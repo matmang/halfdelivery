@@ -6,7 +6,7 @@ import Input from '../../components/Auth/Input';
 import DismissKeyboard from '../../components/DismissKeyboard';
 
 import {isEmail} from '../../utils';
-import {GoogleSignin} from '@react-native-community/google-signin';
+// import {GoogleSignin} from '@react-native-community/google-signin';
 // import {
 //   GooglePress,
 //   KakaoPress,
@@ -69,21 +69,6 @@ export default ({navigation: {navigate}}) => {
       return;
     }
   };
-  const handleSubmit = async () => {
-    validateForm();
-    try {
-     
-    } catch (e) {
-      alert(e);
-    }
-  };
-  const googleSubmit = async () => {
-    // const userToken = await GooglePress();
-    // dispatch(socialLogin(userToken));
-  };
-  // 1. android ios 각각 네이티브코드로 작성한다.
-  // 2. restapi ex) django node.js
-  // 3, 파이어베이스 버리고 django로 가자.
   return (
     <ScrollView>
       <KeyboardAwareScrollView extraScrollHeight={20}>
@@ -124,24 +109,24 @@ export default ({navigation: {navigate}}) => {
               </InputContainer>
             </KeyboardAvoidingView>
             <ButtonContainer>
-              <Btn text={'Sign Up'} accent onPress={handleSubmit} />
+              <Btn text={'Sign Up'} accent onPress={validateForm} />
               <Btn
                 text={'Sign with google'}
                 name="google"
                 accent
-                onPress={googleSubmit}
+                onPress={validateForm}
               />
               <Btn
                 text={'Sign with Kakao'}
                 name="kakao"
                 accent
-                onPress={KakaoPress}
+                onPress={validateForm}
               />
               <Btn
                 text={'Sign with Naver'}
                 name="naver"
                 accent
-                onPress={LoginNaver}
+                onPress={validateForm}
               />
             </ButtonContainer>
           </Container>
