@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import {StyleSheet, View, Text, Button} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useDispatch} from 'react-redux';
-import {logOut} from '../../redux/usersSlice';
-// https://github.com/streamich/react-use
 
 const TempHome = () => {
   const navigation = useNavigation();

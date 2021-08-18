@@ -4,14 +4,14 @@ import styled from 'styled-components';
 import Btn from '../../components/Auth/Btn';
 import Input from '../../components/Auth/Input';
 import DismissKeyboard from '../../components/DismissKeyboard';
-import {signup} from '../../firebase';
+
 import {isEmail} from '../../utils';
 import {GoogleSignin} from '@react-native-community/google-signin';
-import {
-  GooglePress,
-  KakaoPress,
-  LoginNaver,
-} from '../../components/Auth/SocialLoginHandler';
+// import {
+//   GooglePress,
+//   KakaoPress,
+//   LoginNaver,
+// } from '../../components/Auth/SocialLoginHandler';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {useDispatch} from 'react-redux';
 import {socialLogin} from '../../redux/usersSlice';
@@ -72,15 +72,14 @@ export default ({navigation: {navigate}}) => {
   const handleSubmit = async () => {
     validateForm();
     try {
-      const user = await signup({email, password, phoneNumber, name, school});
-      navigate('SignIn', {email, password});
+     
     } catch (e) {
       alert(e);
     }
   };
   const googleSubmit = async () => {
-    const userToken = await GooglePress();
-    dispatch(socialLogin(userToken));
+    // const userToken = await GooglePress();
+    // dispatch(socialLogin(userToken));
   };
   // 1. android ios 각각 네이티브코드로 작성한다.
   // 2. restapi ex) django node.js
