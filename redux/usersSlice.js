@@ -1,5 +1,4 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {authService, signin} from '../firebase';
 
 const userSlice = createSlice({
   name: 'users',
@@ -22,7 +21,6 @@ const userSlice = createSlice({
 export const {logIn, logOut} = userSlice.actions;
 export const userLogin = form => async dispatch => {
   try {
-    const data = await signin(form);
     if (data.uid) {
       dispatch(logIn(data.uid));
     }
@@ -32,7 +30,6 @@ export const userLogin = form => async dispatch => {
 };
 export const socialLogin = form => async dispatch => {
   try {
-    const data = await authService.signInWithCredential(form);
     if (data.user.uid) {
       dispatch(logIn(data.user.uid));
     }
