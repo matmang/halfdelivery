@@ -6,8 +6,8 @@ import {useNavigation} from '@react-navigation/native';
 import {View, Text, Button, TouchableHighlight, Pressable} from 'react-native';
 import {FlingGestureHandler} from 'react-native-gesture-handler';
 import {color} from 'react-native-reanimated';
-import Styles from '../../assets/Styles2';
-
+import Styles from '../../assets/Styles2'; 
+//first commit
 const MakeMatching = () => {
   const [count, setCount] = useState(0);
   useEffect(() => {
