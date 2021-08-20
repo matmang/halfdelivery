@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Text, Button } from "react-native";
+import { Image, View, Text, Button } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import CircularProgress from "react-native-circular-progress-indicator"; // https://www.npmjs.com/package/react-native-circular-progress-indicator
 import styles from "../../components/Main/styles";
@@ -35,15 +35,16 @@ const MatchingRequestHost = (props) => {
       <View style={{ margin: 2 }}>
         <Text style={orderStyles.title}>[ 주문 내역 창 ]</Text>
       </View>
-      <View style={styles.h25grey}>
-        <Text style={{ fontSize: 40, fontWeight: "bold", margin: 10 }}>
+      <View style={styles.orderLog}>
+        <Text style={styles.orderLogCategory}>
           {props.route.params.category}
         </Text>
-        <Text style={{ fontSize: 40, fontWeight: "bold", margin: 10 }}>
+        <Image source={{uri: props.route.params.image}} style={styles.orderLogImage}/>
+        {/* <Text style={{ fontSize: 40, fontWeight: "bold", margin: 10 }}>
           {props.route.params.store}
-        </Text>
-        <Text style={{ fontSize: 30, fontWeight: "bold", margin: 10 }}>
-          최소주문금액: 12,000원
+        </Text> */}
+        <Text style={styles.orderLogMinPrice}>
+          최소주문금액: {props.route.params.minPrice}원
         </Text>
       </View>
       <View style={{ flex: 1 }}>

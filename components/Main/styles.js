@@ -9,12 +9,57 @@ const styles = StyleSheet.create({
     justifyContent: "center", // 세로 정렬
     paddingVertical: 100,
   },
+  rootCategoryButtons: {
+    flexDirection: "row",
+    // padding: 2,
+    backgroundColor: "#fff",
+    // alignContent: "center",
+    justifyContent: "space-evenly",
+  },
+  orderLogImage: {
+    marginBottom: 10,
+    // flex: 1,
+    height: 70,
+    width: 70,
+    resizeMode: "contain", //? Show whole Image (with white space)
+    alignSelf: 'center',
+    borderRadius: 5,
+    borderWidth: 1,
+  },
+  orderLogCategory: {
+    fontSize: 40,
+    fontWeight: "bold",
+    textAlign: "left",
+  },
+  orderLogMinPrice: {
+    fontSize: 30,
+    fontWeight: "bold",
+    textAlign: "left",
+  },
   textInput: {
     height: 40,
     width: "80%",
     margin: 10,
     borderWidth: 1,
     padding: 10,
+  },
+  storeList: {
+    borderRadius: 10,
+    marginBottom: 5,
+    padding: 2,
+    backgroundColor: "grey",
+    justifyContent: "center",
+  },
+  h75col: {
+    width: "95%",
+    borderRadius: 10,
+    height: "75%",
+    marginBottom: 5,
+    padding: 10,
+    backgroundColor: "lightgrey",
+    justifyContent: "center",
+    flexDirection: "column",
+    flexWrap: "wrap",
   },
   h25grey: {
     width: "95%",
@@ -26,6 +71,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     flex: 3.5,
+  },
+  orderLog: {
+    width: "95%",
+    height: "25%",
+    borderRadius: 10,
+    marginBottom: 5,
+    padding: 20,
+    backgroundColor: "lightgrey",
+    // alignItems: "center",
+    // justifyContent: "center",
+    // flex: 3.5,
   },
   h25greyCenter: {
     width: "95%",
@@ -45,9 +101,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     padding: 10,
     backgroundColor: "lightgrey",
-    // alignItems: '',
     justifyContent: "center",
-    flex: 3.5,
     flexDirection: "column",
     flexWrap: "wrap",
   },
@@ -117,7 +171,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 40,
   },
-  
 });
 
 export default styles;

@@ -26,6 +26,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     marginVertical: 1, //? 컴포넌트 복붙해서 재활용시, 사용됨 ㅎㅎ
   },
+  headerRoot: {
+    flexDirection: "row",
+    backgroundColor: "#fff",
+  },
   image: {
     flex: 2,
     height: 150,
@@ -49,7 +53,7 @@ const styles = StyleSheet.create({
     borderColor: "black",
     flex: 2,
   },
-  priceContainer: {
+  minPriceContainer: {
     justifyContent: "center",
     alignContent: "center",
     padding: 5,
@@ -76,7 +80,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   headerText: {
-    fontSize: 15,
+    fontSize: 18,
     textAlign: "center",
     fontWeight: "bold",
   },

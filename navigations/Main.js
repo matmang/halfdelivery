@@ -11,6 +11,7 @@ import InfoBoard from "../screens/Main/InfoBoard";
 import PoliciesBoard from "../screens/Main/PoliciesBoard";
 import TempSendMsg from "../screens/Main/TempSendMsg";
 import MatchingList from "../screens/Main/MatchingList";
+import newMakeMatching from "../screens/Main/newMakeMatching";
 
 const Main = createStackNavigator();
 const Chat = createStackNavigator();
@@ -43,6 +44,13 @@ export default () => (
       component={MatchingList}
       options={{
         title: "매칭 리스트",
+      }}
+    />
+    <Main.Screen
+      name="newMakeMatching"
+      component={newMakeMatching}
+      options={{
+        title: "(수정) 매칭방 만들기",
       }}
     />
     <Main.Screen

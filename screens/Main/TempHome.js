@@ -40,7 +40,7 @@ const TempHome = () => {
         style={styles.buttonStyle}
         title="매칭방 만들기"
         onPress={() => {
-          navigation.navigate("MakeMatching");
+          navigation.navigate("newMakeMatching");
         }}
       />
       {/* <Button

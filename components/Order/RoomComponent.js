@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import styles from "./styles";
 
-const PickRoom = (props) => {
+const RoomComponent = (props) => {
   const item = props.item;
   return (
     <TouchableOpacity style={styles.root} onPress={() => alert("테스트")}>
@@ -12,8 +12,8 @@ const PickRoom = (props) => {
       <View style={styles.storeContainer}>
         <Text style={styles.text}>{item.store}</Text>
       </View>
-      <View style={styles.priceContainer}>
-        <Text style={styles.text}>{item.price}</Text>
+      <View style={styles.minPriceContainer}>
+        <Text style={styles.text}>{item.minPrice}</Text>
       </View>
       <View style={styles.peopleContainer}>
         <Text style={styles.text}>{item.people}명</Text>
@@ -22,4 +22,4 @@ const PickRoom = (props) => {
   );
 };
 
-export default PickRoom;
+export default RoomComponent;
