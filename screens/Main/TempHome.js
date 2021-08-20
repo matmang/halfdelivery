@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import {StyleSheet, View, Text, Button} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {useDispatch} from 'react-redux';
+import React, { Component } from "react";
+import { StyleSheet, View, Text, Button } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
 
 const TempHome = () => {
   const navigation = useNavigation();
@@ -11,63 +11,78 @@ const TempHome = () => {
     <View
       style={{
         flex: 1,
-        alignItems: 'center', // 가로 정렬
-        justifyContent: 'space-evenly', // 세로 정렬
-      }}>
+        alignItems: "center",
+        justifyContent: "space-evenly",
+      }}
+    >
       <Button
         style={styles.buttonStyle}
         title="메시지 테스트"
         onPress={() => {
-          navigation.navigate('TempSendMsg');
+          navigation.navigate("TempSendMsg");
+        }}
+      />
+      {/* <Button
+        style={styles.buttonStyle}
+        title="채널"
+        onPress={() => {
+          navigation.navigate("Channel");
+        }}
+      /> */}
+      <Button
+        style={styles.buttonStyle}
+        title="매칭 리스트"
+        onPress={() => {
+          navigation.navigate("MatchingList");
         }}
       />
       <Button
         style={styles.buttonStyle}
         title="매칭방 만들기"
         onPress={() => {
-          navigation.navigate('MakeMatching');
+          navigation.navigate("MakeMatching");
         }}
       />
-      <Button
+      {/* <Button
         style={styles.buttonStyle}
         title="매칭 요청중 - Host"
         onPress={() => {
-          navigation.navigate('MatchingRequestHost');
+          navigation.navigate("MatchingRequestHost");
         }}
       />
       <Button
         style={styles.buttonStyle}
         title="매칭 요청하기 - Client"
         onPress={() => {
-          navigation.navigate('MatchingRequestClient');
+          navigation.navigate("MatchingRequestClient");
         }}
-      />
+      /> */}
       <Button
         style={styles.buttonStyle}
         title="매칭 성공"
         onPress={() => {
-          navigation.navigate('MatchingSuccess');
+          navigation.navigate("MatchingSuccess");
         }}
       />
       <Button
         style={styles.buttonStyle}
         title="매칭 실패"
         onPress={() => {
-          navigation.navigate('MatchingFailed');
+          navigation.navigate("MatchingFailed");
         }}
       />
       <Button
         style={styles.buttonStyle}
         title="공지사항"
         onPress={() => {
-          navigation.navigate('InfoBoard');
+          navigation.navigate("InfoBoard");
         }}
       />
       <Button
         style={styles.buttonStyle}
         title="약관 및 정책"
         onPress={() => {
-          navigation.navigate('PoliciesBoard');
+          navigation.navigate("PoliciesBoard");
         }}
       />
       <Button
