@@ -13,6 +13,7 @@ const Container = styled.TextInput`
   background-color: white;
   border-radius: 30px;
   margin-bottom: 10px;
+  font-family: 'noto-regular';
 `;
 
 const Input = ({

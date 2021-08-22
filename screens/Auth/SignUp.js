@@ -1,20 +1,21 @@
-import React, {useEffect, useState} from 'react';
-import {KeyboardAvoidingView, ScrollView} from 'react-native';
-import styled from 'styled-components';
-import Btn from '../../components/Auth/Btn';
-import Input from '../../components/Auth/Input';
-import DismissKeyboard from '../../components/DismissKeyboard';
+import React, { useEffect, useState } from "react";
+import { KeyboardAvoidingView, ScrollView } from "react-native";
+import styled from "styled-components";
+import Btn from "../../components/Auth/Btn";
+import Input from "../../components/Auth/Input";
+import DismissKeyboard from "../../components/DismissKeyboard";
 
-import {isEmail} from '../../utils';
+import { isEmail } from "../../utils";
 // import {GoogleSignin} from '@react-native-community/google-signin';
 // import {
 //   GooglePress,
 //   KakaoPress,
 //   LoginNaver,
 // } from '../../components/Auth/SocialLoginHandler';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {useDispatch} from 'react-redux';
-import {socialLogin} from '../../redux/usersSlice';
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { useDispatch } from "react-redux";
+import { socialLogin } from "../../redux/usersSlice";
+import { createAccount } from "../../api";
 
 const Container = styled.View`
   flex: 1;
@@ -31,42 +32,44 @@ const ButtonContainer = styled.View`
   margin-bottom: 30px;
 `;
 
-export default ({navigation: {navigate}}) => {
+export default ({ navigation: { navigate } }) => {
   const dispatch = useDispatch();
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordConfirm, setPasswordConfirm] = useState('');
-  const [school, setSchool] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-
-  useEffect(() => {
-    const socialGoogleConfigure = async () => {
-      await GoogleSignin.configure({
-        scopes: ['email'],
-        webClientId:
-          '271269689660-ql3c8s34ihsf3vvj4fdqec89uikupvge.apps.googleusercontent.com',
-      });
-    };
-    socialGoogleConfigure();
-  }, []);
-
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
   const validateForm = () => {
-    if (email === '' || password === '') {
-      alert('All fields are required.');
+    if (email === "" || password === "") {
+      alert("All fields are required.");
       return;
     }
     if (!isEmail(email)) {
-      alert('Please add a valid email.');
+      alert("Please add a valid email.");
       return;
     }
     if (password !== passwordConfirm) {
-      alert('Password need to match');
+      alert("Password need to match");
       return;
     }
     if (password.length < 6) {
-      alert('The password must contain 6 characters at least');
+      alert("The password must contain 6 characters at least");
       return;
+    }
+  };
+  const handleSubmit = async () => {
+    validateForm();
+    try {
+      const data = await createAccount({
+        email,
+        email,
+        phone_number: 1072441542,
+        birthday: Date.now(),
+        half_money: 10000,
+        password,
+      });
+    } catch (e) {
+      console.warn(e);
     }
   };
   return (
@@ -76,23 +79,21 @@ export default ({navigation: {navigate}}) => {
           <Container>
             <KeyboardAvoidingView behavior="position">
               <InputContainer>
-                <Input value={name} placeholder="Name" stateFn={setName} />
+                <Input
+                  value={firstName}
+                  placeholder="First Name"
+                  stateFn={setFirstName}
+                />
+                <Input
+                  value={lastName}
+                  placeholder="Last Name"
+                  stateFn={setLastName}
+                />
                 <Input
                   value={email}
                   placeholder="Email"
                   autoCapitalize="none"
                   stateFn={setEmail}
-                />
-                <Input
-                  value={school}
-                  placeholder="School"
-                  autoCapitalize="none"
-                  stateFn={setSchool}
-                />
-                <Input
-                  value={phoneNumber}
-                  placeholder="Phone Number"
-                  stateFn={setPhoneNumber}
                 />
                 <Input
                   value={password}
@@ -109,25 +110,7 @@ export default ({navigation: {navigate}}) => {
               </InputContainer>
             </KeyboardAvoidingView>
             <ButtonContainer>
-              <Btn text={'Sign Up'} accent onPress={validateForm} />
-              <Btn
-                text={'Sign with google'}
-                name="google"
-                accent
-                onPress={validateForm}
-              />
-              <Btn
-                text={'Sign with Kakao'}
-                name="kakao"
-                accent
-                onPress={validateForm}
-              />
-              <Btn
-                text={'Sign with Naver'}
-                name="naver"
-                accent
-                onPress={validateForm}
-              />
+              <Btn text={"Sign Up"} accent onPress={handleSubmit} />
             </ButtonContainer>
           </Container>
         </DismissKeyboard>
