@@ -3,7 +3,6 @@ import React from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import styles from "./styles";
 
-//? TS 라서 이렇게 쓰는거임 JS 였으면 걍 props 하면 됨.
 const StoreComponent = (props) => {
   const item = props.item; //? => const {item} = props; 랑 의미가 똑같음.
   const navigation = useNavigation();

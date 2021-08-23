@@ -2,7 +2,8 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import TempHome from "../screens/Main/TempHome";
-import MakeMatching from "../screens/Main/MakeMatching";
+import MatchingList from "../screens/Main/MatchingList";
+import CreateMatching from "../screens/Main/CreateMatching";
 import MatchingRequestClient from "../screens/Main/MatchingRequestClient";
 import MatchingRequestHost from "../screens/Main/MatchingRequestHost";
 import MatchingSuccess from "../screens/Main/MatchingSuccess";
@@ -10,8 +11,6 @@ import MatchingFailed from "../screens/Main/MatchingFailed";
 import InfoBoard from "../screens/Main/InfoBoard";
 import PoliciesBoard from "../screens/Main/PoliciesBoard";
 import TempSendMsg from "../screens/Main/TempSendMsg";
-import MatchingList from "../screens/Main/MatchingList";
-import newMakeMatching from "../screens/Main/newMakeMatching";
 
 const Main = createStackNavigator();
 const Chat = createStackNavigator();
@@ -47,15 +46,8 @@ export default () => (
       }}
     />
     <Main.Screen
-      name="newMakeMatching"
-      component={newMakeMatching}
-      options={{
-        title: "(수정) 매칭방 만들기",
-      }}
-    />
-    <Main.Screen
-      name="MakeMatching"
-      component={MakeMatching}
+      name="CreateMatching"
+      component={CreateMatching}
       options={{
         title: "매칭방 만들기",
       }}

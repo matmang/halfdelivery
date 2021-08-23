@@ -3,32 +3,23 @@ import { useNavigation } from "@react-navigation/native";
 import { View, Text, Button } from "react-native";
 import styles from "../../components/Main/styles";
 import orderStyles from "../../components/Order/styles";
-import StoreList from "../../components/Main/MakeMat";
+import StoreListComponent from "../../components/Main/MakeMat/StoreListComponent";
 
-const newMakeMatching = () => {
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    console.log("useEffect called", count);
-  }, [count]);
+const CreateMatching = () => {
 
   // state값
-  const [category, setCategory] = useState(false);
-  const [store, setStore] = useState(false);
+  const [category, setCategory] = useState("all");
 
   const navigation = useNavigation();
 
   // //! 디자인 시안 나오기 전까진, 일단 Button 으로...
-  const [isPressed, setIsPressed] = useState(false);
   const CategoryButton = (props) => {
     return (
       <View style={{ margin: 10 }}>
         <Button
-          // {isPressed ? 'red' : 'grey'}
           title={props.name}
           onPress={() => {
-            // setCategory(props.name);
-            // setCount(count + 1);
-            alert("테스트");
+            setCategory(props.name)
           }}
         />
       </View>
@@ -60,10 +51,10 @@ const newMakeMatching = () => {
         <Text style={orderStyles.title}>음식점 선택</Text>
       </View>
       <View style={orderStyles.list}>
-        <StoreList />
+        <StoreListComponent targetCatagory={category}/>
       </View>
     </View>
   );
 };
 
-export default newMakeMatching;
+export default CreateMatching;

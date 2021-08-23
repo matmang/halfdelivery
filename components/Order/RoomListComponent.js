@@ -4,8 +4,7 @@ import styles from "./styles";
 import RoomComponent from "./RoomComponent";
 import sampleData from "./sampleData";
 
-const Header = (props) => {
-  const item = props.item;
+const Header = () => {
   return (
     <View style={styles.headerRoot}>
       <View style={styles.categoryContainer}>
@@ -24,34 +23,22 @@ const Header = (props) => {
   );
 };
 
-const PickCategory = (props) => {
-  const item = props.item;
-  return (
-    <View style={styles.rootCategoryButtons}>
-      <Button title="한식" onPress={() => alert("테스트")} />
-      <Button title="중식" onPress={() => alert("테스트")} />
-      <Button title="일식" onPress={() => alert("테스트")} />
-      <Button title="양식" onPress={() => alert("테스트")} />
-      <Button title="카페" onPress={() => alert("테스트")} />
-    </View>
-  );
-};
+let targetData = sampleData;
 
-const ListComponent = () => {
+const RoomListComponent = (props) => {
+  targetData = sampleData.filter(value => value.category == props.targetCategory)
   return (
     <View style={styles.list}>
-      <Text style={styles.title}>매칭 카테고리 선택</Text>
-      <PickCategory />
-      <View style={{ marginTop: 15, marginBottom: 5 }}>
+      <View style={{ marginTop: 5, marginBottom: 5 }}>
         <Text style={styles.title}>매칭 요청 리스트</Text>
         <Header />
       </View>
       <FlatList
-        data={sampleData}
+        data={targetData}
         renderItem={({ item }) => <RoomComponent item={item} />}
       />
     </View>
   );
 };
 
-export default ListComponent;
+export default RoomListComponent;
