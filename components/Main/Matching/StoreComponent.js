@@ -10,11 +10,11 @@ const StoreComponent = (props) => {
     <TouchableOpacity
       style={styles.root}
       onPress={() =>
-        navigation.navigate("MatchingRequestHost", {
+        navigation.navigate("SetMatchingTime", {
           category: item.category,
           store: item.store,
           minPrice: item.minPrice,
-          image: item.image, //! item.image 이다. 즉, 이미지의 uri 값을 옮기는 것이다!! 
+          image: item.image, //! item.image 이다. 즉, 이미지의 uri 값을 옮기는 것이다!!
         })
       }
     >

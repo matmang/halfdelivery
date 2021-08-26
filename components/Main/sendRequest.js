@@ -5,7 +5,6 @@ import {useSetState} from 'react-use';
 import {View, Text, Button, TouchableHighlight, Pressable} from 'react-native';
 import {FlingGestureHandler} from 'react-native-gesture-handler';
 import {color} from 'react-native-reanimated';
-import Styles from '../../assets/Styles2';
 
 
 const sendRequest = () => {

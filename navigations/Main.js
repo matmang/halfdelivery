@@ -4,13 +4,14 @@ import { createStackNavigator } from "@react-navigation/stack";
 import TempHome from "../screens/Main/TempHome";
 import MatchingList from "../screens/Main/MatchingList";
 import CreateMatching from "../screens/Main/CreateMatching";
-import MatchingRequestClient from "../screens/Main/MatchingRequestClient";
-import MatchingRequestHost from "../screens/Main/MatchingRequestHost";
+import MatchingReqClient from "../screens/Main/MatchingReqClient";
+import MatchingReqHost from "../screens/Main/MatchingReqHost";
 import MatchingSuccess from "../screens/Main/MatchingSuccess";
 import MatchingFailed from "../screens/Main/MatchingFailed";
 import InfoBoard from "../screens/Main/InfoBoard";
 import PoliciesBoard from "../screens/Main/PoliciesBoard";
 import TempSendMsg from "../screens/Main/TempSendMsg";
+import SetMatchingTime from "../screens/Main/SetMatchingTime";
 
 const Main = createStackNavigator();
 const Chat = createStackNavigator();
@@ -22,6 +23,13 @@ export default () => (
       component={TempHome}
       options={{
         title: "(임시) 홈",
+      }}
+    />
+    <Main.Screen
+      name="SetMatchingTime"
+      component={SetMatchingTime}
+      options={{
+        title: "매칭 시간 설정",
       }}
     />
     {/* <Chat.Screen
@@ -53,15 +61,15 @@ export default () => (
       }}
     />
     <Main.Screen
-      name="MatchingRequestHost"
-      component={MatchingRequestHost}
+      name="MatchingReqHost"
+      component={MatchingReqHost}
       options={{
         title: "매칭 요청중 - Host",
       }}
     />
     <Main.Screen
-      name="MatchingRequestClient"
-      component={MatchingRequestClient}
+      name="MatchingReqClient"
+      component={MatchingReqClient}
       options={{
         title: "매칭 요청하기 - Client",
       }}

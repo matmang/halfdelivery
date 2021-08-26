@@ -5,7 +5,7 @@ export default [
     store: "홍콩반점",
     minPrice: 10000,
     image:
-      "https://lh3.googleusercontent.com/proxy/NC53Ka7BsWmx8TqiXbhmFIXhrJdwiobLnXMNIwf6iErxoJfeFj0-dOnQvqN2IO48yCQ9uXDCmkkWY6IUeGktIYF1UrAaMCWcwq3wvxMn2uRz",
+      "https://www.theborn.co.kr/wp-content/uploads/2017/06/logo.png",
     expDelivTime: "10~20",
     delivTip: 5000,
   },

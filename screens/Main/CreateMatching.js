@@ -2,15 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { View, Text, Button } from "react-native";
 import styles from "../../components/Main/styles";
-import orderStyles from "../../components/Order/styles";
-import StoreListComponent from "../../components/Main/MakeMat/StoreListComponent";
+import orderStyles from "../../components/Main/Order/styles";
+import StoreListComponent from "../../components/Main/Matching/StoreList";
 
 const CreateMatching = () => {
 
   // state값
   const [category, setCategory] = useState("all");
-
-  const navigation = useNavigation();
 
   // //! 디자인 시안 나오기 전까진, 일단 Button 으로...
   const CategoryButton = (props) => {

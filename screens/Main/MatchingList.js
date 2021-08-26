@@ -1,8 +1,8 @@
 import React, { useState, t, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { View, Button, Text } from "react-native";
-import RoomListComponent from "../../components/Order/RoomListComponent";
-import styles from "../../components/Order/styles";
+import RoomListComponent from "../../components/Main/Order/RoomListComponent";
+import styles from "../../components/Main/Order/styles";
 
 const MatchingList = () => {
   const [category, setCategory] = useState("한식");
