@@ -1,12 +1,12 @@
-import React, {useState} from 'react';
-import {KeyboardAvoidingView} from 'react-native';
-import {useDispatch} from 'react-redux';
-import styled from 'styled-components';
-import Btn from '../../components/Auth/Btn';
-import Input from '../../components/Auth/Input';
-import DismissKeyboard from '../../components/DismissKeyboard';
-import {userLogin} from '../../redux/usersSlice';
-import {isEmail} from '../../utils';
+import React, { useState } from "react";
+import { KeyboardAvoidingView } from "react-native";
+import { useDispatch } from "react-redux";
+import styled from "styled-components";
+import Btn from "../../components/Auth/Btn";
+import Input from "../../components/Auth/Input";
+import DismissKeyboard from "../../components/DismissKeyboard";
+import { userLogin } from "../../redux/usersSlice";
+import { isEmail } from "../../utils";
 
 const Container = styled.View`
   flex: 1;
@@ -18,17 +18,18 @@ const InputContainer = styled.View`
   margin-bottom: 30px;
 `;
 
-export default ({route: {params}}) => {
+export default ({ route: { params } , navigation}) => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState(params?.email);
   const [password, setPassword] = useState(params?.password);
+  const goToSignUp = () => navigation.navigate("SignUp");
   const isFormValid = () => {
-    if (email === '' || password === '') {
-      alert('All fields are required.');
+    if (email === "" || password === "") {
+      alert("All fields are required.");
       return false;
     }
     if (!isEmail(email)) {
-      alert('Email is invalid');
+      alert("Email is invalid");
       return false;
     }
     return true;
@@ -39,9 +40,9 @@ export default ({route: {params}}) => {
     }
     dispatch(
       userLogin({
-        email: email,
+        username: email,
         password: password,
-      }),
+      })
     );
   };
   return (
@@ -64,7 +65,8 @@ export default ({route: {params}}) => {
             />
           </InputContainer>
         </KeyboardAvoidingView>
-        <Btn text={'Sign In'} accent onPress={handleSubmit} />
+        <Btn text={"Sign In"} accent onPress={handleSubmit} />
+        <Btn text={"Sign Up"} accent onPress={goToSignUp} />
       </Container>
     </DismissKeyboard>
   );

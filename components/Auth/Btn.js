@@ -16,14 +16,14 @@ const Button = styled.View`
   background-color: ${props =>
     props.accent ? colors.mainBlue : 'transparent'};
   color: ${props => (props.accent ? colors.mainBlue : colors.mainPink)};
-  font-family: 'NotoSansKR-Regular';
+  font-family: 'noto-regular';
 `;
 
 const Text = styled.Text`
   color: ${props => (props.accent ? colors.mainPink : colors.mainBlue)};
   font-weight: 600;
   font-size: 14px;
-  font-family: 'NotoSansKR-Regular';
+  font-family: 'noto-regular';
 `;
 
 const Btn = ({onPress, text, accent = false}) => (

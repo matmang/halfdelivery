@@ -8,6 +8,7 @@ const Auth = createStackNavigator();
 
 export default () => (
   <Auth.Navigator
+    initialRouteName="SignIn"
     screenOptions={{
       headerBackTitleVisible: false,
       headerTransparent: true,

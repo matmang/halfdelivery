@@ -1,20 +1,15 @@
-import React, {useEffect, useState} from 'react';
-import {KeyboardAvoidingView, ScrollView} from 'react-native';
-import styled from 'styled-components';
-import Btn from '../../components/Auth/Btn';
-import Input from '../../components/Auth/Input';
-import DismissKeyboard from '../../components/DismissKeyboard';
-
-import {isEmail} from '../../utils';
-// import {GoogleSignin} from '@react-native-community/google-signin';
-// import {
-//   GooglePress,
-//   KakaoPress,
-//   LoginNaver,
-// } from '../../components/Auth/SocialLoginHandler';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {useDispatch} from 'react-redux';
-import {socialLogin} from '../../redux/usersSlice';
+import React, { useEffect, useState } from "react";
+import { KeyboardAvoidingView, ScrollView } from "react-native";
+import styled from "styled-components";
+import Btn from "../../components/Auth/Btn";
+import Input from "../../components/Auth/Input";
+import DismissKeyboard from "../../components/DismissKeyboard";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { isEmail, isPhoneNum } from "../../utils";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { useDispatch } from "react-redux";
+import { createAccount } from "../../api";
+import * as GoogleSignIn from 'expo-google-sign-in';
 
 const Container = styled.View`
   flex: 1;
@@ -24,59 +19,103 @@ const Container = styled.View`
 
 const InputContainer = styled.View`
   margin-bottom: 30px;
-  margin-top: 50px;
+  margin-top: 100px;
 `;
 
 const ButtonContainer = styled.View`
   margin-bottom: 30px;
 `;
 
-export default ({navigation: {navigate}}) => {
+export default ({ navigation: { navigate } }) => {
   const dispatch = useDispatch();
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordConfirm, setPasswordConfirm] = useState('');
-  const [school, setSchool] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
 
-  useEffect(() => {
-    const socialGoogleConfigure = async () => {
-      await GoogleSignin.configure({
-        scopes: ['email'],
-        webClientId:
-          '271269689660-ql3c8s34ihsf3vvj4fdqec89uikupvge.apps.googleusercontent.com',
-      });
-    };
-    socialGoogleConfigure();
-  }, []);
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
+  const handleConfirm = (date) => {
+    console.warn("A date has been picked: ", date);
+    hideDatePicker();
+  };
 
   const validateForm = () => {
-    if (email === '' || password === '') {
-      alert('All fields are required.');
-      return;
+    if (
+      email === "" ||
+      password === "" ||
+      firstName === "" ||
+      lastName === "" ||
+      phoneNumber === ""
+    ) {
+      alert("All fields are required.");
+      return false;
     }
     if (!isEmail(email)) {
-      alert('Please add a valid email.');
-      return;
+      alert("Please add a valid email.");
+      return false;
+    }
+    if (!isPhoneNum(phoneNumber)) {
+      alert("Please add a valid phonenumber");
+      return false;
     }
     if (password !== passwordConfirm) {
-      alert('Password need to match');
-      return;
+      alert("Password need to match");
+      return false;
     }
     if (password.length < 6) {
-      alert('The password must contain 6 characters at least');
+      alert("The password must contain 6 characters at least");
+      return false;
+    }
+    return true;
+  };
+  const handleSubmit = async () => {
+    if (!validateForm()) {
       return;
+    }
+    try {
+      const { status } = await createAccount({
+        first_name: firstName,
+        last_name: lastName,
+        email,
+        phone_number: phoneNumber,
+        username: email,
+        password,
+      });
+      if (status == 201) {
+        alert("Account created. Sign in, please.");
+        navigate("SignIn", { email, password });
+      }
+    } catch (e) {
+      console.warn(e);
     }
   };
   return (
-    <ScrollView>
-      <KeyboardAwareScrollView extraScrollHeight={20}>
-        <DismissKeyboard>
-          <Container>
+    <KeyboardAwareScrollView extraScrollHeight={20}>
+      <DismissKeyboard>
+        <Container>
+          <ScrollView>
             <KeyboardAvoidingView behavior="position">
               <InputContainer>
-                <Input value={name} placeholder="Name" stateFn={setName} />
+                <Input
+                  value={firstName}
+                  placeholder="First Name"
+                  stateFn={setFirstName}
+                />
+                <Input
+                  value={lastName}
+                  placeholder="Last Name"
+                  stateFn={setLastName}
+                />
                 <Input
                   value={email}
                   placeholder="Email"
@@ -84,14 +123,9 @@ export default ({navigation: {navigate}}) => {
                   stateFn={setEmail}
                 />
                 <Input
-                  value={school}
-                  placeholder="School"
-                  autoCapitalize="none"
-                  stateFn={setSchool}
-                />
-                <Input
                   value={phoneNumber}
-                  placeholder="Phone Number"
+                  placeholder="Phonenumber"
+                  autoCapitalize="none"
                   stateFn={setPhoneNumber}
                 />
                 <Input
@@ -109,29 +143,11 @@ export default ({navigation: {navigate}}) => {
               </InputContainer>
             </KeyboardAvoidingView>
             <ButtonContainer>
-              <Btn text={'Sign Up'} accent onPress={validateForm} />
-              <Btn
-                text={'Sign with google'}
-                name="google"
-                accent
-                onPress={validateForm}
-              />
-              <Btn
-                text={'Sign with Kakao'}
-                name="kakao"
-                accent
-                onPress={validateForm}
-              />
-              <Btn
-                text={'Sign with Naver'}
-                name="naver"
-                accent
-                onPress={validateForm}
-              />
+              <Btn text={"Sign Up"} accent onPress={handleSubmit} />
             </ButtonContainer>
-          </Container>
-        </DismissKeyboard>
-      </KeyboardAwareScrollView>
-    </ScrollView>
+          </ScrollView>
+        </Container>
+      </DismissKeyboard>
+    </KeyboardAwareScrollView>
   );
 };
