@@ -4,18 +4,12 @@ import styled from "styled-components";
 import Btn from "../../components/Auth/Btn";
 import Input from "../../components/Auth/Input";
 import DismissKeyboard from "../../components/DismissKeyboard";
-
-import { isEmail } from "../../utils";
-// import {GoogleSignin} from '@react-native-community/google-signin';
-// import {
-//   GooglePress,
-//   KakaoPress,
-//   LoginNaver,
-// } from '../../components/Auth/SocialLoginHandler';
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { isEmail, isPhoneNum } from "../../utils";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useDispatch } from "react-redux";
-import { socialLogin } from "../../redux/usersSlice";
 import { createAccount } from "../../api";
+import * as GoogleSignIn from 'expo-google-sign-in';
 
 const Container = styled.View`
   flex: 1;
@@ -25,7 +19,7 @@ const Container = styled.View`
 
 const InputContainer = styled.View`
   margin-bottom: 30px;
-  margin-top: 50px;
+  margin-top: 100px;
 `;
 
 const ButtonContainer = styled.View`
@@ -36,47 +30,80 @@ export default ({ navigation: { navigate } }) => {
   const dispatch = useDispatch();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
+
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
+  const handleConfirm = (date) => {
+    console.warn("A date has been picked: ", date);
+    hideDatePicker();
+  };
+
   const validateForm = () => {
-    if (email === "" || password === "") {
+    if (
+      email === "" ||
+      password === "" ||
+      firstName === "" ||
+      lastName === "" ||
+      phoneNumber === ""
+    ) {
       alert("All fields are required.");
-      return;
+      return false;
     }
     if (!isEmail(email)) {
       alert("Please add a valid email.");
-      return;
+      return false;
+    }
+    if (!isPhoneNum(phoneNumber)) {
+      alert("Please add a valid phonenumber");
+      return false;
     }
     if (password !== passwordConfirm) {
       alert("Password need to match");
-      return;
+      return false;
     }
     if (password.length < 6) {
       alert("The password must contain 6 characters at least");
-      return;
+      return false;
     }
+    return true;
   };
   const handleSubmit = async () => {
-    validateForm();
+    if (!validateForm()) {
+      return;
+    }
     try {
-      const data = await createAccount({
+      const { status } = await createAccount({
+        first_name: firstName,
+        last_name: lastName,
         email,
-        email,
-        phone_number: 1072441542,
-        birthday: Date.now(),
-        half_money: 10000,
+        phone_number: phoneNumber,
+        username: email,
         password,
       });
+      if (status == 201) {
+        alert("Account created. Sign in, please.");
+        navigate("SignIn", { email, password });
+      }
     } catch (e) {
       console.warn(e);
     }
   };
   return (
-    <ScrollView>
-      <KeyboardAwareScrollView extraScrollHeight={20}>
-        <DismissKeyboard>
-          <Container>
+    <KeyboardAwareScrollView extraScrollHeight={20}>
+      <DismissKeyboard>
+        <Container>
+          <ScrollView>
             <KeyboardAvoidingView behavior="position">
               <InputContainer>
                 <Input
@@ -96,6 +123,12 @@ export default ({ navigation: { navigate } }) => {
                   stateFn={setEmail}
                 />
                 <Input
+                  value={phoneNumber}
+                  placeholder="Phonenumber"
+                  autoCapitalize="none"
+                  stateFn={setPhoneNumber}
+                />
+                <Input
                   value={password}
                   placeholder="Password"
                   isPassword={true}
@@ -112,9 +145,9 @@ export default ({ navigation: { navigate } }) => {
             <ButtonContainer>
               <Btn text={"Sign Up"} accent onPress={handleSubmit} />
             </ButtonContainer>
-          </Container>
-        </DismissKeyboard>
-      </KeyboardAwareScrollView>
-    </ScrollView>
+          </ScrollView>
+        </Container>
+      </DismissKeyboard>
+    </KeyboardAwareScrollView>
   );
 };
