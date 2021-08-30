@@ -26,7 +26,9 @@ const Header = () => {
 let targetData = sampleData;
 
 const RoomListComponent = (props) => {
-  targetData = sampleData.filter(value => value.category == props.targetCategory)
+  targetData = sampleData.filter(
+    (value) => value.category == props.targetCategory
+  );
   return (
     <View style={styles.list}>
       <View style={{ marginTop: 5, marginBottom: 5 }}>
