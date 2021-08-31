@@ -1,16 +1,12 @@
 import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createStackNavigator } from "@react-navigation/stack";
 import { Ionicons } from "@expo/vector-icons";
 
 //todo import ChatScreen from ...
-import TempHome from "../screens/Main/TempHome";
 //todo import MyInfoScreen from ...
 
 import MainStack from "./MainStack";
-import InfoBoard from "../screens/Main/InfoBoard";
-import PoliciesBoard from "../screens/Main/PoliciesBoard";
+import CreateMatching from "../screens/Main/CreateMatching";
 import TempMyInfo from "../screens/Main/TempMyInfo";
 
 const Tab = createBottomTabNavigator();
@@ -27,15 +23,15 @@ const BottomTabNav = () => {
         tabBarShowLabel: false,
       }}
     >
-      {/* <Tab.Screen
-        component={InfoBoard}
-        name="ChatScreen"
+      <Tab.Screen
+        component={CreateMatching}
+        name="CreateMatching__"
         options={{
           tabBarIcon: ({ color }) => (
-            <Ionicons name="chatbox" color={color} size={25} />
+            <Ionicons name="heart" color={color} size={25} />
           ),
         }}
-      /> */}
+      />
       <Tab.Screen
         component={MainStack}
         name="TabHome"

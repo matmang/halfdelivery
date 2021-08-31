@@ -5,9 +5,12 @@ import sampleData from "./sampleData";
 import styles from "../styles";
 
 let targetData = sampleData;
-
 const StoreListComponent = (props) => {
-  (props.targetCatagory==="all") ? targetData = sampleData : targetData = sampleData.filter((value) => value.category == props.targetCatagory);
+  props.targetCatagory === "all"
+    ? (targetData = sampleData)
+    : (targetData = sampleData.filter(
+        (value) => value.category == props.targetCatagory
+      ));
 
   return (
     <View style={styles.storeList}>
