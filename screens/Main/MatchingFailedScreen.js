@@ -1,32 +1,33 @@
-import React, {Component} from 'react';
-import {StyleSheet, View, Text, Button} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import React, { Component } from "react";
+import { StyleSheet, View, Text, Button } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
-const MatchingFailed = () => {
+export default () => {
   const navigation = useNavigation();
 
   return (
     <View
       style={{
         flex: 1,
-        alignItems: 'center', // 가로 정렬
-        justifyContent: 'center', // 세로 정렬
+        alignItems: "center", // 가로 정렬
+        justifyContent: "center", // 세로 정렬
         paddingVertical: 100,
-      }}>
+      }}
+    >
       <Text>매칭에 실패했어요</Text>
       <Text>| 주문 결과 창 |</Text>
       <Button
         style={styles.buttonStyle}
         title="홈으로 돌아가기"
         onPress={() => {
-          navigation.navigate('TempHome');
+          navigation.navigate("TempHome");
         }}
       />
       <Button
         style={styles.buttonStyle}
         title="매칭방 만들기"
         onPress={() => {
-          navigation.navigate('MakeMatching');
+          navigation.navigate("MakeMatching");
         }}
       />
     </View>
@@ -41,5 +42,3 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
 });
-
-export default MatchingFailed;

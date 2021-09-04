@@ -2,14 +2,14 @@ import React, { Component } from "react";
 import { StyleSheet, View, Text, Button, Linking } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-const TempMyInfo = () => {
+export default () => {
   const navigation = useNavigation();
   return (
     <View
       style={{
         flex: 1,
-        alignItems: "center", // 가로 정렬
-        justifyContent: "center", // 세로 정렬
+        alignItems: "center",
+        justifyContent: "center",
         paddingVertical: 100,
       }}
     >
@@ -35,5 +35,3 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
 });
-
-export default TempMyInfo;

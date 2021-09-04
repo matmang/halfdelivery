@@ -4,7 +4,7 @@ import { View, Button, Text } from "react-native";
 import RoomListComponent from "../../components/Main/Order/RoomListComponent";
 import styles from "../../components/Main/Order/styles";
 
-const MatchingList = () => {
+export default () => {
   const [category, setCategory] = useState("한식");
   useEffect(() => {
     console.log("useEffect called", category);
@@ -28,11 +28,9 @@ const MatchingList = () => {
       <View style={{ marginTop: 50 }}>
         <Button
           title="매칭방 만들기"
-          onPress={() => navigation.navigate("CreateMatching")}
+          onPress={() => navigation.navigate("CreateMatchingScreen")}
         />
       </View>
     </View>
   );
 };
-
-export default MatchingList;

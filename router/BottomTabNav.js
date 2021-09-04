@@ -7,11 +7,10 @@ import { Ionicons } from "@expo/vector-icons";
 
 import MainStack from "./MainStack";
 import MatchingStack from "./MatchingStack";
-import CreateMatching from "../screens/Main/CreateMatching";
-import TempMyInfo from "../screens/Main/TempMyInfo";
+import TempMyInfo from "../screens/Main/TempMyInfoScreen";
 
 const Tab = createBottomTabNavigator();
-const BottomTabNav = () => {
+export default () => {
   return (
     <Tab.Navigator
       initialRouteName="TabHome"
@@ -54,5 +53,3 @@ const BottomTabNav = () => {
     </Tab.Navigator>
   );
 };
-
-export default BottomTabNav;

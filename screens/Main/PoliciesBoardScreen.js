@@ -1,18 +1,19 @@
-import React, {Component} from 'react';
-import {StyleSheet, View, Text, Button, Linking} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import React, { Component } from "react";
+import { StyleSheet, View, Text, Button, Linking } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
-const PoliciesBoard = () => {
+export default () => {
   const navigation = useNavigation();
   return (
     <View
       style={{
         flex: 1,
-        alignItems: 'center', // 가로 정렬
-        justifyContent: 'center', // 세로 정렬
+        alignItems: "center", // 가로 정렬
+        justifyContent: "center", // 세로 정렬
         paddingVertical: 100,
-      }}>
-      <View style={{padding: 20}}>
+      }}
+    >
+      <View style={{ padding: 20 }}>
         <Text textAlign="left">
           If I had wings I would fly to you Even if it doesn't make sense at all
           If I lose my tongue then I'll be dancing for you Even when I cannot
@@ -30,7 +31,7 @@ const PoliciesBoard = () => {
         title="약관 전문 보기"
         onPress={() => {
           Linking.openURL(
-            'https://www.notion.so/halfdelivery/cocoaPod-b41e6ab1cf434565a51eb56183c3fc4d',
+            "https://www.notion.so/halfdelivery/cocoaPod-b41e6ab1cf434565a51eb56183c3fc4d"
           );
         }}
       />
@@ -38,7 +39,7 @@ const PoliciesBoard = () => {
         style={styles.buttonStyle}
         title="홈으로 돌아가기"
         onPress={() => {
-          navigation.navigate('TempHome');
+          navigation.navigate("TempHome");
         }}
       />
     </View>
@@ -53,5 +54,3 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
 });
-
-export default PoliciesBoard;

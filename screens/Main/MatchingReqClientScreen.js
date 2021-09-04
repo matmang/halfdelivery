@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import CircularProgress from "react-native-circular-progress-indicator"; // https://www.npmjs.com/package/react-native-circular-progress-indicator
 import styles from "../../components/Main/styles";
 
-const MatchingReqClient = (props) => {
+export default (props) => {
   const navigation = useNavigation();
 
   return (
@@ -57,5 +57,3 @@ const MatchingReqClient = (props) => {
     </View>
   );
 };
-
-export default MatchingReqClient;

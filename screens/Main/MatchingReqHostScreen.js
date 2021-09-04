@@ -3,7 +3,7 @@ import { Image, View, Text, Button, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import CircularProgress from "react-native-circular-progress-indicator"; // https://www.npmjs.com/package/react-native-circular-progress-indicator
 
-const MatchingReqHost = (props) => {
+export default (props) => {
   const orderInfo = props.route.params.orderInfo;
   const time = props.route.params.time;
   const persons = props.route.params.persons;
@@ -53,7 +53,7 @@ const MatchingReqHost = (props) => {
         <Button
           title="확인" //? 홈으로 돌아감, 대신 매칭요청은 계속 진행중.
           onPress={() => {
-            navigation.navigate("TempHome");
+            navigation.navigate("TempHomeScreen");
           }}
         />
       </View>
@@ -109,5 +109,3 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
-
-export default MatchingReqHost;

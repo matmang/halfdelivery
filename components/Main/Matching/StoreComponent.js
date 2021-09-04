@@ -10,7 +10,7 @@ const StoreComponent = (props) => {
     <TouchableOpacity
       style={styles.root}
       onPress={() =>
-        navigation.navigate("SetMatchingTime", {
+        navigation.navigate("SetMatchingTimeScreen", {
           category: item.category,
           store: item.store,
           minPrice: item.minPrice,

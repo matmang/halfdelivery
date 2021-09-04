@@ -5,7 +5,7 @@ import styles from "../../components/Main/styles";
 import orderStyles from "../../components/Main/Order/styles";
 import StoreListComponent from "../../components/Main/Matching/StoreList";
 
-const CreateMatching = () => {
+export default () => {
   // state값
   const [category, setCategory] = useState("all");
 
@@ -52,5 +52,3 @@ const CreateMatching = () => {
     </View>
   );
 };
-
-export default CreateMatching;

@@ -1,17 +1,17 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import TempHome from "../screens/Main/TempHome";
-import MatchingList from "../screens/Main/MatchingList";
-import CreateMatching from "../screens/Main/CreateMatching";
-import MatchingReqClient from "../screens/Main/MatchingReqClient";
-import MatchingReqHost from "../screens/Main/MatchingReqHost";
-import MatchingSuccess from "../screens/Main/MatchingSuccess";
-import MatchingFailed from "../screens/Main/MatchingFailed";
-import InfoBoard from "../screens/Main/InfoBoard";
-import PoliciesBoard from "../screens/Main/PoliciesBoard";
-import TempSendMsg from "../screens/Main/TempSendMsg";
-import SetMatchingTime from "../screens/Main/SetMatchingTime";
+import TempHome from "../screens/Main/TempHomeScreen";
+import MatchingList from "../screens/Main/MatchingListScreen";
+import CreateMatchingScreen from "../screens/Main/CreateMatchingScreen";
+import MatchingReqClient from "../screens/Main/MatchingReqClientScreen";
+import MatchingReqHost from "../screens/Main/MatchingReqHostScreen";
+import MatchingSuccess from "../screens/Main/MatchingSuccessScreen";
+import MatchingFailed from "../screens/Main/MatchingFailedScreen";
+import InfoBoardScreen from "../screens/Main/InfoBoardScreen";
+import PoliciesBoard from "../screens/Main/PoliciesBoardScreen";
+import TempSendMsg from "../screens/Main/TempSendMsgScreen";
+import SetMatchingTime from "../screens/Main/SetMatchingTimeScreen";
 
 const Main = createStackNavigator();
 const Chat = createStackNavigator();
@@ -55,7 +55,7 @@ export default () => (
     />
     <Main.Screen
       name="CreateMatching"
-      component={CreateMatching}
+      component={CreateMatchingScreen}
       options={{
         title: "매칭방 만들기",
       }}
@@ -90,7 +90,7 @@ export default () => (
     />
     <Main.Screen
       name="InfoBoard"
-      component={InfoBoard}
+      component={InfoBoardScreen}
       options={{
         title: "공지사항",
       }}
