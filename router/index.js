@@ -9,6 +9,7 @@ const Root = createStackNavigator();
 
 const Router = () => {
   return (
+    // <Test/>
     <Root.Navigator screenOptions={{ headerShown: false }}>
       <Root.Screen component={BottomTabNav} name="BottomTabNav" />
     </Root.Navigator>

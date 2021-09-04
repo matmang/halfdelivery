@@ -6,6 +6,7 @@ import { Ionicons } from "@expo/vector-icons";
 //todo import MyInfoScreen from ...
 
 import MainStack from "./MainStack";
+import MatchingStack from "./MatchingStack";
 import CreateMatching from "../screens/Main/CreateMatching";
 import TempMyInfo from "../screens/Main/TempMyInfo";
 
@@ -24,8 +25,8 @@ const BottomTabNav = () => {
       }}
     >
       <Tab.Screen
-        component={CreateMatching}
-        name="CreateMatching__"
+        component={MatchingStack}
+        name="TabMatching"
         options={{
           tabBarIcon: ({ color }) => (
             <Ionicons name="heart" color={color} size={25} />
@@ -43,7 +44,7 @@ const BottomTabNav = () => {
       />
       <Tab.Screen
         component={TempMyInfo}
-        name="TempMyInfo"
+        name="TabMyInfo"
         options={{
           tabBarIcon: ({ color }) => (
             <Ionicons name="man" color={color} size={25} />

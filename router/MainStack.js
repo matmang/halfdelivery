@@ -12,10 +12,18 @@ import InfoBoard from "../screens/Main/InfoBoard";
 import PoliciesBoard from "../screens/Main/PoliciesBoard";
 import TempSendMsg from "../screens/Main/TempSendMsg";
 import SetMatchingTime from "../screens/Main/SetMatchingTime";
+import Test from "../screens/Main/TestScreen";
 
 const Main = createStackNavigator();
 export default () => (
-  <Main.Navigator initialRouteName="TempHome" screenOptions={{}}>
+  <Main.Navigator initialRouteName="Test" screenOptions={{}}>
+    <Main.Screen
+      name="Test"
+      component={Test}
+      options={{
+        title: "Test",
+      }}
+    />
     <Main.Screen
       name="TempHome"
       component={TempHome}

@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Text, StyleSheet, FlatList } from "react-native";
 import RoomComponent from "./RoomComponent";
-import sampleData from "./sampleData";
+import sampleData from "../../../assets/sampleDataOrd";
 
 const Header = () => {
   return (

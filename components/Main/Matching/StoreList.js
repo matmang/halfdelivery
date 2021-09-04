@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import StoreComponent from "./StoreComponent";
-import sampleData from "./sampleData";
+import sampleData from "../../../assets/sampleDataMat";
 import styles from "../styles";
 
 let targetData = sampleData;
