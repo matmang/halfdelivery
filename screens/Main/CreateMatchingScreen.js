@@ -3,7 +3,7 @@ import { useNavigation } from "@react-navigation/native";
 import { View, Text, Button, ScrollView } from "react-native";
 import styles from "../../components/Main/styles";
 import orderStyles from "../../components/Main/Order/styles";
-import StoreListComponent from "../../components/Main/Matching/StoreList";
+import StoreListComponent from "../../components/Main/Matching/StoreListComponent";
 
 export default () => {
   // state값

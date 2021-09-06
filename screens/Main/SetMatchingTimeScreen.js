@@ -3,7 +3,6 @@ import { StyleSheet, View, Text, Button } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Picker } from "@react-native-picker/picker";
 import QuantitySelector from "../../components/Main/Matching/QuantitySelector";
-import { red } from "chalk";
 
 export default (props) => {
   console.log(props.route.params);

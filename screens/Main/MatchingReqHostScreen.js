@@ -40,7 +40,8 @@ export default (props) => {
       </View>
       <View style={styles.orderLogView}>
         <Text style={styles.orderLogCategory}>{orderInfo.category}</Text>
-        <Image source={{ uri: orderInfo.image }} style={styles.orderLogImage} />
+        <Text style={styles.orderLogMinPrice}>{orderInfo.store}</Text>
+        {/* <Image source={{ uri: orderInfo.image }} style={styles.orderLogImage} /> */}
         <Text style={styles.orderLogMinPrice}>
           최소주문금액: {orderInfo.minPrice}원
         </Text>

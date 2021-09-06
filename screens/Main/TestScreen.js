@@ -7,7 +7,7 @@ export default () => {
   const [data, setData] = useState(0);
 
   // useEffect(() => {
-  //   fetch("http://127.0.0.1:8000/v1/stores/", {
+  //   fetch("http://127.0.0.1:8000/v1/stores/all/", {
   //     method: "GET",
   //   })
   //     .then((resp) => resp.json())
@@ -42,12 +42,12 @@ export default () => {
         <Button
           title="데이터 불러오기"
           onPress={() =>
-            fetch("http://127.0.0.1:8000/v1/stores/", {
+            fetch("http://127.0.0.1:8000/v1/stores/all/", {
               method: "GET",
             })
               .then((resp) => resp.json())
               .then((data) => {
-                // console.log(data);
+                console.log(data);
                 array = data;
                 // target = array.map((e) => {if (e.category == '한식') {return e} });
                 koreanData = array.filter((e) => e.category == "한식");

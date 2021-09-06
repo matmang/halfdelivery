@@ -16,7 +16,7 @@ import TestScreen from "../screens/Main/TestScreen";
 
 const Main = createStackNavigator();
 export default () => (
-  <Main.Navigator initialRouteName="TempHomeScreen" screenOptions={{}}>
+  <Main.Navigator initialRouteName="MatchingListScreen" screenOptions={{}}>
     <Main.Screen
       name="TestScreen"
       component={TestScreen}
