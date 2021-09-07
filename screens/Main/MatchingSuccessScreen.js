@@ -1,18 +1,19 @@
-import React, {Component} from 'react';
-import {StyleSheet, View, Text, Button} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import React, { Component } from "react";
+import { StyleSheet, View, Text, Button } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
-const MatchingSuccess = () => {
+export default () => {
   const navigation = useNavigation();
 
   return (
     <View
       style={{
         flex: 1,
-        alignItems: 'center', // 가로 정렬
-        justifyContent: 'center', // 세로 정렬
+        alignItems: "center", // 가로 정렬
+        justifyContent: "center", // 세로 정렬
         paddingVertical: 100,
-      }}>
+      }}
+    >
       <Text>매칭에 성공했어요</Text>
       <Text>| 주문 결과 창 |</Text>
       <Text>| 채팅하기 |</Text>
@@ -41,5 +42,3 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
 });
-
-export default MatchingSuccess;

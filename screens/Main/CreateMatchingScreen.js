@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { View, Text, Button } from "react-native";
+import { View, Text, Button, ScrollView } from "react-native";
 import styles from "../../components/Main/styles";
 import orderStyles from "../../components/Main/Order/styles";
-import StoreListComponent from "../../components/Main/Matching/StoreList";
+import StoreListComponent from "../../components/Main/Matching/StoreListComponent";
 
-const CreateMatching = () => {
-
+export default () => {
   // state값
   const [category, setCategory] = useState("all");
 
@@ -17,7 +16,7 @@ const CreateMatching = () => {
         <Button
           title={props.name}
           onPress={() => {
-            setCategory(props.name)
+            setCategory(props.name);
           }}
         />
       </View>
@@ -37,22 +36,19 @@ const CreateMatching = () => {
       </View>
       <View style={styles.h10row}>
         <View style={styles.rootCategoryButtons}>
-        <CategoryButton name="한식" />
-        <CategoryButton name="중식" />
-        <CategoryButton name="일식" />
-        <CategoryButton name="양식" />
-        <CategoryButton name="카페" />
-
+          <CategoryButton name="한식" />
+          <CategoryButton name="중식" />
+          <CategoryButton name="일식" />
+          <CategoryButton name="양식" />
+          <CategoryButton name="카페" />
         </View>
       </View>
       <View style={{ margin: 2 }}>
         <Text style={orderStyles.title}>음식점 선택</Text>
       </View>
       <View style={orderStyles.list}>
-        <StoreListComponent targetCatagory={category}/>
+        <StoreListComponent selectedCatagory={category} />
       </View>
     </View>
   );
 };
-
-export default CreateMatching;

@@ -3,9 +3,8 @@ import { StyleSheet, View, Text, Button } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Picker } from "@react-native-picker/picker";
 import QuantitySelector from "../../components/Main/Matching/QuantitySelector";
-import { red } from "chalk";
 
-const SetMatchingTime = (props) => {
+export default (props) => {
   console.log(props.route.params);
   const orderInfo = props.route.params;
 
@@ -48,7 +47,7 @@ const SetMatchingTime = (props) => {
           <Button
             title="매칭방 만들기"
             onPress={() =>
-              navigation.navigate("MatchingReqHost", {
+              navigation.navigate("MatchingReqHostScreen", {
                 time: time,
                 persons: persons,
                 orderInfo: orderInfo,
@@ -105,5 +104,3 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
 });
-
-export default SetMatchingTime;

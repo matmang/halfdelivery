@@ -1,13 +1,9 @@
 import React, { Component, useEffect, useState } from "react";
-import {
-  View,
-  Button,
-  TextInput,
-} from "react-native";
+import { View, Button, TextInput } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import styles from "../../components/Main/styles";
 
-const TempSendMsg = () => {
+export default () => {
   const navigation = useNavigation();
   const [text, setText] = useState("");
   const [texts, setTexts] = useState("empty haha");
@@ -29,5 +25,3 @@ const TempSendMsg = () => {
     </View>
   );
 };
-
-export default TempSendMsg;
