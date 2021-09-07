@@ -9,6 +9,7 @@ import AppLoading from "expo-app-loading";
 const getFonts = () => {
   return Font.loadAsync({
     'noto-regular' : require('./assets/fonts/NotoSansKR-Regular.otf'),
+    'nunito-regular' : require('./assets/fonts/NunitoSans-Regular.ttf'),
   })
 }
 

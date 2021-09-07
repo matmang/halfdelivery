@@ -1,6 +1,6 @@
 import React from 'react';
 import {Dimensions, TouchableOpacity} from 'react-native';
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import Proptypes from 'prop-types';
 import colors from '../../colors';
 
@@ -16,14 +16,14 @@ const Button = styled.View`
   background-color: ${props =>
     props.accent ? colors.mainBlue : 'transparent'};
   color: ${props => (props.accent ? colors.mainBlue : colors.mainPink)};
-  font-family: 'noto-regular';
+  font-family: 'nunito-regular';
 `;
 
 const Text = styled.Text`
   color: ${props => (props.accent ? colors.mainPink : colors.mainBlue)};
   font-weight: 600;
   font-size: 14px;
-  font-family: 'noto-regular';
+  font-family: 'nunito-regular';
 `;
 
 const Btn = ({onPress, text, accent = false}) => (

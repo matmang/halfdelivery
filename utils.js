@@ -5,6 +5,6 @@ export const isEmail = (email) => {
 };
 
 export const isPhoneNum = (phonenumber) => {
-  const regEx = /^\d{3}-\d{3,4}-\d{4}$/;
+  const regEx = /^\d{3}\d{3,4}\d{4}$/;
   return regEx.test(phonenumber);
 };

@@ -15,6 +15,8 @@ const callApi = async (method, path, data, jwt) => {
     return axios[method](fullUrl, data, { headers });
   }
 };
+export const createAccount = form => callApi("post", "/users/", form);
+export const login = form => callApi("post", "/users/login/", form);
+export const callsms = form => callApi("post", "/users/inputsms/", form);
+export const verifysms = form => callApi("post", "/users/smsverification/", form);
 
-export const createAccount = (form) => callApi("post", "/users/", form);
-export const login = (form) => callApi("post", "/users/login/", form);
