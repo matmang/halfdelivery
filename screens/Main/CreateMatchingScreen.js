@@ -47,7 +47,7 @@ export default () => {
         <Text style={orderStyles.title}>음식점 선택</Text>
       </View>
       <View style={orderStyles.list}>
-        <StoreListComponent targetCatagory={category} />
+        <StoreListComponent selectedCatagory={category} />
       </View>
     </View>
   );

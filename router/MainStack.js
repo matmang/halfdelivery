@@ -13,6 +13,7 @@ import PoliciesBoardScreen from "../screens/Main/PoliciesBoardScreen";
 import TempSendMsgScreen from "../screens/Main/TempSendMsgScreen";
 import SetMatchingTimeScreen from "../screens/Main/SetMatchingTimeScreen";
 import TestScreen from "../screens/Main/TestScreen";
+import SelectMenuScreen from "../screens/Main/SelectMenuScreen";
 
 const Main = createStackNavigator();
 export default () => (
@@ -22,6 +23,13 @@ export default () => (
       component={TestScreen}
       options={{
         title: "Test",
+      }}
+    />
+    <Main.Screen
+      name="SelectMenuScreen"
+      component={SelectMenuScreen}
+      options={{
+        title: "선택한 식당",
       }}
     />
     <Main.Screen

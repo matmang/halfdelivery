@@ -1,6 +1,5 @@
 import React, { Component, useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
-import { color, set } from "react-native-reanimated";
 
 const styles = StyleSheet.create({
   centerize: {
