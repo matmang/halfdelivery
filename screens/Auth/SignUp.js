@@ -8,8 +8,8 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { isEmail, isPhoneNum } from "../../utils";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useDispatch } from "react-redux";
-import { createAccount } from "../../api";
-import * as GoogleSignIn from 'expo-google-sign-in';
+import { callsms, createAccount, verifysms } from "../../api";
+import * as GoogleSignIn from "expo-google-sign-in";
 
 const Container = styled.View`
   flex: 1;
@@ -32,6 +32,8 @@ export default ({ navigation: { navigate } }) => {
   const [lastName, setLastName] = useState("");
   const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [authNumber, setAuthNumber] = useState("");
+  const [isVerified, setIsVerified] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
@@ -68,6 +70,10 @@ export default ({ navigation: { navigate } }) => {
       alert("Please add a valid phonenumber");
       return false;
     }
+    if (!isVerified) {
+      alert("Please authenticate your phone number");
+      return false;
+    }
     if (password !== passwordConfirm) {
       alert("Password need to match");
       return false;
@@ -99,53 +105,92 @@ export default ({ navigation: { navigate } }) => {
       console.warn(e);
     }
   };
+  const smsCall = async () => {
+    if (phoneNumber === "") {
+      alert("Please Input phoneNumber");
+    }
+    try {
+      const { status } = await callsms({
+        phone_number: phoneNumber,
+      });
+      if (status == 200) {
+        alert("인증번호가 발송되었습니다.");
+      }
+    } catch (e) {
+      console.warn(e);
+    }
+  };
+  const smsVerificate = async () => {
+    if (phoneNumber === "" || authNumber === "") {
+      alert("Please Input authNumber");
+    }
+    try {
+      const { status } = await verifysms({
+        phone_number: phoneNumber,
+        auth_number: authNumber,
+      });
+      if (status == 200) {
+        alert("인증이 완료되었습니다.");
+        setIsVerified(true);
+      } else {
+        alert("인증번호가 잘못되었습니다.");
+      }
+    } catch (e) {
+      console.warn(e);
+    }
+  };
   return (
     <KeyboardAwareScrollView extraScrollHeight={20}>
       <DismissKeyboard>
         <Container>
-          <ScrollView>
-            <KeyboardAvoidingView behavior="position">
-              <InputContainer>
-                <Input
-                  value={firstName}
-                  placeholder="First Name"
-                  stateFn={setFirstName}
-                />
-                <Input
-                  value={lastName}
-                  placeholder="Last Name"
-                  stateFn={setLastName}
-                />
-                <Input
-                  value={email}
-                  placeholder="Email"
-                  autoCapitalize="none"
-                  stateFn={setEmail}
-                />
-                <Input
-                  value={phoneNumber}
-                  placeholder="Phonenumber"
-                  autoCapitalize="none"
-                  stateFn={setPhoneNumber}
-                />
-                <Input
-                  value={password}
-                  placeholder="Password"
-                  isPassword={true}
-                  stateFn={setPassword}
-                />
-                <Input
-                  value={passwordConfirm}
-                  placeholder="Password Confirm"
-                  isPassword={true}
-                  stateFn={setPasswordConfirm}
-                />
-              </InputContainer>
-            </KeyboardAvoidingView>
-            <ButtonContainer>
-              <Btn text={"Sign Up"} accent onPress={handleSubmit} />
-            </ButtonContainer>
-          </ScrollView>
+          <KeyboardAvoidingView behavior="position">
+            <InputContainer>
+              <Input
+                value={firstName}
+                placeholder="First Name"
+                stateFn={setFirstName}
+              />
+              <Input
+                value={lastName}
+                placeholder="Last Name"
+                stateFn={setLastName}
+              />
+              <Input
+                value={email}
+                placeholder="Email"
+                autoCapitalize="none"
+                stateFn={setEmail}
+              />
+              <Input
+                value={phoneNumber}
+                placeholder="Phonenumber"
+                autoCapitalize="none"
+                stateFn={setPhoneNumber}
+              />
+              <Btn text={"인증번호 발송"} accent onPress={smsCall} />
+              <Input
+                value={authNumber}
+                placeholder="인증번호"
+                stateFn={setAuthNumber}
+              />
+              <Btn text={"인증"} accent onPress={smsVerificate} />
+              <Input
+                value={password}
+                placeholder="Password"
+                isPassword={true}
+                stateFn={setPassword}
+              />
+              <Input
+                value={passwordConfirm}
+                placeholder="Password Confirm"
+                isPassword={true}
+                stateFn={setPasswordConfirm}
+              />
+            </InputContainer>
+          </KeyboardAvoidingView>
+          <ButtonContainer>
+            <Btn text={"Sign Up"} accent onPress={handleSubmit} />
+          </ButtonContainer>
         </Container>
       </DismissKeyboard>
     </KeyboardAwareScrollView>
