@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, View, Text, Button } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Picker } from "@react-native-picker/picker";
-import QuantitySelector from "../../components/Main/Matching/QuantitySelector";
+import QuantitySelector from "../../components/Matching/QuantitySelector";
 
 export default (props) => {
   console.log(props.route.params);
@@ -47,7 +47,7 @@ export default (props) => {
           <Button
             title="매칭방 만들기"
             onPress={() =>
-              navigation.navigate("ChatListScreen", {
+              navigation.navigate("ChatRoomScreen", {
                 time: time,
                 persons: persons,
                 // orderInfo: orderInfo,

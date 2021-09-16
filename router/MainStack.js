@@ -3,7 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import TempHomeScreen from "../screens/Main/TempHomeScreen";
 import MatchingListScreen from "../screens/Main/MatchingListScreen";
-import CreateMatchingScreen from "../screens/Main/CreateMatchingScreen";
+import SelectStoreScreen from "../screens/Main/SelectStoreScreen";
 import MatchingReqClientScreen from "../screens/Main/MatchingReqClientScreen";
 import MatchingReqHostScreen from "../screens/Main/MatchingReqHostScreen";
 import MatchingSuccessScreen from "../screens/Main/MatchingSuccessScreen";
@@ -15,22 +15,42 @@ import SetMatchingTimeScreen from "../screens/Main/SetMatchingTimeScreen";
 import TestScreen from "../screens/Main/TestScreen";
 import SelectMenuScreen from "../screens/Main/SelectMenuScreen";
 import ChatListScreen from "../screens/Chat/ChatListScreen";
+import ChatRoomScreen from "../screens/Chat/ChatRoomScreen";
+import { View, Image, Text, SafeAreaView, Button } from "react-native";
+import halfLogo from "../logos";
+import logos from "../logos";
 
 const Main = createStackNavigator();
+const LogoHeader = (props) => {
+  return (
+    <SafeAreaView
+      style={{
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "white",
+      }}
+    >
+      <Image source={logos.halfLogo} style={{ width: 40, height: 40 }} />
+      {/* <Text>{props.title}</Text> */}
+    </SafeAreaView>
+  );
+};
+
 export default () => (
   <Main.Navigator initialRouteName="MatchingListScreen" screenOptions={{}}>
     <Main.Screen
-      name="TestScreen"
-      component={TestScreen}
+      name="MatchingListScreen"
+      component={MatchingListScreen}
       options={{
-        title: "Test",
+        header: (props) => <LogoHeader {...props} />,
+        title: "매칭 리스트",
       }}
     />
     <Main.Screen
-      name="ChatListScreen"
-      component={ChatListScreen}
+      name="SelectStoreScreen"
+      component={SelectStoreScreen}
       options={{
-        title: "채팅방 목록",
+        title: "음식점 고르기",
       }}
     />
     <Main.Screen
@@ -41,13 +61,6 @@ export default () => (
       }}
     />
     <Main.Screen
-      name="TempHomeScreen"
-      component={TempHomeScreen}
-      options={{
-        title: "(임시) 홈",
-      }}
-    />
-    <Main.Screen
       name="SetMatchingTimeScreen"
       component={SetMatchingTimeScreen}
       options={{
@@ -55,17 +68,39 @@ export default () => (
       }}
     />
     <Main.Screen
-      name="MatchingListScreen"
-      component={MatchingListScreen}
+      name="ChatRoomScreen"
+      component={ChatRoomScreen}
+      options={({ navigation }) => ({
+        title: "채팅방",
+        headerRight: () => (
+          <Button
+            onPress={() => navigation.navigate("ChatListScreen")} // ? useNavigation 훅 대신에, options 의 navigation 프로퍼티를 사용해야 한다!!
+            title="채팅방 목록"
+            color="grey"
+          />
+        ),
+      })}
+    />
+    <Main.Screen
+      name="ChatListScreen"
+      component={ChatListScreen}
       options={{
-        title: "매칭 리스트",
+        title: "채팅방 목록",
+      }}
+    />
+    {/* //! 아래는 아직 쓰지 않는 Screen 임. */}
+    {/* <Main.Screen
+      name="TestScreen"
+      component={TestScreen}
+      options={{
+        title: "Test",
       }}
     />
     <Main.Screen
-      name="CreateMatchingScreen"
-      component={CreateMatchingScreen}
+      name="TempHomeScreen"
+      component={TempHomeScreen}
       options={{
-        title: "매칭방 만들기",
+        title: "(임시) 홈",
       }}
     />
     <Main.Screen
@@ -96,13 +131,6 @@ export default () => (
         title: "매칭 실패",
       }}
     />
-    {/* <Chat.Screen
-      name="ChannelScreen"
-      component={Channel}
-      options={{
-        title: "채널",
-      }}
-    /> */}
     <Main.Screen
       name="TempSendMsgScreen"
       component={TempSendMsgScreen}
@@ -123,6 +151,6 @@ export default () => (
       options={{
         title: "약관 및 정책",
       }}
-    />
+    /> */}
   </Main.Navigator>
 );

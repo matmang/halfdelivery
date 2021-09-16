@@ -1,16 +1,21 @@
+import { useNavigation } from "@react-navigation/core";
 import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, Pressable } from "react-native";
 
 export default (props) => {
   const chatRoom = props.chatRoom;
   const user = chatRoom.users[1];
+  const navigation = useNavigation();
+
+  const onPress = () => {
+    navigation.navigate("ChatRoomScreen");
+  };
   return (
-    <View style={styles.container}>
+    <Pressable style={styles.container} onPress={onPress}>
       <Image
-        source={
-          user.imageLocal
-          // { uri: user.imageUri }
-        }
+        source={{
+          uri: user.imageUri,
+        }}
         style={styles.image}
       />
 
@@ -27,11 +32,11 @@ export default (props) => {
           <Text style={styles.text}>{chatRoom.lastMessage.createdAt}</Text>
         </View>
         <Text style={styles.text} numberOfLines={1} ellipsizeMode="tail">
-          {/* //? ellipsizeMode => 말줄임표(...) 시작위치 선택가능! head or tail. */}
+          {/* //? ellipsizeMode => ...생략점 위치 선택가능! head or tail. */}
           {chatRoom.lastMessage.content}
         </Text>
       </View>
-    </View>
+    </Pressable>
   );
 };
 

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { FlatList, Button, View } from "react-native";
-import StoreComponent from "./StoreComponent";
-import sampleData from "../../../assets/sampleDataMat";
-import styles from "../styles";
+import StoreItem from "./StoreItem";
+import sampleData from "../../assets/sampleDataMat";
+import styles from "../Main/styles";
+import { getStore } from "../../api-2";
 
 let targetData = sampleData;
 
@@ -22,19 +23,24 @@ export default (props) => {
   const [serverData, setServerData] = useState([]);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/v1/stores/all/", {
-      method: "GET",
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        setServerData(data);
+    // fetch("http://127.0.0.1:8000/v1/stores/all/", {
+    //   method: "GET",
+    // })
+    //   .then((resp) => resp.json())
+    //   .then((data) => {
+    //     setServerData(data);
 
-        // ? category 로 객체 묶기 groupBy() 함수를 사용.
-        // const cat = groupBy(data, "category");
-        // setServerData(cat);
-        // console.log(cat);
-      })
-      .catch((error) => alert(error));
+    //     // ? category 로 객체 묶기 groupBy() 함수를 사용.
+    //     // const cat = groupBy(data, "category");
+    //     // setServerData(cat);
+    //     // console.log(cat);
+    //   })
+    //   .catch((error) => alert(error));
+
+    // todo: fetch 랑 axios 공부 할 것..
+    console.log(serverData);
+    getStore(setServerData);
+    console.log(serverData);
   }, []);
 
   props.selectedCatagory === "all"
@@ -43,9 +49,10 @@ export default (props) => {
         (value) => value.category == props.selectedCatagory
       ));
 
-  console.log("==================시작");
-  console.log(groupBy(targetData, "store"));
-  console.log("==================끝");
+  // console.log("==================시작");
+  // console.log(groupBy(targetData, "store"));
+  // console.log("==================끝");
+
   // let temp = [groupBy(targetData, "store")].reduce(
   //   function (previousValue, currentValue) {
   //     return [...previousValue, ...currentValue.books];
@@ -58,7 +65,7 @@ export default (props) => {
     <View style={styles.storeList}>
       <FlatList
         data={targetData}
-        renderItem={({ item }) => <StoreComponent item={item} />}
+        renderItem={({ item }) => <StoreItem item={item} />}
         keyExtractor={(item, index) => index.toString()} // ? Warning 메시지 해결. https://github.com/facebook/react-native/issues/18291
       />
     </View>

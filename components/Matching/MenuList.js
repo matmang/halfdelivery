@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { FlatList, Button, View } from "react-native";
-import sampleData from "../../../assets/sampleDataMat";
-import styles from "../styles";
-import MenuComponent from "./MenuComponent";
+import sampleData from "../../assets/sampleDataMat";
+import styles from "../Main/styles";
+import MenuItem from "./MenuItem";
 
 let targetData = sampleData;
 export default (props) => {
@@ -29,7 +29,7 @@ export default (props) => {
     <View style={styles.storeList}>
       <FlatList
         data={targetData}
-        renderItem={({ item }) => <MenuComponent item={item} />}
+        renderItem={({ item }) => <MenuItem item={item} />}
         keyExtractor={(item, index) => index.toString()} // ? Warning 메시지 해결. https://github.com/facebook/react-native/issues/18291
       />
     </View>

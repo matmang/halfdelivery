@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 
-const RoomComponent = (props) => {
+export default (props) => {
   const item = props.item;
   return (
     <TouchableOpacity style={styles.root} onPress={() => alert("테스트")}>
@@ -69,4 +69,3 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 });
-export default RoomComponent;

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { StyleSheet, View, Text, FlatList } from "react-native";
-import ChatRoomItem from "../../components/Main/Chat/ChatRoomItem";
+import ChatRoomItem from "../../components/Chat/ChatRoomItem";
 import sampleDataChatRooms from "../../assets/sampleDataChatRooms";
 
 export default () => {

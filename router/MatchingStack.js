@@ -1,15 +1,15 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import CreateMatchingScreen from "../screens/Main/CreateMatchingScreen";
+import SelectStoreScreen from "../screens/Main/SelectStoreScreen";
 
 const Main = createStackNavigator();
 export default () => (
-  <Main.Navigator initialRouteName="CreateMatchingScreen" screenOptions={{}}>
+  <Main.Navigator initialRouteName="SelectStoreScreen" screenOptions={{}}>
     <Main.Screen
-      name="CreateMatchingScreen"
-      component={CreateMatchingScreen}
+      name="SelectStoreScreen"
+      component={SelectStoreScreen}
       options={{
-        title: "매칭방 만들기",
+        title: "음식점 고르기",
       }}
     />
   </Main.Navigator>

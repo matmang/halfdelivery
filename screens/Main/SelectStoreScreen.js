@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { View, Text, Button, ScrollView } from "react-native";
 import styles from "../../components/Main/styles";
-import orderStyles from "../../components/Main/Order/styles";
-import StoreListComponent from "../../components/Main/Matching/StoreListComponent";
+import orderStyles from "../../components/Order/styles";
+import StoreList from "../../components/Matching/StoreList";
 
 export default () => {
   // state값
@@ -47,7 +47,7 @@ export default () => {
         <Text style={orderStyles.title}>음식점 선택</Text>
       </View>
       <View style={orderStyles.list}>
-        <StoreListComponent selectedCatagory={category} />
+        <StoreList selectedCatagory={category} />
       </View>
     </View>
   );

@@ -1,8 +1,8 @@
 import React, { useState, t, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { View, Button, Text } from "react-native";
-import RoomListComponent from "../../components/Main/Order/RoomListComponent";
-import styles from "../../components/Main/Order/styles";
+import RoomList from "../../components/Order/RoomList";
+import styles from "../../components/Order/styles";
 
 export default () => {
   const [category, setCategory] = useState("한식");
@@ -22,11 +22,11 @@ export default () => {
           <Button title="카페" onPress={() => setCategory("카페")} />
         </View>
       </View>
-      <RoomListComponent targetCategory={category} />
+      <RoomList targetCategory={category} />
       <View style={{ marginTop: 50 }}>
         <Button
           title="매칭방 만들기"
-          onPress={() => navigation.navigate("CreateMatchingScreen")}
+          onPress={() => navigation.navigate("SelectStoreScreen")}
         />
       </View>
     </View>

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { View, Text, StyleSheet, FlatList } from "react-native";
-import RoomComponent from "./RoomComponent";
-import sampleData from "../../../assets/sampleDataOrd";
+import RoomItem from "./RoomItem";
+import sampleData from "../../assets/sampleDataOrd";
 
 const Header = () => {
   return (
@@ -23,7 +23,8 @@ const Header = () => {
 };
 
 let targetData = sampleData;
-const RoomListComponent = (props) => {
+
+export default (props) => {
   targetData = sampleData.filter(
     (value) => value.category == props.targetCategory
   );
@@ -35,7 +36,7 @@ const RoomListComponent = (props) => {
       </View>
       <FlatList
         data={targetData}
-        renderItem={({ item }) => <RoomComponent item={item} />}
+        renderItem={({ item }) => <RoomItem item={item} />}
       />
     </View>
   );
@@ -131,4 +132,3 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
-export default RoomListComponent;
