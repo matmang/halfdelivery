@@ -1,6 +1,7 @@
 import { useNavigation } from "@react-navigation/core";
 import React from "react";
 import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
+import halfLogo from "../../../assets/halfLogo.png";
 
 export default (props) => {
   const item = props.item; //? => const {item} = props; 랑 의미가 똑같음.
@@ -10,6 +11,7 @@ export default (props) => {
   return (
     <TouchableOpacity
       style={styles.root}
+      // todo:
       // onPress={
       //   // ? 메뉴 선택시, 장바구니에 추가. navigation ㄴㄴ
       //   () =>
@@ -21,12 +23,16 @@ export default (props) => {
       //       image: item.image, //! item.image 이다. 즉, 이미지의 uri 값을 옮기는 것이다!!
       //     })
       // }
+
+      // ? 일단 다음 스크린으로 이동
+      onPress={() => navigation.navigate("SetMatchingTimeScreen")}
     >
       <Image
         style={styles.image}
-        source={{
-          uri: item.image,
-        }}
+        source={
+          halfLogo
+          // {uri: item.image}
+        }
       />
       <View style={styles.rightContainer}>
         {/* 메뉴 */}

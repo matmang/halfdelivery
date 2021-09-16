@@ -43,6 +43,17 @@ export default (props) => {
         (value) => value.category == props.selectedCatagory
       ));
 
+  console.log("==================시작");
+  console.log(groupBy(targetData, "store"));
+  console.log("==================끝");
+  // let temp = [groupBy(targetData, "store")].reduce(
+  //   function (previousValue, currentValue) {
+  //     return [...previousValue, ...currentValue.books];
+  //   },
+  //   ["Alphabet"]
+  // );
+  // console.log(temp);
+
   return (
     <View style={styles.storeList}>
       <FlatList

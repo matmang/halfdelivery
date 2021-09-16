@@ -47,10 +47,10 @@ export default (props) => {
           <Button
             title="매칭방 만들기"
             onPress={() =>
-              navigation.navigate("MatchingReqHostScreen", {
+              navigation.navigate("ChatListScreen", {
                 time: time,
                 persons: persons,
-                orderInfo: orderInfo,
+                // orderInfo: orderInfo,
               })
             }
           />

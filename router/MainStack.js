@@ -14,6 +14,7 @@ import TempSendMsgScreen from "../screens/Main/TempSendMsgScreen";
 import SetMatchingTimeScreen from "../screens/Main/SetMatchingTimeScreen";
 import TestScreen from "../screens/Main/TestScreen";
 import SelectMenuScreen from "../screens/Main/SelectMenuScreen";
+import ChatListScreen from "../screens/Chat/ChatListScreen";
 
 const Main = createStackNavigator();
 export default () => (
@@ -23,6 +24,13 @@ export default () => (
       component={TestScreen}
       options={{
         title: "Test",
+      }}
+    />
+    <Main.Screen
+      name="ChatListScreen"
+      component={ChatListScreen}
+      options={{
+        title: "채팅방 목록",
       }}
     />
     <Main.Screen

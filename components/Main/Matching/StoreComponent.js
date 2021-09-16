@@ -2,6 +2,7 @@ import { useNavigation } from "@react-navigation/core";
 import React from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import styles from "./styles";
+import halfLogo from "../../../assets/halfLogo.png";
 
 export default (props) => {
   const item = props.item; //? => const {item} = props; 랑 의미가 똑같음.
@@ -22,9 +23,10 @@ export default (props) => {
     >
       <Image
         style={styles.image}
-        source={{
-          uri: item.image,
-        }}
+        source={
+          halfLogo
+          // {uri: item.image}
+        }
       />
       <View style={styles.rightContainer}>
         <Text style={styles.title} numberOfLines={1}>
