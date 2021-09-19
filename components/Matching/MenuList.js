@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { FlatList, Button, View } from "react-native";
-import sampleData from "../../assets/sampleDataMat";
+import Menus from "../../sampleData/Menus";
 import styles from "../Main/styles";
 import MenuItem from "./MenuItem";
 
-let targetData = sampleData;
+let targetData = Menus;
 export default (props) => {
   const [serverData, setServerData] = useState([]);
 

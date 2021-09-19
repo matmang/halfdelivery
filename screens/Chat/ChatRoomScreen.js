@@ -3,7 +3,7 @@ import { FlatList, StyleSheet, Text, View, SafeAreaView } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/core";
 import MessageInput from "../../components/Chat/MessageInput";
 import Message from "../../components/Chat/Message";
-import sampleDataChatRooms from "../../assets/sampleDataChatRooms";
+import ChatRooms from "../../sampleData/ChatRooms";
 import StoreItem from "../../components/Matching/StoreItem";
 
 export default () => {
@@ -22,7 +22,7 @@ export default () => {
       <StoreItem item={{}} />
       {/* 채팅메시지 */}
       <FlatList
-        data={sampleDataChatRooms.messages}
+        data={ChatRooms.messages}
         renderItem={({ item }) => <Message message={item} />}
         inverted // ? 렌더링 순서 역전
       />

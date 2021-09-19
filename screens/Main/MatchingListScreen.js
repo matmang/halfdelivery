@@ -6,7 +6,6 @@ import styles from "../../components/Order/styles";
 
 export default () => {
   const [category, setCategory] = useState("한식");
-  useEffect(() => {}, []);
 
   const navigation = useNavigation();
 

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { View, Text, StyleSheet, FlatList } from "react-native";
 import RoomItem from "./RoomItem";
-import sampleData from "../../assets/sampleDataOrd";
+import MatchingRooms from "../../sampleData/MatchingRooms";
 
 const Header = () => {
   return (
@@ -22,10 +22,10 @@ const Header = () => {
   );
 };
 
-let targetData = sampleData;
+let targetData = MatchingRooms;
 
 export default (props) => {
-  targetData = sampleData.filter(
+  targetData = MatchingRooms.filter(
     (value) => value.category == props.targetCategory
   );
   return (

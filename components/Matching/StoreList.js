@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { FlatList, Button, View } from "react-native";
 import StoreItem from "./StoreItem";
-import sampleData from "../../assets/sampleDataMat";
+import MatchingRooms from "../../sampleData/MatchingRooms";
 import styles from "../Main/styles";
 import { getStore } from "../../api-2";
 
-let targetData = sampleData;
+let targetData = MatchingRooms;
 
 // ? 속성으로 객체 분류하기. https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce
 function groupBy(objectArray, property) {
