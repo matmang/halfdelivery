@@ -3,10 +3,12 @@ import { StyleSheet, View, Text, Button } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Picker } from "@react-native-picker/picker";
 import QuantitySelector from "../../components/Matching/QuantitySelector";
+import { connect } from "react-redux";
+// import {  } from "../../redux/Order/orderStore";
 
-export default (props) => {
-  console.log(props.route.params);
-  const orderInfo = props.route.params;
+const SetMatchingTimeScreen = (props) => {
+  const menuInfo = props.route.params.menuInfo;
+  const storeInfo = props.route.params.storeInfo;
 
   const navigation = useNavigation();
   const [time, setTime] = useState(10);
@@ -48,9 +50,9 @@ export default (props) => {
             title="매칭방 만들기"
             onPress={() =>
               navigation.navigate("ChatRoomScreen", {
-                time: time,
-                persons: persons,
-                // orderInfo: orderInfo,
+                matchingRoomInfo: { time, persons },
+                menuInfo,
+                storeInfo,
               })
             }
           />
@@ -104,3 +106,20 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
 });
+
+// const mapStateToProps = (state, ownProps) => {
+//   // 1. "state" : from "store"
+//   // 1. "ownProps" : component Home's ownProps
+//   // console.log(state, ownProps);
+//   console.log("mapStateToProps", state);
+//   console.log("mapStateToProps", ownProps);
+
+//   // ! In order to PUT states to ownProps, We use React-Redux
+//   // ! to do that, "return".
+//   // ? whatever I return here, It will be added to component "Home" as a "new props"
+//   return { sexy: true };
+// };
+
+// export default connect(mapStateToProps)(SetMatchingTimeScreen);
+
+export default SetMatchingTimeScreen;

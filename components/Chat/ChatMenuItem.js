@@ -12,38 +12,14 @@ import { connect } from "react-redux";
 import { addMenu, menusStore, menusSlice } from "../../redux/Order/orderStore";
 import logos from "../../logos";
 
-const MenuItem = ({ menuInfo, storeInfo }) => {
+const ChatMenuItem = ({ menuInfo }) => {
   // menuInfo.image =
   //   "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/9bd0e340-f08c-41e4-98f3-dbc9904abe8e/Logo_72dpi-01.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210906%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20210906T080723Z&X-Amz-Expires=86400&X-Amz-Signature=9cfe0ac4ac1b99ad3e195573772038d7f328eaf41f7ecd2e31c1381569afe07e&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Logo_72dpi-01.png%22";
 
   const navigation = useNavigation();
 
   return (
-    <TouchableOpacity
-      style={styles.root}
-      // todo:
-      // onPress={
-      //   // ? 메뉴 선택시, 장바구니에 추가. navigation ㄴㄴ
-      //   () =>
-      //     navigation.navigate("SetMatchingTimeScreen", {
-      //       store: menuInfo.store,
-      //       price: menuInfo.price,
-      //       minPrice: menuInfo.minPrice,
-      //       delivTip: menuInfo.delivTip,
-      //       image: menuInfo.image, //! menuInfo.image 이다. 즉, 이미지의 uri 값을 옮기는 것이다!!
-      //     })
-      // }
-
-      // ? 일단 다음 스크린으로 이동
-      onPress={() =>
-        navigation.navigate("SetMatchingTimeScreen", {
-          menuInfo,
-          storeInfo,
-        })
-      }
-    >
-      <Button title="리덕스" onPress={() => alert("dd")} />
-
+    <View style={styles.root}>
       <Image
         style={styles.image}
         source={
@@ -67,7 +43,7 @@ const MenuItem = ({ menuInfo, storeInfo }) => {
           )}
         </Text>
       </View>
-    </TouchableOpacity>
+    </View>
   );
 };
 
@@ -110,4 +86,4 @@ const styles = StyleSheet.create({
 // };
 // export default connect(null, mapDispatchToProps)(MenuItem);
 
-export default MenuItem;
+export default ChatMenuItem;

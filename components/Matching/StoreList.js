@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { FlatList, Button, View } from "react-native";
 import StoreItem from "./StoreItem";
-import MatchingRooms from "../../sampleData/MatchingRooms";
+import Stores from "../../sampleData/Stores";
 import styles from "../Main/styles";
 import { getStore } from "../../api-2";
 
-let targetData = MatchingRooms;
+let targetData = Stores;
 
 // ? 속성으로 객체 분류하기. https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce
 function groupBy(objectArray, property) {
@@ -29,18 +29,16 @@ export default (props) => {
     //   .then((resp) => resp.json())
     //   .then((data) => {
     //     setServerData(data);
-
     //     // ? category 로 객체 묶기 groupBy() 함수를 사용.
     //     // const cat = groupBy(data, "category");
     //     // setServerData(cat);
     //     // console.log(cat);
     //   })
     //   .catch((error) => alert(error));
-
-    // todo: fetch 랑 axios 공부 할 것..
-    console.log(serverData);
-    getStore(setServerData);
-    console.log(serverData);
+    // // todo: fetch 랑 axios 공부 할 것..
+    // console.log(serverData);
+    // getStore(setServerData);
+    // console.log(serverData);
   }, []);
 
   props.selectedCatagory === "all"
@@ -64,8 +62,8 @@ export default (props) => {
   return (
     <View style={styles.storeList}>
       <FlatList
-        data={targetData}
-        renderItem={({ item }) => <StoreItem item={item} />}
+        data={Stores} // ? 임시 설정
+        renderItem={({ item }) => <StoreItem storeInfo={item} />}
         keyExtractor={(item, index) => index.toString()} // ? Warning 메시지 해결. https://github.com/facebook/react-native/issues/18291
       />
     </View>
