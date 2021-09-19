@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, createContext } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { View, Text, Button, ScrollView } from "react-native";
 import styles from "../../components/Main/styles";
 import orderStyles from "../../components/Order/styles";
 import StoreList from "../../components/Matching/StoreList";
 
-export default () => {
+// export const SelectStoreScreenContext = createContext();
+
+const SelectStoreScreen = () => {
   // state값
   const [category, setCategory] = useState("all");
-
-  // //! 디자인 시안 나오기 전까진, 일단 Button 으로...
+  //! 디자인 시안 나오기 전까진, 일단 Button 으로...
   const CategoryButton = (props) => {
     return (
       <View style={{ margin: 10 }}>
@@ -47,8 +48,11 @@ export default () => {
         <Text style={orderStyles.title}>음식점 선택</Text>
       </View>
       <View style={orderStyles.list}>
-        <StoreList selectedCatagory={category} />
+        <StoreList category={category} />
       </View>
     </View>
+    // </SelectStoreScreenContext.Provider>
   );
 };
+
+export default SelectStoreScreen;
