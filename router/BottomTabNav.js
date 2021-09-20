@@ -7,7 +7,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 import MainStack from "./MainStack";
 import MatchingStack from "./MatchingStack";
-import Profile from "../screens/Main/Profile";
+import TempMyInfo from "../screens/Main/TempMyInfoScreen";
 
 const Tab = createBottomTabNavigator();
 export default () => {
@@ -42,8 +42,8 @@ export default () => {
         }}
       />
       <Tab.Screen
-        component={Profile}
-        name="Profile"
+        component={TempMyInfo}
+        name="TabMyInfo"
         options={{
           tabBarIcon: ({ color }) => (
             <Ionicons name="man" color={color} size={25} />

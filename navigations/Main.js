@@ -1,7 +1,6 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 
-<<<<<<< Updated upstream
 import TempHome from '../screens/Main/TempHome';
 import MakeMatching from '../screens/Main/MakeMatching';
 import MatchingRequestClient from '../screens/Main/MatchingRequestClient';
@@ -11,20 +10,6 @@ import MatchingFailed from '../screens/Main/MatchingFailed';
 import InfoBoard from '../screens/Main/InfoBoard';
 import PoliciesBoard from '../screens/Main/PoliciesBoard';
 import TempSendMsg from '../screens/Main/TempSendMsg';
-=======
-import TempHome from "../screens/Main/TempHomeScreen";
-import MatchingList from "../screens/Main/MatchingListScreen";
-import CreateMatchingScreen from "../screens/Main/CreateMatchingScreen";
-import MatchingReqClient from "../screens/Main/MatchingReqClientScreen";
-import MatchingReqHost from "../screens/Main/MatchingReqHostScreen";
-import MatchingSuccess from "../screens/Main/MatchingSuccessScreen";
-import MatchingFailed from "../screens/Main/MatchingFailedScreen";
-import InfoBoardScreen from "../screens/Main/InfoBoardScreen";
-import PoliciesBoard from "../screens/Main/PoliciesBoardScreen";
-import TempSendMsg from "../screens/Main/TempSendMsgScreen";
-import SetMatchingTime from "../screens/Main/SetMatchingTimeScreen";
-import Profile from "../screens/Main/Profile";
->>>>>>> Stashed changes
 
 const Main = createStackNavigator();
 
@@ -91,13 +76,6 @@ export default () => (
       component={PoliciesBoard}
       options={{
         title: '약관 및 정책',
-      }}
-    />
-    <Main.Screen
-      name="Profile"
-      component={Profile}
-      options={{
-        title: "프로필",
       }}
     />
   </Main.Navigator>
