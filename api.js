@@ -7,7 +7,7 @@ const callApi = async (method, path, data, jwt) => {
     "Content-Type": "application/json",
   };
   // const baseUrl = "http://0c53-211-207-141-139.ngrok.io/v1";
-  const baseUrl = "http://3450-211-207-141-139.ngrok.io/v1";
+  const baseUrl = "http://61af-211-207-141-139.ngrok.io/v1";
   const fullUrl = `${baseUrl}${path}`;
   if (method === "get" || method === "delete") {
     return axios[method](fullUrl, { headers });
