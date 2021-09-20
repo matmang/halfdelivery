@@ -1,9 +1,11 @@
+import halfLogo from "../assets/halfLogo.png";
 export default [
   {
     id: "1",
     category: "일식",
     store: "크레이지카츠",
     minPrice: 12000,
+    delivTip: 3500,
     people: 1,
   },
   {
@@ -11,6 +13,7 @@ export default [
     category: "카페",
     store: "설빙",
     minPrice: 13000,
+    delivTip: 2500,
     people: 2,
   },
   {
@@ -18,6 +21,7 @@ export default [
     category: "중식",
     store: "홍콩반점",
     minPrice: 15000,
+    delivTip: 1500,
     people: 2,
   },
   {
@@ -25,6 +29,7 @@ export default [
     category: "한식",
     store: "한솥도시락",
     minPrice: 9000,
+    delivTip: 3500,
     people: 2,
   },
   {
@@ -32,6 +37,7 @@ export default [
     category: "일식",
     store: "이자카야",
     minPrice: 10000,
+    delivTip: 3500,
     people: 1,
   },
   {
@@ -39,6 +45,7 @@ export default [
     category: "일식",
     store: "카츠카츠",
     minPrice: 11000,
+    delivTip: 3500,
     people: 2,
   },
   {
@@ -46,6 +53,7 @@ export default [
     category: "한식",
     store: "바비든든",
     minPrice: 7000,
+    delivTip: 3500,
     people: 1,
   },
   {
@@ -53,6 +61,7 @@ export default [
     category: "한식",
     store: "김가네",
     minPrice: 15000,
+    delivTip: 3500,
     people: 1,
   },
   {
@@ -60,6 +69,7 @@ export default [
     category: "일식",
     store: "덮밥킹",
     minPrice: 12000,
+    delivTip: 3500,
     people: 2,
   },
   {
@@ -67,6 +77,7 @@ export default [
     category: "양식",
     store: "롤링파스타",
     minPrice: 11000,
+    delivTip: 3500,
     people: 1,
   },
   {
@@ -74,6 +85,7 @@ export default [
     category: "한식",
     store: "바르다김선생",
     minPrice: 15000,
+    delivTip: 3500,
     people: 2,
   },
   {
@@ -81,6 +93,7 @@ export default [
     category: "일식",
     store: "크레이지카츠",
     minPrice: 12000,
+    delivTip: 3500,
     people: 1,
   },
   {
@@ -88,6 +101,7 @@ export default [
     category: "카페",
     store: "설빙",
     minPrice: 13000,
+    delivTip: 3500,
     people: 2,
   },
   {
@@ -95,6 +109,7 @@ export default [
     category: "중식",
     store: "홍콩반점",
     minPrice: 15000,
+    delivTip: 3500,
     people: 2,
   },
   {
@@ -102,6 +117,7 @@ export default [
     category: "한식",
     store: "한솥도시락",
     minPrice: 9000,
+    delivTip: 3500,
     people: 2,
   },
   {
@@ -109,6 +125,7 @@ export default [
     category: "일식",
     store: "이자카야",
     minPrice: 10000,
+    delivTip: 3500,
     people: 1,
   },
   {
@@ -116,6 +133,7 @@ export default [
     category: "일식",
     store: "카츠카츠",
     minPrice: 11000,
+    delivTip: 3500,
     people: 2,
   },
   {
@@ -123,6 +141,7 @@ export default [
     category: "한식",
     store: "바비든든",
     minPrice: 7000,
+    delivTip: 3500,
     people: 1,
   },
   {
@@ -130,6 +149,7 @@ export default [
     category: "한식",
     store: "김가네",
     minPrice: 15000,
+    delivTip: 3500,
     people: 1,
   },
   {
@@ -137,6 +157,7 @@ export default [
     category: "일식",
     store: "덮밥킹",
     minPrice: 12000,
+    delivTip: 3500,
     people: 2,
   },
   {
@@ -144,6 +165,7 @@ export default [
     category: "양식",
     store: "롤링파스타",
     minPrice: 11000,
+    delivTip: 3500,
     people: 1,
   },
   {
@@ -151,6 +173,7 @@ export default [
     category: "한식",
     store: "바르다김선생",
     minPrice: 15000,
+    delivTip: 3500,
     people: 2,
   },
   {
@@ -158,6 +181,7 @@ export default [
     category: "일식",
     store: "크레이지카츠",
     minPrice: 12000,
+    delivTip: 3500,
     people: 1,
   },
   {
@@ -165,6 +189,7 @@ export default [
     category: "카페",
     store: "설빙",
     minPrice: 13000,
+    delivTip: 3500,
     people: 2,
   },
   {
@@ -172,6 +197,7 @@ export default [
     category: "중식",
     store: "홍콩반점",
     minPrice: 15000,
+    delivTip: 3500,
     people: 2,
   },
   {
@@ -179,6 +205,7 @@ export default [
     category: "한식",
     store: "한솥도시락",
     minPrice: 9000,
+    delivTip: 3500,
     people: 2,
   },
   {
@@ -186,6 +213,7 @@ export default [
     category: "일식",
     store: "이자카야",
     minPrice: 10000,
+    delivTip: 3500,
     people: 1,
   },
   {
@@ -193,6 +221,7 @@ export default [
     category: "일식",
     store: "카츠카츠",
     minPrice: 11000,
+    delivTip: 3500,
     people: 2,
   },
   {
@@ -200,6 +229,7 @@ export default [
     category: "한식",
     store: "바비든든",
     minPrice: 7000,
+    delivTip: 3500,
     people: 1,
   },
   {
@@ -207,6 +237,7 @@ export default [
     category: "한식",
     store: "김가네",
     minPrice: 15000,
+    delivTip: 3500,
     people: 1,
   },
   {
@@ -214,6 +245,7 @@ export default [
     category: "일식",
     store: "덮밥킹",
     minPrice: 12000,
+    delivTip: 3500,
     people: 2,
   },
   {
@@ -221,6 +253,7 @@ export default [
     category: "양식",
     store: "롤링파스타",
     minPrice: 11000,
+    delivTip: 3500,
     people: 1,
   },
   {
@@ -228,6 +261,7 @@ export default [
     category: "한식",
     store: "바르다김선생",
     minPrice: 15000,
+    delivTip: 3500,
     people: 2,
   },
 ];
