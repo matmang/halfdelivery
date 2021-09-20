@@ -12,7 +12,7 @@ const Button = styled.View`
   align-items: center;
   border-radius: 30px;
   border: 1px solid ${props => (props.accent ? 'transparent' : colors.mainBlue)};
-  width: ${width / 1.5}px;
+  width: ${props => (props.size ? size : width / 1.5)}px;
   background-color: ${props =>
     props.accent ? colors.mainBlue : 'transparent'};
   color: ${props => (props.accent ? colors.mainBlue : colors.mainPink)};
@@ -26,7 +26,7 @@ const Text = styled.Text`
   font-family: 'NotoSansKR-Regular';
 `;
 
-const Btn = ({onPress, text, accent = false}) => (
+const Btn = ({onPress, text, accent = false, size}) => (
   <TouchableOpacity onPress={onPress}>
     <Button accent={accent}>
       <Text accent={accent}>{text}</Text>
