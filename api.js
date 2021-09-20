@@ -19,5 +19,3 @@ export const createAccount = form => callApi("post", "/users/", form);
 export const login = form => callApi("post", "/users/login/", form);
 export const callsms = form => callApi("post", "/users/inputsms/", form);
 export const verifysms = form => callApi("post", "/users/smsverification/", form);
-export const stores = page => callApi("get", `/stores/all/?page=${page}`);
-export const profile = id => callApi("get", `/users/${id}`);
