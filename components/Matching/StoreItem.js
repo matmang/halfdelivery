@@ -2,7 +2,7 @@ import { useNavigation } from "@react-navigation/core";
 import React, { useContext } from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import styles from "./styles";
-import logos from "../../logos";
+import logos from "../../images";
 // import { SelectStoreScreenContext } from "../../screens/Main/SelectStoreScreen";
 
 export default ({ storeInfo }) => {

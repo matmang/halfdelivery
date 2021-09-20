@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/core";
-import logos from "../../logos";
+import logos from "../../images";
 
 const ChatStoreItem = ({ storeInfo }) => {
   // storeInfo.image =

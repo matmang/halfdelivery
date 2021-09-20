@@ -10,7 +10,7 @@ import {
 import { useNavigation } from "@react-navigation/core";
 import { connect } from "react-redux";
 import { addMenu, menusStore, menusSlice } from "../../redux/Order/orderStore";
-import logos from "../../logos";
+import logos from "../../images";
 
 const ChatMenuItem = ({ menuInfo }) => {
   // menuInfo.image =

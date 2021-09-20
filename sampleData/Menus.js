@@ -1,4 +1,4 @@
-import halfLogo from "../assets/halfLogo.png";
+import { halfLogo } from "../images";
 
 // item.menu
 // // .image
