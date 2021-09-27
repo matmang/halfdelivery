@@ -17,6 +17,7 @@ import {
 } from "@expo/vector-icons";
 import { Auth, DataStore } from "aws-amplify";
 import { Message, ChatRoom } from "../../AWS/src/models";
+import colors from "../../colors";
 
 const MessageInput = ({ chatRoom }) => {
   const [message, setMessage] = useState("");
@@ -74,7 +75,7 @@ const MessageInput = ({ chatRoom }) => {
             // ?   onChangeText={(newMessage) => setMessage(newMessage)}
             placeholder="메시지를 입력해주세요!"
             autoCorrect={false}
-            autoCapitalize={false}
+            autoCapitalize="none"
           />
           <Feather name="camera" size={24} color="grey" style={styles.icon} />
           <MaterialCommunityIcons
@@ -89,7 +90,7 @@ const MessageInput = ({ chatRoom }) => {
           style={[
             styles.buttonContainer,
             // ? message 가 빈스트링 이면 false 임.
-            { backgroundColor: message ? "pink" : "lightgrey" },
+            { backgroundColor: message ? colors.mainPink : "lightgrey" },
           ]}
           onPress={onPress}
         >
@@ -97,7 +98,7 @@ const MessageInput = ({ chatRoom }) => {
           <Feather
             name="arrow-up"
             size={30}
-            color={message ? "blue" : "grey"}
+            color={message ? colors.mainBlue : "grey"}
             style={styles.icon}
           />
         </Pressable>

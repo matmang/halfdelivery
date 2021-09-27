@@ -18,6 +18,16 @@ const ChatMenuItem = ({ menuInfo }) => {
 
   const navigation = useNavigation();
 
+  if (menuInfo === undefined) {
+    const _menuInfo = {
+      menu: "test",
+      minPrice: "test",
+      menuDetail: "test",
+    };
+
+    menuInfo = _menuInfo;
+  }
+
   return (
     <View style={styles.root}>
       <Image

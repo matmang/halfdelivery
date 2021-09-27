@@ -67,12 +67,14 @@ const ChatListHeader = (props) => {
         // padding: 10,
       }}
     >
-      <Image
-        source={{
-          uri: userImgUri,
-        }}
-        style={{ width: 30, height: 30, borderRadius: 30 }}
-      />
+      {userImgUri !== "" && (
+        <Image
+          source={{
+            uri: userImgUri,
+          }}
+          style={{ width: 30, height: 30, borderRadius: 30 }}
+        />
+      )}
       <View style={{ flex: 1 }}>
         <Text ellipsizeMode="tail" numberOfLines={1}>
           {authUser.attributes.email}
@@ -80,10 +82,10 @@ const ChatListHeader = (props) => {
       </View>
       <Text
         style={{
-          flex: 1,
           textAlign: "center",
-          marginLeft: 50,
+          marginLeft: 70,
           fontWeight: "bold",
+          fontSize: 20,
         }}
       >
         채팅방 리스트
@@ -92,7 +94,7 @@ const ChatListHeader = (props) => {
         name="camera"
         size={24}
         color={"black"}
-        style={{ marginHorizontal: 10 }}
+        style={{ marginLeft: 40, marginRight: 5 }}
       />
       <Button
         onPress={() => navigation.navigate("ChatUserScreen")} // ? useNavigation 훅 대신에, options 의 navigation 프로퍼티를 사용해야 한다!!

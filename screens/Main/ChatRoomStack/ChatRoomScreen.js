@@ -23,15 +23,6 @@ const ChatRoomScreen = (props) => {
   const route = useRoute();
   const navigation = useNavigation();
 
-  const matchingRoomInfo =
-    props.route.params !== undefined
-      ? props.route.params.matchingRoomInfo
-      : "No Data";
-  const storeInfo =
-    props.route.params !== undefined ? props.route.params.storeInfo : {};
-  const menuInfo =
-    props.route.params !== undefined ? props.route.params.menuInfo : {};
-
   // ? 첫 렌더링에만 호출. ChatRoom 가져오기.
   useEffect(() => {
     fetchChatRoom();
@@ -92,6 +83,17 @@ const ChatRoomScreen = (props) => {
     setMessages(fechedMessages);
   };
 
+  const matchingRoomInfo =
+    props.route.params !== undefined
+      ? props.route.params.matchingRoomInfo
+      : "No Data";
+
+  // ! 임시 값.
+  const storeInfo = undefined;
+  const menuInfo = undefined;
+
+  console.log(props.route.params);
+
   // ? chatRoom 이 null 이면...
   if (!chatRoom) {
     return <ActivityIndicator />;
@@ -101,10 +103,10 @@ const ChatRoomScreen = (props) => {
     // ? View 대신 SafeAreaView 를 쓰면, 노치 같은 곳에 데이터가 표출되지 않는다. 굳!
     <SafeAreaView style={styles.page}>
       {/* 주문정보 불러오기. */}
-      {/* <View style={styles.nonChatBox}>
+      <View style={styles.nonChatBox}>
         <ChatStoreItem storeInfo={storeInfo} />
         <ChatMenuItem menuInfo={menuInfo} />
-      </View> */}
+      </View>
 
       {/* 채팅메시지 */}
       <FlatList
