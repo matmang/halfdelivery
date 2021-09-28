@@ -9,7 +9,7 @@ export default () => {
   const dispatch = useDispatch();
   return (
     <NavigationContainer>
-      {!isLoggedIn ? <Router /> : <Auth />}
+      <Router />
     </NavigationContainer>
   );
 };

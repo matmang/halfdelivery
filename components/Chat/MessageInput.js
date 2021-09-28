@@ -62,12 +62,14 @@ const MessageInput = ({ chatRoom }) => {
     >
       <View style={styles.root}>
         <View style={styles.inputContainer}>
+          {/* 이모티콘 아이콘 */}
           <SimpleLineIcons
             name="emotsmile"
             size={24}
             color="grey"
             style={styles.icon}
           />
+          {/* 메시지 입력칸 */}
           <TextInput
             style={styles.input}
             value={message}
@@ -77,7 +79,9 @@ const MessageInput = ({ chatRoom }) => {
             autoCorrect={false}
             autoCapitalize="none"
           />
+          {/* 카메라 아이콘 */}
           <Feather name="camera" size={24} color="grey" style={styles.icon} />
+          {/* 마이크 아이콘 */}
           <MaterialCommunityIcons
             name="microphone"
             size={24}
@@ -85,7 +89,7 @@ const MessageInput = ({ chatRoom }) => {
             style={styles.icon}
           />
         </View>
-        {/* // ? Pressable 은 View 와 대치 가능하다. 오직, onPress 유무 차이만 있음! */}
+        {/* // ? Pressable 은 View 와 대체 가능하다. 오직, onPress 유무 차이만 있음! */}
         <Pressable
           style={[
             styles.buttonContainer,

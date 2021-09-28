@@ -4,7 +4,8 @@ import { useNavigation } from "@react-navigation/native";
 import { Picker } from "@react-native-picker/picker";
 import { connect } from "react-redux";
 import QuantitySelector from "../../../components/Matching/QuantitySelector";
-// import {  } from "../../redux/Order/orderStore";
+import { Auth, DataStore } from "aws-amplify";
+import { ChatRoom, User, ChatRoomUser } from "../../../AWS/src/models";
 
 const SetMatchingTimeScreen = (props) => {
   const menuInfo = props.route.params.menuInfo;
@@ -13,6 +14,36 @@ const SetMatchingTimeScreen = (props) => {
   const navigation = useNavigation();
   const [time, setTime] = useState(10);
   const [persons, setPersons] = useState(2);
+
+  const makeChatRoom = async () => {
+    // ? Chat Room 만들기.
+    const newChatRoom = await DataStore.save(
+      new ChatRoom({ newMessages: 216 })
+    );
+
+    // ? Authenticated User 와 Chat Room 을 연결하기.
+    const authUser = await Auth.currentAuthenticatedUser();
+    // ? DataStore 의 User 모델에서 authUser.attributes.sub 값과 일치하는 값만 가져온다.
+    const dbUser = await DataStore.query(User, authUser.attributes.sub);
+    await DataStore.save(
+      new ChatRoomUser({
+        user: dbUser,
+        chatroom: newChatRoom,
+      })
+    );
+
+    // ! 계정의 imageUri 가 비워져 있으면, 왠진 모르겠지만, 새 채팅방으로 이동 하지 않는다.
+    navigation.navigate("ChatRoomScreen", {
+      id: newChatRoom.id,
+      matchingRoomInfo: { time, persons },
+      menuInfo,
+      storeInfo,
+    });
+
+    // TODO: If tere is already to chat room between these 2 users,
+    // TODO: then redirect to the existing chat room.
+    // TODO: Otherwise, create a new chatroom with these users.
+  };
 
   return (
     <View style={styles.root}>
@@ -46,16 +77,7 @@ const SetMatchingTimeScreen = (props) => {
 
       <View style={styles.buttonView}>
         <View style={styles.buttonContainer}>
-          <Button
-            title="매칭방 만들기"
-            onPress={() =>
-              navigation.navigate("ChatRoomScreen", {
-                matchingRoomInfo: { time, persons },
-                menuInfo,
-                storeInfo,
-              })
-            }
-          />
+          <Button title="매칭방 만들기" onPress={() => makeChatRoom()} />
         </View>
       </View>
     </View>

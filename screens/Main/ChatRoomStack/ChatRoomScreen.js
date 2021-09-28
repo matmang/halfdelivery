@@ -89,10 +89,24 @@ const ChatRoomScreen = (props) => {
       : "No Data";
 
   // ! 임시 값.
-  const storeInfo = undefined;
-  const menuInfo = undefined;
+  if (
+    // props.route.params.matchingRoomInfo === undefined ||
+    props.route.params.storeInfo === undefined ||
+    props.route.params.menuInfo === undefined
+  ) {
+    const storeInfo = undefined;
+    const menuInfo = undefined;
+  } else {
+    const matchingRoomInfo = props.route.params.matchingRoomInfo;
+    const storeInfo = props.route.params.storeInfo;
+    const menuInfo = props.route.params.menuInfo;
+  }
 
-  console.log(props.route.params);
+  // const matchingRoomInfo = props.route.params.matchingRoomInfo;
+  const storeInfo = props.route.params.storeInfo;
+  const menuInfo = props.route.params.menuInfo;
+
+  console.log("파람스: ", props.route.params);
 
   // ? chatRoom 이 null 이면...
   if (!chatRoom) {
