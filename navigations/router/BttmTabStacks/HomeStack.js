@@ -5,6 +5,8 @@ import { View, Image, Text, SafeAreaView, Button } from "react-native";
 import logos from "../../../images";
 
 import HomeScreen from "../../../screens/Main/HomeStack/HomeScreen";
+import TestScreen from "../../../screens/Main/HomeStack/TestScreen";
+
 const Stack = createStackNavigator();
 const LogoHeader = (props) => {
   return (
@@ -31,8 +33,14 @@ export default () => (
       name="HomeScreen"
       component={HomeScreen}
       options={{
-        header: (props) => <LogoHeader {...props} />,
         title: "임시 홈",
+      }}
+    />
+    <Stack.Screen
+      name="TestScreen"
+      component={TestScreen}
+      options={{
+        title: "테스트 스크린",
       }}
     />
   </Stack.Navigator>

@@ -1,3 +1,33 @@
+type StoreCategory @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  category: String!
+  Stores: [Store] @connection(keyName: "byStoreCategory", fields: ["id"])
+}
+
+type Store @model @auth(rules: [{allow: public}]) @key(name: "byStoreCategory", fields: ["storecategoryID"]) {
+  id: ID!
+  store: String!
+  storeImgUri: String
+  minOrdPrice: Int!
+  minDlvTime: Int!
+  maxDlvTime: Int!
+  maxDlvTip: Int!
+  openHours: String!
+  location: String
+  Menus: [Menu] @connection(keyName: "byStore", fields: ["id"])
+  storecategoryID: ID
+}
+
+type Menu @model @auth(rules: [{allow: public}]) @key(name: "byStore", fields: ["storeID"]) {
+  id: ID!
+  menuCategory: String!
+  menu: String!
+  menuImgUri: String
+  menuDetail: String
+  price: Int!
+  storeID: ID
+}
+
 type ChatRoom @model @auth(rules: [{allow: public}]) {
   id: ID!
   newMessages: Int

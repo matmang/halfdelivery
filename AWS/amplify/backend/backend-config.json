@@ -68,5 +68,11 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
+  },
+  "data": {
+    "DynamoDBDataImporter": {
+      "providerPlugin": "awscloudformation",
+      "service": "S3AndLambda"
+    }
   }
 }
