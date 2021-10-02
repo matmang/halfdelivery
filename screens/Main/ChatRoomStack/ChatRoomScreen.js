@@ -14,8 +14,8 @@ import MessageInput from "../../../components/Chat/MessageInput";
 import { Message as MessageModel, ChatRoom } from "../../../AWS/src/models";
 
 import StoreItem from "../../../components/Matching/StoreItem";
-import ChatMenuItem from "../../../components/Chat/ChatMenuItem";
 import ChatStoreItem from "../../../components/Chat/ChatStoreItem";
+import ChatMenuList from "../../../components/Chat/ChatMenuList";
 
 const ChatRoomScreen = (props) => {
   const [messages, setMessages] = useState([]);
@@ -106,7 +106,7 @@ const ChatRoomScreen = (props) => {
   const storeInfo = props.route.params.storeInfo;
   const menuInfo = props.route.params.menuInfo;
 
-  console.log("파람스: ", props.route.params);
+  // console.log("파람스: ", props.route.params);
 
   // ? chatRoom 이 null 이면...
   if (!chatRoom) {
@@ -119,7 +119,9 @@ const ChatRoomScreen = (props) => {
       {/* 주문정보 불러오기. */}
       <View style={styles.nonChatBox}>
         <ChatStoreItem storeInfo={storeInfo} />
-        <ChatMenuItem menuInfo={menuInfo} />
+        <View style={styles.chatMenuList}>
+          <ChatMenuList />
+        </View>
       </View>
 
       {/* 채팅메시지 */}
@@ -142,6 +144,13 @@ const styles = StyleSheet.create({
   nonChatBox: {
     padding: 10,
     backgroundColor: "grey",
+    borderBottomRightRadius: 10,
+    borderBottomLeftRadius: 10,
+  },
+  chatMenuList: {
+    marginTop: 5,
+    padding: 10,
+    backgroundColor: "lightgrey",
     borderBottomRightRadius: 10,
     borderBottomLeftRadius: 10,
   },

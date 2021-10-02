@@ -9,32 +9,33 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 import { connect } from "react-redux";
-import { addMenu, menusStore, menusSlice } from "../../redux/Order/orderStore";
+import { addMenu, menusStore, menusSlice } from "../../redux/Order/_orderStore";
 import logos from "../../images";
 
-const ChatMenuItem = ({ menuInfo }) => {
-  // menuInfo.image =
-  //   "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/9bd0e340-f08c-41e4-98f3-dbc9904abe8e/Logo_72dpi-01.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210906%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20210906T080723Z&X-Amz-Expires=86400&X-Amz-Signature=9cfe0ac4ac1b99ad3e195573772038d7f328eaf41f7ecd2e31c1381569afe07e&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Logo_72dpi-01.png%22";
-
+const ChatMenuItem = ({ object }) => {
   const navigation = useNavigation();
 
-  if (menuInfo === undefined) {
+  if (object === undefined) {
     const _menuInfo = {
-      menu: "test",
-      minPrice: "test",
-      menuDetail: "test",
+      menuInfo: {
+        menu: "test",
+        minPrice: "test",
+        menuDetail: "test",
+      },
     };
 
-    menuInfo = _menuInfo;
+    object = _menuInfo;
   }
+
+  const menuInfo = object.menuInfo;
 
   return (
     <View style={styles.root}>
       <Image
         style={styles.image}
         source={
-          logos.halfLogo
-          // {uri: menuInfo.image}
+          // ? imageUri 가 있으면 그걸 표출하고, 없으면 하프로고 표출.
+          menuInfo.menuImgUri ? { uri: menuInfo.menuImgUri } : logos.halfLogo
         }
       />
       <View style={styles.rightContainer}>
@@ -47,7 +48,6 @@ const ChatMenuItem = ({ menuInfo }) => {
         <Text style={styles.title} numberOfLines={1}>
           {/* //? JS Magic! menuInfo.delivTip 값이 존재할 때에만, && 뒤에값을 표출한다! */}
           {/* //? Conditional components 를 다루는 법이다. */}
-          {/* //! menuInfo.menuDetail 데이터베이스 추후 필요. */}
           {menuInfo.menuDetail && (
             <Text style={styles.title}> {menuInfo.menuDetail}</Text>
           )}

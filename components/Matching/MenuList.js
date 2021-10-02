@@ -18,8 +18,6 @@ export default (props) => {
     //     setServerData(data);
     //   })
     //   .catch((error) => alert(error));
-
-    console.log();
   }, []);
 
   props.selectedStore === "all"

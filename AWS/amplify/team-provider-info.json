@@ -13,14 +13,14 @@
       "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-halfdelivery-staging-72919-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
     },
     "categories": {
+      "auth": {
+        "HalfDelivery": {}
+      },
       "function": {
         "HalfDeliveryPostConfirmation": {
           "deploymentBucketName": "amplify-halfdelivery-staging-72919-deployment",
           "s3Key": "amplify-builds/HalfDeliveryPostConfirmation-2b6478346a6a37704d66-build.zip"
         }
-      },
-      "auth": {
-        "HalfDelivery": {}
       }
     }
   }
