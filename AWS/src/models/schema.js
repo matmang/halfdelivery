@@ -673,6 +673,13 @@ export const schema = {
                         "associatedWith": "userID"
                     }
                 },
+                "halfmoney": {
+                    "name": "halfmoney",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -718,5 +725,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "a4dc36d02ae7d1e13b276d3926df5bd4"
+    "version": "8a30a9107ab3b46a0270df59d2c8e5b6"
 };

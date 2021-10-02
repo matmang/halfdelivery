@@ -1,37 +1,37 @@
-import React, { Component } from "react";
+import Auth, { CognitoUser } from "@aws-amplify/auth";
+import { DataStore } from "@aws-amplify/datastore";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, View, Text, Button, Linking } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { ScrollView } from "react-native-gesture-handler";
+import { User } from "../../../AWS/src/models";
+import UserProfile from "../../../components/Main/UserProfile";
 
-export default () => {
-  const navigation = useNavigation();
+export default ({ navigation }) => {
+  const [authUser, setAuthUser] = useState(undefined);
+  const [userImgUri, setUserImgUri] = useState("");
+  const [userHalfMoney, setUserHalfMoney] = useState(0);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const userData = await Auth.currentAuthenticatedUser().then(setAuthUser);
+    };
+    fetchUserData();
+    const fetchImageUri = async () => {
+      const user = await DataStore.query(User, authUser.attributes.sub);
+      setUserImgUri(user?.imageUri);
+      setUserHalfMoney(user?.halfmoney);
+    };
+    fetchImageUri();
+  }, []);
+
   return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-        paddingVertical: 100,
-      }}
-    >
-      <View style={{ padding: 20 }}>
-        <Text style={{ fontSize: 40, fontWeight: "bold" }}>내정보</Text>
-      </View>
-      <Button
-        style={styles.buttonStyle}
-        title="홈으로 돌아가기"
-        onPress={() => {
-          navigation.navigate("HomeScreen");
-        }}
+    <ScrollView>
+      <UserProfile
+        username="김지우"
+        halfmoney={userHalfMoney}
+        image={userImgUri}
+        fullName="김지우"
       />
-    </View>
+    </ScrollView>
   );
 };
-
-const styles = StyleSheet.create({
-  buttonStyle: {
-    marginTop: 100,
-    marginBottom: 100,
-    marginVertical: 10,
-    paddingTop: 10,
-  },
-});
