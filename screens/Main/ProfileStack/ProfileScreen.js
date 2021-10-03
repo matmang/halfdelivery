@@ -16,13 +16,14 @@ export default ({ navigation }) => {
       const userData = await Auth.currentAuthenticatedUser().then(setAuthUser);
     };
     fetchUserData();
-    const fetchImageUri = async () => {
-      const user = await DataStore.query(User, authUser.attributes.sub);
-      setUserImgUri(user?.imageUri);
-      setUserHalfMoney(user?.halfmoney);
-    };
-    fetchImageUri();
   }, []);
+
+  const fetchImageUri = async () => {
+    const user = await DataStore.query(User, authUser.attributes.sub);
+    setUserImgUri(user?.imageUri);
+    setUserHalfMoney(user?.halfmoney);
+  };
+  fetchImageUri();
 
   return (
     <ScrollView>
