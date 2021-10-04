@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  StyleSheet,
-  Button,
-} from "react-native";
+import { View, Text, Image, TouchableOpacity, StyleSheet, Button } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 import { connect } from "react-redux";
 import logos from "../../images";
@@ -20,8 +13,6 @@ const MenuItem = ({ menuInfo, storeInfo }) => {
   console.log(storeName);
 
   const dispatch = useDispatch();
-
-  const navigation = useNavigation();
 
   return (
     <TouchableOpacity
@@ -39,37 +30,12 @@ const MenuItem = ({ menuInfo, storeInfo }) => {
       //     })
       // }
 
-      // ? 일단 다음 스크린으로 이동
-      onPress={() =>
-        navigation.navigate("SetMatchingTimeScreen", {
-          menuInfo,
-          storeInfo,
-        })
-      }
+      // ? 클릭시, 메뉴정보 redux 로 저장
+      onPress={() => {
+        dispatch(addMenu(menuInfo));
+      }}
     >
-      <Button
-        title="메뉴선택"
-        onPress={() => {
-          dispatch(addMenu(menuInfo));
-        }}
-      />
-      <Button
-        title="클린"
-        onPress={() => {
-          dispatch(cleanMenus(""));
-        }}
-      />
-
-      <Image
-        style={styles.image}
-        source={
-          // ? imageUri 가 있으면 그걸 표출하고, 없으면 하프로고 표출.
-          menuInfo.menuImgUri ? { uri: menuInfo.menuImgUri } : logos.halfLogo
-
-          // {uri: menuInfo.image}
-        }
-      />
-      <View style={styles.rightContainer}>
+      <View style={styles.textContainer}>
         {/* 메뉴 */}
         <Text style={styles.title} numberOfLines={1}>
           {menuInfo.menu} | {menuInfo.minPrice}원
@@ -79,10 +45,19 @@ const MenuItem = ({ menuInfo, storeInfo }) => {
         <Text style={styles.title} numberOfLines={1}>
           {/* //? JS Magic! menuInfo.delivTip 값이 존재할 때에만, && 뒤에값을 표출한다! */}
           {/* //? Conditional components 를 다루는 법이다. */}
-          {menuInfo.menuDetail && (
-            <Text style={styles.title}> {menuInfo.menuDetail}</Text>
-          )}
+          {menuInfo.menuDetail && <Text style={styles.title}> {menuInfo.menuDetail}</Text>}
         </Text>
+      </View>
+      <View style={styles.imageContainer}>
+        <Image
+          style={styles.image}
+          source={
+            // ? imageUri 가 있으면 그걸 표출하고, 없으면 하프로고 표출.
+            menuInfo.menuImgUri ? { uri: menuInfo.menuImgUri } : logos.halfLogo
+
+            // {uri: menuInfo.image}
+          }
+        />
       </View>
     </TouchableOpacity>
   );
@@ -103,11 +78,16 @@ const styles = StyleSheet.create({
     height: "auto",
     resizeMode: "contain", //? Show whole Image (with white space)
   },
-  rightContainer: {
+  textContainer: {
     padding: 10,
     backgroundColor: "white",
-    // justifyContent: "flex-end",
     flex: 4,
+  },
+  imageContainer: {
+    padding: 1,
+    backgroundColor: "white",
+    marginRight: 10,
+    flex: 1,
   },
   title: {
     fontSize: 15,

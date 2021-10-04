@@ -1,12 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  FlatList,
-  StyleSheet,
-  Text,
-  View,
-  SafeAreaView,
-  ActivityIndicator,
-} from "react-native";
+import { FlatList, StyleSheet, Text, View, SafeAreaView, ActivityIndicator } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/core";
 import { DataStore, SortDirection } from "@aws-amplify/datastore";
 import Message from "../../../components/Chat/Message";
@@ -17,11 +10,17 @@ import StoreItem from "../../../components/Matching/StoreItem";
 import ChatStoreItem from "../../../components/Chat/ChatStoreItem";
 import ChatMenuList from "../../../components/Chat/ChatMenuList";
 
+import { useSelector, useDispatch } from "react-redux";
+import { setStore, addMenu, cleanMenus } from "../../../redux/orderSlice";
+
 const ChatRoomScreen = (props) => {
   const [messages, setMessages] = useState([]);
   const [chatRoom, setChatRoom] = useState(null);
   const route = useRoute();
   const navigation = useNavigation();
+
+  const storeName = useSelector((state) => state.orderReducer);
+  const menus = useSelector((state) => state.orderReducer);
 
   // ? 첫 렌더링에만 호출. ChatRoom 가져오기.
   useEffect(() => {
@@ -79,14 +78,11 @@ const ChatRoomScreen = (props) => {
         sort: (message) => message.createdAt(SortDirection.DESCENDING),
       } // ? chatroomID() 는 Amplify 내장 함수다.
     );
-    console.log(fechedMessages);
+    console.log("펫치드메시지스", fechedMessages);
     setMessages(fechedMessages);
   };
 
-  const matchingRoomInfo =
-    props.route.params !== undefined
-      ? props.route.params.matchingRoomInfo
-      : "No Data";
+  const matchingRoomInfo = props.route.params !== undefined ? props.route.params.matchingRoomInfo : "No Data";
 
   // ! 임시 값.
   if (

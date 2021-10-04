@@ -1,26 +1,44 @@
-import React, { useState } from "react";
-import { StyleSheet, View, Text, Button } from "react-native";
+import React, { useState, useEffect } from "react";
+import { StyleSheet, View, Text, Button, SafeAreaView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Picker } from "@react-native-picker/picker";
 import { connect } from "react-redux";
 import QuantitySelector from "../../../components/Matching/QuantitySelector";
 import { Auth, DataStore } from "aws-amplify";
 import { ChatRoom, User, ChatRoomUser } from "../../../AWS/src/models";
+import { useSelector, useDispatch } from "react-redux";
+// import {
+//   setStore,
+//   addMenu,
+//   cleanMenus,
+//   setTime as reduxSetTime,
+//   setPersons as reduxSetPersons,
+// } from "../../../redux/orderSlice";
 
 const SetMatchingTimeScreen = (props) => {
-  const menuInfo = props.route.params.menuInfo;
-  const storeInfo = props.route.params.storeInfo;
-
-  const navigation = useNavigation();
   const [time, setTime] = useState(10);
   const [persons, setPersons] = useState(2);
+
+  const Object = useSelector((state) => state.orderReducer);
+  const dispatch = useDispatch();
+
+  const navigation = useNavigation();
+
+  // ? 시간이랑 인원수 바뀌면 redux store 업데이트.
+  useEffect(() => {
+    // dispatch(reduxSetTime(time));
+    // dispatch(reduxSetPersons(persons));
+    // console.log("스토어네임:", storeName);
+  }, [time, persons]);
 
   const makeChatRoom = async () => {
     // ? Chat Room 만들기.
     const newChatRoom = await DataStore.save(
-      new ChatRoom({ newMessages: 216 })
+      new ChatRoom({
+        newMessages: 68,
+        matchingInfo: { storeName: Object.storeName, menus: Object.menus, roomInfo: { time: time, persons: persons } },
+      })
     );
-
     // ? Authenticated User 와 Chat Room 을 연결하기.
     const authUser = await Auth.currentAuthenticatedUser();
     // ? DataStore 의 User 모델에서 authUser.attributes.sub 값과 일치하는 값만 가져온다.
@@ -35,9 +53,7 @@ const SetMatchingTimeScreen = (props) => {
     // ! 계정의 imageUri 가 비워져 있으면, 왠진 모르겠지만, 새 채팅방으로 이동 하지 않는다.
     navigation.navigate("ChatRoomScreen", {
       id: newChatRoom.id,
-      matchingRoomInfo: { time, persons },
-      menuInfo,
-      storeInfo,
+      // matchingRoomInfo: { time, persons },
     });
 
     // TODO: If tere is already to chat room between these 2 users,
@@ -46,7 +62,7 @@ const SetMatchingTimeScreen = (props) => {
   };
 
   return (
-    <View style={styles.root}>
+    <SafeAreaView style={styles.root}>
       {/* 매칭 요청 시간 */}
       <View style={styles.setTimeView}>
         <View style={styles.leftContainer}>
@@ -80,7 +96,7 @@ const SetMatchingTimeScreen = (props) => {
           <Button title="매칭방 만들기" onPress={() => makeChatRoom()} />
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -128,20 +144,5 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
 });
-
-// const mapStateToProps = (state, ownProps) => {
-//   // 1. "state" : from "store"
-//   // 1. "ownProps" : component Home's ownProps
-//   // console.log(state, ownProps);
-//   console.log("mapStateToProps", state);
-//   console.log("mapStateToProps", ownProps);
-
-//   // ! In order to PUT states to ownProps, We use React-Redux
-//   // ! to do that, "return".
-//   // ? whatever I return here, It will be added to component "Home" as a "new props"
-//   return { sexy: true };
-// };
-
-// export default connect(mapStateToProps)(SetMatchingTimeScreen);
 
 export default SetMatchingTimeScreen;

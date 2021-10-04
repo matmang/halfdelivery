@@ -12,12 +12,10 @@ const ChatListScreen = () => {
   useEffect(() => {
     // ? 채팅방들 가져오기.
     const fetchChatRooms = async () => {
-      const userData = await Auth.currentAuthenticatedUser();
+      const authUser = await Auth.currentAuthenticatedUser();
 
       const chatRooms = (await DataStore.query(ChatRoomUser))
-        .filter(
-          (ChatRoomUser) => ChatRoomUser.user.id === userData.attributes.sub
-        )
+        .filter((ChatRoomUser) => ChatRoomUser.user.id === authUser.attributes.sub)
         .map((ChatRoomUser) => ChatRoomUser.chatroom);
 
       setChatRooms(chatRooms);

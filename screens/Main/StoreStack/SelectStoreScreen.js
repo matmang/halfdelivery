@@ -1,6 +1,6 @@
 import React, { useState, useEffect, createContext } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { View, Text, Button, ScrollView, StyleSheet } from "react-native";
+import { View, Text, Button, ScrollView, StyleSheet, SafeAreaView } from "react-native";
 import StoreList from "../../../components/Matching/StoreList";
 
 // export const SelectStoreScreenContext = createContext();
@@ -23,7 +23,7 @@ const SelectStoreScreen = () => {
   };
 
   return (
-    <View
+    <SafeAreaView
       style={{
         flex: 1,
         alignItems: "center", // 가로 정렬
@@ -48,7 +48,7 @@ const SelectStoreScreen = () => {
       <View style={styles.list}>
         <StoreList category={category} />
       </View>
-    </View>
+    </SafeAreaView>
     // </SelectStoreScreenContext.Provider>
   );
 };

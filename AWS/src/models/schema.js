@@ -372,6 +372,13 @@ export const schema = {
                         "associatedWith": "chatroom"
                     }
                 },
+                "matchingInfo": {
+                    "name": "matchingInfo",
+                    "isArray": false,
+                    "type": "AWSJSON",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -673,6 +680,13 @@ export const schema = {
                         "associatedWith": "userID"
                     }
                 },
+                "halfmoney": {
+                    "name": "halfmoney",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -718,5 +732,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "a4dc36d02ae7d1e13b276d3926df5bd4"
+    "version": "58b411999340e5d87bcc03761b0a75b1"
 };

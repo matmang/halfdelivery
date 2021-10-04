@@ -4,11 +4,14 @@ import { useNavigation } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
 import colors from "../../../colors";
 import { Auth, DataStore } from "aws-amplify";
-import { Store } from "../../../AWS/src/models";
+import { Store, Menu } from "../../../AWS/src/models";
 
 const TestScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
+
+  // ? 예산닭갈
+  const _storeID = "654defb7-914f-4bb5-9b45-564f0726a14b";
 
   // ? 가게저장하는 함수
   const saveStore = async () => {
@@ -27,6 +30,23 @@ const TestScreen = () => {
     console.log("실행완료");
   };
 
+  // ? 메뉴저장하는 함수
+  const saveMenu = async () => {
+    const user = await Auth.currentAuthenticatedUser();
+    const newMessage = await DataStore.save(
+      new Menu({
+        // id: string;
+        menuCategory: "메뉴소개",
+        menu: "1인순대곱창볶음메뉴",
+        // menuImgUri?: ,
+        // menuDetail?: ,
+        price: 13000,
+        storeID: _storeID,
+      })
+    );
+    console.log("실행완료");
+  };
+
   return (
     <View
       style={{
@@ -38,7 +58,7 @@ const TestScreen = () => {
       <Text style={{ fontSize: 40, fontWeight: "bold" }}>테스트 스크린</Text>
 
       {/* 테스트 */}
-      <Pressable style={styles.logOutContainer} onPress={saveStore}>
+      <Pressable style={styles.logOutContainer} onPress={alert("테스트")}>
         <Text>테스트 실행</Text>
       </Pressable>
     </View>

@@ -9,6 +9,8 @@ export const orderSlice = createSlice({
   initialState: {
     storeName: "",
     menus: [],
+    time: 0,
+    persons: 0,
   },
   reducers: {
     // ? 매장이름 할당하기.
@@ -23,6 +25,15 @@ export const orderSlice = createSlice({
     cleanMenus: (state, action) => {
       state.menus = [];
     },
+    // ! 일단은, 매칭 시간이랑 인원은 리덕스가 불필요하지 않을까...
+    // // ? 매칭 시간 설정.
+    // setTime: (state, action) => {
+    //   state.time = action.payload;
+    // },
+    // // ? 매칭 인원 설정.
+    // setPersons: (state, action) => {
+    //   state.persons = action.payload;
+    // },
   },
 });
 

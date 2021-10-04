@@ -6,6 +6,7 @@ import { View, Image, Text, SafeAreaView, Button } from "react-native";
 import logos from "../../../images";
 
 import MatchingListScreen from "../../../screens/Main/PartnerStack/MatchingListScreen";
+import _MatchingListScreen from "../../../screens/Main/PartnerStack/_MatchingListScreen";
 
 const Stack = createStackNavigator();
 const LogoHeader = (props) => {
@@ -25,11 +26,19 @@ const LogoHeader = (props) => {
 
 export default () => (
   <Stack.Navigator
-    initialRouteName="MatchingListScreen"
+    initialRouteName="_MatchingListScreen"
     screenOptions={{
       header: (props) => <LogoHeader {...props} />,
     }}
   >
+    <Stack.Screen
+      name="_MatchingListScreen"
+      component={_MatchingListScreen}
+      options={{
+        header: (props) => <LogoHeader {...props} />,
+        title: "_매칭 리스트",
+      }}
+    />
     <Stack.Screen
       name="MatchingListScreen"
       component={MatchingListScreen}

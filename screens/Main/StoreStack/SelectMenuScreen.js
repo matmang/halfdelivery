@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { View, Text, Button, StyleSheet } from "react-native";
+import { View, Text, Button, StyleSheet, SafeAreaView } from "react-native";
 import StoreItem from "../../../components/Matching/StoreItem";
 import MenuList from "../../../components/Matching/MenuList";
+import { useSelector, useDispatch } from "react-redux";
+import { setStore, addMenu, cleanMenus } from "../../../redux/orderSlice";
 
 export default (props) => {
   const storeInfo = props.route.params.storeInfo;
   const [store, setStore] = useState(storeInfo ? storeInfo.store : "all");
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
 
   return (
-    <View
+    <SafeAreaView
       style={{
         flex: 1,
         alignItems: "center", // 가로 정렬
@@ -27,7 +31,19 @@ export default (props) => {
       <View style={styles.list}>
         <MenuList selectedStore={store} storeInfo={storeInfo} />
       </View>
-    </View>
+      <Button
+        title="클린"
+        onPress={() => {
+          dispatch(cleanMenus(""));
+        }}
+      />
+      <Button
+        title="이동"
+        onPress={() => {
+          navigation.navigate("SetMatchingTimeScreen", {});
+        }}
+      />
+    </SafeAreaView>
   );
 };
 
@@ -55,7 +71,7 @@ const styles = StyleSheet.create({
     // borderColor: "red",
     backgroundColor: "lightgrey",
     width: "90%",
-    height: "70%",
+    height: "65%",
     alignSelf: "center",
     padding: 10,
     marginTop: 10,
