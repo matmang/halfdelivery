@@ -7,6 +7,7 @@ import colors from "../../colors";
 import Auth from "@aws-amplify/auth";
 import SearchBar from "./SearchBar";
 import Btn from "../Auth/Btn";
+import Popular from "./Popular";
 import Swiper from "react-native-swiper";
 import { FlatList } from "react-native-gesture-handler";
 
@@ -26,7 +27,21 @@ const SwipeContanier = styled.View`
   border-radius: 5px;
 `;
 
-const NowPopularContainer = styled.View``;
+const SubTitle = styled.Text`
+  font-family: "noto-regular";
+  font-size: 20px;
+  color: ${colors.mainBlue};
+  font-weight: 600;
+`;
+
+const NowPopularContainer = styled.View`
+  height: 300px;
+  justify-content: center;
+  align-items: center;
+  background-color: ${colors.snow};
+  border: 2px solid ${colors.coal};
+  border-radius: 5px;
+`;
 
 const Home = ({ stores }) => {
   const searchPress = () => {
@@ -60,12 +75,17 @@ const Home = ({ stores }) => {
         autoCapitalize="none"
         searchFn={searchPress}
       />
-      <FlatList
-        data={stores}
-        keyExtractor={(store) => String(store.id)}
-        onEndReachedThreshold={0.8}
-        showsVerticalScrollIndicator={false}
-      />
+      <SubTitle>실시간 매칭 요청 많은 식당</SubTitle>
+      <NowPopularContainer>
+        <FlatList
+          data={stores}
+          keyExtractor={(item, index) => index.toString()}
+          onEndReachedThreshold={0.8}
+          showsVerticalScrollIndicator={true}
+          renderItem={({ item }) => <Popular storeInfo={item} />}
+          windowSize={2}
+        />
+      </NowPopularContainer>
       <Btn text={"Log Out"} accent onPress={logOut} />
     </Container>
   );

@@ -3,6 +3,7 @@ import { Auth } from "aws-amplify";
 import Home from "../../../components/Main/Home";
 import { ScrollView } from "react-native-gesture-handler";
 import { Store } from "../../../AWS/src/models";
+import { DataStore } from "@aws-amplify/datastore";
 
 export default ({ navigation }) => {
   const [search, setSearch] = useState("");
@@ -15,8 +16,8 @@ export default ({ navigation }) => {
     const fetchStores = async () => {
       const userData = await Auth.currentAuthenticatedUser();
       const storeData = await DataStore.query(Store);
-      console.log(storeData);
       setStores(storeData);
+      console.log(stores);
     };
     fetchStores();
   }, []);
