@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  StyleSheet,
-  Button,
-} from "react-native";
+import { View, Text, Image, TouchableOpacity, StyleSheet, Button } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 import { connect } from "react-redux";
 import { addMenu, menusStore, menusSlice } from "../../redux/Order/_orderStore";
@@ -48,9 +41,7 @@ const ChatMenuItem = ({ object }) => {
         <Text style={styles.title} numberOfLines={1}>
           {/* //? JS Magic! menuInfo.delivTip 값이 존재할 때에만, && 뒤에값을 표출한다! */}
           {/* //? Conditional components 를 다루는 법이다. */}
-          {menuInfo.menuDetail && (
-            <Text style={styles.title}> {menuInfo.menuDetail}</Text>
-          )}
+          {menuInfo.menuDetail && <Text style={styles.title}> {menuInfo.menuDetail}</Text>}
         </Text>
       </View>
     </View>
@@ -81,6 +72,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 15,
     fontWeight: "bold",
+    fontFamily: "noto-regular",
     textAlign: "left",
   },
 });

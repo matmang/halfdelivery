@@ -91,6 +91,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 15,
+    fontFamily: "noto-regular",
     fontWeight: "bold",
     textAlign: "left",
   },

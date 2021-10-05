@@ -21,17 +21,19 @@ const styles = StyleSheet.create({
     height: 70,
     width: 70,
     resizeMode: "contain", //? Show whole Image (with white space)
-    alignSelf: 'center',
+    alignSelf: "center",
     borderRadius: 5,
     borderWidth: 1,
   },
   orderLogCategory: {
     fontSize: 40,
+    fontFamily: "noto-regular",
     fontWeight: "bold",
     textAlign: "left",
   },
   orderLogMinPrice: {
     fontSize: 30,
+    fontFamily: "noto-regular",
     fontWeight: "bold",
     textAlign: "left",
   },
@@ -158,17 +160,20 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: 15,
+    fontFamily: "noto-regular",
     fontWeight: "bold",
   },
   textPressed: {
     color: "white",
     textAlign: "center",
     fontSize: 30,
+    fontFamily: "noto-regular",
   },
   textNotPressed: {
     color: "white",
     textAlign: "center",
     fontSize: 40,
+    fontFamily: "noto-regular",
   },
 });
 
