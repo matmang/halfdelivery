@@ -5,6 +5,7 @@ import StoreItem from "../../../components/Matching/StoreItem";
 import MenuList from "../../../components/Matching/MenuList";
 import { useSelector, useDispatch } from "react-redux";
 import { setStore, addMenu, cleanMenus } from "../../../redux/orderSlice";
+import BottomDrawer from "react-native-bottom-drawer-view";
 
 export default (props) => {
   const storeInfo = props.route.params.storeInfo;

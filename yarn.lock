@@ -7981,6 +7981,13 @@ react-is@^17.0.1:
   resolved "https://registry.npmjs.org/react-is/-/react-is-17.0.2.tgz"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
 
+react-native-bottom-drawer-view@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/react-native-bottom-drawer-view/-/react-native-bottom-drawer-view-1.0.3.tgz#bc4af7691364fd1b1104eef18a019c9138b1a4ca"
+  integrity sha512-yPC0I6N02zSHB3wAUWAgs+wH53fwGCa7etho9se3ICBNNBnl9Y+53DKnNMdFKdUuLlF/N4shsmrVmPiNCLEscg==
+  dependencies:
+    prop-types "^15.6.2"
+
 react-native-circular-progress-indicator@^1.1.2:
   version "1.1.2"
   resolved "https://registry.npmjs.org/react-native-circular-progress-indicator/-/react-native-circular-progress-indicator-1.1.2.tgz"
