@@ -4,8 +4,10 @@ import Home from "../../../components/Main/Home";
 import { ScrollView } from "react-native-gesture-handler";
 import { Store } from "../../../AWS/src/models";
 import { DataStore } from "@aws-amplify/datastore";
+import { useNavigation } from "@react-navigation/core";
 
-export default ({ navigation }) => {
+export default () => {
+  const navigation = useNavigation();
   const [search, setSearch] = useState("");
   const [stores, setStores] = useState([]);
   const logOut = () => {
@@ -24,7 +26,7 @@ export default ({ navigation }) => {
 
   return (
     <ScrollView>
-      <Home stores={stores} />
+      <Home stores={stores} navigation={navigation} />
     </ScrollView>
   );
 };

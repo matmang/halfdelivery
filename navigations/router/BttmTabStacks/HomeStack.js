@@ -9,6 +9,7 @@ import TestScreen from "../../../screens/Main/HomeStack/TestScreen";
 import ProfileScreen from "../../../screens/Main/ProfileStack/ProfileScreen";
 import HomeHeaderButton from "../../../components/Main/HomeHeaderButton";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import SearchScreen from "../../../screens/Main/HomeStack/SearchScreen";
 
 const Stack = createStackNavigator();
 const LogoHeader = (props) => {
@@ -26,12 +27,12 @@ const LogoHeader = (props) => {
 };
 
 export default () => (
-  <Stack.Navigator initialRouteName="HomeScreen" screenOptions={{}}>
+  <Stack.Navigator initialRouteName="HomeScreen">
     <Stack.Screen
       name="HomeScreen"
       component={HomeScreen}
       options={({ navigation }) => ({
-        title: "임시 홈",
+        title: "홈",
         headerTitleAlign: "center",
         headerTitle: (props) => <LogoHeader {...props} />,
         headerRight: () => (
@@ -88,6 +89,33 @@ export default () => (
           </HeaderButtons>
         ),
       }}
+    />
+    <Stack.Screen
+      name="Search"
+      component={SearchScreen}
+      options={({ navigation }) => ({
+        title: "검색",
+        headerTitleAlign: "center",
+        headerTitle: (props) => <LogoHeader {...props} />,
+        headerRight: () => (
+          <HeaderButtons HeaderButtonComponent={HomeHeaderButton}>
+            <Item
+              title="Notification"
+              iconName={
+                Platform.OS === "android"
+                  ? "md-notifications"
+                  : "ios-notifications"
+              }
+              onPress={() => alert("알림")}
+            />
+            <Item
+              title="Profile"
+              iconName={Platform.OS === "android" ? "md-person" : "ios-person"}
+              onPress={() => navigation.navigate("Profile")}
+            />
+          </HeaderButtons>
+        ),
+      })}
     />
   </Stack.Navigator>
 );

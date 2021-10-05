@@ -16,7 +16,7 @@ const Container = styled.View`
   align-items: center;
   background-color: ${colors.snow};
   border: 2px solid ${colors.mainBlue};
-  border-radius: 5px;
+  border-radius: 50px;
 `;
 
 const Search = styled.TextInput`
