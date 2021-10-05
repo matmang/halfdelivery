@@ -1,0 +1,64 @@
+type StoreCategory @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  category: String!
+  Stores: [Store] @connection(keyName: "byStoreCategory", fields: ["id"])
+}
+
+type Store @model @auth(rules: [{allow: public}]) @key(name: "byStoreCategory", fields: ["storecategoryID"]) {
+  id: ID!
+  store: String!
+  storeImgUri: String
+  minOrdPrice: Int!
+  minDlvTime: Int!
+  maxDlvTime: Int!
+  maxDlvTip: Int!
+  openHours: String!
+  location: String
+  Menus: [Menu] @connection(keyName: "byStore", fields: ["id"])
+  storecategoryID: ID
+}
+
+type Menu @model @auth(rules: [{allow: public}]) @key(name: "byStore", fields: ["storeID"]) {
+  id: ID!
+  menuCategory: String!
+  menu: String!
+  menuImgUri: String
+  menuDetail: String
+  price: Int!
+  storeID: ID
+}
+
+type ChatRoom @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  newMessages: Int
+  LastMessage: Message @connection
+  Messages: [Message] @connection(keyName: "byChatRoom", fields: ["id"])
+  ChatRoomUsers: [ChatRoomUser] @connection(keyName: "byChatRoom", fields: ["id"])
+  matchingInfo: AWSJSON
+}
+
+type Message @model @auth(rules: [{allow: public}]) @key(name: "byChatRoom", fields: ["userID"]) @key(name: "byUser", fields: ["userID"]) {
+  id: ID!
+  content: String!
+  chatroomID: ID
+  userID: ID
+}
+
+type User @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String!
+  imageUri: String
+  status: String
+  chatrooms: [ChatRoomUser] @connection(keyName: "byUser", fields: ["id"])
+  Messages: [Message] @connection(keyName: "byUser", fields: ["id"])
+  halfmoney: Int
+}
+
+type ChatRoomUser @model(queries: null) @key(name: "byChatRoom", fields: ["chatroomID", "userID"]) @key(name: "byUser", fields: ["userID", "chatroomID"]) @auth(rules: [{allow: public}, {allow: public}]) {
+  id: ID!
+  chatroomID: ID!
+  userID: ID!
+  chatroom: ChatRoom! @connection(fields: ["chatroomID"])
+  user: User! @connection(fields: ["userID"])
+}
+ 

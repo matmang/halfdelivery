@@ -15,14 +15,35 @@ import {
   AntDesign,
   Ionicons,
 } from "@expo/vector-icons";
+import { Auth, DataStore } from "aws-amplify";
+import { Message, ChatRoom } from "../../AWS/src/models";
 import colors from "../../colors";
 
-export default () => {
+const MessageInput = ({ chatRoom }) => {
   const [message, setMessage] = useState("");
-  //   메시지 보내는 함수
-  const sendMessage = () => {
-    console.log("sending:", message);
+
+  // ? 메시지 보내는 함수
+  const sendMessage = async () => {
+    const user = await Auth.currentAuthenticatedUser();
+    const newMessage = await DataStore.save(
+      new Message({
+        content: message,
+        userID: user.attributes.sub,
+        chatroomID: chatRoom.id,
+      })
+    );
+    updateLastMessage(newMessage);
     setMessage("");
+    console.log("sending:", message);
+  };
+
+  const updateLastMessage = async (newMessage) => {
+    // ? Data in DataStore is NOT Mutable. 그래서 cpoyOf 쓰는 거임!
+    DataStore.save(
+      ChatRoom.copyOf(chatRoom, (updatedChatRoom) => {
+        updatedChatRoom.LastMessage = newMessage;
+      })
+    );
   };
 
   //
@@ -41,12 +62,14 @@ export default () => {
     >
       <View style={styles.root}>
         <View style={styles.inputContainer}>
+          {/* 이모티콘 아이콘 */}
           <SimpleLineIcons
             name="emotsmile"
             size={24}
             color="grey"
             style={styles.icon}
           />
+          {/* 메시지 입력칸 */}
           <TextInput
             style={styles.input}
             value={message}
@@ -54,9 +77,11 @@ export default () => {
             // ?   onChangeText={(newMessage) => setMessage(newMessage)}
             placeholder="메시지를 입력해주세요!"
             autoCorrect={false}
-            autoCapitalize="none" // ! false 가 아니라 none 이다..
+            autoCapitalize="none"
           />
+          {/* 카메라 아이콘 */}
           <Feather name="camera" size={24} color="grey" style={styles.icon} />
+          {/* 마이크 아이콘 */}
           <MaterialCommunityIcons
             name="microphone"
             size={24}
@@ -64,7 +89,7 @@ export default () => {
             style={styles.icon}
           />
         </View>
-        {/* // ? Pressable 은 View 와 대치 가능하다. 오직, onPress 유무 차이만 있음! */}
+        {/* // ? Pressable 은 View 와 대체 가능하다. 오직, onPress 유무 차이만 있음! */}
         <Pressable
           style={[
             styles.buttonContainer,
@@ -118,3 +143,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 });
+
+export default MessageInput;

@@ -5,15 +5,20 @@ import { PersistGate } from "redux-persist/integration/react";
 import Gate from "./components/Gate";
 import store, { persistor } from "./redux/store";
 import AppLoading from "expo-app-loading";
+//? AWS Amplify 관련.
+import Amplify from "aws-amplify";
+import config from "./AWS/src/aws-exports";
+import { withAuthenticator } from "aws-amplify-react-native";
+Amplify.configure(config);
 
 const getFonts = () => {
   return Font.loadAsync({
-    'noto-regular' : require('./assets/fonts/NotoSansKR-Regular.otf'),
-    'nunito-regular' : require('./assets/fonts/NunitoSans-Regular.ttf'),
-  })
-}
+    "noto-regular": require("./assets/fonts/NotoSansKR-Regular.otf"),
+    "nunito-regular": require("./assets/fonts/NunitoSans-Regular.ttf"),
+  });
+};
 
-export default function App() {
+function App() {
   const [isReady, setIsReady] = useState(false);
   const handleFinish = () => setIsReady(true);
   return isReady ? (
@@ -23,10 +28,13 @@ export default function App() {
       </PersistGate>
     </Provider>
   ) : (
-    <AppLoading 
+    <AppLoading
       onError={console.error}
       onFinish={handleFinish}
       startAsync={getFonts}
     />
   );
 }
+
+//? 앱 시작시 AWS Amplify 로 로그인하게 하기.
+export default withAuthenticator(App);

@@ -2,8 +2,9 @@ import { useNavigation } from "@react-navigation/core";
 import React, { useContext } from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import styles from "./styles";
-import logos from "../../logos";
-// import { SelectStoreScreenContext } from "../../screens/Main/SelectStoreScreen";
+import logos from "../../images";
+import { useDispatch } from "react-redux";
+import { setStore } from "../../redux/orderSlice";
 
 export default ({ storeInfo }) => {
   // console.log(useContext(SelectStoreScreenContext));
@@ -14,15 +15,20 @@ export default ({ storeInfo }) => {
 
   // storeInfo.image =
   //   "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/9bd0e340-f08c-41e4-98f3-dbc9904abe8e/Logo_72dpi-01.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210906%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20210906T080723Z&X-Amz-Expires=86400&X-Amz-Signature=9cfe0ac4ac1b99ad3e195573772038d7f328eaf41f7ecd2e31c1381569afe07e&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Logo_72dpi-01.png%22";
+  const dispatch = useDispatch();
   const navigation = useNavigation();
+
   return (
     <TouchableOpacity
       style={styles.root}
-      onPress={() =>
+      onPress={() => {
+        // ? 선택한 매장정보 redux 로 저장.
+        dispatch(setStore(storeInfo.store));
+
         navigation.navigate("SelectMenuScreen", {
           storeInfo,
-        })
-      }
+        });
+      }}
     >
       <Image
         style={styles.image}

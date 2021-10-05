@@ -1,4 +1,5 @@
-import halfLogo from "../assets/halfLogo.png";
+import { halfLogo } from "../images";
+
 export default [
   {
     id: "1",

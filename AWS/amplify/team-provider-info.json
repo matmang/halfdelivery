@@ -1,0 +1,27 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-halfdelivery-staging-72919-authRole",
+      "UnauthRoleArn": "arn:aws:iam::852939695325:role/amplify-halfdelivery-staging-72919-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::852939695325:role/amplify-halfdelivery-staging-72919-authRole",
+      "Region": "ap-northeast-2",
+      "DeploymentBucketName": "amplify-halfdelivery-staging-72919-deployment",
+      "UnauthRoleName": "amplify-halfdelivery-staging-72919-unauthRole",
+      "StackName": "amplify-halfdelivery-staging-72919",
+      "StackId": "arn:aws:cloudformation:ap-northeast-2:852939695325:stack/amplify-halfdelivery-staging-72919/765d1a60-1e9b-11ec-ace0-029790e2806e",
+      "AmplifyAppId": "d2ftg9z1s631ih",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-halfdelivery-staging-72919-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
+    },
+    "categories": {
+      "auth": {
+        "HalfDelivery": {}
+      },
+      "function": {
+        "HalfDeliveryPostConfirmation": {
+          "deploymentBucketName": "amplify-halfdelivery-staging-72919-deployment",
+          "s3Key": "amplify-builds/HalfDeliveryPostConfirmation-2b6478346a6a37704d66-build.zip"
+        }
+      }
+    }
+  }
+}
