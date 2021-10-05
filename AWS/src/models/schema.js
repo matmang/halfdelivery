@@ -372,6 +372,13 @@ export const schema = {
                         "associatedWith": "chatroom"
                     }
                 },
+                "matchingInfo": {
+                    "name": "matchingInfo",
+                    "isArray": false,
+                    "type": "AWSJSON",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -725,5 +732,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "8a30a9107ab3b46a0270df59d2c8e5b6"
+    "version": "58b411999340e5d87bcc03761b0a75b1"
 };

@@ -34,6 +34,7 @@ type ChatRoom @model @auth(rules: [{allow: public}]) {
   LastMessage: Message @connection
   Messages: [Message] @connection(keyName: "byChatRoom", fields: ["id"])
   ChatRoomUsers: [ChatRoomUser] @connection(keyName: "byChatRoom", fields: ["id"])
+  matchingInfo: AWSJSON
 }
 
 type Message @model @auth(rules: [{allow: public}]) @key(name: "byChatRoom", fields: ["userID"]) @key(name: "byUser", fields: ["userID"]) {
