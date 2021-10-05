@@ -1,7 +1,7 @@
 import React from "react";
 import { Dimensions, Platform, Platfrom } from "react-native";
 import styled from "styled-components";
-import Auth from "@aws-amplify/auth";
+import PropTypes from "prop-types";
 import colors from "../../colors";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -73,4 +73,7 @@ const Popular = ({ storeInfo }) => (
   </Container>
 );
 
+Popular.propTypes = {
+  storeInfo: PropTypes.object.isRequired,
+};
 export default Popular;

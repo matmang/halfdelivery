@@ -1,15 +1,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import {
-  View,
-  Image,
-  Text,
-  SafeAreaView,
-  Button,
-  Platform,
-  StatusBar,
-} from "react-native";
+import { Image, SafeAreaView, Platform } from "react-native";
 import logos from "../../../images";
 
 import HomeScreen from "../../../screens/Main/HomeStack/HomeScreen";

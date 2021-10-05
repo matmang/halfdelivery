@@ -30,7 +30,7 @@ const SearchBar = ({ value, stateFn, autoCapitalize, searchFn }) => (
   <Container>
     <Search
       value={value}
-      placeholder="search"
+      placeholder="원하는 식당/메뉴를 검색하세요"
       onChangeText={(text) => stateFn(text)}
       autoCapitalize={autoCapitalize}
     />
