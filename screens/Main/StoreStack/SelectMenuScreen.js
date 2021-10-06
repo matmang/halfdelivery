@@ -7,9 +7,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { useRoute } from "@react-navigation/core";
 import { setStore, addMenu, cleanMenus } from "../../../redux/orderSlice";
 import colors from "../../../colors";
-import BottomDrawer from "react-native-bottom-drawer-view";
+
+// import BottomDrawer from "react-native-bottom-drawer-view";
 import ShoppingItem from "../../../components/Order/ShoppingItem";
 import { ScrollView, FlatList, TouchableOpacity } from "react-native-gesture-handler";
+import Animated from "react-native-reanimated";
+import BottomSheet from "reanimated-bottom-sheet";
 
 // ? BottomDrawer 관련 상수들.
 const TAB_BAR_HEIGHT = 49;
@@ -107,8 +110,10 @@ const SelectMenuScreen = (props) => {
         <MenuList selectedStore={store} storeInfo={storeInfo} />
       </View>
 
+      {/* 장바구니 BottomSheet */}
+
       {/* 장바구니 BottomDrawer */}
-      <BottomDrawer
+      {/* <BottomDrawer
         containerHeight={300}
         offset={TAB_BAR_HEIGHT + HEADER_HEIGHT + ADDITIONAL_HEIGHT}
         startUp={false}
@@ -128,7 +133,7 @@ const SelectMenuScreen = (props) => {
             }}
           />
         </View>
-      </BottomDrawer>
+      </BottomDrawer> */}
     </SafeAreaView>
   );
 };
