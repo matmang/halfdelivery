@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import { ScrollView, FlatList, TouchableOpacity } from "react-native-gesture-handler";
+import React, { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { View, Text, Button, StyleSheet, SafeAreaView } from "react-native";
 import StoreItem from "../../../components/Matching/StoreItem";
@@ -10,20 +11,30 @@ import colors from "../../../colors";
 
 // import BottomDrawer from "react-native-bottom-drawer-view";
 import ShoppingItem from "../../../components/Order/ShoppingItem";
-import { ScrollView, FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import Animated from "react-native-reanimated";
-import BottomSheet from "reanimated-bottom-sheet";
+import BottomSheet, { BottomSheetScrollView } from "@gorhom/bottom-sheet";
 
-// ? BottomDrawer 관련 상수들.
-const TAB_BAR_HEIGHT = 49;
-const HEADER_HEIGHT = 60;
-const ADDITIONAL_HEIGHT = 20;
+// // ? BottomDrawer 관련 상수들.
+// const TAB_BAR_HEIGHT = 49;
+// const HEADER_HEIGHT = 60;
+// const ADDITIONAL_HEIGHT = 20;
 
 const SelectMenuScreen = (props) => {
   const storeInfo = props.route.params.storeInfo;
   const [store, setStore] = useState(storeInfo ? storeInfo.store : "all");
   const dispatch = useDispatch();
   const navigation = useNavigation();
+
+  // ref
+  const bottomSheetRef = useRef(null);
+
+  // variables
+  const snapPoints = useMemo(() => ["25%", "50%"], []);
+
+  // callbacks
+  const handleSheetChanges = useCallback((index) => {
+    console.log("handleSheetChanges", index);
+  }, []);
 
   // ? 스크린 떠나면 redux 메뉴들 초기화
   useEffect(() => {
@@ -32,41 +43,16 @@ const SelectMenuScreen = (props) => {
     };
   }, []);
 
-  // ? TabBar를 가리기 위한 시도들...
-  // useEffect(() => {
-  //   const parent = props.navigation.getParent();
-  //   parent.setOptions({
-  //     tabBarVisible: false,
-  //   });
-  //   return () =>
-  //     parent.setOptions({
-  //       tabBarVisible: true,
-  //     });
-  // }, []);
-
-  // useEffect(() => {
-  //   console.log(props);
-  //   props.navigation.setOptions({
-  //     tabBarVisible: false,
-  //   });
-  //   // return () =>
-  //   //   navigation.setOptions({
-  //   //     tabBarVisible: true,
-  //   //   });
-  // }, []);
-
   const menusFromRedux = [];
 
   const ShoppingCart = () => {
     return (
-      <ScrollView>
-        <TouchableOpacity>
-          <View style={styles.ShoppingCartRoot}>
-            <Text style={styles.topText}>장바구니</Text>
-            <ShoppingList />
-          </View>
-        </TouchableOpacity>
-      </ScrollView>
+      <View>
+        <View style={styles.ShoppingCartRoot}>
+          <Text style={styles.topText}>장바구니</Text>
+          <ShoppingList />
+        </View>
+      </View>
     );
   };
 
@@ -91,7 +77,7 @@ const SelectMenuScreen = (props) => {
   };
 
   return (
-    <SafeAreaView
+    <View
       style={{
         flex: 1,
         alignItems: "center", // 가로 정렬
@@ -111,6 +97,10 @@ const SelectMenuScreen = (props) => {
       </View>
 
       {/* 장바구니 BottomSheet */}
+      <BottomSheet ref={bottomSheetRef} index={1} snapPoints={snapPoints} onChange={handleSheetChanges}>
+        <ShoppingCart />
+      </BottomSheet>
+      {/* <BottomSheetScrollView></BottomSheetScrollView> */}
 
       {/* 장바구니 BottomDrawer */}
       {/* <BottomDrawer
@@ -134,7 +124,7 @@ const SelectMenuScreen = (props) => {
           />
         </View>
       </BottomDrawer> */}
-    </SafeAreaView>
+    </View>
   );
 };
 
