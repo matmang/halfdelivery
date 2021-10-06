@@ -38,7 +38,7 @@ const MenuItem = ({ menuInfo, storeInfo }) => {
       <View style={styles.textContainer}>
         {/* 메뉴 */}
         <Text style={styles.title} numberOfLines={1}>
-          {menuInfo.menu} | {menuInfo.minPrice}원
+          {menuInfo.menu} | {menuInfo.price}원
         </Text>
 
         {/* 메뉴 디테일... */}

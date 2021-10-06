@@ -8,33 +8,39 @@ import { useSelector, useDispatch } from "react-redux";
 import { useRoute } from "@react-navigation/core";
 import { setStore, addMenu, cleanMenus } from "../../../redux/orderSlice";
 import colors from "../../../colors";
-
-// import BottomDrawer from "react-native-bottom-drawer-view";
 import ShoppingItem from "../../../components/Order/ShoppingItem";
 import Animated from "react-native-reanimated";
-import BottomSheet, { BottomSheetScrollView } from "@gorhom/bottom-sheet";
-
-// // ? BottomDrawer 관련 상수들.
-// const TAB_BAR_HEIGHT = 49;
-// const HEADER_HEIGHT = 60;
-// const ADDITIONAL_HEIGHT = 20;
+import BottomSheet, { BottomSheetScrollView, BottomSheetFlatList } from "@gorhom/bottom-sheet";
 
 const SelectMenuScreen = (props) => {
   const storeInfo = props.route.params.storeInfo;
   const [store, setStore] = useState(storeInfo ? storeInfo.store : "all");
+
+  // ? orderReducer.menus 가 바뀔때 마다! menus 갱신 됨.
+  const menus = useSelector((state) => state.orderReducer.menus);
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
-  // ref
-  const bottomSheetRef = useRef(null);
+  // todo ============== BottomSheet 관련 코드임 ===============================
+  // hooks
+  const sheetRef = useRef(null);
 
-  // variables
-  const snapPoints = useMemo(() => ["25%", "50%"], []);
+  const snapPoints = useMemo(() => ["8%", "30%", "50%"], []);
 
   // callbacks
-  const handleSheetChanges = useCallback((index) => {
-    console.log("handleSheetChanges", index);
+  const handleSheetChange = useCallback((index) => {
+    console.log("handleSheetChange", index);
   }, []);
+  const handleSnapPress = useCallback((index) => {
+    sheetRef.current?.snapToIndex(index);
+  }, []);
+  const handleClosePress = useCallback(() => {
+    sheetRef.current?.close();
+  }, []);
+
+  // render
+  // const renderItem = useCallback((item) => <ShoppingItem menuInfo={item} />, []);
+  // todo ====================================================================== https://gorhom.github.io/react-native-bottom-sheet/props
 
   // ? 스크린 떠나면 redux 메뉴들 초기화
   useEffect(() => {
@@ -43,41 +49,26 @@ const SelectMenuScreen = (props) => {
     };
   }, []);
 
-  const menusFromRedux = [];
-
-  const ShoppingCart = () => {
-    return (
-      <View>
-        <View style={styles.ShoppingCartRoot}>
-          <Text style={styles.topText}>장바구니</Text>
-          <ShoppingList />
-        </View>
-      </View>
-    );
-  };
-
   const ShoppingList = () => {
     return (
-      <View style={{ width: "100%", backgroundColor: "pink" }}>
-        <ShoppingItem />
-        <ShoppingItem />
-        <ShoppingItem />
-        <ShoppingItem />
-        <ShoppingItem />
+      <BottomSheetFlatList
+        style={{ backgroundColor: colors.mainBlue }}
+        contentContainerStyle={styles.contentContainer}
+        data={menus}
+        keyExtractor={(item, index) => index.toString()} // ? Warning 메시지 해결. https://github.com/facebook/react-native/issues/18291
+        renderItem={({ item }) => <ShoppingItem object={item} />}
 
-        {/* <FlatList
-          data={menusFromRedux}
-          renderItem={(item) => {
-            <ShoppingItem menuInfo={item} />;
-          }}
-          keyExtractor={(item, index) => index.toString()} // ? Warning 메시지 해결. https://github.com/facebook/react-native/issues/18291
-        /> */}
-      </View>
+        // data={menus.menus} // ? 임시 설정
+        // renderItem={({ item }) => <ChatMenuItem object={item} />}
+        // keyExtractor={(item, index) => index.toString()} /
+      >
+        {/* <View style={{ width: "100%", backgroundColor: "pink" }}>{menus.map(renderItem)}</View> */}
+      </BottomSheetFlatList>
     );
   };
 
   return (
-    <View
+    <SafeAreaView
       style={{
         flex: 1,
         alignItems: "center", // 가로 정렬
@@ -97,24 +88,22 @@ const SelectMenuScreen = (props) => {
       </View>
 
       {/* 장바구니 BottomSheet */}
-      <BottomSheet ref={bottomSheetRef} index={1} snapPoints={snapPoints} onChange={handleSheetChanges}>
-        <ShoppingCart />
-      </BottomSheet>
-      {/* <BottomSheetScrollView></BottomSheetScrollView> */}
-
-      {/* 장바구니 BottomDrawer */}
-      {/* <BottomDrawer
-        containerHeight={300}
-        offset={TAB_BAR_HEIGHT + HEADER_HEIGHT + ADDITIONAL_HEIGHT}
-        startUp={false}
-        backgroundColor={colors.mainBlue}
-        panResponder={false}
-
-        // borderRadius={500}
-        // borderTopLeftRadius={500}
-        // borderTopRightRadius={500}
+      <BottomSheet
+        ref={sheetRef}
+        index={1}
+        snapPoints={snapPoints}
+        onChange={handleSheetChange}
+        // bottomInset={10}
       >
-        <ShoppingCart />
+        {/* 장바구니 타이틀 */}
+        <View style={styles.ShoppingCartRoot}>
+          <Text style={styles.topText}>장바구니</Text>
+        </View>
+
+        {/* 메뉴목록 */}
+        <ShoppingList />
+
+        {/* 선택완료 버튼 */}
         <View style={styles.buttonContainer}>
           <Button
             title="선택완료"
@@ -123,8 +112,8 @@ const SelectMenuScreen = (props) => {
             }}
           />
         </View>
-      </BottomDrawer> */}
-    </View>
+      </BottomSheet>
+    </SafeAreaView>
   );
 };
 
@@ -164,12 +153,11 @@ const styles = StyleSheet.create({
   },
   ShoppingCartRoot: {
     // height: "65%",
-    margin: 10,
-    marginTop: 2,
-    padding: 2,
+    // margin: 10,
+    // marginBottom: 5,
     alignItems: "center",
-    // justifyContent: "center",
-    backgroundColor: "skyblue",
+    justifyContent: "center",
+    backgroundColor: colors.mainPink,
   },
   topText: {
     color: "white",
@@ -178,8 +166,17 @@ const styles = StyleSheet.create({
     marginVertical: 3,
   },
   buttonContainer: {
-    backgroundColor: "orange",
-    marginBottom: 40,
+    backgroundColor: colors.mainPink,
+    // marginBottom: 40,
+  },
+  itemContainer: {
+    padding: 6,
+    margin: 6,
+    backgroundColor: "#eee",
+  },
+  contentContainer: {
+    backgroundColor: colors.mainBlue,
+    padding: 5,
   },
 });
 

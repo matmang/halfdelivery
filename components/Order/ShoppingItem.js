@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import ShoppingQuantitySelector from "../Order/ShoppingQuantitySelector";
 
-const ShoppingItem = () => {
+const ShoppingItem = ({ object }) => {
+  const [quantity, setQuantity] = useState(0);
+  const menuInfo = object.menuInfo;
+  console.log("인포", menuInfo);
   return (
     <View style={styles.root}>
       <View style={{ flexDirection: "row" }}>
@@ -10,15 +14,17 @@ const ShoppingItem = () => {
             <Text style={styles.title}>메뉴</Text>
           </View>
           <View>
-            <Text style={styles.menuText}>"스테디 정식" "8,800원"</Text>
+            <Text style={styles.menuText}>
+              {menuInfo.menu} {menuInfo.price}
+            </Text>
           </View>
         </View>
         <View style={styles.rightContainer}>
           <View style={styles.titleContainer}>
             <Text style={styles.title}>수량</Text>
           </View>
-          <View>
-            <Text style={styles.menuText}>Q-S</Text>
+          <View style={{ marginRight: 10 }}>
+            <ShoppingQuantitySelector quantity={quantity} setQuantity={setQuantity} />
           </View>
         </View>
       </View>
@@ -28,7 +34,7 @@ const ShoppingItem = () => {
 
 const styles = StyleSheet.create({
   root: {
-    marginVertical: 2,
+    marginBottom: 2,
     backgroundColor: "white",
     borderColor: "black",
     borderWidth: 1,
