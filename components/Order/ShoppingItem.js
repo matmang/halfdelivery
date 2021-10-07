@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import ShoppingQuantitySelector from "../Order/ShoppingQuantitySelector";
 
-const ShoppingItem = ({ object }) => {
+const ShoppingItem = ({ menuInfo }) => {
   const [quantity, setQuantity] = useState(0);
-  const menuInfo = object.menuInfo;
-  console.log("인포", menuInfo);
+  console.log("ShoppingItem 컴포넌트에서,", menuInfo);
   return (
     <View style={styles.root}>
       <View style={{ flexDirection: "row" }}>

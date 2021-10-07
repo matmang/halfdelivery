@@ -3,25 +3,22 @@ import { StyleSheet, View, Text, Button, SafeAreaView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Picker } from "@react-native-picker/picker";
 import { connect } from "react-redux";
-import QuantitySelector from "../../../components/Matching/QuantitySelector";
 import { Auth, DataStore } from "aws-amplify";
-import { ChatRoom, User, ChatRoomUser } from "../../../AWS/src/models";
+import { ChatRoom, User, ChatRoomUser, OrderMenu, Order } from "../../../AWS/src/models";
 import { useSelector, useDispatch } from "react-redux";
-// import {
-//   setStore,
-//   addMenu,
-//   cleanMenus,
-//   setTime as reduxSetTime,
-//   setPersons as reduxSetPersons,
-// } from "../../../redux/orderSlice";
+import orderReducer from "../../../redux/orderSlice";
+import QuantitySelector from "../../../components/Matching/QuantitySelector";
 
 const SetMatchingTimeScreen = (props) => {
   const [time, setTime] = useState(10);
   const [persons, setPersons] = useState(2);
 
-  const Object = useSelector((state) => state.orderReducer);
-  const dispatch = useDispatch();
+  const orderSiceStates = useSelector((state) => state.orderReducer);
+  console.log("orderSiceStates: ", orderSiceStates);
+  const firstMenu = orderSiceStates.menus[0];
+  console.log("firstMenu: ", firstMenu);
 
+  const dispatch = useDispatch();
   const navigation = useNavigation();
 
   // ? 시간이랑 인원수 바뀌면 redux store 업데이트.
@@ -31,12 +28,50 @@ const SetMatchingTimeScreen = (props) => {
     // console.log("스토어네임:", storeName);
   }, [time, persons]);
 
-  const makeChatRoom = async () => {
-    // ? Chat Room 만들기.
+  // ? 호스트의 메뉴로 OrderMenu 생성.
+  const createOrderMenu = async () => {
+    const QUANTITY = -1; //! 임시값.
+    const PAYMENT_AMOUNT = -1000; //! 임시값.
+
+    const authUser = await Auth.currentAuthenticatedUser();
+
+    const newOrderMenu = await DataStore.save(
+      new OrderMenu({
+        menu: firstMenu.menuInfo.menu,
+        price: firstMenu.menuInfo.price,
+        quantity: QUANTITY,
+        userID: authUser.attributes.sub,
+      })
+    );
+  };
+
+  // ? 호스트가 고른 식당으로, Order 생성.
+  const createOrder = async () => {
+    const msTime = Date.now();
+    const AWSDateTime = new Date(msTime).toISOString();
+    const newOrder = await DataStore.save(
+      new Order({
+        store: orderSiceStates.storeName,
+        // orderDate: AWSDateTime, // ! orderDate는 ERD 에서 삭제하는게...
+        paymentAmount: PAYMENT_AMOUNT,
+      })
+    );
+  };
+
+  // ? Chat Room 생성.
+  const createChatRoom = async () => {
     const newChatRoom = await DataStore.save(
+      // TODO: 담아야 할 데이터들:
+      // ? 1. 유저,
+      // ? 2. 매장이름,
+      // ? 3. (호스트) 유저가 고른 메뉴정보
       new ChatRoom({
-        newMessages: 68,
-        matchingInfo: { storeName: Object.storeName, menus: Object.menus, roomInfo: { time: time, persons: persons } },
+        newMessages: 1007,
+        matchingInfo: {
+          storeName: orderSiceStates.storeName,
+          menus: orderSiceStates.menus,
+          roomInfo: { time: time, persons: persons },
+        },
       })
     );
     // ? Authenticated User 와 Chat Room 을 연결하기.
@@ -50,7 +85,7 @@ const SetMatchingTimeScreen = (props) => {
       })
     );
 
-    // ! 계정의 imageUri 가 비워져 있으면, 왠진 모르겠지만, 새 채팅방으로 이동 하지 않는다.
+    // ! 계정 imageUri 가 비워져 있으면, 왠진 모르겠지만, 새 채팅방으로 이동 하지 않는다.
     navigation.navigate("ChatRoomScreen", {
       id: newChatRoom.id,
       // matchingRoomInfo: { time, persons },
@@ -93,7 +128,14 @@ const SetMatchingTimeScreen = (props) => {
 
       <View style={styles.buttonView}>
         <View style={styles.buttonContainer}>
-          <Button title="매칭방 만들기" onPress={() => makeChatRoom()} />
+          <Button
+            title="매칭방 만들기"
+            onPress={() => {
+              createOrderMenu();
+              createOrder();
+              createChatRoom();
+            }}
+          />
         </View>
       </View>
     </SafeAreaView>

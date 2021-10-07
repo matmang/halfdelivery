@@ -17,9 +17,12 @@ export const orderSlice = createSlice({
     setStore: (state, action) => {
       state.storeName = action.payload;
     },
-    // ? menus 에 메뉴 추가하기.
+    // ? menus 에 메뉴 추가하기. "객체" 형식으로 menus 배열에 추가된다.
     addMenu: (state, action) => {
-      state.menus.push({ menuInfo: action.payload });
+      state.menus.push(action.payload);
+      //TODO: 메뉴 추가 이후, "수량"도 추가하기.
+      //TODO: 1. 해당메뉴가 없으면 수량=1,
+      //TODO: 2. 있으면, 메뉴중복추가X, 수량만 +1
     },
     // ? menus 비우기.
     cleanMenus: (state, action) => {

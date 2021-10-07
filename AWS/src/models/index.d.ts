@@ -4,6 +4,14 @@ import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplif
 
 
 
+type OrderMenuMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
+type OrderMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
 type StoreCategoryMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
@@ -32,6 +40,33 @@ type UserMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
+export declare class OrderMenu {
+  readonly id: string;
+  readonly menu: string;
+  readonly price: number;
+  readonly quantity: number;
+  readonly orderID?: string;
+  readonly userID?: string;
+  readonly createdAt?: string;
+  readonly updatedAt?: string;
+  constructor(init: ModelInit<OrderMenu, OrderMenuMetaData>);
+  static copyOf(source: OrderMenu, mutator: (draft: MutableModel<OrderMenu, OrderMenuMetaData>) => MutableModel<OrderMenu, OrderMenuMetaData> | void): OrderMenu;
+}
+
+export declare class Order {
+  readonly id: string;
+  readonly store: string;
+  readonly orderDate: string;
+  readonly paymentAmount: number;
+  readonly userID?: string;
+  readonly chatroomID?: string;
+  readonly OrderMenus?: (OrderMenu | null)[];
+  readonly createdAt?: string;
+  readonly updatedAt?: string;
+  constructor(init: ModelInit<Order, OrderMetaData>);
+  static copyOf(source: Order, mutator: (draft: MutableModel<Order, OrderMetaData>) => MutableModel<Order, OrderMetaData> | void): Order;
+}
+
 export declare class StoreCategory {
   readonly id: string;
   readonly category: string;
@@ -54,6 +89,7 @@ export declare class Store {
   readonly location?: string;
   readonly Menus?: (Menu | null)[];
   readonly storecategoryID?: string;
+  readonly baeminUri?: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Store, StoreMetaData>);
@@ -81,6 +117,7 @@ export declare class ChatRoom {
   readonly Messages?: (Message | null)[];
   readonly ChatRoomUsers?: (ChatRoomUser | null)[];
   readonly matchingInfo?: string;
+  readonly Orders?: (Order | null)[];
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<ChatRoom, ChatRoomMetaData>);
@@ -116,6 +153,8 @@ export declare class User {
   readonly chatrooms?: (ChatRoomUser | null)[];
   readonly Messages?: (Message | null)[];
   readonly halfmoney?: number;
+  readonly Orders?: (Order | null)[];
+  readonly OrderMenus?: (OrderMenu | null)[];
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<User, UserMetaData>);

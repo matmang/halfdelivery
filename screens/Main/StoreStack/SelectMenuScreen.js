@@ -18,14 +18,15 @@ const SelectMenuScreen = (props) => {
 
   // ? orderReducer.menus 가 바뀔때 마다! menus 갱신 됨.
   const menus = useSelector((state) => state.orderReducer.menus);
+  console.log("menus: ", menus);
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
-  // todo ============== BottomSheet 관련 코드임 ===============================
+  //* ============== BottomSheet 관련 코드임 ===============================
   // hooks
   const sheetRef = useRef(null);
 
-  const snapPoints = useMemo(() => ["8%", "30%", "50%"], []);
+  const snapPoints = useMemo(() => ["8%", "18%", "33%"], []);
 
   // callbacks
   const handleSheetChange = useCallback((index) => {
@@ -40,7 +41,7 @@ const SelectMenuScreen = (props) => {
 
   // render
   // const renderItem = useCallback((item) => <ShoppingItem menuInfo={item} />, []);
-  // todo ====================================================================== https://gorhom.github.io/react-native-bottom-sheet/props
+  //*  ====================================================================== https://gorhom.github.io/react-native-bottom-sheet/props
 
   // ? 스크린 떠나면 redux 메뉴들 초기화
   useEffect(() => {
@@ -56,7 +57,7 @@ const SelectMenuScreen = (props) => {
         contentContainerStyle={styles.contentContainer}
         data={menus}
         keyExtractor={(item, index) => index.toString()} // ? Warning 메시지 해결. https://github.com/facebook/react-native/issues/18291
-        renderItem={({ item }) => <ShoppingItem object={item} />}
+        renderItem={({ item }) => <ShoppingItem menuInfo={item} />}
 
         // data={menus.menus} // ? 임시 설정
         // renderItem={({ item }) => <ChatMenuItem object={item} />}
@@ -94,6 +95,19 @@ const SelectMenuScreen = (props) => {
         snapPoints={snapPoints}
         onChange={handleSheetChange}
         // bottomInset={10}
+        style={{
+          // ? 그림자 효과 주기. https://gorhom.github.io/react-native-bottom-sheet/adding-shadow/
+          // ! Android 에서는 표출되지 않는 것 같음... 에러임. 해결해야 함.
+          shadowColor: "black",
+          shadowOffset: {
+            width: 0,
+            height: 12,
+          },
+          shadowOpacity: 0.58,
+          shadowRadius: 16.0,
+
+          elevation: 24,
+        }}
       >
         {/* 장바구니 타이틀 */}
         <View style={styles.ShoppingCartRoot}>
@@ -167,6 +181,8 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     backgroundColor: colors.mainPink,
+    // backgroundColor: "red",
+    padding: 1,
     // marginBottom: 40,
   },
   itemContainer: {
