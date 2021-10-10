@@ -28,6 +28,10 @@ export const orderSlice = createSlice({
     cleanMenus: (state, action) => {
       state.menus = [];
     },
+    // ? 매장이름 비우기.
+    cleanStoreName: (state, action) => {
+      state.storeName = "-";
+    },
     // ! 일단은, 매칭 시간이랑 인원은 리덕스가 불필요하지 않을까...
     // // ? 매칭 시간 설정.
     // setTime: (state, action) => {
@@ -41,6 +45,6 @@ export const orderSlice = createSlice({
 });
 
 // ? Exporting.
-export const { setStore, addMenu, cleanMenus } = orderSlice.actions;
+export const { setStore, addMenu, cleanMenus, cleanStoreName } = orderSlice.actions;
 const orderReducer = orderSlice.reducer;
 export default orderReducer;

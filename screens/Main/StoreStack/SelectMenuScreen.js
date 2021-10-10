@@ -6,7 +6,7 @@ import StoreItem from "../../../components/Matching/StoreItem";
 import MenuList from "../../../components/Matching/MenuList";
 import { useSelector, useDispatch } from "react-redux";
 import { useRoute } from "@react-navigation/core";
-import { setStore, addMenu, cleanMenus } from "../../../redux/orderSlice";
+import { setStore, addMenu, cleanMenus, cleanStoreName } from "../../../redux/orderSlice";
 import colors from "../../../colors";
 import ShoppingItem from "../../../components/Order/ShoppingItem";
 import Animated from "react-native-reanimated";
@@ -43,11 +43,14 @@ const SelectMenuScreen = (props) => {
   // const renderItem = useCallback((item) => <ShoppingItem menuInfo={item} />, []);
   //*  ====================================================================== https://gorhom.github.io/react-native-bottom-sheet/props
 
-  // ? 스크린 떠나면 redux 메뉴들 초기화
+  // ? redux 메뉴들 초기화
   useEffect(() => {
-    return () => {
-      dispatch(cleanMenus(""));
-    };
+    // dispatch(cleanStoreName());
+    dispatch(cleanMenus());
+    // return () => {
+    //   dispatch(cleanStoreName());
+    //   dispatch(cleanMenus());
+    // };
   }, []);
 
   const ShoppingList = () => {

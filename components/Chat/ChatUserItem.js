@@ -14,10 +14,10 @@ const ChatUserItem = ({ user }) => {
     // ? Authenticated User 와 Chat Room 을 연결하기.
     const authUser = await Auth.currentAuthenticatedUser();
     // ? DataStore 의 User 모델에서 authUser.attributes.sub 값과 일치하는 값만 가져온다.
-    const dbUser = await DataStore.query(User, authUser.attributes.sub);
+    const dbAuthUser = await DataStore.query(User, authUser.attributes.sub);
     await DataStore.save(
       new ChatRoomUser({
-        user: dbUser,
+        user: dbAuthUser,
         chatroom: newChatRoom,
       })
     );

@@ -51,7 +51,9 @@ export default ({ message }) => {
         {!isMe && (
           <View style={styles.imageContainer}>
             <Image source={{ uri: user.imageUri }} style={styles.image} />
-            <Text style={styles.imageContainerText}>{user.name}</Text>
+            <Text style={styles.imageContainerText} numberOfLines={1} ellipsizeMode="tail">
+              {user.name}
+            </Text>
           </View>
         )}
 

@@ -5,10 +5,10 @@ import { connect } from "react-redux";
 import { addMenu, menusStore, menusSlice } from "../../redux/Order/_orderStore";
 import logos from "../../images";
 
-const ChatMenuItem = ({ object }) => {
+const ChatMenuItem = ({ menuInfo }) => {
   const navigation = useNavigation();
 
-  if (object === undefined) {
+  if (menuInfo === undefined) {
     const _menuInfo = {
       menuInfo: {
         menu: "test",
@@ -20,15 +20,13 @@ const ChatMenuItem = ({ object }) => {
     object = _menuInfo;
   }
 
-  const menuInfo = object.menuInfo;
-
   return (
     <View style={styles.root}>
       <Image
         style={styles.image}
         source={
           // ? imageUri 가 있으면 그걸 표출하고, 없으면 하프로고 표출.
-          menuInfo.menuImgUri ? { uri: menuInfo.menuImgUri } : logos.halfLogo
+          menuInfo.menuImgUri !== undefined ? { uri: menuInfo.menuImgUri } : logos.halfLogo
         }
       />
       <View style={styles.rightContainer}>
