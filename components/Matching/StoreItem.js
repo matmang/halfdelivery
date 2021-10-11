@@ -16,6 +16,7 @@ export default ({ storeInfo }) => {
   //   "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/9bd0e340-f08c-41e4-98f3-dbc9904abe8e/Logo_72dpi-01.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210906%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20210906T080723Z&X-Amz-Expires=86400&X-Amz-Signature=9cfe0ac4ac1b99ad3e195573772038d7f328eaf41f7ecd2e31c1381569afe07e&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Logo_72dpi-01.png%22";
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  // console.log(typeof storeInfo.storeImgUri);
 
   return (
     <TouchableOpacity
@@ -32,22 +33,22 @@ export default ({ storeInfo }) => {
       <Image
         style={styles.image}
         source={
-          logos.halfLogo
-          // {uri: storeInfo.image}
+          // { uri: storeInfo.storeImgUri }
+          storeInfo.storeImgUri !== undefined ? { uri: storeInfo.storeImgUri } : logos.halfLogo
         }
       />
       <View style={styles.rightContainer}>
         <Text style={styles.title} numberOfLines={1}>
-          {storeInfo.store} | 최소주문금액 {storeInfo.minPrice}원
+          {storeInfo.store} | 최소주문금액 {storeInfo.minOrdPrice}원
         </Text>
         <Text style={styles.title} numberOfLines={1}>
-          {storeInfo.category} | 배달시간 {storeInfo.expDelivTime}
+          {storeInfo.category} | 배달시간 {storeInfo.maxDlvTime} 분
         </Text>
         <Text style={styles.title} numberOfLines={1}>
           배달팁
           {/* //? JS Magic! storeInfo.delivTip 값이 존재할 때에만, && 뒤에값을 표출한다! */}
           {/* //? Conditional components 를 다루는 법이다. */}
-          {storeInfo.delivTip && <Text style={styles.title}> {storeInfo.delivTip}</Text>}원
+          {storeInfo.maxDlvTip && <Text style={styles.title}> {storeInfo.maxDlvTip}</Text>}원
         </Text>
       </View>
     </TouchableOpacity>

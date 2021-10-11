@@ -2,12 +2,21 @@ import React, { useState, useEffect, createContext } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { View, Text, Button, ScrollView, StyleSheet, SafeAreaView } from "react-native";
 import StoreList from "../../../components/Matching/StoreList";
-
-// export const SelectStoreScreenContext = createContext();
+import { useRoute } from "@react-navigation/core";
+import { setStore, addMenu, cleanMenus, cleanStoreName } from "../../../redux/orderSlice";
+import { Auth, DataStore, SortDirection } from "aws-amplify";
+import { Store } from "../../../AWS/src/models";
+import { useSelector, useDispatch } from "react-redux";
+import orderReducer from "../../../redux/orderSlice";
+import QuantitySelector from "../../../components/Matching/QuantitySelector";
 
 const SelectStoreScreen = () => {
   // state값
   const [category, setCategory] = useState("all");
+
+  useEffect(() => {
+    // fetchStores();
+  }, []);
   //! 디자인 시안 나오기 전까진, 일단 Button 으로...
   const CategoryButton = (props) => {
     return (
@@ -20,6 +29,11 @@ const SelectStoreScreen = () => {
         />
       </View>
     );
+  };
+
+  const fetchStores = async () => {
+    const fetchedStores = await DataStore.query(Store);
+    console.log("fetchedStores", fetchedStores);
   };
 
   return (

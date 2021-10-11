@@ -1,7 +1,7 @@
 import { ScrollView, FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import React, { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { View, Text, Button, StyleSheet, SafeAreaView } from "react-native";
+import { View, Text, Button, StyleSheet, SafeAreaView, Pressable } from "react-native";
 import StoreItem from "../../../components/Matching/StoreItem";
 import MenuList from "../../../components/Matching/MenuList";
 import { useSelector, useDispatch } from "react-redux";
@@ -61,6 +61,7 @@ const SelectMenuScreen = (props) => {
         data={menus}
         keyExtractor={(item, index) => index.toString()} // ? Warning 메시지 해결. https://github.com/facebook/react-native/issues/18291
         renderItem={({ item }) => <ShoppingItem menuInfo={item} />}
+        // inverted
 
         // data={menus.menus} // ? 임시 설정
         // renderItem={({ item }) => <ChatMenuItem object={item} />}
@@ -122,12 +123,20 @@ const SelectMenuScreen = (props) => {
 
         {/* 선택완료 버튼 */}
         <View style={styles.buttonContainer}>
-          <Button
+          {/* <Button
             title="선택완료"
             onPress={() => {
               navigation.navigate("SetMatchingTimeScreen", {});
             }}
-          />
+          /> */}
+          <Pressable
+            onPress={() => {
+              navigation.navigate("SetMatchingTimeScreen", {});
+            }}
+            style={styles.buttonContainer}
+          >
+            <Text style={styles.buttonText}>선택완료</Text>
+          </Pressable>
         </View>
       </BottomSheet>
     </SafeAreaView>
@@ -184,9 +193,16 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     backgroundColor: colors.mainPink,
+    alignItems: "center",
     // backgroundColor: "red",
-    padding: 1,
+    padding: 2,
     // marginBottom: 40,
+  },
+  buttonText: {
+    color: colors.mainBlue,
+    fontWeight: "bold",
+    fontSize: 18,
+    // marginVertical: 3,
   },
   itemContainer: {
     padding: 6,

@@ -88,12 +88,12 @@ const SetMatchingTimeScreen = (props) => {
 
     await createOrder();
 
-    // // ! 계정 imageUri 가 비워져 있으면, 왠진 모르겠지만, 새 채팅방으로 이동 하지 않는다.
-    // navigation.navigate("ChatRoomScreen", {
-    //   chatRoomID: newChatRoom.id,
-    //   matchingInfo: matchingInfo,
-    //   orderID: orderID,
-    // });
+    // ! 계정 imageUri 가 비워져 있으면, 왠진 모르겠지만, 새 채팅방으로 이동 하지 않는다.
+    navigation.navigate("ChatRoomScreen", {
+      chatRoomID: newChatRoom.id,
+      matchingInfo: matchingInfo,
+      orderID: orderID,
+    });
   };
 
   // ? 호스트가 고른 식당으로, Order 생성.
