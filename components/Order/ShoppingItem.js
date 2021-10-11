@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
-import ShoppingQuantitySelector from "../Order/ShoppingQuantitySelector";
+import { Pressable, StyleSheet, Text, View, Image } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteMenu } from "../../redux/orderSlice";
+import images from "../../images";
 
 //! ShoppingList 는 SelectMenuScreen 에 있다.
 
@@ -14,30 +14,29 @@ const ShoppingItem = ({ menuInfo }) => {
   return (
     <View style={styles.root}>
       <View style={{ flexDirection: "row" }}>
-        <Pressable
-          onPress={() => {
-            dispatch(deleteMenu(menuInfo.DelID));
-          }}
-        >
-          <Text>지우자</Text>
-        </Pressable>
-        <View style={styles.leftContainer}>
-          <View style={styles.titleContainer}>
+        <View style={styles.menuContainer}>
+          {/* <View style={styles.titleContainer}>
             <Text style={styles.title}>메뉴</Text>
-          </View>
-          <View>
-            <Text style={styles.menuText}>
-              {menuInfo.menu} {menuInfo.price}
-            </Text>
-          </View>
+          </View> */}
+          <Text style={styles.menuText}>{menuInfo.menu}</Text>
+        </View>
+        <View style={styles.priceContainer}>
+          <Text style={styles.priceText}>{menuInfo.price.toLocaleString("ko-KR")} 원</Text>
         </View>
         <View style={styles.rightContainer}>
-          <View style={styles.titleContainer}>
+          <Pressable
+            onPress={() => {
+              dispatch(deleteMenu(menuInfo.DelID));
+            }}
+          >
+            <Image source={images.deleteMark} />
+          </Pressable>
+          {/* <View style={styles.titleContainer}>
             <Text style={styles.title}>수량</Text>
           </View>
           <View style={{ marginRight: 10 }}>
             <ShoppingQuantitySelector quantity={quantity} setQuantity={setQuantity} />
-          </View>
+          </View> */}
         </View>
       </View>
     </View>
@@ -51,17 +50,33 @@ const styles = StyleSheet.create({
     borderColor: "black",
     borderWidth: 1,
   },
-  leftContainer: {
+  menuContainer: {
     flex: 3,
-    alignItems: "center",
     justifyContent: "center",
     padding: 5,
+    marginLeft: 28,
+  },
+  menuText: {
+    fontSize: 15,
+    fontFamily: "noto-regular",
+    textAlign: "left",
+  },
+  priceContainer: {
+    flex: 3,
+    justifyContent: "center",
+    padding: 5,
+  },
+  priceText: {
+    fontSize: 15,
+    fontFamily: "noto-regular",
+    textAlign: "right",
   },
   rightContainer: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
     padding: 5,
+    marginRight: 28,
   },
   titleContainer: {
     borderColor: "black",
@@ -73,10 +88,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: "noto-regular",
     fontWeight: "bold",
-  },
-  menuText: {
-    fontSize: 15,
-    fontFamily: "noto-regular",
   },
 });
 

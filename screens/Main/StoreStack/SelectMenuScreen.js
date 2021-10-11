@@ -54,19 +54,12 @@ const SelectMenuScreen = (props) => {
   const ShoppingList = () => {
     return (
       <BottomSheetFlatList
-        style={{ backgroundColor: colors.mainBlue }}
+        style={{ backgroundColor: "white" }}
         contentContainerStyle={styles.contentContainer}
         data={menus}
         keyExtractor={(item, index) => index.toString()} // ? Warning 메시지 해결. https://github.com/facebook/react-native/issues/18291
         renderItem={({ item }) => <ShoppingItem menuInfo={item.menuInfo} />}
-        // inverted
-
-        // data={menus.menus} // ? 임시 설정
-        // renderItem={({ item }) => <ChatMenuItem object={item} />}
-        // keyExtractor={(item, index) => index.toString()} /
-      >
-        {/* <View style={{ width: "100%", backgroundColor: "pink" }}>{menus.map(renderItem)}</View> */}
-      </BottomSheetFlatList>
+      ></BottomSheetFlatList>
     );
   };
 
@@ -97,6 +90,10 @@ const SelectMenuScreen = (props) => {
         snapPoints={snapPoints}
         onChange={handleSheetChange}
         // bottomInset={10}
+        backgroundStyle={{
+          //? 스타일링: https://github.com/gorhom/react-native-bottom-sheet/issues/155
+          backgroundColor: colors.mainBlue,
+        }}
         style={{
           // ? 그림자 효과 주기. https://gorhom.github.io/react-native-bottom-sheet/adding-shadow/
           // ! Android 에서는 표출되지 않는 것 같음... 에러임. 해결해야 함.
@@ -179,14 +176,18 @@ const styles = StyleSheet.create({
     // height: "65%",
     // margin: 10,
     // marginBottom: 5,
-    alignItems: "center",
+    // alignItems: "center",
     justifyContent: "center",
-    backgroundColor: colors.mainPink,
+    marginLeft: 28,
+    marginBottom: 16,
+    backgroundColor: colors.mainBlue,
   },
   topText: {
     color: "white",
+    fontFamily: "noto-regular",
     fontWeight: "bold",
     fontSize: 18,
+    textAlign: "left",
     marginVertical: 3,
   },
   buttonContainer: {
@@ -208,7 +209,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#eee",
   },
   contentContainer: {
-    backgroundColor: colors.mainBlue,
+    backgroundColor: "white",
     padding: 5,
   },
 });
