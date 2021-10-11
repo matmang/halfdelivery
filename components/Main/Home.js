@@ -20,6 +20,7 @@ const Container = styled.View`
 
 const SwipeContanier = styled.View`
   height: 100px;
+  margin-top: 10px;
   justify-content: center;
   align-items: center;
   background-color: ${colors.snow};
@@ -52,6 +53,7 @@ const SearchContanier = styled.View`
   background-color: ${colors.snow};
   border: 2px solid ${colors.mainBlue};
   border-radius: 50px;
+  margin-top: 24px;
 `;
 
 const SearchText = styled.Text`
@@ -60,31 +62,12 @@ const SearchText = styled.Text`
 `;
 
 const Home = ({ stores, navigation }) => {
-  const searchPress = () => {
-    alert("검색기능 제작중");
-  };
   const [search, setSearch] = useState("");
   const logOut = () => {
     Auth.signOut();
   };
   return (
     <Container>
-      <Swiper
-        autoplay={true}
-        autoplayTimeout={5}
-        showsPagination={true}
-        style={{ height: 140 }}
-      >
-        <SwipeContanier>
-          <Text>첫번째 페이지입니다!</Text>
-        </SwipeContanier>
-        <SwipeContanier>
-          <Text>두번째 페이지입니다!</Text>
-        </SwipeContanier>
-        <SwipeContanier>
-          <Text>세번째 페이지입니다!</Text>
-        </SwipeContanier>
-      </Swiper>
       <TouchableOpacity onPress={() => navigation.navigate("Search")}>
         <SearchContanier>
           <Ionicons
@@ -102,10 +85,28 @@ const Home = ({ stores, navigation }) => {
           keyExtractor={(item, index) => index.toString()}
           onEndReachedThreshold={0.8}
           showsVerticalScrollIndicator={true}
-          renderItem={({ item }) => <Popular storeInfo={item} />}
+          renderItem={({ item }) => (
+            <Popular storeInfo={item} navigation={navigation} />
+          )}
           windowSize={2}
         />
       </NowPopularContainer>
+      <Swiper
+        autoplay={true}
+        autoplayTimeout={5}
+        showsPagination={true}
+        style={{ height: 160 }}
+      >
+        <SwipeContanier>
+          <Text>첫번째 페이지입니다!</Text>
+        </SwipeContanier>
+        <SwipeContanier>
+          <Text>두번째 페이지입니다!</Text>
+        </SwipeContanier>
+        <SwipeContanier>
+          <Text>세번째 페이지입니다!</Text>
+        </SwipeContanier>
+      </Swiper>
       <Btn text={"Log Out"} accent onPress={logOut} />
     </Container>
   );
