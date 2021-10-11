@@ -4,7 +4,7 @@ import styles from "../Main/styles";
 import ChatMenuItem from "./ChatMenuItem";
 import Menus from "../../sampleData/Menus";
 import { useDispatch, useSelector } from "react-redux";
-import { setStore } from "../../redux/orderSlice";
+// import { setStore } from "../../redux/orderSlice";
 
 // let targetData = Menus;
 export default () => {

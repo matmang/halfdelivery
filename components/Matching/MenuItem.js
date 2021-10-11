@@ -8,29 +8,20 @@ import { setStore, addMenu, cleanMenus } from "../../redux/orderSlice";
 
 const MenuItem = ({ menuInfo, storeInfo }) => {
   const storeName = useSelector((state) => state.orderReducer.storeName);
-  // console.log("스토어네임:", storeName);
+  const _menuInfo = { ...menuInfo }; //? menuInfo 객체 Deep 하게 복사하기.
+  //! const 변수는 할당된 "메모리 주소값이 상수" 라는 뜻이다. 따라서 당연히, const 객체는 수정(속성 추가/삭제)이 가능하다!
 
   const dispatch = useDispatch();
 
   return (
     <TouchableOpacity
       style={styles.root}
-      // todo:
-      // onPress={
-      //   // ? 메뉴 선택시, 장바구니에 추가. navigation ㄴㄴ
-      //   () =>
-      //     navigation.navigate("SetMatchingTimeScreen", {
-      //       store: menuInfo.store,
-      //       price: menuInfo.price,
-      //       minPrice: menuInfo.minPrice,
-      //       delivTip: menuInfo.delivTip,
-      //       image: menuInfo.image, //! menuInfo.image 이다. 즉, 이미지의 uri 값을 옮기는 것이다!!
-      //     })
-      // }
-
       // ? 클릭시, 메뉴정보 redux 로 저장
       onPress={() => {
-        dispatch(addMenu(menuInfo));
+        console.log(_menuInfo);
+        _menuInfo.DelID = Date.now();
+        console.log(_menuInfo);
+        dispatch(addMenu(_menuInfo));
       }}
     >
       <View style={styles.textContainer}>

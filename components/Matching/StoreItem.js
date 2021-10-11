@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 import logos from "../../images";
 import { useDispatch } from "react-redux";
-import { setStore } from "../../redux/orderSlice";
+// import { setStore } from "../../redux/orderSlice";
 
 export default ({ storeInfo }) => {
   const dispatch = useDispatch();
@@ -15,8 +15,7 @@ export default ({ storeInfo }) => {
       style={styles.root}
       onPress={() => {
         // ? 선택한 매장정보 redux 로 저장.
-        dispatch(setStore(storeInfo.store));
-
+        // dispatch(setStore(storeInfo.store));
         navigation.navigate("SelectMenuScreen", {
           storeInfo,
         });

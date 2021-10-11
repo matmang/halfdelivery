@@ -17,7 +17,7 @@ const SelectMenuScreen = (props) => {
   const [store, setStore] = useState(storeInfo ? storeInfo.store : "all");
 
   // ? orderReducer.menus 가 바뀔때 마다! menus 갱신 됨.
-  const menus = useSelector((state) => state.orderReducer.menus);
+  const menus = useSelector((state) => state.orderReducer);
   console.log("menus: ", menus);
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -44,11 +44,10 @@ const SelectMenuScreen = (props) => {
 
   // ? redux 메뉴들 초기화
   useEffect(() => {
-    // dispatch(cleanStoreName());
-    dispatch(cleanMenus());
+    // dispatch(cleanMenus());
     // return () => {
     //   dispatch(cleanStoreName());
-    //   dispatch(cleanMenus());
+    dispatch(cleanMenus());
     // };
   }, []);
 
@@ -59,7 +58,7 @@ const SelectMenuScreen = (props) => {
         contentContainerStyle={styles.contentContainer}
         data={menus}
         keyExtractor={(item, index) => index.toString()} // ? Warning 메시지 해결. https://github.com/facebook/react-native/issues/18291
-        renderItem={({ item }) => <ShoppingItem menuInfo={item} />}
+        renderItem={({ item }) => <ShoppingItem menuInfo={item.menuInfo} />}
         // inverted
 
         // data={menus.menus} // ? 임시 설정

@@ -1,13 +1,26 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import ShoppingQuantitySelector from "../Order/ShoppingQuantitySelector";
+import { useSelector, useDispatch } from "react-redux";
+import { deleteMenu } from "../../redux/orderSlice";
+
+//! ShoppingList 는 SelectMenuScreen 에 있다.
 
 const ShoppingItem = ({ menuInfo }) => {
   const [quantity, setQuantity] = useState(0);
-  console.log("ShoppingItem 컴포넌트에서,", menuInfo);
+  const dispatch = useDispatch();
+  console.log("ShoppingItem | ", menuInfo);
+  // console.log("ShoppingItem | menuInfo.DelID,", menuInfo.DelID);
   return (
     <View style={styles.root}>
       <View style={{ flexDirection: "row" }}>
+        <Pressable
+          onPress={() => {
+            dispatch(deleteMenu(menuInfo.DelID));
+          }}
+        >
+          <Text>지우자</Text>
+        </Pressable>
         <View style={styles.leftContainer}>
           <View style={styles.titleContainer}>
             <Text style={styles.title}>메뉴</Text>

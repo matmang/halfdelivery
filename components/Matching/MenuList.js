@@ -17,7 +17,7 @@ const MenuList = ({ storeInfo }) => {
   const fetchMenus = async () => {
     const fetchedMenus = await DataStore.query(Menu, (c) => c.storeID("eq", storeID));
     setServerData(fetchedMenus);
-    console.log("fetchedMenus", fetchedMenus);
+    // console.log("fetchedMenus", fetchedMenus);
   };
 
   return (
