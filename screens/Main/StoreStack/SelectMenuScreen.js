@@ -38,7 +38,6 @@ const SelectMenuScreen = (props) => {
   const handleClosePress = useCallback(() => {
     sheetRef.current?.close();
   }, []);
-
   // render
   // const renderItem = useCallback((item) => <ShoppingItem menuInfo={item} />, []);
   //*  ====================================================================== https://gorhom.github.io/react-native-bottom-sheet/props
@@ -89,7 +88,7 @@ const SelectMenuScreen = (props) => {
         <Text style={styles.title}>메뉴 선택</Text>
       </View>
       <View style={styles.list}>
-        <MenuList selectedStore={store} storeInfo={storeInfo} />
+        <MenuList storeInfo={storeInfo} />
       </View>
 
       {/* 장바구니 BottomSheet */}

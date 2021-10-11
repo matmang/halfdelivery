@@ -6,21 +6,9 @@ import Menus from "../../sampleData/Menus";
 import { Auth, DataStore, SortDirection } from "aws-amplify";
 import { Store, Menu } from "../../AWS/src/models";
 
-let targetData = Menus;
-export default (props) => {
-  const storeInfo = props.storeInfo;
+const MenuList = ({ storeInfo }) => {
   const [storeID, setStoreID] = useState(storeInfo ? storeInfo.id : "store-id");
   const [serverData, setServerData] = useState([]);
-
-  console.log("storeID", storeID);
-
-  useEffect(() => {}, []);
-
-  props.selectedStore === "all"
-    ? (targetData = serverData)
-    : (targetData = serverData.filter((value) => value.store == props.selectedStore));
-
-  // const selectedCatagory = category
 
   useEffect(() => {
     fetchMenus();
@@ -42,3 +30,5 @@ export default (props) => {
     </View>
   );
 };
+
+export default MenuList;
