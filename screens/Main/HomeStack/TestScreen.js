@@ -17,6 +17,12 @@ const TestScreen = () => {
   const AWSDateTime = new Date(msTime).toISOString();
   console.log(AWSDateTime);
 
+  // ? DataStore.clear() 테스트
+  const clearDataStore = async () => {
+    const temp = await DataStore.clear();
+    console.log(temp);
+  };
+
   // ? ChatRoom 생성.
   const createChatRoom = () => {
     const newChatRoom = DataStore.save(
@@ -69,8 +75,8 @@ const TestScreen = () => {
         <Button
           title="test"
           onPress={() => {
-            createChatRoom();
-            console.log("dd");
+            clearDataStore();
+            console.log("실행완료");
           }}
         />
       </View>

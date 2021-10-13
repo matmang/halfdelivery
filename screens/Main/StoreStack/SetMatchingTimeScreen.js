@@ -19,8 +19,10 @@ const SetMatchingTimeScreen = (props) => {
 
   const storeName = useSelector((state) => state.orderReducer.storeName);
   const menus = useSelector((state) => state.orderReducer.menus);
-  const firstMenu = menus[0];
-  console.log("firstMenu: ", firstMenu);
+
+  console.log("SetMatchingTimeScreen | menus: ", menus);
+  // const firstMenu = menus[0];
+  // console.log("firstMenu: ", firstMenu);
   const matchingInfo = {
     storeName: storeName,
     menus: menus,
@@ -38,9 +40,7 @@ const SetMatchingTimeScreen = (props) => {
   }, []);
 
   const fetchAuthUser = async () => {
-    const _authUser = await Auth.currentAuthenticatedUser().catch((error) => {
-      console.log("_authUser", error);
-    });
+    const _authUser = await Auth.currentAuthenticatedUser();
 
     authUser = _authUser;
     console.log("authUser", authUser);
@@ -56,41 +56,42 @@ const SetMatchingTimeScreen = (props) => {
 
   // ? ChatRoom 생성.
   const createChatRoom = async () => {
-    const newChatRoom = await DataStore.save(
-      // TODO: 담아야 할 데이터들:
-      // ? 1. 유저,
-      // ? 2. 매장이름,
-      // ? 3. (호스트) 유저가 고른 메뉴정보
-      new ChatRoom({
-        newMessages: 5,
-        matchingInfo: matchingInfo,
-      })
-    );
-    // setChatRoomID(newChatRoom.id);
-    console.log("newChatRoom.id", newChatRoom.id);
-    chatRoomID = newChatRoom.id;
-    console.log("chatRoomID", chatRoomID);
+    try {
+      const newChatRoom = await DataStore.save(
+        // TODO: 담아야 할 데이터들:
+        // ? 1. 유저,
+        // ? 2. 매장이름,
+        // ? 3. (호스트) 유저가 고른 메뉴정보
+        new ChatRoom({
+          newMessages: 5,
+          matchingInfo: matchingInfo,
+        })
+      );
 
-    // ? Authenticated User 와 ChatRoom 을 연결하기.
-    // const authUser = await Auth.currentAuthenticatedUser();
-    // ? DataStore 의 User 모델에서 authUser.attributes.sub 값과 일치하는 값만 가져온다.
-    const dbAuthUser = await DataStore.query(User, authUser.attributes.sub).catch((error) => {
-      console.log("dbAuthUser", error);
-    });
-    await DataStore.save(
-      new ChatRoomUser({
-        user: dbAuthUser,
-        chatroom: newChatRoom,
-      })
-    ).catch((error) => {
-      console.log("ChatRoomUser", error);
-    });
+      console.log("newChatRoom.id", newChatRoom.id);
+      chatRoomID = newChatRoom.id;
+      console.log("chatRoomID", chatRoomID);
 
-    await createOrder();
+      // ? Authenticated User 와 ChatRoom 을 연결하기.
+      // const authUser = await Auth.currentAuthenticatedUser();
+      // ? DataStore 의 User 모델에서 authUser.attributes.sub 값과 일치하는 값만 가져온다.
+      const dbAuthUser = await DataStore.query(User, authUser.attributes.sub);
+      await DataStore.save(
+        new ChatRoomUser({
+          user: dbAuthUser,
+          chatroom: newChatRoom,
+        })
+      );
+    } catch (error) {
+      console.log("error |", error);
+    }
+
+    // await createOrder();
 
     // ! 계정 imageUri 가 비워져 있으면, 왠진 모르겠지만, 새 채팅방으로 이동 하지 않는다.
     navigation.navigate("ChatRoomScreen", {
-      chatRoomID: newChatRoom.id,
+      // chatRoomID: newChatRoom.id,
+      chatRoomID: chatRoomID,
       matchingInfo: matchingInfo,
       orderID: orderID,
     });
