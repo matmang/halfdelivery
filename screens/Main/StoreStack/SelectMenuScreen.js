@@ -2,7 +2,7 @@ import { ScrollView, FlatList, TouchableOpacity } from "react-native-gesture-han
 import React, { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { View, Text, Button, StyleSheet, SafeAreaView, Pressable } from "react-native";
-import StoreItem from "../../../components/Matching/StoreItem";
+import StoreComponent from "../../../components/Matching/StoreComponent";
 import MenuList from "../../../components/Matching/MenuList";
 import { useSelector, useDispatch } from "react-redux";
 import { useRoute } from "@react-navigation/core";
@@ -11,6 +11,7 @@ import colors from "../../../colors";
 import ShoppingItem from "../../../components/Order/ShoppingItem";
 import Animated from "react-native-reanimated";
 import BottomSheet, { BottomSheetScrollView, BottomSheetFlatList } from "@gorhom/bottom-sheet";
+import { Picker } from "@react-native-picker/picker";
 
 const SelectMenuScreen = (props) => {
   const storeInfo = props.route.params.storeInfo;
@@ -26,7 +27,7 @@ const SelectMenuScreen = (props) => {
   // hooks
   const sheetRef = useRef(null);
 
-  const snapPoints = useMemo(() => ["8%", "18%", "33%"], []);
+  const snapPoints = useMemo(() => ["4%", "10%", "40%"], []);
 
   // callbacks
   const handleSheetChange = useCallback((index) => {
@@ -40,7 +41,7 @@ const SelectMenuScreen = (props) => {
   }, []);
   // render
   // const renderItem = useCallback((item) => <ShoppingItem menuInfo={item} />, []);
-  //*  ====================================================================== https://gorhom.github.io/react-native-bottom-sheet/props
+  //*  ============== https://gorhom.github.io/react-native-bottom-sheet/props
 
   // ? redux 메뉴들 초기화
   useEffect(() => {
@@ -71,15 +72,14 @@ const SelectMenuScreen = (props) => {
         flexDirection: "column",
       }}
     >
-      <View style={styles.selectedStoreContainer}>
-        <View style={styles.selectedStore}>
-          <StoreItem storeInfo={storeInfo} />
-        </View>
+      <View style={styles.storeComponent}>
+        <StoreComponent storeInfo={storeInfo} />
       </View>
-      <View style={{ margin: 2 }}>
-        <Text style={styles.title}>메뉴 선택</Text>
+      {/* <Picker /> */}
+      <View style={{ backgroundColor: "lightgrey", width: "100%" }}>
+        <Text style={styles.title}>Picker 자리</Text>
       </View>
-      <View style={styles.list}>
+      <View style={styles.menuList}>
         <MenuList storeInfo={storeInfo} />
       </View>
 
@@ -139,34 +139,20 @@ const SelectMenuScreen = (props) => {
 };
 
 const styles = StyleSheet.create({
-  selectedStore: {
-    flexDirection: "row",
-    backgroundColor: "lightgrey",
-    justifyContent: "space-evenly",
-    width: "95%",
-    height: "auto",
-  },
-  selectedStoreContainer: {
-    width: "95%",
-    borderRadius: 10,
+  storeComponent: {
+    width: "100%",
     marginTop: 20,
     marginBottom: 20,
-    paddingVertical: 2,
     backgroundColor: "lightgrey",
     alignItems: "center",
     justifyContent: "center",
-    flexDirection: "row",
   },
-  list: {
+  menuList: {
     // borderWidth: 1,
     // borderColor: "red",
     backgroundColor: "lightgrey",
-    width: "90%",
-    height: "65%",
-    alignSelf: "center",
-    padding: 10,
-    marginTop: 10,
-    borderRadius: 10,
+    width: "100%",
+    // height: "65%",
   },
   title: {
     fontSize: 18,

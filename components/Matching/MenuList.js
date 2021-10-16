@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FlatList, Button, View } from "react-native";
-import styles from "../Main/styles";
+import { FlatList, Button, View, StyleSheet } from "react-native";
 import MenuItem from "./MenuItem";
 import Menus from "../../sampleData/Menus";
 import { Auth, DataStore, SortDirection } from "aws-amplify";
@@ -30,5 +29,15 @@ const MenuList = ({ storeInfo }) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  storeList: {
+    // borderRadius: 10,
+    // marginBottom: 5,
+    // padding: 2,
+    backgroundColor: "grey",
+    justifyContent: "center",
+  },
+});
 
 export default MenuList;

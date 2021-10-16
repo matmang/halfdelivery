@@ -15,7 +15,6 @@ const MenuItem = ({ menuInfo, storeInfo }) => {
 
   return (
     <TouchableOpacity
-      style={styles.root}
       // ? 클릭시, 메뉴정보 redux 로 저장
       onPress={() => {
         console.log(_menuInfo);
@@ -23,27 +22,36 @@ const MenuItem = ({ menuInfo, storeInfo }) => {
         console.log(_menuInfo);
         dispatch(addMenu(_menuInfo));
       }}
+      style={styles.root}
     >
-      <View style={styles.textContainer}>
+      <View style={styles.textsContainer}>
         {/* 메뉴 */}
-        <Text style={styles.title} numberOfLines={1}>
-          {menuInfo.menu} | {menuInfo.price}원
-        </Text>
-
+        <View style={styles.menuContainer}>
+          <Text style={styles.menu} numberOfLines={1}>
+            {menuInfo.menu}
+          </Text>
+        </View>
         {/* 메뉴 디테일... */}
-        <Text style={styles.title} numberOfLines={1}>
+        <View style={styles.detailContainer}>
           {/* //? JS Magic! menuInfo.delivTip 값이 존재할 때에만, && 뒤에값을 표출한다! */}
+          <Text style={styles.detail}>디테일</Text>
           {/* //? Conditional components 를 다루는 법이다. */}
-          {menuInfo.menuDetail && <Text style={styles.title}> {menuInfo.menuDetail}</Text>}
-        </Text>
+          {menuInfo.menuDetail && <Text style={styles.detail}> {menuInfo.menuDetail}</Text>}
+        </View>
+        {/* 가격 */}
+        <View style={styles.priceContainer}>
+          <Text style={styles.price} numberOfLines={1}>
+            {menuInfo.price.toLocaleString("ko-KR")} 원
+          </Text>
+        </View>
       </View>
+
       <View style={styles.imageContainer}>
         <Image
           style={styles.image}
           source={
             // ? imageUri 가 있으면 그걸 표출하고, 없으면 하프로고 표출.
             menuInfo.menuImgUri ? { uri: menuInfo.menuImgUri } : logos.halfLogo
-
             // {uri: menuInfo.image}
           }
         />
@@ -55,31 +63,59 @@ const MenuItem = ({ menuInfo, storeInfo }) => {
 const styles = StyleSheet.create({
   root: {
     flexDirection: "row",
+    height: 100,
     borderWidth: 1,
     borderColor: "black",
-    borderRadius: 5,
+    // borderRadius: 5,
     backgroundColor: "#fff",
     marginVertical: 2, //? 컴포넌트 복붙해서 재활용시, 사용됨 ㅎㅎ
   },
-  image: {
-    marginLeft: 3,
+  textsContainer: {
     flex: 1,
-    height: "auto",
-    resizeMode: "contain", //? Show whole Image (with white space)
-  },
-  textContainer: {
-    padding: 10,
-    backgroundColor: "white",
-    flex: 4,
+    flexDirection: "column",
+    marginLeft: 37,
   },
   imageContainer: {
-    padding: 1,
-    backgroundColor: "white",
-    marginRight: 10,
     flex: 1,
+    alignItems: "flex-end",
+    justifyContent: "center",
+    backgroundColor: "white",
+    marginRight: 38,
   },
-  title: {
-    fontSize: 15,
+  image: {
+    // marginLeft: 3,
+    borderWidth: 1,
+    height: 84,
+    width: 84,
+    resizeMode: "cover",
+    // resizeMode: "contain", //? contain: Show whole Image (with white space)
+  },
+  menuContainer: {
+    backgroundColor: "white",
+    marginTop: 16,
+  },
+  detailContainer: {
+    backgroundColor: "white",
+    marginTop: 5,
+  },
+  priceContainer: {
+    backgroundColor: "white",
+    // marginTop: 11,
+    // marginBottom: 8,
+  },
+  menu: {
+    fontSize: 17,
+    fontFamily: "noto-regular",
+    fontWeight: "bold",
+    textAlign: "left",
+  },
+  detail: {
+    fontSize: 14,
+    fontFamily: "noto-regular",
+    textAlign: "left",
+  },
+  price: {
+    fontSize: 17,
     fontFamily: "noto-regular",
     fontWeight: "bold",
     textAlign: "left",
