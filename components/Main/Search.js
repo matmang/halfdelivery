@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import DismissKeyboard from "../DismissKeyboard";
 import { ActivitiIndicator, Platform, Dimensions } from "react-native";
@@ -9,6 +9,7 @@ import RecentlySearched from "./RecentlySearched";
 import StoreItem from "../Matching/StoreItem";
 import { ChatRoom } from "../../AWS/src/models";
 import Popular from "./Popular";
+import SearchItem from "./SearchItem";
 
 const { width } = Dimensions.get("screen");
 
@@ -69,46 +70,30 @@ const RemoveAll = styled.Text`
   margin-right: 19px;
 `;
 
-const SearchBtn = styled.TouchableOpacity`
-  background-color: ${colors.failure};
-  padding: 10px;
-  margin: 10px 30px;
-  border-radius: 10px;
-  align-items: center;
-`;
-
-const SearchText = styled.Text`
-  color: ${colors.snow};
-  font-weight: 600;
-  font-size: 16px;
-`;
-
-const ResultsText = styled.Text`
-  margin-top: 10px;
-  font-size: 16px;
-  text-align: center;
-`;
-
-const Results = styled.ScrollView`
-  margin-top: 25px;
-`;
-
 const Search = ({ navigation, token }) => {
   const [searching, setSearching] = useState(false);
   const [results, setResults] = useState([]);
   const [tempArray, setTempArray] = useState([]);
   const [search, setSearch] = useState("");
-  const SearchFn = async (token) => {
-    token.forEach((element) => {
-      if (element.minDlvTime == search) {
-        setResults([]);
+
+  const SearchFn = async (text, token) => {
+    var name, i;
+    for (i = 0; i < token.length; i++) {
+      name = token[i].store;
+      if (name.toUpperCase().indexOf(text) > -1) {
+        tempArray.push(token[i]);
+      } else {
         setTempArray([]);
-        tempArray.push(element);
-        setResults(tempArray);
-        setSearching(true);
       }
-    });
+    }
+    if (text === "") {
+      setSearching(false);
+    } else {
+      setSearching(true);
+    }
+    setResults(tempArray);
   };
+
   return (
     <DismissKeyboard>
       <Container>
@@ -127,10 +112,14 @@ const Search = ({ navigation, token }) => {
               value={search}
               autoFocus={true}
               placeholder="원하시는 식당/메뉴를 검색하세요"
-              onChangeText={(text) => setSearch(text)}
+              onChangeText={(text) => {
+                setSearch(text);
+                SearchFn(text, token);
+              }}
             />
             <TouchableOpacity
               onPress={() => {
+                setSearch(text);
                 SearchFn(token);
               }}
             >
@@ -142,7 +131,21 @@ const Search = ({ navigation, token }) => {
             </TouchableOpacity>
           </SearchContanier>
         </TopContainer>
-        {searching ? null : (
+        {searching ? (
+          <FlatList
+            data={results}
+            keyExtractor={(item, index) => index.toString()}
+            onEndReachedThreshold={0.8}
+            showsVerticalScrollIndicator={true}
+            renderItem={({ item }) => (
+              <SearchItem storeInfo={item} navigation={navigation} />
+            )}
+            windowSize={2}
+            style={{
+              marginTop: 26,
+            }}
+          />
+        ) : (
           <SearchedWordContainer>
             <SearchedLabel>최근 검색어</SearchedLabel>
             <TouchableOpacity onPress={() => alert("검색어 전체 삭제")}>
@@ -150,19 +153,6 @@ const Search = ({ navigation, token }) => {
             </TouchableOpacity>
           </SearchedWordContainer>
         )}
-        <FlatList
-          data={results}
-          keyExtractor={(item, index) => index.toString()}
-          onEndReachedThreshold={0.8}
-          showsVerticalScrollIndicator={true}
-          renderItem={({ item }) => (
-            <Popular storeInfo={item} navigation={navigation} />
-          )}
-          windowSize={2}
-          style={{
-            marginTop: 26,
-          }}
-        />
       </Container>
     </DismissKeyboard>
   );
