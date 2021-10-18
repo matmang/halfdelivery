@@ -4,7 +4,7 @@ import styles from "../Main/styles";
 import ChatMenuItem from "./ChatMenuItem";
 import Menus from "../../sampleData/Menus";
 import { useDispatch, useSelector } from "react-redux";
-import { setStore } from "../../redux/orderSlice";
+// import { setStore } from "../../redux/orderSlice";
 
 // let targetData = Menus;
 export default () => {
@@ -12,8 +12,8 @@ export default () => {
   // const [menus, setMenus] = useState([]);
   const dispatch = useDispatch();
 
-  const storeName = useSelector((state) => state.orderReducer);
-  const menus = useSelector((state) => state.orderReducer);
+  const storeName = useSelector((state) => state.orderReducer.storeName);
+  const menus = useSelector((state) => state.orderReducer.menus);
   useEffect(() => {
     console.log("챗메뉴리스트", menus);
     // const _menus = menus;
@@ -37,8 +37,8 @@ export default () => {
   return (
     <View style={styles.storeList}>
       <FlatList
-        data={menus.menus} // ? 임시 설정
-        renderItem={({ item }) => <ChatMenuItem object={item} />}
+        data={menus} // ? 임시 설정
+        renderItem={({ item }) => <ChatMenuItem menuInfo={item} />}
         keyExtractor={(item, index) => index.toString()} // ? Warning 메시지 해결. https://github.com/facebook/react-native/issues/18291
       />
     </View>

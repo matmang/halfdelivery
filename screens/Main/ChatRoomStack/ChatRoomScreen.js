@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import { FlatList, StyleSheet, Text, View, SafeAreaView, ActivityIndicator } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/core";
 import { DataStore, SortDirection } from "@aws-amplify/datastore";
+import Auth from "@aws-amplify/auth";
 import Message from "../../../components/Chat/Message";
 import MessageInput from "../../../components/Chat/MessageInput";
-import { Message as MessageModel, ChatRoom } from "../../../AWS/src/models";
+import { Message as MessageModel, ChatRoom, Order } from "../../../AWS/src/models";
 
 import StoreItem from "../../../components/Matching/StoreItem";
 import ChatStoreItem from "../../../components/Chat/ChatStoreItem";
@@ -19,12 +20,15 @@ const ChatRoomScreen = (props) => {
   const route = useRoute();
   const navigation = useNavigation();
 
-  const storeName = useSelector((state) => state.orderReducer);
-  const menus = useSelector((state) => state.orderReducer);
+  const matchingInfo = props.matchingInfo;
+
+  const storeName = useSelector((state) => state.orderReducer.storeName);
+  const menus = useSelector((state) => state.orderReducer.menus);
 
   // ? 첫 렌더링에만 호출. ChatRoom 가져오기.
   useEffect(() => {
     fetchChatRoom();
+    // updateOrder();
   }, []);
 
   // ? chatRoom 에 변화가 있을때마다 호출. MessageModel 가져오기.
@@ -49,16 +53,16 @@ const ChatRoomScreen = (props) => {
         setMessages((existingMessage) => [msg.element, ...existingMessage]);
       }
     });
-
     // ? 죽을땐 unsubscribe
     return () => subscription.unsubscribe();
   }, []);
 
+  // ? 채팅방 가져오기.
   const fetchChatRoom = async () => {
-    if (!route.params.id) {
+    if (!route.params.chatRoomID) {
       console.warn("No chatroom id provided");
     }
-    const chatRoom = await DataStore.query(ChatRoom, route.params.id);
+    const chatRoom = await DataStore.query(ChatRoom, route.params.chatRoomID);
     if (!chatRoom) {
       console.error("Couldn't find a chat room with this id");
     } else {
@@ -67,6 +71,7 @@ const ChatRoomScreen = (props) => {
     }
   };
 
+  // ? 메시지 가져오기.
   const fetchMessages = async () => {
     if (!chatRoom) {
       return;
@@ -76,11 +81,35 @@ const ChatRoomScreen = (props) => {
       (message) => message.chatroomID("eq", chatRoom?.id),
       {
         sort: (message) => message.createdAt(SortDirection.DESCENDING),
-      } // ? chatroomID() 는 Amplify 내장 함수다.
+      } // ? ("eq", chatRoom?.id) 는 Amplify 내장 함수다.
     );
     console.log("펫치드메시지스", fechedMessages);
     setMessages(fechedMessages);
   };
+
+  // // ? Order 테이블에 chatroomID 업데이트 하기.
+  // const updateOrder = async () => {
+  //   const authUser = await Auth.currentAuthenticatedUser();
+  //   console.log("유저ID", authUser.attributes.sub);
+
+  //   // //? 업데이트 할 Order 타겟팅.
+  //   // const allOrder = await DataStore.query(Order);
+  //   // console.log("allOrder", allOrder);
+  //   // const dbOrders = await DataStore.query(Order, (order) => order.userID("eq", authUser.attributes.sub), {
+  //   //   sort: (order) => order.orderDate(SortDirection.DESCENDING),
+  //   // });
+  //   // console.log("dbOrders", dbOrders);
+  //   // const lastOrderID = dbOrders[0].id;
+
+  //   const original = await DataStore.query(Order, route.params.orderID);
+  //   console.log("오리지날", original);
+  //   // ? 업데이트
+  //   await DataStore.save(
+  //     Order.copyOf(original, (updated) => {
+  //       updated.chatroomID = route.params.chatRoomID;
+  //     })
+  //   );
+  // };
 
   const matchingRoomInfo = props.route.params !== undefined ? props.route.params.matchingRoomInfo : "No Data";
 

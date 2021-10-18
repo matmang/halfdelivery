@@ -1,3 +1,22 @@
+type OrderMenu @model @auth(rules: [{allow: public}]) @key(name: "byOrder", fields: ["orderID"]) @key(name: "byUser", fields: ["userID"]) {
+  id: ID!
+  menu: String!
+  price: Int!
+  quantity: Int!
+  orderID: ID
+  userID: ID
+}
+
+type Order @model @auth(rules: [{allow: public}]) @key(name: "byUser", fields: ["userID"]) @key(name: "byChatRoom", fields: ["chatroomID"]) {
+  id: ID!
+  store: String!
+  orderDate: AWSDateTime!
+  paymentAmount: Int!
+  userID: ID
+  chatroomID: ID
+  OrderMenus: [OrderMenu] @connection(keyName: "byOrder", fields: ["id"])
+}
+
 type StoreCategory @model @auth(rules: [{allow: public}]) {
   id: ID!
   category: String!
@@ -16,6 +35,7 @@ type Store @model @auth(rules: [{allow: public}]) @key(name: "byStoreCategory", 
   location: String
   Menus: [Menu] @connection(keyName: "byStore", fields: ["id"])
   storecategoryID: ID
+  baeminUri: String
 }
 
 type Menu @model @auth(rules: [{allow: public}]) @key(name: "byStore", fields: ["storeID"]) {
@@ -35,6 +55,7 @@ type ChatRoom @model @auth(rules: [{allow: public}]) {
   Messages: [Message] @connection(keyName: "byChatRoom", fields: ["id"])
   ChatRoomUsers: [ChatRoomUser] @connection(keyName: "byChatRoom", fields: ["id"])
   matchingInfo: AWSJSON
+  Orders: [Order] @connection(keyName: "byChatRoom", fields: ["id"])
 }
 
 type Message @model @auth(rules: [{allow: public}]) @key(name: "byChatRoom", fields: ["userID"]) @key(name: "byUser", fields: ["userID"]) {
@@ -52,6 +73,8 @@ type User @model @auth(rules: [{allow: public}]) {
   chatrooms: [ChatRoomUser] @connection(keyName: "byUser", fields: ["id"])
   Messages: [Message] @connection(keyName: "byUser", fields: ["id"])
   halfmoney: Int
+  Orders: [Order] @connection(keyName: "byUser", fields: ["id"])
+  OrderMenus: [OrderMenu] @connection(keyName: "byUser", fields: ["id"])
 }
 
 type ChatRoomUser @model(queries: null) @key(name: "byChatRoom", fields: ["chatroomID", "userID"]) @key(name: "byUser", fields: ["userID", "chatroomID"]) @auth(rules: [{allow: public}, {allow: public}]) {

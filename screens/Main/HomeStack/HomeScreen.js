@@ -4,12 +4,14 @@ import Home from "../../../components/Main/Home";
 import { ScrollView } from "react-native-gesture-handler";
 import { Store } from "../../../AWS/src/models";
 import { DataStore } from "@aws-amplify/datastore";
+import { Button } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 
 export default () => {
   const navigation = useNavigation();
   const [search, setSearch] = useState("");
   const [stores, setStores] = useState([]);
+
   const logOut = () => {
     Auth.signOut();
   };

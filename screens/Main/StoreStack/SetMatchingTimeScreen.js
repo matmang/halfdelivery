@@ -3,68 +3,168 @@ import { StyleSheet, View, Text, Button, SafeAreaView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Picker } from "@react-native-picker/picker";
 import { connect } from "react-redux";
-import QuantitySelector from "../../../components/Matching/QuantitySelector";
-import { Auth, DataStore } from "aws-amplify";
-import { ChatRoom, User, ChatRoomUser } from "../../../AWS/src/models";
+import { Auth, DataStore, SortDirection } from "aws-amplify";
+import { ChatRoom, User, ChatRoomUser, OrderMenu, Order } from "../../../AWS/src/models";
 import { useSelector, useDispatch } from "react-redux";
-// import {
-//   setStore,
-//   addMenu,
-//   cleanMenus,
-//   setTime as reduxSetTime,
-//   setPersons as reduxSetPersons,
-// } from "../../../redux/orderSlice";
+import orderReducer from "../../../redux/orderSlice";
+import QuantitySelector from "../../../components/Matching/QuantitySelector";
 
 const SetMatchingTimeScreen = (props) => {
   const [time, setTime] = useState(10);
   const [persons, setPersons] = useState(2);
+  const [orderID, setOrderID] = useState("/");
+  // const [chatRoomID, setChatRoomID] = useState("#"); // ! useState 사용시, createChatRoom() 함수 async-await 안에서 예상대로 작동하지 않는다...
+  let chatRoomID = "#";
+  let authUser = {};
 
-  const Object = useSelector((state) => state.orderReducer);
+  const storeName = useSelector((state) => state.orderReducer.storeName);
+  const menus = useSelector((state) => state.orderReducer.menus);
+
+  console.log("SetMatchingTimeScreen | menus: ", menus);
+  // const firstMenu = menus[0];
+  // console.log("firstMenu: ", firstMenu);
+  const matchingInfo = {
+    storeName: storeName,
+    menus: menus,
+    roomInfo: { time: time, persons: persons },
+  };
+
   const dispatch = useDispatch();
-
   const navigation = useNavigation();
 
-  // ? 시간이랑 인원수 바뀌면 redux store 업데이트.
+  const QUANTITY = -1; //! 임시값.
+  const PAYMENT_AMOUNT = -1000; //! 임시값.
+
   useEffect(() => {
-    // dispatch(reduxSetTime(time));
-    // dispatch(reduxSetPersons(persons));
-    // console.log("스토어네임:", storeName);
-  }, [time, persons]);
+    fetchAuthUser();
+  }, []);
 
-  const makeChatRoom = async () => {
-    // ? Chat Room 만들기.
-    const newChatRoom = await DataStore.save(
-      new ChatRoom({
-        newMessages: 68,
-        matchingInfo: { storeName: Object.storeName, menus: Object.menus, roomInfo: { time: time, persons: persons } },
-      })
-    );
-    // ? Authenticated User 와 Chat Room 을 연결하기.
-    const authUser = await Auth.currentAuthenticatedUser();
-    // ? DataStore 의 User 모델에서 authUser.attributes.sub 값과 일치하는 값만 가져온다.
-    const dbUser = await DataStore.query(User, authUser.attributes.sub);
-    await DataStore.save(
-      new ChatRoomUser({
-        user: dbUser,
-        chatroom: newChatRoom,
-      })
-    );
+  const fetchAuthUser = async () => {
+    const _authUser = await Auth.currentAuthenticatedUser();
 
-    // ! 계정의 imageUri 가 비워져 있으면, 왠진 모르겠지만, 새 채팅방으로 이동 하지 않는다.
-    navigation.navigate("ChatRoomScreen", {
-      id: newChatRoom.id,
-      // matchingRoomInfo: { time, persons },
-    });
-
-    // TODO: If tere is already to chat room between these 2 users,
-    // TODO: then redirect to the existing chat room.
-    // TODO: Otherwise, create a new chatroom with these users.
+    authUser = _authUser;
+    console.log("authUser", authUser);
   };
+
+  // useEffect(() => {
+  //   createOrder();
+  // }, [chatRoomID]);
+
+  // useEffect(() => {
+  //   createOrderMenu();
+  // }, [orderID]);
+
+  // ? ChatRoom 생성.
+  const createChatRoom = async () => {
+    try {
+      const newChatRoom = await DataStore.save(
+        // TODO: 담아야 할 데이터들:
+        // ? 1. 유저,
+        // ? 2. 매장이름,
+        // ? 3. (호스트) 유저가 고른 메뉴정보
+        new ChatRoom({
+          newMessages: 5,
+          matchingInfo: matchingInfo,
+        })
+      );
+
+      console.log("newChatRoom.id", newChatRoom.id);
+      chatRoomID = newChatRoom.id;
+      console.log("chatRoomID", chatRoomID);
+
+      // ? Authenticated User 와 ChatRoom 을 연결하기.
+      // const authUser = await Auth.currentAuthenticatedUser();
+      // ? DataStore 의 User 모델에서 authUser.attributes.sub 값과 일치하는 값만 가져온다.
+      const dbAuthUser = await DataStore.query(User, authUser.attributes.sub);
+      await DataStore.save(
+        new ChatRoomUser({
+          user: dbAuthUser,
+          chatroom: newChatRoom,
+        })
+      );
+    } catch (error) {
+      console.log("error |", error);
+    }
+
+    // await createOrder();
+
+    // ! 계정 imageUri 가 비워져 있으면, 왠진 모르겠지만, 새 채팅방으로 이동 하지 않는다.
+    navigation.navigate("ChatRoomScreen", {
+      // chatRoomID: newChatRoom.id,
+      chatRoomID: chatRoomID,
+      matchingInfo: matchingInfo,
+      orderID: orderID,
+    });
+  };
+
+  // ? 호스트가 고른 식당으로, Order 생성.
+  const createOrder = async () => {
+    // const authUser = await Auth.currentAuthenticatedUser();
+    const msTime = Date.now();
+    const AWSDateTime = new Date(msTime).toISOString();
+    const newOrder = await DataStore.save(
+      new Order({
+        store: storeName,
+        orderDate: AWSDateTime, // ! orderDate는 지우면 안된다!!!!! createdAt은 시차를 가지고 나중에 생긴다!
+        paymentAmount: PAYMENT_AMOUNT,
+        userID: authUser.attributes.sub,
+        chatroomID: chatRoomID,
+      })
+    ).catch((error) => {
+      console.log("newOrder", error);
+    });
+    setOrderID(newOrder.id);
+
+    const fetchedOrders = await DataStore.query(Order, (order) => order.userID("eq", authUser.attributes.sub), {
+      sort: (s) => s.orderDate(SortDirection.DESCENDING),
+    }).catch((error) => {
+      console.log("fetchedOrders", error);
+    });
+    console.log("fetchedOrders", fetchedOrders);
+    const fetchOrderID = fetchedOrders[0].id;
+    console.log("fetchOrderID", fetchOrderID);
+
+    await createOrderMenu();
+  };
+
+  // ? 호스트의 메뉴로 OrderMenu 생성.
+  const createOrderMenu = async () => {
+    // const authUser = await Auth.currentAuthenticatedUser();
+    const newOrderMenu = await DataStore.save(
+      new OrderMenu({
+        menu: firstMenu.menu,
+        price: firstMenu.price,
+        quantity: QUANTITY,
+        userID: authUser.attributes.sub,
+        orderID: orderID,
+      })
+    ).catch((error) => {
+      console.log("newOrderMenu", error);
+    });
+    // ! 계정 imageUri 가 비워져 있으면, 왠진 모르겠지만, 새 채팅방으로 이동 하지 않는다.
+    navigation.navigate("ChatRoomScreen", {
+      chatRoomID: chatRoomID,
+      matchingInfo: matchingInfo,
+      orderID: orderID,
+    });
+  };
+
+  // const onPress = async () => {
+  //   await createChatRoom();
+  //   await createOrder();
+  //   await createOrderMenu();
+  // };
+
+  // const onPress_NotAsync = () => {
+  //   createChatRoom();
+  //   createOrder();
+  //   createOrderMenu();
+  // };
 
   return (
     <SafeAreaView style={styles.root}>
       {/* 매칭 요청 시간 */}
-      <View style={styles.setTimeView}>
+      <View style={styles.setTimeContainer}>
         <View style={styles.leftContainer}>
           <Text style={styles.title}>매칭 요청 시간</Text>
         </View>
@@ -82,7 +182,7 @@ const SetMatchingTimeScreen = (props) => {
       </View>
 
       {/* 매칭 희망 인원 */}
-      <View style={styles.setPersonsView}>
+      <View style={styles.setPersonsContainer}>
         <View style={styles.leftContainer}>
           <Text style={styles.title}>매칭 희망 인원</Text>
         </View>
@@ -91,9 +191,16 @@ const SetMatchingTimeScreen = (props) => {
         </View>
       </View>
 
-      <View style={styles.buttonView}>
+      <View style={styles.buttonRoot}>
         <View style={styles.buttonContainer}>
-          <Button title="매칭방 만들기" onPress={() => makeChatRoom()} />
+          <Button
+            title="매칭방 만들기"
+            onPress={() => {
+              // onPress();
+              createChatRoom();
+              // onPress_NotAsync();
+            }}
+          />
         </View>
       </View>
     </SafeAreaView>
@@ -110,7 +217,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "right",
   },
-  setTimeView: {
+  setTimeContainer: {
     flex: 1,
     flexDirection: "row",
     marginTop: 30,
@@ -127,11 +234,11 @@ const styles = StyleSheet.create({
   picker: {
     width: "50%",
   },
-  setPersonsView: {
+  setPersonsContainer: {
     flex: 1,
     flexDirection: "row",
   },
-  buttonView: {
+  buttonRoot: {
     flex: 1,
     // alignContent: "flex-end",
     justifyContent: "flex-end",

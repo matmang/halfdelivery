@@ -7,54 +7,51 @@ import { useSelector, useDispatch } from "react-redux";
 import { setStore, addMenu, cleanMenus } from "../../redux/orderSlice";
 
 const MenuItem = ({ menuInfo, storeInfo }) => {
-  // menuInfo.image =
-  //   "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/9bd0e340-f08c-41e4-98f3-dbc9904abe8e/Logo_72dpi-01.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210906%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20210906T080723Z&X-Amz-Expires=86400&X-Amz-Signature=9cfe0ac4ac1b99ad3e195573772038d7f328eaf41f7ecd2e31c1381569afe07e&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Logo_72dpi-01.png%22";
-  const storeName = useSelector((state) => state.orderReducer);
-  console.log(storeName);
+  const storeName = useSelector((state) => state.orderReducer.storeName);
+  const _menuInfo = { ...menuInfo }; //? menuInfo 객체 Deep 하게 복사하기.
+  //! const 변수는 할당된 "메모리 주소값이 상수" 라는 뜻이다. 따라서 당연히, const 객체는 수정(속성 추가/삭제)이 가능하다!
 
   const dispatch = useDispatch();
 
   return (
     <TouchableOpacity
-      style={styles.root}
-      // todo:
-      // onPress={
-      //   // ? 메뉴 선택시, 장바구니에 추가. navigation ㄴㄴ
-      //   () =>
-      //     navigation.navigate("SetMatchingTimeScreen", {
-      //       store: menuInfo.store,
-      //       price: menuInfo.price,
-      //       minPrice: menuInfo.minPrice,
-      //       delivTip: menuInfo.delivTip,
-      //       image: menuInfo.image, //! menuInfo.image 이다. 즉, 이미지의 uri 값을 옮기는 것이다!!
-      //     })
-      // }
-
       // ? 클릭시, 메뉴정보 redux 로 저장
       onPress={() => {
-        dispatch(addMenu(menuInfo));
+        console.log(_menuInfo);
+        _menuInfo.DelID = Date.now();
+        console.log(_menuInfo);
+        dispatch(addMenu(_menuInfo));
       }}
+      style={styles.root}
     >
-      <View style={styles.textContainer}>
+      <View style={styles.textsContainer}>
         {/* 메뉴 */}
-        <Text style={styles.title} numberOfLines={1}>
-          {menuInfo.menu} | {menuInfo.minPrice}원
-        </Text>
-
+        <View style={styles.menuContainer}>
+          <Text style={styles.menu} numberOfLines={1}>
+            {menuInfo.menu}
+          </Text>
+        </View>
         {/* 메뉴 디테일... */}
-        <Text style={styles.title} numberOfLines={1}>
+        <View style={styles.detailContainer}>
           {/* //? JS Magic! menuInfo.delivTip 값이 존재할 때에만, && 뒤에값을 표출한다! */}
+          <Text style={styles.detail}>디테일</Text>
           {/* //? Conditional components 를 다루는 법이다. */}
-          {menuInfo.menuDetail && <Text style={styles.title}> {menuInfo.menuDetail}</Text>}
-        </Text>
+          {menuInfo.menuDetail && <Text style={styles.detail}> {menuInfo.menuDetail}</Text>}
+        </View>
+        {/* 가격 */}
+        <View style={styles.priceContainer}>
+          <Text style={styles.price} numberOfLines={1}>
+            {menuInfo.price.toLocaleString("ko-KR")} 원
+          </Text>
+        </View>
       </View>
+
       <View style={styles.imageContainer}>
         <Image
           style={styles.image}
           source={
             // ? imageUri 가 있으면 그걸 표출하고, 없으면 하프로고 표출.
             menuInfo.menuImgUri ? { uri: menuInfo.menuImgUri } : logos.halfLogo
-
             // {uri: menuInfo.image}
           }
         />
@@ -66,31 +63,60 @@ const MenuItem = ({ menuInfo, storeInfo }) => {
 const styles = StyleSheet.create({
   root: {
     flexDirection: "row",
+    height: 100,
     borderWidth: 1,
     borderColor: "black",
-    borderRadius: 5,
+    // borderRadius: 5,
     backgroundColor: "#fff",
     marginVertical: 2, //? 컴포넌트 복붙해서 재활용시, 사용됨 ㅎㅎ
   },
-  image: {
-    marginLeft: 3,
+  textsContainer: {
     flex: 1,
-    height: "auto",
-    resizeMode: "contain", //? Show whole Image (with white space)
-  },
-  textContainer: {
-    padding: 10,
-    backgroundColor: "white",
-    flex: 4,
+    flexDirection: "column",
+    marginLeft: 37,
   },
   imageContainer: {
-    padding: 1,
-    backgroundColor: "white",
-    marginRight: 10,
     flex: 1,
+    alignItems: "flex-end",
+    justifyContent: "center",
+    backgroundColor: "white",
+    marginRight: 38,
   },
-  title: {
-    fontSize: 15,
+  image: {
+    // marginLeft: 3,
+    borderWidth: 1,
+    height: 84,
+    width: 84,
+    resizeMode: "cover",
+    // resizeMode: "contain", //? contain: Show whole Image (with white space)
+  },
+  menuContainer: {
+    backgroundColor: "white",
+    marginTop: 16,
+  },
+  detailContainer: {
+    backgroundColor: "white",
+    marginTop: 5,
+  },
+  priceContainer: {
+    backgroundColor: "white",
+    // marginTop: 11,
+    // marginBottom: 8,
+  },
+  menu: {
+    fontSize: 17,
+    fontFamily: "noto-regular",
+    fontWeight: "bold",
+    textAlign: "left",
+  },
+  detail: {
+    fontSize: 14,
+    fontFamily: "noto-regular",
+    textAlign: "left",
+  },
+  price: {
+    fontSize: 17,
+    fontFamily: "noto-regular",
     fontWeight: "bold",
     textAlign: "left",
   },

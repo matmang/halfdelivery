@@ -40,11 +40,7 @@ export default () => (
           <HeaderButtons HeaderButtonComponent={HomeHeaderButton}>
             <Item
               title="Notification"
-              iconName={
-                Platform.OS === "android"
-                  ? "md-notifications"
-                  : "ios-notifications"
-              }
+              iconName={Platform.OS === "android" ? "md-notifications" : "ios-notifications"}
               onPress={() => alert("알림")}
             />
             <Item
@@ -76,17 +72,10 @@ export default () => (
           <HeaderButtons HeaderButtonComponent={HomeHeaderButton}>
             <Item
               title="Notification"
-              iconName={
-                Platform.OS === "android"
-                  ? "md-notifications"
-                  : "ios-notifications"
-              }
+              iconName={Platform.OS === "android" ? "md-notifications" : "ios-notifications"}
               onPress={() => alert("알림")}
             />
-            <Item
-              title="Profile"
-              iconName={Platform.OS === "android" ? "md-person" : "ios-person"}
-            />
+            <Item title="Profile" iconName={Platform.OS === "android" ? "md-person" : "ios-person"} />
           </HeaderButtons>
         ),
       }}

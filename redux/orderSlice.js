@@ -6,38 +6,26 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const orderSlice = createSlice({
   name: "order",
-  initialState: {
-    storeName: "",
-    menus: [],
-    time: 0,
-    persons: 0,
-  },
+  initialState: [],
+  // ! state 수정시 참고. 참조: https://redux-toolkit.js.org/usage/immer-reducers
   reducers: {
-    // ? 매장이름 할당하기.
-    setStore: (state, action) => {
-      state.storeName = action.payload;
-    },
-    // ? menus 에 메뉴 추가하기.
+    // ? menus 에 메뉴 추가하기. "객체 안에 객체" 형식으로 추가 된다. (객체 안에 menuInfo 속성의 값으로 action.payload 가 객체로 추가됨.)
     addMenu: (state, action) => {
-      state.menus.push({ menuInfo: action.payload });
+      state.push({ menuInfo: action.payload });
+      // state.menus.push(action.payload);
+    },
+    // ? menus 에서 선택한 메뉴만 삭제하기. DelID 를 활용한다.
+    deleteMenu: (state, action) => {
+      return state.filter((element) => element.menuInfo.DelID !== action.payload);
     },
     // ? menus 비우기.
     cleanMenus: (state, action) => {
-      state.menus = [];
+      return state.filter((element) => element.menuInfo.DelID === 0);
     },
-    // ! 일단은, 매칭 시간이랑 인원은 리덕스가 불필요하지 않을까...
-    // // ? 매칭 시간 설정.
-    // setTime: (state, action) => {
-    //   state.time = action.payload;
-    // },
-    // // ? 매칭 인원 설정.
-    // setPersons: (state, action) => {
-    //   state.persons = action.payload;
-    // },
   },
 });
 
 // ? Exporting.
-export const { setStore, addMenu, cleanMenus } = orderSlice.actions;
+export const { addMenu, deleteMenu, cleanMenus } = orderSlice.actions;
 const orderReducer = orderSlice.reducer;
 export default orderReducer;

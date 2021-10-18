@@ -1,21 +1,14 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  StyleSheet,
-  Button,
-} from "react-native";
+import { View, Text, Image, TouchableOpacity, StyleSheet, Button } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 import { connect } from "react-redux";
 import { addMenu, menusStore, menusSlice } from "../../redux/Order/_orderStore";
 import logos from "../../images";
 
-const ChatMenuItem = ({ object }) => {
+const ChatMenuItem = ({ menuInfo }) => {
   const navigation = useNavigation();
 
-  if (object === undefined) {
+  if (menuInfo === undefined) {
     const _menuInfo = {
       menuInfo: {
         menu: "test",
@@ -27,15 +20,13 @@ const ChatMenuItem = ({ object }) => {
     object = _menuInfo;
   }
 
-  const menuInfo = object.menuInfo;
-
   return (
     <View style={styles.root}>
       <Image
         style={styles.image}
         source={
           // ? imageUri 가 있으면 그걸 표출하고, 없으면 하프로고 표출.
-          menuInfo.menuImgUri ? { uri: menuInfo.menuImgUri } : logos.halfLogo
+          menuInfo.menuImgUri !== undefined ? { uri: menuInfo.menuImgUri } : logos.halfLogo
         }
       />
       <View style={styles.rightContainer}>
@@ -48,9 +39,7 @@ const ChatMenuItem = ({ object }) => {
         <Text style={styles.title} numberOfLines={1}>
           {/* //? JS Magic! menuInfo.delivTip 값이 존재할 때에만, && 뒤에값을 표출한다! */}
           {/* //? Conditional components 를 다루는 법이다. */}
-          {menuInfo.menuDetail && (
-            <Text style={styles.title}> {menuInfo.menuDetail}</Text>
-          )}
+          {menuInfo.menuDetail && <Text style={styles.title}> {menuInfo.menuDetail}</Text>}
         </Text>
       </View>
     </View>
@@ -81,6 +70,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 15,
     fontWeight: "bold",
+    fontFamily: "noto-regular",
     textAlign: "left",
   },
 });
