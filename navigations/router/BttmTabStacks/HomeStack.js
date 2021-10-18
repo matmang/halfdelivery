@@ -9,6 +9,8 @@ import TestScreen from "../../../screens/Main/HomeStack/TestScreen";
 import ProfileScreen from "../../../screens/Main/ProfileStack/ProfileScreen";
 import HomeHeaderButton from "../../../components/Main/HomeHeaderButton";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import SearchScreen from "../../../screens/Main/HomeStack/SearchScreen";
+import SearchBar from "../../../components/Main/SearchBar";
 
 const Stack = createStackNavigator();
 const LogoHeader = (props) => {
@@ -26,12 +28,12 @@ const LogoHeader = (props) => {
 };
 
 export default () => (
-  <Stack.Navigator initialRouteName="HomeScreen" screenOptions={{}}>
+  <Stack.Navigator initialRouteName="HomeScreen">
     <Stack.Screen
       name="HomeScreen"
       component={HomeScreen}
       options={({ navigation }) => ({
-        title: "임시 홈",
+        title: "홈",
         headerTitleAlign: "center",
         headerTitle: (props) => <LogoHeader {...props} />,
         headerRight: () => (
@@ -87,6 +89,13 @@ export default () => (
             />
           </HeaderButtons>
         ),
+      }}
+    />
+    <Stack.Screen
+      name="Search"
+      component={SearchScreen}
+      options={{
+        headerShown: false,
       }}
     />
   </Stack.Navigator>
