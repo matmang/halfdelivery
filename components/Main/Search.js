@@ -1,14 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import DismissKeyboard from "../DismissKeyboard";
-import { ActivitiIndicator, Platform, Dimensions } from "react-native";
+import { Platform, Dimensions } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import colors from "../../colors";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
-import RecentlySearched from "./RecentlySearched";
-import StoreItem from "../Matching/StoreItem";
-import { ChatRoom } from "../../AWS/src/models";
-import Popular from "./Popular";
 import SearchItem from "./SearchItem";
 
 const { width } = Dimensions.get("screen");
