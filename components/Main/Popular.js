@@ -4,6 +4,7 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import colors from "../../colors";
 import { Ionicons } from "@expo/vector-icons";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const { width } = Dimensions.get("screen");
 
@@ -53,24 +54,32 @@ const StoreName = styled.View`
   margin-left: 20px;
 `;
 
-const Popular = ({ storeInfo }) => (
-  <Container>
-    <Ranking>
-      <RankingText>1위</RankingText>
-    </Ranking>
-    <CategoryView>
-      <StoreInfo>양식</StoreInfo>
-    </CategoryView>
-    <StoreName>
-      <StoreInfo>{storeInfo.store}</StoreInfo>
-    </StoreName>
-    <Ionicons
-      color={colors.mainBlue}
-      size={32}
-      name={Platform.OS === "android" ? "md-arrow-up" : "ios-arrow-up"}
-      style={{ marginLeft: "auto" }}
-    />
-  </Container>
+const Popular = ({ storeInfo, navigation }) => (
+  <TouchableOpacity
+    onPress={() =>
+      navigation.navigate("SelectMenuScreen", {
+        storeInfo,
+      })
+    }
+  >
+    <Container>
+      <Ranking>
+        <RankingText>1위</RankingText>
+      </Ranking>
+      <CategoryView>
+        <StoreInfo>양식</StoreInfo>
+      </CategoryView>
+      <StoreName>
+        <StoreInfo>{storeInfo.store}</StoreInfo>
+      </StoreName>
+      <Ionicons
+        color={colors.mainBlue}
+        size={32}
+        name={Platform.OS === "android" ? "md-arrow-up" : "ios-arrow-up"}
+        style={{ marginLeft: "auto" }}
+      />
+    </Container>
+  </TouchableOpacity>
 );
 
 Popular.propTypes = {

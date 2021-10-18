@@ -1,21 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { Auth } from "aws-amplify";
-import Home from "../../../components/Main/Home";
+import React, { useState, useEffect } from "react";
+import { Text } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import { Store } from "../../../AWS/src/models";
-import { DataStore } from "@aws-amplify/datastore";
-import { Button } from "react-native";
 import { useNavigation } from "@react-navigation/core";
+import Search from "../../../components/Main/Search";
+import Auth from "@aws-amplify/auth";
+import { DataStore } from "@aws-amplify/datastore";
+import { Store } from "../../../AWS/src/models";
 
 export default () => {
   const navigation = useNavigation();
   const [search, setSearch] = useState("");
   const [stores, setStores] = useState([]);
-
-  const logOut = () => {
-    Auth.signOut();
-  };
-
   useEffect(() => {
     const fetchStores = async () => {
       const userData = await Auth.currentAuthenticatedUser();
@@ -25,10 +20,9 @@ export default () => {
     };
     fetchStores();
   }, []);
-
   return (
     <ScrollView>
-      <Home stores={stores} navigation={navigation} />
+      <Search navigation={navigation} token={stores} />
     </ScrollView>
   );
 };

@@ -8,26 +8,30 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 const { width } = Dimensions.get("screen");
 
-const Container = styled.View`
-  width: ${width / 1.1}px;
-  height: 60px;
+const SearchContanier = styled.View`
+  height: 50px;
+  width: 80%;
+  margin-top: 50px;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
+  padding-right: 15px;
   align-items: center;
-  background-color: ${colors.snow};
   border: 2px solid ${colors.mainBlue};
-  border-radius: 5px;
+  border-radius: 50px;
 `;
 
 const Search = styled.TextInput`
-  width: ${width / 1.5}px;
-  padding: 12.5px 20px;
-  background-color: ${colors.snow};
-  font-family: "noto-regular";
+  height: 40px;
+  width: 80%;
+  background-color: white;
+  box-shadow: 1px 5px 5px rgba(200, 200, 200, 0.5);
+  border-radius: 50px;
+  justify-content: center;
+  padding-left: 10px;
 `;
 
 const SearchBar = ({ value, stateFn, autoCapitalize, searchFn }) => (
-  <Container>
+  <SearchContanier>
     <Search
       value={value}
       placeholder="원하는 식당/메뉴를 검색하세요"
@@ -41,7 +45,7 @@ const SearchBar = ({ value, stateFn, autoCapitalize, searchFn }) => (
         name={Platform.OS === "android" ? "md-search" : "ios-search"}
       />
     </TouchableOpacity>
-  </Container>
+  </SearchContanier>
 );
 
 SearchBar.propTypes = {

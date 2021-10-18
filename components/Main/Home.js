@@ -9,7 +9,7 @@ import SearchBar from "./SearchBar";
 import Btn from "../Auth/Btn";
 import Popular from "./Popular";
 import Swiper from "react-native-swiper";
-import { FlatList } from "react-native-gesture-handler";
+import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 
 const { width } = Dimensions.get("screen");
 
@@ -20,6 +20,7 @@ const Container = styled.View`
 
 const SwipeContanier = styled.View`
   height: 100px;
+  margin-top: 10px;
   justify-content: center;
   align-items: center;
   background-color: ${colors.snow};
@@ -43,21 +44,58 @@ const NowPopularContainer = styled.View`
   border-radius: 5px;
 `;
 
-const Home = ({ stores }) => {
-  const searchPress = () => {
-    alert("검색기능 제작중");
-  };
+const SearchContanier = styled.View`
+  width: ${width / 1.1}px;
+  height: 60px;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: ${colors.snow};
+  border: 2px solid ${colors.mainBlue};
+  border-radius: 50px;
+  margin-top: 24px;
+`;
+
+const SearchText = styled.Text`
+  font-family: "noto-regular";
+  color: ${colors.moon};
+`;
+
+const Home = ({ stores, navigation }) => {
   const [search, setSearch] = useState("");
   const logOut = () => {
     Auth.signOut();
   };
   return (
     <Container>
+      <TouchableOpacity onPress={() => navigation.navigate("Search")}>
+        <SearchContanier>
+          <Ionicons
+            color={colors.mainBlue}
+            size={32}
+            name={Platform.OS === "android" ? "md-search" : "ios-search"}
+          />
+          <SearchText>원하는 식당/메뉴를 검색하세요</SearchText>
+        </SearchContanier>
+      </TouchableOpacity>
+      <SubTitle>실시간 매칭 요청 많은 식당</SubTitle>
+      <NowPopularContainer>
+        <FlatList
+          data={stores}
+          keyExtractor={(item, index) => index.toString()}
+          onEndReachedThreshold={0.8}
+          showsVerticalScrollIndicator={true}
+          renderItem={({ item }) => (
+            <Popular storeInfo={item} navigation={navigation} />
+          )}
+          windowSize={2}
+        />
+      </NowPopularContainer>
       <Swiper
         autoplay={true}
         autoplayTimeout={5}
         showsPagination={true}
-        style={{ height: 140 }}
+        style={{ height: 160 }}
       >
         <SwipeContanier>
           <Text>첫번째 페이지입니다!</Text>
@@ -69,23 +107,6 @@ const Home = ({ stores }) => {
           <Text>세번째 페이지입니다!</Text>
         </SwipeContanier>
       </Swiper>
-      <SearchBar
-        value={search}
-        stateFn={setSearch}
-        autoCapitalize="none"
-        searchFn={searchPress}
-      />
-      <SubTitle>실시간 매칭 요청 많은 식당</SubTitle>
-      <NowPopularContainer>
-        <FlatList
-          data={stores}
-          keyExtractor={(item, index) => index.toString()}
-          onEndReachedThreshold={0.8}
-          showsVerticalScrollIndicator={true}
-          renderItem={({ item }) => <Popular storeInfo={item} />}
-          windowSize={2}
-        />
-      </NowPopularContainer>
       <Btn text={"Log Out"} accent onPress={logOut} />
     </Container>
   );
