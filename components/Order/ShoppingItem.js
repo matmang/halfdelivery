@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
   root: {
     marginBottom: 2,
     backgroundColor: "white",
+    // height: "auto",
     borderColor: "black",
     borderWidth: 1,
   },
@@ -58,6 +59,7 @@ const styles = StyleSheet.create({
   },
   menuText: {
     fontSize: 15,
+    lineHeight: 17,
     fontFamily: "noto-regular",
     textAlign: "left",
   },
@@ -68,6 +70,7 @@ const styles = StyleSheet.create({
   },
   priceText: {
     fontSize: 15,
+    lineHeight: 17,
     fontFamily: "noto-regular",
     textAlign: "right",
   },

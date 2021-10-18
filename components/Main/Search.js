@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import DismissKeyboard from "../DismissKeyboard";
 import { Platform, Dimensions } from "react-native";
@@ -6,6 +6,8 @@ import { Ionicons } from "@expo/vector-icons";
 import colors from "../../colors";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import SearchItem from "./SearchItem";
+import { useDispatch } from "react-redux";
+import { cleanMenus } from "../../redux/orderSlice";
 
 const { width } = Dimensions.get("screen");
 
@@ -71,6 +73,11 @@ const Search = ({ navigation, token }) => {
   const [results, setResults] = useState([]);
   const [tempArray, setTempArray] = useState([]);
   const [search, setSearch] = useState("");
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(cleanMenus());
+  }, []);
 
   const SearchFn = async (text, token) => {
     var name, i;
@@ -98,9 +105,7 @@ const Search = ({ navigation, token }) => {
             <Ionicons
               color={colors.mainBlue}
               size={32}
-              name={
-                Platform.OS === "android" ? "md-arrow-back" : "ios-arrow-back"
-              }
+              name={Platform.OS === "android" ? "md-arrow-back" : "ios-arrow-back"}
             />
           </TouchableOpacity>
           <SearchContanier>
@@ -133,9 +138,7 @@ const Search = ({ navigation, token }) => {
             keyExtractor={(item, index) => index.toString()}
             onEndReachedThreshold={0.8}
             showsVerticalScrollIndicator={true}
-            renderItem={({ item }) => (
-              <SearchItem storeInfo={item} navigation={navigation} />
-            )}
+            renderItem={({ item }) => <SearchItem storeInfo={item} navigation={navigation} />}
             windowSize={2}
             style={{
               marginTop: 26,
