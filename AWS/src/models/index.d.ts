@@ -56,7 +56,7 @@ export declare class OrderMenu {
 export declare class Order {
   readonly id: string;
   readonly store: string;
-  readonly orderDate: string;
+  readonly orderDateTime: string;
   readonly paymentAmount: number;
   readonly userID?: string;
   readonly chatroomID?: string;
@@ -90,6 +90,7 @@ export declare class Store {
   readonly Menus?: (Menu | null)[];
   readonly storecategoryID?: string;
   readonly baeminUri?: string;
+  readonly telephoneNumber?: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Store, StoreMetaData>);
