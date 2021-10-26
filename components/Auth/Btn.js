@@ -12,7 +12,8 @@ const Button = styled.View`
   border-radius: 30px;
   border: 1px solid
     ${(props) => (props.accent ? "transparent" : colors.mainBlue)};
-  width: ${width / 2}px;
+  width: 338px;
+  height: 48px;
   background-color: ${(props) =>
     props.accent ? colors.mainBlue : "transparent"};
   color: ${(props) => (props.accent ? colors.mainBlue : colors.mainPink)};

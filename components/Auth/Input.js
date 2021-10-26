@@ -1,19 +1,22 @@
-import React from 'react';
-import styled from 'styled-components';
-import Proptypes from 'prop-types';
-import {Dimensions} from 'react-native';
-import colors from '../../colors';
+import React from "react";
+import styled from "styled-components";
+import Proptypes from "prop-types";
+import { Dimensions } from "react-native";
+import colors from "../../colors";
 
-const {width} = Dimensions.get('screen');
+const { width } = Dimensions.get("screen");
 
 const Container = styled.TextInput`
-  width: ${width / 1.5}px;
+  width: 338px;
+  height: 48px;
   padding: 12.5px 20px;
+  padding-top: 0;
+  padding-bottom: 0;
   border: 1px solid ${colors.mainBlue};
   background-color: white;
   border-radius: 30px;
-  margin-bottom: 10px;
-  font-family: 'noto-regular';
+  margin-top: 20px;
+  font-family: "noto-regular";
 `;
 
 const Input = ({
@@ -30,7 +33,7 @@ const Input = ({
     placeholder={placeholder}
     secureTextEntry={isPassword ? true : false}
     autoCapitalize={autoCapitalize}
-    onChangeText={text => stateFn(text)}
+    onChangeText={(text) => stateFn(text)}
   />
 );
 

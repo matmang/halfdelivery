@@ -122,8 +122,8 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "orderDate": {
-                    "name": "orderDate",
+                "orderDateTime": {
+                    "name": "orderDateTime",
                     "isArray": false,
                     "type": "AWSDateTime",
                     "isRequired": true,
@@ -386,6 +386,13 @@ export const schema = {
                 },
                 "baeminUri": {
                     "name": "baeminUri",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "telephoneNumber": {
+                    "name": "telephoneNumber",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -660,6 +667,25 @@ export const schema = {
                                     "delete",
                                     "read"
                                 ]
+                            },
+                            {
+                                "allow": "private",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            },
+                            {
+                                "allow": "private",
+                                "provider": "iam",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
                             }
                         ]
                     }
@@ -853,6 +879,15 @@ export const schema = {
                                 ]
                             },
                             {
+                                "allow": "private",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            },
+                            {
                                 "allow": "public",
                                 "operations": [
                                     "create",
@@ -1005,5 +1040,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "aab363cff1a15f6c314cf6906f450b88"
+    "version": "256a0088057e202a81b14016133132dc"
 };
