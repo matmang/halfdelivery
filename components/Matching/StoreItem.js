@@ -8,7 +8,6 @@ import { useDispatch } from "react-redux";
 export default ({ storeInfo }) => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  // console.log(typeof storeInfo.storeImgUri);
 
   return (
     <TouchableOpacity

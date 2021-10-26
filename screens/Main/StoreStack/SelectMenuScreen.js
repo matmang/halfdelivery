@@ -126,7 +126,9 @@ const SelectMenuScreen = (props) => {
           /> */}
           <Pressable
             onPress={() => {
-              navigation.navigate("SetMatchingTimeScreen", {});
+              navigation.navigate("SetMatchingTimeScreen", {
+                storeInfo,
+              });
             }}
             style={styles.buttonContainer}
           >

@@ -12,25 +12,18 @@ import QuantitySelector from "../../../components/Matching/QuantitySelector";
 const SetMatchingTimeScreen = (props) => {
   const [time, setTime] = useState(10);
   const [persons, setPersons] = useState(2);
-  const [orderID, setOrderID] = useState("/");
-  // const [chatRoomID, setChatRoomID] = useState("#"); // ! useState 사용시, createChatRoom() 함수 async-await 안에서 예상대로 작동하지 않는다...
-  let chatRoomID = "#";
-  let authUser = {};
-
-  const storeName = useSelector((state) => state.orderReducer.storeName);
-  const menus = useSelector((state) => state.orderReducer.menus);
-
-  console.log("SetMatchingTimeScreen | menus: ", menus);
-  // const firstMenu = menus[0];
-  // console.log("firstMenu: ", firstMenu);
-  const matchingInfo = {
-    storeName: storeName,
-    menus: menus,
-    roomInfo: { time: time, persons: persons },
-  };
-
   const dispatch = useDispatch();
   const navigation = useNavigation();
+
+  const storeInfo = props.route.params.storeInfo;
+  const orderReducerState = useSelector((state) => state.orderReducer);
+
+  const matchingInfo = {
+    storeNmenus: { store: storeInfo, menus: orderReducerState.map((e) => e.menuInfo) },
+    timeNpersons: { time, persons },
+  };
+
+  console.log(matchingInfo);
 
   const QUANTITY = -1; //! 임시값.
   const PAYMENT_AMOUNT = -1000; //! 임시값.
@@ -56,35 +49,29 @@ const SetMatchingTimeScreen = (props) => {
 
   // ? ChatRoom 생성.
   const createChatRoom = async () => {
-    try {
-      const newChatRoom = await DataStore.save(
-        // TODO: 담아야 할 데이터들:
-        // ? 1. 유저,
-        // ? 2. 매장이름,
-        // ? 3. (호스트) 유저가 고른 메뉴정보
-        new ChatRoom({
-          newMessages: 1023,
-          matchingInfo: matchingInfo,
-        })
-      );
+    const newChatRoom = await DataStore.save(
+      // TODO: 담아야 할 데이터들:
+      // ? 1. 유저,
+      // ? 2. 매장이름,
+      // ? 3. (호스트) 유저가 고른 메뉴정보
+      new ChatRoom({
+        newMessages: 1026,
+        matchingInfo: matchingInfo,
+      })
+    );
 
-      console.log("newChatRoom.id", newChatRoom.id);
+    console.log("newChatRoom.id", newChatRoom.id);
 
-      // ? Authenticated User 와 ChatRoom 을 연결하기.
-      const authUser = await Auth.currentAuthenticatedUser();
-      // ? DataStore 의 User 모델에서 authUser.attributes.sub 값과 일치하는 값만 가져온다.
-      const dbAuthUser = await DataStore.query(User, authUser.attributes.sub);
-      await DataStore.save(
-        new ChatRoomUser({
-          user: dbAuthUser,
-          chatroom: newChatRoom,
-        })
-      );
-    } catch (error) {
-      console.log("error |", error);
-    }
-
-    // await createOrder();
+    // ? Authenticated User 와 ChatRoom 을 연결하기.
+    const authUser = await Auth.currentAuthenticatedUser();
+    // ? DataStore 의 User 모델에서 authUser.attributes.sub 값과 일치하는 값만 가져온다.
+    const dbAuthUser = await DataStore.query(User, authUser.attributes.sub);
+    await DataStore.save(
+      new ChatRoomUser({
+        user: dbAuthUser,
+        chatroom: newChatRoom,
+      })
+    );
 
     // ! 계정 imageUri 가 비워져 있으면, 왠진 모르겠지만, 새 채팅방으로 이동 하지 않는다.
     navigation.navigate("ChatRoomScreen", {
@@ -143,21 +130,8 @@ const SetMatchingTimeScreen = (props) => {
     navigation.navigate("ChatRoomScreen", {
       chatRoomID: chatRoomID,
       matchingInfo: matchingInfo,
-      orderID: orderID,
     });
   };
-
-  // const onPress = async () => {
-  //   await createChatRoom();
-  //   await createOrder();
-  //   await createOrderMenu();
-  // };
-
-  // const onPress_NotAsync = () => {
-  //   createChatRoom();
-  //   createOrder();
-  //   createOrderMenu();
-  // };
 
   return (
     <SafeAreaView style={styles.root}>
