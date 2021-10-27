@@ -2,7 +2,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import SignIn from "../screens/Auth/SignIn";
 import SignUp from "../screens/Auth/SignUp";
-import Welcome from "../screens/Auth/Welcome";
+import ConfirmSignUp from "../screens/Auth/ConfirmSignUp";
 
 const Auth = createStackNavigator();
 
@@ -10,29 +10,32 @@ export default () => (
   <Auth.Navigator
     initialRouteName="SignIn"
     screenOptions={{
-      headerShown: false,
       headerBackTitleVisible: false,
       headerTransparent: true,
     }}
   >
     <Auth.Screen
-      name="Welcome"
-      component={Welcome}
-      options={{
-        headerTitleStyle: {
-          color: "black",
-        },
-      }}
-    />
-    <Auth.Screen
       name="SignUp"
       component={SignUp}
-      options={{ title: "Sign Up" }}
+      options={{
+        title: "회원가입",
+        headerTitleAlign: "center",
+        headerTitleStyle: { fontFamily: "noto-regular" },
+      }}
     />
     <Auth.Screen
       name="SignIn"
       component={SignIn}
-      options={{ title: "Sign In" }}
+      options={{ headerShown: false, title: "Sign In" }}
+    />
+    <Auth.Screen
+      name="ConfirmSignUp"
+      component={ConfirmSignUp}
+      options={{
+        title: "인증",
+        headerTitleAlign: "center",
+        headerTitleStyle: { fontFamily: "noto-regular" },
+      }}
     />
   </Auth.Navigator>
 );

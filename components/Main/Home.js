@@ -10,6 +10,8 @@ import Btn from "../Auth/Btn";
 import Popular from "./Popular";
 import Swiper from "react-native-swiper";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
+import { logOut } from "../../redux/usersSlice";
+import { useDispatch } from "react-redux";
 
 const { width } = Dimensions.get("screen");
 
@@ -63,8 +65,10 @@ const SearchText = styled.Text`
 
 const Home = ({ stores, navigation }) => {
   const [search, setSearch] = useState("");
-  const logOut = () => {
+  const dispatch = useDispatch();
+  const logOutPress = () => {
     Auth.signOut();
+    dispatch(logOut());
   };
   return (
     <Container>
@@ -107,7 +111,7 @@ const Home = ({ stores, navigation }) => {
           <Text>세번째 페이지입니다!</Text>
         </SwipeContanier>
       </Swiper>
-      <Btn text={"Log Out"} accent onPress={logOut} />
+      <Btn text={"Log Out"} accent onPress={logOutPress} />
     </Container>
   );
 };

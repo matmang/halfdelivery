@@ -70,12 +70,7 @@ export default ({ route: { params }, navigation }) => {
     if (!isFormValid()) {
       return;
     }
-    dispatch(
-      userLogin({
-        username: email,
-        password: password,
-      })
-    );
+    dispatch(userLogin(email, password));
   };
   return (
     <DismissKeyboard>
