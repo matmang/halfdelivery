@@ -8,6 +8,8 @@ import SelectStoreScreen from "../../../screens/Main/StoreStack/SelectStoreScree
 import SelectMenuScreen from "../../../screens/Main/StoreStack/SelectMenuScreen";
 import SetMatchingTimeScreen from "../../../screens/Main/StoreStack/SetMatchingTimeScreen";
 import ChatRoomScreen from "../../../screens/Main/ChatRoomStack/ChatRoomScreen";
+import RequestMatching from "../../../screens/Main/StoreStack/RequestMatching";
+import HomeScreen from "../../../screens/Main/HomeStack/HomeScreen";
 
 const Stack = createStackNavigator();
 const LogoHeader = (props) => {
@@ -53,7 +55,21 @@ export default () => (
         title: "매칭 시간 설정",
       }}
     />
-    {/* 매칭시간 설정후, 채팅방으로 이동해야함. */}
+    <Stack.Screen
+      name="RequestMatching"
+      component={RequestMatching}
+      options={{
+        title: "매칭요청중",
+      }}
+    />
+    <Stack.Screen
+      name="HomeScreen"
+      component={HomeScreen}
+      options={{
+        title: "홈",
+      }}
+    />
+    {/* 매칭시간 설정후, 파트너가 입장시, 채팅방으로 이동해야함. */}
     <Stack.Screen
       name="ChatRoomScreen"
       component={ChatRoomScreen}

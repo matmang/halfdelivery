@@ -18,7 +18,9 @@ const ShoppingItem = ({ menuInfo }) => {
           {/* <View style={styles.titleContainer}>
             <Text style={styles.title}>메뉴</Text>
           </View> */}
-          <Text style={styles.menuText}>{menuInfo.menu}</Text>
+          <Text style={styles.menuText} numberOfLines={1}>
+            {menuInfo.menu}
+          </Text>
         </View>
         <View style={styles.priceContainer}>
           <Text style={styles.priceText}>{menuInfo.price.toLocaleString("ko-KR")} 원</Text>

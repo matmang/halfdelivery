@@ -28,16 +28,14 @@ const SetMatchingTimeScreen = (props) => {
   const QUANTITY = -1; //! 임시값.
   const PAYMENT_AMOUNT = -1000; //! 임시값.
 
-  useEffect(() => {
-    fetchAuthUser();
-  }, []);
+  useEffect(() => {}, []);
 
-  const fetchAuthUser = async () => {
-    const _authUser = await Auth.currentAuthenticatedUser();
+  // const fetchAuthUser = async () => {
+  //   const _authUser = await Auth.currentAuthenticatedUser();
 
-    authUser = _authUser;
-    console.log("authUser", authUser);
-  };
+  //   authUser = _authUser;
+  //   console.log("authUser", authUser);
+  // };
 
   // useEffect(() => {
   //   createOrder();
@@ -55,7 +53,7 @@ const SetMatchingTimeScreen = (props) => {
       // ? 2. 매장이름,
       // ? 3. (호스트) 유저가 고른 메뉴정보
       new ChatRoom({
-        newMessages: 1026,
+        newMessages: 1028,
         matchingInfo: matchingInfo,
       })
     );
@@ -74,15 +72,14 @@ const SetMatchingTimeScreen = (props) => {
     );
 
     // ! 계정 imageUri 가 비워져 있으면, 왠진 모르겠지만, 새 채팅방으로 이동 하지 않는다.
-    navigation.navigate("ChatRoomScreen", {
-      // chatRoomID: newChatRoom.id,
-      // chatRoomID: chatRoomID,
-      // matchingInfo: matchingInfo,
-      // orderID: orderID,
+    navigation.navigate("RequestMatching", {
+      storeInfo,
+      menus: orderReducerState.map((e) => e.menuInfo),
+      matchingInfo,
     });
   };
 
-  // ? 호스트가 고른 식당으로, Order 생성.
+  /*   // ? 호스트가 고른 식당으로, Order 생성.
   const createOrder = async () => {
     // const authUser = await Auth.currentAuthenticatedUser();
     const msTime = Date.now();
@@ -95,15 +92,12 @@ const SetMatchingTimeScreen = (props) => {
         userID: authUser.attributes.sub,
         chatroomID: chatRoomID,
       })
-    ).catch((error) => {
-      console.log("newOrder", error);
-    });
+    );
+
     setOrderID(newOrder.id);
 
     const fetchedOrders = await DataStore.query(Order, (order) => order.userID("eq", authUser.attributes.sub), {
       sort: (s) => s.orderDate(SortDirection.DESCENDING),
-    }).catch((error) => {
-      console.log("fetchedOrders", error);
     });
     console.log("fetchedOrders", fetchedOrders);
     const fetchOrderID = fetchedOrders[0].id;
@@ -123,15 +117,8 @@ const SetMatchingTimeScreen = (props) => {
         userID: authUser.attributes.sub,
         orderID: orderID,
       })
-    ).catch((error) => {
-      console.log("newOrderMenu", error);
-    });
-    // ! 계정 imageUri 가 비워져 있으면, 왠진 모르겠지만, 새 채팅방으로 이동 하지 않는다.
-    navigation.navigate("ChatRoomScreen", {
-      chatRoomID: chatRoomID,
-      matchingInfo: matchingInfo,
-    });
-  };
+    );
+  }; */
 
   return (
     <SafeAreaView style={styles.root}>

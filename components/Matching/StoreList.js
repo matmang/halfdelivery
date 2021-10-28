@@ -23,11 +23,9 @@ const StoreList = ({ categoryID }) => {
     if (categoryID === "ALL") {
       const fetchedStores = await DataStore.query(Store);
       setServerData(fetchedStores);
-      console.log("fetchedStores", fetchedStores);
     } else {
       const fetchedStores = await DataStore.query(Store, (c) => c.storecategoryID("eq", categoryID));
       setServerData(fetchedStores);
-      console.log("fetchedStores", fetchedStores);
     }
   };
 
