@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, Text, Button, SafeAreaView } from "react-native";
+import { StyleSheet, View, Text, Button, SafeAreaView, ActivityIndicator } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Picker } from "@react-native-picker/picker";
 import { connect } from "react-redux";
@@ -9,9 +9,15 @@ import { useSelector, useDispatch } from "react-redux";
 import orderReducer from "../../../redux/orderSlice";
 import QuantitySelector from "../../../components/Matching/QuantitySelector";
 
+function sleep(ms) {
+  return new Promise((r) => setTimeout(r, ms));
+}
+
 const SetMatchingTimeScreen = (props) => {
   const [time, setTime] = useState(10);
   const [persons, setPersons] = useState(2);
+  // const [createdChatRoom, setCreatedChatRoom] = useState({});
+  let createdChatRoom = {};
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
@@ -23,12 +29,15 @@ const SetMatchingTimeScreen = (props) => {
     timeNpersons: { time, persons },
   };
 
-  console.log(matchingInfo);
+  // console.log(matchingInfo);
 
   const QUANTITY = -1; //! 임시값.
   const PAYMENT_AMOUNT = -1000; //! 임시값.
 
-  useEffect(() => {}, []);
+  // useEffect(() => {
+  //   console.log("In useEffect : ");
+  //   console.log(createdChatRoom);
+  // }, [createdChatRoom]);
 
   // const fetchAuthUser = async () => {
   //   const _authUser = await Auth.currentAuthenticatedUser();
@@ -53,12 +62,10 @@ const SetMatchingTimeScreen = (props) => {
       // ? 2. 매장이름,
       // ? 3. (호스트) 유저가 고른 메뉴정보
       new ChatRoom({
-        newMessages: 1028,
+        newMessages: 1029,
         matchingInfo: matchingInfo,
       })
     );
-
-    console.log("newChatRoom.id", newChatRoom.id);
 
     // ? Authenticated User 와 ChatRoom 을 연결하기.
     const authUser = await Auth.currentAuthenticatedUser();
@@ -71,11 +78,11 @@ const SetMatchingTimeScreen = (props) => {
       })
     );
 
-    // ! 계정 imageUri 가 비워져 있으면, 왠진 모르겠지만, 새 채팅방으로 이동 하지 않는다.
     navigation.navigate("RequestMatching", {
       storeInfo,
       menus: orderReducerState.map((e) => e.menuInfo),
       matchingInfo,
+      createdChatRoom: newChatRoom,
     });
   };
 
@@ -155,9 +162,14 @@ const SetMatchingTimeScreen = (props) => {
           <Button
             title="매칭방 만들기"
             onPress={() => {
-              // onPress();
               createChatRoom();
-              // onPress_NotAsync();
+
+              // navigation.navigate("RequestMatching", {
+              //   storeInfo,
+              //   menus: orderReducerState.map((e) => e.menuInfo),
+              //   matchingInfo,
+              //   createdChatRoom,
+              // });
             }}
           />
         </View>

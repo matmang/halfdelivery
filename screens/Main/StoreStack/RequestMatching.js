@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Image, View, Text, Button, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import CircularProgress from "react-native-circular-progress-indicator"; // https://www.npmjs.com/package/react-native-circular-progress-indicator
+import { Auth, DataStore, SortDirection } from "aws-amplify";
+import { ChatRoom, User, ChatRoomUser, OrderMenu, Order } from "../../../AWS/src/models";
 
 const RequestMatching = (props) => {
   const navigation = useNavigation();
@@ -9,8 +11,17 @@ const RequestMatching = (props) => {
   const storeInfo = props.route.params.storeInfo;
   const menus = props.route.params.menus;
   const matchingInfo = props.route.params.matchingInfo;
+  const createdChatRoom = props.route.params.createdChatRoom;
+  console.log("ㅈㅔ대로 왔능가?", createdChatRoom);
 
   const timeNpersons = matchingInfo.timeNpersons;
+
+  const deleteChatRoom = async () => {
+    const modelToDelete = await DataStore.query(ChatRoom, createdChatRoom.id);
+    DataStore.delete(modelToDelete);
+    console.log("삭제 완료");
+  };
+
   return (
     <View
       style={{
@@ -32,7 +43,10 @@ const RequestMatching = (props) => {
           inActiveStrokeColor="red"
           textColor={"#ecf0f1"}
           duration={timeNpersons.time * 60 * 1000} // ? ms 기준임.
-          onAnimationComplete={() => alert("시간 내에 상대방을 찾지 못하였습니다.")}
+          onAnimationComplete={() => {
+            alert("시간 내에 상대방을 찾지 못하였습니다.");
+            deleteChatRoom();
+          }}
         />
       </View>
       <View style={{ margin: 2 }}>
