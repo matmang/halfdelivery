@@ -23,8 +23,9 @@ export default ({ storeInfo }) => {
       <Image
         style={styles.image}
         source={
+          logos.halfLogo
           // { uri: storeInfo.storeImgUri }
-          storeInfo.storeImgUri !== undefined ? { uri: storeInfo.storeImgUri } : logos.halfLogo
+          // storeInfo.storeImgUri !== undefined ? { uri: storeInfo.storeImgUri } : logos.halfLogo
         }
       />
       <View style={styles.rightContainer}>
