@@ -1,43 +1,52 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, FlatList } from "react-native";
 import RoomItem from "./RoomItem";
 import MatchingRooms from "../../sampleData/MatchingRooms";
+import { Auth, DataStore, SortDirection } from "aws-amplify";
+import { ChatRoom, User, ChatRoomUser, OrderMenu, Order, Store } from "../../AWS/src/models";
 
-const Header = () => {
-  return (
-    <View style={styles.headerRoot}>
-      <View style={styles.categoryContainer}>
-        <Text style={styles.headerText}>카테고리</Text>
-      </View>
-      <View style={styles.storeContainer}>
-        <Text style={styles.headerText}>음식점</Text>
-      </View>
-      <View style={styles.minPriceContainer}>
-        <Text style={styles.headerText}>필요금액</Text>
-      </View>
-      <View style={styles.personsContainer}>
-        <Text style={styles.headerText}>남은인원</Text>
-      </View>
-    </View>
-  );
-};
+// const Header = ({ categoryID }) => {
+//   return (
+//     <View style={styles.headerRoot}>
+//       <View style={styles.categoryContainer}>
+//         <Text style={styles.headerText}>카테고리</Text>
+//       </View>
+//       <View style={styles.storeContainer}>
+//         <Text style={styles.headerText}>음식점</Text>
+//       </View>
+//       <View style={styles.minPriceContainer}>
+//         <Text style={styles.headerText}>필요금액</Text>
+//       </View>
+//       <View style={styles.personsContainer}>
+//         <Text style={styles.headerText}>남은인원</Text>
+//       </View>
+//     </View>
+//   );
+// };
 
-let targetData = MatchingRooms;
+// let targetData = MatchingRooms;
 
-export default (props) => {
-  targetData = MatchingRooms.filter(
-    (value) => value.category == props.targetCategory
-  );
+const RoomList = ({ categoryID }) => {
+  const [serverData, setServerData] = useState([]);
+
+  useEffect(() => {
+    // console.log(categoryID);
+    fetchChatRooms();
+  }, []);
+  // }, [categoryID]);
+
+  const fetchChatRooms = async () => {
+    const fetchedChatRooms = await DataStore.query(ChatRoom);
+    setServerData(fetchedChatRooms);
+  };
+
   return (
     <View style={styles.list}>
       <View style={{ marginTop: 5, marginBottom: 5 }}>
         <Text style={styles.title}>매칭 요청 리스트</Text>
-        <Header />
+        {/* <Header /> */}
       </View>
-      <FlatList
-        data={targetData}
-        renderItem={({ item }) => <RoomItem item={item} />}
-      />
+      <FlatList data={serverData} renderItem={({ item }) => <RoomItem chatRoomInfo={item} />} />
     </View>
   );
 };
@@ -132,3 +141,5 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
+
+export default RoomList;

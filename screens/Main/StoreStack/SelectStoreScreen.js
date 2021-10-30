@@ -65,6 +65,7 @@ const SelectStoreScreen = () => {
   return (
     <SafeAreaView
       style={{
+        backgroundColor: "#fff",
         flex: 1,
         alignItems: "center", // 가로 정렬
         flexDirection: "column",
@@ -73,6 +74,7 @@ const SelectStoreScreen = () => {
       <View style={{ marginTop: 20 }}>
         <Text style={styles.title}>음식 카테고리 선택</Text>
       </View>
+
       <View style={styles.h10row}>
         <View style={styles.rootCategoryButtons}>
           <CategoryButton name="한식" />

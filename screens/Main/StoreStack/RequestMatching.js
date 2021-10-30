@@ -18,6 +18,7 @@ const RequestMatching = (props) => {
 
   const deleteChatRoom = async () => {
     const modelToDelete = await DataStore.query(ChatRoom, createdChatRoom.id);
+    console.log("modelToDelete: ", modelToDelete);
     DataStore.delete(modelToDelete);
     console.log("삭제 완료");
   };

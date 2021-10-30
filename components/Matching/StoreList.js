@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { FlatList, Button, View } from "react-native";
 import StoreItem from "./StoreItem";
-import Stores from "../../sampleData/Stores";
 import styles from "../Main/styles";
-import { getStore } from "../../api-2";
 import { Auth, DataStore, SortDirection } from "aws-amplify";
 import { ChatRoom, User, ChatRoomUser, OrderMenu, Order, Store } from "../../AWS/src/models";
 

@@ -62,7 +62,7 @@ const SetMatchingTimeScreen = (props) => {
       // ? 2. 매장이름,
       // ? 3. (호스트) 유저가 고른 메뉴정보
       new ChatRoom({
-        newMessages: 1029,
+        newMessages: 1030,
         matchingInfo: matchingInfo,
       })
     );

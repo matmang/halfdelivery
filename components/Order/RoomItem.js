@@ -1,21 +1,24 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 
-export default (props) => {
-  const item = props.item;
+export default ({ chatRoomInfo }) => {
+  const store = chatRoomInfo.matchingInfo.storeNmenus.store;
+  const menus = chatRoomInfo.matchingInfo.storeNmenus.menus;
+  const timeNpersons = chatRoomInfo.matchingInfo.timeNpersons;
+
   return (
     <TouchableOpacity style={styles.root} onPress={() => alert("테스트")}>
       <View style={styles.categoryContainer}>
-        <Text style={styles.text}>{item.category}</Text>
+        <Text style={styles.text}>카테</Text>
       </View>
       <View style={styles.storeContainer}>
-        <Text style={styles.text}>{item.store}</Text>
+        <Text style={styles.text}>{store.store}</Text>
       </View>
       <View style={styles.minPriceContainer}>
-        <Text style={styles.text}>{item.minPrice}</Text>
+        <Text style={styles.text}>{store.minOrdPrice.toLocaleString("ko-KR")}</Text>
       </View>
       <View style={styles.personsContainer}>
-        <Text style={styles.text}>{item.people}명</Text>
+        <Text style={styles.text}>{timeNpersons.persons}명</Text>
       </View>
     </TouchableOpacity>
   );

@@ -115,7 +115,6 @@ export declare class ChatRoom {
   readonly id: string;
   readonly newMessages?: number;
   readonly LastMessage?: Message;
-  readonly Messages?: (Message | null)[];
   readonly ChatRoomUsers?: (ChatRoomUser | null)[];
   readonly matchingInfo?: string;
   readonly Orders?: (Order | null)[];
