@@ -41,104 +41,18 @@ const RoomList = ({ categoryID }) => {
   };
 
   return (
-    <View style={styles.list}>
-      <View style={{ marginTop: 5, marginBottom: 5 }}>
-        <Text style={styles.title}>매칭 요청 리스트</Text>
-        {/* <Header /> */}
-      </View>
+    <View style={styles.root}>
       <FlatList data={serverData} renderItem={({ item }) => <RoomItem chatRoomInfo={item} />} />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  list: {
-    // borderWidth: 1,
-    // borderColor: "red",
-    backgroundColor: "lightgrey",
-    width: "90%",
-    height: "70%",
-    alignSelf: "center",
-    padding: 10,
-    marginTop: 10,
-    borderRadius: 10,
-  },
-  selectCategoryList: {
-    // borderWidth: 1,
-    // borderColor: "red",
-    backgroundColor: "lightgrey",
-    width: "90%",
-    height: "auto",
-    alignSelf: "center",
-    padding: 10,
-    marginTop: 20,
-    borderRadius: 10,
-  },
-  rootCategoryButtons: {
-    flexDirection: "row",
-    // padding: 2,
-    backgroundColor: "#fff",
-    // alignContent: "center",
-    justifyContent: "space-evenly",
-  },
   root: {
-    flexDirection: "row",
-    // padding: 2,
-    backgroundColor: "#fff",
-    marginVertical: 1, //? 컴포넌트 복붙해서 재활용시, 사용됨 ㅎㅎ
-  },
-  headerRoot: {
-    flexDirection: "row",
-    backgroundColor: "#fff",
-  },
-  categoryContainer: {
-    justifyContent: "center",
-    alignContent: "center",
-    padding: 5,
-    backgroundColor: "white",
-    borderWidth: 1,
-    borderColor: "black",
-    flex: 2,
-  },
-  storeContainer: {
-    justifyContent: "center",
-    alignContent: "center",
-    padding: 5,
-    backgroundColor: "white",
-    borderWidth: 1,
-    borderColor: "black",
-    flex: 2,
-  },
-  minPriceContainer: {
-    justifyContent: "center",
-    alignContent: "center",
-    padding: 5,
-    backgroundColor: "white",
-    borderWidth: 1,
-    borderColor: "black",
-    flex: 2,
-  },
-  personsContainer: {
-    justifyContent: "center",
-    alignContent: "center",
-    padding: 5,
-    backgroundColor: "white",
-    borderWidth: 1,
-    borderColor: "black",
-    flex: 0.8,
-  },
-  text: {
-    fontSize: 15,
-    textAlign: "center",
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  headerText: {
-    fontSize: 18,
-    textAlign: "center",
-    fontWeight: "bold",
+    backgroundColor: "#E5E6E7",
+    width: "100%",
+    height: "100%",
+    alignSelf: "center",
   },
 });
 

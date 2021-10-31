@@ -44,25 +44,24 @@ const MatchingListScreen = () => {
   return (
     <View
       style={{
-        backgroundColor: "#fff",
+        backgroundColor: "#E5E6E7",
         flex: 1,
-        alignItems: "center",
+        // alignItems: "center",
         flexDirection: "column",
       }}
     >
-      <View style={{ marginTop: 20 }}>
-        <Text style={styles.title}>매칭 카테고리 선택</Text>
+      <View style={styles.categoryButtons}>
+        <CategoryButton name="한식" />
+        <CategoryButton name="중식" />
+        <CategoryButton name="일식" />
+        <CategoryButton name="양식" />
+        <CategoryButton name="카페" />
       </View>
 
-      <View style={styles.selectCategoryList}>
-        <View style={styles.rootCategoryButtons}>
-          <CategoryButton name="한식" />
-          <CategoryButton name="중식" />
-          <CategoryButton name="일식" />
-          <CategoryButton name="양식" />
-          <CategoryButton name="카페" />
-        </View>
+      <View style={{ height: 69, marginBottom: 4, backgroundColor: "white", justifyContent: "center" }}>
+        <Text style={styles.title}>배달음식 파트너 모집중</Text>
       </View>
+
       <RoomList categoryID={categoryID} />
       <View style={{ marginTop: 30 }}>
         <Button title="매칭방 만들기" onPress={() => navigation.navigate("SelectStoreScreen")} />
@@ -72,32 +71,23 @@ const MatchingListScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  selectCategoryList: {
-    // borderWidth: 1,
-    // borderColor: "red",
-    backgroundColor: "lightgrey",
-    width: "95%",
-    height: "auto",
-    alignSelf: "center",
-    padding: 10,
-    marginTop: 2,
-    borderRadius: 10,
-  },
-  rootCategoryButtons: {
+  categoryButtons: {
     flexDirection: "row",
-    // padding: 2,
-    backgroundColor: "#fff",
-    // alignContent: "center",
+    backgroundColor: "white",
+    width: "100%",
+    paddingHorizontal: 30,
     justifyContent: "space-evenly",
+    marginBottom: 8,
   },
   text: {
     fontSize: 15,
     textAlign: "center",
   },
   title: {
-    fontSize: 18,
+    fontSize: 20,
     fontFamily: "noto-regular",
-    fontWeight: "bold",
+    textAlign: "left",
+    marginLeft: 24,
   },
 });
 

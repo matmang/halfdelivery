@@ -5,7 +5,7 @@ import logos from "../../images";
 import { useDispatch } from "react-redux";
 // import { setStore } from "../../redux/orderSlice";
 
-export default ({ storeInfo }) => {
+const StoreItem = ({ storeInfo }) => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
@@ -74,3 +74,5 @@ const styles = StyleSheet.create({
     textAlign: "right",
   },
 });
+
+export default StoreItem;

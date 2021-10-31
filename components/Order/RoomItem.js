@@ -9,7 +9,7 @@ export default ({ chatRoomInfo }) => {
   const timeNpersons = chatRoomInfo.matchingInfo.timeNpersons;
 
   return (
-    <TouchableOpacity style={styles.root} onPress={() => alert("테스트")}>
+    <View style={styles.root}>
       <Image
         style={styles.image}
         source={
@@ -51,19 +51,20 @@ export default ({ chatRoomInfo }) => {
         </View>
       </View>
 
-      <View style={{ justifyContent: "center", marginRight: 20 }}>
+      <TouchableOpacity
+        style={{ justifyContent: "center", marginRight: 20, backgroundColor: "red" }}
+        onPress={() => alert("테스트")}
+      >
         <MaterialIcons name="arrow-forward-ios" size={12} color="black" />
-      </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   root: {
     flexDirection: "row",
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 5,
+    height: 100,
     backgroundColor: "#fff",
     marginVertical: 2, //? 컴포넌트 복붙해서 재활용시, 사용됨 ㅎㅎ
   },
@@ -71,7 +72,7 @@ const styles = StyleSheet.create({
     // marginLeft: 3,
     borderWidth: 1,
     flex: 2,
-    marginLeft: 10,
+    marginLeft: 24,
     marginVertical: 10,
     borderRadius: 15,
     height: "auto",
