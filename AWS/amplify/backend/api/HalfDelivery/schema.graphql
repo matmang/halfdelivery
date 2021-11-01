@@ -49,6 +49,7 @@ type Menu @model @key(name: "byStore", fields: ["storeID"]) @auth(rules: [{allow
   storeID: ID
 }
 
+
 type ChatRoom @model @auth(rules: [{allow: private}, {allow: public}, {allow: private, provider: iam}]) {
   id: ID!
   newMessages: Int
@@ -76,7 +77,7 @@ type User @model @auth(rules: [{allow: private}, {allow: public}, {allow: privat
   Orders: [Order] @connection(keyName: "byUser", fields: ["id"])
   OrderMenus: [OrderMenu] @connection(keyName: "byUser", fields: ["id"])
   school: String
-  domitory: String
+  dormitory: String
   nickname: String
 }
 

@@ -18,7 +18,9 @@ const ShoppingItem = ({ menuInfo }) => {
           {/* <View style={styles.titleContainer}>
             <Text style={styles.title}>메뉴</Text>
           </View> */}
-          <Text style={styles.menuText}>{menuInfo.menu}</Text>
+          <Text style={styles.menuText} numberOfLines={1}>
+            {menuInfo.menu}
+          </Text>
         </View>
         <View style={styles.priceContainer}>
           <Text style={styles.priceText}>{menuInfo.price.toLocaleString("ko-KR")} 원</Text>
@@ -47,6 +49,7 @@ const styles = StyleSheet.create({
   root: {
     marginBottom: 2,
     backgroundColor: "white",
+    // height: "auto",
     borderColor: "black",
     borderWidth: 1,
   },
@@ -58,6 +61,7 @@ const styles = StyleSheet.create({
   },
   menuText: {
     fontSize: 15,
+    lineHeight: 17,
     fontFamily: "noto-regular",
     textAlign: "left",
   },
@@ -68,6 +72,7 @@ const styles = StyleSheet.create({
   },
   priceText: {
     fontSize: 15,
+    lineHeight: 17,
     fontFamily: "noto-regular",
     textAlign: "right",
   },

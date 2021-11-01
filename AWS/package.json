@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@aws-amplify/cli": "^4.13.2",
+    "source-map-resolve": "^0.6.0"
+  }
+}

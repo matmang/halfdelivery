@@ -741,15 +741,6 @@ export const schema = {
                     "properties": {
                         "rules": [
                             {
-                                "allow": "private",
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
-                            },
-                            {
                                 "allow": "public",
                                 "operations": [
                                     "create",
@@ -1188,6 +1179,5 @@ export const schema = {
         }
     },
     "enums": {},
-    "nonModels": {},
     "version": "86297ff3f725267cf7e3d223eb21094e"
 };

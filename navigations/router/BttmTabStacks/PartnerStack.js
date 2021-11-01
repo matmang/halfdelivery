@@ -26,7 +26,7 @@ const LogoHeader = (props) => {
 
 export default () => (
   <Stack.Navigator
-    initialRouteName="_MatchingListScreen"
+    initialRouteName="MatchingListScreen"
     screenOptions={{
       header: (props) => <LogoHeader {...props} />,
     }}

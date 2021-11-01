@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
   image: {
     marginTop: 16,
     borderWidth: 1,
+    borderColor: "black",
     borderRadius: 25,
     alignSelf: "center",
     width: 95,

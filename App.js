@@ -6,9 +6,22 @@ import Gate from "./components/Gate";
 import store, { persistor } from "./redux/store";
 import AppLoading from "expo-app-loading";
 //? AWS Amplify 관련.
-import Amplify from "aws-amplify";
+import Amplify, { AuthModeStrategyType } from "aws-amplify";
 import config from "./AWS/src/aws-exports";
 import { withAuthenticator } from "aws-amplify-react-native";
+
+// Amplify.configure({
+//   ...config,
+//   Analytics: {
+//     disabled: true,
+//   },
+//   DataStore: {
+//     authModeStrategyType: AuthModeStrategyType.MULTI_AUTH,
+//   },
+// });
+
+// Amplify.configure(config);
+
 Amplify.configure({
   ...config,
   Analytics: {

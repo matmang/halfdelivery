@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, Text, Button, SafeAreaView } from "react-native";
+import { StyleSheet, View, Text, Button, SafeAreaView, ActivityIndicator } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Picker } from "@react-native-picker/picker";
 import { connect } from "react-redux";
@@ -9,42 +9,42 @@ import { useSelector, useDispatch } from "react-redux";
 import orderReducer from "../../../redux/orderSlice";
 import QuantitySelector from "../../../components/Matching/QuantitySelector";
 
+function sleep(ms) {
+  return new Promise((r) => setTimeout(r, ms));
+}
+
 const SetMatchingTimeScreen = (props) => {
   const [time, setTime] = useState(10);
   const [persons, setPersons] = useState(2);
-  const [orderID, setOrderID] = useState("/");
-  // const [chatRoomID, setChatRoomID] = useState("#"); // ! useState 사용시, createChatRoom() 함수 async-await 안에서 예상대로 작동하지 않는다...
-  let chatRoomID = "#";
-  let authUser = {};
-
-  const storeName = useSelector((state) => state.orderReducer.storeName);
-  const menus = useSelector((state) => state.orderReducer.menus);
-
-  console.log("SetMatchingTimeScreen | menus: ", menus);
-  // const firstMenu = menus[0];
-  // console.log("firstMenu: ", firstMenu);
-  const matchingInfo = {
-    storeName: storeName,
-    menus: menus,
-    roomInfo: { time: time, persons: persons },
-  };
-
+  // const [createdChatRoom, setCreatedChatRoom] = useState({});
+  let createdChatRoom = {};
   const dispatch = useDispatch();
   const navigation = useNavigation();
+
+  const storeInfo = props.route.params.storeInfo;
+  const orderReducerState = useSelector((state) => state.orderReducer);
+
+  const matchingInfo = {
+    storeNmenus: { store: storeInfo, menus: orderReducerState.map((e) => e.menuInfo) },
+    timeNpersons: { time, persons },
+  };
+
+  // console.log(matchingInfo);
 
   const QUANTITY = -1; //! 임시값.
   const PAYMENT_AMOUNT = -1000; //! 임시값.
 
-  useEffect(() => {
-    fetchAuthUser();
-  }, []);
+  // useEffect(() => {
+  //   console.log("In useEffect : ");
+  //   console.log(createdChatRoom);
+  // }, [createdChatRoom]);
 
-  const fetchAuthUser = async () => {
-    const _authUser = await Auth.currentAuthenticatedUser();
+  // const fetchAuthUser = async () => {
+  //   const _authUser = await Auth.currentAuthenticatedUser();
 
-    authUser = _authUser;
-    console.log("authUser", authUser);
-  };
+  //   authUser = _authUser;
+  //   console.log("authUser", authUser);
+  // };
 
   // useEffect(() => {
   //   createOrder();
@@ -56,48 +56,37 @@ const SetMatchingTimeScreen = (props) => {
 
   // ? ChatRoom 생성.
   const createChatRoom = async () => {
-    try {
-      const newChatRoom = await DataStore.save(
-        // TODO: 담아야 할 데이터들:
-        // ? 1. 유저,
-        // ? 2. 매장이름,
-        // ? 3. (호스트) 유저가 고른 메뉴정보
-        new ChatRoom({
-          newMessages: 5,
-          matchingInfo: matchingInfo,
-        })
-      );
+    const newChatRoom = await DataStore.save(
+      // TODO: 담아야 할 데이터들:
+      // ? 1. 유저,
+      // ? 2. 매장이름,
+      // ? 3. (호스트) 유저가 고른 메뉴정보
+      new ChatRoom({
+        newMessages: 1030,
+        matchingInfo: matchingInfo,
+      })
+    );
 
-      console.log("newChatRoom.id", newChatRoom.id);
-      chatRoomID = newChatRoom.id;
-      console.log("chatRoomID", chatRoomID);
+    // ? Authenticated User 와 ChatRoom 을 연결하기.
+    const authUser = await Auth.currentAuthenticatedUser();
+    // ? DataStore 의 User 모델에서 authUser.attributes.sub 값과 일치하는 값만 가져온다.
+    const dbAuthUser = await DataStore.query(User, authUser.attributes.sub);
+    await DataStore.save(
+      new ChatRoomUser({
+        user: dbAuthUser,
+        chatroom: newChatRoom,
+      })
+    );
 
-      // ? Authenticated User 와 ChatRoom 을 연결하기.
-      // const authUser = await Auth.currentAuthenticatedUser();
-      // ? DataStore 의 User 모델에서 authUser.attributes.sub 값과 일치하는 값만 가져온다.
-      const dbAuthUser = await DataStore.query(User, authUser.attributes.sub);
-      await DataStore.save(
-        new ChatRoomUser({
-          user: dbAuthUser,
-          chatroom: newChatRoom,
-        })
-      );
-    } catch (error) {
-      console.log("error |", error);
-    }
-
-    // await createOrder();
-
-    // ! 계정 imageUri 가 비워져 있으면, 왠진 모르겠지만, 새 채팅방으로 이동 하지 않는다.
-    navigation.navigate("ChatRoomScreen", {
-      // chatRoomID: newChatRoom.id,
-      chatRoomID: chatRoomID,
-      matchingInfo: matchingInfo,
-      orderID: orderID,
+    navigation.navigate("RequestMatching", {
+      storeInfo,
+      menus: orderReducerState.map((e) => e.menuInfo),
+      matchingInfo,
+      createdChatRoom: newChatRoom,
     });
   };
 
-  // ? 호스트가 고른 식당으로, Order 생성.
+  /*   // ? 호스트가 고른 식당으로, Order 생성.
   const createOrder = async () => {
     // const authUser = await Auth.currentAuthenticatedUser();
     const msTime = Date.now();
@@ -110,15 +99,12 @@ const SetMatchingTimeScreen = (props) => {
         userID: authUser.attributes.sub,
         chatroomID: chatRoomID,
       })
-    ).catch((error) => {
-      console.log("newOrder", error);
-    });
+    );
+
     setOrderID(newOrder.id);
 
     const fetchedOrders = await DataStore.query(Order, (order) => order.userID("eq", authUser.attributes.sub), {
       sort: (s) => s.orderDate(SortDirection.DESCENDING),
-    }).catch((error) => {
-      console.log("fetchedOrders", error);
     });
     console.log("fetchedOrders", fetchedOrders);
     const fetchOrderID = fetchedOrders[0].id;
@@ -138,28 +124,8 @@ const SetMatchingTimeScreen = (props) => {
         userID: authUser.attributes.sub,
         orderID: orderID,
       })
-    ).catch((error) => {
-      console.log("newOrderMenu", error);
-    });
-    // ! 계정 imageUri 가 비워져 있으면, 왠진 모르겠지만, 새 채팅방으로 이동 하지 않는다.
-    navigation.navigate("ChatRoomScreen", {
-      chatRoomID: chatRoomID,
-      matchingInfo: matchingInfo,
-      orderID: orderID,
-    });
-  };
-
-  // const onPress = async () => {
-  //   await createChatRoom();
-  //   await createOrder();
-  //   await createOrderMenu();
-  // };
-
-  // const onPress_NotAsync = () => {
-  //   createChatRoom();
-  //   createOrder();
-  //   createOrderMenu();
-  // };
+    );
+  }; */
 
   return (
     <SafeAreaView style={styles.root}>
@@ -196,9 +162,14 @@ const SetMatchingTimeScreen = (props) => {
           <Button
             title="매칭방 만들기"
             onPress={() => {
-              // onPress();
               createChatRoom();
-              // onPress_NotAsync();
+
+              // navigation.navigate("RequestMatching", {
+              //   storeInfo,
+              //   menus: orderReducerState.map((e) => e.menuInfo),
+              //   matchingInfo,
+              //   createdChatRoom,
+              // });
             }}
           />
         </View>

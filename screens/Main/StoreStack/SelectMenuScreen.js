@@ -19,7 +19,6 @@ const SelectMenuScreen = (props) => {
 
   // ? orderReducer.menus 가 바뀔때 마다! menus 갱신 됨.
   const menus = useSelector((state) => state.orderReducer);
-  console.log("menus: ", menus);
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
@@ -126,7 +125,9 @@ const SelectMenuScreen = (props) => {
           /> */}
           <Pressable
             onPress={() => {
-              navigation.navigate("SetMatchingTimeScreen", {});
+              navigation.navigate("SetMatchingTimeScreen", {
+                storeInfo,
+              });
             }}
             style={styles.buttonContainer}
           >

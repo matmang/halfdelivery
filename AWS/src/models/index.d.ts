@@ -155,7 +155,6 @@ export declare class User {
   readonly halfmoney?: number;
   readonly Orders?: (Order | null)[];
   readonly OrderMenus?: (OrderMenu | null)[];
-  readonly school?: string;
   readonly domitory?: string;
   readonly nickname?: string;
   readonly createdAt?: string;
