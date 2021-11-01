@@ -56,7 +56,7 @@ export declare class OrderMenu {
 export declare class Order {
   readonly id: string;
   readonly store: string;
-  readonly orderDate: string;
+  readonly orderDateTime: string;
   readonly paymentAmount: number;
   readonly userID?: string;
   readonly chatroomID?: string;
@@ -90,6 +90,7 @@ export declare class Store {
   readonly Menus?: (Menu | null)[];
   readonly storecategoryID?: string;
   readonly baeminUri?: string;
+  readonly telephoneNumber?: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Store, StoreMetaData>);
@@ -114,7 +115,6 @@ export declare class ChatRoom {
   readonly id: string;
   readonly newMessages?: number;
   readonly LastMessage?: Message;
-  readonly Messages?: (Message | null)[];
   readonly ChatRoomUsers?: (ChatRoomUser | null)[];
   readonly matchingInfo?: string;
   readonly Orders?: (Order | null)[];
@@ -155,6 +155,9 @@ export declare class User {
   readonly halfmoney?: number;
   readonly Orders?: (Order | null)[];
   readonly OrderMenus?: (OrderMenu | null)[];
+  readonly school?: string;
+  readonly domitory?: string;
+  readonly nickname?: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<User, UserMetaData>);

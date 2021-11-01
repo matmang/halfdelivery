@@ -12,11 +12,13 @@ const Button = styled.View`
   border-radius: 30px;
   border: 1px solid
     ${(props) => (props.accent ? "transparent" : colors.mainBlue)};
-  width: ${width / 2}px;
+  width: 338px;
+  height: 48px;
   background-color: ${(props) =>
     props.accent ? colors.mainBlue : "transparent"};
   color: ${(props) => (props.accent ? colors.mainBlue : colors.mainPink)};
   font-family: "nunito-regular";
+  opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
 `;
 
 const Text = styled.Text`
@@ -26,9 +28,9 @@ const Text = styled.Text`
   font-family: "nunito-regular";
 `;
 
-const Btn = ({ onPress, text, accent = false }) => (
-  <TouchableOpacity onPress={onPress}>
-    <Button accent={accent}>
+const Btn = ({ onPress, text, accent = false, disabled = false }) => (
+  <TouchableOpacity onPress={onPress} disabled={disabled}>
+    <Button accent={accent} disabled={disabled}>
       <Text accent={accent}>{text}</Text>
     </Button>
   </TouchableOpacity>
@@ -38,6 +40,7 @@ Btn.propTypes = {
   onPress: Proptypes.func.isRequired,
   text: Proptypes.string.isRequired,
   accent: Proptypes.bool,
+  disabled: Proptypes.bool,
 };
 
 export default Btn;

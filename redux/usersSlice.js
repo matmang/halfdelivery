@@ -1,8 +1,8 @@
-import {createSlice} from '@reduxjs/toolkit';
-import { login } from '../api';
+import { createSlice } from "@reduxjs/toolkit";
+import { Auth } from "aws-amplify";
 
 const userSlice = createSlice({
-  name: 'users',
+  name: "users",
   initialState: {
     isLoggedIn: false,
     token: null,
@@ -19,19 +19,15 @@ const userSlice = createSlice({
   },
 });
 
-export const {logIn, logOut} = userSlice.actions;
-export const userLogin = form => async dispatch => {
+export const { logIn, logOut } = userSlice.actions;
+export const userLogin = (username, password) => async (dispatch) => {
   try {
-    const {
-      data: {id, token}
-    } = await login(form);
-    if (id && token) {
-      dispatch(logIn({token}));
-    }
+    const data = await Auth.signIn(username, password);
+    console.log(data);
+    dispatch(logIn(data));
   } catch (e) {
     console.log(e);
-    alert('Wrong user/password');
+    alert("Wrong user/password");
   }
 };
 export default userSlice.reducer;
-

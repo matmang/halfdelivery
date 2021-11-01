@@ -1,16 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-
 import { Image, SafeAreaView, Platform } from "react-native";
 import logos from "../../../images";
-
 import HomeScreen from "../../../screens/Main/HomeStack/HomeScreen";
 import TestScreen from "../../../screens/Main/HomeStack/TestScreen";
 import ProfileScreen from "../../../screens/Main/ProfileStack/ProfileScreen";
 import HomeHeaderButton from "../../../components/Main/HomeHeaderButton";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import SearchScreen from "../../../screens/Main/HomeStack/SearchScreen";
-import SearchBar from "../../../components/Main/SearchBar";
+import styled from "styled-components";
+import colors from "../../../colors";
+import Auth from "@aws-amplify/auth";
+
+const Container = styled.View`
+  flex-direction: row;
+`;
+
+const UserInfo = styled.Text`
+  margin-left: 24px;
+  font-family: "noto-regular";
+  color: ${colors.mainPink};
+`;
+
+const UserSchool = styled.Text`
+  font-family: "noto-regular";
+  color: ${colors.mainPink};
+  text-decoration: underline;
+`;
 
 const Stack = createStackNavigator();
 const LogoHeader = (props) => {
@@ -27,65 +43,103 @@ const LogoHeader = (props) => {
   );
 };
 
-export default () => (
-  <Stack.Navigator initialRouteName="HomeScreen">
-    <Stack.Screen
-      name="HomeScreen"
-      component={HomeScreen}
-      options={({ navigation }) => ({
-        title: "홈",
-        headerTitleAlign: "center",
-        headerTitle: (props) => <LogoHeader {...props} />,
-        headerRight: () => (
-          <HeaderButtons HeaderButtonComponent={HomeHeaderButton}>
-            <Item
-              title="Notification"
-              iconName={Platform.OS === "android" ? "md-notifications" : "ios-notifications"}
-              onPress={() => alert("알림")}
-            />
-            <Item
-              title="Profile"
-              iconName={Platform.OS === "android" ? "md-person" : "ios-person"}
-              onPress={() => {
-                navigation.navigate("Profile");
-              }}
-            />
-          </HeaderButtons>
-        ),
-      })}
-    />
-    <Stack.Screen
-      name="TestScreen"
-      component={TestScreen}
-      options={{
-        title: "테스트 스크린",
-      }}
-    />
-    <Stack.Screen
-      name="Profile"
-      component={ProfileScreen}
-      options={{
-        title: "프로필",
-        headerTitleAlign: "center",
-        headerTitle: (props) => <LogoHeader {...props} />,
-        headerRight: () => (
-          <HeaderButtons HeaderButtonComponent={HomeHeaderButton}>
-            <Item
-              title="Notification"
-              iconName={Platform.OS === "android" ? "md-notifications" : "ios-notifications"}
-              onPress={() => alert("알림")}
-            />
-            <Item title="Profile" iconName={Platform.OS === "android" ? "md-person" : "ios-person"} />
-          </HeaderButtons>
-        ),
-      }}
-    />
-    <Stack.Screen
-      name="Search"
-      component={SearchScreen}
-      options={{
-        headerShown: false,
-      }}
-    />
-  </Stack.Navigator>
-);
+export default () => {
+  const [username, setUsername] = useState("");
+  const [school, setSchool] = useState("");
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const currentUserInfo = await Auth.currentUserInfo();
+      setUsername(currentUserInfo.attributes["custom:nickname"]);
+      setSchool(currentUserInfo.attributes["custom:school"]);
+    };
+    fetchUser();
+  }, []);
+  return (
+    <Stack.Navigator initialRouteName="HomeScreen">
+      <Stack.Screen
+        name="HomeScreen"
+        component={HomeScreen}
+        options={({ navigation }) => ({
+          title: "",
+          headerTitleAlign: "center",
+          headerStyle: {
+            elevation: 0,
+            backgroundColor: "#22326E",
+            shadowOpacity: 0,
+          },
+          headerRight: () => (
+            <HeaderButtons HeaderButtonComponent={HomeHeaderButton}>
+              <Item
+                title="Notification"
+                iconName={
+                  Platform.OS === "android"
+                    ? "md-notifications"
+                    : "ios-notifications"
+                }
+                onPress={() => alert("알림")}
+              />
+              <Item
+                title="Profile"
+                iconName={
+                  Platform.OS === "android" ? "md-person" : "ios-person"
+                }
+                onPress={() => {
+                  navigation.navigate("Profile");
+                }}
+              />
+            </HeaderButtons>
+          ),
+          headerLeft: () => (
+            <Container>
+              <UserInfo>{username}님은 지금 </UserInfo>
+              <UserSchool>{school}</UserSchool>
+            </Container>
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="TestScreen"
+        component={TestScreen}
+        options={{
+          title: "테스트 스크린",
+        }}
+      />
+      <Stack.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{
+          title: "프로필",
+          headerTitleAlign: "center",
+          headerTitle: (props) => <LogoHeader {...props} />,
+          headerRight: () => (
+            <HeaderButtons HeaderButtonComponent={HomeHeaderButton}>
+              <Item
+                title="Notification"
+                iconName={
+                  Platform.OS === "android"
+                    ? "md-notifications"
+                    : "ios-notifications"
+                }
+                onPress={() => alert("알림")}
+              />
+              <Item
+                title="Profile"
+                iconName={
+                  Platform.OS === "android" ? "md-person" : "ios-person"
+                }
+              />
+            </HeaderButtons>
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="Search"
+        component={SearchScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
