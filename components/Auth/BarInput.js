@@ -1,10 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import Proptypes from "prop-types";
-import { Dimensions } from "react-native";
-import colors from "../../colors";
-
-const { width } = Dimensions.get("screen");
 
 const Container = styled.TextInput`
   width: 338px;
@@ -12,15 +8,13 @@ const Container = styled.TextInput`
   padding: 12.5px 20px;
   padding-top: 0;
   padding-bottom: 0;
-  border: 1px solid ${colors.mainBlue};
-  background-color: white;
-  border-radius: 30px;
-  margin-top: 20px;
+  border-bottom-width: 1;
+  border-bottom-color: #000000;
   font-family: "noto-regular";
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
 `;
 
-const Input = ({
+const BarInput = ({
   value,
   placeholder,
   isPassword = false,
@@ -41,7 +35,7 @@ const Input = ({
   />
 );
 
-Input.proptypes = {
+BarInput.proptypes = {
   value: Proptypes.string,
   placeholder: Proptypes.string,
   isPassword: Proptypes.bool,
@@ -50,4 +44,4 @@ Input.proptypes = {
   disabled: Proptypes.bool,
 };
 
-export default Input;
+export default BarInput;

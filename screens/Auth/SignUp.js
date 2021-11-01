@@ -1,25 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { KeyboardAvoidingView, ScrollView } from "react-native";
 import styled from "styled-components";
 import Btn from "../../components/Auth/Btn";
-import Input from "../../components/Auth/Input";
+import BarInput from "../../components/Auth/BarInput";
+import ErrorMessage from "../../components/Auth/ErrorMessage";
 import DismissKeyboard from "../../components/DismissKeyboard";
-import DateTimePickerModal from "react-native-modal-datetime-picker";
-import { isEmail, isPhoneNum } from "../../utils";
+import { isusername, isPhoneNum, isEmail } from "../../utils";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useDispatch } from "react-redux";
-import { callsms, createAccount, verifysms } from "../../api";
-import * as GoogleSignIn from "expo-google-sign-in";
+import Auth from "@aws-amplify/auth";
+import { DataStore } from "@aws-amplify/datastore";
 
 const Container = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
+  background-color: white;
 `;
 
 const InputContainer = styled.View`
   margin-bottom: 30px;
-  margin-top: 100px;
+  margin-top: 57px;
+  height: 520px;
+  justify-content: space-evenly;
 `;
 
 const ButtonContainer = styled.View`
@@ -28,168 +31,129 @@ const ButtonContainer = styled.View`
 
 export default ({ navigation: { navigate } }) => {
   const dispatch = useDispatch();
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [authNumber, setAuthNumber] = useState("");
-  const [isVerified, setIsVerified] = useState(false);
+  const [nickname, setNickname] = useState("");
+  const [username, setusername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [school, setSchool] = useState("");
+  const [dormitory, setDormitory] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [disabled, setDisabled] = useState(true);
 
-  const showDatePicker = () => {
-    setDatePickerVisibility(true);
-  };
+  const imageUri =
+    "https://www.notion.so/halfdelivery/8f990b13fa1d4103bad3423c7461a96a#7ff6b5cef14e4982a03ae85bca1db58d";
 
-  const hideDatePicker = () => {
-    setDatePickerVisibility(false);
-  };
+  const refDidMount = useRef(null);
 
-  const handleConfirm = (date) => {
-    console.warn("A date has been picked: ", date);
-    hideDatePicker();
-  };
+  useEffect(() => {
+    setDisabled(
+      !(
+        username &&
+        password &&
+        passwordConfirm &&
+        school &&
+        dormitory &&
+        !errorMessage
+      )
+    );
+  }, [username, password, passwordConfirm, dormitory, school, errorMessage]);
 
-  const validateForm = () => {
-    if (
-      email === "" ||
-      password === "" ||
-      firstName === "" ||
-      lastName === "" ||
-      phoneNumber === ""
-    ) {
-      alert("All fields are required.");
-      return false;
-    }
-    if (!isEmail(email)) {
-      alert("Please add a valid email.");
-      return false;
-    }
-    if (!isPhoneNum(phoneNumber)) {
-      alert("Please add a valid phonenumber");
-      return false;
-    }
-    if (!isVerified) {
-      alert("Please authenticate your phone number");
-      return false;
-    }
-    if (password !== passwordConfirm) {
-      alert("Password need to match");
-      return false;
-    }
-    if (password.length < 6) {
-      alert("The password must contain 6 characters at least");
-      return false;
-    }
-    return true;
-  };
-  const handleSubmit = async () => {
-    if (!validateForm()) {
-      return;
-    }
-    try {
-      const { status } = await createAccount({
-        first_name: firstName,
-        last_name: lastName,
-        email,
-        phone_number: phoneNumber,
-        username: email,
-        password,
-      });
-      if (status == 201) {
-        alert("Account created. Sign in, please.");
-        navigate("SignIn", { email, password });
-      }
-    } catch (e) {
-      console.warn(e);
-    }
-  };
-  const smsCall = async () => {
-    if (phoneNumber === "") {
-      alert("Please Input phoneNumber");
-    }
-    try {
-      const { status } = await callsms({
-        phone_number: phoneNumber,
-      });
-      if (status == 200) {
-        alert("인증번호가 발송되었습니다.");
-      }
-    } catch (e) {
-      console.warn(e);
-    }
-  };
-  const smsVerificate = async () => {
-    if (phoneNumber === "" || authNumber === "") {
-      alert("Please Input authNumber");
-    }
-    try {
-      const { status } = await verifysms({
-        phone_number: phoneNumber,
-        auth_number: authNumber,
-      });
-      if (status == 200) {
-        alert("인증이 완료되었습니다.");
-        setIsVerified(true);
+  useEffect(() => {
+    if (refDidMount.current) {
+      let error = "";
+      if (!username) {
+        error = "이메일을 입력해주세요.";
+      } else if (!isEmail(username)) {
+        error = "이메일을 다시 확인해주세요.";
+      } else if (password.length < 6) {
+        setEmail(username);
+        error = "비밀번호는 6자리 이상이어야 합니다.";
+      } else if (password !== passwordConfirm) {
+        error = "비밀번호 확인과 비밀번호가 다릅니다.";
+      } else if (!school) {
+        error = "학교를 입력해주세요.";
+      } else if (!dormitory) {
+        error = "기숙사를 입력해주세요.";
       } else {
-        alert("인증번호가 잘못되었습니다.");
+        error = "";
       }
-    } catch (e) {
-      console.warn(e);
+      setErrorMessage(error);
+    } else {
+      refDidMount.current = true;
+    }
+  });
+
+  const handleSubmit = async () => {
+    try {
+      await Auth.signUp({
+        username,
+        password,
+        attributes: {
+          email,
+          "custom:school": school,
+          "custom:dormitory": dormitory,
+          "custom:imageUri": imageUri,
+          "custom:nickname": nickname,
+        },
+      });
+      console.log("Sign-up Confirmed");
+      navigate("ConfirmSignUp", { email });
+    } catch (error) {
+      console.log("Error signing up...", error);
     }
   };
+
   return (
     <KeyboardAwareScrollView extraScrollHeight={20}>
       <DismissKeyboard>
         <Container>
-          <KeyboardAvoidingView behavior="position">
-            <InputContainer>
-              <Input
-                value={firstName}
-                placeholder="First Name"
-                stateFn={setFirstName}
-              />
-              <Input
-                value={lastName}
-                placeholder="Last Name"
-                stateFn={setLastName}
-              />
-              <Input
-                value={email}
-                placeholder="Email"
-                autoCapitalize="none"
-                stateFn={setEmail}
-              />
-              <Input
-                value={phoneNumber}
-                placeholder="Phonenumber"
-                autoCapitalize="none"
-                stateFn={setPhoneNumber}
-              />
-              <Btn text={"인증번호 발송"} accent onPress={smsCall} />
-              <Input
-                value={authNumber}
-                placeholder="인증번호"
-                stateFn={setAuthNumber}
-              />
-              <Btn text={"인증"} accent onPress={smsVerificate} />
-              <Input
-                value={password}
-                placeholder="Password"
-                isPassword={true}
-                stateFn={setPassword}
-              />
-              <Input
-                value={passwordConfirm}
-                placeholder="Password Confirm"
-                isPassword={true}
-                stateFn={setPasswordConfirm}
-              />
-            </InputContainer>
-          </KeyboardAvoidingView>
+          <InputContainer>
+            <BarInput
+              value={nickname}
+              placeholder="이름"
+              autoCapitalize="none"
+              stateFn={setNickname}
+            />
+            <BarInput
+              value={username}
+              placeholder="이메일"
+              autoCapitalize="none"
+              stateFn={setusername}
+            />
+            <BarInput
+              value={password}
+              placeholder="비밀번호"
+              isPassword={true}
+              stateFn={setPassword}
+            />
+            <BarInput
+              value={passwordConfirm}
+              placeholder="비밀번호 확인"
+              isPassword={true}
+              stateFn={setPasswordConfirm}
+            />
+            <BarInput
+              value={school}
+              placeholder="학교"
+              autoCapitalize="none"
+              stateFn={setSchool}
+            />
+            <BarInput
+              value={dormitory}
+              placeholder="기숙사"
+              autoCapitalize="none"
+              stateFn={setDormitory}
+            />
+          </InputContainer>
+          <ErrorMessage message={errorMessage} />
           <ButtonContainer>
-            <Btn text={"Sign Up"} accent onPress={handleSubmit} />
+            <Btn
+              text={"다음"}
+              accent
+              onPress={handleSubmit}
+              disabled={disabled}
+            />
           </ButtonContainer>
         </Container>
       </DismissKeyboard>

@@ -13,23 +13,23 @@ const Container = styled.View`
   height: 60px;
   flex-direction: row;
   align-items: center;
-  background-color: ${colors.snow};
-  border: 2px solid ${colors.mainBlue};
-  border-radius: 5px;
+  background-color: white;
   margin-bottom: 5px;
 `;
 
 const Ranking = styled.View`
-  width: 50px;
-  height: 60px;
+  width: 27px;
+  height: 27px;
   justify-content: center;
   align-items: center;
-  background-color: ${colors.mainBlue};
+  background-color: ${colors.mainPink};
+  border-radius: 30px;
 `;
 
 const RankingText = styled.Text`
   font-family: "nunito-regular";
-  color: ${colors.mainPink};
+  color: ${colors.mainBlue};
+  font-size: 17;
   font-weight: bold;
 `;
 
@@ -64,7 +64,7 @@ const Popular = ({ storeInfo, navigation }) => (
   >
     <Container>
       <Ranking>
-        <RankingText>1위</RankingText>
+        <RankingText>1</RankingText>
       </Ranking>
       <CategoryView>
         <StoreInfo>양식</StoreInfo>
@@ -73,9 +73,20 @@ const Popular = ({ storeInfo, navigation }) => (
         <StoreInfo>{storeInfo.store}</StoreInfo>
       </StoreName>
       <Ionicons
+        color="black"
+        size={20}
+        name={
+          Platform.OS === "android"
+            ? "md-chevron-forward"
+            : "ios-chevron-forward"
+        }
+      />
+      <Ionicons
         color={colors.mainBlue}
         size={32}
-        name={Platform.OS === "android" ? "md-arrow-up" : "ios-arrow-up"}
+        name={
+          Platform.OS === "android" ? "md-caret-up-sharp" : "ios-caret-up-sharp"
+        }
         style={{ marginLeft: "auto" }}
       />
     </Container>

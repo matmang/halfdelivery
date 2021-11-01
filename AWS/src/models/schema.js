@@ -741,7 +741,17 @@ export const schema = {
                     "properties": {
                         "rules": [
                             {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            },
+                            {
                                 "allow": "private",
+                                "provider": "iam",
                                 "operations": [
                                     "create",
                                     "update",
@@ -960,6 +970,15 @@ export const schema = {
                                 ]
                             },
                             {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            },
+                            {
                                 "allow": "private",
                                 "operations": [
                                     "create",
@@ -1083,8 +1102,8 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "dormitory": {
-                    "name": "dormitory",
+                "domitory": {
+                    "name": "domitory",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -1160,6 +1179,5 @@ export const schema = {
         }
     },
     "enums": {},
-    "nonModels": {},
-    "version": "10cd903ee1fd6dc1d6ca6a86529235de"
+    "version": "86297ff3f725267cf7e3d223eb21094e"
 };

@@ -1,7 +1,6 @@
 import Auth, { CognitoUser } from "@aws-amplify/auth";
 import { DataStore } from "@aws-amplify/datastore";
 import React, { useEffect, useState } from "react";
-import { StyleSheet, View, Text, Button, Linking } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { User } from "../../../AWS/src/models";
 import UserProfile from "../../../components/Main/UserProfile";

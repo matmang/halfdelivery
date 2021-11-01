@@ -9,7 +9,7 @@ const HomeHeaderButton = (props) => {
       {...props}
       IconComponent={Ionicons}
       iconSize={23}
-      color={colors.mainBlue}
+      color="white"
     />
   );
 };

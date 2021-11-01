@@ -49,7 +49,8 @@ type Menu @model @key(name: "byStore", fields: ["storeID"]) @auth(rules: [{allow
   storeID: ID
 }
 
-type ChatRoom @model @auth(rules: [{allow: private}]) {
+
+type ChatRoom @model @auth(rules: [{allow: private}, {allow: public}, {allow: private, provider: iam}]) {
   id: ID!
   newMessages: Int
   LastMessage: Message @connection
@@ -80,7 +81,7 @@ type User @model @auth(rules: [{allow: private}, {allow: public}, {allow: privat
   nickname: String
 }
 
-type ChatRoomUser @model(queries: null) @key(name: "byChatRoom", fields: ["chatroomID", "userID"]) @key(name: "byUser", fields: ["userID", "chatroomID"]) @auth(rules: [{allow: private}, {allow: private}, {allow: public}]) {
+type ChatRoomUser @model(queries: null) @key(name: "byChatRoom", fields: ["chatroomID", "userID"]) @key(name: "byUser", fields: ["userID", "chatroomID"]) @auth(rules: [{allow: private}, {allow: public}, {allow: private}, {allow: public}]) {
   id: ID!
   chatroomID: ID!
   userID: ID!

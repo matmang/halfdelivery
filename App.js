@@ -46,9 +46,13 @@ function App() {
       </PersistGate>
     </Provider>
   ) : (
-    <AppLoading onError={console.error} onFinish={handleFinish} startAsync={getFonts} />
+    <AppLoading
+      onError={console.error}
+      onFinish={handleFinish}
+      startAsync={getFonts}
+    />
   );
 }
 
 //? 앱 시작시 AWS Amplify 로 로그인하게 하기.
-export default withAuthenticator(App);
+export default App;
