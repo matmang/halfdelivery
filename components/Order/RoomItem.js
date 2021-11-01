@@ -1,15 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import logos from "../../images";
 import { MaterialIcons } from "@expo/vector-icons";
 
-export default ({ chatRoomInfo }) => {
+const RoomItem = ({ chatRoomInfo }) => {
   const store = chatRoomInfo.matchingInfo.storeNmenus.store;
   const menus = chatRoomInfo.matchingInfo.storeNmenus.menus;
   const timeNpersons = chatRoomInfo.matchingInfo.timeNpersons;
 
+  const KOREAN_ID = "8314af0c-1d8e-4112-869b-15689debb495";
+  const CHINESE_ID = "382f8bce-5182-4402-ab8d-564618a335fd";
+  const JAPANESE_ID = "f9db956b-5bcb-4ddf-ba96-2010ae7c7ee5";
+  const WESTERN_ID = "2634afad-acdb-4b9f-a5cc-feafbd9dbaa4";
+  const CAFE_ID = "b26daa27-f6c3-4243-a73e-f9d9352d06e7";
+
+  let category = "-";
+
+  switch (store.storecategoryID) {
+    case KOREAN_ID:
+      category = "한식";
+      break;
+    case CHINESE_ID:
+      category = "중식";
+      break;
+    case JAPANESE_ID:
+      category = "일식";
+      break;
+    case WESTERN_ID:
+      category = "양식";
+      break;
+    case CAFE_ID:
+      category = "카페";
+      break;
+    default:
+      category = "-";
+      break;
+  }
+
   return (
-    <View style={styles.root}>
+    <TouchableOpacity style={styles.root} onPress={() => alert("테스트")}>
       <Image
         style={styles.image}
         source={
@@ -24,7 +53,7 @@ export default ({ chatRoomInfo }) => {
             style={{ width: 44, height: 20, borderRadius: 12, backgroundColor: "#E5E6E7", justifyContent: "center" }}
           >
             <Text style={styles.categoryText} numberOfLines={1}>
-              카테
+              {category}
             </Text>
           </View>
           <Text style={styles.storeText} numberOfLines={1}>
@@ -51,13 +80,13 @@ export default ({ chatRoomInfo }) => {
         </View>
       </View>
 
-      <TouchableOpacity
+      <View
         style={{ justifyContent: "center", marginRight: 20, backgroundColor: "red" }}
-        onPress={() => alert("테스트")}
+        // onPress={() => alert("테스트")}
       >
         <MaterialIcons name="arrow-forward-ios" size={12} color="black" />
-      </TouchableOpacity>
-    </View>
+      </View>
+    </TouchableOpacity>
   );
 };
 
@@ -150,3 +179,5 @@ const styles = StyleSheet.create({
     fontFamily: "noto-regular",
   },
 });
+
+export default RoomItem;

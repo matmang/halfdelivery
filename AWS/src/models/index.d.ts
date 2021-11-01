@@ -155,6 +155,9 @@ export declare class User {
   readonly halfmoney?: number;
   readonly Orders?: (Order | null)[];
   readonly OrderMenus?: (OrderMenu | null)[];
+  readonly school?: string;
+  readonly dormitory?: string;
+  readonly nickname?: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<User, UserMetaData>);

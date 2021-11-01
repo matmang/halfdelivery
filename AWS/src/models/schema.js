@@ -748,25 +748,6 @@ export const schema = {
                                     "delete",
                                     "read"
                                 ]
-                            },
-                            {
-                                "allow": "public",
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
-                            },
-                            {
-                                "allow": "private",
-                                "provider": "iam",
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
                             }
                         ]
                     }
@@ -979,15 +960,6 @@ export const schema = {
                                 ]
                             },
                             {
-                                "allow": "public",
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
-                            },
-                            {
                                 "allow": "private",
                                 "operations": [
                                     "create",
@@ -1104,6 +1076,27 @@ export const schema = {
                         "associatedWith": "userID"
                     }
                 },
+                "school": {
+                    "name": "school",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "dormitory": {
+                    "name": "dormitory",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "nickname": {
+                    "name": "nickname",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -1168,5 +1161,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "9089d8e2bb4aa9bd0ebc14b8e57db707"
+    "version": "10cd903ee1fd6dc1d6ca6a86529235de"
 };

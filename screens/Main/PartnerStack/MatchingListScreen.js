@@ -4,10 +4,14 @@ import { View, Button, Text, StyleSheet } from "react-native";
 import RoomList from "../../../components/Order/RoomList";
 
 const MatchingListScreen = () => {
-  const [category, setCategory] = useState("한식");
+  const [categoryID, setCategoryID] = useState("한식");
   const navigation = useNavigation();
 
-  const categoryID = "temp";
+  const KOREAN_ID = "8314af0c-1d8e-4112-869b-15689debb495";
+  const CHINESE_ID = "382f8bce-5182-4402-ab8d-564618a335fd";
+  const JAPANESE_ID = "f9db956b-5bcb-4ddf-ba96-2010ae7c7ee5";
+  const WESTERN_ID = "2634afad-acdb-4b9f-a5cc-feafbd9dbaa4";
+  const CAFE_ID = "b26daa27-f6c3-4243-a73e-f9d9352d06e7";
 
   const CategoryButton = (props) => {
     return (
@@ -63,6 +67,7 @@ const MatchingListScreen = () => {
       </View>
 
       <RoomList categoryID={categoryID} />
+
       <View style={{ marginTop: 30 }}>
         <Button title="매칭방 만들기" onPress={() => navigation.navigate("SelectStoreScreen")} />
       </View>

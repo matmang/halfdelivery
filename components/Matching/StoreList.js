@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
-import { FlatList, Button, View } from "react-native";
+import { FlatList, Button, View, StyleSheet } from "react-native";
 import StoreItem from "./StoreItem";
-import styles from "../Main/styles";
 import { Auth, DataStore, SortDirection } from "aws-amplify";
 import { ChatRoom, User, ChatRoomUser, OrderMenu, Order, Store } from "../../AWS/src/models";
 
@@ -28,7 +27,7 @@ const StoreList = ({ categoryID }) => {
   };
 
   return (
-    <View style={styles.storeList}>
+    <View style={styles.root}>
       <FlatList
         data={serverData} // ? 임시 설정
         renderItem={({ item }) => <StoreItem storeInfo={item} />}
@@ -37,5 +36,14 @@ const StoreList = ({ categoryID }) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  root: {
+    backgroundColor: "#E5E6E7",
+    justifyContent: "center",
+    width: "100%",
+    height: "100%",
+  },
+});
 
 export default StoreList;

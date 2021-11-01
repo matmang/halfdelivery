@@ -5,27 +5,6 @@ import MatchingRooms from "../../sampleData/MatchingRooms";
 import { Auth, DataStore, SortDirection } from "aws-amplify";
 import { ChatRoom, User, ChatRoomUser, OrderMenu, Order, Store } from "../../AWS/src/models";
 
-// const Header = ({ categoryID }) => {
-//   return (
-//     <View style={styles.headerRoot}>
-//       <View style={styles.categoryContainer}>
-//         <Text style={styles.headerText}>카테고리</Text>
-//       </View>
-//       <View style={styles.storeContainer}>
-//         <Text style={styles.headerText}>음식점</Text>
-//       </View>
-//       <View style={styles.minPriceContainer}>
-//         <Text style={styles.headerText}>필요금액</Text>
-//       </View>
-//       <View style={styles.personsContainer}>
-//         <Text style={styles.headerText}>남은인원</Text>
-//       </View>
-//     </View>
-//   );
-// };
-
-// let targetData = MatchingRooms;
-
 const RoomList = ({ categoryID }) => {
   const [serverData, setServerData] = useState([]);
 
@@ -39,6 +18,24 @@ const RoomList = ({ categoryID }) => {
     const fetchedChatRooms = await DataStore.query(ChatRoom);
     setServerData(fetchedChatRooms);
   };
+
+  // useEffect(() => {
+  //   // ? 채팅방들 가져오기.
+  //   const fetchChatRooms = async () => {
+  //     const authUser = await Auth.currentAuthenticatedUser();
+
+  //     //! 내가 만든 방들은 보여주면 안 된다.
+  //     const chatRooms = (await DataStore.query(ChatRoomUser))
+  //       .filter((ChatRoomUser) => ChatRoomUser.user.id !== authUser.attributes.sub)
+  //       .map((ChatRoomUser) => ChatRoomUser.chatroom)
+  //       .filter((chatroom) => chatroom.matchingInfo !== null);
+
+  //     // const filteredChatRooms = chatRooms.filter((element) => element.matchingInfo === null);
+  //     setServerData(chatRooms);
+  //   };
+
+  //   fetchChatRooms();
+  // }, []);
 
   return (
     <View style={styles.root}>
