@@ -29,9 +29,7 @@ const Text = styled.Text`
 `;
 
 const Btn = ({ onPress, text, accent = false, disabled = false }) => (
-  <TouchableOpacity
-    onPress={disabled ? () => alert("정보를 제대로 입력하세요") : onPress}
-  >
+  <TouchableOpacity onPress={onPress} disabled={disabled}>
     <Button accent={accent} disabled={disabled}>
       <Text accent={accent}>{text}</Text>
     </Button>

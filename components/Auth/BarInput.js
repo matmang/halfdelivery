@@ -10,9 +10,8 @@ const Container = styled.TextInput`
   padding-bottom: 0;
   border-bottom-width: 1;
   border-bottom-color: #000000;
-  margin-top: 32px;
-  margin-bottom: 20px;
   font-family: "noto-regular";
+  opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
 `;
 
 const BarInput = ({
@@ -22,6 +21,7 @@ const BarInput = ({
   autoCapitalize,
   stateFn,
   KeyboardType,
+  disabled = false,
 }) => (
   <Container
     KeyboardType={KeyboardType}
@@ -30,6 +30,8 @@ const BarInput = ({
     secureTextEntry={isPassword ? true : false}
     autoCapitalize={autoCapitalize}
     onChangeText={(text) => stateFn(text)}
+    disabled={disabled}
+    editable={disabled ? false : true}
   />
 );
 
@@ -39,6 +41,7 @@ BarInput.proptypes = {
   isPassword: Proptypes.bool,
   autoCapitalize: Proptypes.string,
   stateFn: Proptypes.func,
+  disabled: Proptypes.bool,
 };
 
 export default BarInput;

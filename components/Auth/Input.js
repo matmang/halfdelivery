@@ -17,6 +17,7 @@ const Container = styled.TextInput`
   border-radius: 30px;
   margin-top: 20px;
   font-family: "noto-regular";
+  opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
 `;
 
 const Input = ({
@@ -26,6 +27,7 @@ const Input = ({
   autoCapitalize,
   stateFn,
   KeyboardType,
+  disabled = false,
 }) => (
   <Container
     KeyboardType={KeyboardType}
@@ -34,6 +36,8 @@ const Input = ({
     secureTextEntry={isPassword ? true : false}
     autoCapitalize={autoCapitalize}
     onChangeText={(text) => stateFn(text)}
+    disabled={disabled}
+    editable={disabled ? false : true}
   />
 );
 
@@ -43,6 +47,7 @@ Input.proptypes = {
   isPassword: Proptypes.bool,
   autoCapitalize: Proptypes.string,
   stateFn: Proptypes.func,
+  disabled: Proptypes.bool,
 };
 
 export default Input;

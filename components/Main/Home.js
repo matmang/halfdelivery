@@ -2,10 +2,8 @@ import React, { useState } from "react";
 import { View, Text, Dimensions, ActivityIndicator } from "react-native";
 import styled from "styled-components";
 import { Ionicons } from "@expo/vector-icons";
-import PropTypes from "prop-types";
 import colors from "../../colors";
 import Auth from "@aws-amplify/auth";
-import SearchBar from "./SearchBar";
 import Btn from "../Auth/Btn";
 import Popular from "./Popular";
 import Swiper from "react-native-swiper";
@@ -18,16 +16,23 @@ const { width } = Dimensions.get("screen");
 const Container = styled.View`
   justify-content: center;
   align-items: center;
+  background-color: white;
+`;
+
+const HeaderContainer = styled.View`
+  width: ${width};
+  justify-content: center;
+  align-items: center;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  background-color: ${colors.mainBlue};
 `;
 
 const SwipeContanier = styled.View`
   height: 100px;
-  margin-top: 10px;
   justify-content: center;
   align-items: center;
-  background-color: ${colors.snow};
-  border: 2px solid ${colors.coal};
-  border-radius: 5px;
+  background-color: white;
 `;
 
 const SubTitle = styled.Text`
@@ -35,36 +40,46 @@ const SubTitle = styled.Text`
   font-size: 20px;
   color: ${colors.mainBlue};
   font-weight: 600;
+  margin-right: auto;
+  margin-left: 24px;
+`;
+
+const MapText = styled.Text`
+  font-family: "noto-regular";
+  color: white;
+  margin-top: 6px;
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: 14px;
+  text-decoration-line: underline;
 `;
 
 const NowPopularContainer = styled.View`
-  height: 300px;
+  height: 320px;
   justify-content: center;
   align-items: center;
   background-color: ${colors.snow};
-  border: 2px solid ${colors.coal};
-  border-radius: 5px;
+  margin-bottom: 36px;
 `;
 
 const SearchContanier = styled.View`
-  width: ${width / 1.1}px;
-  height: 60px;
+  width: 364px;
+  height: 41px;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   align-items: center;
   background-color: ${colors.snow};
   border: 2px solid ${colors.mainBlue};
   border-radius: 50px;
-  margin-top: 24px;
 `;
 
 const SearchText = styled.Text`
   font-family: "noto-regular";
+  margin-left: 19px;
   color: ${colors.moon};
 `;
 
 const Home = ({ stores, navigation }) => {
-  const [search, setSearch] = useState("");
   const dispatch = useDispatch();
   const logOutPress = () => {
     Auth.signOut();
@@ -72,17 +87,21 @@ const Home = ({ stores, navigation }) => {
   };
   return (
     <Container>
-      <TouchableOpacity onPress={() => navigation.navigate("Search")}>
-        <SearchContanier>
-          <Ionicons
-            color={colors.mainBlue}
-            size={32}
-            name={Platform.OS === "android" ? "md-search" : "ios-search"}
-          />
-          <SearchText>원하는 식당/메뉴를 검색하세요</SearchText>
-        </SearchContanier>
-      </TouchableOpacity>
-      <SubTitle>실시간 매칭 요청 많은 식당</SubTitle>
+      <HeaderContainer>
+        <TouchableOpacity onPress={() => navigation.navigate("Search")}>
+          <SearchContanier>
+            <Ionicons
+              color={colors.mainBlue}
+              size={32}
+              name={Platform.OS === "android" ? "md-search" : "ios-search"}
+              style={{ marginLeft: 22 }}
+            />
+            <SearchText>원하는 식당/메뉴를 검색하세요</SearchText>
+          </SearchContanier>
+        </TouchableOpacity>
+        <MapText>지도로 식당 찾기</MapText>
+      </HeaderContainer>
+      <SubTitle>실시간 주문 랭킹</SubTitle>
       <NowPopularContainer>
         <FlatList
           data={stores}
@@ -93,13 +112,14 @@ const Home = ({ stores, navigation }) => {
             <Popular storeInfo={item} navigation={navigation} />
           )}
           windowSize={2}
+          style={{ backgroundColor: "white" }}
         />
       </NowPopularContainer>
       <Swiper
         autoplay={true}
         autoplayTimeout={5}
         showsPagination={true}
-        style={{ height: 160 }}
+        style={{ width: 364, height: 128 }}
       >
         <SwipeContanier>
           <Text>첫번째 페이지입니다!</Text>

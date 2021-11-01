@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Auth } from "aws-amplify";
 import { SafeAreaView } from "react-native";
-import Input from "../../components/Auth/Input";
+import BarInput from "../../components/Auth/BarInput";
 import Btn from "../../components/Auth/Btn";
 import styled from "styled-components";
 import colors from "../../colors";
@@ -22,8 +22,8 @@ const Title = styled.Text`
   font-weight: 500;
 `;
 
-export default ({ navigation }) => {
-  const [email, setEmail] = useState("");
+export default ({ route: { params }, navigation }) => {
+  const [email, setEmail] = useState(params?.email);
   const [authCode, setAuthCode] = useState("");
 
   const confirmSignUp = async () => {
@@ -40,14 +40,15 @@ export default ({ navigation }) => {
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
       <Container>
         <InputContainer>
-          <Title>인증 번호 확인</Title>
-          <Input
+          <Title>본인 인증을 해주세요</Title>
+          <BarInput
             value={email}
             placeholder="이메일"
             autoCapitalize="none"
             stateFn={setEmail}
+            disabled={true}
           />
-          <Input
+          <BarInput
             value={authCode}
             placeholder="인증번호"
             autoCapitalize="none"

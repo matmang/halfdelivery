@@ -1,4 +1,4 @@
-type OrderMenu @model @auth(rules: [{allow: public}]) @key(name: "byOrder", fields: ["orderID"]) @key(name: "byUser", fields: ["userID"]) {
+type OrderMenu @model @key(name: "byOrder", fields: ["orderID"]) @key(name: "byUser", fields: ["userID"]) @auth(rules: [{allow: private}, {allow: public}, {allow: private, provider: iam}]) {
   id: ID!
   menu: String!
   price: Int!
@@ -7,7 +7,7 @@ type OrderMenu @model @auth(rules: [{allow: public}]) @key(name: "byOrder", fiel
   userID: ID
 }
 
-type Order @model @auth(rules: [{allow: public}]) @key(name: "byUser", fields: ["userID"]) @key(name: "byChatRoom", fields: ["chatroomID"]) {
+type Order @model @key(name: "byUser", fields: ["userID"]) @key(name: "byChatRoom", fields: ["chatroomID"]) @auth(rules: [{allow: private}, {allow: public}, {allow: private, provider: iam}]) {
   id: ID!
   store: String!
   orderDateTime: AWSDateTime!
@@ -17,13 +17,13 @@ type Order @model @auth(rules: [{allow: public}]) @key(name: "byUser", fields: [
   OrderMenus: [OrderMenu] @connection(keyName: "byOrder", fields: ["id"])
 }
 
-type StoreCategory @model @auth(rules: [{allow: public}]) {
+type StoreCategory @model @auth(rules: [{allow: private}, {allow: public}, {allow: private, provider: iam}]) {
   id: ID!
   category: String!
   Stores: [Store] @connection(keyName: "byStoreCategory", fields: ["id"])
 }
 
-type Store @model @auth(rules: [{allow: public}]) @key(name: "byStoreCategory", fields: ["storecategoryID"]) {
+type Store @model @key(name: "byStoreCategory", fields: ["storecategoryID"]) @auth(rules: [{allow: private}, {allow: public}, {allow: private, provider: iam}]) {
   id: ID!
   store: String!
   storeImgUri: String
@@ -39,7 +39,7 @@ type Store @model @auth(rules: [{allow: public}]) @key(name: "byStoreCategory", 
   telephoneNumber: String
 }
 
-type Menu @model @auth(rules: [{allow: public}]) @key(name: "byStore", fields: ["storeID"]) {
+type Menu @model @key(name: "byStore", fields: ["storeID"]) @auth(rules: [{allow: private}, {allow: public}, {allow: private, provider: iam}]) {
   id: ID!
   menuCategory: String!
   menu: String!
@@ -49,24 +49,23 @@ type Menu @model @auth(rules: [{allow: public}]) @key(name: "byStore", fields: [
   storeID: ID
 }
 
-type ChatRoom @model @auth(rules: [{allow: public}, {allow: private}, {allow: private, provider: iam}]) {
+type ChatRoom @model @auth(rules: [{allow: private}, {allow: public}, {allow: private, provider: iam}]) {
   id: ID!
   newMessages: Int
   LastMessage: Message @connection
-  Messages: [Message] @connection(keyName: "byChatRoom", fields: ["id"])
   ChatRoomUsers: [ChatRoomUser] @connection(keyName: "byChatRoom", fields: ["id"])
   matchingInfo: AWSJSON
   Orders: [Order] @connection(keyName: "byChatRoom", fields: ["id"])
 }
 
-type Message @model @auth(rules: [{allow: public}]) @key(name: "byChatRoom", fields: ["userID"]) @key(name: "byUser", fields: ["userID"]) {
+type Message @model @key(name: "byChatRoom", fields: ["userID"]) @key(name: "byUser", fields: ["userID"]) @auth(rules: [{allow: private}, {allow: public}, {allow: private, provider: iam}]) {
   id: ID!
   content: String!
   chatroomID: ID
   userID: ID
 }
 
-type User @model @auth(rules: [{allow: public}]) {
+type User @model @auth(rules: [{allow: private}, {allow: public}, {allow: private, provider: iam}]) {
   id: ID!
   name: String!
   imageUri: String
@@ -76,13 +75,16 @@ type User @model @auth(rules: [{allow: public}]) {
   halfmoney: Int
   Orders: [Order] @connection(keyName: "byUser", fields: ["id"])
   OrderMenus: [OrderMenu] @connection(keyName: "byUser", fields: ["id"])
+  school: String
+  domitory: String
+  nickname: String
 }
 
-type ChatRoomUser @model(queries: null) @key(name: "byChatRoom", fields: ["chatroomID", "userID"]) @key(name: "byUser", fields: ["userID", "chatroomID"]) @auth(rules: [{allow: public}, {allow: private}, {allow: public}]) {
+type ChatRoomUser @model(queries: null) @key(name: "byChatRoom", fields: ["chatroomID", "userID"]) @key(name: "byUser", fields: ["userID", "chatroomID"]) @auth(rules: [{allow: private}, {allow: public}, {allow: private}, {allow: public}]) {
   id: ID!
   chatroomID: ID!
   userID: ID!
   chatroom: ChatRoom! @connection(fields: ["chatroomID"])
   user: User! @connection(fields: ["userID"])
 }
-   
+ 
