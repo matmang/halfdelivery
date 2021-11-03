@@ -4,7 +4,7 @@ import logos from "../../images";
 import { MaterialIcons } from "@expo/vector-icons";
 
 const RoomItem = ({ chatRoomInfo }) => {
-  const store = chatRoomInfo.matchingInfo.storeNmenus.store;
+  const storeInfo = chatRoomInfo.matchingInfo.storeNmenus.store;
   const menus = chatRoomInfo.matchingInfo.storeNmenus.menus;
   const timeNpersons = chatRoomInfo.matchingInfo.timeNpersons;
 
@@ -16,7 +16,7 @@ const RoomItem = ({ chatRoomInfo }) => {
 
   let category = "-";
 
-  switch (store.storecategoryID) {
+  switch (storeInfo.storecategoryID) {
     case KOREAN_ID:
       category = "한식";
       break;
@@ -42,8 +42,11 @@ const RoomItem = ({ chatRoomInfo }) => {
       <Image
         style={styles.image}
         source={
-          logos.halfLogo
-          // { uri: storeInfo.storeImgUri }
+          // logos.halfLogo
+          // {
+          //   uri: "https://halfdelivery-images.s3.ap-northeast-2.amazonaws.com/%EB%A7%9B%EC%9E%88%EB%8A%94%EC%A4%91%EA%B5%AD%EC%A7%91.jpg",
+          // }
+          { uri: storeInfo.storeImgUri }
           // store.storeImgUri !== undefined ? { uri: store.storeImgUri } : logos.halfLogo
         }
       />
@@ -57,12 +60,12 @@ const RoomItem = ({ chatRoomInfo }) => {
             </Text>
           </View>
           <Text style={styles.storeText} numberOfLines={1}>
-            {store.store}
+            {storeInfo.store}
           </Text>
         </View>
 
         <Text style={styles.priceText} numberOfLines={1}>
-          필요금액 {store.minOrdPrice.toLocaleString("ko-KR")} 원
+          필요금액 {storeInfo.minOrdPrice.toLocaleString("ko-KR")} 원
         </Text>
 
         <View style={{ flexDirection: "row", alignItems: "center" }}>
