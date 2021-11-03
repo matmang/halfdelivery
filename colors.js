@@ -1,6 +1,8 @@
 export default {
-  mainPink: "#FFB6B6",
-  mainBlue: "#22326E",
+  old_mainPink: "#FFB6B6",
+  mainPink: "#FFCDCF",
+  old_mainBlue: "#22326E",
+  mainBlue: "#0E257C",
   nickel: "#666666",
   snow: "#F4F4F4",
   moon: "#999999",
