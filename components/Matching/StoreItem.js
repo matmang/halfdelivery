@@ -4,7 +4,13 @@ import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 import logos from "../../images";
 import { useDispatch } from "react-redux";
 import { MaterialIcons } from "@expo/vector-icons";
-// import { setStore } from "../../redux/orderSlice";
+import styled from "styled-components";
+
+const NunitoText = styled.Text`
+  font-size: 14px;
+  font-family: "nunito-regular";
+  text-align: right;
+`;
 
 const StoreItem = ({ storeInfo }) => {
   const dispatch = useDispatch();
@@ -24,16 +30,17 @@ const StoreItem = ({ storeInfo }) => {
       <Image
         style={styles.image}
         source={
-          logos.halfLogo
+          // logos.halfLogo
           // { uri: storeInfo.storeImgUri }
-          // storeInfo.storeImgUri !== undefined ? { uri: storeInfo.storeImgUri } : logos.halfLogo
+          storeInfo.storeImgUri !== undefined ? { uri: storeInfo.storeImgUri } : logos.halfLogo
         }
       />
       <View style={styles.infoContainer}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <Text style={styles.storeText} numberOfLines={1}>
-            {storeInfo.store} Nunito Test 1998
+            {storeInfo.store}
           </Text>
+
           <View
             style={{ justifyContent: "center", marginLeft: 12, backgroundColor: "red" }}
             // onPress={() => alert("테스트")}
@@ -43,26 +50,29 @@ const StoreItem = ({ storeInfo }) => {
         </View>
 
         <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <Text style={styles.priceText} numberOfLines={1}>
-            최소주문금액
-          </Text>
-          <Text style={styles.priceNums} numberOfLines={1}>
-            {storeInfo.minOrdPrice.toLocaleString("ko-KR")}원
-          </Text>
-        </View>
+          <View style={styles.leftBox}>
+            <Text style={styles.priceText} numberOfLines={1}>
+              최소주문금액
+            </Text>
+            <Text style={styles.delivTipText} numberOfLines={1}>
+              배달팁
+            </Text>
+          </View>
 
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <Text style={styles.delivTipText} numberOfLines={1}>
-            배달팁
-          </Text>
-          <Text style={styles.delivTipNums} numberOfLines={1}>
-            {/* //? JS Magic! storeInfo.delivTip 값이 존재할 때에만, && 뒤에값을 표출한다! */}
-            {/* //? Conditional components 를 다루는 법이다. */}
-            {storeInfo.maxDlvTip.toLocaleString("ko-KR") && (
-              <Text style={styles.title}> {storeInfo.maxDlvTip.toLocaleString("ko-KR")}</Text>
-            )}
-            원
-          </Text>
+          <View style={styles.rightBox}>
+            <Text style={styles.priceText} numberOfLines={1}>
+              <NunitoText>{storeInfo.minOrdPrice.toLocaleString("ko-KR")}</NunitoText> 원
+            </Text>
+            <Text style={styles.priceText} numberOfLines={1}>
+              {/* //? JS Magic! storeInfo.delivTip 값이 존재할 때에만, && 뒤에값을 표출한다! */}
+              {/* //? Conditional components 를 다루는 법이다. */}
+              {storeInfo.maxDlvTip && (
+                <Text style={styles.priceText}>
+                  <NunitoText>{storeInfo.maxDlvTip.toLocaleString("ko-KR")}</NunitoText> 원
+                </Text>
+              )}
+            </Text>
+          </View>
         </View>
       </View>
     </TouchableOpacity>
@@ -85,28 +95,29 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     height: "auto",
     width: "auto",
-    resizeMode: "cover", // ? https://github.com/facebook/react-native/issues/17684#:~:text=resizeMode%3D%22contain%22&text=contain%20%3A%20Scale%20the%20image%20uniformly,the%20view%20(minus%20padding).
+    // width: 83,
+    // height: 72,
+    resizeMode: "stretch", // ? https://github.com/facebook/react-native/issues/17684#:~:text=resizeMode%3D%22contain%22&text=contain%20%3A%20Scale%20the%20image%20uniformly,the%20view%20(minus%20padding).
   },
   infoContainer: {
+    // backgroundColor: "yellow",
     padding: 5,
     marginLeft: 10,
-    backgroundColor: "white",
     justifyContent: "center",
     flex: 5,
   },
-  title: {
-    fontSize: 15,
-    fontFamily: "noto-regular",
-    // fontWeight: "bold",
-    textAlign: "right",
+  leftBox: {
+    // backgroundColor: "red",
+  },
+  rightBox: {
+    // backgroundColor: "blue",
+    marginLeft: 18,
   },
 
   storeText: {
     fontSize: 17,
     textAlign: "left",
     fontFamily: "noto-regular",
-    // fontFamily: "nunito-regular",
-    // marginLeft: 8,
     marginBottom: 3,
   },
   priceText: {
@@ -114,20 +125,8 @@ const styles = StyleSheet.create({
     textAlign: "left",
     fontFamily: "noto-regular",
   },
-  priceNums: {
-    fontSize: 14,
-    marginLeft: 29,
-    textAlign: "left",
-    fontFamily: "noto-regular",
-  },
   delivTipText: {
     fontSize: 14,
-    textAlign: "left",
-    fontFamily: "noto-regular",
-  },
-  delivTipNums: {
-    fontSize: 14,
-    marginLeft: 64,
     textAlign: "left",
     fontFamily: "noto-regular",
   },

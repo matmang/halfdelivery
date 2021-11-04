@@ -41,14 +41,7 @@ const RoomItem = ({ chatRoomInfo }) => {
     <TouchableOpacity style={styles.root} onPress={() => alert("테스트")}>
       <Image
         style={styles.image}
-        source={
-          // logos.halfLogo
-          // {
-          //   uri: "https://halfdelivery-images.s3.ap-northeast-2.amazonaws.com/%EB%A7%9B%EC%9E%88%EB%8A%94%EC%A4%91%EA%B5%AD%EC%A7%91.jpg",
-          // }
-          { uri: storeInfo.storeImgUri }
-          // store.storeImgUri !== undefined ? { uri: store.storeImgUri } : logos.halfLogo
-        }
+        source={storeInfo.storeImgUri !== undefined ? { uri: storeInfo.storeImgUri } : logos.halfLogo}
       />
       <View style={styles.infoContainer}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>

@@ -45,7 +45,7 @@ const SignupContainer = styled.View`
 
 const LoginText = styled.Text`
   font-family: "noto-regular";
-  font-size: 14;
+  font-size: 14px;
   margin-left: 13px;
 `;
 

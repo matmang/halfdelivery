@@ -6,7 +6,7 @@ import { Auth, DataStore, SortDirection } from "aws-amplify";
 import { ChatRoom, User, ChatRoomUser, OrderMenu, Order } from "../../../AWS/src/models";
 import colors from "../../../colors";
 
-const RequestMatching = (props) => {
+const RequestMatchingScreen = (props) => {
   const navigation = useNavigation();
 
   const storeInfo = props.route.params.storeInfo;
@@ -126,4 +126,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default RequestMatching;
+export default RequestMatchingScreen;

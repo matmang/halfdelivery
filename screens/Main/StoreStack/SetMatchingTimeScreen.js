@@ -80,7 +80,7 @@ const SetMatchingTimeScreen = (props) => {
       })
     );
 
-    navigation.navigate("RequestMatching", {
+    navigation.navigate("RequestMatchingScreen", {
       storeInfo,
       menus: orderReducerState.map((e) => e.menuInfo),
       matchingInfo,
@@ -166,7 +166,7 @@ const SetMatchingTimeScreen = (props) => {
             onPress={() => {
               createChatRoom();
 
-              // navigation.navigate("RequestMatching", {
+              // navigation.navigate("RequestMatchingScreen", {
               //   storeInfo,
               //   menus: orderReducerState.map((e) => e.menuInfo),
               //   matchingInfo,
