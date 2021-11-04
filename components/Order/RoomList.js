@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   root: {
     backgroundColor: "#E5E6E7",
     width: "100%",
-    height: "100%",
+    height: "80%",
     alignSelf: "center",
   },
 });
