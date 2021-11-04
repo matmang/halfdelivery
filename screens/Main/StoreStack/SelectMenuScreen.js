@@ -117,12 +117,6 @@ const SelectMenuScreen = (props) => {
 
         {/* 선택완료 버튼 */}
         <View style={styles.buttonContainer}>
-          {/* <Button
-            title="선택완료"
-            onPress={() => {
-              navigation.navigate("SetMatchingTimeScreen", {});
-            }}
-          /> */}
           <Pressable
             onPress={() => {
               navigation.navigate("SetMatchingTimeScreen", {
@@ -182,7 +176,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     // backgroundColor: "red",
     padding: 2,
-    // marginBottom: 40,
+    marginBottom: 40,
   },
   buttonText: {
     color: colors.mainBlue,

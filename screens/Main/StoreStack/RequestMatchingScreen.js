@@ -48,7 +48,7 @@ const RequestMatchingScreen = (props) => {
           onAnimationComplete={() => {
             alert("시간 내에 상대방을 찾지 못하였습니다.");
             console.log("시간 내에 상대방을 찾지 못하였습니다.");
-            // deleteChatRoom();
+            deleteChatRoom();
           }}
         />
       </View>
