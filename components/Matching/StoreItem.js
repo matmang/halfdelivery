@@ -32,7 +32,7 @@ const StoreItem = ({ storeInfo }) => {
       <View style={styles.infoContainer}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <Text style={styles.storeText} numberOfLines={1}>
-            {storeInfo.store}
+            {storeInfo.store} Nunito Test 1998
           </Text>
           <View
             style={{ justifyContent: "center", marginLeft: 12, backgroundColor: "red" }}
@@ -105,6 +105,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
     textAlign: "left",
     fontFamily: "noto-regular",
+    // fontFamily: "nunito-regular",
     // marginLeft: 8,
     marginBottom: 3,
   },
