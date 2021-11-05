@@ -16,7 +16,7 @@ const Container = styled.View`
 
 const StoreName = styled.Text`
   font-family: "noto-regular";
-  font-size: 17;
+  font-size: 17px;
 `;
 
 const SearchItem = ({ navigation, storeInfo }) => (
@@ -35,12 +35,7 @@ const SearchItem = ({ navigation, storeInfo }) => (
         style={{ marginRight: 11 }}
       />
       <StoreName>{storeInfo.store}</StoreName>
-      <Feather
-        name="arrow-up-right"
-        size={20}
-        color="black"
-        style={{ marginLeft: "auto" }}
-      />
+      <Feather name="arrow-up-right" size={20} color="black" style={{ marginLeft: "auto" }} />
     </Container>
   </TouchableOpacity>
 );

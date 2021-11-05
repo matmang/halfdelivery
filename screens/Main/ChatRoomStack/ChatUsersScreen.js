@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Pressable, FlatList, Text } from "react-native";
-import { DataStore } from "@aws-amplify/datastore";
-import { User } from "../../../AWS/src/models";
+import { Auth, DataStore } from "aws-amplify";
 import ChatUserItem from "../../../components/Chat/ChatUserItem";
 
 const ChatUsersScreen = () => {

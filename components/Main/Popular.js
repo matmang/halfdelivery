@@ -29,7 +29,7 @@ const Ranking = styled.View`
 const RankingText = styled.Text`
   font-family: "nunito-regular";
   color: ${colors.mainBlue};
-  font-size: 17;
+  font-size: 17px;
   font-weight: bold;
 `;
 
@@ -75,18 +75,12 @@ const Popular = ({ storeInfo, navigation }) => (
       <Ionicons
         color="black"
         size={20}
-        name={
-          Platform.OS === "android"
-            ? "md-chevron-forward"
-            : "ios-chevron-forward"
-        }
+        name={Platform.OS === "android" ? "md-chevron-forward" : "ios-chevron-forward"}
       />
       <Ionicons
         color={colors.mainBlue}
         size={32}
-        name={
-          Platform.OS === "android" ? "md-caret-up-sharp" : "ios-caret-up-sharp"
-        }
+        name={Platform.OS === "android" ? "md-caret-up-sharp" : "ios-caret-up-sharp"}
         style={{ marginLeft: "auto" }}
       />
     </Container>

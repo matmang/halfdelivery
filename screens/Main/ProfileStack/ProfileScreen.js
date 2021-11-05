@@ -1,5 +1,4 @@
-import Auth, { CognitoUser } from "@aws-amplify/auth";
-import { DataStore } from "@aws-amplify/datastore";
+import { Auth, DataStore, CognitoUser } from "aws-amplify";
 import React, { useEffect, useState } from "react";
 import { ScrollView } from "react-native-gesture-handler";
 import { User } from "../../../AWS/src/models";
@@ -26,12 +25,7 @@ export default ({ navigation }) => {
 
   return (
     <ScrollView>
-      <UserProfile
-        username="김지우"
-        halfmoney={userHalfMoney}
-        image={userImgUri}
-        fullName="김지우"
-      />
+      <UserProfile username="김지우" halfmoney={userHalfMoney} image={userImgUri} fullName="김지우" />
     </ScrollView>
   );
 };
