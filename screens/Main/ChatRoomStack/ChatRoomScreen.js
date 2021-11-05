@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FlatList, StyleSheet, Text, View, SafeAreaView, ActivityIndicator } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/core";
-import { DataStore, SortDirection } from "@aws-amplify/datastore";
-import Auth from "@aws-amplify/auth";
+import { Auth, DataStore, SortDirection } from "aws-amplify";
 import Message from "../../../components/Chat/Message";
 import MessageInput from "../../../components/Chat/MessageInput";
 import { Message as MessageModel, ChatRoom, Order } from "../../../AWS/src/models";

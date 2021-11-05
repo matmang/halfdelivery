@@ -8,8 +8,7 @@ import DismissKeyboard from "../../components/DismissKeyboard";
 import { isusername, isPhoneNum, isEmail } from "../../utils";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useDispatch } from "react-redux";
-import Auth from "@aws-amplify/auth";
-import { DataStore } from "@aws-amplify/datastore";
+import { Auth, DataStore } from "aws-amplify";
 
 const Container = styled.View`
   flex: 1;
@@ -47,16 +46,7 @@ export default ({ navigation: { navigate } }) => {
   const refDidMount = useRef(null);
 
   useEffect(() => {
-    setDisabled(
-      !(
-        username &&
-        password &&
-        passwordConfirm &&
-        school &&
-        dormitory &&
-        !errorMessage
-      )
-    );
+    setDisabled(!(username && password && passwordConfirm && school && dormitory && !errorMessage));
   }, [username, password, passwordConfirm, dormitory, school, errorMessage]);
 
   useEffect(() => {
@@ -109,51 +99,21 @@ export default ({ navigation: { navigate } }) => {
       <DismissKeyboard>
         <Container>
           <InputContainer>
-            <BarInput
-              value={nickname}
-              placeholder="이름"
-              autoCapitalize="none"
-              stateFn={setNickname}
-            />
-            <BarInput
-              value={username}
-              placeholder="이메일"
-              autoCapitalize="none"
-              stateFn={setusername}
-            />
-            <BarInput
-              value={password}
-              placeholder="비밀번호"
-              isPassword={true}
-              stateFn={setPassword}
-            />
+            <BarInput value={nickname} placeholder="이름" autoCapitalize="none" stateFn={setNickname} />
+            <BarInput value={username} placeholder="이메일" autoCapitalize="none" stateFn={setusername} />
+            <BarInput value={password} placeholder="비밀번호" isPassword={true} stateFn={setPassword} />
             <BarInput
               value={passwordConfirm}
               placeholder="비밀번호 확인"
               isPassword={true}
               stateFn={setPasswordConfirm}
             />
-            <BarInput
-              value={school}
-              placeholder="학교"
-              autoCapitalize="none"
-              stateFn={setSchool}
-            />
-            <BarInput
-              value={dormitory}
-              placeholder="기숙사"
-              autoCapitalize="none"
-              stateFn={setDormitory}
-            />
+            <BarInput value={school} placeholder="학교" autoCapitalize="none" stateFn={setSchool} />
+            <BarInput value={dormitory} placeholder="기숙사" autoCapitalize="none" stateFn={setDormitory} />
           </InputContainer>
           <ErrorMessage message={errorMessage} />
           <ButtonContainer>
-            <Btn
-              text={"다음"}
-              accent
-              onPress={handleSubmit}
-              disabled={disabled}
-            />
+            <Btn text={"다음"} accent onPress={handleSubmit} disabled={disabled} />
           </ButtonContainer>
         </Container>
       </DismissKeyboard>

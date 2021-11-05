@@ -103,3 +103,4 @@ type ChatRoomUser
   chatroom: ChatRoom! @connection(fields: ["chatroomID"])
   user: User! @connection(fields: ["userID"])
 }
+  
