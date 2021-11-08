@@ -26,7 +26,7 @@ const SelectMenuScreen = (props) => {
   // hooks
   const sheetRef = useRef(null);
 
-  const snapPoints = useMemo(() => ["4%", "10%", "40%"], []);
+  const snapPoints = useMemo(() => ["4%", "10%", "47.5%"], []);
 
   // callbacks
   const handleSheetChange = useCallback((index) => {
@@ -125,7 +125,7 @@ const SelectMenuScreen = (props) => {
             }}
             style={styles.buttonContainer}
           >
-            <Text style={styles.buttonText}>선택완료</Text>
+            <Text style={styles.buttonText}>파트너 구하러 가기</Text>
           </Pressable>
         </View>
       </BottomSheet>
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginLeft: 28,
     marginBottom: 16,
-    backgroundColor: colors.mainBlue,
+    backgroundColor: colors.unAccent,
   },
   topText: {
     color: "white",

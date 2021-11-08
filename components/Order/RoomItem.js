@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image, ActivityIndicator } from "react-native";
 import logos from "../../images";
 import { MaterialIcons } from "@expo/vector-icons";
+import { useNavigation, useRoute } from "@react-navigation/core";
 
 const RoomItem = ({ chatRoomInfo }) => {
+  const navigation = useNavigation();
+
   const storeInfo = chatRoomInfo.matchingInfo.storeNmenus.store;
   const menus = chatRoomInfo.matchingInfo.storeNmenus.menus;
   const timeNpersons = chatRoomInfo.matchingInfo.timeNpersons;
@@ -37,8 +40,17 @@ const RoomItem = ({ chatRoomInfo }) => {
       break;
   }
 
+  const onPress = () => {
+    navigation.navigate("ChatRoomScreen", {
+      chatRoomID: chatRoomInfo.id,
+      storeInfo,
+      menus,
+      timeNpersons,
+    });
+  };
+
   return (
-    <TouchableOpacity style={styles.root} onPress={() => alert("테스트")}>
+    <TouchableOpacity style={styles.root} onPress={onPress}>
       <Image
         style={styles.image}
         source={storeInfo.storeImgUri !== undefined ? { uri: storeInfo.storeImgUri } : logos.halfLogo}
@@ -76,10 +88,7 @@ const RoomItem = ({ chatRoomInfo }) => {
         </View>
       </View>
 
-      <View
-        style={{ justifyContent: "center", marginRight: 20, backgroundColor: "red" }}
-        // onPress={() => alert("테스트")}
-      >
+      <View style={{ justifyContent: "center", marginRight: 20, backgroundColor: "red" }}>
         <MaterialIcons name="arrow-forward-ios" size={12} color="black" />
       </View>
     </TouchableOpacity>

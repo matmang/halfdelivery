@@ -31,8 +31,6 @@ export default ({ chatRoom }) => {
     };
 
     fetchUsers();
-
-    console.log("챗룸", chatRoom);
   }, []);
 
   useEffect(() => {

@@ -19,10 +19,10 @@ const ChatRoomScreen = (props) => {
   const route = useRoute();
   const navigation = useNavigation();
 
-  const matchingInfo = props.matchingInfo;
-
-  const storeName = useSelector((state) => state.orderReducer.storeName);
-  const menus = useSelector((state) => state.orderReducer.menus);
+  const storeInfo = route.params.storeInfo;
+  console.log("storeInfo", storeInfo);
+  const storeName = storeInfo.store;
+  const menus = route.params.menus;
 
   // ? 첫 렌더링에만 호출. ChatRoom 가져오기.
   useEffect(() => {
@@ -110,27 +110,27 @@ const ChatRoomScreen = (props) => {
   //   );
   // };
 
-  const matchingRoomInfo = props.route.params !== undefined ? props.route.params.matchingRoomInfo : "No Data";
+  // const matchingRoomInfo = props.route.params !== undefined ? route.params.matchingRoomInfo : "No Data";
 
-  // ! 임시 값.
-  if (
-    // props.route.params.matchingRoomInfo === undefined ||
-    props.route.params.storeInfo === undefined ||
-    props.route.params.menuInfo === undefined
-  ) {
-    const storeInfo = undefined;
-    const menuInfo = undefined;
-  } else {
-    const matchingRoomInfo = props.route.params.matchingRoomInfo;
-    const storeInfo = props.route.params.storeInfo;
-    const menuInfo = props.route.params.menuInfo;
-  }
+  // // ! 임시 값.
+  // if (
+  //   // route.params.matchingRoomInfo === undefined ||
+  //   route.params.storeInfo === undefined ||
+  //   route.params.menuInfo === undefined
+  // ) {
+  //   const storeInfo = undefined;
+  //   const menuInfo = undefined;
+  // } else {
+  //   const matchingRoomInfo = route.params.matchingRoomInfo;
+  //   const storeInfo = route.params.storeInfo;
+  //   const menuInfo = route.params.menuInfo;
+  // }
 
-  // const matchingRoomInfo = props.route.params.matchingRoomInfo;
-  const storeInfo = props.route.params.storeInfo;
-  const menuInfo = props.route.params.menuInfo;
+  // // const matchingRoomInfo = route.params.matchingRoomInfo;
+  // const storeInfo = route.params.storeInfo;
+  // const menuInfo = route.params.menuInfo;
 
-  // console.log("파람스: ", props.route.params);
+  // // console.log("파람스: ", props.route.params);
 
   // ? chatRoom 이 null 이면...
   if (!chatRoom) {

@@ -19,7 +19,7 @@ function groupBy(objectArray, property) {
 }
 
 const RoomList = ({ categoryID }) => {
-  const [serverData, setServerData] = useState([]);
+  const [chatRooms, setChatRooms] = useState([]);
 
   useEffect(() => {
     // console.log(categoryID);
@@ -27,33 +27,77 @@ const RoomList = ({ categoryID }) => {
   }, []);
   // }, [categoryID]);
 
+  // ? Listening to new chatrooms. https://docs.amplify.aws/lib/datastore/real-time/q/platform/js/
+  // ? In Real Time!
+  // ? 새 채팅방이 생길때마다 렌더링 하기위해서, messages state를 수정하자.
+  useEffect(() => {
+    // ? 그러기 위해서 우선, chatrooms 모델을 구독, subscription 해야 한다.
+    const subscription = DataStore.observe(ChatRoom).subscribe((ChatRoom) => {
+      console.log("ChatRoom 섭스", ChatRoom);
+      // console.log(msg.model, msg.opType, msg.element);
+
+      // ? 새 챗룸 추가!
+      // if (ChatRoom.model === ChatRoomModel && ChatRoom.opType === "INSERT") {
+      if (ChatRoom.opType === "INSERT") {
+        // * setState 에 함수를 넣으면, 그 함수의 첫번쨰 인자는 현재 state를 갖는다.
+        setChatRooms((existingChatRooms) => [ChatRoom.element, ...existingChatRooms]);
+      }
+    });
+    // ? 죽을땐 unsubscribe
+    return () => subscription.unsubscribe();
+  }, []);
+
   const fetchChatRooms = async () => {
-    // const all_ChatRooms = (await DataStore.query(ChatRoom)).filter((e) => e.newMessages === 1105);
-    // const all_ChatRooms = await DataStore.query(ChatRoom);
-    const all_ChatRooms = (await DataStore.query(ChatRoom)).filter((item) => item._deleted === null);
-    const all_ChatRoomUsers = (await DataStore.query(ChatRoomUser)).filter((item) => item._deleted === null);
+    const authUser = await Auth.currentAuthenticatedUser();
 
-    const ChatRoom_ids = all_ChatRooms.map((item) => item.id);
-    const ChatRoomUsers_ids = all_ChatRoomUsers.map((item) => item.id);
+    // const chatRooms_for_ids = (await DataStore.query(ChatRoom)).filter((e) => e.newMessages === 1105);
+    // const chatRooms_for_ids = await DataStore.query(ChatRoom);
+    const chatRooms_for_ids = (await DataStore.query(ChatRoom)).filter((ChatRoom) => ChatRoom._deleted === null);
 
+    const all_chatRoomUsers = (await DataStore.query(ChatRoomUser)).filter(
+      (ChatRoomUser) => ChatRoomUser._deleted === null
+    );
+
+    // ? 내가 만든 챗룸을 제외한, 챗룸 불러오기. (챗룸유저를 이용한다)
+    const all_chatRooms = (await DataStore.query(ChatRoomUser))
+      .filter((ChatRoomUser) => ChatRoomUser.user.id !== authUser.attributes.sub)
+      .map((ChatRoomUser) => ChatRoomUser.chatroom)
+      .filter((chatroom) => chatroom.matchingInfo !== null);
+
+    const chatRoom_ids = all_chatRooms.map((item) => item.id);
+    const ChatRoomUsers_ids = all_chatRoomUsers.map((item) => item.id);
     const pairArray = []; // ? {키: ChatRoom 아이디, 밸류: (대응되는) ChatRoomUser 객체} 가 원소들로 들어간다
-    console.log(all_ChatRooms);
 
-    // * 챗룸id 와 대응되는 챗룸유저id 를 찾아서 grouped_pairArray로 정리하는 과정.
-    for (let index in ChatRoom_ids) {
-      let ChatRoom_id = ChatRoom_ids[index];
-      let ChatRoomUser = all_ChatRoomUsers.find((ChatRoomUser) => ChatRoomUser.chatroom.id === ChatRoom_id);
+    // console.log("all_chatRooms", all_chatRooms);
+    console.log("아이디", chatRoom_ids);
 
-      let pair = { ChatRoom_id: ChatRoom_id, ChatRoomUser: ChatRoomUser };
+    // * 챗룸id 와 대응되는 챗룸유저id 를 찾아서 grouped_pairObject로 정리하는 과정.
+    for (let index in chatRoom_ids) {
+      let chatRoom_id = chatRoom_ids[index];
+      let ChatRoomUser = all_chatRoomUsers.find((ChatRoomUser) => ChatRoomUser.chatroom.id === chatRoom_id);
+
+      let pair = { chatRoom_id: chatRoom_id, ChatRoomUser: ChatRoomUser };
       pairArray.push(pair);
     }
 
-    const grouped_pairArray = groupBy(pairArray, "ChatRoom_id");
-    console.log("grouped_pairArray: ", grouped_pairArray);
+    const grouped_pairObject = groupBy(pairArray, "chatRoom_id");
+    const keysArray = Object.keys(grouped_pairObject);
+    const except_chatRoom_ids = [];
+    for (let index in keysArray) {
+      let key = keysArray[index];
+      let valueArray = grouped_pairObject[key];
+      let length = valueArray.length;
 
-    //TODO: 챗룸유저id 가 2개(인원수)미만인 채팅방만 고른다.
-    //TODO: ...
-    setServerData(all_ChatRooms);
+      if (length > 1) {
+        except_chatRoom_ids.push(key);
+      }
+    }
+
+    // ? 챗룸유저id 가 2개(인원수)미만인 채팅방만 고른다.
+    const fit_chatRooms = all_chatRooms.filter((chatroom) => chatroom.id !== except_chatRoom_ids.values);
+    // console.log("fit_chatRooms", fit_chatRooms);
+
+    setChatRooms(fit_chatRooms);
   };
 
   // useEffect(() => {
@@ -68,7 +112,7 @@ const RoomList = ({ categoryID }) => {
   //       .filter((chatroom) => chatroom.matchingInfo !== null);
 
   //     // const filteredChatRooms = chatRooms.filter((element) => element.matchingInfo === null);
-  //     setServerData(chatRooms);
+  //     setChatRooms(chatRooms);
   //   };
 
   //   fetchChatRooms();
@@ -77,7 +121,7 @@ const RoomList = ({ categoryID }) => {
   return (
     <View style={styles.root}>
       <FlatList
-        data={serverData}
+        data={chatRooms}
         renderItem={({ item }) => (item !== undefined ? <RoomItem chatRoomInfo={item} /> : <ActivityIndicator />)}
       />
     </View>
