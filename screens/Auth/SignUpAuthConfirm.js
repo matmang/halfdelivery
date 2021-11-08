@@ -148,12 +148,14 @@ export default ({ route: { params }, navigation }) => {
         username,
         password,
         attributes: {
+          email: username,
+          "custom:nickname": name,
           "custom:phonenumber": phoneNumber,
           "custom:birthday": birthday,
         },
       });
       console.log("Sign-up Confirmed");
-      navigation.navigate("SignUpAuthConfirm");
+      alert("인증번호가 전송되었습니다.");
     } catch (error) {
       console.log("Error signing up...", error);
     }
@@ -161,7 +163,7 @@ export default ({ route: { params }, navigation }) => {
 
   const confirmSignUp = async () => {
     try {
-      await Auth.confirmSignUp(phoneNumber, authCode);
+      await Auth.confirmSignUp(username, authCode);
       console.log("code confirmed");
     } catch (error) {
       console.log("verification code dose not match.", error.code);
@@ -205,7 +207,7 @@ export default ({ route: { params }, navigation }) => {
         <PasswordContainer>
           <AuthContainer>
             <NameText>휴대폰 번호</NameText>
-            <AuthTouch>
+            <AuthTouch onPress={handleSubmit}>
               <AuthText>인증번호 요청</AuthText>
             </AuthTouch>
           </AuthContainer>
@@ -229,7 +231,11 @@ export default ({ route: { params }, navigation }) => {
           <Btn
             text={"다음"}
             accent={accent}
-            onPress={handleSubmit}
+            onPress={() => {
+              confirmSignUp();
+              Auth.signIn(username, password);
+              navigation.navigate("SignUpSchool", { username, password });
+            }}
             icon={true}
           />
         </ButtonContainer>

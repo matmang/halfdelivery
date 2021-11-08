@@ -6,6 +6,8 @@ import ConfirmSignUp from "../screens/Auth/ConfirmSignUp";
 import Welcome from "../screens/Auth/Welcome";
 import SignUpAuth from "../screens/Auth/SignUpAuth";
 import SignUpAuthConfirm from "../screens/Auth/SignUpAuthConfirm";
+import SignUpSchool from "../screens/Auth/SignUpSchool";
+import SignUpBank from "../screens/Auth/SignUpBank";
 
 const Auth = createStackNavigator();
 
@@ -43,6 +45,20 @@ export default () => (
     <Auth.Screen
       name="SignUpAuthConfirm"
       component={SignUpAuthConfirm}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <Auth.Screen
+      name="SignUpSchool"
+      component={SignUpSchool}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <Auth.Screen
+      name="SignUpBank"
+      component={SignUpBank}
       options={{
         headerShown: false,
       }}
