@@ -50,6 +50,10 @@ const ButtonContainer = styled.View`
   bottom: 30;
 `;
 
+const AuthContainer = styled.View`
+  flex-direction: row;
+`;
+
 const PhaseText = styled.Text`
   font-family: "noto-regular";
   font-size: 22;
@@ -68,10 +72,25 @@ const NameText = styled.Text`
   color: ${colors.mainBlue};
 `;
 
-export default ({ navigation }) => {
-  const [username, setusername] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirm, setPasswordConfirm] = useState("");
+const AuthText = styled.Text`
+  font-family: "noto-regular";
+  font-size: 14;
+  text-decoration-line: underline;
+  margin-left: auto;
+  color: ${colors.subPink1};
+`;
+
+const AuthTouch = styled.TouchableOpacity`
+  margin-left: auto;
+`;
+
+export default ({ route: { params }, navigation }) => {
+  const [username, setusername] = useState(params?.username);
+  const [password, setPassword] = useState(params?.password);
+  const [name, setName] = useState("");
+  const [birthday, setBirthday] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [authCode, setAuthCode] = useState("");
   const [IDerrorMessage, setIDErrorMessage] = useState("");
   const [PWerrorMessage, setPWErrorMessage] = useState("");
   const [PWCerrorMessage, setPWCErrorMessage] = useState("");
@@ -81,17 +100,19 @@ export default ({ navigation }) => {
 
   useEffect(() => {
     setAccent(
-      username &&
-        password &&
-        passwordConfirm &&
+      name &&
+        birthday &&
+        phoneNumber &&
+        authCode &&
         !IDerrorMessage &&
         !PWerrorMessage &&
         !PWCerrorMessage
     );
   }, [
-    username,
-    password,
-    passwordConfirm,
+    name,
+    birthday,
+    phoneNumber,
+    authCode,
     IDerrorMessage,
     PWerrorMessage,
     PWCerrorMessage,
@@ -102,14 +123,12 @@ export default ({ navigation }) => {
       let IDerror = "";
       let PWerror = "";
       let PWCerror = "";
-      if (!username) {
-        IDerror = "이메일을 입력해주세요.";
-      } else if (!isEmail(username)) {
-        IDerror = "이메일을 다시 확인해주세요.";
-      } else if (password.length < 6) {
-        PWerror = "비밀번호는 6자리 이상이어야 합니다.";
-      } else if (password !== passwordConfirm) {
-        PWCerror = "비밀번호 확인과 비밀번호가 다릅니다.";
+      if (!name) {
+        IDerror = "실명을 입력해주세요.";
+      } else if (birthday.length !== 6) {
+        PWerror = "생년월일은 6자리여야합니다 ex) 980424";
+      } else if (!phoneNumber) {
+        PWCerror = "휴대폰 번호를 입력해주세요.";
       } else {
         IDerror = "";
         PWerror = "";
@@ -123,16 +142,29 @@ export default ({ navigation }) => {
     }
   });
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     try {
-      // await Auth.signUp({
-      //   username,
-      //   password,
-      // });
+      await Auth.signUp({
+        username,
+        password,
+        attributes: {
+          "custom:phonenumber": phoneNumber,
+          "custom:birthday": birthday,
+        },
+      });
       console.log("Sign-up Confirmed");
-      navigation.navigate("SignUpAuthConfirm", { username, password });
+      navigation.navigate("SignUpAuthConfirm");
     } catch (error) {
       console.log("Error signing up...", error);
+    }
+  };
+
+  const confirmSignUp = async () => {
+    try {
+      await Auth.confirmSignUp(phoneNumber, authCode);
+      console.log("code confirmed");
+    } catch (error) {
+      console.log("verification code dose not match.", error.code);
     }
   };
 
@@ -146,40 +178,52 @@ export default ({ navigation }) => {
           />
         </ProgressContainer>
         <PhaseContainer>
-          <PhaseText>회원 정보를 입력해주세요</PhaseText>
+          <PhaseText>본인인증을 해주세요</PhaseText>
           <ExplainText>
             본인 확인 절차이며, 다른 용도로 사용되지 않습니다.
           </ExplainText>
         </PhaseContainer>
         <IDContainer>
-          <NameText>아이디</NameText>
+          <NameText>이름</NameText>
           <BarInput
-            placeholder={"아이디를 입력해주세요"}
-            stateFn={setusername}
+            placeholder={"실명을 입력해주세요"}
+            stateFn={setName}
             autoCapitalize="none"
-            value={username}
+            value={name}
           />
           <ErrorMessage message={IDerrorMessage} />
         </IDContainer>
         <PasswordContainer>
-          <NameText>비밀번호</NameText>
+          <NameText>생년월일</NameText>
           <BarInput
-            placeholder={"비밀번호를 입력해주세요"}
-            stateFn={setPassword}
-            isPassword={true}
-            value={password}
+            placeholder={"6자리 입력 (ex. 980424)"}
+            stateFn={setBirthday}
+            value={birthday}
           />
           <ErrorMessage message={PWerrorMessage} />
         </PasswordContainer>
         <PasswordContainer>
-          <NameText>비밀번호 확인</NameText>
+          <AuthContainer>
+            <NameText>휴대폰 번호</NameText>
+            <AuthTouch>
+              <AuthText>인증번호 요청</AuthText>
+            </AuthTouch>
+          </AuthContainer>
           <BarInput
-            placeholder={"비밀번호를 확인해주세요"}
-            stateFn={setPasswordConfirm}
-            isPassword={true}
-            value={passwordConfirm}
+            placeholder={"'-'구분 없이 입력해주세요"}
+            stateFn={setPhoneNumber}
+            value={phoneNumber}
           />
           <ErrorMessage message={PWCerrorMessage} />
+        </PasswordContainer>
+        <PasswordContainer>
+          <NameText>인증번호</NameText>
+          <BarInput
+            placeholder={"인증번호 숫자 6자리를 입력해주세요"}
+            stateFn={setAuthCode}
+            isPassword={true}
+            value={authCode}
+          />
         </PasswordContainer>
         <ButtonContainer>
           <Btn
