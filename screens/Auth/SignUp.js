@@ -5,11 +5,10 @@ import Btn from "../../components/Auth/Btn";
 import BarInput from "../../components/Auth/BarInput";
 import ErrorMessage from "../../components/Auth/ErrorMessage";
 import DismissKeyboard from "../../components/DismissKeyboard";
-import { isusername, isPhoneNum, isEmail } from "../../utils";
+import { isEmail } from "../../utils";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useDispatch } from "react-redux";
 import Auth from "@aws-amplify/auth";
-import { DataStore } from "@aws-amplify/datastore";
 
 const Container = styled.View`
   flex: 1;
@@ -41,21 +40,16 @@ export default ({ navigation: { navigate } }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [disabled, setDisabled] = useState(true);
 
-  const imageUri =
-    "https://www.notion.so/halfdelivery/8f990b13fa1d4103bad3423c7461a96a#7ff6b5cef14e4982a03ae85bca1db58d";
-
   const refDidMount = useRef(null);
 
   useEffect(() => {
     setDisabled(
-      !(
-        username &&
+      username &&
         password &&
         passwordConfirm &&
         school &&
         dormitory &&
         !errorMessage
-      )
     );
   }, [username, password, passwordConfirm, dormitory, school, errorMessage]);
 
@@ -93,7 +87,6 @@ export default ({ navigation: { navigate } }) => {
           email,
           "custom:school": school,
           "custom:dormitory": dormitory,
-          "custom:imageUri": imageUri,
           "custom:nickname": nickname,
         },
       });
@@ -150,9 +143,9 @@ export default ({ navigation: { navigate } }) => {
           <ButtonContainer>
             <Btn
               text={"다음"}
-              accent
+              accent={disabled}
               onPress={handleSubmit}
-              disabled={disabled}
+              icon={true}
             />
           </ButtonContainer>
         </Container>
