@@ -8,7 +8,7 @@ import SelectStoreScreen from "../../../screens/Main/StoreStack/SelectStoreScree
 import SelectMenuScreen from "../../../screens/Main/StoreStack/SelectMenuScreen";
 import SetMatchingTimeScreen from "../../../screens/Main/StoreStack/SetMatchingTimeScreen";
 import ChatRoomScreen from "../../../screens/Main/ChatRoomStack/ChatRoomScreen";
-import RequestMatching from "../../../screens/Main/StoreStack/RequestMatching";
+import RequestMatchingScreen from "../../../screens/Main/StoreStack/RequestMatchingScreen";
 import HomeScreen from "../../../screens/Main/HomeStack/HomeScreen";
 
 const Stack = createStackNavigator();
@@ -56,8 +56,8 @@ export default () => (
       }}
     />
     <Stack.Screen
-      name="RequestMatching"
-      component={RequestMatching}
+      name="RequestMatchingScreen"
+      component={RequestMatchingScreen}
       options={{
         title: "매칭요청중",
       }}

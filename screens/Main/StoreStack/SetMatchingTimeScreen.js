@@ -56,14 +56,16 @@ const SetMatchingTimeScreen = (props) => {
 
   // ? ChatRoom 생성.
   const createChatRoom = async () => {
+    // await DataStore.clear();
+
     const newChatRoom = await DataStore.save(
       // TODO: 담아야 할 데이터들:
       // ? 1. 유저,
       // ? 2. 매장이름,
       // ? 3. (호스트) 유저가 고른 메뉴정보
       new ChatRoom({
-        newMessages: 1030,
-        matchingInfo: matchingInfo,
+        newMessages: 1107,
+        matchingInfo,
       })
     );
 
@@ -78,7 +80,7 @@ const SetMatchingTimeScreen = (props) => {
       })
     );
 
-    navigation.navigate("RequestMatching", {
+    navigation.navigate("RequestMatchingScreen", {
       storeInfo,
       menus: orderReducerState.map((e) => e.menuInfo),
       matchingInfo,
@@ -164,7 +166,7 @@ const SetMatchingTimeScreen = (props) => {
             onPress={() => {
               createChatRoom();
 
-              // navigation.navigate("RequestMatching", {
+              // navigation.navigate("RequestMatchingScreen", {
               //   storeInfo,
               //   menus: orderReducerState.map((e) => e.menuInfo),
               //   matchingInfo,

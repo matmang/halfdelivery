@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import BottomTabNav from "./BottomTabNav";
+import { SafeAreaView } from "react-native";
 
 const Root = createStackNavigator();
 

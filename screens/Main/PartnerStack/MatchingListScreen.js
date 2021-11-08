@@ -48,7 +48,7 @@ const MatchingListScreen = () => {
   return (
     <View
       style={{
-        backgroundColor: "#E5E6E7",
+        backgroundColor: "#FFFFFF",
         flex: 1,
         // alignItems: "center",
         flexDirection: "column",
@@ -62,15 +62,11 @@ const MatchingListScreen = () => {
         <CategoryButton name="카페" />
       </View>
 
-      <View style={{ height: 69, marginBottom: 4, backgroundColor: "white", justifyContent: "center" }}>
+      {/* <View style={{ height: 69, marginBottom: 4, backgroundColor: "white", justifyContent: "center" }}>
         <Text style={styles.title}>배달음식 파트너 모집중</Text>
-      </View>
+      </View> */}
 
       <RoomList categoryID={categoryID} />
-
-      <View style={{ marginTop: 30 }}>
-        <Button title="매칭방 만들기" onPress={() => navigation.navigate("SelectStoreScreen")} />
-      </View>
     </View>
   );
 };
@@ -82,7 +78,7 @@ const styles = StyleSheet.create({
     width: "100%",
     paddingHorizontal: 30,
     justifyContent: "space-evenly",
-    marginBottom: 8,
+    marginBottom: 4,
   },
   text: {
     fontSize: 15,

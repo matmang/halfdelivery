@@ -17,8 +17,8 @@ const StoreComponent = ({ storeInfo }) => {
       <Image
         style={styles.image}
         source={
-          // storeInfo.storeImgUri !== undefined ? { uri: storeInfo.storeImgUri } : logos.halfLogo
-          logos.halfLogo
+          storeInfo.storeImgUri !== undefined ? { uri: storeInfo.storeImgUri } : logos.halfLogo
+          // logos.halfLogo
         }
       />
 
@@ -55,6 +55,8 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     width: 95,
     height: 82,
+    // height: "auto",
+    // width: "auto",
     resizeMode: "contain", //? Show whole Image (with white space)
   },
   infoContainer: {

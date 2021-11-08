@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Image, ActivityIndicator } from "react-native";
 import logos from "../../images";
 import { MaterialIcons } from "@expo/vector-icons";
+import { useNavigation, useRoute } from "@react-navigation/core";
 
 const RoomItem = ({ chatRoomInfo }) => {
-  const store = chatRoomInfo.matchingInfo.storeNmenus.store;
+  const navigation = useNavigation();
+
+  const storeInfo = chatRoomInfo.matchingInfo.storeNmenus.store;
   const menus = chatRoomInfo.matchingInfo.storeNmenus.menus;
   const timeNpersons = chatRoomInfo.matchingInfo.timeNpersons;
 
@@ -16,7 +19,7 @@ const RoomItem = ({ chatRoomInfo }) => {
 
   let category = "-";
 
-  switch (store.storecategoryID) {
+  switch (storeInfo.storecategoryID) {
     case KOREAN_ID:
       category = "한식";
       break;
@@ -37,15 +40,20 @@ const RoomItem = ({ chatRoomInfo }) => {
       break;
   }
 
+  const onPress = () => {
+    navigation.navigate("ChatRoomScreen", {
+      chatRoomID: chatRoomInfo.id,
+      storeInfo,
+      menus,
+      timeNpersons,
+    });
+  };
+
   return (
-    <TouchableOpacity style={styles.root} onPress={() => alert("테스트")}>
+    <TouchableOpacity style={styles.root} onPress={onPress}>
       <Image
         style={styles.image}
-        source={
-          logos.halfLogo
-          // { uri: storeInfo.storeImgUri }
-          // store.storeImgUri !== undefined ? { uri: store.storeImgUri } : logos.halfLogo
-        }
+        source={storeInfo.storeImgUri !== undefined ? { uri: storeInfo.storeImgUri } : logos.halfLogo}
       />
       <View style={styles.infoContainer}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -57,12 +65,12 @@ const RoomItem = ({ chatRoomInfo }) => {
             </Text>
           </View>
           <Text style={styles.storeText} numberOfLines={1}>
-            {store.store}
+            {storeInfo.store}
           </Text>
         </View>
 
         <Text style={styles.priceText} numberOfLines={1}>
-          필요금액 {store.minOrdPrice.toLocaleString("ko-KR")} 원
+          필요금액 {storeInfo.minOrdPrice.toLocaleString("ko-KR")} 원
         </Text>
 
         <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -80,10 +88,7 @@ const RoomItem = ({ chatRoomInfo }) => {
         </View>
       </View>
 
-      <View
-        style={{ justifyContent: "center", marginRight: 20, backgroundColor: "red" }}
-        // onPress={() => alert("테스트")}
-      >
+      <View style={{ justifyContent: "center", marginRight: 20, backgroundColor: "red" }}>
         <MaterialIcons name="arrow-forward-ios" size={12} color="black" />
       </View>
     </TouchableOpacity>

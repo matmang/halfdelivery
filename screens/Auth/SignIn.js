@@ -1,4 +1,4 @@
-import CheckBox from "@react-native-community/checkbox";
+// import CheckBox from "@react-native-community/checkbox";
 import React, { useState } from "react";
 import { KeyboardAvoidingView, Image } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -45,7 +45,7 @@ const SignupContainer = styled.View`
 
 const LoginText = styled.Text`
   font-family: "noto-regular";
-  font-size: 14;
+  font-size: 14px;
   margin-left: 13px;
 `;
 
@@ -77,10 +77,7 @@ export default ({ route: { params }, navigation }) => {
       <Container>
         <KeyboardAvoidingView>
           <LogoContainer>
-            <Image
-              source={require("../../assets/images/halfLogo.png")}
-              style={{ width: 62.2, height: 90.21 }}
-            />
+            <Image source={require("../../assets/images/halfLogo.png")} style={{ width: 62.2, height: 90.21 }} />
           </LogoContainer>
           <InputContainer>
             <Input
@@ -90,20 +87,15 @@ export default ({ route: { params }, navigation }) => {
               autoCapitalize="none"
               stateFn={setEmail}
             />
-            <Input
-              value={password}
-              placeholder="비밀번호"
-              isPassword={true}
-              stateFn={setPassword}
-            />
+            <Input value={password} placeholder="비밀번호" isPassword={true} stateFn={setPassword} />
           </InputContainer>
         </KeyboardAvoidingView>
         <CheckboxContainer>
-          <CheckBox
+          {/* <CheckBox
             disabled={false}
             value={toggleCheckBox}
             onValueChange={(newValue) => setToggleCheckBox(newValue)}
-          />
+          /> */}
           <LoginText>로그인 상태 유지</LoginText>
         </CheckboxContainer>
         <Btn text={"로그인"} accent onPress={handleSubmit} />

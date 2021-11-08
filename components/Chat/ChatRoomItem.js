@@ -1,9 +1,8 @@
-import Auth from "@aws-amplify/auth";
-import { DataStore } from "@aws-amplify/datastore";
 import { useNavigation } from "@react-navigation/core";
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, Image, Pressable, ActivityIndicator } from "react-native";
 import { ChatRoomUser, User, Message } from "../../AWS/src/models";
+import { Auth, DataStore } from "aws-amplify";
 
 export default ({ chatRoom }) => {
   // const [users, setUsers] = useState([]); // ? All users in this chatRoom
@@ -32,8 +31,6 @@ export default ({ chatRoom }) => {
     };
 
     fetchUsers();
-
-    console.log("챗룸", chatRoom);
   }, []);
 
   useEffect(() => {

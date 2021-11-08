@@ -3,8 +3,7 @@ import { Text } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/core";
 import Search from "../../../components/Main/Search";
-import Auth from "@aws-amplify/auth";
-import { DataStore } from "@aws-amplify/datastore";
+import { Auth, DataStore } from "aws-amplify";
 import { Store } from "../../../AWS/src/models";
 
 export default () => {

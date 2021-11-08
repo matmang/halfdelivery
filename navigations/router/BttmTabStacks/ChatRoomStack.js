@@ -1,14 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import {
-  Pressable,
-  Button,
-  View,
-  Text,
-  Image,
-  useWindowDimensions,
-  ActivityIndicator,
-} from "react-native";
+import { Pressable, Button, View, Text, Image, useWindowDimensions, ActivityIndicator } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 import logos from "../../../images";
 import { FontAwesome, Feather } from "@expo/vector-icons";
@@ -16,9 +8,7 @@ import ChatListScreen from "../../../screens/Main/ChatRoomStack/ChatListScreen";
 import ChatRoomScreen from "../../../screens/Main/ChatRoomStack/ChatRoomScreen";
 import ChatUserScreen from "../../../screens/Main/ChatRoomStack/ChatUsersScreen";
 import { User } from "../../../AWS/src/models";
-import Auth from "@aws-amplify/auth";
-import { DataStore } from "@aws-amplify/datastore";
-
+import { Auth, DataStore } from "aws-amplify";
 const Stack = createStackNavigator();
 const LogoHeader = (props) => {
   return (
@@ -90,12 +80,7 @@ const ChatListHeader = (props) => {
       >
         채팅방 리스트
       </Text>
-      <Feather
-        name="camera"
-        size={24}
-        color={"black"}
-        style={{ marginLeft: 40, marginRight: 5 }}
-      />
+      <Feather name="camera" size={24} color={"black"} style={{ marginLeft: 40, marginRight: 5 }} />
       <Button
         onPress={() => navigation.navigate("ChatUserScreen")} // ? useNavigation 훅 대신에, options 의 navigation 프로퍼티를 사용해야 한다!!
         title="유저 목록"

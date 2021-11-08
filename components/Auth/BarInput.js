@@ -8,7 +8,7 @@ const Container = styled.TextInput`
   padding: 12.5px 20px;
   padding-top: 0;
   padding-bottom: 0;
-  border-bottom-width: 1;
+  border-bottom-width: 1px;
   border-bottom-color: #000000;
   font-family: "noto-regular";
   font-size: 17;

@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { ActivityIndicator, StyleSheet, Text, View, Image } from "react-native";
 import colors from "../../colors";
-import { DataStore } from "@aws-amplify/datastore";
 import { User } from "../../AWS/src/models";
-import Auth from "@aws-amplify/auth";
+import { Auth, DataStore } from "aws-amplify";
 
 export default ({ message }) => {
   const [user, setUser] = useState(undefined);

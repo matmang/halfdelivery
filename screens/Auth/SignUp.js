@@ -102,45 +102,22 @@ export default ({ navigation: { navigate } }) => {
       <DismissKeyboard>
         <Container>
           <InputContainer>
-            <BarInput
-              value={nickname}
-              placeholder="이름"
-              autoCapitalize="none"
-              stateFn={setNickname}
-            />
-            <BarInput
-              value={username}
-              placeholder="이메일"
-              autoCapitalize="none"
-              stateFn={setusername}
-            />
-            <BarInput
-              value={password}
-              placeholder="비밀번호"
-              isPassword={true}
-              stateFn={setPassword}
-            />
+            <BarInput value={nickname} placeholder="이름" autoCapitalize="none" stateFn={setNickname} />
+            <BarInput value={username} placeholder="이메일" autoCapitalize="none" stateFn={setusername} />
+            <BarInput value={password} placeholder="비밀번호" isPassword={true} stateFn={setPassword} />
             <BarInput
               value={passwordConfirm}
               placeholder="비밀번호 확인"
               isPassword={true}
               stateFn={setPasswordConfirm}
             />
-            <BarInput
-              value={school}
-              placeholder="학교"
-              autoCapitalize="none"
-              stateFn={setSchool}
-            />
-            <BarInput
-              value={dormitory}
-              placeholder="기숙사"
-              autoCapitalize="none"
-              stateFn={setDormitory}
-            />
+            <BarInput value={school} placeholder="학교" autoCapitalize="none" stateFn={setSchool} />
+            <BarInput value={dormitory} placeholder="기숙사" autoCapitalize="none" stateFn={setDormitory} />
           </InputContainer>
           <ErrorMessage message={errorMessage} />
           <ButtonContainer>
+
+
             <Btn
               text={"다음"}
               accent={disabled}

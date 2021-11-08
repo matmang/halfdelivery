@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Auth } from "aws-amplify";
 import Home from "../../../components/Main/Home";
 import { ScrollView } from "react-native-gesture-handler";
 import { Store } from "../../../AWS/src/models";
-import { DataStore } from "@aws-amplify/datastore";
+import { Auth, DataStore } from "aws-amplify";
 import { Button } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 
