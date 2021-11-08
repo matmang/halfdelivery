@@ -23,7 +23,7 @@ const SelectMenuScreen = (props) => {
   const navigation = useNavigation();
 
   //* ============== BottomSheet 관련 코드임 ===============================
-  // hooks
+  // hooks haha
   const sheetRef = useRef(null);
 
   const snapPoints = useMemo(() => ["4%", "10%", "47.5%"], []);
