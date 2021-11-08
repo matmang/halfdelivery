@@ -61,7 +61,6 @@ const MatchingListScreen = () => {
         <CategoryButton name="양식" />
         <CategoryButton name="카페" />
       </View>
-
       {/* <View style={{ height: 69, marginBottom: 4, backgroundColor: "white", justifyContent: "center" }}>
         <Text style={styles.title}>배달음식 파트너 모집중</Text>
       </View> */}

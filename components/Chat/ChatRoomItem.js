@@ -1,6 +1,13 @@
 import { useNavigation } from "@react-navigation/core";
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, Image, Pressable, ActivityIndicator } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  Pressable,
+  ActivityIndicator,
+} from "react-native";
 import { ChatRoomUser, User, Message } from "../../AWS/src/models";
 import { Auth, DataStore } from "aws-amplify";
 
@@ -27,7 +34,9 @@ export default ({ chatRoom }) => {
       // ? 내가 아닌 다른 유저를 Display 한다. (나 == authUser)
       const authUser = await Auth.currentAuthenticatedUser();
 
-      setUser(fetchedUsers.find((user) => user.id !== authUser.attributes.sub) || null);
+      setUser(
+        fetchedUsers.find((user) => user.id !== authUser.attributes.sub) || null
+      );
     };
 
     fetchUsers();
@@ -37,7 +46,9 @@ export default ({ chatRoom }) => {
     if (!chatRoom.chatRoomLastMessageId) {
       return;
     }
-    DataStore.query(Message, chatRoom.chatRoomLastMessageId).then(setLastMessage);
+    DataStore.query(Message, chatRoom.chatRoomLastMessageId).then(
+      setLastMessage
+    );
   }, []);
 
   const onPress = () => {

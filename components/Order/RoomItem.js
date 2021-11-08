@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Image, ActivityIndicator } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Image,
+  ActivityIndicator,
+} from "react-native";
 import logos from "../../images";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation, useRoute } from "@react-navigation/core";
@@ -53,12 +60,22 @@ const RoomItem = ({ chatRoomInfo }) => {
     <TouchableOpacity style={styles.root} onPress={onPress}>
       <Image
         style={styles.image}
-        source={storeInfo.storeImgUri !== undefined ? { uri: storeInfo.storeImgUri } : logos.halfLogo}
+        source={
+          storeInfo.storeImgUri !== undefined
+            ? { uri: storeInfo.storeImgUri }
+            : logos.halfLogo
+        }
       />
       <View style={styles.infoContainer}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <View
-            style={{ width: 44, height: 20, borderRadius: 12, backgroundColor: "#E5E6E7", justifyContent: "center" }}
+            style={{
+              width: 44,
+              height: 20,
+              borderRadius: 12,
+              backgroundColor: "#E5E6E7",
+              justifyContent: "center",
+            }}
           >
             <Text style={styles.categoryText} numberOfLines={1}>
               {category}
@@ -88,7 +105,13 @@ const RoomItem = ({ chatRoomInfo }) => {
         </View>
       </View>
 
-      <View style={{ justifyContent: "center", marginRight: 20, backgroundColor: "red" }}>
+      <View
+        style={{
+          justifyContent: "center",
+          marginRight: 20,
+          backgroundColor: "red",
+        }}
+      >
         <MaterialIcons name="arrow-forward-ios" size={12} color="black" />
       </View>
     </TouchableOpacity>
