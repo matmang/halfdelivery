@@ -43,7 +43,14 @@ export default ({ navigation: { navigate } }) => {
   const refDidMount = useRef(null);
 
   useEffect(() => {
-    setDisabled(username && password && passwordConfirm && school && dormitory && !errorMessage);
+    setDisabled(
+      username &&
+        password &&
+        passwordConfirm &&
+        school &&
+        dormitory &&
+        !errorMessage
+    );
   }, [username, password, passwordConfirm, dormitory, school, errorMessage]);
 
   useEffect(() => {
@@ -109,7 +116,14 @@ export default ({ navigation: { navigate } }) => {
           </InputContainer>
           <ErrorMessage message={errorMessage} />
           <ButtonContainer>
-            <Btn text={"다음"} accent={disabled} onPress={handleSubmit} icon={true} />
+
+
+            <Btn
+              text={"다음"}
+              accent={disabled}
+              onPress={handleSubmit}
+              icon={true}
+            />
           </ButtonContainer>
         </Container>
       </DismissKeyboard>

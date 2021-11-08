@@ -4,13 +4,14 @@ import Proptypes from "prop-types";
 
 const Container = styled.TextInput`
   width: 338px;
-  height: 48px;
+  height: 33px;
   padding: 12.5px 20px;
   padding-top: 0;
   padding-bottom: 0;
   border-bottom-width: 1px;
   border-bottom-color: #000000;
   font-family: "noto-regular";
+  font-size: 17;
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
 `;
 

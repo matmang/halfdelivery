@@ -16,4 +16,3 @@ export default {
   error: "#FF3B30",
   errorPink: "#ED0069",
 };
-// soomin18@hanyang.ac.kr
