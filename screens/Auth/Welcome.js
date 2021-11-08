@@ -1,28 +1,181 @@
-import React from 'react';
-import {StatusBar} from 'react-native';
-import styled from 'styled-components';
-import Btn from '../../components/Auth/Btn';
+import React from "react";
+import { Image, ImageBackground } from "react-native";
+import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
+import { Ionicons } from "@expo/vector-icons";
+import styled from "styled-components";
+import colors from "../../colors";
+import loginbackground from "../../assets/images/loginbackground.png";
 
 const Container = styled.View`
   flex: 1;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  background-color: white;
 `;
 
-const BtnContainer = styled.View`
-  margin-top: 40px;
+const LogoContainer = styled.View`
+  justify-content: center;
+  align-items: center;
 `;
 
-export default ({navigation}) => {
-  const goToSignUp = () => navigation.navigate('SignUp');
-  const goToSignIn = () => navigation.navigate('SignIn');
+const WelcomeContainer = styled.View`
+  justify-content: center;
+  align-items: center;
+  margin-top: 23px;
+`;
+
+const BodyContainer = styled.View`
+  width: 100%;
+  align-items: center;
+  margin-top: 73px;
+`;
+
+const ExplainContainer = styled.View`
+  flex-direction: row;
+  margin-right: auto;
+`;
+
+const TouchContainer = styled.TouchableOpacity`
+  flex-direction: row;
+  align-items: center;
+  margin-right: auto;
+  margin-left: 49px;
+`;
+
+const Footer = styled.View`
+  position: absolute;
+  bottom: 10;
+`;
+
+const WhiteCircle = styled.View`
+  width: 27px;
+  height: 27px;
+  border-radius: 50px;
+  margin-left: 35px;
+  background-color: white;
+  position: absolute;
+`;
+
+const SecondContainer = styled.View`
+  margin-right: auto;
+  margin-top: 20px;
+`;
+
+const WelcomeText = styled.Text`
+  font-family: "nunito-regular";
+  font-size: 40;
+  font-weight: bold;
+  color: ${colors.mainBlue};
+`;
+
+const WelcomeTextKR = styled.Text`
+  font-family: "noto-regular";
+  font-size: 20;
+  font-weight: bold;
+  color: ${colors.mainBlue};
+`;
+
+const BlackText = styled.Text`
+  font-family: "noto-regular";
+  font-size: 15;
+  margin-right: auto;
+  margin-left: 49px;
+`;
+
+const BlueText = styled.Text`
+  font-family: "noto-regular";
+  font-size: 17;
+  margin-left: 8;
+  color: ${colors.mainBlue};
+`;
+
+const ExplainText = styled.Text`
+  font-family: "noto-regular";
+  font-size: 12;
+  color: ${colors.blueGrey};
+`;
+
+export default ({ navigation }) => {
   return (
     <Container>
-      <BtnContainer>
-        <Btn onPress={goToSignUp} text={'Sign Up'} accent={true} />
-        <Btn onPress={goToSignIn} text={'Sign In'} />
-      </BtnContainer>
-      <StatusBar barStyle="light-content" />
+      <ImageBackground
+        source={loginbackground}
+        style={{
+          width: "100%",
+          height: "100%",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+        resizeMode="stretch"
+      >
+        <LogoContainer>
+          <Image
+            source={require("../../assets/images/halfLogo.png")}
+            style={{ width: 83, height: 120 }}
+          />
+        </LogoContainer>
+        <WelcomeContainer>
+          <WelcomeText>Welcome</WelcomeText>
+          <WelcomeTextKR>어서오세요, 하프디 입니다 !</WelcomeTextKR>
+        </WelcomeContainer>
+        <BodyContainer>
+          <ExplainContainer>
+            <WhiteCircle></WhiteCircle>
+            <BlackText>또 만나서 반가워요!</BlackText>
+          </ExplainContainer>
+          <TouchContainer onPress={() => navigation.navigate("SignIn")}>
+            <Ionicons
+              color={colors.mainBlue}
+              size={15}
+              name={
+                Platform.OS === "android" ? "md-arrow-forward" : "ios-search"
+              }
+            />
+            <BlueText>기존 아이디 로그인</BlueText>
+          </TouchContainer>
+          <TouchContainer>
+            <Ionicons
+              color={colors.mainBlue}
+              size={15}
+              name={
+                Platform.OS === "android" ? "md-arrow-forward" : "ios-search"
+              }
+            />
+            <BlueText>카카오 계정 로그인</BlueText>
+          </TouchContainer>
+          <SecondContainer>
+            <ExplainContainer>
+              <WhiteCircle></WhiteCircle>
+              <BlackText>하프디가 처음이라면</BlackText>
+            </ExplainContainer>
+            <TouchContainer onPress={() => navigation.navigate("SignUpAuth")}>
+              <Ionicons
+                color={colors.mainBlue}
+                size={15}
+                name={
+                  Platform.OS === "android" ? "md-arrow-forward" : "ios-search"
+                }
+              />
+              <BlueText>NEW 회원가입</BlueText>
+            </TouchContainer>
+            <TouchContainer>
+              <Ionicons
+                color={colors.mainBlue}
+                size={15}
+                name={
+                  Platform.OS === "android" ? "md-arrow-forward" : "ios-search"
+                }
+              />
+              <BlueText>카카오 계정 회원가입</BlueText>
+            </TouchContainer>
+          </SecondContainer>
+        </BodyContainer>
+        <Footer>
+          <ExplainText>
+            하프딜리버리는1인가구 배달음식 주문을 도와주는 서비스 입니다
+          </ExplainText>
+        </Footer>
+      </ImageBackground>
     </Container>
   );
 };

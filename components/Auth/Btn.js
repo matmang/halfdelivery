@@ -1,34 +1,46 @@
-import React from 'react';
-import {Dimensions, TouchableOpacity} from 'react-native';
-import styled from 'styled-components';
-import Proptypes from 'prop-types';
-import colors from '../../colors';
+import React from "react";
+import { Dimensions, TouchableOpacity } from "react-native";
+import styled, { createGlobalStyle } from "styled-components";
+import { Ionicons } from "@expo/vector-icons";
+import Proptypes from "prop-types";
+import colors from "../../colors";
 
-const {width} = Dimensions.get('screen');
+const { width } = Dimensions.get("screen");
 
 const Button = styled.View`
-  margin-bottom: 10px;
   padding: 12.5px 0px;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
   border-radius: 30px;
-  border: 1px solid ${props => (props.accent ? 'transparent' : colors.mainBlue)};
-  width: ${width / 1.5}px;
-  background-color: ${props =>
-    props.accent ? colors.mainBlue : 'transparent'};
-  color: ${props => (props.accent ? colors.mainBlue : colors.mainPink)};
-  font-family: 'NotoSansKR-Regular';
+  width: 338px;
+  height: 48px;
+  background-color: ${(props) =>
+    props.accent ? colors.mainBlue : colors.unAccent};
+  color: ${(props) => (props.accent ? colors.mainBlue : colors.unAccent)};
+  font-family: "nunito-regular";
 `;
 
 const Text = styled.Text`
-  color: ${props => (props.accent ? colors.mainPink : colors.mainBlue)};
+  color: ${(props) => (props.accent ? colors.subPink3 : colors.blueGrey)};
   font-weight: 600;
-  font-size: 14px;
-  font-family: 'NotoSansKR-Regular';
+  font-size: 14;
+  font-family: "nunito-regular";
 `;
 
-const Btn = ({onPress, text, accent = false}) => (
-  <TouchableOpacity onPress={onPress}>
+const Btn = ({ onPress, text, accent = false, icon = false }) => (
+  <TouchableOpacity onPress={onPress} disabled={!accent}>
     <Button accent={accent}>
+      {icon ? (
+        <Ionicons
+          color={accent ? colors.subPink3 : colors.blueGrey}
+          size={13}
+          name={
+            Platform.OS === "android" ? "md-arrow-forward" : "ios-arrow-forward"
+          }
+          style={{ marginRight: 8 }}
+        />
+      ) : null}
       <Text accent={accent}>{text}</Text>
     </Button>
   </TouchableOpacity>
@@ -38,6 +50,7 @@ Btn.propTypes = {
   onPress: Proptypes.func.isRequired,
   text: Proptypes.string.isRequired,
   accent: Proptypes.bool,
+  disabled: Proptypes.bool,
 };
 
 export default Btn;

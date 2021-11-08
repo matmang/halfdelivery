@@ -1,35 +1,81 @@
-import React from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
-import SignIn from '../screens/Auth/SignIn';
-import SignUp from '../screens/Auth/SignUp';
-import Welcome from '../screens/Auth/Welcome';
+import React from "react";
+import { createStackNavigator } from "@react-navigation/stack";
+import SignIn from "../screens/Auth/SignIn";
+import SignUp from "../screens/Auth/SignUp";
+import ConfirmSignUp from "../screens/Auth/ConfirmSignUp";
+import Welcome from "../screens/Auth/Welcome";
+import SignUpAuth from "../screens/Auth/SignUpAuth";
+import SignUpAuthConfirm from "../screens/Auth/SignUpAuthConfirm";
+import SignUpSchool from "../screens/Auth/SignUpSchool";
+import SignUpBank from "../screens/Auth/SignUpBank";
 
 const Auth = createStackNavigator();
 
 export default () => (
   <Auth.Navigator
+    initialRouteName="Welcome"
     screenOptions={{
       headerBackTitleVisible: false,
       headerTransparent: true,
-    }}>
+    }}
+  >
     <Auth.Screen
       name="Welcome"
       component={Welcome}
       options={{
-        headerTitleStyle: {
-          color: 'black',
-        },
+        headerShown: false,
       }}
     />
     <Auth.Screen
       name="SignUp"
       component={SignUp}
-      options={{title: 'Sign Up'}}
+      options={{
+        title: "회원가입",
+        headerTitleAlign: "center",
+        headerTitleStyle: { fontFamily: "noto-regular" },
+      }}
+    />
+    <Auth.Screen
+      name="SignUpAuth"
+      component={SignUpAuth}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <Auth.Screen
+      name="SignUpAuthConfirm"
+      component={SignUpAuthConfirm}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <Auth.Screen
+      name="SignUpSchool"
+      component={SignUpSchool}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <Auth.Screen
+      name="SignUpBank"
+      component={SignUpBank}
+      options={{
+        headerShown: false,
+      }}
     />
     <Auth.Screen
       name="SignIn"
       component={SignIn}
-      options={{title: 'Sign In'}}
+      options={{ headerShown: false, title: "Sign In" }}
+    />
+    <Auth.Screen
+      name="ConfirmSignUp"
+      component={ConfirmSignUp}
+      options={{
+        title: "인증",
+        headerTitleAlign: "center",
+        headerTitleStyle: { fontFamily: "noto-regular" },
+      }}
     />
   </Auth.Navigator>
 );

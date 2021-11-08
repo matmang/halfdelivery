@@ -1,137 +1,155 @@
-import React, {useEffect, useState} from 'react';
-import {KeyboardAvoidingView, ScrollView} from 'react-native';
-import styled from 'styled-components';
-import Btn from '../../components/Auth/Btn';
-import Input from '../../components/Auth/Input';
-import DismissKeyboard from '../../components/DismissKeyboard';
-
-import {isEmail} from '../../utils';
-// import {GoogleSignin} from '@react-native-community/google-signin';
-// import {
-//   GooglePress,
-//   KakaoPress,
-//   LoginNaver,
-// } from '../../components/Auth/SocialLoginHandler';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {useDispatch} from 'react-redux';
-import {socialLogin} from '../../redux/usersSlice';
+import React, { useEffect, useRef, useState } from "react";
+import { KeyboardAvoidingView, ScrollView } from "react-native";
+import styled from "styled-components";
+import Btn from "../../components/Auth/Btn";
+import BarInput from "../../components/Auth/BarInput";
+import ErrorMessage from "../../components/Auth/ErrorMessage";
+import DismissKeyboard from "../../components/DismissKeyboard";
+import { isEmail } from "../../utils";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { useDispatch } from "react-redux";
+import Auth from "@aws-amplify/auth";
 
 const Container = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
+  background-color: white;
 `;
 
 const InputContainer = styled.View`
   margin-bottom: 30px;
-  margin-top: 50px;
+  margin-top: 57px;
+  height: 520px;
+  justify-content: space-evenly;
 `;
 
 const ButtonContainer = styled.View`
   margin-bottom: 30px;
 `;
 
-export default ({navigation: {navigate}}) => {
+export default ({ navigation: { navigate } }) => {
   const dispatch = useDispatch();
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordConfirm, setPasswordConfirm] = useState('');
-  const [school, setSchool] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [nickname, setNickname] = useState("");
+  const [username, setusername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [school, setSchool] = useState("");
+  const [dormitory, setDormitory] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [disabled, setDisabled] = useState(true);
+
+  const refDidMount = useRef(null);
 
   useEffect(() => {
-    const socialGoogleConfigure = async () => {
-      await GoogleSignin.configure({
-        scopes: ['email'],
-        webClientId:
-          '271269689660-ql3c8s34ihsf3vvj4fdqec89uikupvge.apps.googleusercontent.com',
-      });
-    };
-    socialGoogleConfigure();
-  }, []);
+    setDisabled(
+      username &&
+        password &&
+        passwordConfirm &&
+        school &&
+        dormitory &&
+        !errorMessage
+    );
+  }, [username, password, passwordConfirm, dormitory, school, errorMessage]);
 
-  const validateForm = () => {
-    if (email === '' || password === '') {
-      alert('All fields are required.');
-      return;
+  useEffect(() => {
+    if (refDidMount.current) {
+      let error = "";
+      if (!username) {
+        error = "이메일을 입력해주세요.";
+      } else if (!isEmail(username)) {
+        error = "이메일을 다시 확인해주세요.";
+      } else if (password.length < 6) {
+        setEmail(username);
+        error = "비밀번호는 6자리 이상이어야 합니다.";
+      } else if (password !== passwordConfirm) {
+        error = "비밀번호 확인과 비밀번호가 다릅니다.";
+      } else if (!school) {
+        error = "학교를 입력해주세요.";
+      } else if (!dormitory) {
+        error = "기숙사를 입력해주세요.";
+      } else {
+        error = "";
+      }
+      setErrorMessage(error);
+    } else {
+      refDidMount.current = true;
     }
-    if (!isEmail(email)) {
-      alert('Please add a valid email.');
-      return;
-    }
-    if (password !== passwordConfirm) {
-      alert('Password need to match');
-      return;
-    }
-    if (password.length < 6) {
-      alert('The password must contain 6 characters at least');
-      return;
+  });
+
+  const handleSubmit = async () => {
+    try {
+      await Auth.signUp({
+        username,
+        password,
+        attributes: {
+          email,
+          "custom:school": school,
+          "custom:dormitory": dormitory,
+          "custom:nickname": nickname,
+        },
+      });
+      console.log("Sign-up Confirmed");
+      navigate("ConfirmSignUp", { email });
+    } catch (error) {
+      console.log("Error signing up...", error);
     }
   };
+
   return (
-    <ScrollView>
-      <KeyboardAwareScrollView extraScrollHeight={20}>
-        <DismissKeyboard>
-          <Container>
-            <KeyboardAvoidingView behavior="position">
-              <InputContainer>
-                <Input value={name} placeholder="Name" stateFn={setName} />
-                <Input
-                  value={email}
-                  placeholder="Email"
-                  autoCapitalize="none"
-                  stateFn={setEmail}
-                />
-                <Input
-                  value={school}
-                  placeholder="School"
-                  autoCapitalize="none"
-                  stateFn={setSchool}
-                />
-                <Input
-                  value={phoneNumber}
-                  placeholder="Phone Number"
-                  stateFn={setPhoneNumber}
-                />
-                <Input
-                  value={password}
-                  placeholder="Password"
-                  isPassword={true}
-                  stateFn={setPassword}
-                />
-                <Input
-                  value={passwordConfirm}
-                  placeholder="Password Confirm"
-                  isPassword={true}
-                  stateFn={setPasswordConfirm}
-                />
-              </InputContainer>
-            </KeyboardAvoidingView>
-            <ButtonContainer>
-              <Btn text={'Sign Up'} accent onPress={validateForm} />
-              <Btn
-                text={'Sign with google'}
-                name="google"
-                accent
-                onPress={validateForm}
-              />
-              <Btn
-                text={'Sign with Kakao'}
-                name="kakao"
-                accent
-                onPress={validateForm}
-              />
-              <Btn
-                text={'Sign with Naver'}
-                name="naver"
-                accent
-                onPress={validateForm}
-              />
-            </ButtonContainer>
-          </Container>
-        </DismissKeyboard>
-      </KeyboardAwareScrollView>
-    </ScrollView>
+    <KeyboardAwareScrollView extraScrollHeight={20}>
+      <DismissKeyboard>
+        <Container>
+          <InputContainer>
+            <BarInput
+              value={nickname}
+              placeholder="이름"
+              autoCapitalize="none"
+              stateFn={setNickname}
+            />
+            <BarInput
+              value={username}
+              placeholder="이메일"
+              autoCapitalize="none"
+              stateFn={setusername}
+            />
+            <BarInput
+              value={password}
+              placeholder="비밀번호"
+              isPassword={true}
+              stateFn={setPassword}
+            />
+            <BarInput
+              value={passwordConfirm}
+              placeholder="비밀번호 확인"
+              isPassword={true}
+              stateFn={setPasswordConfirm}
+            />
+            <BarInput
+              value={school}
+              placeholder="학교"
+              autoCapitalize="none"
+              stateFn={setSchool}
+            />
+            <BarInput
+              value={dormitory}
+              placeholder="기숙사"
+              autoCapitalize="none"
+              stateFn={setDormitory}
+            />
+          </InputContainer>
+          <ErrorMessage message={errorMessage} />
+          <ButtonContainer>
+            <Btn
+              text={"다음"}
+              accent={disabled}
+              onPress={handleSubmit}
+              icon={true}
+            />
+          </ButtonContainer>
+        </Container>
+      </DismissKeyboard>
+    </KeyboardAwareScrollView>
   );
 };

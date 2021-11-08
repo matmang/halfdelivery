@@ -1,0 +1,15 @@
+@font-face {
+    font-family: 'noto-regular';
+    font-display: fallback;
+    src: url('./NotoSansKR-Regular.otf');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'nunito-regular';
+    font-display: fallback;
+    src: url('./NunitoSans-Regular.ttf');
+    font-weight: 300;
+    font-style: normal;
+}
