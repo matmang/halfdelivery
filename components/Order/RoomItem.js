@@ -48,11 +48,14 @@ const RoomItem = ({ chatRoomInfo }) => {
   }
 
   const onPress = () => {
-    navigation.navigate("ChatRoomScreen", {
-      chatRoomID: chatRoomInfo.id,
-      storeInfo,
-      menus,
-      timeNpersons,
+    navigation.navigate("ChatRoomStack", {
+      screen: "ChatRoomScreen",
+      params: {
+        chatRoomID: chatRoomInfo.id,
+        storeInfo,
+        menus,
+        timeNpersons,
+      },
     });
   };
 

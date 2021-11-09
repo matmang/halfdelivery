@@ -20,10 +20,13 @@ const StoreItem = ({ storeInfo }) => {
     <TouchableOpacity
       style={styles.root}
       onPress={() => {
-        // ? 선택한 매장정보 redux 로 저장.
-        // dispatch(setStore(storeInfo.store));
-        navigation.navigate("SelectMenuScreen", {
-          storeInfo,
+        // ? nested screen 상태에선, navigation 방법이 조금 다르다.
+        // 참조: https://reactnavigation.org/docs/nesting-navigators/#navigating-to-a-screen-in-a-nested-navigator
+        navigation.navigate("StoreStack", {
+          screen: "SelectMenuScreen",
+          params: {
+            storeInfo,
+          },
         });
       }}
     >
@@ -32,7 +35,9 @@ const StoreItem = ({ storeInfo }) => {
         source={
           // logos.halfLogo
           // { uri: storeInfo.storeImgUri }
-          storeInfo.storeImgUri !== undefined ? { uri: storeInfo.storeImgUri } : logos.halfLogo
+          storeInfo.storeImgUri !== undefined
+            ? { uri: storeInfo.storeImgUri }
+            : logos.halfLogo
         }
       />
       <View style={styles.infoContainer}>
@@ -42,7 +47,11 @@ const StoreItem = ({ storeInfo }) => {
           </Text>
 
           <View
-            style={{ justifyContent: "center", marginLeft: 12, backgroundColor: "red" }}
+            style={{
+              justifyContent: "center",
+              marginLeft: 12,
+              backgroundColor: "red",
+            }}
             // onPress={() => alert("테스트")}
           >
             <MaterialIcons name="arrow-forward-ios" size={12} color="black" />
@@ -61,14 +70,20 @@ const StoreItem = ({ storeInfo }) => {
 
           <View style={styles.rightBox}>
             <Text style={styles.priceText} numberOfLines={1}>
-              <NunitoText>{storeInfo.minOrdPrice.toLocaleString("ko-KR")}</NunitoText> 원
+              <NunitoText>
+                {storeInfo.minOrdPrice.toLocaleString("ko-KR")}
+              </NunitoText>{" "}
+              원
             </Text>
             <Text style={styles.priceText} numberOfLines={1}>
               {/* //? JS Magic! storeInfo.delivTip 값이 존재할 때에만, && 뒤에값을 표출한다! */}
               {/* //? Conditional components 를 다루는 법이다. */}
               {storeInfo.maxDlvTip && (
                 <Text style={styles.priceText}>
-                  <NunitoText>{storeInfo.maxDlvTip.toLocaleString("ko-KR")}</NunitoText> 원
+                  <NunitoText>
+                    {storeInfo.maxDlvTip.toLocaleString("ko-KR")}
+                  </NunitoText>{" "}
+                  원
                 </Text>
               )}
             </Text>

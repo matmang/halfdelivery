@@ -3,29 +3,36 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import { Image, StyleSheet, View, SafeAreaView } from "react-native";
 
-import StoreStack from "./BttmTabStacks/StoreStack";
-import PartnerStack from "./BttmTabStacks/PartnerStack";
-import HomeStack from "./BttmTabStacks/HomeStack";
-import OrderInfoStack from "./BttmTabStacks/OrderInfoStack";
-import ChatRoomStack from "./BttmTabStacks/ChatRoomStack";
+import btStoreStack from "./BttmTabStacks/btStoreStack";
+import btPartnerStack from "./BttmTabStacks/btPartnerStack";
+import btHomeStack from "./BttmTabStacks/btHomeStack";
+import btOrderInfoStack from "./BttmTabStacks/btOrderInfoStack";
+import btChatRoomStack from "./BttmTabStacks/btChatRoomStack";
 import colors from "../../colors";
 import images from "../../images";
+import styled from "styled-components";
+// import Logo from "./logo.svg";
+
+const Footer = styled.View`
+  position: absolute;
+  bottom: 10;
+`;
 
 const Tab = createBottomTabNavigator();
 
 const TabBarIcon = (focused, onSource, offSource) => {
   return (
-    <View style={styles.otherTabBarIcon}>
+    <Footer style={styles.otherTabBarIcon}>
       <Image source={focused ? onSource : offSource} />
-    </View>
+    </Footer>
   );
 };
 
 const CenterTabBarIcon = (focused, onSource, offSource) => {
   return (
-    <View style={styles.centerTabBarIcon}>
+    <Footer style={styles.centerTabBarIcon}>
       <Image source={focused ? onSource : offSource} />
-    </View>
+    </Footer>
   );
 };
 
@@ -54,7 +61,7 @@ const customBottomTab = () => {
       }}
     >
       <Tab.Screen
-        component={StoreStack}
+        component={btStoreStack}
         name="Store"
         options={{
           tabBarIcon: ({ focused }) => {
@@ -63,7 +70,7 @@ const customBottomTab = () => {
         }}
       />
       <Tab.Screen
-        component={PartnerStack}
+        component={btPartnerStack}
         name="Partner"
         options={{
           tabBarIcon: ({ focused }) => {
@@ -72,8 +79,8 @@ const customBottomTab = () => {
         }}
       />
       <Tab.Screen
-        component={HomeStack}
-        name="Home"
+        component={btHomeStack}
+        name="btHomeStack"
         options={{
           tabBarIcon: ({ focused }) => {
             return CenterTabBarIcon(focused, images.halfDOn, images.halfDOff);
@@ -81,7 +88,7 @@ const customBottomTab = () => {
         }}
       />
       <Tab.Screen
-        component={OrderInfoStack}
+        component={btOrderInfoStack}
         name="OrderInfo"
         options={{
           tabBarIcon: ({ focused }) => {
@@ -90,7 +97,7 @@ const customBottomTab = () => {
         }}
       />
       <Tab.Screen
-        component={ChatRoomStack}
+        component={btChatRoomStack}
         name="ChatRoom"
         options={{
           tabBarIcon: ({ focused }) => {

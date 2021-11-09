@@ -101,13 +101,6 @@ export default () => {
         })}
       />
       <Stack.Screen
-        name="TestScreen"
-        component={SignUpExample}
-        options={{
-          title: "테스트 스크린",
-        }}
-      />
-      <Stack.Screen
         name="Profile"
         component={ProfileScreen}
         options={{

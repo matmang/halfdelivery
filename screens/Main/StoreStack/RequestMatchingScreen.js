@@ -3,7 +3,13 @@ import { Image, View, Text, Button, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import CircularProgress from "react-native-circular-progress-indicator"; // https://www.npmjs.com/package/react-native-circular-progress-indicator
 import { Auth, DataStore, SortDirection } from "aws-amplify";
-import { ChatRoom, User, ChatRoomUser, OrderMenu, Order } from "../../../AWS/src/models";
+import {
+  ChatRoom,
+  User,
+  ChatRoomUser,
+  OrderMenu,
+  Order,
+} from "../../../AWS/src/models";
 import colors from "../../../colors";
 
 const RequestMatchingScreen = (props) => {
@@ -18,7 +24,9 @@ const RequestMatchingScreen = (props) => {
   const timeNpersons = matchingInfo.timeNpersons;
 
   const deleteChatRoom = async () => {
-    const modelToDelete = await DataStore.query(ChatRoom, (c) => c.id("eq", createdChatRoom.id));
+    const modelToDelete = await DataStore.query(ChatRoom, (c) =>
+      c.id("eq", createdChatRoom.id)
+    );
     console.log("modelToDelete: ", modelToDelete);
     DataStore.delete(modelToDelete[0]); // ! ???????
     console.log("삭제 완료");
@@ -58,18 +66,29 @@ const RequestMatchingScreen = (props) => {
       <View style={styles.orderLogView}>
         {/* <Text style={styles.orderLogCategory}>{orderInfo.category}</Text> */}
         <Text style={styles.orderLogMinPrice}>{storeInfo.store}</Text>
-        <Image source={{ uri: storeInfo.storeImgUri }} style={styles.orderLogImage} />
-        <Text style={styles.orderLogMinPrice}>최소주문금액: {storeInfo.minOrdPrice}원</Text>
+        <Image
+          source={{ uri: storeInfo.storeImgUri }}
+          style={styles.orderLogImage}
+        />
+        <Text style={styles.orderLogMinPrice}>
+          최소주문금액: {storeInfo.minOrdPrice}원
+        </Text>
 
         {/* 매칭 시간 / 인원 */}
-        <Text style={styles.orderLogMinPrice}>매칭 시간: {timeNpersons.time}분</Text>
-        <Text style={styles.orderLogMinPrice}>매칭 인원: {timeNpersons.persons}명</Text>
+        <Text style={styles.orderLogMinPrice}>
+          매칭 시간: {timeNpersons.time}분
+        </Text>
+        <Text style={styles.orderLogMinPrice}>
+          매칭 인원: {timeNpersons.persons}명
+        </Text>
       </View>
       <View style={{ flex: 1 }}>
         <Button
           title="확인" //? 홈으로 돌아감, 대신 매칭요청은 계속 진행중.
           onPress={() => {
-            navigation.navigate("HomeScreen");
+            navigation.navigate("BottomTabNav", {
+              screen: "btHomeStack",
+            });
           }}
         />
       </View>

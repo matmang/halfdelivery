@@ -52,9 +52,16 @@ export default ({ chatRoom }) => {
   }, []);
 
   const onPress = () => {
-    navigation.navigate("ChatRoomScreen", {
-      id: chatRoom.id,
+    navigation.navigate("ChatRoomStack", {
+      screen: "ChatRoomScreen",
+      params: {
+        id: chatRoom.id,
+      },
     });
+
+    // navigation.navigate("ChatRoomScreen", {
+    //   id: chatRoom.id,
+    // });
   };
 
   // ? user 정보 불러오는동안 로딩 바.
