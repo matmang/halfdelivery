@@ -111,8 +111,9 @@ const RoomItem = ({ chatRoomInfo }) => {
       <View
         style={{
           justifyContent: "center",
-          marginRight: 20,
-          backgroundColor: "red",
+          marginLeft: 80,
+          marginRight: 24,
+          backgroundColor: "yellow",
         }}
       >
         <MaterialIcons name="arrow-forward-ios" size={12} color="black" />
@@ -124,6 +125,7 @@ const RoomItem = ({ chatRoomInfo }) => {
 const styles = StyleSheet.create({
   root: {
     flexDirection: "row",
+    alignItems: "center",
     height: 100,
     backgroundColor: "#fff",
     marginVertical: 2, //? 컴포넌트 복붙해서 재활용시, 사용됨 ㅎㅎ
@@ -131,20 +133,17 @@ const styles = StyleSheet.create({
   image: {
     // marginLeft: 3,
     borderWidth: 1,
-    flex: 2,
     marginLeft: 24,
     marginVertical: 10,
     borderRadius: 15,
-    height: "auto",
-    width: "auto",
+    height: 72,
+    width: 72,
     resizeMode: "cover", // ? https://github.com/facebook/react-native/issues/17684#:~:text=resizeMode%3D%22contain%22&text=contain%20%3A%20Scale%20the%20image%20uniformly,the%20view%20(minus%20padding).
   },
   infoContainer: {
     padding: 5,
-    marginLeft: 10,
-    backgroundColor: "white",
+    marginLeft: 20,
     justifyContent: "center",
-    flex: 5,
   },
   title: {
     fontSize: 15,
@@ -168,7 +167,6 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderWidth: 1,
     borderColor: "black",
-    flex: 1,
   },
   timeContainer: {
     justifyContent: "center",
@@ -176,7 +174,6 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderWidth: 1,
     borderColor: "black",
-    flex: 1,
   },
   text: {
     fontSize: 15,

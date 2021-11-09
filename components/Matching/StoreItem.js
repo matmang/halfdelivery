@@ -97,6 +97,7 @@ const StoreItem = ({ storeInfo }) => {
 const styles = StyleSheet.create({
   root: {
     flexDirection: "row",
+    alignItems: "center",
     height: 100,
     backgroundColor: "#fff",
     marginVertical: 2, //? 컴포넌트 복붙해서 재활용시, 사용됨 ㅎㅎ
@@ -104,22 +105,19 @@ const styles = StyleSheet.create({
   image: {
     // marginLeft: 3,
     borderWidth: 1,
-    flex: 2,
     marginLeft: 24,
     marginVertical: 10,
     borderRadius: 15,
-    height: "auto",
-    width: "auto",
-    // width: 83,
-    // height: 72,
+    height: 72,
+    width: 72,
+
     resizeMode: "stretch", // ? https://github.com/facebook/react-native/issues/17684#:~:text=resizeMode%3D%22contain%22&text=contain%20%3A%20Scale%20the%20image%20uniformly,the%20view%20(minus%20padding).
   },
   infoContainer: {
     // backgroundColor: "yellow",
     padding: 5,
-    marginLeft: 10,
+    marginLeft: 20,
     justifyContent: "center",
-    flex: 5,
   },
   leftBox: {
     // backgroundColor: "red",
