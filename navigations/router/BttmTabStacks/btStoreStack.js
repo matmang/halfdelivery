@@ -24,7 +24,7 @@ const Title = styled.Text`
   color: #ffffff;
   font-weight: bold;
 `;
-// 56
+
 const BlueHeader = (props) => {
   return (
     <HeaderView>
