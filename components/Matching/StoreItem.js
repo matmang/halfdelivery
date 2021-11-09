@@ -104,14 +104,15 @@ const styles = StyleSheet.create({
   },
   image: {
     // marginLeft: 3,
+    borderColor: "black",
     borderWidth: 1,
     marginLeft: 24,
     marginVertical: 10,
-    borderRadius: 15,
+    borderRadius: 10,
     height: 72,
     width: 72,
 
-    resizeMode: "stretch", // ? https://github.com/facebook/react-native/issues/17684#:~:text=resizeMode%3D%22contain%22&text=contain%20%3A%20Scale%20the%20image%20uniformly,the%20view%20(minus%20padding).
+    resizeMode: "cover", // ? https://github.com/facebook/react-native/issues/17684#:~:text=resizeMode%3D%22contain%22&text=contain%20%3A%20Scale%20the%20image%20uniformly,the%20view%20(minus%20padding).
   },
   infoContainer: {
     // backgroundColor: "yellow",
@@ -129,17 +130,20 @@ const styles = StyleSheet.create({
 
   storeText: {
     fontSize: 17,
+    lineHeight: 20,
     textAlign: "left",
     fontFamily: "noto-regular",
     marginBottom: 3,
   },
   priceText: {
     fontSize: 14,
+    lineHeight: 16,
     textAlign: "left",
     fontFamily: "noto-regular",
   },
   delivTipText: {
     fontSize: 14,
+    lineHeight: 16,
     textAlign: "left",
     fontFamily: "noto-regular",
   },

@@ -15,7 +15,7 @@ import styled from "styled-components";
 
 const Footer = styled.View`
   position: absolute;
-  bottom: 10;
+  bottom: 10px;
 `;
 
 const Tab = createBottomTabNavigator();

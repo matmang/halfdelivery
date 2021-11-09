@@ -1,15 +1,36 @@
 import React, { useState, useEffect, createContext } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { View, Text, Button, ScrollView, StyleSheet, SafeAreaView } from "react-native";
+import {
+  View,
+  Text,
+  Button,
+  ScrollView,
+  StyleSheet,
+  SafeAreaView,
+  Pressable,
+} from "react-native";
 import StoreList from "../../../components/Matching/StoreList";
 import { useRoute } from "@react-navigation/core";
-import { setStore, addMenu, cleanMenus, cleanStoreName } from "../../../redux/orderSlice";
+import {
+  setStore,
+  addMenu,
+  cleanMenus,
+  cleanStoreName,
+} from "../../../redux/orderSlice";
 import { Auth, DataStore, SortDirection } from "aws-amplify";
 import { Store } from "../../../AWS/src/models";
 import { useSelector, useDispatch } from "react-redux";
 import orderReducer from "../../../redux/orderSlice";
 import QuantitySelector from "../../../components/Matching/QuantitySelector";
+import styled from "styled-components";
+import colors from "../../../colors";
 
+const ButtonTitle = styled.Text`
+  font-family: "noto-regular";
+  font-size: 17;
+  line-height: 20;
+  color: ${colors.blueGrey};
+`;
 const SelectStoreScreen = () => {
   //
   const KOREAN_ID = "8314af0c-1d8e-4112-869b-15689debb495";
@@ -33,33 +54,33 @@ const SelectStoreScreen = () => {
   //! 디자인 시안 나오기 전까진, 일단 Button 으로...
   const CategoryButton = (props) => {
     return (
-      <View style={{ margin: 10 }}>
-        <Button
-          title={props.name}
-          onPress={() => {
-            switch (props.name) {
-              case "한식":
-                setCategoryID(KOREAN_ID);
-                break;
-              case "중식":
-                setCategoryID(CHINESE_ID);
-                break;
-              case "일식":
-                setCategoryID(JAPANESE_ID);
-                break;
-              case "양식":
-                setCategoryID(WESTERN_ID);
-                break;
-              case "카페":
-                setCategoryID(CAFE_ID);
-                break;
-              default:
-                setCategoryID("ALL");
-                break;
-            }
-          }}
-        />
-      </View>
+      <Pressable
+        style={{ margin: 10 }}
+        onPress={() => {
+          switch (props.name) {
+            case "한식":
+              setCategoryID(KOREAN_ID);
+              break;
+            case "중식":
+              setCategoryID(CHINESE_ID);
+              break;
+            case "일식":
+              setCategoryID(JAPANESE_ID);
+              break;
+            case "양식":
+              setCategoryID(WESTERN_ID);
+              break;
+            case "카페":
+              setCategoryID(CAFE_ID);
+              break;
+            default:
+              setCategoryID("ALL");
+              break;
+          }
+        }}
+      >
+        <ButtonTitle>{props.name}</ButtonTitle>
+      </Pressable>
     );
   };
 
@@ -102,7 +123,7 @@ const styles = StyleSheet.create({
     width: "100%",
     paddingHorizontal: 30,
     justifyContent: "space-evenly",
-    marginBottom: 8,
+    marginBottom: 4,
   },
 });
 export default SelectStoreScreen;
