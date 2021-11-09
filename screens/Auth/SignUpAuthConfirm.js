@@ -47,7 +47,7 @@ const PasswordContainer = styled.View`
 const ButtonContainer = styled.View`
   margin-top: 40px;
   position: absolute;
-  bottom: 30;
+  bottom: 30px;
 `;
 
 const AuthContainer = styled.View`
@@ -56,25 +56,25 @@ const AuthContainer = styled.View`
 
 const PhaseText = styled.Text`
   font-family: "noto-regular";
-  font-size: 22;
+  font-size: 22px;
 `;
 
 const ExplainText = styled.Text`
   font-family: "noto-regular";
-  font-size: 14;
+  font-size: 14px;
   color: #3c3c3c;
   margin-top: -20px;
 `;
 
 const NameText = styled.Text`
   font-family: "noto-regular";
-  font-size: 15;
+  font-size: 15px;
   color: ${colors.mainBlue};
 `;
 
 const AuthText = styled.Text`
   font-family: "noto-regular";
-  font-size: 14;
+  font-size: 14px;
   text-decoration-line: underline;
   margin-left: auto;
   color: ${colors.subPink1};

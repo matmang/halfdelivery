@@ -24,7 +24,7 @@ const Button = styled.View`
 const Text = styled.Text`
   color: ${(props) => (props.accent ? colors.subPink3 : colors.blueGrey)};
   font-weight: 600;
-  font-size: 14;
+  font-size: 14px;
   font-family: "nunito-regular";
 `;
 

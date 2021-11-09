@@ -1,16 +1,41 @@
-import { ScrollView, FlatList, TouchableOpacity } from "react-native-gesture-handler";
-import React, { useState, useEffect, useCallback, useMemo, useRef } from "react";
+import {
+  ScrollView,
+  FlatList,
+  TouchableOpacity,
+} from "react-native-gesture-handler";
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  useMemo,
+  useRef,
+} from "react";
 import { useNavigation } from "@react-navigation/native";
-import { View, Text, Button, StyleSheet, SafeAreaView, Pressable } from "react-native";
+import {
+  View,
+  Text,
+  Button,
+  StyleSheet,
+  SafeAreaView,
+  Pressable,
+} from "react-native";
 import StoreComponent from "../../../components/Matching/StoreComponent";
 import MenuList from "../../../components/Matching/MenuList";
 import { useSelector, useDispatch } from "react-redux";
 import { useRoute } from "@react-navigation/core";
-import { setStore, addMenu, cleanMenus, cleanStoreName } from "../../../redux/orderSlice";
+import {
+  setStore,
+  addMenu,
+  cleanMenus,
+  cleanStoreName,
+} from "../../../redux/orderSlice";
 import colors from "../../../colors";
 import ShoppingItem from "../../../components/Order/ShoppingItem";
 import Animated from "react-native-reanimated";
-import BottomSheet, { BottomSheetScrollView, BottomSheetFlatList } from "@gorhom/bottom-sheet";
+import BottomSheet, {
+  BottomSheetScrollView,
+  BottomSheetFlatList,
+} from "@gorhom/bottom-sheet";
 import { Picker } from "@react-native-picker/picker";
 
 const SelectMenuScreen = (props) => {
@@ -164,7 +189,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.unAccent,
   },
   topText: {
-    color: "white",
+    color: colors.mainBlue,
     fontFamily: "noto-regular",
     fontWeight: "bold",
     fontSize: 18,

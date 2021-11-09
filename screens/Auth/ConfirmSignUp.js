@@ -17,7 +17,7 @@ const InputContainer = styled.View`
 `;
 
 const Title = styled.Text`
-  font-size: 20;
+  font-size: 20px;
   color: ${colors.mainBlue};
   font-weight: 500;
 `;

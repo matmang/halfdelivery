@@ -27,8 +27,8 @@ import colors from "../../../colors";
 
 const ButtonTitle = styled.Text`
   font-family: "noto-regular";
-  font-size: 17;
-  line-height: 20;
+  font-size: 17px;
+  line-height: 20px;
   color: ${colors.blueGrey};
 `;
 const SelectStoreScreen = () => {

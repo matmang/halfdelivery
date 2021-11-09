@@ -11,7 +11,7 @@ const Container = styled.TextInput`
   border-bottom-width: 1px;
   border-bottom-color: #000000;
   font-family: "noto-regular";
-  font-size: 17;
+  font-size: 17px;
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
 `;
 
