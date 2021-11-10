@@ -6,7 +6,7 @@ import colors from "../../colors";
 const StyledText = styled.Text`
   align-items: flex-start;
   font-family: "noto-regular";
-  font-size: 12;
+  font-size: 12px;
   color: ${colors.errorPink};
 `;
 

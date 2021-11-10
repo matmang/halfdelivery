@@ -58,7 +58,7 @@ export default () => {
     fetchUser();
   }, []);
   return (
-    <Stack.Navigator initialRouteName="TestScreen">
+    <Stack.Navigator initialRouteName="HomeScreen">
       <Stack.Screen
         name="HomeScreen"
         component={HomeScreen}
@@ -74,12 +74,18 @@ export default () => {
             <HeaderButtons HeaderButtonComponent={HomeHeaderButton}>
               <Item
                 title="Notification"
-                iconName={Platform.OS === "android" ? "md-notifications" : "ios-notifications"}
+                iconName={
+                  Platform.OS === "android"
+                    ? "md-notifications"
+                    : "ios-notifications"
+                }
                 onPress={() => alert("알림")}
               />
               <Item
                 title="Profile"
-                iconName={Platform.OS === "android" ? "md-person" : "ios-person"}
+                iconName={
+                  Platform.OS === "android" ? "md-person" : "ios-person"
+                }
                 onPress={() => {
                   navigation.navigate("Profile");
                 }}
@@ -95,13 +101,6 @@ export default () => {
         })}
       />
       <Stack.Screen
-        name="TestScreen"
-        component={SignUpExample}
-        options={{
-          title: "테스트 스크린",
-        }}
-      />
-      <Stack.Screen
         name="Profile"
         component={ProfileScreen}
         options={{
@@ -112,10 +111,19 @@ export default () => {
             <HeaderButtons HeaderButtonComponent={HomeHeaderButton}>
               <Item
                 title="Notification"
-                iconName={Platform.OS === "android" ? "md-notifications" : "ios-notifications"}
+                iconName={
+                  Platform.OS === "android"
+                    ? "md-notifications"
+                    : "ios-notifications"
+                }
                 onPress={() => alert("알림")}
               />
-              <Item title="Profile" iconName={Platform.OS === "android" ? "md-person" : "ios-person"} />
+              <Item
+                title="Profile"
+                iconName={
+                  Platform.OS === "android" ? "md-person" : "ios-person"
+                }
+              />
             </HeaderButtons>
           ),
         }}

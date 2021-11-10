@@ -20,7 +20,7 @@ const Container = styled.View`
 `;
 
 const HeaderContainer = styled.View`
-  width: ${width};
+  width: ${width}px;
   justify-content: center;
   align-items: center;
   border-bottom-left-radius: 30px;

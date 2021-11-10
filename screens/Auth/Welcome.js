@@ -44,7 +44,7 @@ const TouchContainer = styled.TouchableOpacity`
 
 const Footer = styled.View`
   position: absolute;
-  bottom: 10;
+  bottom: 10px;
 `;
 
 const WhiteCircle = styled.View`
@@ -63,35 +63,35 @@ const SecondContainer = styled.View`
 
 const WelcomeText = styled.Text`
   font-family: "nunito-regular";
-  font-size: 40;
+  font-size: 40px;
   font-weight: bold;
   color: ${colors.mainBlue};
 `;
 
 const WelcomeTextKR = styled.Text`
   font-family: "noto-regular";
-  font-size: 20;
+  font-size: 20px;
   font-weight: bold;
   color: ${colors.mainBlue};
 `;
 
 const BlackText = styled.Text`
   font-family: "noto-regular";
-  font-size: 15;
+  font-size: 15px;
   margin-right: auto;
   margin-left: 49px;
 `;
 
 const BlueText = styled.Text`
   font-family: "noto-regular";
-  font-size: 17;
-  margin-left: 8;
+  font-size: 17px;
+  margin-left: 8px;
   color: ${colors.mainBlue};
 `;
 
 const ExplainText = styled.Text`
   font-family: "noto-regular";
-  font-size: 12;
+  font-size: 12px;
   color: ${colors.blueGrey};
 `;
 

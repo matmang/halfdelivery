@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Image, ActivityIndicator } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Image,
+  ActivityIndicator,
+} from "react-native";
 import logos from "../../images";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation, useRoute } from "@react-navigation/core";
@@ -41,11 +48,14 @@ const RoomItem = ({ chatRoomInfo }) => {
   }
 
   const onPress = () => {
-    navigation.navigate("ChatRoomScreen", {
-      chatRoomID: chatRoomInfo.id,
-      storeInfo,
-      menus,
-      timeNpersons,
+    navigation.navigate("ChatRoomStack", {
+      screen: "ChatRoomScreen",
+      params: {
+        chatRoomID: chatRoomInfo.id,
+        storeInfo,
+        menus,
+        timeNpersons,
+      },
     });
   };
 
@@ -53,12 +63,23 @@ const RoomItem = ({ chatRoomInfo }) => {
     <TouchableOpacity style={styles.root} onPress={onPress}>
       <Image
         style={styles.image}
-        source={storeInfo.storeImgUri !== undefined ? { uri: storeInfo.storeImgUri } : logos.halfLogo}
+        source={
+          storeInfo.storeImgUri !== undefined
+            ? { uri: storeInfo.storeImgUri }
+            : logos.halfLogo
+        }
       />
       <View style={styles.infoContainer}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <View
-            style={{ width: 44, height: 20, borderRadius: 12, backgroundColor: "#E5E6E7", justifyContent: "center" }}
+            style={{
+              width: 44,
+              height: 20,
+              borderRadius: 12,
+              backgroundColor: "#E5E6E7",
+              justifyContent: "center",
+              marginBottom: 5,
+            }}
           >
             <Text style={styles.categoryText} numberOfLines={1}>
               {category}
@@ -88,7 +109,14 @@ const RoomItem = ({ chatRoomInfo }) => {
         </View>
       </View>
 
-      <View style={{ justifyContent: "center", marginRight: 20, backgroundColor: "red" }}>
+      <View
+        style={{
+          justifyContent: "center",
+          marginLeft: 80,
+          marginRight: 24,
+          backgroundColor: "yellow",
+        }}
+      >
         <MaterialIcons name="arrow-forward-ios" size={12} color="black" />
       </View>
     </TouchableOpacity>
@@ -98,27 +126,26 @@ const RoomItem = ({ chatRoomInfo }) => {
 const styles = StyleSheet.create({
   root: {
     flexDirection: "row",
+    alignItems: "center",
     height: 100,
     backgroundColor: "#fff",
     marginVertical: 2, //? 컴포넌트 복붙해서 재활용시, 사용됨 ㅎㅎ
   },
   image: {
     // marginLeft: 3,
+    borderColor: "black",
     borderWidth: 1,
-    flex: 2,
     marginLeft: 24,
     marginVertical: 10,
-    borderRadius: 15,
-    height: "auto",
-    width: "auto",
+    borderRadius: 10,
+    height: 72,
+    width: 72,
     resizeMode: "cover", // ? https://github.com/facebook/react-native/issues/17684#:~:text=resizeMode%3D%22contain%22&text=contain%20%3A%20Scale%20the%20image%20uniformly,the%20view%20(minus%20padding).
   },
   infoContainer: {
     padding: 5,
-    marginLeft: 10,
-    backgroundColor: "white",
+    marginLeft: 20,
     justifyContent: "center",
-    flex: 5,
   },
   title: {
     fontSize: 15,
@@ -142,7 +169,6 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderWidth: 1,
     borderColor: "black",
-    flex: 1,
   },
   timeContainer: {
     justifyContent: "center",
@@ -150,10 +176,10 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderWidth: 1,
     borderColor: "black",
-    flex: 1,
   },
   text: {
     fontSize: 15,
+    lineHeight: 17,
     textAlign: "center",
   },
   categoryText: {
@@ -163,6 +189,7 @@ const styles = StyleSheet.create({
   },
   storeText: {
     fontSize: 17,
+    lineHeight: 20,
     textAlign: "left",
     fontFamily: "noto-regular",
     marginLeft: 8,
@@ -170,16 +197,19 @@ const styles = StyleSheet.create({
   },
   priceText: {
     fontSize: 17,
+    lineHeight: 20,
     textAlign: "left",
     fontFamily: "noto-regular",
   },
   personsText: {
     fontSize: 14,
+    lineHeight: 16,
     textAlign: "left",
     fontFamily: "noto-regular",
   },
   timeText: {
     fontSize: 12,
+    lineHeight: 14,
     textAlign: "left",
     fontFamily: "noto-regular",
   },

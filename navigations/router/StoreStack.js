@@ -2,14 +2,13 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { View, Image, Text, SafeAreaView, Button } from "react-native";
 
-import logos from "../../../images";
+import logos from "../../images";
 
-import SelectStoreScreen from "../../../screens/Main/StoreStack/SelectStoreScreen";
-import SelectMenuScreen from "../../../screens/Main/StoreStack/SelectMenuScreen";
-import SetMatchingTimeScreen from "../../../screens/Main/StoreStack/SetMatchingTimeScreen";
-import ChatRoomScreen from "../../../screens/Main/ChatRoomStack/ChatRoomScreen";
-import RequestMatchingScreen from "../../../screens/Main/StoreStack/RequestMatchingScreen";
-import HomeScreen from "../../../screens/Main/HomeStack/HomeScreen";
+import SelectMenuScreen from "../../screens/Main/StoreStack/SelectMenuScreen";
+import SetMatchingTimeScreen from "../../screens/Main/StoreStack/SetMatchingTimeScreen";
+import ChatRoomScreen from "../../screens/Main/ChatRoomStack/ChatRoomScreen";
+import RequestMatchingScreen from "../../screens/Main/StoreStack/RequestMatchingScreen";
+import HomeScreen from "../../screens/Main/HomeStack/HomeScreen";
 
 const Stack = createStackNavigator();
 const LogoHeader = (props) => {
@@ -29,18 +28,11 @@ const LogoHeader = (props) => {
 
 export default () => (
   <Stack.Navigator
-    initialRouteName="SelectStoreScreen"
+    initialRouteName="SelectMenuScreen"
     screenOptions={{
       header: (props) => <LogoHeader {...props} />,
     }}
   >
-    <Stack.Screen
-      name="SelectStoreScreen"
-      component={SelectStoreScreen}
-      options={{
-        title: "음식점 고르기",
-      }}
-    />
     <Stack.Screen
       name="SelectMenuScreen"
       component={SelectMenuScreen}
@@ -62,13 +54,7 @@ export default () => (
         title: "매칭요청중",
       }}
     />
-    <Stack.Screen
-      name="HomeScreen"
-      component={HomeScreen}
-      options={{
-        title: "홈",
-      }}
-    />
+
     {/* 매칭시간 설정후, 파트너가 입장시, 채팅방으로 이동해야함. */}
     <Stack.Screen
       name="ChatRoomScreen"

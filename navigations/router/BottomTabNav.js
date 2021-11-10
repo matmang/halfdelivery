@@ -1,100 +1,115 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
-import { Image, StyleSheet, View, SafeAreaView } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  View,
+  SafeAreaView,
+  Pressable,
+  TouchableOpacity,
+  Text,
+  ImageBackground,
+} from "react-native";
 
-import StoreStack from "./BttmTabStacks/StoreStack";
-import PartnerStack from "./BttmTabStacks/PartnerStack";
-import HomeStack from "./BttmTabStacks/HomeStack";
-import OrderInfoStack from "./BttmTabStacks/OrderInfoStack";
-import ChatRoomStack from "./BttmTabStacks/ChatRoomStack";
+import btStoreStack from "./BttmTabStacks/btStoreStack";
+import btPartnerStack from "./BttmTabStacks/btPartnerStack";
+import btHomeStack from "./BttmTabStacks/btHomeStack";
+import btOrderInfoStack from "./BttmTabStacks/btOrderInfoStack";
+import btChatRoomStack from "./BttmTabStacks/btChatRoomStack";
 import colors from "../../colors";
 import images from "../../images";
+import styled from "styled-components";
+
+import storeOn from "../../assets/images/BottomTabNav/storeOn.png";
+import partnerOn from "../../assets/images/BottomTabNav/partnerOn.png";
+import halfdOn from "../../assets/images/BottomTabNav/halfdOn.png";
+import orderinfoOn from "../../assets/images/BottomTabNav/orderinfoOn.png";
+import talkOn from "../../assets/images/BottomTabNav/talkOn.png";
+
+import empty from "../../assets/images/empty.png";
 
 const Tab = createBottomTabNavigator();
 
-const TabBarIcon = (focused, onSource, offSource) => {
+const BottomTabView = styled.View`
+  justify-content: center;
+  align-items: center;
+  /* background-color: red; */
+  flex-direction: row;
+
+  height: 80px;
+  width: 100%;
+  position: absolute;
+  bottom: 2px;
+`;
+
+const BottomTab = (props) => {
   return (
-    <View style={styles.otherTabBarIcon}>
-      <Image source={focused ? onSource : offSource} />
-    </View>
+    <BottomTabView>
+      <Image source={props} />
+    </BottomTabView>
   );
 };
 
-const CenterTabBarIcon = (focused, onSource, offSource) => {
-  return (
-    <View style={styles.centerTabBarIcon}>
-      <Image source={focused ? onSource : offSource} />
-    </View>
-  );
-};
+const customBottomTabNEW = () => {
+  // const [image, setImage] = useState(storeOn); //! 리액트훅 Tab 네비게이션 prop 안에 못 넣는다..!
 
-const customBottomTab = () => {
   return (
     <Tab.Navigator
       initialRouteName="Stores"
       screenOptions={{
-        showLabel: false,
-        // tabBarInactiveTintColor: "lightgrey",
-        // tabBarActiveTintColor: colors.mainBlue,
-        // tabBarActiveBackgroundColor: colors.mainPink,
         headerShown: false,
         tabBarShowLabel: false,
-        tabBarStyle: {
-          position: "absolute",
-          backgroundColor: "white",
-          height: 62,
-          // top: 30,
-          // bottom: 50,
-          // left: 10,
-          // right: 10,
-          // borderRadius: 10,
-          ...styles.shadow,
-        },
+        // tabBarItemStyle: {
+        //   borderColor: "black",
+        //   borderWidth: 2,
+        //   height: 70,
+        // },
+        tabBarIcon: () => <Image source={empty} />,
       }}
     >
       <Tab.Screen
-        component={StoreStack}
+        component={btStoreStack}
         name="Store"
         options={{
-          tabBarIcon: ({ focused }) => {
-            return TabBarIcon(focused, images.storeOn, images.storeOff);
+          tabBarBackground: () => {
+            return BottomTab(storeOn);
           },
         }}
       />
       <Tab.Screen
-        component={PartnerStack}
+        component={btPartnerStack}
         name="Partner"
         options={{
-          tabBarIcon: ({ focused }) => {
-            return TabBarIcon(focused, images.partnerOn, images.partnerOff);
+          tabBarBackground: () => {
+            return BottomTab(partnerOn);
           },
         }}
       />
       <Tab.Screen
-        component={HomeStack}
-        name="Home"
+        component={btHomeStack}
+        name="btHomeStack"
         options={{
-          tabBarIcon: ({ focused }) => {
-            return CenterTabBarIcon(focused, images.halfDOn, images.halfDOff);
+          tabBarBackground: () => {
+            return BottomTab(halfdOn);
           },
         }}
       />
       <Tab.Screen
-        component={OrderInfoStack}
+        component={btOrderInfoStack}
         name="OrderInfo"
         options={{
-          tabBarIcon: ({ focused }) => {
-            return TabBarIcon(focused, images.orderLogOn, images.orderLogOff);
+          tabBarBackground: () => {
+            return BottomTab(orderinfoOn);
           },
         }}
       />
       <Tab.Screen
-        component={ChatRoomStack}
+        component={btChatRoomStack}
         name="ChatRoom"
         options={{
-          tabBarIcon: ({ focused }) => {
-            return TabBarIcon(focused, images.talkOn, images.talkOff);
+          tabBarBackground: () => {
+            return BottomTab(talkOn);
           },
         }}
       />
@@ -102,93 +117,4 @@ const customBottomTab = () => {
   );
 };
 
-// const BottomTabNav = () => {
-//   return (
-//     <Tab.Navigator
-//       initialRouteName="Stores"
-//       screenOptions={{
-//         showLabel: false,
-//         tabBarInactiveTintColor: "lightgrey",
-//         tabBarActiveTintColor: colors.mainBlue,
-//         tabBarActiveBackgroundColor: colors.mainPink,
-//         headerShown: false,
-//         tabBarShowLabel: false,
-//       }}
-//     >
-//       <Tab.Screen
-//         component={StoreStack}
-//         name="Store"
-//         options={{
-//           tabBarIcon: ({ color }) => <Ionicons name="heart" color={color} size={25} />,
-//         }}
-//       />
-//       <Tab.Screen
-//         component={PartnerStack}
-//         name="Partner"
-//         options={{
-//           tabBarIcon: ({ color }) => <Ionicons name="people" color={color} size={25} />,
-//         }}
-//       />
-//       <Tab.Screen
-//         component={HomeStack}
-//         name="Home"
-//         options={{
-//           tabBarIcon: ({ color }) => <Ionicons name="home" color={color} size={25} />,
-//         }}
-//       />
-//       <Tab.Screen
-//         component={OrderInfoStack}
-//         name="OrderInfo"
-//         options={{
-//           tabBarIcon: ({ color }) => <Ionicons name="reorder-four" color={color} size={25} />,
-//         }}
-//       />
-//       <Tab.Screen
-//         component={ChatRoomStack}
-//         name="ChatRoom"
-//         options={{
-//           tabBarIcon: ({ color }) => <Ionicons name="chatbox" color={color} size={25} />,
-//         }}
-//       />
-//     </Tab.Navigator>
-//   );
-// };
-
-const styles = StyleSheet.create({
-  shadow: {
-    shadowColor: "black",
-    shadowOffset: {
-      width: 0,
-      height: -2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 6,
-    elevation: 5,
-  },
-  otherTabBarIcon: {
-    // backgroundColor: "red",
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 24,
-  },
-  centerTabBarIcon: {
-    // backgroundColor: "red",
-    backgroundColor: "white",
-    width: 73,
-    height: 73,
-    borderRadius: 73,
-    justifyContent: "center",
-    alignItems: "center",
-
-    // shadowColor: "black",
-    // shadowOffset: {
-    //   width: 0,
-    //   height: -2,
-    // },
-    // shadowOpacity: 0.1,
-    // shadowRadius: 6,
-    // elevation: 5,
-  },
-});
-
-export default customBottomTab;
+export default customBottomTabNEW;
