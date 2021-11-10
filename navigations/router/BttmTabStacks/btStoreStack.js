@@ -36,15 +36,15 @@ const BlueHeader = (props) => {
 export default () => (
   <Stack.Navigator
     initialRouteName="SelectStoreScreen"
-    screenOptions={{
-      header: (props) => <BlueHeader {...props} />,
-    }}
+    // screenOptions={{
+    //   header: (props) => <BlueHeader {...props} />,
+    // }}
   >
     <Stack.Screen
       name="SelectStoreScreen"
       component={SelectStoreScreen}
       options={{
-        title: "음식점 고르기",
+        header: (props) => <BlueHeader {...props} />,
       }}
     />
   </Stack.Navigator>
