@@ -155,7 +155,7 @@ export default ({ route: { params }, navigation }) => {
         },
       });
       console.log("Sign-up Confirmed");
-      alert("인증번호가 전송되었습니다.");
+      alert("입력하신 이메일로 인증번호가 전송되었습니다.");
     } catch (error) {
       console.log("Error signing up...", error);
     }
@@ -192,6 +192,7 @@ export default ({ route: { params }, navigation }) => {
             stateFn={setName}
             autoCapitalize="none"
             value={name}
+            isValued={name ? true : false}
           />
           <ErrorMessage message={IDerrorMessage} />
         </IDContainer>
@@ -201,6 +202,7 @@ export default ({ route: { params }, navigation }) => {
             placeholder={"6자리 입력 (ex. 980424)"}
             stateFn={setBirthday}
             value={birthday}
+            isValued={birthday ? true : false}
           />
           <ErrorMessage message={PWerrorMessage} />
         </PasswordContainer>
@@ -215,6 +217,7 @@ export default ({ route: { params }, navigation }) => {
             placeholder={"'-'구분 없이 입력해주세요"}
             stateFn={setPhoneNumber}
             value={phoneNumber}
+            isValued={phoneNumber ? true : false}
           />
           <ErrorMessage message={PWCerrorMessage} />
         </PasswordContainer>
@@ -225,6 +228,7 @@ export default ({ route: { params }, navigation }) => {
             stateFn={setAuthCode}
             isPassword={true}
             value={authCode}
+            isValued={authCode ? true : false}
           />
         </PasswordContainer>
         <ButtonContainer>

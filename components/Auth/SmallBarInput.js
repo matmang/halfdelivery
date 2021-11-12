@@ -9,7 +9,8 @@ const Container = styled.TextInput`
   padding-top: 0;
   padding-bottom: 0;
   border-bottom-width: 1px;
-  border-bottom-color: ${colors.blueGrey};
+  border-bottom-color: ${({ isValued }) =>
+    isValued ? colors.mainBlue : colors.blueGrey};
   font-family: "noto-regular";
   font-size: 17px;
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
@@ -23,6 +24,7 @@ const SmallBarInput = ({
   stateFn,
   KeyboardType,
   disabled = false,
+  isValued = false,
 }) => (
   <Container
     KeyboardType={KeyboardType}
@@ -33,6 +35,7 @@ const SmallBarInput = ({
     onChangeText={(text) => stateFn(text)}
     disabled={disabled}
     editable={disabled ? false : true}
+    isValued={isValued}
   />
 );
 
@@ -43,6 +46,7 @@ SmallBarInput.proptypes = {
   autoCapitalize: Proptypes.string,
   stateFn: Proptypes.func,
   disabled: Proptypes.bool,
+  isValued: Proptypes.bool,
 };
 
 export default SmallBarInput;

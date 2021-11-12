@@ -120,6 +120,7 @@ const SignInModal = ({ isModalVisible, onBackdropPress }) => {
             placeholder={"아이디"}
             stateFn={setUsername}
             value={username}
+            isValued={username ? true : false}
           />
         </IDContainer>
         <PasswordContainer>
@@ -128,6 +129,7 @@ const SignInModal = ({ isModalVisible, onBackdropPress }) => {
             stateFn={setPassword}
             value={password}
             isPassword={true}
+            isValued={password ? true : false}
           />
         </PasswordContainer>
         <FindTextContainer>

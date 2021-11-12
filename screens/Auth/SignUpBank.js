@@ -124,6 +124,7 @@ export default ({ route: { params }, navigation }) => {
             stateFn={setbank}
             autoCapitalize="none"
             value={bank}
+            isValued={bank ? true : false}
           />
         </IDContainer>
         <PasswordContainer>
@@ -133,6 +134,7 @@ export default ({ route: { params }, navigation }) => {
             stateFn={setaccountNumber}
             autoCapitalize="none"
             value={accountNumber}
+            isValued={accountNumber ? true : false}
           />
         </PasswordContainer>
         <ButtonContainer>
