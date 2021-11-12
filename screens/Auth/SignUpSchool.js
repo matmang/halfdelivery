@@ -121,6 +121,7 @@ export default ({ route: { params }, navigation }) => {
             stateFn={setSchool}
             autoCapitalize="none"
             value={school}
+            isValued={school ? true : false}
           />
         </IDContainer>
         <PasswordContainer>
@@ -130,6 +131,7 @@ export default ({ route: { params }, navigation }) => {
             stateFn={setCollege}
             autoCapitalize="none"
             value={college}
+            isValued={college ? true : false}
           />
         </PasswordContainer>
         <ButtonContainer>

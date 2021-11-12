@@ -158,6 +158,7 @@ export default ({ navigation }) => {
             stateFn={setusername}
             autoCapitalize="none"
             value={username}
+            isValued={username ? true : false}
           />
           <ErrorMessage message={IDerrorMessage} />
         </IDContainer>
@@ -168,6 +169,7 @@ export default ({ navigation }) => {
             stateFn={setPassword}
             isPassword={true}
             value={password}
+            isValued={password ? true : false}
           />
           <ErrorMessage message={PWerrorMessage} />
         </PasswordContainer>
@@ -178,6 +180,7 @@ export default ({ navigation }) => {
             stateFn={setPasswordConfirm}
             isPassword={true}
             value={passwordConfirm}
+            isValued={passwordConfirm ? true : false}
           />
           <ErrorMessage message={PWCerrorMessage} />
         </PasswordContainer>

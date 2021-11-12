@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Image, ImageBackground } from "react-native";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components";
 import colors from "../../colors";
+import SignInModal from "../../components/Auth/SignInModal";
 import loginbackground from "../../assets/images/loginbackground.png";
 
 const Container = styled.View`
@@ -96,6 +97,12 @@ const ExplainText = styled.Text`
 `;
 
 export default ({ navigation }) => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const toggleModal = () => {
+    setIsModalVisible(!isModalVisible);
+  };
+
   return (
     <Container>
       <ImageBackground
@@ -123,7 +130,7 @@ export default ({ navigation }) => {
             <WhiteCircle></WhiteCircle>
             <BlackText>또 만나서 반가워요!</BlackText>
           </ExplainContainer>
-          <TouchContainer onPress={() => navigation.navigate("SignIn")}>
+          <TouchContainer onPress={toggleModal}>
             <Ionicons
               color={colors.mainBlue}
               size={15}
@@ -170,6 +177,10 @@ export default ({ navigation }) => {
             </TouchContainer>
           </SecondContainer>
         </BodyContainer>
+        <SignInModal
+          isModalVisible={isModalVisible}
+          onBackdropPress={() => setIsModalVisible(false)}
+        />
         <Footer>
           <ExplainText>
             하프딜리버리는1인가구 배달음식 주문을 도와주는 서비스 입니다

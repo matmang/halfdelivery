@@ -4,9 +4,8 @@ import Proptypes from "prop-types";
 import colors from "../../colors";
 
 const Container = styled.TextInput`
-  width: 338px;
+  width: 296px;
   height: 33px;
-  padding: 12.5px 20px;
   padding-top: 0;
   padding-bottom: 0;
   border-bottom-width: 1px;
@@ -17,7 +16,7 @@ const Container = styled.TextInput`
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
 `;
 
-const BarInput = ({
+const SmallBarInput = ({
   value,
   placeholder,
   isPassword = false,
@@ -40,7 +39,7 @@ const BarInput = ({
   />
 );
 
-BarInput.proptypes = {
+SmallBarInput.proptypes = {
   value: Proptypes.string,
   placeholder: Proptypes.string,
   isPassword: Proptypes.bool,
@@ -50,4 +49,4 @@ BarInput.proptypes = {
   isValued: Proptypes.bool,
 };
 
-export default BarInput;
+export default SmallBarInput;
