@@ -1,8 +1,5 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import SignIn from "../screens/Auth/SignIn";
-import SignUp from "../screens/Auth/SignUp";
-import ConfirmSignUp from "../screens/Auth/ConfirmSignUp";
 import Welcome from "../screens/Auth/Welcome";
 import SignUpAuth from "../screens/Auth/SignUpAuth";
 import SignUpAuthConfirm from "../screens/Auth/SignUpAuthConfirm";
@@ -24,15 +21,6 @@ export default () => (
       component={Welcome}
       options={{
         headerShown: false,
-      }}
-    />
-    <Auth.Screen
-      name="SignUp"
-      component={SignUp}
-      options={{
-        title: "회원가입",
-        headerTitleAlign: "center",
-        headerTitleStyle: { fontFamily: "noto-regular" },
       }}
     />
     <Auth.Screen
@@ -61,20 +49,6 @@ export default () => (
       component={SignUpBank}
       options={{
         headerShown: false,
-      }}
-    />
-    <Auth.Screen
-      name="SignIn"
-      component={SignIn}
-      options={{ headerShown: false, title: "Sign In" }}
-    />
-    <Auth.Screen
-      name="ConfirmSignUp"
-      component={ConfirmSignUp}
-      options={{
-        title: "인증",
-        headerTitleAlign: "center",
-        headerTitleStyle: { fontFamily: "noto-regular" },
       }}
     />
   </Auth.Navigator>
