@@ -67,7 +67,7 @@ export default () => {
           headerTitleAlign: "center",
           headerStyle: {
             elevation: 0,
-            backgroundColor: "#22326E",
+            backgroundColor: "#0E257C",
             shadowOpacity: 0,
           },
           headerRight: () => (

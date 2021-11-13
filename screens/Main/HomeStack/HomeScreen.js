@@ -3,10 +3,10 @@ import Home from "../../../components/Main/Home";
 import { ScrollView } from "react-native-gesture-handler";
 import { Store } from "../../../AWS/src/models";
 import { Auth, DataStore } from "aws-amplify";
-import { Button } from "react-native";
+import { Button, Text } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 
-export default () => {
+export default ({ isModalVisible }) => {
   const navigation = useNavigation();
   const [search, setSearch] = useState("");
   const [stores, setStores] = useState([]);
@@ -20,14 +20,18 @@ export default () => {
       const userData = await Auth.currentAuthenticatedUser();
       const storeData = await DataStore.query(Store);
       setStores(storeData);
-      console.log(stores);
+      console.log(isModalVisible);
     };
     fetchStores();
   }, []);
 
   return (
     <ScrollView>
-      <Home stores={stores} navigation={navigation} />
+      <Home
+        stores={stores}
+        navigation={navigation}
+        isModalVisible={isModalVisible}
+      />
     </ScrollView>
   );
 };

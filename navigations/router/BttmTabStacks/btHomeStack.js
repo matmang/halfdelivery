@@ -13,6 +13,8 @@ import colors from "../../../colors";
 import Auth from "@aws-amplify/auth";
 
 import SignUpExample from "../../../screens/Auth/SignUpExample";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import ProfileModal from "../../../components/Main/ProfileModal";
 
 const Container = styled.View`
   flex-direction: row;
@@ -48,6 +50,11 @@ const LogoHeader = (props) => {
 export default () => {
   const [username, setUsername] = useState("");
   const [school, setSchool] = useState("");
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const toggleModal = () => {
+    setIsModalVisible(!isModalVisible);
+  };
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -61,13 +68,15 @@ export default () => {
     <Stack.Navigator initialRouteName="HomeScreen">
       <Stack.Screen
         name="HomeScreen"
-        component={HomeScreen}
+        children={({ navigation }) => (
+          <HomeScreen isModalVisible={isModalVisible} />
+        )}
         options={({ navigation }) => ({
           title: "",
           headerTitleAlign: "center",
           headerStyle: {
             elevation: 0,
-            backgroundColor: "#22326E",
+            backgroundColor: "#0E257C",
             shadowOpacity: 0,
           },
           headerRight: () => (
@@ -95,7 +104,9 @@ export default () => {
           headerLeft: () => (
             <Container>
               <UserInfo>{username}님은 지금 </UserInfo>
-              <UserSchool>{school}</UserSchool>
+              <TouchableOpacity onPress={toggleModal}>
+                <UserSchool>{school}</UserSchool>
+              </TouchableOpacity>
             </Container>
           ),
         })}
