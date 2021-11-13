@@ -54,17 +54,20 @@ const StoreName = styled.View`
   margin-left: 20px;
 `;
 
-const Popular = ({ storeInfo, navigation }) => (
+const Popular = ({ index, storeInfo, navigation }) => (
   <TouchableOpacity
     onPress={() =>
-      navigation.navigate("SelectMenuScreen", {
-        storeInfo,
+      navigation.navigate("StoreStack", {
+        screen: "SelectMenuScreen",
+        params: {
+          storeInfo,
+        },
       })
     }
   >
     <Container>
       <Ranking>
-        <RankingText>1</RankingText>
+        <RankingText>{index + 1}</RankingText>
       </Ranking>
       <CategoryView>
         <StoreInfo>양식</StoreInfo>
@@ -75,12 +78,18 @@ const Popular = ({ storeInfo, navigation }) => (
       <Ionicons
         color="black"
         size={20}
-        name={Platform.OS === "android" ? "md-chevron-forward" : "ios-chevron-forward"}
+        name={
+          Platform.OS === "android"
+            ? "md-chevron-forward"
+            : "ios-chevron-forward"
+        }
       />
       <Ionicons
         color={colors.mainBlue}
         size={32}
-        name={Platform.OS === "android" ? "md-caret-up-sharp" : "ios-caret-up-sharp"}
+        name={
+          Platform.OS === "android" ? "md-caret-up-sharp" : "ios-caret-up-sharp"
+        }
         style={{ marginLeft: "auto" }}
       />
     </Container>

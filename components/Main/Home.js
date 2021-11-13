@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, Dimensions, ActivityIndicator } from "react-native";
 import styled from "styled-components";
 import { Ionicons } from "@expo/vector-icons";
@@ -10,6 +10,7 @@ import Swiper from "react-native-swiper";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { logOut } from "../../redux/usersSlice";
 import { useDispatch } from "react-redux";
+import ProfileModal from "./ProfileModal";
 
 const { width } = Dimensions.get("screen");
 
@@ -23,8 +24,6 @@ const HeaderContainer = styled.View`
   width: ${width}px;
   justify-content: center;
   align-items: center;
-  border-bottom-left-radius: 30px;
-  border-bottom-right-radius: 30px;
   background-color: ${colors.mainBlue};
 `;
 
@@ -58,7 +57,7 @@ const NowPopularContainer = styled.View`
   height: 320px;
   justify-content: center;
   align-items: center;
-  background-color: ${colors.snow};
+  background-color: white;
   margin-bottom: 36px;
 `;
 
@@ -79,12 +78,23 @@ const SearchText = styled.Text`
   color: ${colors.moon};
 `;
 
-const Home = ({ stores, navigation }) => {
+const Home = ({ stores, navigation, isModalVisible }) => {
   const dispatch = useDispatch();
+  const [isVisible, setIsVisible] = useState(false);
+
   const logOutPress = () => {
     Auth.signOut();
     dispatch(logOut());
   };
+
+  useEffect(() => {
+    setIsVisible(!isVisible);
+  }, [isModalVisible]);
+
+  useEffect(() => {
+    setIsVisible(false);
+  }, []);
+
   return (
     <Container>
       <HeaderContainer>
@@ -103,17 +113,13 @@ const Home = ({ stores, navigation }) => {
       </HeaderContainer>
       <SubTitle>실시간 주문 랭킹</SubTitle>
       <NowPopularContainer>
-        <FlatList
-          data={stores}
-          keyExtractor={(item, index) => index.toString()}
-          onEndReachedThreshold={0.8}
-          showsVerticalScrollIndicator={true}
-          renderItem={({ item }) => (
-            <Popular storeInfo={item} navigation={navigation} />
-          )}
-          windowSize={2}
-          style={{ backgroundColor: "white" }}
-        />
+        {stores.map((item, index) => {
+          if (index < 5) {
+            return (
+              <Popular index={index} storeInfo={item} navigation={navigation} />
+            );
+          }
+        })}
       </NowPopularContainer>
       <Swiper
         autoplay={true}
@@ -127,11 +133,12 @@ const Home = ({ stores, navigation }) => {
         <SwipeContanier>
           <Text>두번째 페이지입니다!</Text>
         </SwipeContanier>
-        <SwipeContanier>
-          <Text>세번째 페이지입니다!</Text>
-        </SwipeContanier>
       </Swiper>
       <Btn text={"Log Out"} accent onPress={logOutPress} />
+      <ProfileModal
+        isModalVisible={isVisible}
+        onBackdropPress={() => setIsVisible(false)}
+      />
     </Container>
   );
 };

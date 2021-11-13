@@ -22,8 +22,11 @@ const StoreName = styled.Text`
 const SearchItem = ({ navigation, storeInfo }) => (
   <TouchableOpacity
     onPress={() =>
-      navigation.navigate("SelectMenuScreen", {
-        storeInfo,
+      navigation.navigate("StoreStack", {
+        screen: "SelectMenuScreen",
+        params: {
+          storeInfo,
+        },
       })
     }
   >
@@ -35,7 +38,12 @@ const SearchItem = ({ navigation, storeInfo }) => (
         style={{ marginRight: 11 }}
       />
       <StoreName>{storeInfo.store}</StoreName>
-      <Feather name="arrow-up-right" size={20} color="black" style={{ marginLeft: "auto" }} />
+      <Feather
+        name="arrow-up-right"
+        size={20}
+        color="black"
+        style={{ marginLeft: "auto" }}
+      />
     </Container>
   </TouchableOpacity>
 );
