@@ -23,7 +23,7 @@ import styled from "styled-components";
 
 import storeOn from "../../assets/images/BottomTabNav/storeOn.png";
 import partnerOn from "../../assets/images/BottomTabNav/partnerOn.png";
-import halfdOn from "../../assets/images/BottomTabNav/halfDOn.png";
+import halfdOn from "../../assets/images/BottomTabNav/halfdOn.png";
 import orderinfoOn from "../../assets/images/BottomTabNav/orderinfoOn.png";
 import talkOn from "../../assets/images/BottomTabNav/talkOn.png";
 
