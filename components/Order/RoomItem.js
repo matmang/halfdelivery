@@ -48,8 +48,8 @@ const RoomItem = ({ chatRoomInfo }) => {
   }
 
   const onPress = () => {
-    navigation.navigate("ChatRoomStack", {
-      screen: "ChatRoomScreen",
+    navigation.navigate("StoreStack", {
+      screen: "SelectMenuScreen",
       params: {
         chatRoomID: chatRoomInfo.id,
         storeInfo,

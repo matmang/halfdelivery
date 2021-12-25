@@ -39,6 +39,7 @@ import BottomSheet, {
 import { Picker } from "@react-native-picker/picker";
 
 const SelectMenuScreen = (props) => {
+  let isHost = false;
   const storeInfo = props.route.params.storeInfo;
   const [store, setStore] = useState(storeInfo ? storeInfo.store : "all");
 
@@ -97,7 +98,11 @@ const SelectMenuScreen = (props) => {
       }}
     >
       <View style={styles.storeComponent}>
-        <StoreComponent storeInfo={storeInfo} />
+        {isHost ? (
+          <StoreComponent storeInfo={storeInfo} />
+        ) : (
+          <StoreComponent storeInfo={storeInfo} />
+        )}
       </View>
       {/* <Picker /> */}
       <View style={{ backgroundColor: "lightgrey", width: "100%" }}>
