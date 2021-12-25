@@ -33,12 +33,9 @@ function groupBy(objectArray, property) {
 
 const RoomList = ({ categoryID }) => {
   const [chatRooms, setChatRooms] = useState([]);
-
   useEffect(() => {
-    // console.log(categoryID);
     fetchChatRooms();
   }, []);
-  // }, [categoryID]);
 
   // ? Listening to new chatrooms. https://docs.amplify.aws/lib/datastore/real-time/q/platform/js/
   // ? In Real Time!
@@ -50,7 +47,6 @@ const RoomList = ({ categoryID }) => {
       // console.log(msg.model, msg.opType, msg.element);
 
       // ? 새 챗룸 추가!
-      // if (ChatRoom.model === ChatRoomModel && ChatRoom.opType === "INSERT") {
       if (ChatRoom.opType === "INSERT") {
         // * setState 에 함수를 넣으면, 그 함수의 첫번쨰 인자는 현재 state를 갖는다.
         setChatRooms((existingChatRooms) => [
@@ -65,13 +61,6 @@ const RoomList = ({ categoryID }) => {
 
   const fetchChatRooms = async () => {
     const authUser = await Auth.currentAuthenticatedUser();
-
-    // const chatRooms_for_ids = (await DataStore.query(ChatRoom)).filter((e) => e.newMessages === 1105);
-    // const chatRooms_for_ids = await DataStore.query(ChatRoom);
-    const chatRooms_for_ids = (await DataStore.query(ChatRoom)).filter(
-      (ChatRoom) => ChatRoom._deleted === null
-    );
-
     const all_chatRoomUsers = (await DataStore.query(ChatRoomUser)).filter(
       (ChatRoomUser) => ChatRoomUser._deleted === null
     );
@@ -85,11 +74,7 @@ const RoomList = ({ categoryID }) => {
       .filter((chatroom) => chatroom.matchingInfo !== null);
 
     const chatRoom_ids = all_chatRooms.map((item) => item.id);
-    const ChatRoomUsers_ids = all_chatRoomUsers.map((item) => item.id);
     const pairArray = []; // ? {키: ChatRoom 아이디, 밸류: (대응되는) ChatRoomUser 객체} 가 원소들로 들어간다
-
-    // console.log("all_chatRooms", all_chatRooms);
-    console.log("아이디", chatRoom_ids);
 
     // * 챗룸id 와 대응되는 챗룸유저id 를 찾아서 grouped_pairObject로 정리하는 과정.
     for (let index in chatRoom_ids) {
@@ -105,6 +90,7 @@ const RoomList = ({ categoryID }) => {
     const grouped_pairObject = groupBy(pairArray, "chatRoom_id");
     const keysArray = Object.keys(grouped_pairObject);
     const except_chatRoom_ids = [];
+
     for (let index in keysArray) {
       let key = keysArray[index];
       let valueArray = grouped_pairObject[key];
@@ -119,7 +105,6 @@ const RoomList = ({ categoryID }) => {
     const fit_chatRooms = all_chatRooms.filter(
       (chatroom) => chatroom.id !== except_chatRoom_ids.values
     );
-    // console.log("fit_chatRooms", fit_chatRooms);
 
     setChatRooms(fit_chatRooms);
   };
@@ -145,7 +130,10 @@ const RoomList = ({ categoryID }) => {
   return (
     <View style={styles.root}>
       <FlatList
-        data={chatRooms}
+        data={chatRooms.filter(
+          (obj) =>
+            obj.matchingInfo.storeNmenus.store.storecategoryID === categoryID
+        )}
         renderItem={({ item }) =>
           item !== undefined ? (
             <RoomItem chatRoomInfo={item} />
