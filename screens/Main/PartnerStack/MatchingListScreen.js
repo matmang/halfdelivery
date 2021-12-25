@@ -11,7 +11,7 @@ const Categorries = styled.Pressable`
 `;
 
 const MatchingListScreen = () => {
-  const [categoryID, setCategoryID] = useState("한식");
+  const [categoryID, setCategoryID] = useState("ALL");
   const navigation = useNavigation();
 
   const KOREAN_ID = "8314af0c-1d8e-4112-869b-15689debb495";

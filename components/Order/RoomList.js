@@ -130,10 +130,15 @@ const RoomList = ({ categoryID }) => {
   return (
     <View style={styles.root}>
       <FlatList
-        data={chatRooms.filter(
-          (obj) =>
-            obj.matchingInfo.storeNmenus.store.storecategoryID === categoryID
-        )}
+        data={
+          categoryID === "ALL"
+            ? chatRooms
+            : chatRooms.filter(
+                (obj) =>
+                  obj.matchingInfo.storeNmenus.store.storecategoryID ===
+                  categoryID
+              )
+        }
         renderItem={({ item }) =>
           item !== undefined ? (
             <RoomItem chatRoomInfo={item} />
