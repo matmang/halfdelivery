@@ -1,5 +1,5 @@
 import React from "react";
-import { Dimensions, Platform, Platfrom } from "react-native";
+import { Dimensions, Platform, Platfrom, Text } from "react-native";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import colors from "../../colors";
@@ -73,7 +73,11 @@ const Popular = ({ index, storeInfo, navigation }) => (
         <StoreInfo>양식</StoreInfo>
       </CategoryView>
       <StoreName>
-        <StoreInfo>{storeInfo.store}</StoreInfo>
+        {storeInfo?.store ? (
+          <StoreInfo>{storeInfo?.store}</StoreInfo>
+        ) : (
+          <Text>에러</Text>
+        )}
       </StoreName>
       <Ionicons
         color="black"
@@ -96,7 +100,4 @@ const Popular = ({ index, storeInfo, navigation }) => (
   </TouchableOpacity>
 );
 
-Popular.propTypes = {
-  storeInfo: PropTypes.object.isRequired,
-};
 export default Popular;

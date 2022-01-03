@@ -2,7 +2,14 @@ import React, { useState, useEffect, useContext } from "react";
 import { FlatList, Button, View, StyleSheet } from "react-native";
 import StoreItem from "./StoreItem";
 import { Auth, DataStore, SortDirection } from "aws-amplify";
-import { ChatRoom, User, ChatRoomUser, OrderMenu, Order, Store } from "../../AWS/src/models";
+import {
+  ChatRoom,
+  User,
+  ChatRoomUser,
+  OrderMenu,
+  Order,
+  Store,
+} from "../../AWS/src/models";
 
 const StoreList = ({ categoryID }) => {
   const [serverData, setServerData] = useState([]);
@@ -21,7 +28,9 @@ const StoreList = ({ categoryID }) => {
       const fetchedStores = await DataStore.query(Store);
       setServerData(fetchedStores);
     } else {
-      const fetchedStores = await DataStore.query(Store, (c) => c.storecategoryID("eq", categoryID));
+      const fetchedStores = await DataStore.query(Store, (c) =>
+        c.storecategoryID("eq", categoryID)
+      );
       setServerData(fetchedStores);
     }
   };

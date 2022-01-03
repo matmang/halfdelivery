@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Dimensions, ActivityIndicator } from "react-native";
+import {
+  View,
+  Text,
+  Dimensions,
+  ActivityIndicator,
+  Button,
+} from "react-native";
 import styled from "styled-components";
 import { Ionicons } from "@expo/vector-icons";
 import colors from "../../colors";
@@ -116,7 +122,12 @@ const Home = ({ stores, navigation, isModalVisible }) => {
         {stores.map((item, index) => {
           if (index < 5) {
             return (
-              <Popular index={index} storeInfo={item} navigation={navigation} />
+              <Popular
+                key={index}
+                index={index}
+                storeInfo={item}
+                navigation={navigation}
+              />
             );
           }
         })}
