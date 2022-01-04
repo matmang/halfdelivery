@@ -18,6 +18,7 @@ import {
 import { Auth, DataStore } from "aws-amplify";
 import { Message, ChatRoom } from "../../AWS/src/models";
 import colors from "../../colors";
+import * as ImagePicker from "expo-image-picker";
 
 const MessageInput = ({ chatRoom }) => {
   const [message, setMessage] = useState("");
