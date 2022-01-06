@@ -17,12 +17,11 @@ const ChatRoomScreen = (props) => {
   const [messages, setMessages] = useState([]);
   const [chatRoom, setChatRoom] = useState(null);
   const route = useRoute();
-  const navigation = useNavigation();
 
-  const storeInfo = route.params.storeInfo;
-  console.log("storeInfo", storeInfo);
-  const storeName = storeInfo.store;
-  const menus = route.params.menus;
+  // const storeInfo = route.params.storeInfo;
+  // console.log("storeInfo", storeInfo);
+  // const storeName = storeInfo.store;
+  // const menus = route.params.menus;
 
   // ? 첫 렌더링에만 호출. ChatRoom 가져오기.
   useEffect(() => {
@@ -142,7 +141,7 @@ const ChatRoomScreen = (props) => {
     <SafeAreaView style={styles.page}>
       {/* 주문정보 불러오기. */}
       <View style={styles.nonChatBox}>
-        <ChatStoreItem storeInfo={storeInfo} />
+        {/* <ChatStoreItem storeInfo={storeInfo} /> */}
         <View style={styles.chatMenuList}>
           <ChatMenuList />
         </View>

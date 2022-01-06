@@ -22,6 +22,7 @@ import * as ImagePicker from "expo-image-picker";
 
 const MessageInput = ({ chatRoom }) => {
   const [message, setMessage] = useState("");
+  const [image, setImage] = useState(null);
 
   // ? 메시지 보내는 함수
   const sendMessage = async () => {
@@ -55,6 +56,36 @@ const MessageInput = ({ chatRoom }) => {
     message ? sendMessage() : clickedWithoutMessages();
   };
 
+  //- Image picker
+  const pickImage = async () => {
+    // No permissions request is necessary for launching the image library | 이제 permission 안 필요한듯.
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    console.log(result);
+
+    if (!result.cancelled) {
+      setImage(result.uri);
+    }
+  };
+
+  //- Camera Launcher
+  const takePhoto = async () => {
+    // No permissions request is necessary for launching the image library | 이제 permission 안 필요한듯.
+    let result = await ImagePicker.launchCameraAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      aspect: [4, 3],
+    });
+
+    if (!result.cancelled) {
+      setImage(result.uri);
+    }
+  };
+
   return (
     // ? KeyboardAvoidingView 를 사용해야 키보드가 표출될떄 화면을 안 가린다.. 참조: https://reactnative.dev/docs/keyboardavoidingview
     <KeyboardAvoidingView
@@ -70,6 +101,7 @@ const MessageInput = ({ chatRoom }) => {
             color="grey"
             style={styles.icon}
           />
+
           {/* 메시지 입력칸 */}
           <TextInput
             style={styles.input}
@@ -80,15 +112,24 @@ const MessageInput = ({ chatRoom }) => {
             autoCorrect={false}
             autoCapitalize="none"
           />
+
+          {/* 이미지 아이콘 */}
+          <Pressable onPress={pickImage}>
+            <Feather name="image" size={24} color="grey" style={styles.icon} />
+          </Pressable>
+
           {/* 카메라 아이콘 */}
-          <Feather name="camera" size={24} color="grey" style={styles.icon} />
+          <Pressable onPress={takePhoto}>
+            <Feather name="camera" size={24} color="grey" style={styles.icon} />
+          </Pressable>
+
           {/* 마이크 아이콘 */}
-          <MaterialCommunityIcons
+          {/* <MaterialCommunityIcons
             name="microphone"
             size={24}
             color="grey"
             style={styles.icon}
-          />
+          /> */}
         </View>
         {/* // ? Pressable 은 View 와 대체 가능하다. 오직, onPress 유무 차이만 있음! */}
         <Pressable
