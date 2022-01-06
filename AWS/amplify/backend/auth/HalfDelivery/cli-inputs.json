@@ -1,0 +1,52 @@
+{
+  "version": "1",
+  "cognitoConfig": {
+    "authSelections": "identityPoolAndUserPool",
+    "requiredAttributes": [
+      "email"
+    ],
+    "resourceName": "HalfDelivery",
+    "serviceName": "Cognito",
+    "useDefault": "manual",
+    "userpoolClientReadAttributes": [],
+    "userpoolClientWriteAttributes": [],
+    "aliasAttributes": [],
+    "resourceNameTruncated": "halfde9d152dbb",
+    "sharedId": "9d152dbb",
+    "userPoolGroupList": [],
+    "userPoolGroups": false,
+    "userPoolName": "HalfDelivery",
+    "usernameAttributes": [
+      "email"
+    ],
+    "usernameCaseSensitive": false,
+    "userpoolClientRefreshTokenValidity": 30,
+    "userpoolClientSetAttributes": false,
+    "userpoolClientGenerateSecret": false,
+    "userpoolClientLambdaRole": "HalfDe9d152dbb_userpoolclient_lambda_role",
+    "passwordPolicyCharacters": [],
+    "passwordPolicyMinLength": 6,
+    "adminQueries": false,
+    "mfaConfiguration": "OFF",
+    "mfaTypes": [
+      "SMS Text Message"
+    ],
+    "smsAuthenticationMessage": "Your authentication code is {####}",
+    "emailVerificationMessage": "Half Delivery Sign-Up Verification Code\n\nWelcome to Half Delivery,\nYour verification code is {####}.\nEnter your code into the sign-up form to complete the process.",
+    "emailVerificationSubject": "Half Delivery Sign-Up Verification Code: {####}",
+    "smsVerificationMessage": "Your verification code is {####}",
+    "autoVerifiedAttributes": [
+      "email"
+    ],
+    "hostedUI": false,
+    "thirdPartyAuth": false,
+    "identityPoolName": "testAuthIdentityPool",
+    "allowUnauthenticatedIdentities": false,
+    "authProviders": [],
+    "triggers": {
+      "PostConfirmation": [
+        "custom"
+      ]
+    }
+  }
+}
