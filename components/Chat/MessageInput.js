@@ -15,7 +15,7 @@ import {
   AntDesign,
   Ionicons,
 } from "@expo/vector-icons";
-import { Auth, DataStore } from "aws-amplify";
+import { Auth, DataStore, Storage } from "aws-amplify";
 import { Message, ChatRoom } from "../../AWS/src/models";
 import colors from "../../colors";
 import * as ImagePicker from "expo-image-picker";
@@ -24,7 +24,7 @@ const MessageInput = ({ chatRoom }) => {
   const [message, setMessage] = useState("");
   const [image, setImage] = useState(null);
 
-  // ? 메시지 보내는 함수
+  //- 메시지 보내는 함수
   const sendMessage = async () => {
     const user = await Auth.currentAuthenticatedUser();
     const newMessage = await DataStore.save(
@@ -48,12 +48,12 @@ const MessageInput = ({ chatRoom }) => {
     );
   };
 
-  //
-  const clickedWithoutMessages = () => {
-    console.log("Clicked without Messages");
-  };
   const onPress = () => {
-    message ? sendMessage() : clickedWithoutMessages();
+    if (image) {
+      sendImage();
+    } else if (message) {
+      sendMessage();
+    }
   };
 
   //- Image picker
@@ -84,6 +84,26 @@ const MessageInput = ({ chatRoom }) => {
     if (!result.cancelled) {
       setImage(result.uri);
     }
+  };
+
+  //- Send Images
+  const sendImage = async () => {
+    if (!image) {
+      return null;
+    }
+
+    const blob = await getImageBlob();
+    await Storage.put("test2.png", blob);
+  };
+
+  const getImageBlob = async () => {
+    if (!image) {
+      return null;
+    }
+
+    const response = await fetch(image);
+    const blob = await response.blob();
+    return blob;
   };
 
   return (
@@ -136,7 +156,7 @@ const MessageInput = ({ chatRoom }) => {
           style={[
             styles.buttonContainer,
             // ? message 가 빈스트링 이면 false 임.
-            { backgroundColor: message ? colors.mainPink : "lightgrey" },
+            { backgroundColor: message || image ? colors.mainPink : "lightgrey" },
           ]}
           onPress={onPress}
         >
