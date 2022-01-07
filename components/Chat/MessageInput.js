@@ -9,7 +9,7 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
-import { 
+import {
   SimpleLineIcons,
   Feather,
   MaterialCommunityIcons,
@@ -134,8 +134,23 @@ const MessageInput = ({ chatRoom }) => {
       keyboardVerticalOffset={100}
     >
       {image && (
-        <Image source={{ uri: image }} style={{ width: 100, height: 100 }} />
+        <View>
+          <Image
+            source={{ uri: image }}
+            style={{ width: 100, height: 100, borderRadius: 10 }}
+          />
+
+          <Pressable onPress={() => setImage(null)}>
+            <AntDesign
+              name="close"
+              size={24}
+              color="black"
+              style={{ margin: 5 }}
+            />
+          </Pressable>
+        </View>
       )}
+
       <View style={styles.root}>
         <View style={styles.inputContainer}>
           {/* 이모티콘 아이콘 */}
