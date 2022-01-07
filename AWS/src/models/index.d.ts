@@ -118,6 +118,7 @@ export declare class ChatRoom {
   readonly ChatRoomUsers?: (ChatRoomUser | null)[];
   readonly matchingInfo?: string;
   readonly Orders?: (Order | null)[];
+  readonly host: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<ChatRoom, ChatRoomMetaData>);

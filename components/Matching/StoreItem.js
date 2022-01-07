@@ -26,6 +26,7 @@ const StoreItem = ({ storeInfo }) => {
           screen: "SelectMenuScreen",
           params: {
             storeInfo,
+            isHost: true
           },
         });
       }}

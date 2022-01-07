@@ -18,6 +18,7 @@ import {
   StyleSheet,
   SafeAreaView,
   Pressable,
+  ActivityIndicator,
 } from "react-native";
 import StoreComponent from "../../../components/Matching/StoreComponent";
 import MenuList from "../../../components/Matching/MenuList";
@@ -39,9 +40,14 @@ import BottomSheet, {
 import { Picker } from "@react-native-picker/picker";
 
 const SelectMenuScreen = (props) => {
-  let isHost = false;
   const storeInfo = props.route.params.storeInfo;
   const [store, setStore] = useState(storeInfo ? storeInfo.store : "all");
+  let isHost = false;
+  if (props.route.params.isHost === undefined) {
+    isHost = false;
+  } else {
+    isHost = props.route.params.isHost;
+  }
 
   // ? orderReducer.menus 가 바뀔때 마다! menus 갱신 됨.
   const menus = useSelector((state) => state.orderReducer);
@@ -89,6 +95,17 @@ const SelectMenuScreen = (props) => {
     );
   };
 
+  const nextScreen = (isHost) => {
+    if (isHost) {
+      navigation.navigate("SetMatchingTimeScreen", {
+        storeInfo,
+        isHost,
+      });
+    } else {
+      //TODO: (방에서 메뉴수정하는 경우) 매치방으로 이동.
+    }
+  };
+
   return (
     <SafeAreaView
       style={{
@@ -101,6 +118,7 @@ const SelectMenuScreen = (props) => {
         {isHost ? (
           <StoreComponent storeInfo={storeInfo} />
         ) : (
+          // <ActivityIndicator />
           <StoreComponent storeInfo={storeInfo} />
         )}
       </View>
@@ -148,11 +166,7 @@ const SelectMenuScreen = (props) => {
         {/* 선택완료 버튼 */}
         <View style={styles.buttonContainer}>
           <Pressable
-            onPress={() => {
-              navigation.navigate("SetMatchingTimeScreen", {
-                storeInfo,
-              });
-            }}
+            onPress={() => nextScreen(isHost)}
             style={styles.buttonContainer}
           >
             <Text style={styles.buttonText}>파트너 구하러 가기</Text>

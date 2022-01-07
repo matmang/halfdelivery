@@ -22,6 +22,6 @@
       }
     },
     "apiName": "HalfDelivery",
-    "gqlSchemaPath": "/tmp/amplify-9655e95d-6bb2-40fb-bb42-088762a2f99f/amplify/backend/api/HalfDelivery/schema.graphql"
+    "gqlSchemaPath": "/tmp/amplify-cd89767d-ebeb-44ab-9bc1-bfaf3cf4aea3/amplify/backend/api/HalfDelivery/schema.graphql"
   }
 }
