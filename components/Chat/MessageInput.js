@@ -19,6 +19,8 @@ import { Auth, DataStore, Storage } from "aws-amplify";
 import { Message, ChatRoom } from "../../AWS/src/models";
 import colors from "../../colors";
 import * as ImagePicker from "expo-image-picker";
+import "react-native-get-random-values";
+import { v4 as uuidv4 } from "uuid";
 
 const MessageInput = ({ chatRoom }) => {
   const [message, setMessage] = useState("");
@@ -93,7 +95,7 @@ const MessageInput = ({ chatRoom }) => {
     }
 
     const blob = await getImageBlob();
-    await Storage.put("test2.png", blob);
+    await Storage.put(`${uuidv4()}.png`, blob);
   };
 
   const getImageBlob = async () => {
@@ -156,7 +158,9 @@ const MessageInput = ({ chatRoom }) => {
           style={[
             styles.buttonContainer,
             // ? message 가 빈스트링 이면 false 임.
-            { backgroundColor: message || image ? colors.mainPink : "lightgrey" },
+            {
+              backgroundColor: message || image ? colors.mainPink : "lightgrey",
+            },
           ]}
           onPress={onPress}
         >
