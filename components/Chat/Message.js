@@ -3,6 +3,7 @@ import { ActivityIndicator, StyleSheet, Text, View, Image } from "react-native";
 import colors from "../../colors";
 import { User } from "../../AWS/src/models";
 import { Auth, DataStore } from "aws-amplify";
+import { S3Image } from "aws-amplify-react-native";
 
 export default ({ message }) => {
   const [user, setUser] = useState(undefined);
@@ -44,13 +45,29 @@ export default ({ message }) => {
   }
 
   return (
-    <View style={[styles.container, isMe ? styles.rightContainer : styles.leftContainer]}>
+    <View
+      style={[
+        styles.container,
+        isMe ? styles.rightContainer : styles.leftContainer,
+      ]}
+    >
       <View style={{ flexDirection: "row" }}>
         {/* 상대방 화면만 이미지, 이름 표출 */}
         {!isMe && (
           <View style={styles.imageContainer}>
             <Image source={{ uri: user.imageUri }} style={styles.image} />
-            <Text style={styles.imageContainerText} numberOfLines={1} ellipsizeMode="tail">
+
+            {message.image && (
+              <S3Image
+                imgKey={message.image}
+                style={{ height: "100%", width: "100%" }}
+              />
+            )}
+            <Text
+              style={styles.imageContainerText}
+              numberOfLines={1}
+              ellipsizeMode="tail"
+            >
               {user.name}
             </Text>
           </View>
@@ -64,8 +81,15 @@ export default ({ message }) => {
         )}
 
         {/* 메시지 내용 */}
-        <View style={[styles.textContainer, isMe ? styles.rightTextContainer : styles.leftTextContainer]}>
-          <Text style={{ color: isMe ? "white" : "black" }}>{message.content}</Text>
+        <View
+          style={[
+            styles.textContainer,
+            isMe ? styles.rightTextContainer : styles.leftTextContainer,
+          ]}
+        >
+          <Text style={{ color: isMe ? "white" : "black" }}>
+            {message.content}
+          </Text>
         </View>
 
         {/* 메시지 생성 시각 | 상대방*/}

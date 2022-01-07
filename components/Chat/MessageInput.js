@@ -9,7 +9,7 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
-import {
+import { 
   SimpleLineIcons,
   Feather,
   MaterialCommunityIcons,
