@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {
   View,
   Text,
+  Image,
   StyleSheet,
   TextInput,
   Pressable,
@@ -25,6 +26,7 @@ import { v4 as uuidv4 } from "uuid";
 const MessageInput = ({ chatRoom }) => {
   const [message, setMessage] = useState("");
   const [image, setImage] = useState(null);
+  console.log(`image ${image}`);
 
   //- 메시지 보내는 함수
   const sendMessage = async () => {
@@ -37,8 +39,7 @@ const MessageInput = ({ chatRoom }) => {
       })
     );
     updateLastMessage(newMessage);
-    setMessage("");
-    console.log("sending:", message);
+    resetFields();
   };
 
   const updateLastMessage = async (newMessage) => {
@@ -58,6 +59,11 @@ const MessageInput = ({ chatRoom }) => {
     }
   };
 
+  const resetFields = () => {
+    setMessage("");
+    setImage(null);
+  };
+
   //- Image picker
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library | 이제 permission 안 필요한듯.
@@ -65,7 +71,7 @@ const MessageInput = ({ chatRoom }) => {
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       aspect: [4, 3],
-      quality: 1,
+      quality: 1, //? quality 낮추면 서버에 저장되는 파일 용량도 낮아짐.
     });
 
     console.log(result);
@@ -95,7 +101,20 @@ const MessageInput = ({ chatRoom }) => {
     }
 
     const blob = await getImageBlob();
-    await Storage.put(`${uuidv4()}.png`, blob);
+    const { key } = await Storage.put(`${uuidv4()}.png`, blob);
+
+    // send message
+    const user = await Auth.currentAuthenticatedUser();
+    const newMessage = await DataStore.save(
+      new Message({
+        content: message,
+        image: key,
+        userID: user.attributes.sub,
+        chatroomID: chatRoom.id,
+      })
+    );
+    updateLastMessage(newMessage);
+    resetFields();
   };
 
   const getImageBlob = async () => {
@@ -114,6 +133,9 @@ const MessageInput = ({ chatRoom }) => {
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       keyboardVerticalOffset={100}
     >
+      {image && (
+        <Image source={{ uri: image }} style={{ width: 100, height: 100 }} />
+      )}
       <View style={styles.root}>
         <View style={styles.inputContainer}>
           {/* 이모티콘 아이콘 */}
