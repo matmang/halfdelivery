@@ -1,10 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { FlatList, StyleSheet, Text, View, SafeAreaView, ActivityIndicator } from "react-native";
+import {
+  FlatList,
+  StyleSheet,
+  Text,
+  View,
+  SafeAreaView,
+  ActivityIndicator,
+} from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/core";
 import { Auth, DataStore, SortDirection } from "aws-amplify";
 import Message from "../../../components/Chat/Message";
 import MessageInput from "../../../components/Chat/MessageInput";
-import { Message as MessageModel, ChatRoom, Order } from "../../../AWS/src/models";
+import {
+  Message as MessageModel,
+  ChatRoom,
+  Order,
+} from "../../../AWS/src/models";
 
 import StoreItem from "../../../components/Matching/StoreItem";
 import ChatStoreItem from "../../../components/Chat/ChatStoreItem";
@@ -57,10 +68,10 @@ const ChatRoomScreen = (props) => {
 
   // ? 채팅방 가져오기.
   const fetchChatRoom = async () => {
-    if (!route.params.chatRoomID) {
+    if (!route.params.id) {
       console.warn("No chatroom id provided");
     }
-    const chatRoom = await DataStore.query(ChatRoom, route.params.chatRoomID);
+    const chatRoom = await DataStore.query(ChatRoom, route.params.id);
     if (!chatRoom) {
       console.error("Couldn't find a chat room with this id");
     } else {
@@ -104,7 +115,7 @@ const ChatRoomScreen = (props) => {
   //   // ? 업데이트
   //   await DataStore.save(
   //     Order.copyOf(original, (updated) => {
-  //       updated.chatroomID = route.params.chatRoomID;
+  //       updated.chatroomID = route.params.id;
   //     })
   //   );
   // };
