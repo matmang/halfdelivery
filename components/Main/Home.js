@@ -17,6 +17,7 @@ import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { logOut } from "../../redux/usersSlice";
 import { useDispatch } from "react-redux";
 import ProfileModal from "./ProfileModal";
+import tailwind from "tailwind-rn";
 
 const { width } = Dimensions.get("screen");
 
