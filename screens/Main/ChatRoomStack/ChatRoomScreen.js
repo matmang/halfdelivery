@@ -28,6 +28,7 @@ const ChatRoomScreen = (props) => {
   const [messages, setMessages] = useState([]);
   const [chatRoom, setChatRoom] = useState(null);
   const route = useRoute();
+  console.log("하하", route);
 
   // const storeInfo = route.params.storeInfo;
   // console.log("storeInfo", storeInfo);
@@ -150,12 +151,9 @@ const ChatRoomScreen = (props) => {
   return (
     // ? View 대신 SafeAreaView 를 쓰면, 노치 같은 곳에 데이터가 표출되지 않는다. 굳!
     <SafeAreaView style={styles.page}>
-      {/* 주문정보 불러오기. */}
-      <View style={styles.nonChatBox}>
-        {/* <ChatStoreItem storeInfo={storeInfo} /> */}
-        <View style={styles.chatMenuList}>
-          <ChatMenuList />
-        </View>
+      {/* 임시값 */}
+      <View style={styles.temp}>
+        <Text>chatroom id: {route.params.id.toString()}</Text>
       </View>
 
       {/* 채팅메시지 */}
@@ -175,7 +173,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     flex: 1,
   },
-  nonChatBox: {
+  temp: {
     padding: 10,
     backgroundColor: "grey",
     borderBottomRightRadius: 10,
