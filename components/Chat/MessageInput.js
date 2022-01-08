@@ -22,10 +22,26 @@ import colors from "../../colors";
 import * as ImagePicker from "expo-image-picker";
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
+import styled from "styled-components";
+
+const Btm = styled.View`
+  flex-direction: row;
+  align-items: center;
+  /* width: 338px; */
+  height: 80px;
+  /* padding: 12.5px 20px; */
+  background-color: yellow;
+  border-bottom-color: ${({ isValued }) =>
+    isValued ? colors.mainBlue : colors.blueGrey};
+  font-family: "noto-regular";
+  font-size: 17px;
+  /* opacity: ${({ disabled }) => (disabled ? 0.5 : 1)}; */
+`;
 
 const MessageInput = ({ chatRoom }) => {
   const [message, setMessage] = useState("");
   const [image, setImage] = useState(null);
+  const [isBtm, setIsBtm] = useState(false);
   console.log(`image ${image}`);
 
   //- 메시지 보내는 함수
@@ -63,6 +79,12 @@ const MessageInput = ({ chatRoom }) => {
     setMessage("");
     setImage(null);
   };
+
+  const expandBtm = () => {
+    isBtm ? setIsBtm(false) : setIsBtm(true);
+  };
+
+  console.log(isBtm);
 
   //- Image picker
   const pickImage = async () => {
@@ -150,16 +172,17 @@ const MessageInput = ({ chatRoom }) => {
           </Pressable>
         </View>
       )}
-
       <View style={styles.root}>
         <View style={styles.inputContainer}>
-          {/* 이모티콘 아이콘 */}
-          <SimpleLineIcons
-            name="emotsmile"
-            size={24}
-            color="grey"
-            style={styles.icon}
-          />
+          {/* 플러스 아이콘 */}
+          <Pressable onPress={expandBtm}>
+            <SimpleLineIcons
+              name="plus"
+              size={24}
+              color="grey"
+              style={styles.icon}
+            />
+          </Pressable>
 
           {/* 메시지 입력칸 */}
           <TextInput
@@ -171,16 +194,6 @@ const MessageInput = ({ chatRoom }) => {
             autoCorrect={false}
             autoCapitalize="none"
           />
-
-          {/* 이미지 아이콘 */}
-          <Pressable onPress={pickImage}>
-            <Feather name="image" size={24} color="grey" style={styles.icon} />
-          </Pressable>
-
-          {/* 카메라 아이콘 */}
-          <Pressable onPress={takePhoto}>
-            <Feather name="camera" size={24} color="grey" style={styles.icon} />
-          </Pressable>
 
           {/* 마이크 아이콘 */}
           {/* <MaterialCommunityIcons
@@ -210,6 +223,19 @@ const MessageInput = ({ chatRoom }) => {
           />
         </Pressable>
       </View>
+      {isBtm && (
+        <Btm>
+          {/* 이미지 아이콘 */}
+          <Pressable onPress={pickImage}>
+            <Feather name="image" size={40} color="grey" style={styles.icon} />
+          </Pressable>
+
+          {/* 카메라 아이콘 */}
+          <Pressable onPress={takePhoto}>
+            <Feather name="camera" size={40} color="grey" style={styles.icon} />
+          </Pressable>
+        </Btm>
+      )}
     </KeyboardAvoidingView>
   );
 };
@@ -218,6 +244,7 @@ const styles = StyleSheet.create({
   root: {
     flexDirection: "row",
     padding: 10,
+    backgroundColor: "red",
   },
   inputContainer: {
     backgroundColor: "#f2f2f2",
