@@ -4,7 +4,11 @@ import colors from "../../colors";
 import { User } from "../../AWS/src/models";
 import { Auth, DataStore } from "aws-amplify";
 import { S3Image } from "aws-amplify-react-native";
+import styled from "styled-components";
 
+const ImageView = styled.View`
+  margin-bottom: 10px;
+`;
 export default ({ message }) => {
   const [user, setUser] = useState(undefined);
   const [isMe, setIsMe] = useState(false);
@@ -57,12 +61,6 @@ export default ({ message }) => {
           <View style={styles.imageContainer}>
             <Image source={{ uri: user.imageUri }} style={styles.image} />
 
-            {message.image && (
-              <S3Image
-                imgKey={message.image}
-                style={{ height: "100%", width: "100%" }}
-              />
-            )}
             <Text
               style={styles.imageContainerText}
               numberOfLines={1}
@@ -87,6 +85,15 @@ export default ({ message }) => {
             isMe ? styles.rightTextContainer : styles.leftTextContainer,
           ]}
         >
+          {message.image && (
+            <ImageView>
+              <S3Image
+                imgKey={message.image}
+                style={{ height: "80%", width: "100%", padding: 10 }}
+                resizeMode="cover"
+              />
+            </ImageView>
+          )}
           <Text style={{ color: isMe ? "white" : "black" }}>
             {message.content}
           </Text>
@@ -127,6 +134,7 @@ const styles = StyleSheet.create({
 
   textContainer: {
     padding: 10,
+    paddingBottom: 20,
     margin: 5,
     borderRadius: 10,
     maxWidth: "70%",
