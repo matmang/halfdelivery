@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import {
+  Button,
+  Pressable,
   FlatList,
   StyleSheet,
   Text,
+  Image,
   View,
   SafeAreaView,
   ActivityIndicator,
+  Modal,
 } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/core";
 import { Auth, DataStore, SortDirection } from "aws-amplify";
@@ -24,11 +28,51 @@ import ChatMenuList from "../../../components/Chat/ChatMenuList";
 import { useSelector, useDispatch } from "react-redux";
 import { setStore, addMenu, cleanMenus } from "../../../redux/orderSlice";
 
+import { Entypo } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import styled from "styled-components";
+
+const TopBox = styled.View`
+  flex: 1;
+  padding: 10px;
+  justify-content: center;
+  background-color: green;
+  opacity: 0.8;
+  height: 144px;
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+`;
+
+const TextBox = styled.Text`
+  /* font-family: "noto-regular"; //! noto로 폰트바꾸면 이상하게 줄맞춤이 깨진다.. */
+  font-size: 17px;
+  margin-left: 12px;
+  margin-right: auto;
+`;
+
 const ChatRoomScreen = (props) => {
   const [messages, setMessages] = useState([]);
   const [chatRoom, setChatRoom] = useState(null);
+  const [isModal, setIsModal] = useState(false);
   const route = useRoute();
-  console.log("하하", route);
+
+  const navigation = props.navigation;
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <Pressable
+          style={{ marginRight: 20, marginVertical: 10, flexDirection: "row" }}
+          onPress={() => {
+            isModal ? setIsModal(false) : setIsModal(true);
+          }}
+        >
+          <Entypo name="dots-three-horizontal" size={24} color="white" />
+        </Pressable>
+      ),
+    });
+  }, [navigation, isModal]);
+  console.log("isModal", isModal);
 
   // const storeInfo = route.params.storeInfo;
   // console.log("storeInfo", storeInfo);
@@ -151,10 +195,100 @@ const ChatRoomScreen = (props) => {
   return (
     // ? View 대신 SafeAreaView 를 쓰면, 노치 같은 곳에 데이터가 표출되지 않는다. 굳!
     <SafeAreaView style={styles.page}>
-      {/* 임시값 */}
-      <View style={styles.temp}>
-        <Text>chatroom id: {route.params.id.toString()}</Text>
-      </View>
+      {/* //~ 방법1. Modal 로 구현 */}
+      {/* <View style={styles.centeredView}>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={isModal}
+          onRequestClose={() => {
+            Alert.alert("Modal has been closed.");
+          }}
+        >
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Text style={styles.modalText}>Hello World!</Text>
+              <Pressable
+                style={[styles.button, styles.buttonClose]}
+                onPress={() => {
+                  setIsModal(false);
+                }}
+              >
+                <Text style={styles.textStyle}>Hide Modal</Text>
+              </Pressable>
+            </View>
+          </View>
+        </Modal>
+      </View> */}
+
+      {/* //~ 방법2. 그냥 View 로 구현 */}
+      {isModal && (
+        <TopBox>
+          <Pressable
+            style={{
+              marginLeft: 20,
+              marginVertical: 10,
+              flexDirection: "row",
+            }}
+            onPress={() => {
+              console.log("Im pressed");
+              alert("신고해");
+            }}
+          >
+            <Image
+              source={require("../../../assets/images/alert.png")}
+              style={{ width: 18, height: 18.5 }}
+            />
+            <TextBox>신고하기</TextBox>
+            <MaterialCommunityIcons
+              name="arrow-top-right"
+              size={24}
+              color="black"
+              style={{ marginRight: 24 }}
+            />
+          </Pressable>
+          <Pressable
+            style={{
+              marginLeft: 20,
+              marginVertical: 10,
+              flexDirection: "row",
+            }}
+            onPress={() => {}}
+          >
+            <Image
+              source={require("../../../assets/images/ban.png")}
+              style={{ width: 18, height: 18 }}
+            />
+            <TextBox>차단하기</TextBox>
+            <MaterialCommunityIcons
+              name="arrow-top-right"
+              size={24}
+              color="black"
+              style={{ marginRight: 24 }}
+            />
+          </Pressable>
+          <Pressable
+            style={{
+              marginLeft: 20,
+              marginVertical: 10,
+              flexDirection: "row",
+            }}
+            onPress={() => {}}
+          >
+            <Image
+              source={require("../../../assets/images/leave.png")}
+              style={{ width: 15.95, height: 22.37 }}
+            />
+            <TextBox>채팅방 나가기</TextBox>
+            <MaterialCommunityIcons
+              name="arrow-top-right"
+              size={24}
+              color="black"
+              style={{ marginRight: 24 }}
+            />
+          </Pressable>
+        </TopBox>
+      )}
 
       {/* 채팅메시지 */}
       <FlatList
@@ -173,18 +307,54 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     flex: 1,
   },
-  temp: {
-    padding: 10,
-    backgroundColor: "grey",
-    borderBottomRightRadius: 10,
-    borderBottomLeftRadius: 10,
-  },
   chatMenuList: {
     marginTop: 5,
     padding: 10,
     backgroundColor: "lightgrey",
     borderBottomRightRadius: 10,
     borderBottomLeftRadius: 10,
+  },
+  //? 아래부터는 다 Modal 관련 스타일임
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  buttonOpen: {
+    backgroundColor: "#F194FF",
+  },
+  buttonClose: {
+    backgroundColor: "#2196F3",
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center",
   },
 });
 
