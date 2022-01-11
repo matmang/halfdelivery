@@ -89,12 +89,12 @@ export default ({ message }) => {
             <ImageView>
               <S3Image
                 imgKey={message.image}
-                style={{ height: "80%", width: "100%", padding: 10 }}
+                style={{ height: 80, width: 80, padding: 10 }}
                 resizeMode="cover"
               />
             </ImageView>
           )}
-          <Text style={{ color: isMe ? "white" : "black" }}>
+          <Text style={{ color: isMe ? "white" : "black", fontSize: 15 }}>
             {message.content}
           </Text>
         </View>

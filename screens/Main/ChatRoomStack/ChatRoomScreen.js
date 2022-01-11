@@ -36,12 +36,13 @@ const TopBox = styled.View`
   flex: 1;
   padding: 10px;
   justify-content: center;
-  background-color: green;
-  opacity: 0.8;
+  background-color: white;
+  /* opacity: 0.8; */
   height: 144px;
   width: 100%;
   position: absolute;
   z-index: 1;
+  box-shadow: 3px 3px 6px rgba(200, 200, 200, 1);
 `;
 
 const TextBox = styled.Text`
