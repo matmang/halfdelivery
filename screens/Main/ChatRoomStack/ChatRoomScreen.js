@@ -31,6 +31,7 @@ import { setStore, addMenu, cleanMenus } from "../../../redux/orderSlice";
 import { Entypo } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import styled from "styled-components";
+import Svg, { Path } from "react-native-svg";
 
 const TopBox = styled.View`
   flex: 1;
@@ -240,6 +241,12 @@ const ChatRoomScreen = (props) => {
               source={require("../../../assets/images/alert.png")}
               style={{ width: 18, height: 18.5 }}
             />
+            <Svg width={20} height={20} viewBox="0 0 20 20">
+              <Path
+                d="M10.16,4,9.074,5.086l4.3,4.3H4v1.54h9.371l-4.3,4.3L10.16,16.32l6.16-6.16Z"
+                fill="#000"
+              />
+            </Svg>
             <TextBox>신고하기</TextBox>
             <MaterialCommunityIcons
               name="arrow-top-right"
