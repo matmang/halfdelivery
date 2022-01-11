@@ -20,6 +20,7 @@ import btChatRoomStack from "./BttmTabStacks/btChatRoomStack";
 import colors from "../../colors";
 import images from "../../images";
 import styled from "styled-components";
+import Svg, { Path } from "react-native-svg";
 
 import storeOn from "../../assets/images/BottomTabNav/storeOn.png";
 import partnerOn from "../../assets/images/BottomTabNav/partnerOn.png";
@@ -28,6 +29,7 @@ import orderinfoOn from "../../assets/images/BottomTabNav/orderinfoOn.png";
 import talkOn from "../../assets/images/BottomTabNav/talkOn.png";
 
 import empty from "../../assets/images/empty.png";
+import NavigationHOME from "../../assets/images/BottomTabNav/HomeCI.svg";
 
 const Tab = createBottomTabNavigator();
 
@@ -47,6 +49,15 @@ const BottomTab = (props) => {
   return (
     <BottomTabView>
       <Image source={props} />
+    </BottomTabView>
+  );
+};
+
+const SVGtest = () => {
+  return (
+    <BottomTabView>
+      <NavigationHOME width={430} height={98} />
+      {/* <NavigationHOME width="100%" height="100%" /> */}
     </BottomTabView>
   );
 };
@@ -91,7 +102,8 @@ const customBottomTabNEW = () => {
         name="btHomeStack"
         options={{
           tabBarBackground: () => {
-            return BottomTab(halfdOn);
+            // return BottomTab(halfdOn);
+            return SVGtest();
           },
         }}
       />
