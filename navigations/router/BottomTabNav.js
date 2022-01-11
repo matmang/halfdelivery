@@ -22,11 +22,11 @@ import images from "../../images";
 import styled from "styled-components";
 import Svg, { Path } from "react-native-svg";
 
-import storeOn from "../../assets/images/BottomTabNav/storeOn.png";
-import partnerOn from "../../assets/images/BottomTabNav/partnerOn.png";
-import halfdOn from "../../assets/images/BottomTabNav/halfDOn.png";
-import orderinfoOn from "../../assets/images/BottomTabNav/orderinfoOn.png";
-import talkOn from "../../assets/images/BottomTabNav/talkOn.png";
+import storeOn from "../../assets/images/BottomTabNav/store4x.png";
+import partnerOn from "../../assets/images/BottomTabNav/partner4x.png";
+import halfdOn from "../../assets/images/BottomTabNav/hlafd4x.png";
+import orderinfoOn from "../../assets/images/BottomTabNav/order4x.png";
+import talkOn from "../../assets/images/BottomTabNav/talk4x.png";
 
 import empty from "../../assets/images/empty.png";
 import NavigationHOME from "../../assets/images/BottomTabNav/HomeCI.svg";
@@ -39,6 +39,7 @@ const BottomTabView = styled.View`
   /* background-color: red; */
   flex-direction: row;
 
+  padding: 0px;
   height: 80px;
   width: 100%;
   position: absolute;
@@ -48,7 +49,7 @@ const BottomTabView = styled.View`
 const BottomTab = (props) => {
   return (
     <BottomTabView>
-      <Image source={props} />
+      <Image source={props} style={{ width: "110%", height: "110%" }} />
     </BottomTabView>
   );
 };
