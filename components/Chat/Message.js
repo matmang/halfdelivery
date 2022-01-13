@@ -32,10 +32,7 @@ const MsgBox = styled.View`
 `;
 
 const ImageView = styled.View`
-  margin-bottom: ${(props) =>
-    props.isMsg
-      ? 10
-      : 0}px; //! 추후 삭제예정.. 이미지와 텍스트는 따로 표출해야함
+  margin-bottom: 0px;
 `;
 const Msg = styled.Text`
   font-size: 15px;
@@ -141,22 +138,28 @@ export default ({ message }) => {
             <TimeStamp>{changedTimeStamp}</TimeStamp>
           </View>
         )}
-
-        {/* 메시지 내용 */}
-        <MsgBox isMe={isMe}>
+        <View>
+          {/* 이미지 메시지 */}
           {message.image && (
-            <ImageView isMsg={message.content}>
-              <S3Image
-                imgKey={message.image}
-                style={{ width: width * 0.3, aspectRatio: 3 / 4 }}
-                resizeMode="cover"
-              />
-            </ImageView>
+            <MsgBox isMe={isMe}>
+              <ImageView>
+                <S3Image
+                  imgKey={message.image}
+                  style={{ width: width * 0.3, aspectRatio: 3 / 4 }}
+                  resizeMode="cover"
+                />
+              </ImageView>
+            </MsgBox>
           )}
 
-          {/* 느낌표 두개 연산자(!!)는 Boolean 으로 형 변환해준다 */}
-          {!!message.content && <Msg isMe={isMe}>{message.content}</Msg>}
-        </MsgBox>
+          {/* 텍스트 메시지 */}
+          {!!message.content && (
+            <MsgBox isMe={isMe}>
+              {/* 느낌표 두개 연산자(!!)는 Boolean 으로 형 변환해준다 */}
+              <Msg isMe={isMe}>{message.content}</Msg>
+            </MsgBox>
+          )}
+        </View>
 
         {/* 메시지 생성 시각 | 상대방*/}
         {!isMe && (
