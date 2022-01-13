@@ -15,10 +15,10 @@ import styled from "styled-components";
 
 const MsgBox = styled.View`
   /* padding: 10px; */
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top: 4px;
-  padding-bottom: 5px;
+  padding-left: ${(props) => (props.isImg ? "4px" : "10px")};
+  padding-right: ${(props) => (props.isImg ? "4px" : "10px")};
+  padding-top: ${(props) => (props.isImg ? "4px" : "4px")};
+  padding-bottom: ${(props) => (props.isImg ? "4px" : "5px")};
 
   margin-right: ${(props) => (props.isMe ? "32px" : "auto")};
   margin-left: ${(props) => (props.isMe ? "auto" : "15px")};
@@ -138,14 +138,12 @@ export default ({ message }) => {
         <View>
           {/* 이미지 메시지 */}
           {message.image && (
-            <MsgBox isMe={isMe} width={width}>
-              <ImageView>
-                <S3Image
-                  imgKey={message.image}
-                  style={{ width: width * 0.3, aspectRatio: 3 / 4 }}
-                  resizeMode="cover"
-                />
-              </ImageView>
+            <MsgBox isMe={isMe} width={width} isImg={!!message.image}>
+              <S3Image
+                imgKey={message.image}
+                style={{ width: width * 0.3, aspectRatio: 3 / 4 }}
+                resizeMode="cover"
+              />
             </MsgBox>
           )}
 
@@ -191,13 +189,6 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 0,
   },
 
-  leftTextContainer: {
-    backgroundColor: "#FFFFFF",
-  },
-  rightTextContainer: {
-    backgroundColor: colors.mainBlue,
-  },
-
   image: {
     height: 40,
     width: 40,
@@ -212,10 +203,5 @@ const styles = StyleSheet.create({
     // backgroundColor: "red",
     alignItems: "center",
     // justifyContents: "center",
-  },
-  imageContainerText: {
-    fontSize: 10,
-    fontWeight: "bold",
-    // numberOfLines: 1,
   },
 });
