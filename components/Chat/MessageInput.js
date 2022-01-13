@@ -49,8 +49,8 @@ const ImgProgress = styled.View`
   height: 3px;
   border-radius: 5px;
   background-color: lightblue;
-  width: 100%;
-  /* width: ${(props) => props.progress * 100}%; */
+  /* width: 100%; */
+  width: ${(props) => props.progress * 100}%;
   margin-right: auto;
 `;
 

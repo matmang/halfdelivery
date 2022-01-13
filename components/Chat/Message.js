@@ -13,9 +13,44 @@ import { Auth, DataStore } from "aws-amplify";
 import { S3Image } from "aws-amplify-react-native";
 import styled from "styled-components";
 
-const ImageView = styled.View`
-  margin-bottom: 10px;
+const MsgBox = styled.View`
+  /* padding: 10px; */
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 4px;
+  padding-bottom: 5px;
+
+  margin-right: 32px;
+  margin-left: auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+  border-radius: 6px;
+  width: auto;
+  max-width: 100%;
+  background: ${(props) => (props.isMe ? colors.mainBlue : "white")};
 `;
+
+const ImageView = styled.View`
+  margin-bottom: ${(props) =>
+    props.isMsg
+      ? 10
+      : 0}px; //! 추후 삭제예정.. 이미지와 텍스트는 따로 표출해야함
+`;
+const Msg = styled.Text`
+  font-size: 15px;
+  font-family: "noto-regular";
+  color: ${(props) => (props.isMe ? "white" : colors.mainBlue)};
+`;
+
+const TimeStamp = styled.Text`
+  font-size: 12px;
+  font-family: "nunito-regular";
+  color: #9c9c9c;
+  /* margin-left: auto; */
+  margin-right: 6px;
+`;
+
 export default ({ message }) => {
   const [user, setUser] = useState(undefined);
   const [isMe, setIsMe] = useState(false);
@@ -41,7 +76,28 @@ export default ({ message }) => {
   const changeTimeStamp = (message_createdAt) => {
     // const KR_TIME_DIFF = 32400000; // ? 9시간.
     const UTCms = Date.parse(message_createdAt);
-    return new Date(UTCms).toLocaleString("ko-KR");
+    // return new Date(UTCms).toLocaleString("ko-KR");
+    const time = new Date(UTCms);
+    let hour = time.getHours();
+    let when = "";
+    if (hour < 12) {
+      when = " AM";
+    } else {
+      console.log("dd");
+      hour = hour - 12;
+      when = " PM";
+    }
+    hour.toString();
+
+    let minute = time.getMinutes();
+    if (minute < 10) {
+      minute.toString();
+      minute = "0" + minute;
+    } else {
+      minute.toString();
+    }
+
+    return hour + ":" + minute + when;
   };
 
   if (!user) {
@@ -82,19 +138,14 @@ export default ({ message }) => {
         {/* 메시지 생성 시각 | 나*/}
         {isMe && (
           <View style={{ justifyContent: "flex-end" }}>
-            <Text style={[styles.timestampText]}>{changedTimeStamp}</Text>
+            <TimeStamp>{changedTimeStamp}</TimeStamp>
           </View>
         )}
 
         {/* 메시지 내용 */}
-        <View
-          style={[
-            styles.textContainer,
-            isMe ? styles.rightTextContainer : styles.leftTextContainer,
-          ]}
-        >
+        <MsgBox isMe={isMe}>
           {message.image && (
-            <ImageView>
+            <ImageView isMsg={message.content}>
               <S3Image
                 imgKey={message.image}
                 style={{ width: width * 0.3, aspectRatio: 3 / 4 }}
@@ -102,15 +153,15 @@ export default ({ message }) => {
               />
             </ImageView>
           )}
-          <Text style={{ color: isMe ? "white" : "black", fontSize: 15 }}>
-            {message.content}
-          </Text>
-        </View>
+
+          {/* 느낌표 두개 연산자(!!)는 Boolean 으로 형 변환해준다 */}
+          {!!message.content && <Msg isMe={isMe}>{message.content}</Msg>}
+        </MsgBox>
 
         {/* 메시지 생성 시각 | 상대방*/}
         {!isMe && (
           <View style={{ justifyContent: "flex-end" }}>
-            <Text style={[styles.timestampText]}>{changedTimeStamp}</Text>
+            <TimeStamp>{changedTimeStamp}</TimeStamp>
           </View>
         )}
       </View>
@@ -140,20 +191,11 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 0,
   },
 
-  textContainer: {
-    padding: 10,
-    paddingBottom: 20,
-    margin: 5,
-    borderRadius: 10,
-    maxWidth: "70%",
-  },
   leftTextContainer: {
-    backgroundColor: colors.mainPink,
-    borderTopLeftRadius: 0,
+    backgroundColor: "#FFFFFF",
   },
   rightTextContainer: {
     backgroundColor: colors.mainBlue,
-    borderTopRightRadius: 0,
   },
 
   image: {
@@ -174,10 +216,5 @@ const styles = StyleSheet.create({
     fontSize: 10,
     fontWeight: "bold",
     // numberOfLines: 1,
-  },
-
-  timestampText: {
-    fontSize: 7,
-    color: "black",
   },
 });
