@@ -312,7 +312,7 @@ const ChatRoomScreen = (props) => {
 
 const styles = StyleSheet.create({
   page: {
-    backgroundColor: "white",
+    backgroundColor: "#F5F6F6",
     flex: 1,
   },
   chatMenuList: {

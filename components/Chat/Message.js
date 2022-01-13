@@ -13,12 +13,29 @@ import { Auth, DataStore } from "aws-amplify";
 import { S3Image } from "aws-amplify-react-native";
 import styled from "styled-components";
 
+const ImgBox = styled.View`
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+
+  margin-right: ${(props) => (props.isMe ? "32px" : "auto")};
+  margin-left: ${(props) => (props.isMe ? "auto" : "15px")};
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+  width: auto;
+  max-width: ${(props) => props.width * 0.61}%;
+  background: ${colors.mainBlue};
+  border-radius: 6px;
+`;
+
 const MsgBox = styled.View`
   /* padding: 10px; */
-  padding-left: ${(props) => (props.isImg ? "4px" : "10px")};
-  padding-right: ${(props) => (props.isImg ? "4px" : "10px")};
-  padding-top: ${(props) => (props.isImg ? "4px" : "4px")};
-  padding-bottom: ${(props) => (props.isImg ? "4px" : "5px")};
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 4px;
+  padding-bottom: 5px;
 
   margin-right: ${(props) => (props.isMe ? "32px" : "auto")};
   margin-left: ${(props) => (props.isMe ? "auto" : "15px")};
@@ -34,9 +51,6 @@ const MsgBox = styled.View`
   border-color: ${(props) => (props.isMe ? colors.mainBlue : colors.mainBlue)};
 `;
 
-const ImageView = styled.View`
-  margin-bottom: 0px;
-`;
 const MsgText = styled.Text`
   font-size: 15px;
   line-height: 17px;
@@ -138,13 +152,13 @@ export default ({ message }) => {
         <View>
           {/* 이미지 메시지 */}
           {message.image && (
-            <MsgBox isMe={isMe} width={width} isImg={!!message.image}>
+            <ImgBox isMe={isMe} width={width}>
               <S3Image
                 imgKey={message.image}
                 style={{ width: width * 0.3, aspectRatio: 3 / 4 }}
                 resizeMode="cover"
               />
-            </MsgBox>
+            </ImgBox>
           )}
 
           {/* 텍스트 메시지 */}
