@@ -15,6 +15,7 @@ import {
   MaterialCommunityIcons,
   AntDesign,
   Ionicons,
+  Entypo,
 } from "@expo/vector-icons";
 import { Auth, DataStore, Storage } from "aws-amplify";
 import { Message, ChatRoom } from "../../AWS/src/models";
@@ -23,6 +24,12 @@ import * as ImagePicker from "expo-image-picker";
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
 import styled from "styled-components";
+
+const InputBox = styled.View`
+  flex-direction: row;
+  padding: 10px;
+  background-color: ${colors.mainBlue};
+`;
 
 const Btm = styled.View`
   flex-direction: row;
@@ -38,10 +45,20 @@ const Btm = styled.View`
   /* opacity: ${({ disabled }) => (disabled ? 0.5 : 1)}; */
 `;
 
+const ImgProgress = styled.View`
+  height: 3px;
+  border-radius: 5px;
+  background-color: lightblue;
+  width: 100%;
+  /* width: ${(props) => props.progress * 100}%; */
+  margin-right: auto;
+`;
+
 const MessageInput = ({ chatRoom }) => {
   const [message, setMessage] = useState("");
   const [image, setImage] = useState(null);
   const [isBtm, setIsBtm] = useState(false);
+  const [progress, setProgress] = useState(0);
   console.log(`image ${image}`);
 
   //- 메시지 보내는 함수
@@ -72,12 +89,14 @@ const MessageInput = ({ chatRoom }) => {
       sendImage();
     } else if (message) {
       sendMessage();
+    } else {
     }
   };
 
   const resetFields = () => {
     setMessage("");
     setImage(null);
+    setProgress(0);
   };
 
   const expandBtm = () => {
@@ -117,13 +136,20 @@ const MessageInput = ({ chatRoom }) => {
   };
 
   //- Send Images
+  const progressCallback = (progress) => {
+    console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
+    setProgress(progress.loaded / progress.total);
+  };
+
   const sendImage = async () => {
     if (!image) {
       return null;
     }
 
     const blob = await getImageBlob();
-    const { key } = await Storage.put(`${uuidv4()}.png`, blob);
+    const { key } = await Storage.put(`${uuidv4()}.png`, blob, {
+      progressCallback,
+    });
 
     // send message
     const user = await Auth.currentAuthenticatedUser();
@@ -135,6 +161,7 @@ const MessageInput = ({ chatRoom }) => {
         chatroomID: chatRoom.id,
       })
     );
+
     updateLastMessage(newMessage);
     resetFields();
   };
@@ -157,11 +184,6 @@ const MessageInput = ({ chatRoom }) => {
     >
       {image && (
         <View>
-          <Image
-            source={{ uri: image }}
-            style={{ width: 100, height: 100, borderRadius: 10 }}
-          />
-
           <Pressable onPress={() => setImage(null)}>
             <AntDesign
               name="close"
@@ -170,16 +192,21 @@ const MessageInput = ({ chatRoom }) => {
               style={{ margin: 5 }}
             />
           </Pressable>
+          <Image
+            source={{ uri: image }}
+            style={{ width: 100, height: 100, borderRadius: 10 }}
+          />
+          <ImgProgress progress={progress} />
         </View>
       )}
-      <View style={styles.root}>
+      <InputBox>
         <View style={styles.inputContainer}>
           {/* 플러스 아이콘 */}
           <Pressable onPress={expandBtm}>
-            <SimpleLineIcons
+            <Entypo
               name="plus"
               size={24}
-              color="grey"
+              color={colors.mainBlue}
               style={styles.icon}
             />
           </Pressable>
@@ -190,7 +217,7 @@ const MessageInput = ({ chatRoom }) => {
             value={message}
             onChangeText={setMessage} // ? 이 코드는 아래코드와 "똑같다".
             // ?   onChangeText={(newMessage) => setMessage(newMessage)}
-            placeholder="메시지를 입력해주세요!"
+            placeholder="텍스트 박스"
             autoCorrect={false}
             autoCapitalize="none"
           />
@@ -222,7 +249,7 @@ const MessageInput = ({ chatRoom }) => {
             style={styles.icon}
           />
         </Pressable>
-      </View>
+      </InputBox>
       {isBtm && (
         <Btm>
           {/* 이미지 아이콘 */}
@@ -241,11 +268,6 @@ const MessageInput = ({ chatRoom }) => {
 };
 
 const styles = StyleSheet.create({
-  root: {
-    flexDirection: "row",
-    padding: 10,
-    backgroundColor: "red",
-  },
   inputContainer: {
     backgroundColor: "#f2f2f2",
     flexDirection: "row",

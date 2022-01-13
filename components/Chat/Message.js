@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { ActivityIndicator, StyleSheet, Text, View, Image } from "react-native";
+import {
+  ActivityIndicator,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  useWindowDimensions,
+} from "react-native";
 import colors from "../../colors";
 import { User } from "../../AWS/src/models";
 import { Auth, DataStore } from "aws-amplify";
@@ -12,6 +19,7 @@ const ImageView = styled.View`
 export default ({ message }) => {
   const [user, setUser] = useState(undefined);
   const [isMe, setIsMe] = useState(false);
+  const { width } = useWindowDimensions();
 
   useEffect(() => {
     // ? 메시지의 userID 값을 불러옴.
@@ -89,7 +97,7 @@ export default ({ message }) => {
             <ImageView>
               <S3Image
                 imgKey={message.image}
-                style={{ height: 80, width: 80, padding: 10 }}
+                style={{ width: width * 0.3, aspectRatio: 3 / 4 }}
                 resizeMode="cover"
               />
             </ImageView>
