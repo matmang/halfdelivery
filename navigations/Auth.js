@@ -5,6 +5,8 @@ import SignUpAuth from "../screens/Auth/SignUpAuth";
 import SignUpAuthConfirm from "../screens/Auth/SignUpAuthConfirm";
 import SignUpSchool from "../screens/Auth/SignUpSchool";
 import SignUpBank from "../screens/Auth/SignUpBank";
+import FindId from "../screens/Auth/FindId";
+import FindPassword from "../screens/Auth/FindPassword";
 
 const Auth = createStackNavigator();
 
@@ -47,6 +49,20 @@ export default () => (
     <Auth.Screen
       name="SignUpBank"
       component={SignUpBank}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <Auth.Screen
+      name="FindId"
+      component={FindId}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <Auth.Screen
+      name="FindPassword"
+      component={FindPassword}
       options={{
         headerShown: false,
       }}
