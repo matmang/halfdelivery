@@ -20,22 +20,26 @@ const MsgBox = styled.View`
   padding-top: 4px;
   padding-bottom: 5px;
 
-  margin-right: 32px;
-  margin-left: auto;
+  margin-right: ${(props) => (props.isMe ? "32px" : "auto")};
+  margin-left: ${(props) => (props.isMe ? "auto" : "15px")};
   margin-top: 5px;
   margin-bottom: 5px;
 
-  border-radius: 6px;
   width: auto;
-  max-width: 100%;
+  max-width: ${(props) => props.width * 0.61}%;
   background: ${(props) => (props.isMe ? colors.mainBlue : "white")};
+  border-radius: 6px;
+
+  border-width: ${(props) => (props.isMe ? 1.5 : 1.5)}px;
+  border-color: ${(props) => (props.isMe ? colors.mainBlue : colors.mainBlue)};
 `;
 
 const ImageView = styled.View`
   margin-bottom: 0px;
 `;
-const Msg = styled.Text`
+const MsgText = styled.Text`
   font-size: 15px;
+  line-height: 17px;
   font-family: "noto-regular";
   color: ${(props) => (props.isMe ? "white" : colors.mainBlue)};
 `;
@@ -45,7 +49,8 @@ const TimeStamp = styled.Text`
   font-family: "nunito-regular";
   color: #9c9c9c;
   /* margin-left: auto; */
-  margin-right: 6px;
+  margin-right: ${(props) => (props.isMe ? 6 : 0)}px;
+  margin-left: ${(props) => (props.isMe ? 0 : 6)}px;
 `;
 
 export default ({ message }) => {
@@ -121,27 +126,19 @@ export default ({ message }) => {
         {!isMe && (
           <View style={styles.imageContainer}>
             <Image source={{ uri: user.imageUri }} style={styles.image} />
-
-            <Text
-              style={styles.imageContainerText}
-              numberOfLines={1}
-              ellipsizeMode="tail"
-            >
-              {user.name}
-            </Text>
           </View>
         )}
 
         {/* 메시지 생성 시각 | 나*/}
         {isMe && (
           <View style={{ justifyContent: "flex-end" }}>
-            <TimeStamp>{changedTimeStamp}</TimeStamp>
+            <TimeStamp isMe={isMe}>{changedTimeStamp}</TimeStamp>
           </View>
         )}
         <View>
           {/* 이미지 메시지 */}
           {message.image && (
-            <MsgBox isMe={isMe}>
+            <MsgBox isMe={isMe} width={width}>
               <ImageView>
                 <S3Image
                   imgKey={message.image}
@@ -154,9 +151,9 @@ export default ({ message }) => {
 
           {/* 텍스트 메시지 */}
           {!!message.content && (
-            <MsgBox isMe={isMe}>
+            <MsgBox isMe={isMe} width={width}>
               {/* 느낌표 두개 연산자(!!)는 Boolean 으로 형 변환해준다 */}
-              <Msg isMe={isMe}>{message.content}</Msg>
+              <MsgText isMe={isMe}>{message.content}</MsgText>
             </MsgBox>
           )}
         </View>
@@ -211,9 +208,10 @@ const styles = StyleSheet.create({
   imageContainer: {
     height: 50,
     width: 50,
+    // marginBottom: 10,
     // backgroundColor: "red",
     alignItems: "center",
-    justifyContent: "center",
+    // justifyContents: "center",
   },
   imageContainerText: {
     fontSize: 10,
