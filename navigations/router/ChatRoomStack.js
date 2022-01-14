@@ -62,9 +62,13 @@ export default () => (
           // flex: 1,
         },
         headerLeft: () => (
-          <Pressable style={{ marginLeft: 20 }} onPress={navigation.goBack}>
-            <AntDesign name="arrowleft" size={24} color="white" />
-          </Pressable>
+          <AntDesign
+            name="arrowleft"
+            size={24}
+            color="white"
+            style={{ marginLeft: 20 }}
+            onPress={navigation.goBack}
+          />
         ),
         headerRight: (props) => (
           // <Button
@@ -73,9 +77,14 @@ export default () => (
           //   color="grey"
           // />
           //! screen 과의 상호작용은, screen 컴포넌트 내에서 코드작성해야 한다. 참고: https://reactnavigation.org/docs/header-buttons/#header-interaction-with-its-screen-component
-          <Pressable style={{ marginRight: 20 }} onPress={() => {}}>
-            <Entypo name="dots-three-horizontal" size={24} color="white" />
-          </Pressable>
+
+          <Entypo
+            name="dots-three-horizontal"
+            size={24}
+            color="white"
+            style={{ marginRight: 20 }}
+            onPress={() => {}}
+          />
         ),
       })}
     />

@@ -73,7 +73,34 @@ const ProfileImg = styled.Image`
   border-radius: 45px;
 `;
 
-export default ({ message }) => {
+const changeTimeStamp = (message_createdAt) => {
+  // const KR_TIME_DIFF = 32400000; // ? 9시간.
+  const UTCms = Date.parse(message_createdAt);
+  // return new Date(UTCms).toLocaleString("ko-KR");
+  const time = new Date(UTCms);
+  let hour = time.getHours();
+  let when = "";
+  if (hour < 12) {
+    when = " AM";
+  } else {
+    console.log("dd");
+    hour = hour - 12;
+    when = " PM";
+  }
+  hour.toString();
+
+  let minute = time.getMinutes();
+  if (minute < 10) {
+    minute.toString();
+    minute = "0" + minute;
+  } else {
+    minute.toString();
+  }
+
+  return hour + ":" + minute + when;
+};
+
+const Message = ({ message }) => {
   const [user, setUser] = useState(undefined);
   const [isMe, setIsMe] = useState(false);
   const { width } = useWindowDimensions();
@@ -94,33 +121,6 @@ export default ({ message }) => {
     };
     checkIfMe();
   }, [user]);
-
-  const changeTimeStamp = (message_createdAt) => {
-    // const KR_TIME_DIFF = 32400000; // ? 9시간.
-    const UTCms = Date.parse(message_createdAt);
-    // return new Date(UTCms).toLocaleString("ko-KR");
-    const time = new Date(UTCms);
-    let hour = time.getHours();
-    let when = "";
-    if (hour < 12) {
-      when = " AM";
-    } else {
-      console.log("dd");
-      hour = hour - 12;
-      when = " PM";
-    }
-    hour.toString();
-
-    let minute = time.getMinutes();
-    if (minute < 10) {
-      minute.toString();
-      minute = "0" + minute;
-    } else {
-      minute.toString();
-    }
-
-    return hour + ":" + minute + when;
-  };
 
   if (!user) {
     return <ActivityIndicator />;
@@ -205,3 +205,6 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 0,
   },
 });
+
+export { Message, changeTimeStamp };
+export default Message;
