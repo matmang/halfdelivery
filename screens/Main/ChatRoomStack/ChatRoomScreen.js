@@ -33,6 +33,8 @@ import {
   OnTransfering,
   Transferred,
 } from "../../../components/Statuses";
+import colors from "../../../colors";
+import { MaterialIcons } from "@expo/vector-icons";
 
 const TopBox = styled.View`
   flex: 1;
@@ -40,25 +42,64 @@ const TopBox = styled.View`
   justify-content: center;
   background-color: white;
   /* opacity: 0.8; */
-  height: 144px;
   width: 100%;
+  height: 144px;
   position: absolute;
-  z-index: 1;
+  z-index: 3;
   box-shadow: 3px 3px 6px rgba(200, 200, 200, 1);
 `;
 
 const RoomInfo = styled.View`
   /* flex: 1; */
   /* padding: 10px; */
-  justify-content: center;
+  align-items: center;
+  flex-direction: row;
   background-color: white;
-  height: 48px;
   width: 100%;
+  height: 48px;
+  z-index: 1;
+`;
+
+const InfoDetail = styled.View`
+  width: 100%;
+  height: 257px;
+  background-color: white;
+  box-shadow: 3px 3px 6px rgba(200, 200, 200, 1);
+  z-index: 0;
+`;
+
+const RoomText = styled.Text`
+  font-family: "noto-regular";
+  font-size: 17px;
+  text-decoration: underline;
+  color: ${colors.mainBlue};
+  margin-left: 14px;
+`;
+
+const PrfImgView = styled.View`
+  flex-direction: row;
+  /* //! 안드로이드는 margin-left: 33% 가 맞음 */
+  /* margin-left: 33%; */
+  margin-left: 25%;
+  margin-right: auto;
+  /* border-width: 1px; */
+  justify-content: space-evenly;
+`;
+
+const ProfileImg = styled.Image`
+  height: 22px;
+  width: 22px;
+  border-radius: 22px;
+  margin-left: 2%;
+  margin-right: 3px;
+  border-width: 1px;
 `;
 
 const TextBox = styled.Text`
-  /* font-family: "noto-regular"; //! noto로 폰트바꾸면 이상하게 줄맞춤이 깨진다.. */
+  /* //! noto로 폰트바꾸면 이상하게 줄맞춤이 깨진다.. */
+  font-family: "noto-regular";
   font-size: 17px;
+  line-height: 19px;
   margin-left: 12px;
   margin-right: auto;
 `;
@@ -66,7 +107,8 @@ const TextBox = styled.Text`
 const ChatRoomScreen = (props) => {
   const [messages, setMessages] = useState([]);
   const [chatRoom, setChatRoom] = useState(null);
-  const [isModal, setIsModal] = useState(false);
+  const [is3dots, setIs3dots] = useState(false);
+  const [isDetail, setIsDetail] = useState(false);
   const route = useRoute();
 
   //- 헤더바, 점3개 버튼누르면 작동
@@ -77,15 +119,15 @@ const ChatRoomScreen = (props) => {
         <Pressable
           style={{ marginRight: 20, marginVertical: 10, flexDirection: "row" }}
           onPress={() => {
-            isModal ? setIsModal(false) : setIsModal(true);
+            is3dots ? setIs3dots(false) : setIs3dots(true);
           }}
         >
           <Entypo name="dots-three-horizontal" size={24} color="white" />
         </Pressable>
       ),
     });
-  }, [navigation, isModal]);
-  console.log("isModal", isModal);
+  }, [navigation, is3dots]);
+  console.log("is3dots", is3dots);
 
   // const storeInfo = route.params.storeInfo;
   // console.log("storeInfo", storeInfo);
@@ -208,34 +250,7 @@ const ChatRoomScreen = (props) => {
   return (
     // ? View 대신 SafeAreaView 를 쓰면, 노치 같은 곳에 데이터가 표출되지 않는다. 굳!
     <SafeAreaView style={styles.page}>
-      {/* //~ 방법1. Modal 로 구현 */}
-      {/* <View style={styles.centeredView}>
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={isModal}
-          onRequestClose={() => {
-            Alert.alert("Modal has been closed.");
-          }}
-        >
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <Text style={styles.modalText}>Hello World!</Text>
-              <Pressable
-                style={[styles.button, styles.buttonClose]}
-                onPress={() => {
-                  setIsModal(false);
-                }}
-              >
-                <Text style={styles.textStyle}>Hide Modal</Text>
-              </Pressable>
-            </View>
-          </View>
-        </Modal>
-      </View> */}
-
-      {/* //~ 방법2. 그냥 View 로 구현 */}
-      {isModal && (
+      {is3dots && (
         <TopBox>
           <Pressable
             style={{
@@ -252,12 +267,13 @@ const ChatRoomScreen = (props) => {
               source={require("../../../assets/images/alert.png")}
               style={{ width: 18, height: 18.5 }}
             />
-            <Svg width={20} height={20} viewBox="0 0 20 20">
+
+            {/* <Svg width={20} height={20} viewBox="0 0 20 20">
               <Path
                 d="M10.16,4,9.074,5.086l4.3,4.3H4v1.54h9.371l-4.3,4.3L10.16,16.32l6.16-6.16Z"
                 fill="#000"
               />
-            </Svg>
+            </Svg> */}
             <TextBox>신고하기</TextBox>
             <MaterialCommunityIcons
               name="arrow-top-right"
@@ -310,8 +326,31 @@ const ChatRoomScreen = (props) => {
       )}
 
       <RoomInfo>
-        <OnMatching />
+        <OnMatching style={{ marginLeft: 24 }} />
+        <RoomText>정직유부</RoomText>
+
+        <PrfImgView>
+          {/* //! 나의 이미지만, style 줄 것 */}
+          <ProfileImg
+            source={require("../../../assets/images/tempProfileImg.png")}
+            style={{ borderWidth: 2, borderColor: colors.mainBlue }}
+          />
+          <ProfileImg
+            source={require("../../../assets/images/tempProfileImg.png")}
+          />
+        </PrfImgView>
+        <MaterialIcons
+          name={isDetail ? "keyboard-arrow-up" : "keyboard-arrow-down"}
+          size={24}
+          color={colors.mainBlue}
+          style={{ marginLeft: "auto", marginRight: 24 }}
+          onPress={() => {
+            isDetail ? setIsDetail(false) : setIsDetail(true);
+          }}
+        />
       </RoomInfo>
+
+      {isDetail && <InfoDetail></InfoDetail>}
 
       {/* 채팅메시지 */}
       <FlatList
@@ -336,48 +375,6 @@ const styles = StyleSheet.create({
     backgroundColor: "lightgrey",
     borderBottomRightRadius: 10,
     borderBottomLeftRadius: 10,
-  },
-  //? 아래부터는 다 Modal 관련 스타일임
-  centeredView: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 22,
-  },
-  modalView: {
-    margin: 20,
-    backgroundColor: "white",
-    borderRadius: 20,
-    padding: 35,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  button: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
-  },
-  buttonOpen: {
-    backgroundColor: "#F194FF",
-  },
-  buttonClose: {
-    backgroundColor: "#2196F3",
-  },
-  textStyle: {
-    color: "white",
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-  modalText: {
-    marginBottom: 15,
-    textAlign: "center",
   },
 });
 

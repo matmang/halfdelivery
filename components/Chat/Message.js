@@ -67,6 +67,12 @@ const TimeStamp = styled.Text`
   margin-left: ${(props) => (props.isMe ? 0 : 6)}px;
 `;
 
+const ProfileImg = styled.Image`
+  height: 45px;
+  width: 45px;
+  border-radius: 45px;
+`;
+
 export default ({ message }) => {
   const [user, setUser] = useState(undefined);
   const [isMe, setIsMe] = useState(false);
@@ -137,11 +143,7 @@ export default ({ message }) => {
     >
       <View style={{ flexDirection: "row" }}>
         {/* 상대방 화면만 이미지, 이름 표출 */}
-        {!isMe && (
-          <View style={styles.imageContainer}>
-            <Image source={{ uri: user.imageUri }} style={styles.image} />
-          </View>
-        )}
+        {!isMe && <ProfileImg source={{ uri: user.imageUri }} />}
 
         {/* 메시지 생성 시각 | 나*/}
         {isMe && (
@@ -201,21 +203,5 @@ const styles = StyleSheet.create({
     marginLeft: "auto",
     marginRight: 10,
     borderTopRightRadius: 0,
-  },
-
-  image: {
-    height: 40,
-    width: 40,
-    borderRadius: 40,
-    borderColor: "lightgrey",
-    borderWidth: 1,
-  },
-  imageContainer: {
-    height: 50,
-    width: 50,
-    // marginBottom: 10,
-    // backgroundColor: "red",
-    alignItems: "center",
-    // justifyContents: "center",
   },
 });

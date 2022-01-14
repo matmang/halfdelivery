@@ -51,9 +51,15 @@ export default () => (
         title: "OOOO 매칭방",
         headerTitleStyle: {
           color: "white",
+          fontFamily: "noto-regular",
+          fontSize: 17,
         },
+        headerTitleAlign: "center",
         headerStyle: {
           backgroundColor: colors.mainBlue,
+          // alignItems: "center",
+          // justifyContent: "center",
+          // flex: 1,
         },
         headerLeft: () => (
           <Pressable style={{ marginLeft: 20 }} onPress={navigation.goBack}>

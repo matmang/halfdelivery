@@ -184,14 +184,13 @@ const MessageInput = ({ chatRoom }) => {
     >
       {image && (
         <View>
-          <Pressable onPress={() => setImage(null)}>
-            <AntDesign
-              name="close"
-              size={24}
-              color="black"
-              style={{ margin: 5 }}
-            />
-          </Pressable>
+          <AntDesign
+            name="close"
+            size={24}
+            color="black"
+            style={{ margin: 5 }}
+            onPress={() => setImage(null)}
+          />
           <Image
             source={{ uri: image }}
             style={{ width: 100, height: 100, borderRadius: 10 }}
@@ -202,14 +201,13 @@ const MessageInput = ({ chatRoom }) => {
       <InputBox>
         <View style={styles.inputContainer}>
           {/* 플러스 아이콘 */}
-          <Pressable onPress={expandBtm}>
-            <Entypo
-              name="plus"
-              size={24}
-              color={colors.mainBlue}
-              style={styles.icon}
-            />
-          </Pressable>
+          <Entypo
+            name="plus"
+            size={24}
+            color={colors.mainBlue}
+            style={styles.icon}
+            onPress={expandBtm}
+          />
 
           {/* 메시지 입력칸 */}
           <TextInput
@@ -230,8 +228,8 @@ const MessageInput = ({ chatRoom }) => {
             style={styles.icon}
           /> */}
         </View>
-        {/* // ? Pressable 은 View 와 대체 가능하다. 오직, onPress 유무 차이만 있음! */}
-        <Pressable
+
+        <View
           style={[
             styles.buttonContainer,
             // ? message 가 빈스트링 이면 false 임.
@@ -239,7 +237,6 @@ const MessageInput = ({ chatRoom }) => {
               backgroundColor: message || image ? colors.mainPink : "lightgrey",
             },
           ]}
-          onPress={onPress}
         >
           {/* 메시지 보내기 버튼 */}
           <Feather
@@ -247,9 +244,11 @@ const MessageInput = ({ chatRoom }) => {
             size={30}
             color={message ? colors.mainBlue : "grey"}
             style={styles.icon}
+            onPress={onPress}
           />
-        </Pressable>
+        </View>
       </InputBox>
+
       {isBtm && (
         <Btm>
           {/* 이미지 아이콘 */}
