@@ -20,18 +20,19 @@ import {
   ChatRoom,
   Order,
 } from "../../../AWS/src/models";
-
-import StoreItem from "../../../components/Matching/StoreItem";
-import ChatStoreItem from "../../../components/Chat/ChatStoreItem";
-import ChatMenuList from "../../../components/Chat/ChatMenuList";
-
 import { useSelector, useDispatch } from "react-redux";
 import { setStore, addMenu, cleanMenus } from "../../../redux/orderSlice";
-
 import { Entypo } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import styled from "styled-components";
 import Svg, { Path } from "react-native-svg";
+import {
+  OnMatching,
+  Matched,
+  Failed,
+  OnTransfering,
+  Transferred,
+} from "../../../components/Statuses";
 
 const TopBox = styled.View`
   flex: 1;
@@ -44,6 +45,15 @@ const TopBox = styled.View`
   position: absolute;
   z-index: 1;
   box-shadow: 3px 3px 6px rgba(200, 200, 200, 1);
+`;
+
+const RoomInfo = styled.View`
+  /* flex: 1; */
+  /* padding: 10px; */
+  justify-content: center;
+  background-color: white;
+  height: 48px;
+  width: 100%;
 `;
 
 const TextBox = styled.Text`
@@ -59,6 +69,7 @@ const ChatRoomScreen = (props) => {
   const [isModal, setIsModal] = useState(false);
   const route = useRoute();
 
+  //- 헤더바, 점3개 버튼누르면 작동
   const navigation = props.navigation;
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -297,6 +308,10 @@ const ChatRoomScreen = (props) => {
           </Pressable>
         </TopBox>
       )}
+
+      <RoomInfo>
+        <OnMatching />
+      </RoomInfo>
 
       {/* 채팅메시지 */}
       <FlatList
