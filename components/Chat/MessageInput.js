@@ -24,6 +24,7 @@ import * as ImagePicker from "expo-image-picker";
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
 import styled from "styled-components";
+import ReactNativeModal from "react-native-modal";
 
 const InputBox = styled.View`
   flex-direction: row;
@@ -33,16 +34,11 @@ const InputBox = styled.View`
 
 const Btm = styled.View`
   flex-direction: row;
+  justify-content: space-evenly;
   align-items: center;
-  /* width: 338px; */
-  height: 80px;
-  /* padding: 12.5px 20px; */
-  background-color: yellow;
-  border-bottom-color: ${({ isValued }) =>
-    isValued ? colors.mainBlue : colors.blueGrey};
-  font-family: "noto-regular";
-  font-size: 17px;
-  /* opacity: ${({ disabled }) => (disabled ? 0.5 : 1)}; */
+  width: 100%;
+  height: 153px;
+  background-color: ${colors.unAccent};
 `;
 
 const ImgProgress = styled.View`
@@ -54,11 +50,28 @@ const ImgProgress = styled.View`
   margin-right: auto;
 `;
 
+const ModalBox = styled.View`
+  width: 60%;
+  height: 20%;
+  background-color: white;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: space-evenly;
+`;
+
+const BlueText = styled.Text`
+  font-family: "noto-regular";
+  font-size: 17px;
+  margin-left: 8px;
+  color: ${colors.mainBlue};
+`;
+
 const MessageInput = ({ chatRoom }) => {
   const [message, setMessage] = useState("");
   const [image, setImage] = useState(null);
   const [isBtm, setIsBtm] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [isModal, setIsModal] = useState(false);
   console.log(`image ${image}`);
 
   //- 메시지 보내는 함수
@@ -133,6 +146,46 @@ const MessageInput = ({ chatRoom }) => {
     if (!result.cancelled) {
       setImage(result.uri);
     }
+  };
+
+  // - 카메라/앨범 선택 Modal
+  const CamAlbModal = ({ isModal, setIsModal }) => {
+    return (
+      <ReactNativeModal
+        isVisible={isModal}
+        style={{ justifyContent: "center", alignItems: "center" }}
+      >
+        <ModalBox>
+          <BlueText
+            onPress={() => {
+              ImagePicker.getCameraPermissionsAsync().then((res) => {
+                console.log(res);
+              });
+              // takePhoto();
+              // setIsModal(false);
+            }}
+          >
+            카메라 실행
+          </BlueText>
+
+          <BlueText
+            onPress={() => {
+              pickImage();
+              setIsModal(false);
+            }}
+          >
+            앨범 실행
+          </BlueText>
+          <BlueText
+            onPress={() => {
+              setIsModal(false);
+            }}
+          >
+            창 닫기
+          </BlueText>
+        </ModalBox>
+      </ReactNativeModal>
+    );
   };
 
   //- Send Images
@@ -251,17 +304,49 @@ const MessageInput = ({ chatRoom }) => {
 
       {isBtm && (
         <Btm>
-          {/* 이미지 아이콘 */}
-          <Pressable onPress={pickImage}>
-            <Feather name="image" size={40} color="grey" style={styles.icon} />
+          {/* 카메라/앨범  */}
+          <Pressable
+            onPress={() => {
+              // pickImage();
+              setIsModal(true);
+            }}
+          >
+            <Image
+              source={require("../../assets/images/ChatRoomScreen/cam_alb.png")}
+              style={{ width: 83, height: 96 }}
+            />
           </Pressable>
 
           {/* 카메라 아이콘 */}
-          <Pressable onPress={takePhoto}>
-            <Feather name="camera" size={40} color="grey" style={styles.icon} />
+          {/* <Pressable onPress={takePhoto}></Pressable> */}
+
+          {/* 주문확인  */}
+          <Pressable onPress={() => {}}>
+            <Image
+              source={require("../../assets/images/ChatRoomScreen/checkOrder.png")}
+              style={{ width: 83, height: 96 }}
+            />
+          </Pressable>
+
+          {/* 계좌전송  */}
+          <Pressable onPress={() => {}}>
+            <Image
+              source={require("../../assets/images/ChatRoomScreen/sendAcc.png")}
+              style={{ width: 83, height: 96 }}
+            />
+          </Pressable>
+
+          {/* 송금확인  */}
+          <Pressable onPress={() => {}}>
+            <Image
+              source={require("../../assets/images/ChatRoomScreen/checkTransfer.png")}
+              style={{ width: 83, height: 96 }}
+            />
           </Pressable>
         </Btm>
       )}
+
+      <CamAlbModal isModal={isModal} setIsModal={setIsModal} />
     </KeyboardAvoidingView>
   );
 };
