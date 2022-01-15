@@ -44,10 +44,17 @@ const ImgBox = styled.View`
   margin-left: 24px;
 `;
 
-const ProfileImg = styled.Image`
+const Img40 = styled.Image`
   height: 45px;
   width: 45px;
   border-radius: 45px;
+  border-width: 2px;
+`;
+
+const Img35 = styled.Image`
+  height: 35px;
+  width: 35px;
+  border-radius: 35px;
   border-width: 2px;
 `;
 
@@ -99,7 +106,10 @@ export default ({ chatRoom }) => {
   // const [users, setUsers] = useState([]); // ? All users in this chatRoom
   const [user, setUser] = useState(null); // ? The display user
   const [lastMessage, setLastMessage] = useState(undefined); // ? The display user
-  const [persons, setPersons] = useState(2);
+  const [persons, setPersons] = useState(4);
+  //! 임시값
+  const user_imageUri =
+    "https://media.istockphoto.com/photos/beauty-portrait-of-young-woman-picture-id1309405076?s=612x612";
 
   const navigation = useNavigation();
 
@@ -165,9 +175,10 @@ export default ({ chatRoom }) => {
         {/* //- 2명일때 배치 */}
         {persons === 2 && (
           <ImgBox>
-            <ProfileImg
+            <Img40
               source={{
-                uri: user.imageUri,
+                // uri: user.imageUri,
+                uri: user_imageUri,
               }}
               style={{
                 marginLeft: 5,
@@ -176,9 +187,10 @@ export default ({ chatRoom }) => {
                 position: "absolute",
               }}
             />
-            <ProfileImg
+            <Img40
               source={{
-                uri: user.imageUri,
+                // uri: user.imageUri,
+                uri: user_imageUri,
               }}
               style={{
                 marginLeft: 32,
@@ -192,10 +204,102 @@ export default ({ chatRoom }) => {
         )}
 
         {/* //- 3명일때 배치 */}
-        {persons === 3 && <ImgBox></ImgBox>}
+        {persons === 3 && (
+          <ImgBox>
+            <Img35
+              source={{
+                // uri: user.imageUri,
+                uri: user_imageUri,
+              }}
+              style={{
+                marginLeft: 8,
+                marginTop: 5,
+                borderColor: "black",
+                position: "absolute",
+              }}
+            />
+            <Img35
+              source={{
+                // uri: user.imageUri,
+                uri: user_imageUri,
+              }}
+              style={{
+                marginLeft: 38,
+                marginTop: 5,
+                borderColor: "black",
+                position: "absolute",
+              }}
+            />
+            <Img35
+              source={{
+                // uri: user.imageUri,
+                uri: user_imageUri,
+              }}
+              style={{
+                marginLeft: 22.5,
+                marginTop: 30,
+                borderColor: "red",
+                backgroundColor: "orange",
+                position: "absolute",
+              }}
+            />
+          </ImgBox>
+        )}
 
         {/* //- 4명일때 배치 */}
-        {persons === 4 && <ImgBox></ImgBox>}
+        {persons === 4 && (
+          <ImgBox>
+            <Img35
+              source={{
+                // uri: user.imageUri,
+                uri: user_imageUri,
+              }}
+              style={{
+                marginLeft: 8,
+                marginTop: 5,
+                borderColor: "black",
+                position: "absolute",
+              }}
+            />
+            <Img35
+              source={{
+                // uri: user.imageUri,
+                uri: user_imageUri,
+              }}
+              style={{
+                marginLeft: 38,
+                marginTop: 5,
+                borderColor: "black",
+                position: "absolute",
+              }}
+            />
+            <Img35
+              source={{
+                // uri: user.imageUri,
+                uri: user_imageUri,
+              }}
+              style={{
+                marginLeft: 8,
+                marginTop: 30,
+                borderColor: "black",
+                position: "absolute",
+              }}
+            />
+            <Img35
+              source={{
+                // uri: user.imageUri,
+                uri: user_imageUri,
+              }}
+              style={{
+                marginLeft: 38,
+                marginTop: 30,
+                borderColor: "red",
+                backgroundColor: "orange",
+                position: "absolute",
+              }}
+            />
+          </ImgBox>
+        )}
 
         <NonImgBox>
           <InfoView>
@@ -212,9 +316,11 @@ export default ({ chatRoom }) => {
             <TimeStamp>{changeTimeStamp(lastMessage?.createdAt)}</TimeStamp>
           </InfoView>
           <InfoView style={{ marginTop: 8 }}>
-            <InfoText style={{ marginLeft: 3 }}>1인 배달비</InfoText>
-            <InfoText style={{ marginLeft: 4 }}>
-              <NunitoText>
+            <InfoText style={{ marginLeft: 3, color: colors.coal }}>
+              1인 배달비
+            </InfoText>
+            <InfoText style={{ marginLeft: 4, color: colors.coal }}>
+              <NunitoText style={{ color: colors.coal }}>
                 10,000
                 {/* {storeInfo.minOrdPrice.toLocaleString("ko-KR")} */}
               </NunitoText>
