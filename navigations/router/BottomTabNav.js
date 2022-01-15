@@ -54,14 +54,14 @@ const BottomTab = (props) => {
   );
 };
 
-const SVGtest = () => {
-  return (
-    <BottomTabView>
-      <NavigationHOME width={430} height={98} />
-      {/* <NavigationHOME width="100%" height="100%" /> */}
-    </BottomTabView>
-  );
-};
+// const SVGtest = () => {
+//   return (
+//     <BottomTabView>
+//       <NavigationHOME width={430} height={98} />
+//       {/* <NavigationHOME width="100%" height="100%" /> */}
+//     </BottomTabView>
+//   );
+// };
 
 const customBottomTabNEW = () => {
   // const [image, setImage] = useState(storeOn); //! 리액트훅 Tab 네비게이션 prop 안에 못 넣는다..!
@@ -103,8 +103,7 @@ const customBottomTabNEW = () => {
         name="btHomeStack"
         options={{
           tabBarBackground: () => {
-            // return BottomTab(halfdOn);
-            return SVGtest();
+            return BottomTab(halfdOn);
           },
         }}
       />

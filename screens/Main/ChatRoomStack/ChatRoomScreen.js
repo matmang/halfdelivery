@@ -264,7 +264,7 @@ const ChatRoomScreen = (props) => {
             }}
           >
             <Image
-              source={require("../../../assets/images/alert.png")}
+              source={require("../../../assets/images/alert4x.png")}
               style={{ width: 18, height: 18.5 }}
             />
 
@@ -291,7 +291,7 @@ const ChatRoomScreen = (props) => {
             onPress={() => {}}
           >
             <Image
-              source={require("../../../assets/images/ban.png")}
+              source={require("../../../assets/images/ban4x.png")}
               style={{ width: 18, height: 18 }}
             />
             <TextBox>차단하기</TextBox>
@@ -311,7 +311,7 @@ const ChatRoomScreen = (props) => {
             onPress={() => {}}
           >
             <Image
-              source={require("../../../assets/images/leave.png")}
+              source={require("../../../assets/images/leave4x.png")}
               style={{ width: 15.95, height: 22.37 }}
             />
             <TextBox>채팅방 나가기</TextBox>
