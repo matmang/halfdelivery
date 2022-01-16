@@ -106,7 +106,7 @@ export default ({ chatRoom }) => {
   // const [users, setUsers] = useState([]); // ? All users in this chatRoom
   const [user, setUser] = useState(null); // ? The display user
   const [lastMessage, setLastMessage] = useState(undefined); // ? The display user
-  const [persons, setPersons] = useState(4);
+  const [persons, setPersons] = useState(2);
   //! 임시값
   const user_imageUri =
     "https://media.istockphoto.com/photos/beauty-portrait-of-young-woman-picture-id1309405076?s=612x612";

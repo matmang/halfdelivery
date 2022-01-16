@@ -118,6 +118,7 @@ const MessageInput = ({ chatRoom }) => {
 
   console.log(isBtm);
 
+  //! ImagePicker.showImagePicker 는 사라졌다. 나눠서 만들어야함. https://stackoverflow.com/questions/67664806/imagepicker-showimagepicker-is-not-a-function
   //- Image picker
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library | 이제 permission 안 필요한듯.
@@ -147,6 +148,9 @@ const MessageInput = ({ chatRoom }) => {
       setImage(result.uri);
     }
   };
+
+  //- 테스트
+  const test = async () => {};
 
   // - 카메라/앨범 선택 Modal
   const CamAlbModal = ({ isModal, setIsModal }) => {
@@ -308,7 +312,8 @@ const MessageInput = ({ chatRoom }) => {
           <Pressable
             onPress={() => {
               // pickImage();
-              setIsModal(true);
+              // setIsModal(true);
+              test();
             }}
           >
             <Image
