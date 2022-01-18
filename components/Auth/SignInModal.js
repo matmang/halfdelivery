@@ -121,7 +121,7 @@ const SignInModal = ({ isModalVisible, onBackdropPress }) => {
             stateFn={setUsername}
             value={username}
             isValued={username ? true : false}
-            autoCapitalize={false}
+            autoCapitalize="none"
           />
         </IDContainer>
         <PasswordContainer>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import {
   View,
   Text,
@@ -8,6 +8,8 @@ import {
   Pressable,
   KeyboardAvoidingView,
   Platform,
+  Modal,
+  SafeAreaView,
 } from "react-native";
 import {
   SimpleLineIcons,
@@ -116,12 +118,15 @@ const MessageInput = ({ chatRoom }) => {
     isBtm ? setIsBtm(false) : setIsBtm(true);
   };
 
-  console.log(isBtm);
-
   //! ImagePicker.showImagePicker 는 사라졌다. 나눠서 만들어야함. https://stackoverflow.com/questions/67664806/imagepicker-showimagepicker-is-not-a-function
   //- Image picker
-  const pickImage = async () => {
-    // No permissions request is necessary for launching the image library | 이제 permission 안 필요한듯.
+  const pickImage = async (setIsModal) => {
+    console.log("pickImage 실행됨");
+    await setIsModal(false);
+
+    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    console.log("ImagePermission status", status);
+
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
@@ -137,8 +142,13 @@ const MessageInput = ({ chatRoom }) => {
   };
 
   //- Camera Launcher
-  const takePhoto = async () => {
-    // No permissions request is necessary for launching the image library | 이제 permission 안 필요한듯.
+  const takePhoto = async (setIsModal) => {
+    console.log("takePhoto 실행됨");
+    await setIsModal(false);
+
+    const { status } = await ImagePicker.requestCameraPermissionsAsync();
+    console.log("CameraPermission status", status);
+
     let result = await ImagePicker.launchCameraAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       aspect: [4, 3],
@@ -148,9 +158,6 @@ const MessageInput = ({ chatRoom }) => {
       setImage(result.uri);
     }
   };
-
-  //- 테스트
-  const test = async () => {};
 
   // - 카메라/앨범 선택 Modal
   const CamAlbModal = ({ isModal, setIsModal }) => {
@@ -162,11 +169,7 @@ const MessageInput = ({ chatRoom }) => {
         <ModalBox>
           <BlueText
             onPress={() => {
-              ImagePicker.getCameraPermissionsAsync().then((res) => {
-                console.log(res);
-              });
-              // takePhoto();
-              // setIsModal(false);
+              takePhoto(setIsModal);
             }}
           >
             카메라 실행
@@ -174,8 +177,7 @@ const MessageInput = ({ chatRoom }) => {
 
           <BlueText
             onPress={() => {
-              pickImage();
-              setIsModal(false);
+              pickImage(setIsModal);
             }}
           >
             앨범 실행
@@ -312,8 +314,7 @@ const MessageInput = ({ chatRoom }) => {
           <Pressable
             onPress={() => {
               // pickImage();
-              // setIsModal(true);
-              test();
+              setIsModal(true);
             }}
           >
             <Image
