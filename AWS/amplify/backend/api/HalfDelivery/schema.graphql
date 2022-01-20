@@ -1,8 +1,4 @@
-type OrderMenu
-  @model
-  @key(name: "byOrder", fields: ["orderID"])
-  @key(name: "byUser", fields: ["userID"])
-  @auth(rules: [{ allow: public }]) {
+type OrderMenu @model @key(name: "byOrder", fields: ["orderID"]) @key(name: "byUser", fields: ["userID"]) @auth(rules: [{allow: public}]) {
   id: ID!
   menu: String!
   price: Int!
@@ -11,11 +7,7 @@ type OrderMenu
   userID: ID
 }
 
-type Order
-  @model
-  @key(name: "byUser", fields: ["userID"])
-  @key(name: "byChatRoom", fields: ["chatroomID"])
-  @auth(rules: [{ allow: public }]) {
+type Order @model @key(name: "byUser", fields: ["userID"]) @key(name: "byChatRoom", fields: ["chatroomID"]) @auth(rules: [{allow: public}]) {
   id: ID!
   store: String!
   orderDateTime: AWSDateTime!
@@ -25,13 +17,13 @@ type Order
   OrderMenus: [OrderMenu] @connection(keyName: "byOrder", fields: ["id"])
 }
 
-type StoreCategory @model @auth(rules: [{ allow: public }]) {
+type StoreCategory @model @auth(rules: [{allow: public}]) {
   id: ID!
   category: String!
   Stores: [Store] @connection(keyName: "byStoreCategory", fields: ["id"])
 }
 
-type Store @model @key(name: "byStoreCategory", fields: ["storecategoryID"]) @auth(rules: [{ allow: public }]) {
+type Store @model @key(name: "byStoreCategory", fields: ["storecategoryID"]) @auth(rules: [{allow: public}]) {
   id: ID!
   store: String!
   storeImgUri: String
@@ -47,7 +39,7 @@ type Store @model @key(name: "byStoreCategory", fields: ["storecategoryID"]) @au
   telephoneNumber: String
 }
 
-type Menu @model @key(name: "byStore", fields: ["storeID"]) @auth(rules: [{ allow: public }]) {
+type Menu @model @key(name: "byStore", fields: ["storeID"]) @auth(rules: [{allow: public}]) {
   id: ID!
   menuCategory: String!
   menu: String!
@@ -57,27 +49,26 @@ type Menu @model @key(name: "byStore", fields: ["storeID"]) @auth(rules: [{ allo
   storeID: ID
 }
 
-type ChatRoom @model @auth(rules: [{ allow: public }]) {
+type ChatRoom @model @auth(rules: [{allow: public}]) {
   id: ID!
   newMessages: Int
   LastMessage: Message @connection
   ChatRoomUsers: [ChatRoomUser] @connection(keyName: "byChatRoom", fields: ["id"])
   matchingInfo: AWSJSON
   Orders: [Order] @connection(keyName: "byChatRoom", fields: ["id"])
+  host: String!
 }
 
-type Message
-  @model
-  @key(name: "byChatRoom", fields: ["userID"])
-  @key(name: "byUser", fields: ["userID"])
-  @auth(rules: [{ allow: public }]) {
+type Message @model @key(name: "byChatRoom", fields: ["userID"]) @key(name: "byUser", fields: ["userID"]) @auth(rules: [{allow: public}]) {
   id: ID!
-  content: String!
+  content: String
   chatroomID: ID
   userID: ID
+  image: String
+  audio: String
 }
 
-type User @model @auth(rules: [{ allow: public }]) {
+type User @model @auth(rules: [{allow: public}]) {
   id: ID!
   name: String!
   imageUri: String
@@ -92,15 +83,11 @@ type User @model @auth(rules: [{ allow: public }]) {
   nickname: String
 }
 
-type ChatRoomUser
-  @model(queries: null)
-  @key(name: "byChatRoom", fields: ["chatroomID", "userID"])
-  @key(name: "byUser", fields: ["userID", "chatroomID"])
-  @auth(rules: [{ allow: public }, { allow: public }]) {
+type ChatRoomUser @model(queries: null) @key(name: "byChatRoom", fields: ["chatroomID", "userID"]) @key(name: "byUser", fields: ["userID", "chatroomID"]) @auth(rules: [{allow: public}, {allow: public}]) {
   id: ID!
   chatroomID: ID!
   userID: ID!
   chatroom: ChatRoom! @connection(fields: ["chatroomID"])
   user: User! @connection(fields: ["userID"])
 }
-   
+  

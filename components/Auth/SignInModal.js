@@ -56,7 +56,7 @@ const BtnContainer = styled.View`
 const FindText = styled.Text`
   font-family: "noto-regular";
   color: ${colors.moon};
-  font-size: 14;
+  font-size: 14px;
   text-decoration-line: underline;
   margin-left: auto;
   margin-right: 10px;
@@ -121,6 +121,7 @@ const SignInModal = ({ isModalVisible, onBackdropPress }) => {
             stateFn={setUsername}
             value={username}
             isValued={username ? true : false}
+            autoCapitalize="none"
           />
         </IDContainer>
         <PasswordContainer>

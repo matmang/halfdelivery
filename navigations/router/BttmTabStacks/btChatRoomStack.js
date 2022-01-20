@@ -11,25 +11,13 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 import logos from "../../../images";
-import { FontAwesome, Feather } from "@expo/vector-icons";
+import { FontAwesome, Feather, AntDesign } from "@expo/vector-icons";
 import ChatListScreen from "../../../screens/Main/ChatRoomStack/ChatListScreen";
-
 import { User } from "../../../AWS/src/models";
 import { Auth, DataStore } from "aws-amplify";
+import colors from "../../../colors";
+
 const Stack = createStackNavigator();
-const LogoHeader = (props) => {
-  return (
-    <SafeAreaView
-      style={{
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "white",
-      }}
-    >
-      <Image source={logos.halfLogo} style={{ width: 40, height: 40 }} />
-    </SafeAreaView>
-  );
-};
 
 const ChatListHeader = (props) => {
   const [authUser, setAuthUser] = useState(undefined);
@@ -111,10 +99,30 @@ export default () => (
     <Stack.Screen
       name="ChatListScreen"
       component={ChatListScreen}
-      options={{
-        // title: "채팅방 리스트",
-        headerTitle: ChatListHeader,
-      }}
+      options={({ navigation }) => ({
+        title: "하프톡",
+        headerTitleStyle: {
+          color: "white",
+          fontFamily: "noto-regular",
+          fontSize: 17,
+        },
+        headerTitleAlign: "center",
+        headerStyle: {
+          backgroundColor: colors.mainBlue,
+          // alignItems: "center",
+          // justifyContent: "center",
+          // flex: 1,
+        },
+        headerLeft: () => (
+          <AntDesign
+            name="arrowleft"
+            size={24}
+            color="white"
+            style={{ marginLeft: 20 }}
+            onPress={navigation.goBack}
+          />
+        ),
+      })}
     />
   </Stack.Navigator>
 );

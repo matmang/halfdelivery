@@ -15,4 +15,5 @@ export default {
   silver: "#CCCCCC",
   error: "#FF3B30",
   errorPink: "#ED0069",
+  failGrey: "#E5E6E7",
 };

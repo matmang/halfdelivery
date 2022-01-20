@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="430" height="98" viewBox="0 0 430 98">
+  <defs>
+    <filter id="Navigation_하프디" x="0" y="0" width="430" height="98" filterUnits="userSpaceOnUse">
+      <feOffset dy="-2" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.102"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Navigation_하프디-2" x="0" y="0" width="430" height="98" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-2"/>
+      <feFlood flood-opacity="0.161" result="color"/>
+      <feComposite operator="out" in="SourceGraphic" in2="blur-2"/>
+      <feComposite operator="in" in="color"/>
+      <feComposite operator="in" in2="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g data-type="innerShadowGroup">
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Navigation_하프디)">
+      <path id="Navigation_하프디-3" data-name="Navigation_하프디" d="M0,77V15H175.029a36.512,36.512,0,0,1,62.942,0H412V77Z" transform="translate(9 14)" fill="#fff"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Navigation_하프디-2)">
+      <path id="Navigation_하프디-4" data-name="Navigation_하프디" d="M0,77V15H175.029a36.512,36.512,0,0,1,62.942,0H412V77Z" transform="translate(9 14)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

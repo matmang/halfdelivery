@@ -1,12 +1,109 @@
 import React, { useState, useEffect } from "react";
-import { ActivityIndicator, StyleSheet, Text, View, Image } from "react-native";
+import {
+  ActivityIndicator,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  useWindowDimensions,
+} from "react-native";
 import colors from "../../colors";
 import { User } from "../../AWS/src/models";
 import { Auth, DataStore } from "aws-amplify";
+import { S3Image } from "aws-amplify-react-native";
+import styled from "styled-components";
 
-export default ({ message }) => {
+const ImgBox = styled.View`
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+
+  margin-right: ${(props) => (props.isMe ? "32px" : "auto")};
+  margin-left: ${(props) => (props.isMe ? "auto" : "15px")};
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+  width: auto;
+  max-width: ${(props) => props.width * 0.61}%;
+  background: ${colors.mainBlue};
+  border-radius: 6px;
+`;
+
+const MsgBox = styled.View`
+  /* padding: 10px; */
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 4px;
+  padding-bottom: 5px;
+
+  margin-right: ${(props) => (props.isMe ? "32px" : "auto")};
+  margin-left: ${(props) => (props.isMe ? "auto" : "15px")};
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+  width: auto;
+  max-width: ${(props) => props.width * 0.61}%;
+  background: ${(props) => (props.isMe ? colors.mainBlue : "white")};
+  border-radius: 6px;
+
+  border-width: ${(props) => (props.isMe ? 1.5 : 1.5)}px;
+  border-color: ${(props) => (props.isMe ? colors.mainBlue : colors.mainBlue)};
+`;
+
+const MsgText = styled.Text`
+  font-size: 15px;
+  line-height: 17px;
+  font-family: "noto-regular";
+  color: ${(props) => (props.isMe ? "white" : colors.mainBlue)};
+`;
+
+const TimeStamp = styled.Text`
+  font-size: 12px;
+  font-family: "nunito-regular";
+  color: #9c9c9c;
+  /* margin-left: auto; */
+  margin-right: ${(props) => (props.isMe ? 6 : 0)}px;
+  margin-left: ${(props) => (props.isMe ? 0 : 6)}px;
+`;
+
+const ProfileImg = styled.Image`
+  height: 45px;
+  width: 45px;
+  border-radius: 45px;
+`;
+
+const changeTimeStamp = (message_createdAt) => {
+  // const KR_TIME_DIFF = 32400000; // ? 9시간.
+  const UTCms = Date.parse(message_createdAt);
+  // return new Date(UTCms).toLocaleString("ko-KR");
+  const time = new Date(UTCms);
+  let hour = time.getHours();
+  let when = "";
+  if (hour < 12) {
+    when = " AM";
+  } else {
+    console.log("dd");
+    hour = hour - 12;
+    when = " PM";
+  }
+  hour.toString();
+
+  let minute = time.getMinutes();
+  if (minute < 10) {
+    minute.toString();
+    minute = "0" + minute;
+  } else {
+    minute.toString();
+  }
+
+  return hour + ":" + minute + when;
+};
+
+const Message = ({ message }) => {
   const [user, setUser] = useState(undefined);
   const [isMe, setIsMe] = useState(false);
+  const { width } = useWindowDimensions();
 
   useEffect(() => {
     // ? 메시지의 userID 값을 불러옴.
@@ -25,12 +122,6 @@ export default ({ message }) => {
     checkIfMe();
   }, [user]);
 
-  const changeTimeStamp = (message_createdAt) => {
-    // const KR_TIME_DIFF = 32400000; // ? 9시간.
-    const UTCms = Date.parse(message_createdAt);
-    return new Date(UTCms).toLocaleString("ko-KR");
-  };
-
   if (!user) {
     return <ActivityIndicator />;
   }
@@ -44,34 +135,47 @@ export default ({ message }) => {
   }
 
   return (
-    <View style={[styles.container, isMe ? styles.rightContainer : styles.leftContainer]}>
+    <View
+      style={[
+        styles.container,
+        isMe ? styles.rightContainer : styles.leftContainer,
+      ]}
+    >
       <View style={{ flexDirection: "row" }}>
         {/* 상대방 화면만 이미지, 이름 표출 */}
-        {!isMe && (
-          <View style={styles.imageContainer}>
-            <Image source={{ uri: user.imageUri }} style={styles.image} />
-            <Text style={styles.imageContainerText} numberOfLines={1} ellipsizeMode="tail">
-              {user.name}
-            </Text>
-          </View>
-        )}
+        {!isMe && <ProfileImg source={{ uri: user.imageUri }} />}
 
         {/* 메시지 생성 시각 | 나*/}
         {isMe && (
           <View style={{ justifyContent: "flex-end" }}>
-            <Text style={[styles.timestampText]}>{changedTimeStamp}</Text>
+            <TimeStamp isMe={isMe}>{changedTimeStamp}</TimeStamp>
           </View>
         )}
+        <View>
+          {/* 이미지 메시지 */}
+          {message.image && (
+            <ImgBox isMe={isMe} width={width}>
+              <S3Image
+                imgKey={message.image}
+                style={{ width: width * 0.3, aspectRatio: 3 / 4 }}
+                resizeMode="cover"
+              />
+            </ImgBox>
+          )}
 
-        {/* 메시지 내용 */}
-        <View style={[styles.textContainer, isMe ? styles.rightTextContainer : styles.leftTextContainer]}>
-          <Text style={{ color: isMe ? "white" : "black" }}>{message.content}</Text>
+          {/* 텍스트 메시지 */}
+          {!!message.content && (
+            <MsgBox isMe={isMe} width={width}>
+              {/* 느낌표 두개 연산자(!!)는 Boolean 으로 형 변환해준다 */}
+              <MsgText isMe={isMe}>{message.content}</MsgText>
+            </MsgBox>
+          )}
         </View>
 
         {/* 메시지 생성 시각 | 상대방*/}
         {!isMe && (
           <View style={{ justifyContent: "flex-end" }}>
-            <Text style={[styles.timestampText]}>{changedTimeStamp}</Text>
+            <TimeStamp>{changedTimeStamp}</TimeStamp>
           </View>
         )}
       </View>
@@ -100,44 +204,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
     borderTopRightRadius: 0,
   },
-
-  textContainer: {
-    padding: 10,
-    margin: 5,
-    borderRadius: 10,
-    maxWidth: "70%",
-  },
-  leftTextContainer: {
-    backgroundColor: colors.mainPink,
-    borderTopLeftRadius: 0,
-  },
-  rightTextContainer: {
-    backgroundColor: colors.mainBlue,
-    borderTopRightRadius: 0,
-  },
-
-  image: {
-    height: 40,
-    width: 40,
-    borderRadius: 40,
-    borderColor: "lightgrey",
-    borderWidth: 1,
-  },
-  imageContainer: {
-    height: 50,
-    width: 50,
-    // backgroundColor: "red",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  imageContainerText: {
-    fontSize: 10,
-    fontWeight: "bold",
-    // numberOfLines: 1,
-  },
-
-  timestampText: {
-    fontSize: 7,
-    color: "black",
-  },
 });
+
+export { Message, changeTimeStamp };
+export default Message;

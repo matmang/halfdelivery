@@ -26,7 +26,6 @@ const Title = styled.Text`
 `;
 
 const BlueHeader = (props) => {
-  console.log(props);
   return (
     <HeaderView>
       <Title>파트너 리스트</Title>
