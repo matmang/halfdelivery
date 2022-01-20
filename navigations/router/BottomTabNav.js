@@ -22,11 +22,11 @@ import images from "../../images";
 import styled from "styled-components";
 import Svg, { Path } from "react-native-svg";
 
-import storeOn from "../../assets/images/BottomTabNav/store4x.png";
-import partnerOn from "../../assets/images/BottomTabNav/partner4x.png";
-import halfdOn from "../../assets/images/BottomTabNav/hlafd4x.png";
-import orderinfoOn from "../../assets/images/BottomTabNav/order4x.png";
-import talkOn from "../../assets/images/BottomTabNav/talk4x.png";
+import storeOn from "../../assets/images/BottomTabNav/store.png";
+import matList from "../../assets/images/BottomTabNav/matList.png";
+import homeOn from "../../assets/images/BottomTabNav/home.png";
+import talkOn from "../../assets/images/BottomTabNav/talk.png";
+import myInfo from "../../assets/images/BottomTabNav/myInfo.png";
 
 import empty from "../../assets/images/empty.png";
 import NavigationHOME from "../../assets/images/BottomTabNav/HomeCI.svg";
@@ -94,7 +94,7 @@ const customBottomTabNEW = () => {
         name="Partner"
         options={{
           tabBarBackground: () => {
-            return BottomTab(partnerOn);
+            return BottomTab(matList);
           },
         }}
       />
@@ -103,16 +103,7 @@ const customBottomTabNEW = () => {
         name="btHomeStack"
         options={{
           tabBarBackground: () => {
-            return BottomTab(halfdOn);
-          },
-        }}
-      />
-      <Tab.Screen
-        component={btOrderInfoStack}
-        name="OrderInfo"
-        options={{
-          tabBarBackground: () => {
-            return BottomTab(orderinfoOn);
+            return BottomTab(homeOn);
           },
         }}
       />
@@ -122,6 +113,15 @@ const customBottomTabNEW = () => {
         options={{
           tabBarBackground: () => {
             return BottomTab(talkOn);
+          },
+        }}
+      />
+      <Tab.Screen
+        component={btOrderInfoStack}
+        name="OrderInfo"
+        options={{
+          tabBarBackground: () => {
+            return BottomTab(myInfo);
           },
         }}
       />
