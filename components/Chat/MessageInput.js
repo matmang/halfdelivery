@@ -8,8 +8,9 @@ import {
   Pressable,
   KeyboardAvoidingView,
   Platform,
-  Modal,
+  // Modal,
   SafeAreaView,
+  Dimensions,
 } from "react-native";
 import {
   SimpleLineIcons,
@@ -26,7 +27,7 @@ import * as ImagePicker from "expo-image-picker";
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
 import styled from "styled-components";
-import ReactNativeModal from "react-native-modal";
+import Modal from "react-native-modal";
 
 const InputBox = styled.View`
   flex-direction: row;
@@ -134,7 +135,7 @@ const MessageInput = ({ chatRoom }) => {
       quality: 1, //? quality 낮추면 서버에 저장되는 파일 용량도 낮아짐.
     });
 
-    console.log(result);
+    console.log("result", result);
 
     if (!result.cancelled) {
       setImage(result.uri);
@@ -162,9 +163,13 @@ const MessageInput = ({ chatRoom }) => {
   // - 카메라/앨범 선택 Modal
   const CamAlbModal = ({ isModal, setIsModal }) => {
     return (
-      <ReactNativeModal
+      <Modal
+        // coverScreen={false}
         isVisible={isModal}
         style={{ justifyContent: "center", alignItems: "center" }}
+        onBackdropPress={() => {
+          setIsModal(false);
+        }}
       >
         <ModalBox>
           <BlueText
@@ -182,15 +187,8 @@ const MessageInput = ({ chatRoom }) => {
           >
             앨범 실행
           </BlueText>
-          <BlueText
-            onPress={() => {
-              setIsModal(false);
-            }}
-          >
-            창 닫기
-          </BlueText>
         </ModalBox>
-      </ReactNativeModal>
+      </Modal>
     );
   };
 
