@@ -10,6 +10,7 @@ import {
 import logos from "../../images";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation, useRoute } from "@react-navigation/core";
+import StoreCategory from "../StoreCategory";
 
 const RoomItem = ({ chatRoomInfo }) => {
   const navigation = useNavigation();
@@ -71,20 +72,7 @@ const RoomItem = ({ chatRoomInfo }) => {
       />
       <View style={styles.infoContainer}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <View
-            style={{
-              width: 44,
-              height: 20,
-              borderRadius: 12,
-              backgroundColor: "#E5E6E7",
-              justifyContent: "center",
-              marginBottom: 5,
-            }}
-          >
-            <Text style={styles.categoryText} numberOfLines={1}>
-              {category}
-            </Text>
-          </View>
+          <StoreCategory category={category} />
           <Text style={styles.storeText} numberOfLines={1}>
             {storeInfo.store}
           </Text>
@@ -181,11 +169,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
     lineHeight: 17,
     textAlign: "center",
-  },
-  categoryText: {
-    fontSize: 12,
-    textAlign: "center",
-    fontFamily: "noto-regular",
   },
   storeText: {
     fontSize: 17,
