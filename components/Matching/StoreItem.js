@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/core";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -14,6 +14,13 @@ import { MaterialIcons } from "@expo/vector-icons";
 import styled from "styled-components";
 import StoreModal from "./StoreModal";
 import StoreCategory from "../StoreCategory";
+import {
+  KOREAN_ID,
+  CHINESE_ID,
+  JAPANESE_ID,
+  WESTERN_ID,
+  CAFE_ID,
+} from "../../assets/constants";
 
 const StoreRoomBox = styled.Pressable`
   width: 100%;
@@ -71,10 +78,36 @@ const NunitoText = styled.Text`
   text-align: right;
 `;
 
-const StoreItem = ({ storeInfo, category }) => {
+const StoreItem = ({ storeInfo }) => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const [isModal, setIsModal] = useState(false);
+  const [category, setCategory] = useState(null);
+
+  console.log(storeInfo);
+
+  useEffect(() => {
+    switch (storeInfo.storecategoryID) {
+      case KOREAN_ID:
+        setCategory("한식");
+        break;
+      case CHINESE_ID:
+        setCategory("중식");
+        break;
+      case JAPANESE_ID:
+        setCategory("일식");
+        break;
+      case WESTERN_ID:
+        setCategory("양식");
+        break;
+      case CAFE_ID:
+        setCategory("카페");
+        break;
+      default:
+        setCategory("-");
+        break;
+    }
+  }, [storeInfo.storecategoryID]);
 
   return (
     <StoreRoomBox
@@ -143,6 +176,11 @@ const StoreItem = ({ storeInfo, category }) => {
               {/* //? Conditional components 를 다루는 법이다. */}
               {storeInfo.maxDlvTip && (
                 <InfoText>
+                  <NunitoText>
+                    {/*  //! minDlvTip 자리*/}
+                    {storeInfo.maxDlvTip.toLocaleString("ko-KR")}
+                  </NunitoText>
+                  원{"   "}~{"   "}
                   <NunitoText>
                     {storeInfo.maxDlvTip.toLocaleString("ko-KR")}
                   </NunitoText>

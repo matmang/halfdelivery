@@ -98,6 +98,11 @@ const StoreInfo_mini = ({ storeInfo, category }) => {
               {storeInfo.maxDlvTip && (
                 <InfoText>
                   <NunitoText>
+                    {/*  //! minDlvTip 자리*/}
+                    {storeInfo.maxDlvTip.toLocaleString("ko-KR")}
+                  </NunitoText>
+                  원{"   "}~{"   "}
+                  <NunitoText>
                     {storeInfo.maxDlvTip.toLocaleString("ko-KR")}
                   </NunitoText>
                   원
@@ -137,7 +142,7 @@ const BlueLine = styled.View`
 const Mid = styled.View`
   width: 364px;
   height: 204px;
-  background-color: lightgoldenrodyellow;
+  /* background-color: lightgoldenrodyellow; */
 `;
 
 const Btm = styled.View`
@@ -172,8 +177,8 @@ const Select = styled.Pressable`
   align-self: center;
   align-items: center;
 
-  background-color: ${({ isPressed }) =>
-    isPressed ? colors.mainBlue : colors.unAccent};
+  background-color: ${({ selectedName }) =>
+    selectedName !== null ? colors.mainBlue : colors.unAccent};
 
   border-radius: 40px;
   margin-top: auto;
@@ -181,8 +186,7 @@ const Select = styled.Pressable`
 `;
 
 const StoreModal = ({ isModal, setIsModal, storeInfo, category }) => {
-  console.log("StoreModal 입니다");
-  const [isPressed, setIsPressed] = useState(false);
+  const [selectedName, setSelectedName] = useState(null);
 
   return (
     <Modal
@@ -211,20 +215,36 @@ const StoreModal = ({ isModal, setIsModal, storeInfo, category }) => {
               marginTop: 20,
             }}
           >
-            <Platform name={"배달의 민족"} isPressed={isPressed} />
-            <Platform name={"요기요"} isPressed={isPressed} />
-            <Platform name={"배달통"} isPressed={isPressed} />
-            <Platform name={"쿠팡잇츠"} isPressed={isPressed} />
+            <Platform
+              name={"배달의 민족"}
+              selectedName={selectedName}
+              setSelectedName={setSelectedName}
+            />
+            <Platform
+              name={"요기요"}
+              selectedName={selectedName}
+              setSelectedName={setSelectedName}
+            />
+            <Platform
+              name={"배달통"}
+              selectedName={selectedName}
+              setSelectedName={setSelectedName}
+            />
+            <Platform
+              name={"쿠팡잇츠"}
+              selectedName={selectedName}
+              setSelectedName={setSelectedName}
+            />
           </View>
           <Select
+            selectedName={selectedName}
             onPress={() => {
-              isPressed ? setIsPressed(false) : setIsPressed(true);
+              alert(selectedName);
             }}
-            isPressed={isPressed}
           >
             <Noto17
               style={{
-                color: isPressed ? "white" : colors.unselectedGrey,
+                color: selectedName ? "white" : colors.unselectedGrey,
               }}
             >
               선택완료

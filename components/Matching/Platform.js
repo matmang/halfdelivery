@@ -3,11 +3,11 @@ import React, { useState } from "react";
 import colors from "../../colors";
 import styled from "styled-components";
 
-const RootView = styled.View`
+const RootView = styled.Pressable`
   width: 68px;
   /* width: auto; */
   height: 82px;
-  background-color: lightpink;
+  /* background-color: lightpink; */
   justify-content: center;
   align-items: center;
 `;
@@ -16,24 +16,34 @@ const Img = styled.Image`
   border-radius: 6px;
   width: 54px;
   height: 54px;
-  background-color: white;
-  border-width: ${({ isPressed }) => (isPressed ? 1.5 : 0)}px;
-  border-color: ${({ isPressed }) => (isPressed ? colors.mainBlue : "white")};
+  background-color: grey;
+  border-width: ${({ name, selectedName }) =>
+    name === selectedName ? 1.5 : 0}px;
+  border-color: ${({ name, selectedName }) =>
+    name === selectedName ? colors.mainBlue : "white"};
 `;
 
 const Noto14 = styled.Text`
   font-family: "noto-regular";
   font-size: 14px;
   margin-top: 12px;
-  color: ${({ isPressed }) => (isPressed ? colors.mainBlue : "black")};
-  text-decoration: ${({ isPressed }) => (isPressed ? "underline" : null)};
+  color: ${({ name, selectedName }) =>
+    name === selectedName ? colors.mainBlue : "black"};
+  text-decoration: ${({ name, selectedName }) =>
+    name === selectedName ? "underline" : null};
 `;
 
-const Platforms = ({ name, isPressed }) => {
+const Platforms = ({ name, selectedName, setSelectedName }) => {
   return (
-    <RootView>
-      <Img isPressed={isPressed} />
-      <Noto14 isPressed={isPressed}>{name}</Noto14>
+    <RootView
+      onPress={() => {
+        setSelectedName(name);
+      }}
+    >
+      <Img name={name} selectedName={selectedName} />
+      <Noto14 name={name} selectedName={selectedName}>
+        {name}
+      </Noto14>
     </RootView>
   );
 };

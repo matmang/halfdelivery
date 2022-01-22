@@ -24,6 +24,13 @@ import orderReducer from "../../../redux/orderSlice";
 import QuantitySelector from "../../../components/Matching/QuantitySelector";
 import styled from "styled-components";
 import colors from "../../../colors";
+import {
+  KOREAN_ID,
+  CHINESE_ID,
+  JAPANESE_ID,
+  WESTERN_ID,
+  CAFE_ID,
+} from "../../../assets/constants";
 
 const Categorries = styled.Pressable`
   height: 52px;
@@ -31,14 +38,6 @@ const Categorries = styled.Pressable`
 `;
 
 const SelectStoreScreen = () => {
-  //
-  const KOREAN_ID = "8314af0c-1d8e-4112-869b-15689debb495";
-  const CHINESE_ID = "382f8bce-5182-4402-ab8d-564618a335fd";
-  const JAPANESE_ID = "f9db956b-5bcb-4ddf-ba96-2010ae7c7ee5";
-  const WESTERN_ID = "2634afad-acdb-4b9f-a5cc-feafbd9dbaa4";
-  const CAFE_ID = "b26daa27-f6c3-4243-a73e-f9d9352d06e7";
-
-  // state값
   const [categoryID, setCategoryID] = useState("ALL");
 
   useEffect(() => {
@@ -53,12 +52,11 @@ const SelectStoreScreen = () => {
       id === categoryID ? colors.mainBlue : colors.blueGrey};
   `;
 
-  //! 디자인 시안 나오기 전까진, 일단 Button 으로...
-  const CategoryButton = (props) => {
+  const CategoryButton = ({ id, name }) => {
     return (
       <Categorries
         onPress={() => {
-          switch (props.name) {
+          switch (name) {
             case "한식":
               setCategoryID(KOREAN_ID);
               break;
@@ -80,7 +78,7 @@ const SelectStoreScreen = () => {
           }
         }}
       >
-        <ButtonTitle id={props.id}>{props.name}</ButtonTitle>
+        <ButtonTitle id={id}>{name}</ButtonTitle>
       </Categorries>
     );
   };
