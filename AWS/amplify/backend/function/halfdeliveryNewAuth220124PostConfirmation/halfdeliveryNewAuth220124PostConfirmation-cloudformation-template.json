@@ -1,6 +1,6 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "Lambda resource stack creation using Amplify CLI",
+  "Description": "{\"createdOn\":\"Mac\",\"createdBy\":\"Amplify\",\"createdWith\":\"7.6.12\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
   "Parameters": {
     "GROUP": {
       "Type": "String",
@@ -67,12 +67,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "HalfDeliveryPostConfirmation",
+            "halfdeliveryNewAuth220124PostConfirmation",
             {
               "Fn::Join": [
                 "",
                 [
-                  "HalfDeliveryPostConfirmation",
+                  "halfdeliveryNewAuth220124PostConfirmation",
                   "-",
                   {
                     "Ref": "env"
@@ -122,12 +122,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "HalfDeliveryPostConfirmation",
+            "halfdeliveryNewAuth220124PostConfirmation",
             {
               "Fn::Join": [
                 "",
                 [
-                  "HalfDeliveryPostConfirmation",
+                  "halfdeliveryNewAuth220124PostConfirmation",
                   "-",
                   {
                     "Ref": "env"

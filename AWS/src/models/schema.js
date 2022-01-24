@@ -904,8 +904,8 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "status": {
-                    "name": "status",
+                "phone_number": {
+                    "name": "phone_number",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -939,10 +939,10 @@ export const schema = {
                         "associatedWith": "userID"
                     }
                 },
-                "halfmoney": {
-                    "name": "halfmoney",
+                "bank": {
+                    "name": "bank",
                     "isArray": false,
-                    "type": "Int",
+                    "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -974,6 +974,13 @@ export const schema = {
                         "associatedWith": "userID"
                     }
                 },
+                "accountnumber": {
+                    "name": "accountnumber",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "school": {
                     "name": "school",
                     "isArray": false,
@@ -981,17 +988,31 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "dormitory": {
-                    "name": "dormitory",
+                "college": {
+                    "name": "college",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
-                "nickname": {
-                    "name": "nickname",
+                "birthday": {
+                    "name": "birthday",
                     "isArray": false,
                     "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "status": {
+                    "name": "status",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "agree": {
+                    "name": "agree",
+                    "isArray": false,
+                    "type": "Boolean",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -1040,5 +1061,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "f5c60e428b4ed88f217487d3e87c571e"
+    "version": "e180363a9615a6d6977a8371e06eba1c"
 };

@@ -148,14 +148,20 @@ export default ({ route: { params }, navigation }) => {
         username,
         password,
         attributes: {
-          email: username,
-          "custom:nickname": name,
-          "custom:phonenumber": phoneNumber,
-          "custom:birthday": birthday,
+          name: name.toString(),
+          phone_number: phoneNumber.toString(),
+          // email: username,
+          // "custom:name": name,
+          // "custom:phonenumber": phoneNumber,
+          "custom:birthday": birthday.toString(),
+          "custom:school": "school",
+          "custom:college": "college",
+          "custom:bank": "bank",
+          "custom:accountnumber": "accountNumber.toString()",
         },
       });
       console.log("Sign-up Confirmed");
-      alert("입력하신 이메일로 인증번호가 전송되었습니다.");
+      alert("입력하신 핸드폰 번호로 인증번호가 전송되었습니다.");
     } catch (error) {
       console.log("Error signing up...", error);
     }
