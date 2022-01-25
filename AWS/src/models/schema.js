@@ -617,8 +617,8 @@ export const schema = {
                         "associatedWith": "chatroomID"
                     }
                 },
-                "host": {
-                    "name": "host",
+                "master": {
+                    "name": "master",
                     "isArray": false,
                     "type": "String",
                     "isRequired": true,
@@ -1061,5 +1061,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "e180363a9615a6d6977a8371e06eba1c"
+    "version": "d246b21f932da5b8ac66709d7397f1d0"
 };

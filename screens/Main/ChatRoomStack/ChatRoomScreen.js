@@ -46,10 +46,10 @@ const TopBox = styled.View`
   height: 144px;
   position: absolute;
   z-index: 3;
-  box-shadow: 3px 3px 6px rgba(200, 200, 200, 1);
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
 `;
 
-const RoomInfo = styled.View`
+const RoomInfoBox = styled.View`
   /* flex: 1; */
   /* padding: 10px; */
   align-items: center;
@@ -64,7 +64,7 @@ const InfoDetail = styled.View`
   width: 100%;
   height: 257px;
   background-color: white;
-  box-shadow: 3px 3px 6px rgba(200, 200, 200, 1);
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
   z-index: 0;
 `;
 
@@ -127,7 +127,7 @@ const ChatRoomScreen = (props) => {
       ),
     });
   }, [navigation, is3dots]);
-  console.log("is3dots", is3dots);
+  // console.log("is3dots", is3dots);
 
   // const storeInfo = route.params.storeInfo;
   // console.log("storeInfo", storeInfo);
@@ -175,7 +175,7 @@ const ChatRoomScreen = (props) => {
     if (!chatRoom) {
       console.error("Couldn't find a chat room with this id");
     } else {
-      console.log(chatRoom);
+      console.log("chatRoom이다", chatRoom);
       setChatRoom(chatRoom);
     }
   };
@@ -325,7 +325,7 @@ const ChatRoomScreen = (props) => {
         </TopBox>
       )}
 
-      <RoomInfo>
+      <RoomInfoBox>
         <OnMatching style={{ marginLeft: 24 }} />
         <RoomText>정직유부</RoomText>
 
@@ -348,14 +348,16 @@ const ChatRoomScreen = (props) => {
             isDetail ? setIsDetail(false) : setIsDetail(true);
           }}
         />
-      </RoomInfo>
+      </RoomInfoBox>
 
       {isDetail && <InfoDetail></InfoDetail>}
 
       {/* 채팅메시지 */}
       <FlatList
         data={messages}
-        renderItem={({ item }) => <Message message={item} />}
+        renderItem={({ item }) => (
+          <Message message={item} masterId={chatRoom.master} />
+        )}
         inverted // ? 렌더링 순서 역전 - 왜 이렇게 하는지는, fechedMessages() 함수 속 "sort" 문장 확인해볼 것.
       />
       {/* 채팅메시지 입력 */}
