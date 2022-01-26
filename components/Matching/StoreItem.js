@@ -33,14 +33,12 @@ const StoreRoomBox = styled.Pressable`
 `;
 
 const Img = styled.Image`
-  border-color: black;
-  border-width: 1px;
   margin-left: 24px;
   margin-top: 10px;
   margin-bottom: 10px;
   border-radius: 10px;
+  width: 80px;
   height: 72px;
-  width: 72px;
 `;
 
 const NonImgBox = styled.View`
