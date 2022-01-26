@@ -22,13 +22,9 @@ const StoreList = ({ categoryID }) => {
   const [serverData, setServerData] = useState([]);
   const [category, setCategory] = useState("-");
 
-  // useEffect(() => {
-  //   fetchStores();
-  // }, []);
-
   useEffect(() => {
     console.log(categoryID);
-    fetchStores();
+    // fetchStores(); //? 다른기능구현 하는동안에는, API 요청수 절약을 위해 꺼둠.
 
     switch (categoryID) {
       case KOREAN_ID:

@@ -61,10 +61,10 @@ const MsgBox = styled.View`
 `;
 
 const MsgText = styled.Text`
-  font-size: 15px;
-  line-height: 17px;
+  font-size: 13px;
+  line-height: 15px;
   font-family: "noto-regular";
-  color: ${(props) => (props.isMe ? "white" : colors.mainBlue)};
+  color: ${(props) => (props.isMe ? "white" : "black")};
 `;
 
 const TimeStamp = styled.Text`

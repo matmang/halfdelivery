@@ -49,6 +49,20 @@ const TopBox = styled.View`
   box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
 `;
 
+const ProcessBox = styled.View`
+  margin-top: 12px;
+  border-radius: 16px;
+  align-self: center;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
+`;
+
+const ProcessImg = styled.Image`
+  width: 364px;
+  height: 50px;
+  border-radius: 16px;
+  /* border-width: 1px; */
+`;
+
 const RoomInfoBox = styled.View`
   /* flex: 1; */
   /* padding: 10px; */
@@ -325,12 +339,11 @@ const ChatRoomScreen = (props) => {
         </TopBox>
       )}
 
-      <RoomInfoBox>
+      {/* <RoomInfoBox>
         <OnMatching style={{ marginLeft: 24 }} />
         <RoomText>정직유부</RoomText>
 
         <PrfImgView>
-          {/* //! 나의 이미지만, style 줄 것 */}
           <ProfileImg
             source={require("../../../assets/images/tempProfileImg.png")}
             style={{ borderWidth: 2, borderColor: colors.mainBlue }}
@@ -348,7 +361,13 @@ const ChatRoomScreen = (props) => {
             isDetail ? setIsDetail(false) : setIsDetail(true);
           }}
         />
-      </RoomInfoBox>
+      </RoomInfoBox> */}
+
+      <ProcessBox>
+        <ProcessImg
+          source={require("../../../assets/images/ChatRoomScreen/processBox/process_menuChecked.png")}
+        />
+      </ProcessBox>
 
       {isDetail && <InfoDetail></InfoDetail>}
 
