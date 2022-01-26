@@ -30,9 +30,32 @@ import styled from "styled-components";
 import Modal from "react-native-modal";
 
 const InputBox = styled.View`
+  width: 100%;
+  height: 65px;
   flex-direction: row;
   padding: 10px;
   background-color: ${colors.mainBlue};
+`;
+
+const PlusBox = styled.Pressable`
+  /* background: red; */
+  align-self: center;
+  margin-left: 12px;
+`;
+
+const PlusImg = styled.Image`
+  width: 21px;
+  height: 21px;
+`;
+
+const SendMsgBox = styled(PlusBox)`
+  margin-left: 0px;
+  margin-right: 12px;
+`;
+
+const SendMsgImg = styled(PlusImg)`
+  width: 21px;
+  height: 14px;
 `;
 
 const Btm = styled.View`
@@ -256,16 +279,13 @@ const MessageInput = ({ chatRoom }) => {
         </View>
       )}
       <InputBox>
-        <View style={styles.inputContainer}>
-          {/* 플러스 아이콘 */}
-          <Entypo
-            name="plus"
-            size={24}
-            color={colors.mainBlue}
-            style={styles.icon}
-            onPress={expandBtm}
+        {/* 플러스 아이콘 */}
+        <PlusBox onPress={expandBtm}>
+          <PlusImg
+            source={require("../../assets/images/ChatRoomScreen/messageInput/plus.png")}
           />
-
+        </PlusBox>
+        <View style={styles.inputContainer}>
           {/* 메시지 입력칸 */}
           <TextInput
             style={styles.input}
@@ -277,16 +297,15 @@ const MessageInput = ({ chatRoom }) => {
             autoCapitalize="none"
           />
 
-          {/* 마이크 아이콘 */}
-          {/* <MaterialCommunityIcons
-            name="microphone"
-            size={24}
-            color="grey"
-            style={styles.icon}
-          /> */}
+          {/* 메시지 보내기 버튼 */}
+          <SendMsgBox onPress={onPress}>
+            <SendMsgImg
+              source={require("../../assets/images/ChatRoomScreen/messageInput/send_message.png")}
+            />
+          </SendMsgBox>
         </View>
 
-        <View
+        {/* <View
           style={[
             styles.buttonContainer,
             // ? message 가 빈스트링 이면 false 임.
@@ -294,16 +313,7 @@ const MessageInput = ({ chatRoom }) => {
               backgroundColor: message || image ? colors.mainPink : "lightgrey",
             },
           ]}
-        >
-          {/* 메시지 보내기 버튼 */}
-          <Feather
-            name="arrow-up"
-            size={30}
-            color={message ? colors.mainBlue : "grey"}
-            style={styles.icon}
-            onPress={onPress}
-          />
-        </View>
+        ></View> */}
       </InputBox>
 
       {isBtm && (
@@ -316,34 +326,31 @@ const MessageInput = ({ chatRoom }) => {
             }}
           >
             <Image
-              source={require("../../assets/images/ChatRoomScreen/cam_alb.png")}
+              source={require("../../assets/images/ChatRoomScreen/messageInput/bottomArea/cam_alb.png")}
               style={{ width: 83, height: 96 }}
             />
           </Pressable>
 
-          {/* 카메라 아이콘 */}
-          {/* <Pressable onPress={takePhoto}></Pressable> */}
-
-          {/* 주문확인  */}
+          {/* 매칭 정보  */}
           <Pressable onPress={() => {}}>
             <Image
-              source={require("../../assets/images/ChatRoomScreen/checkOrder.png")}
+              source={require("../../assets/images/ChatRoomScreen/messageInput/bottomArea/matching_info.png")}
               style={{ width: 83, height: 96 }}
             />
           </Pressable>
 
-          {/* 계좌전송  */}
+          {/* 계좌 전송  */}
           <Pressable onPress={() => {}}>
             <Image
-              source={require("../../assets/images/ChatRoomScreen/sendAcc.png")}
+              source={require("../../assets/images/ChatRoomScreen/messageInput/bottomArea/send_account.png")}
               style={{ width: 83, height: 96 }}
             />
           </Pressable>
 
-          {/* 송금확인  */}
+          {/* 연락처 전송  */}
           <Pressable onPress={() => {}}>
             <Image
-              source={require("../../assets/images/ChatRoomScreen/checkTransfer.png")}
+              source={require("../../assets/images/ChatRoomScreen/messageInput/bottomArea/send_contact.png")}
               style={{ width: 83, height: 96 }}
             />
           </Pressable>
@@ -357,9 +364,10 @@ const MessageInput = ({ chatRoom }) => {
 
 const styles = StyleSheet.create({
   inputContainer: {
-    backgroundColor: "#f2f2f2",
+    backgroundColor: "white",
     flexDirection: "row",
     flex: 1,
+    marginLeft: 12,
     marginRight: 10,
     borderRadius: 25,
     borderWidth: 1,
@@ -369,9 +377,6 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    marginHorizontal: 5,
-  },
-  icon: {
     marginHorizontal: 5,
   },
   buttonContainer: {
