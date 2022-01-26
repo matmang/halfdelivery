@@ -28,6 +28,7 @@ import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
 import styled from "styled-components";
 import Modal from "react-native-modal";
+import AccountModal from "../Matching/AccountModal";
 
 const InputBox = styled.View`
   width: 100%;
@@ -97,7 +98,8 @@ const MessageInput = ({ chatRoom }) => {
   const [image, setImage] = useState(null);
   const [isBtm, setIsBtm] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [isModal, setIsModal] = useState(false);
+  const [isCamModal, setIsCamModal] = useState(false);
+  const [isAccModal, setIsAccModal] = useState(false);
   console.log(`image ${image}`);
 
   //- 메시지 보내는 함수
@@ -322,7 +324,7 @@ const MessageInput = ({ chatRoom }) => {
           <Pressable
             onPress={() => {
               // pickImage();
-              setIsModal(true);
+              setIsCamModal(true);
             }}
           >
             <Image
@@ -340,7 +342,11 @@ const MessageInput = ({ chatRoom }) => {
           </Pressable>
 
           {/* 계좌 전송  */}
-          <Pressable onPress={() => {}}>
+          <Pressable
+            onPress={() => {
+              setIsAccModal(true);
+            }}
+          >
             <Image
               source={require("../../assets/images/ChatRoomScreen/messageInput/bottomArea/send_account.png")}
               style={{ width: 83, height: 96 }}
@@ -357,7 +363,8 @@ const MessageInput = ({ chatRoom }) => {
         </Btm>
       )}
 
-      <CamAlbModal isModal={isModal} setIsModal={setIsModal} />
+      <AccountModal isModal={isAccModal} setIsModal={setIsAccModal} />
+      <CamAlbModal isModal={isCamModal} setIsModal={setIsCamModal} />
     </KeyboardAvoidingView>
   );
 };
