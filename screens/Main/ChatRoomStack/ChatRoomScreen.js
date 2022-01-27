@@ -36,6 +36,7 @@ import {
 import colors from "../../../colors";
 import { MaterialIcons } from "@expo/vector-icons";
 import EjectModal from "../../../components/Chat/EjectModal/EjectModal";
+import Component0 from "../../../components/Component0";
 
 const TopBox = styled.View`
   flex: 1;
@@ -274,7 +275,8 @@ const ChatRoomScreen = (props) => {
 
   return (
     <SafeAreaView style={styles.page}>
-      <EjectModal />
+      {/* <EjectModal /> */}
+      <Component0 />
     </SafeAreaView>
 
     // // ? View 대신 SafeAreaView 를 쓰면, 노치 같은 곳에 데이터가 표출되지 않는다. 굳!
@@ -354,16 +356,17 @@ const ChatRoomScreen = (props) => {
     //     </TopBox>
     //   )}
 
+    //   {/* //TODO: 어떠 컴포넌트로 위치시켜야 할까.. */}
+    //   <EjectModal />
+
+    //   <Component0 />
+
     //   <ProcessBox>
     //     <ProcessImg
     //       source={require("../../../assets/images/ChatRoomScreen/processBox/process_menuChecked.png")}
     //     />
     //   </ProcessBox>
-    //   {/* <EjectModal /> */}
-    //   {/* <RN1 /> */}
-
     //   {isDetail && <InfoDetail></InfoDetail>}
-
     //   {/* 채팅메시지 */}
     //   <FlatList
     //     data={messages}
@@ -381,6 +384,7 @@ const ChatRoomScreen = (props) => {
 const styles = StyleSheet.create({
   page: {
     backgroundColor: "#F5F6F6",
+    // backgroundColor: "red",
     flex: 1,
   },
   chatMenuList: {

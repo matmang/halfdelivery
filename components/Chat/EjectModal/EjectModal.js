@@ -101,7 +101,7 @@ export default class EjectModal extends Component {
             style={styles.EjectModal_x996_x2}
             preserveAspectRatio="none"
             viewBox="0 0 363.99951171875 54.9998779296875"
-            fill="rgba(245, 246, 246, 1)"
+            fill="#F5F6F6"
           >
             <SvgPath d="M 9.999899864196777 54.99990081787109 C 4.477499961853027 54.99990081787109 0 50.52330017089844 0 45 L 0 0 L 363.9996032714844 0 L 363.9996032714844 45 C 363.9996032714844 50.52330017089844 359.5230102539062 54.99990081787109 353.9996948242188 54.99990081787109 L 9.999899864196777 54.99990081787109 Z" />
           </Svg>
@@ -264,7 +264,7 @@ const styles = StyleSheet.create({
   Root: {
     opacity: 1,
     position: "relative",
-    backgroundColor: "transparent",
+    backgroundColor: "yellow",
     marginTop: 0,
     marginRight: 0,
     marginBottom: 0,
@@ -274,10 +274,11 @@ const styles = StyleSheet.create({
     paddingBottom: 0,
     paddingLeft: 0,
     width: 412,
-    height: 870,
+    height: "auto",
     left: 0,
     top: 0,
     alignSelf: "center",
+    // zIndex: 10,
   },
   EjectModal_x996: {
     opacity: 1,
@@ -325,7 +326,6 @@ const styles = StyleSheet.create({
     top: 0,
   },
   EjectModal_x996_x2: {
-    opacity: 0.5961650013923645,
     position: "absolute",
     marginTop: 0,
     marginRight: 0,
