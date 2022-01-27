@@ -79,7 +79,15 @@ const Send = styled.Pressable`
   margin-bottom: 16px;
 `;
 
-const AccountModal = ({ isModal, setIsModal, authUser }) => {
+const AccountModal = ({
+  isModal,
+  setIsModal,
+  name,
+  bank,
+  accountnumber,
+  setIsSendAcc,
+  sendAccount,
+}) => {
   // const [selectedName, setSelectedName] = useState(null);
 
   return (
@@ -102,7 +110,7 @@ const AccountModal = ({ isModal, setIsModal, authUser }) => {
                   marginLeft: 28,
                 }}
               >
-                최수민 님의 계좌번호입니다
+                {name} 님의 계좌번호입니다
               </Noto17>
             </View>
             <View
@@ -130,16 +138,18 @@ const AccountModal = ({ isModal, setIsModal, authUser }) => {
             }}
           >
             <Noto14>
-              <AntDesign name="arrowright" size={16} color="black" /> 국민은행
+              <AntDesign name="arrowright" size={16} color="black" /> {bank}
             </Noto14>
-            <Noto14>최수민</Noto14>
-            <Nunito14>12321-31232-123213</Nunito14>
+            <Noto14>{name}</Noto14>
+            <Nunito14>{accountnumber}</Nunito14>
           </View>
         </Mid>
         <Btm>
           <Send
             onPress={() => {
-              alert("전송하기");
+              // alert("전송하기");
+              // setIsSendAcc(true);
+              sendAccount();
             }}
           >
             <Noto17

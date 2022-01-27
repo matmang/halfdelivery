@@ -158,10 +158,6 @@ const Message = ({ message, masterId }) => {
     // console.log("교정 시간", changeTimeStamp(message.createdAt), typeof changeTimeStamp(message.createdAt));
   }
 
-  console.log("user:", user);
-  console.log("masterId:", masterId);
-  console.log("userId:", user.id);
-  console.log("isMaster:", isMaster);
   return (
     <View
       style={[
@@ -173,7 +169,14 @@ const Message = ({ message, masterId }) => {
         {/* 상대방 화면만 이미지, 이름 표출 */}
         {!isMe && (
           <ProfileView>
-            <ProfileImg source={{ uri: user.imageUri }} isMaster={isMaster} />
+            <ProfileImg
+              source={
+                user.imageUri
+                  ? { uri: user.imageUri }
+                  : require("../../assets/images/default_prf_img.png")
+              }
+              isMaster={isMaster}
+            />
           </ProfileView>
         )}
 

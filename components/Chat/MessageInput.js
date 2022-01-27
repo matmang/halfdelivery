@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import {
   View,
   Text,
@@ -93,7 +93,7 @@ const BlueText = styled.Text`
   color: ${colors.mainBlue};
 `;
 
-const MessageInput = ({ chatRoom }) => {
+const MessageInput = ({ chatRoom, me }) => {
   const [message, setMessage] = useState("");
   const [image, setImage] = useState(null);
   const [isBtm, setIsBtm] = useState(false);
@@ -258,6 +258,22 @@ const MessageInput = ({ chatRoom }) => {
     return blob;
   };
 
+  //- 계좌번호 보내기
+  const sendAccount = async () => {
+    const user = await Auth.currentAuthenticatedUser();
+    const account = `${me["custom:bank"]} ${me["custom:accountnumber"]}`;
+    const newMessage = await DataStore.save(
+      new Message({
+        content: account,
+        userID: user.attributes.sub,
+        chatroomID: chatRoom.id,
+      })
+    );
+
+    updateLastMessage(newMessage);
+    resetFields();
+  };
+
   return (
     // ? KeyboardAvoidingView 를 사용해야 키보드가 표출될떄 화면을 안 가린다.. 참조: https://reactnative.dev/docs/keyboardavoidingview
     <KeyboardAvoidingView
@@ -363,7 +379,14 @@ const MessageInput = ({ chatRoom }) => {
         </Btm>
       )}
 
-      <AccountModal isModal={isAccModal} setIsModal={setIsAccModal} />
+      <AccountModal
+        isModal={isAccModal}
+        setIsModal={setIsAccModal}
+        name={me.name}
+        bank={me["custom:bank"]}
+        accountnumber={me["custom:accountnumber"]}
+        sendAccount={sendAccount}
+      />
       <CamAlbModal isModal={isCamModal} setIsModal={setIsCamModal} />
     </KeyboardAvoidingView>
   );

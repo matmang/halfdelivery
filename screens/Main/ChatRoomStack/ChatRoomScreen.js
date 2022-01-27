@@ -123,6 +123,7 @@ const ChatRoomScreen = (props) => {
   const [chatRoom, setChatRoom] = useState(null);
   const [is3dots, setIs3dots] = useState(false);
   const [isDetail, setIsDetail] = useState(false);
+  const [authUser, setAuthUser] = useState([]);
   const route = useRoute();
 
   //- 헤더바, 점3개 버튼누르면 작동
@@ -209,6 +210,15 @@ const ChatRoomScreen = (props) => {
     console.log("펫치드메시지스", fechedMessages);
     setMessages(fechedMessages);
   };
+
+  useEffect(() => {
+    const fetchAuthUser = async () => {
+      const _authUser = await Auth.currentAuthenticatedUser();
+      setAuthUser(_authUser);
+    };
+    fetchAuthUser();
+  }, []);
+  console.log("authUser", authUser);
 
   // // ? Order 테이블에 chatroomID 업데이트 하기.
   // const updateOrder = async () => {
@@ -380,7 +390,7 @@ const ChatRoomScreen = (props) => {
         inverted // ? 렌더링 순서 역전 - 왜 이렇게 하는지는, fechedMessages() 함수 속 "sort" 문장 확인해볼 것.
       />
       {/* 채팅메시지 입력 */}
-      <MessageInput chatRoom={chatRoom} />
+      <MessageInput chatRoom={chatRoom} me={authUser.attributes} />
     </SafeAreaView>
   );
 };
