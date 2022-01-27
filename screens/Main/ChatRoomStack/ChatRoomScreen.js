@@ -35,6 +35,7 @@ import {
 } from "../../../components/Statuses";
 import colors from "../../../colors";
 import { MaterialIcons } from "@expo/vector-icons";
+import EjectModal from "../../../components/Chat/EjectModal/EjectModal";
 
 const TopBox = styled.View`
   flex: 1;
@@ -272,126 +273,108 @@ const ChatRoomScreen = (props) => {
   }
 
   return (
-    // ? View 대신 SafeAreaView 를 쓰면, 노치 같은 곳에 데이터가 표출되지 않는다. 굳!
     <SafeAreaView style={styles.page}>
-      {is3dots && (
-        <TopBox>
-          <Pressable
-            style={{
-              marginLeft: 20,
-              marginVertical: 10,
-              flexDirection: "row",
-            }}
-            onPress={() => {
-              console.log("Im pressed");
-              alert("신고해");
-            }}
-          >
-            <Image
-              source={require("../../../assets/images/ChatRoomScreen/alert4x.png")}
-              style={{ width: 18, height: 18.5 }}
-            />
-
-            {/* <Svg width={20} height={20} viewBox="0 0 20 20">
-              <Path
-                d="M10.16,4,9.074,5.086l4.3,4.3H4v1.54h9.371l-4.3,4.3L10.16,16.32l6.16-6.16Z"
-                fill="#000"
-              />
-            </Svg> */}
-            <TextBox>신고하기</TextBox>
-            <MaterialCommunityIcons
-              name="arrow-top-right"
-              size={24}
-              color="black"
-              style={{ marginRight: 24 }}
-            />
-          </Pressable>
-          <Pressable
-            style={{
-              marginLeft: 20,
-              marginVertical: 10,
-              flexDirection: "row",
-            }}
-            onPress={() => {}}
-          >
-            <Image
-              source={require("../../../assets/images/ChatRoomScreen/ban4x.png")}
-              style={{ width: 18, height: 18 }}
-            />
-            <TextBox>차단하기</TextBox>
-            <MaterialCommunityIcons
-              name="arrow-top-right"
-              size={24}
-              color="black"
-              style={{ marginRight: 24 }}
-            />
-          </Pressable>
-          <Pressable
-            style={{
-              marginLeft: 20,
-              marginVertical: 10,
-              flexDirection: "row",
-            }}
-            onPress={() => {}}
-          >
-            <Image
-              source={require("../../../assets/images/ChatRoomScreen/leave4x.png")}
-              style={{ width: 15.95, height: 22.37 }}
-            />
-            <TextBox>채팅방 나가기</TextBox>
-            <MaterialCommunityIcons
-              name="arrow-top-right"
-              size={24}
-              color="black"
-              style={{ marginRight: 24 }}
-            />
-          </Pressable>
-        </TopBox>
-      )}
-
-      {/* <RoomInfoBox>
-        <OnMatching style={{ marginLeft: 24 }} />
-        <RoomText>정직유부</RoomText>
-
-        <PrfImgView>
-          <ProfileImg
-            source={require("../../../assets/images/tempProfileImg.png")}
-            style={{ borderWidth: 2, borderColor: colors.mainBlue }}
-          />
-          <ProfileImg
-            source={require("../../../assets/images/tempProfileImg.png")}
-          />
-        </PrfImgView>
-        <MaterialIcons
-          name={isDetail ? "keyboard-arrow-up" : "keyboard-arrow-down"}
-          size={24}
-          color={colors.mainBlue}
-          style={{ marginLeft: "auto", marginRight: 24 }}
-          onPress={() => {
-            isDetail ? setIsDetail(false) : setIsDetail(true);
-          }}
-        />
-      </RoomInfoBox> */}
-
-      <ProcessBox>
-        <ProcessImg
-          source={require("../../../assets/images/ChatRoomScreen/processBox/process_menuChecked.png")}
-        />
-      </ProcessBox>
-
-      {isDetail && <InfoDetail></InfoDetail>}
-
-      {/* 채팅메시지 */}
-      <FlatList
-        data={messages}
-        renderItem={({ item }) => (
-          <Message message={item} masterId={chatRoom.master} />
-        )}
-        inverted // ? 렌더링 순서 역전 - 왜 이렇게 하는지는, fechedMessages() 함수 속 "sort" 문장 확인해볼 것.
-      />
-      {/* 채팅메시지 입력 */}
-      <MessageInput chatRoom={chatRoom} me={authUser.attributes} />
+      <EjectModal />
     </SafeAreaView>
+
+    // // ? View 대신 SafeAreaView 를 쓰면, 노치 같은 곳에 데이터가 표출되지 않는다. 굳!
+    // <SafeAreaView style={styles.page}>
+    //   {is3dots && (
+    //     <TopBox>
+    //       <Pressable
+    //         style={{
+    //           marginLeft: 20,
+    //           marginVertical: 10,
+    //           flexDirection: "row",
+    //         }}
+    //         onPress={() => {
+    //           console.log("Im pressed");
+    //           alert("신고해");
+    //         }}
+    //       >
+    //         <Image
+    //           source={require("../../../assets/images/ChatRoomScreen/alert4x.png")}
+    //           style={{ width: 18, height: 18.5 }}
+    //         />
+
+    //         {/* <Svg width={20} height={20} viewBox="0 0 20 20">
+    //           <Path
+    //             d="M10.16,4,9.074,5.086l4.3,4.3H4v1.54h9.371l-4.3,4.3L10.16,16.32l6.16-6.16Z"
+    //             fill="#000"
+    //           />
+    //         </Svg> */}
+    //         <TextBox>신고하기</TextBox>
+    //         <MaterialCommunityIcons
+    //           name="arrow-top-right"
+    //           size={24}
+    //           color="black"
+    //           style={{ marginRight: 24 }}
+    //         />
+    //       </Pressable>
+    //       <Pressable
+    //         style={{
+    //           marginLeft: 20,
+    //           marginVertical: 10,
+    //           flexDirection: "row",
+    //         }}
+    //         onPress={() => {}}
+    //       >
+    //         <Image
+    //           source={require("../../../assets/images/ChatRoomScreen/ban4x.png")}
+    //           style={{ width: 18, height: 18 }}
+    //         />
+    //         <TextBox>차단하기</TextBox>
+    //         <MaterialCommunityIcons
+    //           name="arrow-top-right"
+    //           size={24}
+    //           color="black"
+    //           style={{ marginRight: 24 }}
+    //         />
+    //       </Pressable>
+    //       <Pressable
+    //         style={{
+    //           marginLeft: 20,
+    //           marginVertical: 10,
+    //           flexDirection: "row",
+    //         }}
+    //         onPress={() => {}}
+    //       >
+    //         <Image
+    //           source={require("../../../assets/images/ChatRoomScreen/leave4x.png")}
+    //           style={{ width: 15.95, height: 22.37 }}
+    //         />
+    //         <TextBox>채팅방 나가기</TextBox>
+    //         <MaterialCommunityIcons
+    //           name="arrow-top-right"
+    //           size={24}
+    //           color="black"
+    //           style={{ marginRight: 24 }}
+    //         />
+    //       </Pressable>
+    //     </TopBox>
+    //   )}
+
+    //   <ProcessBox>
+    //     <ProcessImg
+    //       source={require("../../../assets/images/ChatRoomScreen/processBox/process_menuChecked.png")}
+    //     />
+    //   </ProcessBox>
+    //   {/* <EjectModal /> */}
+    //   {/* <RN1 /> */}
+
+    //   {isDetail && <InfoDetail></InfoDetail>}
+
+    //   {/* 채팅메시지 */}
+    //   <FlatList
+    //     data={messages}
+    //     renderItem={({ item }) => (
+    //       <Message message={item} masterId={chatRoom.master} />
+    //     )}
+    //     inverted // ? 렌더링 순서 역전 - 왜 이렇게 하는지는, fechedMessages() 함수 속 "sort" 문장 확인해볼 것.
+    //   />
+    //   {/* 채팅메시지 입력 */}
+    //   <MessageInput chatRoom={chatRoom} me={authUser.attributes} />
+    // </SafeAreaView>
   );
 };
 

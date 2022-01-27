@@ -85,7 +85,6 @@ const AccountModal = ({
   name,
   bank,
   accountnumber,
-  setIsSendAcc,
   sendAccount,
 }) => {
   // const [selectedName, setSelectedName] = useState(null);
@@ -147,8 +146,6 @@ const AccountModal = ({
         <Btm>
           <Send
             onPress={() => {
-              // alert("전송하기");
-              // setIsSendAcc(true);
               sendAccount();
             }}
           >
