@@ -35,8 +35,10 @@ import {
 } from "../../../components/Statuses";
 import colors from "../../../colors";
 import { MaterialIcons } from "@expo/vector-icons";
-import EjectModal from "../../../components/Chat/EjectModal/EjectModal";
-import Component0 from "../../../components/Component0";
+import EjectModal from "../../../components/Chat/Modals/EjectModal/EjectModal";
+import CRS_CancleMatchingModal from "../../../components/Chat/Modals/CRS_CancleMatchingModal";
+import CRS_MatchingCancledModal from "../../../components/Chat/Modals/CRS_MatchingCancledModal";
+import CRS_EjectPartnerModal from "../../../components/Chat/Modals/CRS_EjectPartnerModal";
 
 const TopBox = styled.View`
   flex: 1;
@@ -276,7 +278,10 @@ const ChatRoomScreen = (props) => {
   return (
     <SafeAreaView style={styles.page}>
       {/* <EjectModal /> */}
-      <Component0 />
+
+      {/* <ChatCancleMatchingModal /> */}
+      <CRS_MatchingCancledModal />
+      <CRS_EjectPartnerModal />
     </SafeAreaView>
 
     // // ? View 대신 SafeAreaView 를 쓰면, 노치 같은 곳에 데이터가 표출되지 않는다. 굳!

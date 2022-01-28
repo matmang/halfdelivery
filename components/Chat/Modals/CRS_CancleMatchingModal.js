@@ -52,7 +52,7 @@ export default () => {
             }}
           >
             취소
-          </Text>{" "}
+          </Text>
           <Text
             style={{
               fontFamily: "noto-regular",
@@ -61,7 +61,6 @@ export default () => {
               color: "rgba(0, 0, 0, 255)",
             }}
           >
-            {" "}
             합니다{" "}
           </Text>
         </Text>
