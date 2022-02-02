@@ -36,12 +36,13 @@ import {
 } from "../../../components/Statuses";
 import colors from "../../../colors";
 import { MaterialIcons } from "@expo/vector-icons";
-import EjectModal from "../../../components/Chat/Modals/EjectModal/EjectModal";
+import EjectModal from "../../../components/Chat/Modals/EjectModal_deprecated/EjectModal";
 import {
   MatchingCancelled,
   EjectPartner,
   CancelMatching,
 } from "../../../components/Chat/Modals/";
+import Component0 from "../../../components/Chat/Modals/Component0";
 
 const TopBox = styled.View`
   flex: 1;
@@ -281,7 +282,7 @@ const ChatRoomScreen = (props) => {
   return (
     <ScrollView style={styles.page}>
       {/* <EjectModal /> */}
-
+      <Component0 />
       <CancelMatching />
       <MatchingCancelled />
       <EjectPartner />

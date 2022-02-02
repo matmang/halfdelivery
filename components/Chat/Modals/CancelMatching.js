@@ -1,5 +1,6 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, Pressable } from "react-native";
+import RoundedBtn from "../../RoundedBtn";
 
 export default () => {
   return (
@@ -90,8 +91,8 @@ export default () => {
             alignItems: "flex-start",
           }}
         >
-          <View
-            style={{
+          <RoundedBtn
+            btnStyle={{
               justifyContent: "center",
               alignItems: "center",
               marginStart: 3.5,
@@ -102,21 +103,20 @@ export default () => {
               borderWidth: 2,
               borderColor: "rgba(173, 177, 192, 255)",
             }}
-          >
-            <Text
-              style={{
-                fontFamily: "noto-regular",
-                fontSize: 17,
-                textAlign: "center",
-                color: "rgba(173, 177, 192, 255)",
-              }}
-            >
-              {" "}
-              매칭유지{" "}
-            </Text>
-          </View>
-          <View
-            style={{
+            textStyle={{
+              fontFamily: "noto-regular",
+              fontSize: 17,
+              textAlign: "center",
+              color: "rgba(173, 177, 192, 255)",
+            }}
+            text={"매칭유지"}
+            onPress={() => {
+              alert("모달창 닫기");
+            }}
+          />
+
+          <RoundedBtn
+            btnStyle={{
               justifyContent: "center",
               alignItems: "center",
               // paddingStart: 45,
@@ -129,19 +129,17 @@ export default () => {
               borderWidth: 2,
               borderColor: "rgba(227, 0, 78, 255)",
             }}
-          >
-            <Text
-              style={{
-                fontFamily: "noto-regular",
-                fontSize: 17,
-                textAlign: "center",
-                color: "rgba(227, 0, 78, 255)",
-              }}
-            >
-              {" "}
-              매칭취소{" "}
-            </Text>
-          </View>
+            textStyle={{
+              fontFamily: "noto-regular",
+              fontSize: 17,
+              textAlign: "center",
+              color: "rgba(227, 0, 78, 255)",
+            }}
+            text={"매칭취소"}
+            onPress={() => {
+              alert("매칭취소");
+            }}
+          />
         </View>
       </View>
     </View>

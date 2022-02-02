@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, Image, Pressable } from "react-native";
 import colors from "../../../colors";
+import Btn from "../../Auth/Btn";
 import RoundedBtn from "../../RoundedBtn";
 
 const Reason = ({
@@ -34,6 +35,7 @@ const Reason = ({
     </View>
   );
 };
+
 export default ({ name }) => {
   const [selected, setSelected] = useState(null);
   const [reason, setReason] = useState(null);
@@ -210,6 +212,34 @@ export default ({ name }) => {
             // marginTop: 20,
           }}
         >
+          {/* <Pressable
+            style={{
+              alignItems: "center",
+              justifyContent: "center",
+              width: 324,
+              height: 48,
+              borderRadius: 24,
+              borderWidth: 2,
+              borderColor:
+                reason === null ? "rgba(173, 177, 192, 255)" : colors.mainBlue,
+            }}
+          >
+            <Text
+              style={{
+                fontFamily: "noto-regular",
+                fontWeight: "400",
+                fontSize: 17,
+                textAlign: "center",
+                color:
+                  reason === null
+                    ? "rgba(173, 177, 192, 255)"
+                    : colors.mainBlue,
+              }}
+            >
+              {" "}
+              내보내기{" "}
+            </Text>
+          </Pressable> */}
           <RoundedBtn
             text={"내보내기"}
             isPressed={reason}
