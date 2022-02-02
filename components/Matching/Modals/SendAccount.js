@@ -1,12 +1,96 @@
 import { View, Text, Pressable, Image } from "react-native";
 import React, { useState } from "react";
 import Modal from "react-native-modal";
-import colors from "../../colors";
+import colors from "../../../colors";
 import styled from "styled-components";
-import StoreCategory from "../StoreCategory";
-import Platform from "./Platform";
+import StoreCategory from "../../StoreCategory";
+import Platform from "../Platform";
 import { color } from "react-native-reanimated";
 import { AntDesign } from "@expo/vector-icons";
+
+export default ({
+  isModal,
+  setIsModal,
+  name,
+  bank,
+  accountnumber,
+  sendAccount,
+}) => {
+  // const [selectedName, setSelectedName] = useState(null);
+
+  return (
+    <Modal
+      animationIn="fadeIn"
+      animationOut="fadeOut"
+      isVisible={isModal}
+      style={{ justifyContent: "center", alignItems: "center" }}
+      onBackdropPress={() => {
+        setIsModal(false);
+      }}
+    >
+      <ModalBox>
+        <Top>
+          <TopRow>
+            <View style={{ flex: 4, justifyContent: "center" }}>
+              <Noto17
+                style={{
+                  marginTop: 20,
+                  marginLeft: 28,
+                }}
+              >
+                {name} 님의 계좌번호입니다
+              </Noto17>
+            </View>
+            <View
+              style={{
+                flex: 1,
+                justifyContent: "center",
+                marginTop: 20,
+                alignItems: "center",
+              }}
+            >
+              <Image
+                source={require("../../../assets/images/ChatRoomScreen/saw_wheel.png")}
+                style={{ width: 20, height: 20 }}
+              />
+            </View>
+          </TopRow>
+          <BlueLine />
+        </Top>
+        <Mid>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-evenly",
+              marginTop: 20,
+            }}
+          >
+            <Noto14>
+              <AntDesign name="arrowright" size={16} color="black" /> {bank}
+            </Noto14>
+            <Noto14>{name}</Noto14>
+            <Nunito14>{accountnumber}</Nunito14>
+          </View>
+        </Mid>
+        <Btm>
+          <Send
+            onPress={() => {
+              sendAccount();
+            }}
+          >
+            <Noto17
+              style={{
+                color: colors.subPink3,
+              }}
+            >
+              전송하기
+            </Noto17>
+          </Send>
+        </Btm>
+      </ModalBox>
+    </Modal>
+  );
+};
 
 const ModalBox = styled.View`
   width: 364px;
@@ -78,89 +162,3 @@ const Send = styled.Pressable`
   margin-top: auto;
   margin-bottom: 16px;
 `;
-
-const AccountModal = ({
-  isModal,
-  setIsModal,
-  name,
-  bank,
-  accountnumber,
-  sendAccount,
-}) => {
-  // const [selectedName, setSelectedName] = useState(null);
-
-  return (
-    <Modal
-      animationIn="fadeIn"
-      animationOut="fadeOut"
-      isVisible={isModal}
-      style={{ justifyContent: "center", alignItems: "center" }}
-      onBackdropPress={() => {
-        setIsModal(false);
-      }}
-    >
-      <ModalBox>
-        <Top>
-          <TopRow>
-            <View style={{ flex: 4, justifyContent: "center" }}>
-              <Noto17
-                style={{
-                  marginTop: 20,
-                  marginLeft: 28,
-                }}
-              >
-                {name} 님의 계좌번호입니다
-              </Noto17>
-            </View>
-            <View
-              style={{
-                flex: 1,
-                justifyContent: "center",
-                marginTop: 20,
-                alignItems: "center",
-              }}
-            >
-              <Image
-                source={require("../../assets/images/ChatRoomScreen/saw_wheel.png")}
-                style={{ width: 20, height: 20 }}
-              />
-            </View>
-          </TopRow>
-          <BlueLine />
-        </Top>
-        <Mid>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-evenly",
-              marginTop: 20,
-            }}
-          >
-            <Noto14>
-              <AntDesign name="arrowright" size={16} color="black" /> {bank}
-            </Noto14>
-            <Noto14>{name}</Noto14>
-            <Nunito14>{accountnumber}</Nunito14>
-          </View>
-        </Mid>
-        <Btm>
-          <Send
-            onPress={() => {
-              sendAccount();
-            }}
-          >
-            <Noto17
-              style={{
-                color: colors.subPink3,
-              }}
-            >
-              전송하기
-            </Noto17>
-          </Send>
-        </Btm>
-      </ModalBox>
-    </Modal>
-  );
-};
-
-export default AccountModal;

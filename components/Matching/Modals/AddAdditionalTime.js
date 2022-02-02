@@ -1,45 +1,18 @@
 import React, { useState } from "react";
 import { View, Text, Image, Pressable } from "react-native";
 import colors from "../../../colors";
+import Btn from "../../Auth/Btn";
+import PlatformIcon from "../../PlatformIcon";
 import RoundedBtn from "../../RoundedBtn";
-import BtmWarnningMessage from "../../BtmWarnningMessage";
-
-const Reason = ({
-  number,
-  reasonText,
-  selected,
-  setSelected,
-  setReason,
-  marginTop,
-}) => {
-  return (
-    <View
-      style={{ flexDirection: "row", marginTop: marginTop ? marginTop : 18 }}
-    >
-      <Pressable
-        onPress={() => {
-          setSelected(number);
-          setReason(reasonText);
-        }}
-      >
-        <Image
-          source={
-            number === selected
-              ? require("../../../assets/images/ChatRoomScreen/RadioButton_On.png")
-              : require("../../../assets/images/ChatRoomScreen/RadioButton_Off.png")
-          }
-          style={{ width: 20, height: 20, marginLeft: 20 }}
-        />
-      </Pressable>
-      <Text style={{ marginLeft: 10 }}>{reasonText}</Text>
-    </View>
-  );
-};
+import { MaterialIcons } from "@expo/vector-icons";
+import BarInput from "../../Auth/BarInput";
+import SmallBarInput from "../../Auth/SmallBarInput";
 
 export default ({ name }) => {
-  const [selected, setSelected] = useState(null);
-  const [reason, setReason] = useState(null);
-  console.log(reason);
+  const [time, setTime] = useState(null);
+  const [isPressed, setIsPressed] = useState(null);
+
+  console.log(isPressed);
   return (
     <View
       style={{
@@ -60,7 +33,7 @@ export default ({ name }) => {
           // alignItems: "center",
           // padding: 20,
           width: 364,
-          height: 471.07,
+          height: 348,
           borderRadius: 16,
           backgroundColor: "rgba(255, 255, 255, 255)",
         }}
@@ -102,14 +75,9 @@ export default ({ name }) => {
               color: "rgba(14, 37, 124, 255)",
             }}
           >
-            {" "}
-            홍길동{" "}
+            매칭 시간
           </Text>
-          <Text
-            style={{
-              marginStart: 3,
-            }}
-          >
+          <Text>
             <Text
               style={{
                 fontFamily: "noto-regular",
@@ -118,7 +86,7 @@ export default ({ name }) => {
                 color: "rgba(0, 0, 0, 255)",
               }}
             >
-              님을 매칭에서{" "}
+              을{" "}
             </Text>
             <Text
               style={{
@@ -128,7 +96,7 @@ export default ({ name }) => {
                 color: "rgba(14, 37, 124, 255)",
               }}
             >
-              퇴장
+              추가
             </Text>
             <Text
               style={{
@@ -138,7 +106,7 @@ export default ({ name }) => {
                 color: "rgba(0, 0, 0, 255)",
               }}
             >
-              시킵니다{" "}
+              합니다{" "}
             </Text>
           </Text>
         </View>
@@ -147,61 +115,34 @@ export default ({ name }) => {
           <View
             style={{
               marginStart: 0.5,
-              marginTop: 16,
-              backgroundColor: "rgba(84, 101, 170, 255)",
+              marginTop: 14,
+              backgroundColor: colors.mainBlue,
               width: 324,
               height: 1.5,
               alignSelf: "center",
             }}
           />
+
           <Text
             style={{
               fontFamily: "noto-regular",
               fontWeight: "400",
               fontSize: 17,
-              color: "rgba(0, 0, 0, 255)",
-              marginTop: 21,
+              color: colors.mainBlue,
+              marginTop: 40,
               paddingLeft: 20,
             }}
           >
             {" "}
-            퇴장 사유{" "}
+            매칭 시간{" "}
           </Text>
-          <Reason
-            number={0}
-            reasonText={"주문금액을 입력하지 않음"}
-            selected={selected}
-            setSelected={setSelected}
-            setReason={setReason}
-            marginTop={14}
-          />
-          <Reason
-            number={1}
-            reasonText={"주문금액이 알맞지 않음"}
-            selected={selected}
-            setSelected={setSelected}
-            setReason={setReason}
-          />
-          <Reason
-            number={2}
-            reasonText={"주문 메뉴 정보를 첨부하지 않음"}
-            selected={selected}
-            setSelected={setSelected}
-            setReason={setReason}
-          />
-          <Reason
-            number={3}
-            reasonText={"주문 메뉴 정보가 알맞지 않음"}
-            selected={selected}
-            setSelected={setSelected}
-            setReason={setReason}
-          />
-          <Reason
-            number={4}
-            reasonText={"준비완료를 진행하지 않음"}
-            selected={selected}
-            setSelected={setSelected}
-            setReason={setReason}
+          <SmallBarInput
+            placeholder={"  매칭 시간을 선택해주세요"}
+            stateFn={setTime}
+            value={time && time.toLocaleString("ko-KR")}
+            isValued={time ? true : false}
+            autoCapitalize="none"
+            viewStyle={{ marginTop: 20, alignSelf: "center" }}
           />
         </View>
 
@@ -209,18 +150,16 @@ export default ({ name }) => {
           style={{
             alignItems: "center",
             justifyContent: "center",
-            // marginTop: 20,
           }}
         >
           <RoundedBtn
-            text={"내보내기"}
-            isPressed={reason}
+            text={"추가하기"}
+            isPressed={time}
             onPress={() => {
-              reason ? alert("내보내기") : null;
+              time ? alert("추가하기") : null;
             }}
+            btnStyle={{ marginTop: 56, marginBottom: 44 }}
           />
-
-          <BtmWarnningMessage viewStyle={{ marginTop: 16 }} />
         </View>
       </View>
     </View>
