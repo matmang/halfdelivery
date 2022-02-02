@@ -42,7 +42,7 @@ import {
   EjectPartner,
   CancelMatching,
 } from "../../../components/Chat/Modals/";
-import Component0 from "../../../components/Chat/Modals/Component0";
+import { InputOrderPrice } from "../../../components/Matching/Modals/";
 
 const TopBox = styled.View`
   flex: 1;
@@ -281,8 +281,7 @@ const ChatRoomScreen = (props) => {
 
   return (
     <ScrollView style={styles.page}>
-      {/* <EjectModal /> */}
-      <Component0 />
+      <InputOrderPrice />
       <CancelMatching />
       <MatchingCancelled />
       <EjectPartner />
