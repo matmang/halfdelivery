@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, Text, Image, Pressable } from "react-native";
 import colors from "../../../colors";
 import RoundedBtn from "../../RoundedBtn";
+import BtmWarnningMessage from "../../BtmWarnningMessage";
 
 const Reason = ({
   number,
@@ -218,32 +219,7 @@ export default ({ name }) => {
             }}
           />
 
-          <View
-            style={{
-              backgroundColor: "#F5F6F6",
-              justifyContent: "center",
-              width: 364,
-              height: 55,
-              marginTop: 16,
-              borderBottomLeftRadius: 16,
-              borderBottomRightRadius: 16,
-            }}
-          >
-            <Text
-              style={{
-                color: "rgba(62, 63, 65, 1)",
-                fontSize: 10,
-                fontStyle: "normal",
-                fontFamily: "noto-regular",
-                textAlign: "left",
-                paddingHorizontal: 10,
-              }}
-            >
-              * 하프딜리버리는 상품거래에 대한 통신판매중개자이며, 통신판매의
-              당사자가 아닙니다. 따라서, 하프딜리버리는 상품거래에 대하여 책임을
-              지지 않습니다.
-            </Text>
-          </View>
+          <BtmWarnningMessage viewStyle={{ marginTop: 16 }} />
         </View>
       </View>
     </View>
