@@ -12,6 +12,7 @@ import { User } from "../../AWS/src/models";
 import { Auth, DataStore } from "aws-amplify";
 import { S3Image } from "aws-amplify-react-native";
 import styled from "styled-components";
+import { color } from "react-native-reanimated";
 
 const ImgBox = styled.View`
   padding-left: 4px;
@@ -57,7 +58,7 @@ const MsgBox = styled.View`
   border-color: ${(props) =>
     (props.isMaster && colors.mainBlue) ||
     (props.isMe && colors.mainBlue) ||
-    (!props.isMaster && !props.isMe && "white")};
+    (!props.isMaster && !props.isMe && colors.unselectedGrey)};
 `;
 
 const MsgText = styled.Text`

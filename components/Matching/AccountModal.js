@@ -91,8 +91,8 @@ const AccountModal = ({
 
   return (
     <Modal
-      animationIn="zoomInDown"
-      animationOut="zoomOutUp"
+      animationIn="fadeIn"
+      animationOut="fadeOut"
       isVisible={isModal}
       style={{ justifyContent: "center", alignItems: "center" }}
       onBackdropPress={() => {

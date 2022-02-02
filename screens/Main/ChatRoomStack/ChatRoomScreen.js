@@ -10,6 +10,7 @@ import {
   SafeAreaView,
   ActivityIndicator,
   Modal,
+  ScrollView,
 } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/core";
 import { Auth, DataStore, SortDirection } from "aws-amplify";
@@ -36,9 +37,11 @@ import {
 import colors from "../../../colors";
 import { MaterialIcons } from "@expo/vector-icons";
 import EjectModal from "../../../components/Chat/Modals/EjectModal/EjectModal";
-import CRS_CancleMatchingModal from "../../../components/Chat/Modals/CRS_CancleMatchingModal";
-import CRS_MatchingCancledModal from "../../../components/Chat/Modals/CRS_MatchingCancledModal";
-import CRS_EjectPartnerModal from "../../../components/Chat/Modals/CRS_EjectPartnerModal";
+import {
+  MatchingCancelled,
+  EjectPartner,
+  CancelMatching,
+} from "../../../components/Chat/Modals/";
 
 const TopBox = styled.View`
   flex: 1;
@@ -276,15 +279,15 @@ const ChatRoomScreen = (props) => {
   }
 
   return (
-    <SafeAreaView style={styles.page}>
+    <ScrollView style={styles.page}>
       {/* <EjectModal /> */}
 
-      {/* <ChatCancleMatchingModal /> */}
-      <CRS_MatchingCancledModal />
-      <CRS_EjectPartnerModal />
-    </SafeAreaView>
+      <CancelMatching />
+      <MatchingCancelled />
+      <EjectPartner />
+    </ScrollView>
 
-    // // ? View 대신 SafeAreaView 를 쓰면, 노치 같은 곳에 데이터가 표출되지 않는다. 굳!
+    // ? View 대신 SafeAreaView 를 쓰면, 노치 같은 곳에 데이터가 표출되지 않는다. 굳!
     // <SafeAreaView style={styles.page}>
     //   {is3dots && (
     //     <TopBox>
@@ -362,9 +365,7 @@ const ChatRoomScreen = (props) => {
     //   )}
 
     //   {/* //TODO: 어떠 컴포넌트로 위치시켜야 할까.. */}
-    //   <EjectModal />
-
-    //   <Component0 />
+    //   {/* <EjectModal /> */}
 
     //   <ProcessBox>
     //     <ProcessImg

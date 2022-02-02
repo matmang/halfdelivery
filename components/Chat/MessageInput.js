@@ -191,6 +191,8 @@ const MessageInput = ({ chatRoom, me }) => {
       <Modal
         // coverScreen={false}
         isVisible={isModal}
+        animationIn="fadeIn"
+        animationOut="fadeOut"
         style={{ justifyContent: "center", alignItems: "center" }}
         onBackdropPress={() => {
           setIsModal(false);

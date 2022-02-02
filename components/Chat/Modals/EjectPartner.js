@@ -2,9 +2,18 @@ import React, { useState } from "react";
 import { View, Text, Image, Pressable } from "react-native";
 import colors from "../../../colors";
 
-const Reason = ({ number, reasonText, selected, setSelected, setReason }) => {
+const Reason = ({
+  number,
+  reasonText,
+  selected,
+  setSelected,
+  setReason,
+  marginTop,
+}) => {
   return (
-    <View style={{ flexDirection: "row", marginTop: 20 }}>
+    <View
+      style={{ flexDirection: "row", marginTop: marginTop ? marginTop : 18 }}
+    >
       <Pressable
         onPress={() => {
           setSelected(number);
@@ -161,6 +170,7 @@ export default ({ name }) => {
             selected={selected}
             setSelected={setSelected}
             setReason={setReason}
+            marginTop={14}
           />
           <Reason
             number={1}
