@@ -79,10 +79,10 @@ const SignInModal = ({ isModalVisible, onBackdropPress }) => {
       alert("아이디와 비밀번호를 모두 입력해주세요.");
       return false;
     }
-    if (!isEmail(username)) {
-      alert("이메일 형식이 정확하지 않습니다.");
-      return false;
-    }
+    // if (!isEmail(username)) {
+    //   alert("이메일 형식이 정확하지 않습니다.");
+    //   return false;
+    // }
     return true;
   };
 

@@ -56,7 +56,7 @@ type ChatRoom @model @auth(rules: [{allow: public}]) {
   ChatRoomUsers: [ChatRoomUser] @connection(keyName: "byChatRoom", fields: ["id"])
   matchingInfo: AWSJSON
   Orders: [Order] @connection(keyName: "byChatRoom", fields: ["id"])
-  host: String!
+  master: String!
 }
 
 type Message @model @key(name: "byChatRoom", fields: ["userID"]) @key(name: "byUser", fields: ["userID"]) @auth(rules: [{allow: public}]) {
@@ -72,15 +72,18 @@ type User @model @auth(rules: [{allow: public}]) {
   id: ID!
   name: String!
   imageUri: String
-  status: String
+  phone_number: String
   chatrooms: [ChatRoomUser] @connection(keyName: "byUser", fields: ["id"])
   Messages: [Message] @connection(keyName: "byUser", fields: ["id"])
-  halfmoney: Int
+  bank: String
   Orders: [Order] @connection(keyName: "byUser", fields: ["id"])
   OrderMenus: [OrderMenu] @connection(keyName: "byUser", fields: ["id"])
+  accountnumber: String
   school: String
-  dormitory: String
-  nickname: String
+  college: String
+  birthday: String
+  status: String
+  agree: Boolean
 }
 
 type ChatRoomUser @model(queries: null) @key(name: "byChatRoom", fields: ["chatroomID", "userID"]) @key(name: "byUser", fields: ["userID", "chatroomID"]) @auth(rules: [{allow: public}, {allow: public}]) {
@@ -90,4 +93,4 @@ type ChatRoomUser @model(queries: null) @key(name: "byChatRoom", fields: ["chatr
   chatroom: ChatRoom! @connection(fields: ["chatroomID"])
   user: User! @connection(fields: ["userID"])
 }
-  
+ 

@@ -12,6 +12,7 @@ import { User } from "../../AWS/src/models";
 import { Auth, DataStore } from "aws-amplify";
 import { S3Image } from "aws-amplify-react-native";
 import styled from "styled-components";
+import { color } from "react-native-reanimated";
 
 const ImgBox = styled.View`
   padding-left: 4px;
@@ -45,17 +46,26 @@ const MsgBox = styled.View`
   width: auto;
   max-width: ${(props) => props.width * 0.61}%;
   background: ${(props) => (props.isMe ? colors.mainBlue : "white")};
-  border-radius: 6px;
+  border-radius: 14px;
+  border-bottom-left-radius: ${(props) => (props.isMe ? "14px" : "0px")};
+  border-bottom-right-radius: ${(props) => (props.isMe ? "0px" : "14px")};
 
-  border-width: ${(props) => (props.isMe ? 1.5 : 1.5)}px;
-  border-color: ${(props) => (props.isMe ? colors.mainBlue : colors.mainBlue)};
+  border-width: ${(props) =>
+    (props.isMaster && "1.5px") ||
+    (props.isMe && "1.5px") ||
+    (!props.isMaster && !props.isMe && "1.5px")};
+
+  border-color: ${(props) =>
+    (props.isMaster && colors.mainBlue) ||
+    (props.isMe && colors.mainBlue) ||
+    (!props.isMaster && !props.isMe && colors.unselectedGrey)};
 `;
 
 const MsgText = styled.Text`
-  font-size: 15px;
-  line-height: 17px;
+  font-size: 13px;
+  line-height: 15px;
   font-family: "noto-regular";
-  color: ${(props) => (props.isMe ? "white" : colors.mainBlue)};
+  color: ${(props) => (props.isMe ? "white" : "black")};
 `;
 
 const TimeStamp = styled.Text`
@@ -68,13 +78,25 @@ const TimeStamp = styled.Text`
 `;
 
 const ProfileImg = styled.Image`
-  height: 45px;
-  width: 45px;
-  border-radius: 45px;
+  width: 38px;
+  height: 38px;
+  border-radius: 38px;
+  border-width: ${(props) => (props.isMaster ? "1.5px" : "0px")};
+  border-color: ${colors.mainBlue};
+`;
+
+//! 프로필이미지 그림자 효과를 주기위해 필요함
+const ProfileView = styled.View`
+  /* background-color: red; */
+  /* width: 38px;
+  height: 38px;
+  border-radius: 38px; */
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1;
 `;
 
 const changeTimeStamp = (message_createdAt) => {
-  // const KR_TIME_DIFF = 32400000; // ? 9시간.
+  // const KR_TIME_DIFF = 32400000; //? 9시간
   const UTCms = Date.parse(message_createdAt);
   // return new Date(UTCms).toLocaleString("ko-KR");
   const time = new Date(UTCms);
@@ -100,26 +122,29 @@ const changeTimeStamp = (message_createdAt) => {
   return hour + ":" + minute + when;
 };
 
-const Message = ({ message }) => {
-  const [user, setUser] = useState(undefined);
+const Message = ({ message, masterId }) => {
+  const [user, setUser] = useState({});
   const [isMe, setIsMe] = useState(false);
+  const [isMaster, setIsMaster] = useState(false);
   const { width } = useWindowDimensions();
 
   useEffect(() => {
-    // ? 메시지의 userID 값을 불러옴.
+    //? 메시지의 userID 값을 불러옴
     DataStore.query(User, message.userID).then(setUser);
   }, []);
 
   useEffect(() => {
-    const checkIfMe = async () => {
+    const check_isMe_isMaster = async () => {
       if (!user) {
         return;
       }
       const authUser = await Auth.currentAuthenticatedUser();
-      // ? 내 계정의 id 값과 같으면, 이 메시지는 나의 메시지임.
+      //? 내 계정의 id 값과 같으면, 이 메시지는 나의 메시지임
       setIsMe(user.id === authUser.attributes.sub);
+      //? 채팅방의 master 의 id 값(masterId)과 같으면, 이 메시지는 마스터의 것임
+      setIsMaster(user.id === masterId);
     };
-    checkIfMe();
+    check_isMe_isMaster();
   }, [user]);
 
   if (!user) {
@@ -143,7 +168,18 @@ const Message = ({ message }) => {
     >
       <View style={{ flexDirection: "row" }}>
         {/* 상대방 화면만 이미지, 이름 표출 */}
-        {!isMe && <ProfileImg source={{ uri: user.imageUri }} />}
+        {!isMe && (
+          <ProfileView>
+            <ProfileImg
+              source={
+                user.imageUri
+                  ? { uri: user.imageUri }
+                  : require("../../assets/images/default_prf_img.png")
+              }
+              isMaster={isMaster}
+            />
+          </ProfileView>
+        )}
 
         {/* 메시지 생성 시각 | 나*/}
         {isMe && (
@@ -165,7 +201,7 @@ const Message = ({ message }) => {
 
           {/* 텍스트 메시지 */}
           {!!message.content && (
-            <MsgBox isMe={isMe} width={width}>
+            <MsgBox isMe={isMe} width={width} isMaster={isMaster}>
               {/* 느낌표 두개 연산자(!!)는 Boolean 으로 형 변환해준다 */}
               <MsgText isMe={isMe}>{message.content}</MsgText>
             </MsgBox>
@@ -199,7 +235,7 @@ const styles = StyleSheet.create({
   },
   rightContainer: {
     // ! 여기다가 조건문 쓰면 안 된다. 조건문은 Style을 사용하는 곳에서 써야 한다.
-    // ?  marginLeft: "auto" => 자동으로 왼쪽 margin 이 최대로 생김.
+    //?  marginLeft: "auto" => 자동으로 왼쪽 margin 이 최대로 생김.
     marginLeft: "auto",
     marginRight: 10,
     borderTopRightRadius: 0,

@@ -88,8 +88,8 @@ export default ({ route: { params }, navigation }) => {
     try {
       const user = await Auth.currentAuthenticatedUser();
       await Auth.updateUserAttributes(user, {
-        "custom:bank": bank,
-        "custom:accountnumber": accountNumber,
+        "custom:bank": bank.toString(),
+        "custom:accountnumber": accountNumber.toString(),
       });
       console.log("Update Complete");
       const currentUserInfo = await Auth.currentUserInfo();

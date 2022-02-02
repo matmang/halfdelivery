@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import {
   View,
   Text,
@@ -8,8 +8,9 @@ import {
   Pressable,
   KeyboardAvoidingView,
   Platform,
-  Modal,
+  // Modal,
   SafeAreaView,
+  Dimensions,
 } from "react-native";
 import {
   SimpleLineIcons,
@@ -26,12 +27,36 @@ import * as ImagePicker from "expo-image-picker";
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
 import styled from "styled-components";
-import ReactNativeModal from "react-native-modal";
+import Modal from "react-native-modal";
+import AccountModal from "../Matching/AccountModal";
 
 const InputBox = styled.View`
+  width: 100%;
+  height: 65px;
   flex-direction: row;
   padding: 10px;
   background-color: ${colors.mainBlue};
+`;
+
+const PlusBox = styled.Pressable`
+  /* background: red; */
+  align-self: center;
+  margin-left: 12px;
+`;
+
+const PlusImg = styled.Image`
+  width: 21px;
+  height: 21px;
+`;
+
+const SendMsgBox = styled(PlusBox)`
+  margin-left: 0px;
+  margin-right: 12px;
+`;
+
+const SendMsgImg = styled(PlusImg)`
+  width: 21px;
+  height: 14px;
 `;
 
 const Btm = styled.View`
@@ -68,12 +93,13 @@ const BlueText = styled.Text`
   color: ${colors.mainBlue};
 `;
 
-const MessageInput = ({ chatRoom }) => {
+const MessageInput = ({ chatRoom, me }) => {
   const [message, setMessage] = useState("");
   const [image, setImage] = useState(null);
   const [isBtm, setIsBtm] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [isModal, setIsModal] = useState(false);
+  const [isCamModal, setIsCamModal] = useState(false);
+  const [isAccModal, setIsAccModal] = useState(false);
   console.log(`image ${image}`);
 
   //- 메시지 보내는 함수
@@ -134,7 +160,7 @@ const MessageInput = ({ chatRoom }) => {
       quality: 1, //? quality 낮추면 서버에 저장되는 파일 용량도 낮아짐.
     });
 
-    console.log(result);
+    console.log("result", result);
 
     if (!result.cancelled) {
       setImage(result.uri);
@@ -162,9 +188,15 @@ const MessageInput = ({ chatRoom }) => {
   // - 카메라/앨범 선택 Modal
   const CamAlbModal = ({ isModal, setIsModal }) => {
     return (
-      <ReactNativeModal
+      <Modal
+        // coverScreen={false}
         isVisible={isModal}
+        animationIn="fadeIn"
+        animationOut="fadeOut"
         style={{ justifyContent: "center", alignItems: "center" }}
+        onBackdropPress={() => {
+          setIsModal(false);
+        }}
       >
         <ModalBox>
           <BlueText
@@ -182,15 +214,8 @@ const MessageInput = ({ chatRoom }) => {
           >
             앨범 실행
           </BlueText>
-          <BlueText
-            onPress={() => {
-              setIsModal(false);
-            }}
-          >
-            창 닫기
-          </BlueText>
         </ModalBox>
-      </ReactNativeModal>
+      </Modal>
     );
   };
 
@@ -235,6 +260,22 @@ const MessageInput = ({ chatRoom }) => {
     return blob;
   };
 
+  //- 계좌번호 보내기
+  const sendAccount = async () => {
+    const user = await Auth.currentAuthenticatedUser();
+    const account = `${me["custom:bank"]} ${me["custom:accountnumber"]}`;
+    const newMessage = await DataStore.save(
+      new Message({
+        content: account,
+        userID: user.attributes.sub,
+        chatroomID: chatRoom.id,
+      })
+    );
+
+    updateLastMessage(newMessage);
+    resetFields();
+  };
+
   return (
     // ? KeyboardAvoidingView 를 사용해야 키보드가 표출될떄 화면을 안 가린다.. 참조: https://reactnative.dev/docs/keyboardavoidingview
     <KeyboardAvoidingView
@@ -258,16 +299,13 @@ const MessageInput = ({ chatRoom }) => {
         </View>
       )}
       <InputBox>
-        <View style={styles.inputContainer}>
-          {/* 플러스 아이콘 */}
-          <Entypo
-            name="plus"
-            size={24}
-            color={colors.mainBlue}
-            style={styles.icon}
-            onPress={expandBtm}
+        {/* 플러스 아이콘 */}
+        <PlusBox onPress={expandBtm}>
+          <PlusImg
+            source={require("../../assets/images/ChatRoomScreen/messageInput/plus.png")}
           />
-
+        </PlusBox>
+        <View style={styles.inputContainer}>
           {/* 메시지 입력칸 */}
           <TextInput
             style={styles.input}
@@ -279,16 +317,15 @@ const MessageInput = ({ chatRoom }) => {
             autoCapitalize="none"
           />
 
-          {/* 마이크 아이콘 */}
-          {/* <MaterialCommunityIcons
-            name="microphone"
-            size={24}
-            color="grey"
-            style={styles.icon}
-          /> */}
+          {/* 메시지 보내기 버튼 */}
+          <SendMsgBox onPress={onPress}>
+            <SendMsgImg
+              source={require("../../assets/images/ChatRoomScreen/messageInput/send_message.png")}
+            />
+          </SendMsgBox>
         </View>
 
-        <View
+        {/* <View
           style={[
             styles.buttonContainer,
             // ? message 가 빈스트링 이면 false 임.
@@ -296,16 +333,7 @@ const MessageInput = ({ chatRoom }) => {
               backgroundColor: message || image ? colors.mainPink : "lightgrey",
             },
           ]}
-        >
-          {/* 메시지 보내기 버튼 */}
-          <Feather
-            name="arrow-up"
-            size={30}
-            color={message ? colors.mainBlue : "grey"}
-            style={styles.icon}
-            onPress={onPress}
-          />
-        </View>
+        ></View> */}
       </InputBox>
 
       {isBtm && (
@@ -314,54 +342,64 @@ const MessageInput = ({ chatRoom }) => {
           <Pressable
             onPress={() => {
               // pickImage();
-              setIsModal(true);
+              setIsCamModal(true);
             }}
           >
             <Image
-              source={require("../../assets/images/ChatRoomScreen/cam_alb.png")}
+              source={require("../../assets/images/ChatRoomScreen/messageInput/bottomArea/cam_alb.png")}
               style={{ width: 83, height: 96 }}
             />
           </Pressable>
 
-          {/* 카메라 아이콘 */}
-          {/* <Pressable onPress={takePhoto}></Pressable> */}
-
-          {/* 주문확인  */}
+          {/* 매칭 정보  */}
           <Pressable onPress={() => {}}>
             <Image
-              source={require("../../assets/images/ChatRoomScreen/checkOrder.png")}
+              source={require("../../assets/images/ChatRoomScreen/messageInput/bottomArea/matching_info.png")}
               style={{ width: 83, height: 96 }}
             />
           </Pressable>
 
-          {/* 계좌전송  */}
-          <Pressable onPress={() => {}}>
+          {/* 계좌 전송  */}
+          <Pressable
+            onPress={() => {
+              setIsAccModal(true);
+            }}
+          >
             <Image
-              source={require("../../assets/images/ChatRoomScreen/sendAcc.png")}
+              source={require("../../assets/images/ChatRoomScreen/messageInput/bottomArea/send_account.png")}
               style={{ width: 83, height: 96 }}
             />
           </Pressable>
 
-          {/* 송금확인  */}
+          {/* 연락처 전송  */}
           <Pressable onPress={() => {}}>
             <Image
-              source={require("../../assets/images/ChatRoomScreen/checkTransfer.png")}
+              source={require("../../assets/images/ChatRoomScreen/messageInput/bottomArea/send_contact.png")}
               style={{ width: 83, height: 96 }}
             />
           </Pressable>
         </Btm>
       )}
 
-      <CamAlbModal isModal={isModal} setIsModal={setIsModal} />
+      <AccountModal
+        isModal={isAccModal}
+        setIsModal={setIsAccModal}
+        name={me.name}
+        bank={me["custom:bank"]}
+        accountnumber={me["custom:accountnumber"]}
+        sendAccount={sendAccount}
+      />
+      <CamAlbModal isModal={isCamModal} setIsModal={setIsCamModal} />
     </KeyboardAvoidingView>
   );
 };
 
 const styles = StyleSheet.create({
   inputContainer: {
-    backgroundColor: "#f2f2f2",
+    backgroundColor: "white",
     flexDirection: "row",
     flex: 1,
+    marginLeft: 12,
     marginRight: 10,
     borderRadius: 25,
     borderWidth: 1,
@@ -371,9 +409,6 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    marginHorizontal: 5,
-  },
-  icon: {
     marginHorizontal: 5,
   },
   buttonContainer: {

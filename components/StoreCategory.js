@@ -1,0 +1,31 @@
+import { StyleSheet, Text, View } from "react-native";
+import React from "react";
+
+const StoreCategory = ({category}) => {
+  return (
+    <View
+      style={{
+        width: 44,
+        height: 20,
+        borderRadius: 12,
+        backgroundColor: "#E5E6E7",
+        justifyContent: "center",
+        marginBottom: 5,
+      }}
+    >
+      <Text style={styles.categoryText} numberOfLines={1}>
+        {category}
+      </Text>
+    </View>
+  );
+};
+
+export default StoreCategory;
+
+const styles = StyleSheet.create({
+  categoryText: {
+    fontSize: 12,
+    textAlign: "center",
+    fontFamily: "noto-regular",
+  },
+});

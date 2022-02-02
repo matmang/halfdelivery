@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/core";
-import React, { useContext } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -12,8 +12,17 @@ import logos from "../../images";
 import { useDispatch } from "react-redux";
 import { MaterialIcons } from "@expo/vector-icons";
 import styled from "styled-components";
+import StoreModal from "./StoreModal";
+import StoreCategory from "../StoreCategory";
+import {
+  KOREAN_ID,
+  CHINESE_ID,
+  JAPANESE_ID,
+  WESTERN_ID,
+  CAFE_ID,
+} from "../../assets/constants";
 
-const StoreRoomBox = styled.View`
+const StoreRoomBox = styled.Pressable`
   width: 100%;
   height: 100px;
   flex-direction: row;
@@ -21,6 +30,15 @@ const StoreRoomBox = styled.View`
   background-color: white;
   margin-top: 2px;
   margin-bottom: 2px;
+`;
+
+const Img = styled.Image`
+  margin-left: 24px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  width: 80px;
+  height: 72px;
 `;
 
 const NonImgBox = styled.View`
@@ -32,6 +50,7 @@ const NonImgBox = styled.View`
 const InfoView = styled.View`
   flex-direction: row;
   align-items: center;
+  padding: 2px;
 `;
 
 const StoreText = styled.Text`
@@ -39,6 +58,7 @@ const StoreText = styled.Text`
   line-height: 20px;
   text-align: left;
   font-family: "noto-regular";
+  margin-left: 8px;
   margin-bottom: 3px;
 `;
 
@@ -47,6 +67,7 @@ const InfoText = styled.Text`
   line-height: 16px;
   text-align: left;
   font-family: "noto-regular";
+  padding: 2px;
 `;
 
 const NunitoText = styled.Text`
@@ -58,23 +79,63 @@ const NunitoText = styled.Text`
 const StoreItem = ({ storeInfo }) => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const [isModal, setIsModal] = useState(false);
+  const [category, setCategory] = useState(null);
+
+  console.log(storeInfo);
+
+  useEffect(() => {
+    switch (storeInfo.storecategoryID) {
+      case KOREAN_ID:
+        setCategory("한식");
+        break;
+      case CHINESE_ID:
+        setCategory("중식");
+        break;
+      case JAPANESE_ID:
+        setCategory("일식");
+        break;
+      case WESTERN_ID:
+        setCategory("양식");
+        break;
+      case CAFE_ID:
+        setCategory("카페");
+        break;
+      default:
+        setCategory("-");
+        break;
+    }
+  }, [storeInfo.storecategoryID]);
 
   return (
     <StoreRoomBox
+      // onPress={() => {
+      //   // ? nested screen 상태에선, navigation 방법이 조금 다르다.
+      //   // 참조: https://reactnavigation.org/docs/nesting-navigators/#navigating-to-a-screen-in-a-nested-navigator
+      //   navigation.navigate("StoreStack", {
+      //     screen: "SelectMenuScreen",
+      //     params: {
+      //       storeInfo,
+      //       isHost: true,
+      //     },
+      //   });
+      // }}
       onPress={() => {
-        // ? nested screen 상태에선, navigation 방법이 조금 다르다.
-        // 참조: https://reactnavigation.org/docs/nesting-navigators/#navigating-to-a-screen-in-a-nested-navigator
-        navigation.navigate("StoreStack", {
-          screen: "SelectMenuScreen",
-          params: {
-            storeInfo,
-            isHost: true,
-          },
-        });
+        setIsModal(true);
+        // alert("s");
+        // return <StoreModal isModal={true} setIsModal={setIsModal} />;
       }}
     >
-      <Image
-        style={styles.image}
+      {isModal && (
+        <StoreModal
+          isModal={isModal}
+          setIsModal={setIsModal}
+          storeInfo={storeInfo}
+          category={category}
+        />
+      )}
+      <Img
+        resizeMode="cover"
         source={
           // logos.halfLogo
           // { uri: storeInfo.storeImgUri }
@@ -85,6 +146,7 @@ const StoreItem = ({ storeInfo }) => {
       />
       <NonImgBox>
         <InfoView>
+          <StoreCategory category={category} />
           <StoreText>{storeInfo.store}</StoreText>
           <MaterialIcons
             name="arrow-forward-ios"
@@ -113,6 +175,11 @@ const StoreItem = ({ storeInfo }) => {
               {storeInfo.maxDlvTip && (
                 <InfoText>
                   <NunitoText>
+                    {/*  //! minDlvTip 자리*/}
+                    {storeInfo.maxDlvTip.toLocaleString("ko-KR")}
+                  </NunitoText>
+                  원{"   "}~{"   "}
+                  <NunitoText>
                     {storeInfo.maxDlvTip.toLocaleString("ko-KR")}
                   </NunitoText>
                   원
@@ -125,20 +192,5 @@ const StoreItem = ({ storeInfo }) => {
     </StoreRoomBox>
   );
 };
-
-const styles = StyleSheet.create({
-  image: {
-    // marginLeft: 3,
-    borderColor: "black",
-    borderWidth: 1,
-    marginLeft: 24,
-    marginVertical: 10,
-    borderRadius: 10,
-    height: 72,
-    width: 72,
-
-    resizeMode: "cover", // ? https://github.com/facebook/react-native/issues/17684#:~:text=resizeMode%3D%22contain%22&text=contain%20%3A%20Scale%20the%20image%20uniformly,the%20view%20(minus%20padding).
-  },
-});
 
 export default StoreItem;
