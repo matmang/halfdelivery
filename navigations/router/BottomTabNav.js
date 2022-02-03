@@ -68,7 +68,7 @@ const customBottomTabNEW = () => {
 
   return (
     <Tab.Navigator
-      initialRouteName="Stores"
+      initialRouteName="btHomeStack"
       screenOptions={{
         headerShown: false,
         tabBarShowLabel: false,

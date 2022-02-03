@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Image, KeyboardAvoidingView, ScrollView } from "react-native";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { Image, Picker, ScrollView, View } from "react-native";
 import styled from "styled-components";
 import Btn from "../../components/Auth/Btn";
 import BarInput from "../../components/Auth/BarInput";
@@ -10,6 +10,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { useDispatch } from "react-redux";
 import Auth from "@aws-amplify/auth";
 import colors from "../../colors";
+import DropDownPicker from "react-native-dropdown-picker";
 
 const Container = styled.View`
   flex: 1;
@@ -35,10 +36,11 @@ const IDContainer = styled.View`
   margin-left: 23px;
   margin-right: auto;
   justify-content: flex-start;
+  z-index: 10;
 `;
 
 const PasswordContainer = styled.View`
-  margin-top: 15px;
+  margin-top: 5px;
   margin-left: 23px;
   margin-right: auto;
   justify-content: flex-start;
@@ -68,12 +70,42 @@ const NameText = styled.Text`
   color: ${colors.mainBlue};
 `;
 
+const CollegeText = styled.Text`
+  margin-top: 10px;
+  font-family: "noto-regular";
+  font-size: 15px;
+  color: ${colors.mainBlue};
+`;
+
 export default ({ route: { params }, navigation }) => {
   const [username, setusername] = useState(params?.username);
   const [password, setPassword] = useState(params?.password);
   const [school, setSchool] = useState("");
   const [college, setCollege] = useState("");
   const [accent, setAccent] = useState(false);
+  const [schoolOpen, setSchoolOpen] = useState(false);
+  const [collegeOpen, setCollegeOpen] = useState(false);
+  const [value, setValue] = useState(null);
+  const [schoolItems, setSchoolItems] = useState([
+    { label: "한양대학교 ERICA", value: "ERICA" },
+  ]);
+  const [collegeItems, setCollegeItems] = useState([
+    { label: "공학대학", value: "1" },
+    { label: "소프트웨어융합대학", value: "2" },
+    { label: "약학대학", value: "3" },
+    { label: "과학기술융합대학", value: "4" },
+    { label: "국제문화대학", value: "5" },
+    { label: "언론정보대학", value: "6" },
+    { label: "경상대학", value: "7" },
+    { label: "디자인대학", value: "8" },
+    { label: "예체능대학", value: "9" },
+    { label: "창의융합교육원", value: "10" },
+  ]);
+
+  const [schoolPlaceholder, setSchoolPlaceholder] =
+    useState("학교를 선택해주세요");
+  const [collegePlaceholder, setCollegePlaceholder] =
+    useState("단과대학을 선택해주세요");
 
   const refDidMount = useRef(null);
 
@@ -83,7 +115,8 @@ export default ({ route: { params }, navigation }) => {
 
   const handleSubmit = async () => {
     try {
-      const user = await Auth.currentAuthenticatedUser();
+      const user = await Auth.signIn(params.username, params.password);
+      console.log(user);
       await Auth.updateUserAttributes(user, {
         "custom:school": school.toString(),
         "custom:college": college.toString(),
@@ -116,22 +149,37 @@ export default ({ route: { params }, navigation }) => {
         </PhaseContainer>
         <IDContainer>
           <NameText>학교</NameText>
-          <BarInput
-            placeholder={"학교를 선택해주세요"}
-            stateFn={setSchool}
-            autoCapitalize="none"
-            value={school}
-            isValued={school ? true : false}
+          <DropDownPicker
+            open={schoolOpen}
+            value={value}
+            setOpen={setSchoolOpen}
+            setValue={setValue}
+            setItems={setSchoolItems}
+            items={schoolItems}
+            onSelectItem={(item) => {
+              setSchool(item.label);
+              setSchoolPlaceholder(item.label);
+            }}
+            containerStyle={{ width: 336 }}
+            placeholder={schoolPlaceholder}
+            zIndex={100}
           />
+          <CollegeText>단과대학</CollegeText>
         </IDContainer>
         <PasswordContainer>
-          <NameText>단과대학</NameText>
-          <BarInput
-            placeholder={"단과대학을 선택해주세요"}
-            stateFn={setCollege}
-            autoCapitalize="none"
-            value={college}
-            isValued={college ? true : false}
+          <DropDownPicker
+            open={collegeOpen}
+            value={value}
+            setOpen={setCollegeOpen}
+            setValue={setValue}
+            setItems={setCollegeItems}
+            items={collegeItems}
+            onSelectItem={(item) => {
+              setCollege(item.label);
+              setCollegePlaceholder(item.label);
+            }}
+            containerStyle={{ width: 336 }}
+            placeholder={collegePlaceholder}
           />
         </PasswordContainer>
         <ButtonContainer>

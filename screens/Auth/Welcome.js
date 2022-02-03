@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { Image, ImageBackground } from "react-native";
+import { Image, ImageBackground, Text } from "react-native";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components";
 import colors from "../../colors";
 import SignInModal from "../../components/Auth/SignInModal";
 import loginbackground from "../../assets/images/loginbackground.png";
+import Btn from "../../components/Auth/Btn";
+import DropDownPicker from "react-native-dropdown-picker";
 
 const Container = styled.View`
   flex: 1;
@@ -28,12 +30,13 @@ const WelcomeContainer = styled.View`
 const BodyContainer = styled.View`
   width: 100%;
   align-items: center;
-  margin-top: 73px;
+  margin-top: 53px;
 `;
 
 const ExplainContainer = styled.View`
   flex-direction: row;
-  margin-right: auto;
+  margin-top: 19px;
+  justify-content: space-between;
 `;
 
 const TouchContainer = styled.TouchableOpacity`
@@ -48,17 +51,7 @@ const Footer = styled.View`
   bottom: 10px;
 `;
 
-const WhiteCircle = styled.View`
-  width: 27px;
-  height: 27px;
-  border-radius: 50px;
-  margin-left: 35px;
-  background-color: white;
-  position: absolute;
-`;
-
 const SecondContainer = styled.View`
-  margin-right: auto;
   margin-top: 20px;
 `;
 
@@ -103,6 +96,10 @@ export default ({ navigation }) => {
     setIsModalVisible(!isModalVisible);
   };
 
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(null);
+  const [data, setData] = useState([{ label: "한양대학교 ERICA", value: "1" }]);
+
   return (
     <Container>
       <ImageBackground
@@ -126,56 +123,29 @@ export default ({ navigation }) => {
           <WelcomeTextKR>어서오세요, 하프디 입니다 !</WelcomeTextKR>
         </WelcomeContainer>
         <BodyContainer>
-          <ExplainContainer>
-            <WhiteCircle></WhiteCircle>
-            <BlackText>또 만나서 반가워요!</BlackText>
-          </ExplainContainer>
-          <TouchContainer onPress={toggleModal}>
-            <Ionicons
-              color={colors.mainBlue}
-              size={15}
-              name={
-                Platform.OS === "android" ? "md-arrow-forward" : "ios-search"
-              }
-            />
-            <BlueText>기존 아이디 로그인</BlueText>
-          </TouchContainer>
-          <TouchContainer>
-            <Ionicons
-              color={colors.mainBlue}
-              size={15}
-              name={
-                Platform.OS === "android" ? "md-arrow-forward" : "ios-search"
-              }
-            />
-            <BlueText>카카오 계정 로그인</BlueText>
-          </TouchContainer>
+          <Btn
+            onPress={() => setIsModalVisible(true)}
+            text="로그인"
+            accent={true}
+          />
           <SecondContainer>
-            <ExplainContainer>
-              <WhiteCircle></WhiteCircle>
-              <BlackText>하프디가 처음이라면</BlackText>
-            </ExplainContainer>
-            <TouchContainer onPress={() => navigation.navigate("SignUpAuth")}>
-              <Ionicons
-                color={colors.mainBlue}
-                size={15}
-                name={
-                  Platform.OS === "android" ? "md-arrow-forward" : "ios-search"
-                }
-              />
-              <BlueText>NEW 회원가입</BlueText>
-            </TouchContainer>
-            <TouchContainer>
-              <Ionicons
-                color={colors.mainBlue}
-                size={15}
-                name={
-                  Platform.OS === "android" ? "md-arrow-forward" : "ios-search"
-                }
-              />
-              <BlueText>카카오 계정 회원가입</BlueText>
-            </TouchContainer>
+            <Btn
+              onPress={() => navigation.navigate("SignUpAuth")}
+              text="회원가입"
+              accent={true}
+            />
           </SecondContainer>
+          <ExplainContainer>
+            <TouchableOpacity onPress={() => navigation.navigate("FindId")}>
+              <ExplainText>아이디 찾기 </ExplainText>
+            </TouchableOpacity>
+            <ExplainText> | </ExplainText>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("FindPassword")}
+            >
+              <ExplainText> 비밀번호 찾기</ExplainText>
+            </TouchableOpacity>
+          </ExplainContainer>
         </BodyContainer>
         <SignInModal
           isModalVisible={isModalVisible}

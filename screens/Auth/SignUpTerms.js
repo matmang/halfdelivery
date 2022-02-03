@@ -11,7 +11,7 @@ import { useDispatch } from "react-redux";
 import Auth from "@aws-amplify/auth";
 import colors from "../../colors";
 import { logIn, userLogin } from "../../redux/usersSlice";
-import DropDownPicker from "react-native-dropdown-picker";
+import CircleCheckBox, { LABEL_POSITION } from "react-native-circle-checkbox";
 
 const Container = styled.View`
   flex: 1;
@@ -53,6 +53,18 @@ const ButtonContainer = styled.View`
   bottom: 30px;
 `;
 
+const Distributionline = styled.View`
+  height: 0;
+  width: 336px;
+  margin-top: 8px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 0;
+  padding-bottom: 0;
+  border-bottom-width: 1px;
+  border-bottom-color: ${colors.mainBlue};
+`;
+
 const PhaseText = styled.Text`
   font-family: "noto-regular";
   font-size: 22px;
@@ -65,14 +77,7 @@ const ExplainText = styled.Text`
   margin-top: -20px;
 `;
 
-const NameText = styled.Text`
-  font-family: "noto-regular";
-  font-size: 15px;
-  color: ${colors.mainBlue};
-`;
-
-const AccountText = styled.Text`
-  margin-top: 15px;
+const TermText = styled.Text`
   font-family: "noto-regular";
   font-size: 15px;
   color: ${colors.mainBlue};
@@ -82,39 +87,27 @@ export default ({ route: { params }, navigation }) => {
   const [username, setusername] = useState(params?.username);
   const [password, setPassword] = useState(params?.password);
   const [bank, setBank] = useState("");
-  const [bankOpen, setBankOpen] = useState(false);
-  const [value, setValue] = useState(null);
   const [accountNumber, setaccountNumber] = useState("");
+  const [termAllCheck, setTermAllCheck] = useState(false);
+  const [termService, setTermService] = useState(false);
+  const [termPersonal, setTermPersonal] = useState(false);
+  const [termAd, setTermAd] = useState(false);
   const [accent, setAccent] = useState(false);
-
-  const [bankItems, setBankItems] = useState([
-    { label: "KB국민은행", value: "1" },
-    { label: "IBK기업은행", value: "2" },
-    { label: "NH농협은행", value: "3" },
-    { label: "신한은행", value: "4" },
-    { label: "우리은행", value: "5" },
-    { label: "KEB하나은행", value: "6" },
-    { label: "씨티은행", value: "7" },
-    { label: "DGB대구은행", value: "8" },
-    { label: "BNK부산은행", value: "9" },
-    { label: "SC제일은행", value: "10" },
-    { label: "카카오뱅크", value: "11" },
-  ]);
 
   const dispatch = useDispatch();
 
   const refDidMount = useRef(null);
 
   useEffect(() => {
-    setAccent(bank && accountNumber);
-  }, [bank, accountNumber]);
+    setAccent(termService && termPersonal);
+  }, [termService, termPersonal]);
 
   const handleSubmit = async () => {
     try {
-      const user = await Auth.signIn(params.username, params.password);
+      const user = await Auth.currentAuthenticatedUser();
       await Auth.updateUserAttributes(user, {
-        "custom:bank": bank.toString(),
-        "custom:accountnumber": accountNumber.toString(),
+        "custom:bank": bank,
+        "custom:accountnumber": accountNumber,
       });
       console.log("Update Complete");
       const currentUserInfo = await Auth.currentUserInfo();
@@ -122,7 +115,7 @@ export default ({ route: { params }, navigation }) => {
         currentUserInfo.attributes["custom:bank"],
         currentUserInfo.attributes["custom:accountnumber"]
       );
-      navigation.navigate("SignUpTerms", { username, password });
+      dispatch(userLogin(username, password));
     } catch (error) {
       console.log("Error signing up...", error);
     }
@@ -138,32 +131,64 @@ export default ({ route: { params }, navigation }) => {
           />
         </ProgressContainer>
         <PhaseContainer>
-          <PhaseText>금융정보를 입력해주세요</PhaseText>
-          <ExplainText>본인 명의의 계좌번호를 등록해주세요.</ExplainText>
-          <ExplainText>안전한 거래를 위해서 사용되는 정보입니다.</ExplainText>
+          <PhaseText>약관동의</PhaseText>
+          <ExplainText>
+            하프딜리버리 회원가입을 위해 약관에 동의해주세요
+          </ExplainText>
         </PhaseContainer>
         <IDContainer>
-          <NameText>은행명</NameText>
-          <DropDownPicker
-            open={bankOpen}
-            value={value}
-            setOpen={setBankOpen}
-            setValue={setValue}
-            setItems={setBankItems}
-            items={bankItems}
-            onSelectItem={(item) => {
-              setBank(item.label);
+          <CircleCheckBox
+            checked={termAllCheck}
+            onToggle={(checked) => {
+              setTermAllCheck(checked);
+              setTermAd(checked);
+              setTermPersonal(checked);
+              setTermService(checked);
             }}
-            containerStyle={{ width: 336 }}
-            placeholder="은행을 선택해주세요"
+            labelPosition={LABEL_POSITION.RIGHT}
+            label="전체 동의하기"
+            outerColor={colors.blueGrey}
+            innerColor={colors.mainBlue}
+            outerSize={20}
+            filterSize={17}
+            innerSize={10}
           />
-          <AccountText>계좌번호</AccountText>
-          <BarInput
-            placeholder={"'-'구분 없이 계좌번호를 입력해주세요"}
-            stateFn={setaccountNumber}
-            autoCapitalize="none"
-            value={accountNumber}
-            isValued={accountNumber ? true : false}
+          <Distributionline></Distributionline>
+          <CircleCheckBox
+            checked={termService}
+            onToggle={(checked) => setTermService(checked)}
+            labelPosition={LABEL_POSITION.RIGHT}
+            label="(필수) 서비스 이용약관"
+            outerColor={colors.blueGrey}
+            innerColor={colors.mainBlue}
+            outerSize={20}
+            filterSize={17}
+            innerSize={10}
+            styleCheckboxContainer={{ marginTop: 25 }}
+          />
+          <CircleCheckBox
+            checked={termPersonal}
+            onToggle={(checked) => setTermPersonal(checked)}
+            labelPosition={LABEL_POSITION.RIGHT}
+            label="(필수) 개인정보 수집 및 이용동의"
+            outerColor={colors.blueGrey}
+            innerColor={colors.mainBlue}
+            outerSize={20}
+            filterSize={17}
+            innerSize={10}
+            styleCheckboxContainer={{ marginTop: 25 }}
+          />
+          <CircleCheckBox
+            checked={termAd}
+            onToggle={(checked) => setTermAd(checked)}
+            labelPosition={LABEL_POSITION.RIGHT}
+            label="(선택) 광고성 메일 수신동의"
+            outerColor={colors.blueGrey}
+            innerColor={colors.mainBlue}
+            outerSize={20}
+            filterSize={17}
+            innerSize={10}
+            styleCheckboxContainer={{ marginTop: 25 }}
           />
         </IDContainer>
         <ButtonContainer>

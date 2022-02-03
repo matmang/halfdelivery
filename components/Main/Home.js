@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Dimensions, ActivityIndicator } from "react-native";
+import {
+  View,
+  Text,
+  Dimensions,
+  ActivityIndicator,
+  Button,
+} from "react-native";
 import styled from "styled-components";
 import { Ionicons } from "@expo/vector-icons";
 import colors from "../../colors";
@@ -11,6 +17,7 @@ import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { logOut } from "../../redux/usersSlice";
 import { useDispatch } from "react-redux";
 import ProfileModal from "./ProfileModal";
+import tailwind from "tailwind-rn";
 
 const { width } = Dimensions.get("screen");
 
@@ -116,7 +123,12 @@ const Home = ({ stores, navigation, isModalVisible }) => {
         {stores.map((item, index) => {
           if (index < 5) {
             return (
-              <Popular index={index} storeInfo={item} navigation={navigation} />
+              <Popular
+                key={index}
+                index={index}
+                storeInfo={item}
+                navigation={navigation}
+              />
             );
           }
         })}

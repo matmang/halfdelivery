@@ -13,44 +13,34 @@ const Button = styled.View`
   justify-content: center;
   align-items: center;
   border-radius: 30px;
-  width: 338px;
-  height: 48px;
+  width: 97px;
+  height: 25px;
   background-color: ${(props) =>
-    props.accent ? colors.mainBlue : colors.unAccent};
-  color: ${(props) => (props.accent ? colors.mainBlue : colors.unAccent)};
+    props.accent ? colors.subPink3 : colors.unAccent};
+  color: ${(props) => (props.accent ? colors.mainBlue : colors.coal)};
   font-family: "nunito-regular";
 `;
 
 const Text = styled.Text`
-  color: ${(props) => (props.accent ? "#FFFFFF" : colors.blueGrey)};
+  color: ${(props) => (props.accent ? colors.mainBlue : colors.coal)};
   font-weight: 600;
-  font-size: 14px;
-  font-family: "nunito-regular";
+  font-size: 12px;
+  font-family: "noto-regular";
 `;
 
-const Btn = ({ onPress, text, accent = false, icon = false }) => (
-  <TouchableOpacity onPress={onPress} disabled={!accent}>
+const ConfirmBtn = ({ onPress, text, accent = false }) => (
+  <TouchableOpacity onPress={onPress} disabled={accent}>
     <Button accent={accent}>
-      {icon ? (
-        <Ionicons
-          color={accent ? "#FFFFFF" : colors.blueGrey}
-          size={13}
-          name={
-            Platform.OS === "android" ? "md-arrow-forward" : "ios-arrow-forward"
-          }
-          style={{ marginRight: 8 }}
-        />
-      ) : null}
       <Text accent={accent}>{text}</Text>
     </Button>
   </TouchableOpacity>
 );
 
-Btn.propTypes = {
+ConfirmBtn.propTypes = {
   onPress: Proptypes.func.isRequired,
   text: Proptypes.string.isRequired,
   accent: Proptypes.bool,
   disabled: Proptypes.bool,
 };
 
-export default Btn;
+export default ConfirmBtn;
