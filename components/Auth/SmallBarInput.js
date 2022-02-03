@@ -25,6 +25,7 @@ const SmallBarInput = ({
   KeyboardType,
   disabled = false,
   isValued = false,
+  viewStyle,
 }) => (
   <Container
     KeyboardType={KeyboardType}
@@ -36,6 +37,7 @@ const SmallBarInput = ({
     disabled={disabled}
     editable={disabled ? false : true}
     isValued={isValued}
+    style={viewStyle}
   />
 );
 

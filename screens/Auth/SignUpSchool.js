@@ -118,8 +118,8 @@ export default ({ route: { params }, navigation }) => {
       const user = await Auth.signIn(params.username, params.password);
       console.log(user);
       await Auth.updateUserAttributes(user, {
-        "custom:school": school,
-        "custom:college": college,
+        "custom:school": school.toString(),
+        "custom:college": college.toString(),
       });
       console.log("Update Complete");
       const currentUserInfo = await Auth.currentUserInfo();

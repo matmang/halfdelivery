@@ -1,28 +1,161 @@
-import React, { useState, useEffect } from "react";
-import { FlatList, StyleSheet, Text, View, SafeAreaView, ActivityIndicator } from "react-native";
+import React, { useState, useEffect, useLayoutEffect } from "react";
+import {
+  Button,
+  Pressable,
+  FlatList,
+  StyleSheet,
+  Text,
+  Image,
+  View,
+  SafeAreaView,
+  ActivityIndicator,
+  Modal,
+  ScrollView,
+} from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/core";
 import { Auth, DataStore, SortDirection } from "aws-amplify";
 import Message from "../../../components/Chat/Message";
 import MessageInput from "../../../components/Chat/MessageInput";
-import { Message as MessageModel, ChatRoom, Order } from "../../../AWS/src/models";
-
-import StoreItem from "../../../components/Matching/StoreItem";
-import ChatStoreItem from "../../../components/Chat/ChatStoreItem";
-import ChatMenuList from "../../../components/Chat/ChatMenuList";
-
+import {
+  Message as MessageModel,
+  ChatRoom,
+  Order,
+} from "../../../AWS/src/models";
 import { useSelector, useDispatch } from "react-redux";
 import { setStore, addMenu, cleanMenus } from "../../../redux/orderSlice";
+import { Entypo } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import styled from "styled-components";
+import Svg, { Path } from "react-native-svg";
+import {
+  OnMatching,
+  Matched,
+  Failed,
+  OnTransfering,
+  Transferred,
+} from "../../../components/Statuses";
+import colors from "../../../colors";
+import { MaterialIcons } from "@expo/vector-icons";
+import EjectModal from "../../../components/Chat/Modals/EjectModal_deprecated/EjectModal";
+import {
+  MatchingCancelled,
+  EjectPartner,
+  CancelMatching,
+} from "../../../components/Chat/Modals/";
+import { InputOrderPrice } from "../../../components/Matching/Modals/";
+
+const TopBox = styled.View`
+  flex: 1;
+  padding: 10px;
+  justify-content: center;
+  background-color: white;
+  /* opacity: 0.8; */
+  width: 100%;
+  height: 144px;
+  position: absolute;
+  z-index: 3;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
+`;
+
+const ProcessBox = styled.View`
+  margin-top: 12px;
+  border-radius: 16px;
+  align-self: center;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
+`;
+
+const ProcessImg = styled.Image`
+  width: 364px;
+  height: 50px;
+  border-radius: 16px;
+  /* border-width: 1px; */
+`;
+
+const RoomInfoBox = styled.View`
+  /* flex: 1; */
+  /* padding: 10px; */
+  align-items: center;
+  flex-direction: row;
+  background-color: white;
+  width: 100%;
+  height: 48px;
+  z-index: 1;
+`;
+
+const InfoDetail = styled.View`
+  width: 100%;
+  height: 257px;
+  background-color: white;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
+  z-index: 0;
+`;
+
+const RoomText = styled.Text`
+  font-family: "noto-regular";
+  font-size: 17px;
+  text-decoration: underline;
+  color: ${colors.mainBlue};
+  margin-left: 14px;
+`;
+
+const PrfImgView = styled.View`
+  flex-direction: row;
+  /* //! 안드로이드는 margin-left: 33% 가 맞음 */
+  /* margin-left: 33%; */
+  margin-left: 25%;
+  margin-right: auto;
+  /* border-width: 1px; */
+  justify-content: space-evenly;
+`;
+
+const ProfileImg = styled.Image`
+  height: 22px;
+  width: 22px;
+  border-radius: 22px;
+  margin-left: 2%;
+  margin-right: 3px;
+  border-width: 1px;
+`;
+
+const TextBox = styled.Text`
+  /* //! noto로 폰트바꾸면 이상하게 줄맞춤이 깨진다.. */
+  font-family: "noto-regular";
+  font-size: 17px;
+  line-height: 19px;
+  margin-left: 12px;
+  margin-right: auto;
+`;
 
 const ChatRoomScreen = (props) => {
   const [messages, setMessages] = useState([]);
   const [chatRoom, setChatRoom] = useState(null);
+  const [is3dots, setIs3dots] = useState(false);
+  const [isDetail, setIsDetail] = useState(false);
+  const [authUser, setAuthUser] = useState([]);
   const route = useRoute();
-  const navigation = useNavigation();
 
-  const storeInfo = route.params.storeInfo;
-  console.log("storeInfo", storeInfo);
-  const storeName = storeInfo.store;
-  const menus = route.params.menus;
+  //- 헤더바, 점3개 버튼누르면 작동
+  const navigation = props.navigation;
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <Pressable
+          style={{ marginRight: 20, marginVertical: 10, flexDirection: "row" }}
+          onPress={() => {
+            is3dots ? setIs3dots(false) : setIs3dots(true);
+          }}
+        >
+          <Entypo name="dots-three-horizontal" size={24} color="white" />
+        </Pressable>
+      ),
+    });
+  }, [navigation, is3dots]);
+  // console.log("is3dots", is3dots);
+
+  // const storeInfo = route.params.storeInfo;
+  // console.log("storeInfo", storeInfo);
+  // const storeName = storeInfo.store;
+  // const menus = route.params.menus;
 
   // ? 첫 렌더링에만 호출. ChatRoom 가져오기.
   useEffect(() => {
@@ -58,14 +191,14 @@ const ChatRoomScreen = (props) => {
 
   // ? 채팅방 가져오기.
   const fetchChatRoom = async () => {
-    if (!route.params.chatRoomID) {
+    if (!route.params.id) {
       console.warn("No chatroom id provided");
     }
-    const chatRoom = await DataStore.query(ChatRoom, route.params.chatRoomID);
+    const chatRoom = await DataStore.query(ChatRoom, route.params.id);
     if (!chatRoom) {
       console.error("Couldn't find a chat room with this id");
     } else {
-      console.log(chatRoom);
+      console.log("chatRoom이다", chatRoom);
       setChatRoom(chatRoom);
     }
   };
@@ -86,6 +219,15 @@ const ChatRoomScreen = (props) => {
     setMessages(fechedMessages);
   };
 
+  useEffect(() => {
+    const fetchAuthUser = async () => {
+      const _authUser = await Auth.currentAuthenticatedUser();
+      setAuthUser(_authUser);
+    };
+    fetchAuthUser();
+  }, []);
+  console.log("authUser", authUser);
+
   // // ? Order 테이블에 chatroomID 업데이트 하기.
   // const updateOrder = async () => {
   //   const authUser = await Auth.currentAuthenticatedUser();
@@ -105,7 +247,7 @@ const ChatRoomScreen = (props) => {
   //   // ? 업데이트
   //   await DataStore.save(
   //     Order.copyOf(original, (updated) => {
-  //       updated.chatroomID = route.params.chatRoomID;
+  //       updated.chatroomID = route.params.id;
   //     })
   //   );
   // };
@@ -138,38 +280,118 @@ const ChatRoomScreen = (props) => {
   }
 
   return (
-    // ? View 대신 SafeAreaView 를 쓰면, 노치 같은 곳에 데이터가 표출되지 않는다. 굳!
-    <SafeAreaView style={styles.page}>
-      {/* 주문정보 불러오기. */}
-      <View style={styles.nonChatBox}>
-        <ChatStoreItem storeInfo={storeInfo} />
-        <View style={styles.chatMenuList}>
-          <ChatMenuList />
-        </View>
-      </View>
+    <ScrollView style={styles.page}>
+      <InputOrderPrice />
+      <CancelMatching />
+      <MatchingCancelled />
+      <EjectPartner />
+    </ScrollView>
 
-      {/* 채팅메시지 */}
-      <FlatList
-        data={messages}
-        renderItem={({ item }) => <Message message={item} />}
-        inverted // ? 렌더링 순서 역전 - 왜 이렇게 하는지는, fechedMessages() 함수 속 "sort" 문장 확인해볼 것.
-      />
-      {/* 채팅메시지 입력 */}
-      <MessageInput chatRoom={chatRoom} />
-    </SafeAreaView>
+    // ? View 대신 SafeAreaView 를 쓰면, 노치 같은 곳에 데이터가 표출되지 않는다. 굳!
+    // <SafeAreaView style={styles.page}>
+    //   {is3dots && (
+    //     <TopBox>
+    //       <Pressable
+    //         style={{
+    //           marginLeft: 20,
+    //           marginVertical: 10,
+    //           flexDirection: "row",
+    //         }}
+    //         onPress={() => {
+    //           console.log("Im pressed");
+    //           alert("신고해");
+    //         }}
+    //       >
+    //         <Image
+    //           source={require("../../../assets/images/ChatRoomScreen/alert4x.png")}
+    //           style={{ width: 18, height: 18.5 }}
+    //         />
+
+    //         {/* <Svg width={20} height={20} viewBox="0 0 20 20">
+    //           <Path
+    //             d="M10.16,4,9.074,5.086l4.3,4.3H4v1.54h9.371l-4.3,4.3L10.16,16.32l6.16-6.16Z"
+    //             fill="#000"
+    //           />
+    //         </Svg> */}
+    //         <TextBox>신고하기</TextBox>
+    //         <MaterialCommunityIcons
+    //           name="arrow-top-right"
+    //           size={24}
+    //           color="black"
+    //           style={{ marginRight: 24 }}
+    //         />
+    //       </Pressable>
+    //       <Pressable
+    //         style={{
+    //           marginLeft: 20,
+    //           marginVertical: 10,
+    //           flexDirection: "row",
+    //         }}
+    //         onPress={() => {}}
+    //       >
+    //         <Image
+    //           source={require("../../../assets/images/ChatRoomScreen/ban4x.png")}
+    //           style={{ width: 18, height: 18 }}
+    //         />
+    //         <TextBox>차단하기</TextBox>
+    //         <MaterialCommunityIcons
+    //           name="arrow-top-right"
+    //           size={24}
+    //           color="black"
+    //           style={{ marginRight: 24 }}
+    //         />
+    //       </Pressable>
+    //       <Pressable
+    //         style={{
+    //           marginLeft: 20,
+    //           marginVertical: 10,
+    //           flexDirection: "row",
+    //         }}
+    //         onPress={() => {}}
+    //       >
+    //         <Image
+    //           source={require("../../../assets/images/ChatRoomScreen/leave4x.png")}
+    //           style={{ width: 15.95, height: 22.37 }}
+    //         />
+    //         <TextBox>채팅방 나가기</TextBox>
+    //         <MaterialCommunityIcons
+    //           name="arrow-top-right"
+    //           size={24}
+    //           color="black"
+    //           style={{ marginRight: 24 }}
+    //         />
+    //       </Pressable>
+    //     </TopBox>
+    //   )}
+
+    //   {/* //TODO: 어떠 컴포넌트로 위치시켜야 할까.. */}
+    //   {/* <EjectModal /> */}
+
+    //   <ProcessBox>
+    //     <ProcessImg
+    //       source={require("../../../assets/images/ChatRoomScreen/processBox/process_menuChecked.png")}
+    //     />
+    //   </ProcessBox>
+    //   {isDetail && <InfoDetail></InfoDetail>}
+    //   {/* 채팅메시지 */}
+    //   <FlatList
+    //     data={messages}
+    //     renderItem={({ item }) => (
+    //       <Message message={item} masterId={chatRoom.master} />
+    //     )}
+    //     inverted // ? 렌더링 순서 역전 - 왜 이렇게 하는지는, fechedMessages() 함수 속 "sort" 문장 확인해볼 것.
+    //   />
+    //   {/* 채팅메시지 입력 */}
+    //   <MessageInput chatRoom={chatRoom} me={authUser.attributes} />
+    // </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   page: {
-    backgroundColor: "white",
+    backgroundColor: "#F5F6F6",
+    // backgroundColor: "red",
     flex: 1,
-  },
-  nonChatBox: {
-    padding: 10,
-    backgroundColor: "grey",
-    borderBottomRightRadius: 10,
-    borderBottomLeftRadius: 10,
   },
   chatMenuList: {
     marginTop: 5,

@@ -20,14 +20,16 @@ import btChatRoomStack from "./BttmTabStacks/btChatRoomStack";
 import colors from "../../colors";
 import images from "../../images";
 import styled from "styled-components";
+import Svg, { Path } from "react-native-svg";
 
-import storeOn from "../../assets/images/BottomTabNav/storeOn.png";
-import partnerOn from "../../assets/images/BottomTabNav/partnerOn.png";
-import halfdOn from "../../assets/images/BottomTabNav/halfDOn.png";
-import orderinfoOn from "../../assets/images/BottomTabNav/orderinfoOn.png";
-import talkOn from "../../assets/images/BottomTabNav/talkOn.png";
+import storeOn from "../../assets/images/BottomTabNav/store.png";
+import matList from "../../assets/images/BottomTabNav/matList.png";
+import homeOn from "../../assets/images/BottomTabNav/home.png";
+import talkOn from "../../assets/images/BottomTabNav/talk.png";
+import myInfo from "../../assets/images/BottomTabNav/myInfo.png";
 
 import empty from "../../assets/images/empty.png";
+import NavigationHOME from "../../assets/images/BottomTabNav/HomeCI.svg";
 
 const Tab = createBottomTabNavigator();
 
@@ -37,6 +39,7 @@ const BottomTabView = styled.View`
   /* background-color: red; */
   flex-direction: row;
 
+  padding: 0px;
   height: 80px;
   width: 100%;
   position: absolute;
@@ -46,10 +49,19 @@ const BottomTabView = styled.View`
 const BottomTab = (props) => {
   return (
     <BottomTabView>
-      <Image source={props} />
+      <Image source={props} style={{ width: "110%", height: "110%" }} />
     </BottomTabView>
   );
 };
+
+// const SVGtest = () => {
+//   return (
+//     <BottomTabView>
+//       <NavigationHOME width={430} height={98} />
+//       {/* <NavigationHOME width="100%" height="100%" /> */}
+//     </BottomTabView>
+//   );
+// };
 
 const customBottomTabNEW = () => {
   // const [image, setImage] = useState(storeOn); //! 리액트훅 Tab 네비게이션 prop 안에 못 넣는다..!
@@ -82,7 +94,7 @@ const customBottomTabNEW = () => {
         name="Partner"
         options={{
           tabBarBackground: () => {
-            return BottomTab(partnerOn);
+            return BottomTab(matList);
           },
         }}
       />
@@ -91,16 +103,7 @@ const customBottomTabNEW = () => {
         name="btHomeStack"
         options={{
           tabBarBackground: () => {
-            return BottomTab(halfdOn);
-          },
-        }}
-      />
-      <Tab.Screen
-        component={btOrderInfoStack}
-        name="OrderInfo"
-        options={{
-          tabBarBackground: () => {
-            return BottomTab(orderinfoOn);
+            return BottomTab(homeOn);
           },
         }}
       />
@@ -110,6 +113,15 @@ const customBottomTabNEW = () => {
         options={{
           tabBarBackground: () => {
             return BottomTab(talkOn);
+          },
+        }}
+      />
+      <Tab.Screen
+        component={btOrderInfoStack}
+        name="OrderInfo"
+        options={{
+          tabBarBackground: () => {
+            return BottomTab(myInfo);
           },
         }}
       />

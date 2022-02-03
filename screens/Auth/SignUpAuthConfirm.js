@@ -150,10 +150,14 @@ export default ({ route: { params }, navigation }) => {
           name: name,
           phone_number: "+82" + phoneNumber.slice(1, 11),
           "custom:birthday": birthday,
+          "custom:school": "0000",
+          "custom:college": "0000",
+          "custom:bank": "0000",
+          "custom:accountnumber": "0000"
         },
       });
       console.log("Sign-up Confirmed");
-      alert("입력하신 전화번호로 인증번호가 전송되었습니다.");
+      alert("입력하신 핸드폰 번호로 인증번호가 전송되었습니다.");
     } catch (error) {
       console.log("Error signing up...", error);
     }

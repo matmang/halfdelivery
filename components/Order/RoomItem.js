@@ -10,6 +10,14 @@ import {
 import logos from "../../images";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation, useRoute } from "@react-navigation/core";
+import StoreCategory from "../StoreCategory";
+import {
+  KOREAN_ID,
+  CHINESE_ID,
+  JAPANESE_ID,
+  WESTERN_ID,
+  CAFE_ID,
+} from "../../assets/constants";
 
 const RoomItem = ({ chatRoomInfo }) => {
   const navigation = useNavigation();
@@ -17,12 +25,6 @@ const RoomItem = ({ chatRoomInfo }) => {
   const storeInfo = chatRoomInfo.matchingInfo.storeNmenus.store;
   const menus = chatRoomInfo.matchingInfo.storeNmenus.menus;
   const timeNpersons = chatRoomInfo.matchingInfo.timeNpersons;
-
-  const KOREAN_ID = "8314af0c-1d8e-4112-869b-15689debb495";
-  const CHINESE_ID = "382f8bce-5182-4402-ab8d-564618a335fd";
-  const JAPANESE_ID = "f9db956b-5bcb-4ddf-ba96-2010ae7c7ee5";
-  const WESTERN_ID = "2634afad-acdb-4b9f-a5cc-feafbd9dbaa4";
-  const CAFE_ID = "b26daa27-f6c3-4243-a73e-f9d9352d06e7";
 
   let category = "-";
 
@@ -48,8 +50,8 @@ const RoomItem = ({ chatRoomInfo }) => {
   }
 
   const onPress = () => {
-    navigation.navigate("ChatRoomStack", {
-      screen: "ChatRoomScreen",
+    navigation.navigate("StoreStack", {
+      screen: "SelectMenuScreen",
       params: {
         chatRoomID: chatRoomInfo.id,
         storeInfo,
@@ -71,20 +73,7 @@ const RoomItem = ({ chatRoomInfo }) => {
       />
       <View style={styles.infoContainer}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <View
-            style={{
-              width: 44,
-              height: 20,
-              borderRadius: 12,
-              backgroundColor: "#E5E6E7",
-              justifyContent: "center",
-              marginBottom: 5,
-            }}
-          >
-            <Text style={styles.categoryText} numberOfLines={1}>
-              {category}
-            </Text>
-          </View>
+          <StoreCategory category={category} />
           <Text style={styles.storeText} numberOfLines={1}>
             {storeInfo.store}
           </Text>
@@ -181,11 +170,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
     lineHeight: 17,
     textAlign: "center",
-  },
-  categoryText: {
-    fontSize: 12,
-    textAlign: "center",
-    fontFamily: "noto-regular",
   },
   storeText: {
     fontSize: 17,

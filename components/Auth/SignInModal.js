@@ -56,7 +56,7 @@ const BtnContainer = styled.View`
 const FindText = styled.Text`
   font-family: "noto-regular";
   color: ${colors.moon};
-  font-size: 14;
+  font-size: 14px;
   text-decoration-line: underline;
   margin-left: auto;
   margin-right: 10px;
@@ -79,10 +79,10 @@ const SignInModal = ({ isModalVisible, onBackdropPress }) => {
       alert("아이디와 비밀번호를 모두 입력해주세요.");
       return false;
     }
-    if (!isEmail(username)) {
-      alert("이메일 형식이 정확하지 않습니다.");
-      return false;
-    }
+    // if (!isEmail(username)) {
+    //   alert("이메일 형식이 정확하지 않습니다.");
+    //   return false;
+    // }
     return true;
   };
 
@@ -121,6 +121,7 @@ const SignInModal = ({ isModalVisible, onBackdropPress }) => {
             stateFn={setUsername}
             value={username}
             isValued={username ? true : false}
+            autoCapitalize="none"
           />
         </IDContainer>
         <PasswordContainer>
