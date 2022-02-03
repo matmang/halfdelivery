@@ -617,6 +617,13 @@ export const schema = {
                         "associatedWith": "chatroomID"
                     }
                 },
+                "master": {
+                    "name": "master",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -673,7 +680,7 @@ export const schema = {
                     "name": "content",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": []
                 },
                 "chatroomID": {
@@ -687,6 +694,20 @@ export const schema = {
                     "name": "userID",
                     "isArray": false,
                     "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "image": {
+                    "name": "image",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "audio": {
+                    "name": "audio",
+                    "isArray": false,
+                    "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -883,8 +904,8 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "status": {
-                    "name": "status",
+                "phone_number": {
+                    "name": "phone_number",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -918,10 +939,10 @@ export const schema = {
                         "associatedWith": "userID"
                     }
                 },
-                "halfmoney": {
-                    "name": "halfmoney",
+                "bank": {
+                    "name": "bank",
                     "isArray": false,
-                    "type": "Int",
+                    "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -953,6 +974,13 @@ export const schema = {
                         "associatedWith": "userID"
                     }
                 },
+                "accountnumber": {
+                    "name": "accountnumber",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "school": {
                     "name": "school",
                     "isArray": false,
@@ -960,17 +988,31 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "dormitory": {
-                    "name": "dormitory",
+                "college": {
+                    "name": "college",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
-                "nickname": {
-                    "name": "nickname",
+                "birthday": {
+                    "name": "birthday",
                     "isArray": false,
                     "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "status": {
+                    "name": "status",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "agree": {
+                    "name": "agree",
+                    "isArray": false,
+                    "type": "Boolean",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -1019,5 +1061,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "10cd903ee1fd6dc1d6ca6a86529235de"
+    "version": "d246b21f932da5b8ac66709d7397f1d0"
 };

@@ -168,12 +168,7 @@ export default () => {
           <ErrorMessage message={nameErrorMessage} />
         </NameContainer>
         <PhoneNumberContainer>
-          <AuthContainer>
-            <NameText>휴대폰 번호</NameText>
-            <AuthTouch onPress={handleSubmit}>
-              <AuthText>인증번호 요청</AuthText>
-            </AuthTouch>
-          </AuthContainer>
+          <NameText>휴대폰 번호</NameText>
           <BarInput
             placeholder={"'-'구분 없이 입력해주세요"}
             stateFn={setPhoneNumber}
@@ -182,9 +177,9 @@ export default () => {
           />
         </PhoneNumberContainer>
         <PhoneNumberContainer>
-          <NameText>인증번호</NameText>
+          <NameText>이메일</NameText>
           <BarInput
-            placeholder={"인증번호 숫자 4자리를 입력해주세요"}
+            placeholder={"확인 가능한 이메일 주소를 입력해주세요"}
             stateFn={setAuthCode}
             value={authCode}
             isValued={authCode ? true : false}
@@ -192,12 +187,12 @@ export default () => {
         </PhoneNumberContainer>
         <ButtonContainer>
           <Btn
-            text={"다음"}
+            text={"입력완료"}
             accent={accent == true}
             onPress={() => {
               confirmFindId();
             }}
-            icon={true}
+            icon={false}
           />
         </ButtonContainer>
       </Container>

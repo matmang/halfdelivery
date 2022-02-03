@@ -7,6 +7,7 @@ import { Store, User } from "../../AWS/src/models";
 import colors from "../../colors";
 import BarInput from "../../components/Auth/BarInput";
 import Btn from "../../components/Auth/Btn";
+import ConfirmBtn from "../../components/Auth/ConfirmBtn";
 import ErrorMessage from "../../components/Auth/ErrorMessage";
 import FindPasswordModal from "../../components/Auth/FindPasswordModal";
 import DismissKeyboard from "../../components/DismissKeyboard";
@@ -66,6 +67,8 @@ const ButtonContainer = styled.View`
 
 const AuthContainer = styled.View`
   flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const PhaseText = styled.Text`
@@ -105,16 +108,13 @@ const AuthTouch = styled.TouchableOpacity`
   margin-left: auto;
 `;
 
-export default ({ navigation }) => {
-  const [userName, setUserName] = useState("");
+export default ({ navigation, route: { params } }) => {
+  const [userName, setUserName] = useState(params?.userName);
   const [phoneNumber, setPhoneNumber] = useState("");
   const [authCode, setAuthCode] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirm, setPasswordConfirm] = useState("");
-  const [userNameErrorMessage, setUserNameErrorMessage] = useState("");
-  const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
-  const [passwordConfirmErrorMessage, setPasswordConfirmErrorMessage] =
-    useState("");
+  const [password, setPassword] = useState(params?.password);
+  const [phoneNumberErrorMessage, setPhoneNumberErrorMessage] = useState("");
+  const [authCodeErrorMessage, setAuthCodeErrorMessage] = useState("");
   const [accent, setAccent] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -123,56 +123,45 @@ export default ({ navigation }) => {
   useEffect(() => {
     setAccent(
       userName &&
+        phoneNumber &&
+        authCode &&
         password &&
-        passwordConfirm &&
-        !userNameErrorMessage &&
-        !passwordErrorMessage &&
-        !passwordConfirmErrorMessage
+        !phoneNumberErrorMessage &&
+        !authCodeErrorMessage
     );
   }, [
     userName,
+    phoneNumber,
+    authCode,
     password,
-    passwordConfirm,
-    userNameErrorMessage,
-    passwordErrorMessage,
-    passwordConfirmErrorMessage,
+    phoneNumberErrorMessage,
+    authCodeErrorMessage,
   ]);
 
   useEffect(() => {
     if (refDidMount.current) {
-      let userNameError = "";
-      let passwordError = "";
-      let passwordConfirmError = "";
-      if (!userName) {
-        userNameError = "가입한 아이디를 입력해주세요.";
-      } else if (password.length < 6) {
-        passwordError = "비밀번호는 6자리 이상이어야 합니다.";
-      } else if (password !== passwordConfirm) {
-        passwordConfirmError = "비밀번호 확인과 비밀번호가 다릅니다.";
+      let phoneNumberError = "";
+      let authCodeError = "";
+      if (!phoneNumber) {
+        phoneNumberError = "휴대폰 번호를 입력해주세요.";
+      } else if (authCode.length !== 6) {
+        authCodeError = "인증번호 6자리를 입력해주세요.";
       } else {
-        userNameError = "";
-        passwordError = "";
-        passwordConfirmError = "";
+        phoneNumberError = "";
+        authCodeError = "";
       }
-      setUserNameErrorMessage(userNameError);
-      setPasswordErrorMessage(passwordError);
-      setPasswordConfirmErrorMessage(passwordConfirmError);
+      setPhoneNumberErrorMessage(phoneNumberError);
+      setAuthCodeErrorMessage(authCodeError);
     } else {
       refDidMount.current = true;
     }
   });
 
   const handleSubmit = () => {
-    try {
-      // await Auth.signUp({
-      //   username,
-      //   password,
-      // });
-      console.log("Password Confirmed");
-      navigation.navigate("FindPasswordConfirm", { userName, password });
-    } catch (error) {
-      console.log("Error find password...", error);
-    }
+    Auth.forgotPassword(userName)
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err));
+    alert("회원가입시 입력한 전화번호로 인증문자가 전송되었습니다.");
   };
 
   const confirmFindId = () => {
@@ -205,38 +194,28 @@ export default ({ navigation }) => {
               </ExplainText>
             </PhaseContainer>
             <NameContainer>
-              <NameText>아이디</NameText>
+              <AuthContainer>
+                <NameText>휴대폰 번호</NameText>
+                <ConfirmBtn onPress={handleSubmit} text={"인증번호 요청"} />
+              </AuthContainer>
               <BarInput
-                placeholder={"아이디를 입력해주세요"}
-                stateFn={setUserName}
-                value={userName}
-                isValued={userName ? true : false}
+                placeholder={"'-'구분 없이 입력해주세요"}
+                stateFn={setPhoneNumber}
+                value={phoneNumber}
+                isValued={phoneNumber ? true : false}
               />
-              <ErrorMessage message={userNameErrorMessage} />
+              <ErrorMessage message={phoneNumberErrorMessage} />
             </NameContainer>
             <PasswordContainer>
-              <NameText>새로운 비밀번호</NameText>
+              <NameText>인증번호</NameText>
               <BarInput
-                placeholder={"변경할 비밀번호를 입력해주세요"}
-                stateFn={setPassword}
-                value={password}
-                isValued={password ? true : false}
-                isPassword={true}
+                placeholder={"인증번호 숫자 6자리 입력해주세요"}
+                stateFn={setAuthCode}
+                value={authCode}
+                isValued={authCode ? true : false}
               />
-              <ErrorMessage message={passwordErrorMessage} />
+              <ErrorMessage message={authCodeErrorMessage} />
             </PasswordContainer>
-            <PasswordContainer>
-              <NameText>새로운 비밀번호 확인</NameText>
-              <BarInput
-                placeholder={"변경할 비밀번호를 한번 더 입력해주세요"}
-                stateFn={setPasswordConfirm}
-                value={passwordConfirm}
-                isValued={password ? true : false}
-                isPassword={true}
-              />
-              <ErrorMessage message={passwordConfirmErrorMessage} />
-            </PasswordContainer>
-
             <GotoText>아이디 찾기 바로가기</GotoText>
           </Container>
         </ScrollView>
@@ -245,7 +224,7 @@ export default ({ navigation }) => {
             text={"다음"}
             accent={accent == true}
             onPress={() => {
-              handleSubmit();
+              confirmFindId();
             }}
             icon={true}
           />

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Image, ImageBackground } from "react-native";
+import { Image, ImageBackground, Text } from "react-native";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components";
@@ -7,6 +7,7 @@ import colors from "../../colors";
 import SignInModal from "../../components/Auth/SignInModal";
 import loginbackground from "../../assets/images/loginbackground.png";
 import Btn from "../../components/Auth/Btn";
+import DropDownPicker from "react-native-dropdown-picker";
 
 const Container = styled.View`
   flex: 1;
@@ -94,6 +95,10 @@ export default ({ navigation }) => {
   const toggleModal = () => {
     setIsModalVisible(!isModalVisible);
   };
+
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(null);
+  const [data, setData] = useState([{ label: "한양대학교 ERICA", value: "1" }]);
 
   return (
     <Container>

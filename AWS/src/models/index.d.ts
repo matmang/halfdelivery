@@ -118,6 +118,7 @@ export declare class ChatRoom {
   readonly ChatRoomUsers?: (ChatRoomUser | null)[];
   readonly matchingInfo?: string;
   readonly Orders?: (Order | null)[];
+  readonly master: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<ChatRoom, ChatRoomMetaData>);
@@ -126,9 +127,11 @@ export declare class ChatRoom {
 
 export declare class Message {
   readonly id: string;
-  readonly content: string;
+  readonly content?: string;
   readonly chatroomID?: string;
   readonly userID?: string;
+  readonly image?: string;
+  readonly audio?: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Message, MessageMetaData>);
@@ -149,15 +152,18 @@ export declare class User {
   readonly id: string;
   readonly name: string;
   readonly imageUri?: string;
-  readonly status?: string;
+  readonly phone_number?: string;
   readonly chatrooms?: (ChatRoomUser | null)[];
   readonly Messages?: (Message | null)[];
-  readonly halfmoney?: number;
+  readonly bank?: string;
   readonly Orders?: (Order | null)[];
   readonly OrderMenus?: (OrderMenu | null)[];
+  readonly accountnumber?: string;
   readonly school?: string;
-  readonly dormitory?: string;
-  readonly nickname?: string;
+  readonly college?: string;
+  readonly birthday?: string;
+  readonly status?: string;
+  readonly agree?: boolean;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<User, UserMetaData>);

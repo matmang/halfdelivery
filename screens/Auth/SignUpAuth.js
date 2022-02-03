@@ -104,8 +104,6 @@ export default ({ navigation }) => {
       let PWCerror = "";
       if (!username) {
         IDerror = "이메일을 입력해주세요.";
-      } else if (!isEmail(username)) {
-        IDerror = "이메일을 다시 확인해주세요.";
       } else if (password.length < 6) {
         PWerror = "비밀번호는 6자리 이상이어야 합니다.";
       } else if (password !== passwordConfirm) {

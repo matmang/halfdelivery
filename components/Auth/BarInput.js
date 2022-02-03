@@ -12,8 +12,8 @@ const Container = styled.TextInput`
   border-bottom-width: 1px;
   border-bottom-color: ${({ isValued }) =>
     isValued ? colors.mainBlue : colors.blueGrey};
-  font-family: "noto-regular";
-  font-size: 17px;
+  font-family: "nunito-regular";
+  font-size: 14.5px;
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
 `;
 

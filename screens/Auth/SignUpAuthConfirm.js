@@ -10,6 +10,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { useDispatch } from "react-redux";
 import Auth from "@aws-amplify/auth";
 import colors from "../../colors";
+import ConfirmBtn from "../../components/Auth/ConfirmBtn";
 
 const Container = styled.View`
   flex: 1;
@@ -52,6 +53,8 @@ const ButtonContainer = styled.View`
 
 const AuthContainer = styled.View`
   flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const PhaseText = styled.Text`
@@ -78,10 +81,6 @@ const AuthText = styled.Text`
   text-decoration-line: underline;
   margin-left: auto;
   color: ${colors.subPink1};
-`;
-
-const AuthTouch = styled.TouchableOpacity`
-  margin-left: auto;
 `;
 
 export default ({ route: { params }, navigation }) => {
@@ -148,14 +147,13 @@ export default ({ route: { params }, navigation }) => {
         username,
         password,
         attributes: {
-          email: username,
-          "custom:nickname": name,
-          "custom:phonenumber": phoneNumber,
+          name: name,
+          phone_number: "+82" + phoneNumber.slice(1, 11),
           "custom:birthday": birthday,
         },
       });
       console.log("Sign-up Confirmed");
-      alert("입력하신 이메일로 인증번호가 전송되었습니다.");
+      alert("입력하신 전화번호로 인증번호가 전송되었습니다.");
     } catch (error) {
       console.log("Error signing up...", error);
     }
@@ -209,9 +207,7 @@ export default ({ route: { params }, navigation }) => {
         <PasswordContainer>
           <AuthContainer>
             <NameText>휴대폰 번호</NameText>
-            <AuthTouch onPress={handleSubmit}>
-              <AuthText>인증번호 요청</AuthText>
-            </AuthTouch>
+            <ConfirmBtn onPress={handleSubmit} text={"인증번호 요청"} />
           </AuthContainer>
           <BarInput
             placeholder={"'-'구분 없이 입력해주세요"}

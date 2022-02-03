@@ -19,7 +19,7 @@
             {
               "authenticationType": "AMAZON_COGNITO_USER_POOLS",
               "userPoolConfig": {
-                "userPoolId": "authHalfDelivery"
+                "userPoolId": "authhalfdeliveryNewAuth220124"
               }
             }
           ]
@@ -28,13 +28,13 @@
     }
   },
   "auth": {
-    "HalfDelivery": {
+    "halfdeliveryNewAuth220124": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [
         {
           "category": "function",
-          "resourceName": "HalfDeliveryPostConfirmation",
+          "resourceName": "halfdeliveryNewAuth220124PostConfirmation",
           "triggerProvider": "Cognito",
           "attributes": [
             "Arn",
@@ -44,26 +44,28 @@
       ],
       "customAuth": false,
       "frontendAuthConfig": {
-        "loginMechanisms": [],
+        "socialProviders": [],
+        "usernameAttributes": [],
         "signupAttributes": [
-          "EMAIL"
+          "NAME",
+          "PHONE_NUMBER"
         ],
         "passwordProtectionSettings": {
-          "passwordPolicyMinLength": 6,
+          "passwordPolicyMinLength": 8,
           "passwordPolicyCharacters": []
         },
-        "mfaConfiguration": "OFF",
+        "mfaConfiguration": "OPTIONAL",
         "mfaTypes": [
           "SMS"
         ],
         "verificationMechanisms": [
-          "EMAIL"
+          "PHONE_NUMBER"
         ]
       }
     }
   },
   "function": {
-    "HalfDeliveryPostConfirmation": {
+    "halfdeliveryNewAuth220124PostConfirmation": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
@@ -73,6 +75,13 @@
     "DynamoDBDataImporter": {
       "providerPlugin": "awscloudformation",
       "service": "S3AndLambda"
+    }
+  },
+  "storage": {
+    "s3fd8cfc0a": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": []
     }
   }
 }
