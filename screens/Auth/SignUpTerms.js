@@ -2,15 +2,16 @@ import React, { useEffect, useRef, useState } from "react";
 import { Image, KeyboardAvoidingView, ScrollView } from "react-native";
 import styled from "styled-components";
 import Btn from "../../components/Auth/Btn";
-import BarInput from "../../components/Auth/BarInput";
-import ErrorMessage from "../../components/Auth/ErrorMessage";
 import DismissKeyboard from "../../components/DismissKeyboard";
-import { isEmail } from "../../utils";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useDispatch } from "react-redux";
-import Auth from "@aws-amplify/auth";
 import colors from "../../colors";
-import { logIn, userLogin } from "../../redux/usersSlice";
+import {
+  logIn,
+  toggleTermAd,
+  toggleTermPersonal,
+  toggleTermService,
+  userLogin,
+} from "../../redux/usersSlice";
 import CircleCheckBox, { LABEL_POSITION } from "react-native-circle-checkbox";
 
 const Container = styled.View`
@@ -104,17 +105,9 @@ export default ({ route: { params }, navigation }) => {
 
   const handleSubmit = async () => {
     try {
-      const user = await Auth.currentAuthenticatedUser();
-      await Auth.updateUserAttributes(user, {
-        "custom:bank": bank,
-        "custom:accountnumber": accountNumber,
-      });
-      console.log("Update Complete");
-      const currentUserInfo = await Auth.currentUserInfo();
-      console.log(
-        currentUserInfo.attributes["custom:bank"],
-        currentUserInfo.attributes["custom:accountnumber"]
-      );
+      dispatch(toggleTermService(termService));
+      dispatch(toggleTermPersonal(termPersonal));
+      dispatch(toggleTermAd(termAd));
       dispatch(userLogin(username, password));
     } catch (error) {
       console.log("Error signing up...", error);
