@@ -15,7 +15,7 @@ import Popular from "./Popular";
 import Swiper from "react-native-swiper";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { logOut } from "../../redux/usersSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ProfileModal from "./ProfileModal";
 import tailwind from "tailwind-rn";
 
@@ -88,6 +88,9 @@ const SearchText = styled.Text`
 const Home = ({ stores, navigation, isModalVisible }) => {
   const dispatch = useDispatch();
   const [isVisible, setIsVisible] = useState(false);
+  const { isLoggedIn, termService, termPersonal, termAd } = useSelector(
+    (state) => state.usersReducer
+  );
 
   const logOutPress = () => {
     Auth.signOut();
