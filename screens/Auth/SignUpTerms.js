@@ -6,7 +6,6 @@ import DismissKeyboard from "../../components/DismissKeyboard";
 import { useDispatch } from "react-redux";
 import colors from "../../colors";
 import {
-  logIn,
   toggleTermAd,
   toggleTermPersonal,
   toggleTermService,
@@ -87,8 +86,6 @@ const TermText = styled.Text`
 export default ({ route: { params }, navigation }) => {
   const [username, setusername] = useState(params?.username);
   const [password, setPassword] = useState(params?.password);
-  const [bank, setBank] = useState("");
-  const [accountNumber, setaccountNumber] = useState("");
   const [termAllCheck, setTermAllCheck] = useState(false);
   const [termService, setTermService] = useState(false);
   const [termPersonal, setTermPersonal] = useState(false);
