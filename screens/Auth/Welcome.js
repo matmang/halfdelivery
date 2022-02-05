@@ -8,6 +8,7 @@ import SignInModal from "../../components/Auth/SignInModal";
 import loginbackground from "../../assets/images/loginbackground.png";
 import Btn from "../../components/Auth/Btn";
 import DropDownPicker from "react-native-dropdown-picker";
+import { height, width } from "../../utils";
 
 const Container = styled.View`
   flex: 1;
@@ -24,18 +25,18 @@ const LogoContainer = styled.View`
 const WelcomeContainer = styled.View`
   justify-content: center;
   align-items: center;
-  margin-top: 23px;
+  margin-top: ${height * 24}px;
 `;
 
 const BodyContainer = styled.View`
   width: 100%;
   align-items: center;
-  margin-top: 53px;
+  margin-top: ${height * 53}px;
 `;
 
 const ExplainContainer = styled.View`
   flex-direction: row;
-  margin-top: 19px;
+  margin-top: ${height * 19}px;
   justify-content: space-between;
 `;
 
@@ -43,16 +44,16 @@ const TouchContainer = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
   margin-right: auto;
-  margin-left: 49px;
+  margin-left: ${width * 49}px;
 `;
 
 const Footer = styled.View`
   position: absolute;
-  bottom: 10px;
+  bottom: ${height * 10}px;
 `;
 
 const SecondContainer = styled.View`
-  margin-top: 20px;
+  margin-top: ${height * 20}px;
 `;
 
 const WelcomeText = styled.Text`
@@ -73,13 +74,13 @@ const BlackText = styled.Text`
   font-family: "noto-regular";
   font-size: 15px;
   margin-right: auto;
-  margin-left: 49px;
+  margin-left: ${width * 49}px;
 `;
 
 const BlueText = styled.Text`
   font-family: "noto-regular";
   font-size: 17px;
-  margin-left: 8px;
+  margin-left: ${width * 8}px;
   color: ${colors.mainBlue};
 `;
 
