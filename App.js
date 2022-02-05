@@ -32,7 +32,11 @@ Amplify.configure({
 const getFonts = () => {
   return Font.loadAsync({
     "noto-regular": require("./assets/fonts/NotoSansKR-Regular.otf"),
+    "noto-medium": require("./assets/fonts/NotoSansKR-Medium.otf"),
+    "noto-bold": require("./assets/fonts/NotoSansKR-Bold.otf"),
     "nunito-regular": require("./assets/fonts/NunitoSans-Regular.ttf"),
+    "nunito-semibold": require("./assets/fonts/NunitoSans-SemiBold.ttf"),
+    "nunito-bold": require("./assets/fonts/NunitoSans-Bold.ttf"),
   });
 };
 

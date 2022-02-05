@@ -46,6 +46,7 @@ import {
   InputOrderPrice,
   RequestAdditionalTime,
   AddAdditionalTime,
+  ViewProfilePartner,
 } from "../../../components/Matching/Modals/";
 
 const ChatRoomScreen = (props) => {
@@ -203,6 +204,7 @@ const ChatRoomScreen = (props) => {
 
   return (
     <ScrollView style={styles.page}>
+      <ViewProfilePartner />
       <AddAdditionalTime />
       <RequestAdditionalTime />
       <InputOrderPrice />
