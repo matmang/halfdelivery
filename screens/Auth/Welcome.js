@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-import { Image, ImageBackground, Text } from "react-native";
-import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
-import { Ionicons } from "@expo/vector-icons";
+import { Image, ImageBackground } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import styled from "styled-components";
 import colors from "../../colors";
 import SignInModal from "../../components/Auth/SignInModal";
 import loginbackground from "../../assets/images/loginbackground.png";
 import Btn from "../../components/Auth/Btn";
-import DropDownPicker from "react-native-dropdown-picker";
 import { height, width } from "../../utils";
 
 const Container = styled.View`
@@ -49,7 +47,13 @@ const TouchContainer = styled.TouchableOpacity`
 
 const Footer = styled.View`
   position: absolute;
-  bottom: ${height * 10}px;
+  height: ${height * 65}px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  bottom: 0;
+  background-color: ${colors.unAccent};
 `;
 
 const SecondContainer = styled.View`
@@ -77,10 +81,15 @@ const BlackText = styled.Text`
   margin-left: ${width * 49}px;
 `;
 
-const BlueText = styled.Text`
+const BlueTextER = styled.Text`
+  font-family: "nunito-regular";
+  font-size: 17px;
+  color: ${colors.mainBlue};
+`;
+
+const BlueTextKR = styled.Text`
   font-family: "noto-regular";
   font-size: 17px;
-  margin-left: ${width * 8}px;
   color: ${colors.mainBlue};
 `;
 
@@ -97,10 +106,6 @@ export default ({ navigation }) => {
     setIsModalVisible(!isModalVisible);
   };
 
-  const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(null);
-  const [data, setData] = useState([{ label: "한양대학교 ERICA", value: "1" }]);
-
   return (
     <Container>
       <ImageBackground
@@ -116,7 +121,7 @@ export default ({ navigation }) => {
         <LogoContainer>
           <Image
             source={require("../../assets/images/halfLogo.png")}
-            style={{ width: 83, height: 120 }}
+            style={{ width: width * 83.19, height: height * 120.64 }}
           />
         </LogoContainer>
         <WelcomeContainer>
@@ -153,9 +158,8 @@ export default ({ navigation }) => {
           onBackdropPress={() => setIsModalVisible(false)}
         />
         <Footer>
-          <ExplainText>
-            하프딜리버리는1인가구 배달음식 주문을 도와주는 서비스 입니다
-          </ExplainText>
+          <BlueTextER>HALF DELIVERY </BlueTextER>
+          <BlueTextKR>사용가이드 바로가기</BlueTextKR>
         </Footer>
       </ImageBackground>
     </Container>

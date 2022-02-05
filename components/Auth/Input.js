@@ -1,21 +1,19 @@
 import React from "react";
 import styled from "styled-components";
 import Proptypes from "prop-types";
-import { Dimensions } from "react-native";
 import colors from "../../colors";
-
-const { width } = Dimensions.get("screen");
+import { height, width } from "../../utils";
 
 const Container = styled.TextInput`
-  width: 338px;
-  height: 48px;
-  padding: 12.5px 20px;
+  width: ${width * 338}px;
+  height: ${height * 48}px;
+  padding: ${height * 12.5}px ${width * 20}px;
   padding-top: 0;
   padding-bottom: 0;
   border: 1px solid ${colors.mainBlue};
   background-color: white;
   border-radius: 30px;
-  margin-top: 20px;
+  margin-top: ${height * 20}px;
   font-family: "noto-regular";
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
 `;

@@ -1,9 +1,8 @@
-import { Auth, DataStore } from "aws-amplify";
+import { Auth } from "aws-amplify";
 import React, { useEffect, useRef, useState } from "react";
 import { Image } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import styled from "styled-components";
-import { Store, User } from "../../AWS/src/models";
 import colors from "../../colors";
 import BarInput from "../../components/Auth/BarInput";
 import Btn from "../../components/Auth/Btn";
@@ -11,6 +10,7 @@ import ConfirmBtn from "../../components/Auth/ConfirmBtn";
 import ErrorMessage from "../../components/Auth/ErrorMessage";
 import FindPasswordModal from "../../components/Auth/FindPasswordModal";
 import DismissKeyboard from "../../components/DismissKeyboard";
+import { height } from "../../utils";
 
 const OuterContainer = styled.View`
   flex: 1;
@@ -25,7 +25,7 @@ const Container = styled.View`
 `;
 
 const LogoConatainer = styled.View`
-  margin-top: 62px;
+  margin-top: ${height * 62}px;
   justify-content: center;
   align-items: center;
 `;
@@ -33,33 +33,33 @@ const LogoConatainer = styled.View`
 const PhaseContainer = styled.View`
   justify-content: center;
   align-items: center;
-  margin-top: 22px;
-  height: 56px;
+  margin-top: ${height * 22}px;
+  height: ${height * 56}px;
 `;
 
 const NameContainer = styled.View`
-  margin-top: 74px;
+  margin-top: ${height * 74}px;
   margin-left: auto;
   margin-right: auto;
   justify-content: flex-start;
 `;
 
 const PhoneNumberContainer = styled.View`
-  margin-top: 15px;
+  margin-top: ${height * 15}px;
   margin-left: auto;
   margin-right: auto;
   justify-content: flex-start;
 `;
 
 const PasswordContainer = styled.View`
-  margin-top: 15px;
+  margin-top: ${height * 15}px;
   margin-left: auto;
   margin-right: auto;
   justify-content: flex-start;
 `;
 
 const ButtonContainer = styled.View`
-  bottom: 30px;
+  bottom: ${height * 30}px;
   position: absolute;
   margin-left: auto;
   margin-right: auto;
@@ -80,7 +80,7 @@ const ExplainText = styled.Text`
   font-family: "noto-regular";
   font-size: 14px;
   color: #3c3c3c;
-  margin-top: -20px;
+  margin-top: ${height * -20}px;
 `;
 
 const NameText = styled.Text`
@@ -101,7 +101,7 @@ const GotoText = styled.Text`
   font-family: "noto-regular";
   font-size: 14px;
   color: ${colors.blueGrey};
-  margin-top: 53px;
+  margin-top: ${height * 53}px;
 `;
 
 const AuthTouch = styled.TouchableOpacity`

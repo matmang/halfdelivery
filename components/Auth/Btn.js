@@ -1,20 +1,19 @@
 import React from "react";
-import { Dimensions, TouchableOpacity } from "react-native";
-import styled, { createGlobalStyle } from "styled-components";
+import { TouchableOpacity } from "react-native";
+import styled from "styled-components";
 import { Ionicons } from "@expo/vector-icons";
 import Proptypes from "prop-types";
 import colors from "../../colors";
-
-const { width } = Dimensions.get("screen");
+import { height, width } from "../../utils";
 
 const Button = styled.View`
-  padding: 12.5px 0px;
+  padding: ${height * 12.5}px 0px;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   border-radius: 30px;
-  width: 338px;
-  height: 48px;
+  width: ${width * 338}px;
+  height: ${height * 48}px;
   background-color: ${(props) =>
     props.accent ? colors.mainBlue : colors.unAccent};
   color: ${(props) => (props.accent ? colors.mainBlue : colors.unAccent)};

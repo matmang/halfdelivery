@@ -2,10 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import Proptypes from "prop-types";
 import colors from "../../colors";
+import { height, width } from "../../utils";
 
 const Container = styled.TextInput`
-  width: 296px;
-  height: 33px;
+  width: ${width * 296}px;
+  height: ${height * 33}px;
   padding-top: 0;
   padding-bottom: 0;
   border-bottom-width: 1px;

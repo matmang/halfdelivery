@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Image, KeyboardAvoidingView, ScrollView } from "react-native";
+import { Image } from "react-native";
 import styled from "styled-components";
 import Btn from "../../components/Auth/Btn";
 import DismissKeyboard from "../../components/DismissKeyboard";
@@ -12,10 +12,10 @@ import {
   userLogin,
 } from "../../redux/usersSlice";
 import CircleCheckBox, { LABEL_POSITION } from "react-native-circle-checkbox";
+import { height, width } from "../../utils";
 
 const Container = styled.View`
   flex: 1;
-  justify-content: center;
   align-items: center;
   background-color: white;
 `;
@@ -23,40 +23,41 @@ const Container = styled.View`
 const ProgressContainer = styled.View`
   justify-content: center;
   align-items: center;
+  margin-top: ${height * 80};
 `;
 
 const PhaseContainer = styled.View`
   justify-content: center;
   align-items: center;
-  margin-top: 22px;
-  height: 56px;
+  margin-top: ${height * 22}px;
+  height: ${height * 56}px;
 `;
 
 const IDContainer = styled.View`
-  margin-top: 74px;
-  margin-left: 23px;
+  margin-top: ${height * 74}px;
+  margin-left: ${width * 23}px;
   margin-right: auto;
   justify-content: flex-start;
   z-index: 10;
 `;
 
 const PasswordContainer = styled.View`
-  margin-top: 15px;
-  margin-left: 23px;
+  margin-top: ${height * 15}px;
+  margin-left: ${width * 23}px;
   margin-right: auto;
   justify-content: flex-start;
 `;
 
 const ButtonContainer = styled.View`
-  margin-top: 40px;
+  margin-top: ${height * 40}px;
   position: absolute;
-  bottom: 30px;
+  bottom: ${height * 30}px;
 `;
 
 const Distributionline = styled.View`
   height: 0;
-  width: 336px;
-  margin-top: 8px;
+  width: ${width * 336}px;
+  margin-top: ${height * 8}px;
   margin-left: auto;
   margin-right: auto;
   padding-top: 0;
@@ -74,7 +75,7 @@ const ExplainText = styled.Text`
   font-family: "noto-regular";
   font-size: 14px;
   color: #3c3c3c;
-  margin-top: -20px;
+  margin-top: ${height * -20}px;
 `;
 
 const TermText = styled.Text`
