@@ -3,42 +3,20 @@ import { View, Text, Image, Pressable } from "react-native";
 import colors from "../../../colors";
 import RoundedBtn from "../../RoundedBtn";
 import BtmWarnningMessage from "../../BtmWarnningMessage";
+import CheckBox from "../../CheckBox";
 
-const Reason = ({
-  number,
-  reasonText,
-  selected,
-  setSelected,
-  setReason,
-  marginTop,
-}) => {
-  return (
-    <View
-      style={{ flexDirection: "row", marginTop: marginTop ? marginTop : 18 }}
-    >
-      <Pressable
-        onPress={() => {
-          setSelected(number);
-          setReason(reasonText);
-        }}
-      >
-        <Image
-          source={
-            number === selected
-              ? require("../../../assets/images/ChatRoomScreen/RadioButton_On.png")
-              : require("../../../assets/images/ChatRoomScreen/RadioButton_Off.png")
-          }
-          style={{ width: 20, height: 20, marginLeft: 20 }}
-        />
-      </Pressable>
-      <Text style={{ marginLeft: 10 }}>{reasonText}</Text>
-    </View>
-  );
-};
 export default ({ name }) => {
-  const [selected, setSelected] = useState(null);
-  const [reason, setReason] = useState(null);
-  console.log(reason);
+  const [reason1, setReason1] = useState(null);
+  const [reason2, setReason2] = useState(null);
+  const [reason3, setReason3] = useState(null);
+  const [reason4, setReason4] = useState(null);
+  const [reason5, setReason5] = useState(null);
+
+  const reasons = { reason1, reason2, reason3, reason4, reason5 };
+  const isEmpty = Object.values(reasons).every((x) => x === null);
+  // console.log("reasons", reasons);
+  // console.log("isEmpty", isEmpty);
+
   return (
     <View
       style={{
@@ -146,7 +124,7 @@ export default ({ name }) => {
           <View
             style={{
               marginStart: 0.5,
-              marginTop: 14,
+              marginTop: 16,
               backgroundColor: "rgba(84, 101, 170, 255)",
               width: 324,
               height: 1.5,
@@ -166,7 +144,33 @@ export default ({ name }) => {
             {" "}
             퇴장 사유{" "}
           </Text>
-          <Reason
+          <CheckBox
+            text={"주문금액을 입력하지 않음"}
+            viewStyle={{ marginTop: 14 }}
+            parentSetState={setReason1}
+          />
+          <CheckBox
+            text={"주문금액이 알맞지 않음"}
+            viewStyle={{ marginTop: 18 }}
+            parentSetState={setReason2}
+          />
+          <CheckBox
+            text={"주문 메뉴 정보를 첨부하지 않음"}
+            viewStyle={{ marginTop: 18 }}
+            parentSetState={setReason3}
+          />
+          <CheckBox
+            text={"주문 메뉴 정보가 알맞지 않음"}
+            viewStyle={{ marginTop: 18 }}
+            parentSetState={setReason4}
+          />
+          <CheckBox
+            text={"준비완료를 진행하지 않음"}
+            viewStyle={{ marginTop: 18 }}
+            parentSetState={setReason5}
+          />
+
+          {/* <Reason
             number={0}
             reasonText={"주문금액을 입력하지 않음"}
             selected={selected}
@@ -201,7 +205,7 @@ export default ({ name }) => {
             selected={selected}
             setSelected={setSelected}
             setReason={setReason}
-          />
+          /> */}
         </View>
 
         <View
@@ -213,9 +217,9 @@ export default ({ name }) => {
         >
           <RoundedBtn
             text={"내보내기"}
-            isPressed={reason}
+            isPressed={!isEmpty}
             onPress={() => {
-              reason ? alert("내보내기") : null;
+              !isEmpty ? alert("내보내기") : null;
             }}
           />
 

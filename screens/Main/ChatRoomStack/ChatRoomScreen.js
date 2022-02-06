@@ -42,89 +42,12 @@ import {
   EjectPartner,
   CancelMatching,
 } from "../../../components/Chat/Modals/";
-import { InputOrderPrice } from "../../../components/Matching/Modals/";
-
-const TopBox = styled.View`
-  flex: 1;
-  padding: 10px;
-  justify-content: center;
-  background-color: white;
-  /* opacity: 0.8; */
-  width: 100%;
-  height: 144px;
-  position: absolute;
-  z-index: 3;
-  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
-`;
-
-const ProcessBox = styled.View`
-  margin-top: 12px;
-  border-radius: 16px;
-  align-self: center;
-  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
-`;
-
-const ProcessImg = styled.Image`
-  width: 364px;
-  height: 50px;
-  border-radius: 16px;
-  /* border-width: 1px; */
-`;
-
-const RoomInfoBox = styled.View`
-  /* flex: 1; */
-  /* padding: 10px; */
-  align-items: center;
-  flex-direction: row;
-  background-color: white;
-  width: 100%;
-  height: 48px;
-  z-index: 1;
-`;
-
-const InfoDetail = styled.View`
-  width: 100%;
-  height: 257px;
-  background-color: white;
-  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
-  z-index: 0;
-`;
-
-const RoomText = styled.Text`
-  font-family: "noto-regular";
-  font-size: 17px;
-  text-decoration: underline;
-  color: ${colors.mainBlue};
-  margin-left: 14px;
-`;
-
-const PrfImgView = styled.View`
-  flex-direction: row;
-  /* //! 안드로이드는 margin-left: 33% 가 맞음 */
-  /* margin-left: 33%; */
-  margin-left: 25%;
-  margin-right: auto;
-  /* border-width: 1px; */
-  justify-content: space-evenly;
-`;
-
-const ProfileImg = styled.Image`
-  height: 22px;
-  width: 22px;
-  border-radius: 22px;
-  margin-left: 2%;
-  margin-right: 3px;
-  border-width: 1px;
-`;
-
-const TextBox = styled.Text`
-  /* //! noto로 폰트바꾸면 이상하게 줄맞춤이 깨진다.. */
-  font-family: "noto-regular";
-  font-size: 17px;
-  line-height: 19px;
-  margin-left: 12px;
-  margin-right: auto;
-`;
+import {
+  InputOrderPrice,
+  RequestAdditionalTime,
+  AddAdditionalTime,
+  ViewProfilePartner,
+} from "../../../components/Matching/Modals/";
 
 const ChatRoomScreen = (props) => {
   const [messages, setMessages] = useState([]);
@@ -281,6 +204,9 @@ const ChatRoomScreen = (props) => {
 
   return (
     <ScrollView style={styles.page}>
+      <ViewProfilePartner />
+      <AddAdditionalTime />
+      <RequestAdditionalTime />
       <InputOrderPrice />
       <CancelMatching />
       <MatchingCancelled />
@@ -307,12 +233,6 @@ const ChatRoomScreen = (props) => {
     //           style={{ width: 18, height: 18.5 }}
     //         />
 
-    //         {/* <Svg width={20} height={20} viewBox="0 0 20 20">
-    //           <Path
-    //             d="M10.16,4,9.074,5.086l4.3,4.3H4v1.54h9.371l-4.3,4.3L10.16,16.32l6.16-6.16Z"
-    //             fill="#000"
-    //           />
-    //         </Svg> */}
     //         <TextBox>신고하기</TextBox>
     //         <MaterialCommunityIcons
     //           name="arrow-top-right"
@@ -401,5 +321,87 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 10,
   },
 });
+
+const TopBox = styled.View`
+  flex: 1;
+  padding: 10px;
+  justify-content: center;
+  background-color: white;
+  /* opacity: 0.8; */
+  width: 100%;
+  height: 144px;
+  position: absolute;
+  z-index: 3;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
+`;
+
+const ProcessBox = styled.View`
+  margin-top: 12px;
+  border-radius: 16px;
+  align-self: center;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
+`;
+
+const ProcessImg = styled.Image`
+  width: 364px;
+  height: 50px;
+  border-radius: 16px;
+  /* border-width: 1px; */
+`;
+
+const RoomInfoBox = styled.View`
+  /* flex: 1; */
+  /* padding: 10px; */
+  align-items: center;
+  flex-direction: row;
+  background-color: white;
+  width: 100%;
+  height: 48px;
+  z-index: 1;
+`;
+
+const InfoDetail = styled.View`
+  width: 100%;
+  height: 257px;
+  background-color: white;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
+  z-index: 0;
+`;
+
+const RoomText = styled.Text`
+  font-family: "noto-regular";
+  font-size: 17px;
+  text-decoration: underline;
+  color: ${colors.mainBlue};
+  margin-left: 14px;
+`;
+
+const PrfImgView = styled.View`
+  flex-direction: row;
+  /* //! 안드로이드는 margin-left: 33% 가 맞음 */
+  /* margin-left: 33%; */
+  margin-left: 25%;
+  margin-right: auto;
+  /* border-width: 1px; */
+  justify-content: space-evenly;
+`;
+
+const ProfileImg = styled.Image`
+  height: 22px;
+  width: 22px;
+  border-radius: 22px;
+  margin-left: 2%;
+  margin-right: 3px;
+  border-width: 1px;
+`;
+
+const TextBox = styled.Text`
+  /* //! noto로 폰트바꾸면 이상하게 줄맞춤이 깨진다.. */
+  font-family: "noto-regular";
+  font-size: 17px;
+  line-height: 19px;
+  margin-left: 12px;
+  margin-right: auto;
+`;
 
 export default ChatRoomScreen;

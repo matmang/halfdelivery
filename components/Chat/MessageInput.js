@@ -28,70 +28,7 @@ import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
 import styled from "styled-components";
 import Modal from "react-native-modal";
-import AccountModal from "../Matching/AccountModal";
-
-const InputBox = styled.View`
-  width: 100%;
-  height: 65px;
-  flex-direction: row;
-  padding: 10px;
-  background-color: ${colors.mainBlue};
-`;
-
-const PlusBox = styled.Pressable`
-  /* background: red; */
-  align-self: center;
-  margin-left: 12px;
-`;
-
-const PlusImg = styled.Image`
-  width: 21px;
-  height: 21px;
-`;
-
-const SendMsgBox = styled(PlusBox)`
-  margin-left: 0px;
-  margin-right: 12px;
-`;
-
-const SendMsgImg = styled(PlusImg)`
-  width: 21px;
-  height: 14px;
-`;
-
-const Btm = styled.View`
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
-  width: 100%;
-  height: 153px;
-  background-color: ${colors.unAccent};
-`;
-
-const ImgProgress = styled.View`
-  height: 3px;
-  border-radius: 5px;
-  background-color: lightblue;
-  /* width: 100%; */
-  width: ${(props) => props.progress * 100}%;
-  margin-right: auto;
-`;
-
-const ModalBox = styled.View`
-  width: 60%;
-  height: 20%;
-  background-color: white;
-  border-radius: 10px;
-  align-items: center;
-  justify-content: space-evenly;
-`;
-
-const BlueText = styled.Text`
-  font-family: "noto-regular";
-  font-size: 17px;
-  margin-left: 8px;
-  color: ${colors.mainBlue};
-`;
+import { SendAccount } from "../Matching/Modals";
 
 const MessageInput = ({ chatRoom, me }) => {
   const [message, setMessage] = useState("");
@@ -381,7 +318,7 @@ const MessageInput = ({ chatRoom, me }) => {
         </Btm>
       )}
 
-      <AccountModal
+      <SendAccount
         isModal={isAccModal}
         setIsModal={setIsAccModal}
         name={me.name}
@@ -420,5 +357,68 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 });
+
+const InputBox = styled.View`
+  width: 100%;
+  height: 65px;
+  flex-direction: row;
+  padding: 10px;
+  background-color: ${colors.mainBlue};
+`;
+
+const PlusBox = styled.Pressable`
+  /* background: red; */
+  align-self: center;
+  margin-left: 12px;
+`;
+
+const PlusImg = styled.Image`
+  width: 21px;
+  height: 21px;
+`;
+
+const SendMsgBox = styled(PlusBox)`
+  margin-left: 0px;
+  margin-right: 12px;
+`;
+
+const SendMsgImg = styled(PlusImg)`
+  width: 21px;
+  height: 14px;
+`;
+
+const Btm = styled.View`
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  height: 153px;
+  background-color: ${colors.unAccent};
+`;
+
+const ImgProgress = styled.View`
+  height: 3px;
+  border-radius: 5px;
+  background-color: lightblue;
+  /* width: 100%; */
+  width: ${(props) => props.progress * 100}%;
+  margin-right: auto;
+`;
+
+const ModalBox = styled.View`
+  width: 60%;
+  height: 20%;
+  background-color: white;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: space-evenly;
+`;
+
+const BlueText = styled.Text`
+  font-family: "noto-regular";
+  font-size: 17px;
+  margin-left: 8px;
+  color: ${colors.mainBlue};
+`;
 
 export default MessageInput;
