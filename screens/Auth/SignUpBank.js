@@ -1,21 +1,17 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Image, KeyboardAvoidingView, ScrollView } from "react-native";
+import { Image } from "react-native";
 import styled from "styled-components";
 import Btn from "../../components/Auth/Btn";
 import BarInput from "../../components/Auth/BarInput";
-import ErrorMessage from "../../components/Auth/ErrorMessage";
 import DismissKeyboard from "../../components/DismissKeyboard";
-import { isEmail } from "../../utils";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { height, width } from "../../utils";
 import { useDispatch } from "react-redux";
 import Auth from "@aws-amplify/auth";
 import colors from "../../colors";
-import { logIn, userLogin } from "../../redux/usersSlice";
 import DropDownPicker from "react-native-dropdown-picker";
 
 const Container = styled.View`
   flex: 1;
-  justify-content: center;
   align-items: center;
   background-color: white;
 `;
@@ -23,34 +19,39 @@ const Container = styled.View`
 const ProgressContainer = styled.View`
   justify-content: center;
   align-items: center;
+  margin-top: ${height * 80};
 `;
 
 const PhaseContainer = styled.View`
   justify-content: center;
   align-items: center;
-  margin-top: 22px;
-  height: 56px;
+  margin-top: ${height * 22}px;
+  height: ${height * 56}px;
 `;
 
 const IDContainer = styled.View`
-  margin-top: 74px;
-  margin-left: 23px;
+  margin-top: ${height * 74}px;
+  margin-left: ${width * 23}px;
   margin-right: auto;
   justify-content: flex-start;
   z-index: 10;
 `;
 
 const PasswordContainer = styled.View`
-  margin-top: 15px;
-  margin-left: 23px;
+  margin-top: ${height * 15}px;
+  margin-left: ${width * 23}px;
   margin-right: auto;
   justify-content: flex-start;
 `;
 
 const ButtonContainer = styled.View`
-  margin-top: 40px;
+  align-items: center;
+  background-color: white;
+  width: 100%;
+  height: ${height * 82}px;
+  margin-top: ${height * 40}px;
   position: absolute;
-  bottom: 30px;
+  bottom: 0px;
 `;
 
 const PhaseText = styled.Text`
@@ -62,20 +63,20 @@ const ExplainText = styled.Text`
   font-family: "noto-regular";
   font-size: 14px;
   color: #3c3c3c;
-  margin-top: -20px;
+  margin-top: ${height * -20}px;
 `;
 
 const NameText = styled.Text`
   font-family: "noto-regular";
   font-size: 15px;
-  color: ${colors.mainBlue};
+  color: ${colors.primaryBlue};
 `;
 
 const AccountText = styled.Text`
-  margin-top: 15px;
+  margin-top: ${height * 15}px;
   font-family: "noto-regular";
   font-size: 15px;
-  color: ${colors.mainBlue};
+  color: ${colors.primaryBlue};
 `;
 
 export default ({ route: { params }, navigation }) => {
@@ -134,7 +135,7 @@ export default ({ route: { params }, navigation }) => {
         <ProgressContainer>
           <Image
             source={require("../../assets/images/SignUp3.png")}
-            style={{ width: 180, height: 45 }}
+            style={{ width: width * 180, height: height * 44 }}
           />
         </ProgressContainer>
         <PhaseContainer>

@@ -1,28 +1,26 @@
 import React from "react";
-import { Dimensions, TouchableOpacity } from "react-native";
-import styled, { createGlobalStyle } from "styled-components";
-import { Ionicons } from "@expo/vector-icons";
+import { TouchableOpacity } from "react-native";
+import styled from "styled-components";
 import Proptypes from "prop-types";
 import colors from "../../colors";
-
-const { width } = Dimensions.get("screen");
+import { height, width } from "../../utils";
 
 const Button = styled.View`
-  padding: 12.5px 0px;
+  padding: ${height * 12.5}px 0px;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   border-radius: 30px;
-  width: 97px;
-  height: 25px;
+  width: ${width * 97}px;
+  height: ${height * 25}px;
   background-color: ${(props) =>
-    props.accent ? colors.subPink3 : colors.unAccent};
-  color: ${(props) => (props.accent ? colors.mainBlue : colors.coal)};
+    props.accent ? colors.palePink : colors.coolGray};
+  color: ${(props) => (props.accent ? colors.primaryBlue : colors.oxfordGray)};
   font-family: "nunito-regular";
 `;
 
 const Text = styled.Text`
-  color: ${(props) => (props.accent ? colors.mainBlue : colors.coal)};
+  color: ${(props) => (props.accent ? colors.primaryBlue : colors.oxfordGray)};
   font-weight: 600;
   font-size: 12px;
   font-family: "noto-regular";

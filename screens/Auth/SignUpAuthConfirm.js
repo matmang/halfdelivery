@@ -1,54 +1,56 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Image, KeyboardAvoidingView, ScrollView } from "react-native";
+import { Image } from "react-native";
 import styled from "styled-components";
 import Btn from "../../components/Auth/Btn";
 import BarInput from "../../components/Auth/BarInput";
 import ErrorMessage from "../../components/Auth/ErrorMessage";
 import DismissKeyboard from "../../components/DismissKeyboard";
-import { isEmail } from "../../utils";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { useDispatch } from "react-redux";
 import Auth from "@aws-amplify/auth";
 import colors from "../../colors";
 import ConfirmBtn from "../../components/Auth/ConfirmBtn";
+import { height, width } from "../../utils";
 
 const Container = styled.View`
   flex: 1;
-  justify-content: center;
   align-items: center;
   background-color: white;
 `;
 
 const ProgressContainer = styled.View`
   justify-content: center;
+  margin-top: ${height * 80};
   align-items: center;
 `;
 
 const PhaseContainer = styled.View`
   justify-content: center;
   align-items: center;
-  margin-top: 22px;
-  height: 56px;
+  margin-top: ${height * 22}px;
+  height: ${height * 56}px;
 `;
 
 const IDContainer = styled.View`
-  margin-top: 74px;
-  margin-left: 23px;
+  margin-top: ${height * 74}px;
+  margin-left: ${width * 23}px;
   margin-right: auto;
   justify-content: flex-start;
 `;
 
 const PasswordContainer = styled.View`
-  margin-top: 15px;
-  margin-left: 23px;
+  margin-top: ${height * 15}px;
+  margin-left: ${width * 23}px;
   margin-right: auto;
   justify-content: flex-start;
 `;
 
 const ButtonContainer = styled.View`
-  margin-top: 40px;
+  align-items: center;
+  background-color: white;
+  width: 100%;
+  height: ${height * 82}px;
+  margin-top: ${height * 40}px;
   position: absolute;
-  bottom: 30px;
+  bottom: 0px;
 `;
 
 const AuthContainer = styled.View`
@@ -66,13 +68,13 @@ const ExplainText = styled.Text`
   font-family: "noto-regular";
   font-size: 14px;
   color: #3c3c3c;
-  margin-top: -20px;
+  margin-top: ${height * -20}px;
 `;
 
 const NameText = styled.Text`
   font-family: "noto-regular";
   font-size: 15px;
-  color: ${colors.mainBlue};
+  color: ${colors.primaryBlue};
 `;
 
 const AuthText = styled.Text`
@@ -153,7 +155,7 @@ export default ({ route: { params }, navigation }) => {
           "custom:school": "0000",
           "custom:college": "0000",
           "custom:bank": "0000",
-          "custom:accountnumber": "0000"
+          "custom:accountnumber": "0000",
         },
       });
       console.log("Sign-up Confirmed");
@@ -178,7 +180,7 @@ export default ({ route: { params }, navigation }) => {
         <ProgressContainer>
           <Image
             source={require("../../assets/images/SignUp1.png")}
-            style={{ width: 175, height: 42 }}
+            style={{ width: width * 180, height: height * 44 }}
           />
         </ProgressContainer>
         <PhaseContainer>
@@ -195,6 +197,7 @@ export default ({ route: { params }, navigation }) => {
             autoCapitalize="none"
             value={name}
             isValued={name ? true : false}
+            error={IDerrorMessage ? true : false}
           />
           <ErrorMessage message={IDerrorMessage} />
         </IDContainer>
@@ -205,6 +208,7 @@ export default ({ route: { params }, navigation }) => {
             stateFn={setBirthday}
             value={birthday}
             isValued={birthday ? true : false}
+            error={PWerrorMessage ? true : false}
           />
           <ErrorMessage message={PWerrorMessage} />
         </PasswordContainer>
@@ -218,6 +222,7 @@ export default ({ route: { params }, navigation }) => {
             stateFn={setPhoneNumber}
             value={phoneNumber}
             isValued={phoneNumber ? true : false}
+            error={PWCerrorMessage ? true : false}
           />
           <ErrorMessage message={PWCerrorMessage} />
         </PasswordContainer>

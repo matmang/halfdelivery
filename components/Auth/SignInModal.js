@@ -7,14 +7,14 @@ import colors from "../../colors";
 import ReactNativeModal from "react-native-modal";
 import SmallBarInput from "./SmallBarInput";
 import SmallBtn from "./SmallBtn";
-import { isEmail } from "../../utils";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useDispatch } from "react-redux";
 import { userLogin } from "../../redux/usersSlice";
+import { height, width } from "../../utils";
 
 const Container = styled.View`
-  width: 336px;
-  height: 330px;
+  width: ${width * 336}px;
+  height: ${height * 330}px;
   background-color: white;
   border-radius: 10px;
   align-items: center;
@@ -22,51 +22,50 @@ const Container = styled.View`
 `;
 
 const IconContainer = styled.View`
-  padding-left: 283px;
-  padding-right: 21px;
+  padding-left: ${width * 283}px;
+  padding-right: ${width * 21}px;
   width: 100%;
   justify-content: center;
   align-items: center;
-  margin-top: 21px;
+  margin-top: ${height * 21}px;
 `;
 
 const IDContainer = styled.View`
-  margin-top: 30px;
+  margin-top: ${height * 30}px;
   justify-content: center;
   align-items: center;
 `;
 
 const PasswordContainer = styled.View`
-  margin-top: 36px;
+  margin-top: ${height * 36}px;
   justify-content: center;
   align-items: center;
 `;
 
 const FindTextContainer = styled.View`
-  margin-top: 30px;
+  margin-top: ${height * 30}px;
   width: 100%;
 `;
 
 const BtnContainer = styled.View`
-  margin-top: 20px;
+  margin-top: ${height * 20}px;
   justify-content: center;
   align-items: center;
 `;
 
 const FindText = styled.Text`
   font-family: "noto-regular";
-  color: ${colors.moon};
+  color: ${colors.captionGray};
   font-size: 14px;
   text-decoration-line: underline;
   margin-left: auto;
-  margin-right: 10px;
+  margin-right: ${width * 10}px;
 `;
 
 const SignInModal = ({ isModalVisible, onBackdropPress }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [accent, setAccent] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
 
   const dispatch = useDispatch();
 
@@ -79,10 +78,6 @@ const SignInModal = ({ isModalVisible, onBackdropPress }) => {
       alert("아이디와 비밀번호를 모두 입력해주세요.");
       return false;
     }
-    // if (!isEmail(username)) {
-    //   alert("이메일 형식이 정확하지 않습니다.");
-    //   return false;
-    // }
     return true;
   };
 
@@ -107,7 +102,7 @@ const SignInModal = ({ isModalVisible, onBackdropPress }) => {
             }}
           >
             <Ionicons
-              color={colors.mainBlue}
+              color={colors.primaryBlue}
               size={20}
               name={
                 Platform.OS === "android" ? "md-close-sharp" : "ios-close-sharp"

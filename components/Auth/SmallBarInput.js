@@ -2,15 +2,16 @@ import React from "react";
 import styled from "styled-components";
 import Proptypes from "prop-types";
 import colors from "../../colors";
+import { height, width } from "../../utils";
 
 const Container = styled.TextInput`
-  width: 296px;
-  height: 33px;
+  width: ${width * 296}px;
+  height: ${height * 33}px;
   padding-top: 0;
   padding-bottom: 0;
   border-bottom-width: 1px;
   border-bottom-color: ${({ isValued }) =>
-    isValued ? colors.mainBlue : colors.blueGrey};
+    isValued ? colors.primaryBlue : colors.blueGray};
   font-family: "nunito-regular";
   font-size: 17px;
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};

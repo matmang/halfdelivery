@@ -12,7 +12,6 @@ import styled from "styled-components";
 import colors from "../../../colors";
 import Auth from "@aws-amplify/auth";
 
-import SignUpExample from "../../../screens/Auth/SignUpExample";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import ProfileModal from "../../../components/Main/ProfileModal";
 
