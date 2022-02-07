@@ -52,7 +52,7 @@ const Distributionline = styled.View`
   padding-top: 0;
   padding-bottom: 0;
   border-bottom-width: 1px;
-  border-bottom-color: ${colors.mainBlue};
+  border-bottom-color: ${colors.primaryBlue};
 `;
 
 const UserInfoText = styled.Text`
@@ -70,7 +70,7 @@ const TopBlueInfoText = styled.Text`
   font-family: "noto-regular";
   font-size: 17px;
   margin-left: ${width * 28}px;
-  color: ${colors.mainBlue};
+  color: ${colors.primaryBlue};
 `;
 
 const BtInfoText = styled.Text`

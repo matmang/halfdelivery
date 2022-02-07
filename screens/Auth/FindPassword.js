@@ -1,4 +1,4 @@
-import { Auth, DataStore } from "aws-amplify";
+import { Auth } from "aws-amplify";
 import React, { useEffect, useRef, useState } from "react";
 import { Image } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
@@ -10,7 +10,8 @@ import ConfirmBtn from "../../components/Auth/ConfirmBtn";
 import ErrorMessage from "../../components/Auth/ErrorMessage";
 import FindPasswordModal from "../../components/Auth/FindPasswordModal";
 import DismissKeyboard from "../../components/DismissKeyboard";
-import { height } from "../../utils";
+import { width, height } from "../../utils";
+import { Ionicons } from "@expo/vector-icons";
 
 const OuterContainer = styled.View`
   flex: 1;
@@ -44,13 +45,6 @@ const NameContainer = styled.View`
   justify-content: flex-start;
 `;
 
-const PhoneNumberContainer = styled.View`
-  margin-top: ${height * 15}px;
-  margin-left: auto;
-  margin-right: auto;
-  justify-content: flex-start;
-`;
-
 const PasswordContainer = styled.View`
   margin-top: ${height * 15}px;
   margin-left: auto;
@@ -59,16 +53,27 @@ const PasswordContainer = styled.View`
 `;
 
 const ButtonContainer = styled.View`
-  bottom: ${height * 30}px;
+  align-items: center;
+  background-color: white;
+  width: 100%;
+  height: ${height * 82}px;
+  margin-top: ${height * 40}px;
   position: absolute;
-  margin-left: auto;
-  margin-right: auto;
+  bottom: 0px;
 `;
 
 const AuthContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+`;
+
+const GotoContainer = styled.View`
+  margin-left: auto;
+  margin-right: ${width * 24}px;
+  align-items: center;
+  flex-direction: row;
+  margin-top: auto;
 `;
 
 const PhaseText = styled.Text`
@@ -86,26 +91,13 @@ const ExplainText = styled.Text`
 const NameText = styled.Text`
   font-family: "noto-regular";
   font-size: 15px;
-  color: ${colors.mainBlue};
-`;
-
-const AuthText = styled.Text`
-  font-family: "noto-regular";
-  font-size: 14px;
-  text-decoration-line: underline;
-  margin-left: auto;
-  color: ${colors.subPink1};
+  color: ${colors.primaryBlue};
 `;
 
 const GotoText = styled.Text`
   font-family: "noto-regular";
   font-size: 14px;
-  color: ${colors.blueGrey};
-  margin-top: ${height * 53}px;
-`;
-
-const AuthTouch = styled.TouchableOpacity`
-  margin-left: auto;
+  color: ${colors.blueGray};
 `;
 
 export default ({ navigation }) => {
@@ -193,6 +185,7 @@ export default ({ navigation }) => {
                 stateFn={setUserName}
                 value={userName}
                 isValued={userName ? true : false}
+                error={userNameErrorMessage ? true : false}
               />
               <ErrorMessage message={userNameErrorMessage} />
             </NameContainer>
@@ -203,10 +196,23 @@ export default ({ navigation }) => {
                 stateFn={setAuthCode}
                 value={authCode}
                 isValued={authCode ? true : false}
+                error={authCodeErrorMessage ? true : false}
               />
               <ErrorMessage message={authCodeErrorMessage} />
             </PasswordContainer>
-            <GotoText>아이디 찾기 바로가기</GotoText>
+            <GotoContainer>
+              <Ionicons
+                color={accent ? "#FFFFFF" : colors.blueGray}
+                size={width * 15}
+                name={
+                  Platform.OS === "android"
+                    ? "md-arrow-forward"
+                    : "ios-arrow-forward"
+                }
+                style={{ marginRight: width * 6 }}
+              />
+              <GotoText>아이디 찾기 바로가기</GotoText>
+            </GotoContainer>
           </Container>
         </ScrollView>
         <ButtonContainer>
@@ -216,7 +222,6 @@ export default ({ navigation }) => {
             onPress={() => {
               handleSubmit();
             }}
-            icon={true}
           />
         </ButtonContainer>
         <FindPasswordModal

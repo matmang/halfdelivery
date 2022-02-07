@@ -53,7 +53,7 @@ const Footer = styled.View`
   align-items: center;
   flex-direction: row;
   bottom: 0;
-  background-color: ${colors.unAccent};
+  background-color: ${colors.blueGray2};
 `;
 
 const SecondContainer = styled.View`
@@ -64,14 +64,14 @@ const WelcomeText = styled.Text`
   font-family: "nunito-regular";
   font-size: 40px;
   font-weight: bold;
-  color: ${colors.mainBlue};
+  color: ${colors.primaryBlue};
 `;
 
 const WelcomeTextKR = styled.Text`
   font-family: "noto-regular";
   font-size: 20px;
   font-weight: bold;
-  color: ${colors.mainBlue};
+  color: ${colors.primaryBlue};
 `;
 
 const BlackText = styled.Text`
@@ -84,19 +84,19 @@ const BlackText = styled.Text`
 const BlueTextER = styled.Text`
   font-family: "nunito-regular";
   font-size: 17px;
-  color: ${colors.mainBlue};
+  color: ${colors.primaryBlue};
 `;
 
 const BlueTextKR = styled.Text`
   font-family: "noto-regular";
   font-size: 17px;
-  color: ${colors.mainBlue};
+  color: ${colors.primaryBlue};
 `;
 
 const ExplainText = styled.Text`
   font-family: "noto-regular";
   font-size: 12px;
-  color: ${colors.blueGrey};
+  color: ${colors.blueGray};
 `;
 
 export default ({ navigation }) => {

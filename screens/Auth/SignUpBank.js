@@ -45,9 +45,13 @@ const PasswordContainer = styled.View`
 `;
 
 const ButtonContainer = styled.View`
+  align-items: center;
+  background-color: white;
+  width: 100%;
+  height: ${height * 82}px;
   margin-top: ${height * 40}px;
   position: absolute;
-  bottom: ${height * 30}px;
+  bottom: 0px;
 `;
 
 const PhaseText = styled.Text`
@@ -65,14 +69,14 @@ const ExplainText = styled.Text`
 const NameText = styled.Text`
   font-family: "noto-regular";
   font-size: 15px;
-  color: ${colors.mainBlue};
+  color: ${colors.primaryBlue};
 `;
 
 const AccountText = styled.Text`
   margin-top: ${height * 15}px;
   font-family: "noto-regular";
   font-size: 15px;
-  color: ${colors.mainBlue};
+  color: ${colors.primaryBlue};
 `;
 
 export default ({ route: { params }, navigation }) => {

@@ -49,9 +49,13 @@ const PasswordContainer = styled.View`
 `;
 
 const ButtonContainer = styled.View`
+  align-items: center;
+  background-color: white;
+  width: 100%;
+  height: ${height * 82}px;
   margin-top: ${height * 40}px;
   position: absolute;
-  bottom: ${height * 30}px;
+  bottom: 0px;
 `;
 
 const Distributionline = styled.View`
@@ -63,7 +67,7 @@ const Distributionline = styled.View`
   padding-top: 0;
   padding-bottom: 0;
   border-bottom-width: 1px;
-  border-bottom-color: ${colors.mainBlue};
+  border-bottom-color: ${colors.primaryBlue};
 `;
 
 const PhaseText = styled.Text`
@@ -81,7 +85,7 @@ const ExplainText = styled.Text`
 const TermText = styled.Text`
   font-family: "noto-regular";
   font-size: 15px;
-  color: ${colors.mainBlue};
+  color: ${colors.primaryBlue};
 `;
 
 export default ({ route: { params }, navigation }) => {
@@ -138,8 +142,8 @@ export default ({ route: { params }, navigation }) => {
             }}
             labelPosition={LABEL_POSITION.RIGHT}
             label="전체 동의하기"
-            outerColor={colors.blueGrey}
-            innerColor={colors.mainBlue}
+            outerColor={colors.blueGray}
+            innerColor={colors.primaryBlue}
             outerSize={20}
             filterSize={17}
             innerSize={10}
@@ -150,8 +154,8 @@ export default ({ route: { params }, navigation }) => {
             onToggle={(checked) => setTermService(checked)}
             labelPosition={LABEL_POSITION.RIGHT}
             label="(필수) 서비스 이용약관"
-            outerColor={colors.blueGrey}
-            innerColor={colors.mainBlue}
+            outerColor={colors.blueGray}
+            innerColor={colors.primaryBlue}
             outerSize={20}
             filterSize={17}
             innerSize={10}
@@ -162,8 +166,8 @@ export default ({ route: { params }, navigation }) => {
             onToggle={(checked) => setTermPersonal(checked)}
             labelPosition={LABEL_POSITION.RIGHT}
             label="(필수) 개인정보 수집 및 이용동의"
-            outerColor={colors.blueGrey}
-            innerColor={colors.mainBlue}
+            outerColor={colors.blueGray}
+            innerColor={colors.primaryBlue}
             outerSize={20}
             filterSize={17}
             innerSize={10}
@@ -174,8 +178,8 @@ export default ({ route: { params }, navigation }) => {
             onToggle={(checked) => setTermAd(checked)}
             labelPosition={LABEL_POSITION.RIGHT}
             label="(선택) 광고성 메일 수신동의"
-            outerColor={colors.blueGrey}
-            innerColor={colors.mainBlue}
+            outerColor={colors.blueGray}
+            innerColor={colors.primaryBlue}
             outerSize={20}
             filterSize={17}
             innerSize={10}

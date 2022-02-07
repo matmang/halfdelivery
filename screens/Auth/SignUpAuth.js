@@ -42,9 +42,13 @@ const PasswordContainer = styled.View`
 `;
 
 const ButtonContainer = styled.View`
+  align-items: center;
+  background-color: white;
+  width: 100%;
+  height: ${height * 82}px;
   margin-top: ${height * 40}px;
   position: absolute;
-  bottom: ${height * 30}px;
+  bottom: 0px;
 `;
 
 const PhaseText = styled.Text`
@@ -62,7 +66,7 @@ const ExplainText = styled.Text`
 const NameText = styled.Text`
   font-family: "noto-regular";
   font-size: 15px;
-  color: ${colors.mainBlue};
+  color: ${colors.primaryBlue};
 `;
 
 export default ({ navigation }) => {
@@ -100,9 +104,9 @@ export default ({ navigation }) => {
       let PWerror = "";
       let PWCerror = "";
       if (!username) {
-        IDerror = "이메일을 입력해주세요.";
-      } else if (password.length < 6) {
-        PWerror = "비밀번호는 6자리 이상이어야 합니다.";
+        IDerror = "아이디를 입력해주세요.";
+      } else if (password.length < 8) {
+        PWerror = "비밀번호는 8자리 이상이어야 합니다.";
       } else if (password !== passwordConfirm) {
         PWCerror = "비밀번호 확인과 비밀번호가 다릅니다.";
       } else {
@@ -150,6 +154,7 @@ export default ({ navigation }) => {
             autoCapitalize="none"
             value={username}
             isValued={username ? true : false}
+            error={IDerrorMessage ? true : false}
           />
           <ErrorMessage message={IDerrorMessage} />
         </IDContainer>
@@ -161,6 +166,7 @@ export default ({ navigation }) => {
             isPassword={true}
             value={password}
             isValued={password ? true : false}
+            error={PWerrorMessage ? true : false}
           />
           <ErrorMessage message={PWerrorMessage} />
         </PasswordContainer>
@@ -172,6 +178,7 @@ export default ({ navigation }) => {
             isPassword={true}
             value={passwordConfirm}
             isValued={passwordConfirm ? true : false}
+            error={PWCerrorMessage ? true : false}
           />
           <ErrorMessage message={PWCerrorMessage} />
         </PasswordContainer>

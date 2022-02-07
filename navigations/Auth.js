@@ -43,22 +43,11 @@ export default () => (
           backgroundColor: "white",
           shadowOpacity: 0,
         },
-        headerLeft: () => (
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Ionicons
-              color={colors.mainBlue}
-              size={width * 24}
-              name={
-                Platform.OS === "android" ? "md-arrow-back" : "ios-arrow-back"
-              }
-              style={{ marginLeft: width * 24, marginTop: height * 20 }}
-            />
-          </TouchableOpacity>
-        ),
+        headerLeft: () => {},
         headerRight: () => (
           <TouchableOpacity onPress={() => navigation.navigate("Welcome")}>
             <Ionicons
-              color={colors.mainBlue}
+              color={colors.primaryBlue}
               size={width * 24}
               name={Platform.OS === "android" ? "md-close" : "ios-close"}
               style={{ marginRight: width * 24, marginTop: height * 20 }}
@@ -81,7 +70,7 @@ export default () => (
         headerLeft: () => (
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Ionicons
-              color={colors.mainBlue}
+              color={colors.primaryBlue}
               size={width * 24}
               name={
                 Platform.OS === "android" ? "md-arrow-back" : "ios-arrow-back"
@@ -93,7 +82,7 @@ export default () => (
         headerRight: () => (
           <TouchableOpacity onPress={() => navigation.navigate("Welcome")}>
             <Ionicons
-              color={colors.mainBlue}
+              color={colors.primaryBlue}
               size={width * 24}
               name={Platform.OS === "android" ? "md-close" : "ios-close"}
               style={{ marginRight: width * 24, marginTop: height * 20 }}
@@ -116,7 +105,7 @@ export default () => (
         headerLeft: () => (
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Ionicons
-              color={colors.mainBlue}
+              color={colors.primaryBlue}
               size={width * 24}
               name={
                 Platform.OS === "android" ? "md-arrow-back" : "ios-arrow-back"
@@ -128,7 +117,7 @@ export default () => (
         headerRight: () => (
           <TouchableOpacity onPress={() => navigation.navigate("Welcome")}>
             <Ionicons
-              color={colors.mainBlue}
+              color={colors.primaryBlue}
               size={width * 24}
               name={Platform.OS === "android" ? "md-close" : "ios-close"}
               style={{ marginRight: width * 24, marginTop: height * 20 }}
@@ -151,7 +140,7 @@ export default () => (
         headerLeft: () => (
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Ionicons
-              color={colors.mainBlue}
+              color={colors.primaryBlue}
               size={width * 24}
               name={
                 Platform.OS === "android" ? "md-arrow-back" : "ios-arrow-back"
@@ -163,7 +152,7 @@ export default () => (
         headerRight: () => (
           <TouchableOpacity onPress={() => navigation.navigate("Welcome")}>
             <Ionicons
-              color={colors.mainBlue}
+              color={colors.primaryBlue}
               size={width * 24}
               name={Platform.OS === "android" ? "md-close" : "ios-close"}
               style={{ marginRight: width * 24, marginTop: height * 20 }}
@@ -186,7 +175,7 @@ export default () => (
         headerLeft: () => (
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Ionicons
-              color={colors.mainBlue}
+              color={colors.primaryBlue}
               size={width * 24}
               name={
                 Platform.OS === "android" ? "md-arrow-back" : "ios-arrow-back"
@@ -198,7 +187,7 @@ export default () => (
         headerRight: () => (
           <TouchableOpacity onPress={() => navigation.navigate("Welcome")}>
             <Ionicons
-              color={colors.mainBlue}
+              color={colors.primaryBlue}
               size={width * 24}
               name={Platform.OS === "android" ? "md-close" : "ios-close"}
               style={{ marginRight: width * 24, marginTop: height * 20 }}
@@ -221,7 +210,7 @@ export default () => (
         headerLeft: () => (
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Ionicons
-              color={colors.mainBlue}
+              color={colors.primaryBlue}
               size={width * 24}
               name={
                 Platform.OS === "android" ? "md-arrow-back" : "ios-arrow-back"
@@ -233,7 +222,7 @@ export default () => (
         headerRight: () => (
           <TouchableOpacity onPress={() => navigation.navigate("Welcome")}>
             <Ionicons
-              color={colors.mainBlue}
+              color={colors.primaryBlue}
               size={width * 24}
               name={Platform.OS === "android" ? "md-close" : "ios-close"}
               style={{ marginRight: width * 24, marginTop: height * 20 }}
@@ -256,7 +245,7 @@ export default () => (
         headerLeft: () => (
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Ionicons
-              color={colors.mainBlue}
+              color={colors.primaryBlue}
               size={width * 24}
               name={
                 Platform.OS === "android" ? "md-arrow-back" : "ios-arrow-back"
@@ -268,7 +257,7 @@ export default () => (
         headerRight: () => (
           <TouchableOpacity onPress={() => navigation.navigate("Welcome")}>
             <Ionicons
-              color={colors.mainBlue}
+              color={colors.primaryBlue}
               size={width * 24}
               name={Platform.OS === "android" ? "md-close" : "ios-close"}
               style={{ marginRight: width * 24, marginTop: height * 20 }}
@@ -291,7 +280,7 @@ export default () => (
         headerLeft: () => (
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Ionicons
-              color={colors.mainBlue}
+              color={colors.primaryBlue}
               size={width * 24}
               name={
                 Platform.OS === "android" ? "md-arrow-back" : "ios-arrow-back"
@@ -303,7 +292,7 @@ export default () => (
         headerRight: () => (
           <TouchableOpacity onPress={() => navigation.navigate("Welcome")}>
             <Ionicons
-              color={colors.mainBlue}
+              color={colors.primaryBlue}
               size={width * 24}
               name={Platform.OS === "android" ? "md-close" : "ios-close"}
               style={{ marginRight: width * 24, marginTop: height * 20 }}

@@ -44,9 +44,13 @@ const PasswordContainer = styled.View`
 `;
 
 const ButtonContainer = styled.View`
+  align-items: center;
+  background-color: white;
+  width: 100%;
+  height: ${height * 82}px;
   margin-top: ${height * 40}px;
   position: absolute;
-  bottom: ${height * 30}px;
+  bottom: 0px;
 `;
 
 const AuthContainer = styled.View`
@@ -70,7 +74,7 @@ const ExplainText = styled.Text`
 const NameText = styled.Text`
   font-family: "noto-regular";
   font-size: 15px;
-  color: ${colors.mainBlue};
+  color: ${colors.primaryBlue};
 `;
 
 const AuthText = styled.Text`
@@ -193,6 +197,7 @@ export default ({ route: { params }, navigation }) => {
             autoCapitalize="none"
             value={name}
             isValued={name ? true : false}
+            error={IDerrorMessage ? true : false}
           />
           <ErrorMessage message={IDerrorMessage} />
         </IDContainer>
@@ -203,6 +208,7 @@ export default ({ route: { params }, navigation }) => {
             stateFn={setBirthday}
             value={birthday}
             isValued={birthday ? true : false}
+            error={PWerrorMessage ? true : false}
           />
           <ErrorMessage message={PWerrorMessage} />
         </PasswordContainer>
@@ -216,6 +222,7 @@ export default ({ route: { params }, navigation }) => {
             stateFn={setPhoneNumber}
             value={phoneNumber}
             isValued={phoneNumber ? true : false}
+            error={PWCerrorMessage ? true : false}
           />
           <ErrorMessage message={PWCerrorMessage} />
         </PasswordContainer>

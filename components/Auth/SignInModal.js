@@ -55,7 +55,7 @@ const BtnContainer = styled.View`
 
 const FindText = styled.Text`
   font-family: "noto-regular";
-  color: ${colors.moon};
+  color: ${colors.captionGray};
   font-size: 14px;
   text-decoration-line: underline;
   margin-left: auto;
@@ -102,7 +102,7 @@ const SignInModal = ({ isModalVisible, onBackdropPress }) => {
             }}
           >
             <Ionicons
-              color={colors.mainBlue}
+              color={colors.primaryBlue}
               size={20}
               name={
                 Platform.OS === "android" ? "md-close-sharp" : "ios-close-sharp"

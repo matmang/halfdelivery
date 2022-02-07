@@ -15,13 +15,13 @@ const Button = styled.View`
   width: ${width * 338}px;
   height: ${height * 48}px;
   background-color: ${(props) =>
-    props.accent ? colors.mainBlue : colors.unAccent};
-  color: ${(props) => (props.accent ? colors.mainBlue : colors.unAccent)};
+    props.accent ? colors.primaryBlue : colors.blueGray2};
+  color: ${(props) => (props.accent ? colors.primaryBlue : colors.blueGray2)};
   font-family: "nunito-regular";
 `;
 
 const Text = styled.Text`
-  color: ${(props) => (props.accent ? "#FFFFFF" : colors.blueGrey)};
+  color: ${(props) => (props.accent ? "#FFFFFF" : colors.blueGray)};
   font-weight: 600;
   font-size: 14px;
   font-family: "nunito-regular";
@@ -32,7 +32,7 @@ const Btn = ({ onPress, text, accent = false, icon = false }) => (
     <Button accent={accent}>
       {icon ? (
         <Ionicons
-          color={accent ? "#FFFFFF" : colors.blueGrey}
+          color={accent ? "#FFFFFF" : colors.blueGray}
           size={15}
           name={
             Platform.OS === "android" ? "md-arrow-forward" : "ios-arrow-forward"

@@ -44,9 +44,13 @@ const PhoneNumberContainer = styled.View`
 `;
 
 const ButtonContainer = styled.View`
+  align-items: center;
+  background-color: white;
+  width: 100%;
+  height: ${height * 82}px;
   margin-top: ${height * 40}px;
   position: absolute;
-  bottom: ${height * 30}px;
+  bottom: 0px;
 `;
 
 const AuthContainer = styled.View`
@@ -68,7 +72,7 @@ const ExplainText = styled.Text`
 const NameText = styled.Text`
   font-family: "noto-regular";
   font-size: 15px;
-  color: ${colors.mainBlue};
+  color: ${colors.primaryBlue};
 `;
 
 const AuthText = styled.Text`

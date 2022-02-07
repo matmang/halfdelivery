@@ -14,13 +14,13 @@ const Button = styled.View`
   width: ${width * 97}px;
   height: ${height * 25}px;
   background-color: ${(props) =>
-    props.accent ? colors.subPink3 : colors.unAccent};
-  color: ${(props) => (props.accent ? colors.mainBlue : colors.coal)};
+    props.accent ? colors.palePink : colors.coolGray};
+  color: ${(props) => (props.accent ? colors.primaryBlue : colors.oxfordGray)};
   font-family: "nunito-regular";
 `;
 
 const Text = styled.Text`
-  color: ${(props) => (props.accent ? colors.mainBlue : colors.coal)};
+  color: ${(props) => (props.accent ? colors.primaryBlue : colors.oxfordGray)};
   font-weight: 600;
   font-size: 12px;
   font-family: "noto-regular";
