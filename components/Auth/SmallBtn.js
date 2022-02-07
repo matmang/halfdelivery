@@ -1,26 +1,27 @@
 import React from "react";
-import { Dimensions, TouchableOpacity } from "react-native";
-import styled, { createGlobalStyle } from "styled-components";
+import { TouchableOpacity } from "react-native";
+import styled from "styled-components";
 import { Ionicons } from "@expo/vector-icons";
 import Proptypes from "prop-types";
 import colors from "../../colors";
+import { height, width } from "../../utils";
 
 const Button = styled.View`
-  padding: 12.5px 0px;
+  padding: ${height * 12.5}px 0px;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   border-radius: 30px;
-  width: 296px;
-  height: 48px;
+  width: ${width * 296}px;
+  height: ${height * 48}px;
   background-color: ${(props) =>
-    props.accent ? colors.mainBlue : colors.unAccent};
-  color: ${(props) => (props.accent ? colors.mainBlue : colors.unAccent)};
+    props.accent ? colors.primaryBlue : colors.blueGray2};
+  color: ${(props) => (props.accent ? colors.primaryBlue : colors.blueGray2)};
   font-family: "nunito-regular";
 `;
 
 const Text = styled.Text`
-  color: ${(props) => (props.accent ? colors.subPink3 : colors.blueGrey)};
+  color: ${(props) => (props.accent ? colors.palePink : colors.blueGray)};
   font-weight: 600;
   font-size: 14px;
   font-family: "nunito-regular";
@@ -31,7 +32,7 @@ const SmallBtn = ({ onPress, text, accent = false, icon = false }) => (
     <Button accent={accent}>
       {icon ? (
         <Ionicons
-          color={accent ? colors.subPink3 : colors.blueGrey}
+          color={accent ? colors.palePink : colors.blueGray}
           size={13}
           name={
             Platform.OS === "android" ? "md-arrow-forward" : "ios-arrow-forward"

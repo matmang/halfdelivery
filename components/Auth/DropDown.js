@@ -2,12 +2,9 @@ import React, { useRef, useState } from "react";
 import { Modal, StyleSheet, Text, View } from "react-native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
-import colors from "../../colors";
-import { useAnimatedRef } from "react-native-reanimated";
 
 export const DropDown = ({ label, data, onSelect }) => {
   const [visible, setVisible] = useState(false);
-  const [dropdownTop, setDropdownTop] = useState(0);
   const [selected, setSelected] = useState(undefined);
   const DropdownButton = useRef();
 
