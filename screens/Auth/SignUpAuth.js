@@ -15,7 +15,7 @@ const Container = styled.View`
 `;
 
 const ProgressContainer = styled.View`
-  margin-top: ${height * 80};
+  margin-top: ${height * 110};
   justify-content: center;
   align-items: center;
 `;
@@ -120,10 +120,6 @@ export default ({ navigation }) => {
 
   const handleSubmit = () => {
     try {
-      // await Auth.signUp({
-      //   username,
-      //   password,
-      // });
       console.log("Sign-up Confirmed");
       navigation.navigate("SignUpAuthConfirm", { username, password });
     } catch (error) {
@@ -137,7 +133,7 @@ export default ({ navigation }) => {
         <ProgressContainer>
           <Image
             source={require("../../assets/images/SignUp1.png")}
-            style={{ width: 175, height: 42 }}
+            style={{ width: width * 180, height: height * 44 }}
           />
         </ProgressContainer>
         <PhaseContainer>

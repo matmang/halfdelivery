@@ -176,7 +176,7 @@ export default ({ route: { params }, navigation }) => {
         <ProgressContainer>
           <Image
             source={require("../../assets/images/SignUp1.png")}
-            style={{ width: 175, height: 42 }}
+            style={{ width: width * 180, height: height * 44 }}
           />
         </ProgressContainer>
         <PhaseContainer>

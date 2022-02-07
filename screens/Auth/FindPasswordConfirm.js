@@ -65,12 +65,6 @@ const ButtonContainer = styled.View`
   margin-right: auto;
 `;
 
-const AuthContainer = styled.View`
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-`;
-
 const PhaseText = styled.Text`
   font-family: "noto-regular";
   font-size: 22px;
@@ -110,11 +104,12 @@ const AuthTouch = styled.TouchableOpacity`
 
 export default ({ navigation, route: { params } }) => {
   const [userName, setUserName] = useState(params?.userName);
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [authCode, setAuthCode] = useState("");
-  const [password, setPassword] = useState(params?.password);
-  const [phoneNumberErrorMessage, setPhoneNumberErrorMessage] = useState("");
-  const [authCodeErrorMessage, setAuthCodeErrorMessage] = useState("");
+  const [authCode, setAuthCode] = useState(params?.authCode);
+  const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
+  const [passwordConfirmErrorMessage, setPasswordConfirmErrorMessage] =
+    useState("");
   const [accent, setAccent] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -123,46 +118,39 @@ export default ({ navigation, route: { params } }) => {
   useEffect(() => {
     setAccent(
       userName &&
-        phoneNumber &&
         authCode &&
         password &&
-        !phoneNumberErrorMessage &&
-        !authCodeErrorMessage
+        passwordConfirm &&
+        !passwordErrorMessage &&
+        !passwordConfirmErrorMessage
     );
   }, [
     userName,
-    phoneNumber,
     authCode,
     password,
-    phoneNumberErrorMessage,
-    authCodeErrorMessage,
+    passwordConfirm,
+    passwordErrorMessage,
+    passwordConfirmErrorMessage,
   ]);
 
   useEffect(() => {
     if (refDidMount.current) {
-      let phoneNumberError = "";
-      let authCodeError = "";
-      if (!phoneNumber) {
-        phoneNumberError = "휴대폰 번호를 입력해주세요.";
-      } else if (authCode.length !== 6) {
-        authCodeError = "인증번호 6자리를 입력해주세요.";
+      let passwordError = "";
+      let passwordConfirmError = "";
+      if (password.length < 6) {
+        passwordError = "비밀번호는 6자리 이상이어야 합니다.";
+      } else if (password !== passwordConfirm) {
+        passwordConfirmError = "비밀번호 확인과 비밀번호가 다릅니다.";
       } else {
-        phoneNumberError = "";
-        authCodeError = "";
+        passwordError = "";
+        passwordConfirmError = "";
       }
-      setPhoneNumberErrorMessage(phoneNumberError);
-      setAuthCodeErrorMessage(authCodeError);
+      setPasswordErrorMessage(passwordError);
+      setPasswordConfirmErrorMessage(passwordConfirmError);
     } else {
       refDidMount.current = true;
     }
   });
-
-  const handleSubmit = () => {
-    Auth.forgotPassword(userName)
-      .then((data) => console.log(data))
-      .catch((err) => console.log(err));
-    alert("회원가입시 입력한 전화번호로 인증문자가 전송되었습니다.");
-  };
 
   const confirmFindId = () => {
     Auth.forgotPasswordSubmit(userName, authCode, password)
@@ -194,27 +182,24 @@ export default ({ navigation, route: { params } }) => {
               </ExplainText>
             </PhaseContainer>
             <NameContainer>
-              <AuthContainer>
-                <NameText>휴대폰 번호</NameText>
-                <ConfirmBtn onPress={handleSubmit} text={"인증번호 요청"} />
-              </AuthContainer>
+              <NameText>비밀번호</NameText>
               <BarInput
-                placeholder={"'-'구분 없이 입력해주세요"}
-                stateFn={setPhoneNumber}
-                value={phoneNumber}
-                isValued={phoneNumber ? true : false}
+                placeholder={"변경할 비밀번호를 입력해주세요"}
+                stateFn={setPassword}
+                value={password}
+                isValued={password ? true : false}
               />
-              <ErrorMessage message={phoneNumberErrorMessage} />
+              <ErrorMessage message={passwordErrorMessage} />
             </NameContainer>
             <PasswordContainer>
-              <NameText>인증번호</NameText>
+              <NameText>비밀번호 확인</NameText>
               <BarInput
-                placeholder={"인증번호 숫자 6자리 입력해주세요"}
-                stateFn={setAuthCode}
-                value={authCode}
-                isValued={authCode ? true : false}
+                placeholder={"변경할 비밀번호를 확인해주세요"}
+                stateFn={setPasswordConfirm}
+                value={passwordConfirm}
+                isValued={passwordConfirm ? true : false}
               />
-              <ErrorMessage message={authCodeErrorMessage} />
+              <ErrorMessage message={passwordConfirmErrorMessage} />
             </PasswordContainer>
             <GotoText>아이디 찾기 바로가기</GotoText>
           </Container>

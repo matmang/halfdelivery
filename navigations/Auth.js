@@ -9,6 +9,11 @@ import SignUpTerms from "../screens/Auth/SignUpTerms";
 import FindId from "../screens/Auth/FindId";
 import FindPassword from "../screens/Auth/FindPassword";
 import FindPasswordConfirm from "../screens/Auth/FindPasswordConfirm";
+import { Ionicons } from "@expo/vector-icons";
+import { height, width } from "../utils";
+import colors from "../colors";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { Platform } from "react-native";
 
 const Auth = createStackNavigator();
 
@@ -30,58 +35,282 @@ export default () => (
     <Auth.Screen
       name="SignUpAuth"
       component={SignUpAuth}
-      options={{
-        headerShown: false,
-      }}
+      options={({ navigation }) => ({
+        title: "",
+        headerTitleAlign: "center",
+        headerStyle: {
+          elevation: 0,
+          backgroundColor: "white",
+          shadowOpacity: 0,
+        },
+        headerLeft: () => (
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Ionicons
+              color={colors.mainBlue}
+              size={width * 24}
+              name={
+                Platform.OS === "android" ? "md-arrow-back" : "ios-arrow-back"
+              }
+              style={{ marginLeft: width * 24, marginTop: height * 20 }}
+            />
+          </TouchableOpacity>
+        ),
+        headerRight: () => (
+          <TouchableOpacity onPress={() => navigation.navigate("Welcome")}>
+            <Ionicons
+              color={colors.mainBlue}
+              size={width * 24}
+              name={Platform.OS === "android" ? "md-close" : "ios-close"}
+              style={{ marginRight: width * 24, marginTop: height * 20 }}
+            />
+          </TouchableOpacity>
+        ),
+      })}
     />
     <Auth.Screen
       name="SignUpAuthConfirm"
       component={SignUpAuthConfirm}
-      options={{
-        headerShown: false,
-      }}
+      options={({ navigation }) => ({
+        title: "",
+        headerTitleAlign: "center",
+        headerStyle: {
+          elevation: 0,
+          backgroundColor: "white",
+          shadowOpacity: 0,
+        },
+        headerLeft: () => (
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Ionicons
+              color={colors.mainBlue}
+              size={width * 24}
+              name={
+                Platform.OS === "android" ? "md-arrow-back" : "ios-arrow-back"
+              }
+              style={{ marginLeft: width * 24, marginTop: height * 20 }}
+            />
+          </TouchableOpacity>
+        ),
+        headerRight: () => (
+          <TouchableOpacity onPress={() => navigation.navigate("Welcome")}>
+            <Ionicons
+              color={colors.mainBlue}
+              size={width * 24}
+              name={Platform.OS === "android" ? "md-close" : "ios-close"}
+              style={{ marginRight: width * 24, marginTop: height * 20 }}
+            />
+          </TouchableOpacity>
+        ),
+      })}
     />
     <Auth.Screen
       name="SignUpSchool"
       component={SignUpSchool}
-      options={{
-        headerShown: false,
-      }}
+      options={({ navigation }) => ({
+        title: "",
+        headerTitleAlign: "center",
+        headerStyle: {
+          elevation: 0,
+          backgroundColor: "white",
+          shadowOpacity: 0,
+        },
+        headerLeft: () => (
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Ionicons
+              color={colors.mainBlue}
+              size={width * 24}
+              name={
+                Platform.OS === "android" ? "md-arrow-back" : "ios-arrow-back"
+              }
+              style={{ marginLeft: width * 24, marginTop: height * 20 }}
+            />
+          </TouchableOpacity>
+        ),
+        headerRight: () => (
+          <TouchableOpacity onPress={() => navigation.navigate("Welcome")}>
+            <Ionicons
+              color={colors.mainBlue}
+              size={width * 24}
+              name={Platform.OS === "android" ? "md-close" : "ios-close"}
+              style={{ marginRight: width * 24, marginTop: height * 20 }}
+            />
+          </TouchableOpacity>
+        ),
+      })}
     />
     <Auth.Screen
       name="SignUpBank"
       component={SignUpBank}
-      options={{
-        headerShown: false,
-      }}
+      options={({ navigation }) => ({
+        title: "",
+        headerTitleAlign: "center",
+        headerStyle: {
+          elevation: 0,
+          backgroundColor: "white",
+          shadowOpacity: 0,
+        },
+        headerLeft: () => (
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Ionicons
+              color={colors.mainBlue}
+              size={width * 24}
+              name={
+                Platform.OS === "android" ? "md-arrow-back" : "ios-arrow-back"
+              }
+              style={{ marginLeft: width * 24, marginTop: height * 20 }}
+            />
+          </TouchableOpacity>
+        ),
+        headerRight: () => (
+          <TouchableOpacity onPress={() => navigation.navigate("Welcome")}>
+            <Ionicons
+              color={colors.mainBlue}
+              size={width * 24}
+              name={Platform.OS === "android" ? "md-close" : "ios-close"}
+              style={{ marginRight: width * 24, marginTop: height * 20 }}
+            />
+          </TouchableOpacity>
+        ),
+      })}
     />
     <Auth.Screen
       name="SignUpTerms"
       component={SignUpTerms}
-      options={{
-        headerShown: false,
-      }}
+      options={({ navigation }) => ({
+        title: "",
+        headerTitleAlign: "center",
+        headerStyle: {
+          elevation: 0,
+          backgroundColor: "white",
+          shadowOpacity: 0,
+        },
+        headerLeft: () => (
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Ionicons
+              color={colors.mainBlue}
+              size={width * 24}
+              name={
+                Platform.OS === "android" ? "md-arrow-back" : "ios-arrow-back"
+              }
+              style={{ marginLeft: width * 24, marginTop: height * 20 }}
+            />
+          </TouchableOpacity>
+        ),
+        headerRight: () => (
+          <TouchableOpacity onPress={() => navigation.navigate("Welcome")}>
+            <Ionicons
+              color={colors.mainBlue}
+              size={width * 24}
+              name={Platform.OS === "android" ? "md-close" : "ios-close"}
+              style={{ marginRight: width * 24, marginTop: height * 20 }}
+            />
+          </TouchableOpacity>
+        ),
+      })}
     />
     <Auth.Screen
       name="FindId"
       component={FindId}
-      options={{
-        headerShown: false,
-      }}
+      options={({ navigation }) => ({
+        title: "",
+        headerTitleAlign: "center",
+        headerStyle: {
+          elevation: 0,
+          backgroundColor: "white",
+          shadowOpacity: 0,
+        },
+        headerLeft: () => (
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Ionicons
+              color={colors.mainBlue}
+              size={width * 24}
+              name={
+                Platform.OS === "android" ? "md-arrow-back" : "ios-arrow-back"
+              }
+              style={{ marginLeft: width * 24, marginTop: height * 20 }}
+            />
+          </TouchableOpacity>
+        ),
+        headerRight: () => (
+          <TouchableOpacity onPress={() => navigation.navigate("Welcome")}>
+            <Ionicons
+              color={colors.mainBlue}
+              size={width * 24}
+              name={Platform.OS === "android" ? "md-close" : "ios-close"}
+              style={{ marginRight: width * 24, marginTop: height * 20 }}
+            />
+          </TouchableOpacity>
+        ),
+      })}
     />
     <Auth.Screen
       name="FindPassword"
       component={FindPassword}
-      options={{
-        headerShown: false,
-      }}
+      options={({ navigation }) => ({
+        title: "",
+        headerTitleAlign: "center",
+        headerStyle: {
+          elevation: 0,
+          backgroundColor: "white",
+          shadowOpacity: 0,
+        },
+        headerLeft: () => (
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Ionicons
+              color={colors.mainBlue}
+              size={width * 24}
+              name={
+                Platform.OS === "android" ? "md-arrow-back" : "ios-arrow-back"
+              }
+              style={{ marginLeft: width * 24, marginTop: height * 20 }}
+            />
+          </TouchableOpacity>
+        ),
+        headerRight: () => (
+          <TouchableOpacity onPress={() => navigation.navigate("Welcome")}>
+            <Ionicons
+              color={colors.mainBlue}
+              size={width * 24}
+              name={Platform.OS === "android" ? "md-close" : "ios-close"}
+              style={{ marginRight: width * 24, marginTop: height * 20 }}
+            />
+          </TouchableOpacity>
+        ),
+      })}
     />
     <Auth.Screen
       name="FindPasswordConfirm"
       component={FindPasswordConfirm}
-      options={{
-        headerShown: false,
-      }}
+      options={({ navigation }) => ({
+        title: "",
+        headerTitleAlign: "center",
+        headerStyle: {
+          elevation: 0,
+          backgroundColor: "white",
+          shadowOpacity: 0,
+        },
+        headerLeft: () => (
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Ionicons
+              color={colors.mainBlue}
+              size={width * 24}
+              name={
+                Platform.OS === "android" ? "md-arrow-back" : "ios-arrow-back"
+              }
+              style={{ marginLeft: width * 24, marginTop: height * 20 }}
+            />
+          </TouchableOpacity>
+        ),
+        headerRight: () => (
+          <TouchableOpacity onPress={() => navigation.navigate("Welcome")}>
+            <Ionicons
+              color={colors.mainBlue}
+              size={width * 24}
+              name={Platform.OS === "android" ? "md-close" : "ios-close"}
+              style={{ marginRight: width * 24, marginTop: height * 20 }}
+            />
+          </TouchableOpacity>
+        ),
+      })}
     />
   </Auth.Navigator>
 );

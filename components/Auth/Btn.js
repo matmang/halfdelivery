@@ -33,11 +33,11 @@ const Btn = ({ onPress, text, accent = false, icon = false }) => (
       {icon ? (
         <Ionicons
           color={accent ? "#FFFFFF" : colors.blueGrey}
-          size={13}
+          size={15}
           name={
             Platform.OS === "android" ? "md-arrow-forward" : "ios-arrow-forward"
           }
-          style={{ marginRight: 8 }}
+          style={{ marginRight: width * 6 }}
         />
       ) : null}
       <Text accent={accent}>{text}</Text>
