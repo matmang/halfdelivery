@@ -21,7 +21,7 @@ const StatusText = styled.Text`
 
 const OnMatching = ({ style }) => {
   return (
-    <StatusBox color={colors.unAccent} style={style}>
+    <StatusBox color={colors.blueGray2} style={style}>
       <StatusText color={colors.primaryBlue}>매칭중</StatusText>
     </StatusBox>
   );
@@ -30,15 +30,15 @@ const OnMatching = ({ style }) => {
 const Matched = ({ style }) => {
   return (
     <StatusBox color={colors.primaryBlue} style={style}>
-      <StatusText color={colors.unAccent}>매칭완료</StatusText>
+      <StatusText color={colors.blueGray2}>매칭완료</StatusText>
     </StatusBox>
   );
 };
 
 const Failed = ({ style }) => {
   return (
-    <StatusBox color={colors.failGrey} style={style}>
-      <StatusText color={colors.blueGrey}>매칭실패</StatusText>
+    <StatusBox color={colors.coolGray} style={style}>
+      <StatusText color={colors.blueGray}>매칭실패</StatusText>
     </StatusBox>
   );
 };

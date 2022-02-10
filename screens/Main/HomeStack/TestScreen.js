@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
   logOutContainer: {
-    backgroundColor: colors.primaryPink,
+    backgroundColor: colors.primaryBlue,
     height: 30,
     width: "80%",
     alignSelf: "center",

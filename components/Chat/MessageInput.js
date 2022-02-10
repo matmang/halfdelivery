@@ -393,7 +393,7 @@ const Btm = styled.View`
   align-items: center;
   width: 100%;
   height: 153px;
-  background-color: ${colors.unAccent};
+  background-color: ${colors.blueGray2};
 `;
 
 const ImgProgress = styled.View`

@@ -31,7 +31,7 @@ const HeaderContainer = styled.View`
   width: ${width}px;
   justify-content: center;
   align-items: center;
-  /* background-color: ${colors.mainBlue}; */
+  background-color: ${colors.primaryBlue};
 `;
 
 const SwipeContanier = styled.View`
@@ -44,7 +44,7 @@ const SwipeContanier = styled.View`
 const SubTitle = styled.Text`
   font-family: "noto-regular";
   font-size: 20px;
-  /* color: ${colors.mainBlue}; */
+  color: ${colors.primaryBlue};
   font-weight: 600;
   margin-right: auto;
   margin-left: 24px;
@@ -74,15 +74,15 @@ const SearchContanier = styled.View`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  /* background-color: ${colors.snow}; */
-  /* border: 2px solid ${colors.mainBlue}; */
+  background-color: white;
+  border: 2px solid ${colors.primaryBlue};
   border-radius: 50px;
 `;
 
 const SearchText = styled.Text`
   font-family: "noto-regular";
   margin-left: 19px;
-  /* color: ${colors.moon}; */
+  color: ${colors.unselectedGrey};
 `;
 
 const Home = ({ stores, navigation, isModalVisible }) => {
@@ -111,7 +111,7 @@ const Home = ({ stores, navigation, isModalVisible }) => {
         <TouchableOpacity onPress={() => navigation.navigate("Search")}>
           <SearchContanier>
             <Ionicons
-              // color={colors.mainBlue}
+              color={colors.mainBlue}
               size={32}
               name={Platform.OS === "android" ? "md-search" : "ios-search"}
               style={{ marginLeft: 22 }}

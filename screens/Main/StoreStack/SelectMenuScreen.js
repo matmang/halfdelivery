@@ -139,7 +139,7 @@ const SelectMenuScreen = (props) => {
         // bottomInset={10}
         backgroundStyle={{
           //? 스타일링: https://github.com/gorhom/react-native-bottom-sheet/issues/155
-          backgroundColor: colors.unAccent,
+          backgroundColor: colors.blueGray2,
         }}
         style={{
           // ? 그림자 효과 주기. https://gorhom.github.io/react-native-bottom-sheet/adding-shadow/
@@ -205,7 +205,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginLeft: 28,
     marginBottom: 16,
-    backgroundColor: colors.unAccent,
+    backgroundColor: colors.blueGray2,
   },
   topText: {
     color: colors.primaryBlue,

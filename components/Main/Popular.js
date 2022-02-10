@@ -1,7 +1,6 @@
 import React from "react";
 import { Dimensions, Platform, Platfrom, Text } from "react-native";
 import styled from "styled-components";
-import PropTypes from "prop-types";
 import colors from "../../colors";
 import { Ionicons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -35,7 +34,7 @@ const RankingText = styled.Text`
 
 const StoreInfo = styled.Text`
   font-family: "noto-regular";
-  color: ${colors.coal};
+  color: ${colors.captionGray};
   font-weight: bold;
 `;
 

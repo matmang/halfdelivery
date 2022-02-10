@@ -3,7 +3,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { Image, SafeAreaView, Platform } from "react-native";
 import logos from "../../../images";
 import HomeScreen from "../../../screens/Main/HomeStack/HomeScreen";
-import TestScreen from "../../../screens/Main/HomeStack/TestScreen";
 import ProfileScreen from "../../../screens/Main/ProfileStack/ProfileScreen";
 import HomeHeaderButton from "../../../components/Main/HomeHeaderButton";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
@@ -13,7 +12,6 @@ import colors from "../../../colors";
 import Auth from "@aws-amplify/auth";
 
 import { TouchableOpacity } from "react-native-gesture-handler";
-import ProfileModal from "../../../components/Main/ProfileModal";
 
 const Container = styled.View`
   flex-direction: row;

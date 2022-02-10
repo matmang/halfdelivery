@@ -58,7 +58,7 @@ const MsgBox = styled.View`
   border-color: ${(props) =>
     (props.isMaster && colors.primaryBlue) ||
     (props.isMe && colors.primaryBlue) ||
-    (!props.isMaster && !props.isMe && colors.unselectedGrey)};
+    (!props.isMaster && !props.isMe && colors.steelBlue2)};
 `;
 
 const MsgText = styled.Text`

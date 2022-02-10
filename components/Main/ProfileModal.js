@@ -99,7 +99,7 @@ const AccuontTitle = styled.Text`
 const CopyText = styled.Text`
   font-family: "noto-regular";
   font-size: 14;
-  color: ${colors.moon};
+  color: ${colors.unselectedGrey};
   text-decoration: underline;
   margin-right: 28px;
 `;

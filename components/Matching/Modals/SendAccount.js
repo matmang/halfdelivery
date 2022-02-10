@@ -80,7 +80,7 @@ export default ({
           >
             <Noto17
               style={{
-                color: colors.subPink3,
+                color: colors.palePink,
               }}
             >
               전송하기
