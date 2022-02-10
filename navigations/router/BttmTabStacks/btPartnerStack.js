@@ -12,7 +12,7 @@ const HeaderView = styled.SafeAreaView`
   margin-top: 24px;
   justify-content: center;
   align-items: center;
-  background-color: ${colors.mainBlue};
+  background-color: ${colors.primaryBlue};
   height: 56px;
   width: 100%;
   /* position: relative; */

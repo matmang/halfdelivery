@@ -4,7 +4,14 @@ import { useNavigation } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
 import colors from "../../../colors";
 import { Auth, DataStore } from "aws-amplify";
-import { Store, Menu, User, ChatRoom, ChatRoomUser, Order } from "../../../AWS/src/models";
+import {
+  Store,
+  Menu,
+  User,
+  ChatRoom,
+  ChatRoomUser,
+  Order,
+} from "../../../AWS/src/models";
 
 const TAB_BAR_HEIGHT = 49;
 const HEADER_HEIGHT = 60;
@@ -107,7 +114,7 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
   logOutContainer: {
-    backgroundColor: colors.mainPink,
+    backgroundColor: colors.primaryBlue,
     height: 30,
     width: "80%",
     alignSelf: "center",

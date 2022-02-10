@@ -31,7 +31,7 @@ const SearchContanier = styled.View`
   justify-content: space-between;
   padding-right: 15px;
   align-items: center;
-  border: 2px solid ${colors.mainBlue};
+  border: 2px solid ${colors.primaryBlue};
   border-radius: 50px;
 `;
 
@@ -103,9 +103,11 @@ const Search = ({ navigation, token }) => {
         <TopContainer>
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Ionicons
-              color={colors.mainBlue}
+              color={colors.primaryBlue}
               size={32}
-              name={Platform.OS === "android" ? "md-arrow-back" : "ios-arrow-back"}
+              name={
+                Platform.OS === "android" ? "md-arrow-back" : "ios-arrow-back"
+              }
             />
           </TouchableOpacity>
           <SearchContanier>
@@ -125,7 +127,7 @@ const Search = ({ navigation, token }) => {
               }}
             >
               <Ionicons
-                color={colors.mainBlue}
+                color={colors.primaryBlue}
                 size={32}
                 name={Platform.OS === "android" ? "md-search" : "ios-search"}
               />
@@ -138,7 +140,9 @@ const Search = ({ navigation, token }) => {
             keyExtractor={(item, index) => index.toString()}
             onEndReachedThreshold={0.8}
             showsVerticalScrollIndicator={true}
-            renderItem={({ item }) => <SearchItem storeInfo={item} navigation={navigation} />}
+            renderItem={({ item }) => (
+              <SearchItem storeInfo={item} navigation={navigation} />
+            )}
             windowSize={2}
             style={{
               marginTop: 26,

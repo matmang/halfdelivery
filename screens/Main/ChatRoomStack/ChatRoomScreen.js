@@ -372,7 +372,7 @@ const RoomText = styled.Text`
   font-family: "noto-regular";
   font-size: 17px;
   text-decoration: underline;
-  color: ${colors.mainBlue};
+  color: ${colors.primaryBlue};
   margin-left: 14px;
 `;
 

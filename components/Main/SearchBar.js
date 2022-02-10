@@ -6,8 +6,6 @@ import colors from "../../colors";
 import styled from "styled-components";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-const { width } = Dimensions.get("screen");
-
 const SearchContanier = styled.View`
   height: 50px;
   width: 80%;
@@ -16,7 +14,7 @@ const SearchContanier = styled.View`
   justify-content: space-between;
   padding-right: 15px;
   align-items: center;
-  border: 2px solid ${colors.mainBlue};
+  border: 2px solid ${colors.primaryBlue};
   border-radius: 50px;
 `;
 
@@ -40,7 +38,7 @@ const SearchBar = ({ value, stateFn, autoCapitalize, searchFn }) => (
     />
     <TouchableOpacity onPress={searchFn}>
       <Ionicons
-        color={colors.mainBlue}
+        color={colors.primaryBlue}
         size={32}
         name={Platform.OS === "android" ? "md-search" : "ios-search"}
       />

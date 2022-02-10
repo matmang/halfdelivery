@@ -20,7 +20,7 @@ const RoundedBtn = ({ btnStyle, textStyle, text, isPressed, onPress }) => {
           borderWidth: 2,
           borderColor: !isPressed
             ? "rgba(173, 177, 192, 255)"
-            : colors.mainBlue,
+            : colors.primaryBlue,
         },
         btnStyle,
       ]}
@@ -32,7 +32,7 @@ const RoundedBtn = ({ btnStyle, textStyle, text, isPressed, onPress }) => {
             fontWeight: "400",
             fontSize: 17,
             textAlign: "center",
-            color: !isPressed ? "rgba(173, 177, 192, 255)" : colors.mainBlue,
+            color: !isPressed ? "rgba(173, 177, 192, 255)" : colors.primaryBlue,
           },
           textStyle,
         ]}

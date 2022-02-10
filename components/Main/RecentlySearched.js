@@ -35,7 +35,7 @@ const RecentlySearched = ({ onPress, removeFn }) => {
       <TouchableOpacity onPress={onPress}>
         <Content>
           <Ionicons
-            color={colors.mainBlue}
+            color={colors.primaryBlue}
             size={20}
             name={Platform.OS === "android" ? "md-search" : "ios-search"}
           />
@@ -45,7 +45,7 @@ const RecentlySearched = ({ onPress, removeFn }) => {
       </TouchableOpacity>
       <TouchableOpacity onPress={removeFn}>
         <Ionicons
-          color={colors.mainBlue}
+          color={colors.primaryBlue}
           size={22}
           name={
             Platform.OS === "android" ? "md-remove-circle" : "ios-remove-circle"
