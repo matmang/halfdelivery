@@ -5,13 +5,14 @@ import colors from "../../colors";
 import { height, width } from "../../utils";
 
 const Container = styled.TextInput`
-  width: ${width * 296}px;
-  height: ${height * 33}px;
+  width: ${width * 324}px;
+  height: ${height * 28}px;
   padding-top: 0;
-  padding-bottom: 0;
+  padding-left: ${width * 26};
+  padding-bottom: ${height * 7};
   border-bottom-width: 1px;
-  border-bottom-color: ${({ isValued }) =>
-    isValued ? colors.primaryBlue : colors.blueGray};
+  border-bottom-color: ${({ isValued, error }) =>
+    error ? colors.errorPink : isValued ? colors.primaryBlue : colors.blueGray};
   font-family: "nunito-regular";
   font-size: 17px;
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
@@ -27,6 +28,7 @@ const SmallBarInput = ({
   disabled = false,
   isValued = false,
   viewStyle,
+  error = false,
 }) => (
   <Container
     KeyboardType={KeyboardType}
@@ -39,6 +41,7 @@ const SmallBarInput = ({
     editable={disabled ? false : true}
     isValued={isValued}
     style={viewStyle}
+    error={error}
   />
 );
 
