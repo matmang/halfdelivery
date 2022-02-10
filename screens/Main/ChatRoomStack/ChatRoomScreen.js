@@ -48,6 +48,7 @@ import {
   AddAdditionalTime,
   ViewProfilePartner,
 } from "../../../components/Matching/Modals/";
+import Dropdown from "../../../components/Dropdown";
 
 const ChatRoomScreen = (props) => {
   const [messages, setMessages] = useState([]);
@@ -56,6 +57,8 @@ const ChatRoomScreen = (props) => {
   const [isDetail, setIsDetail] = useState(false);
   const [authUser, setAuthUser] = useState([]);
   const route = useRoute();
+
+  const [selected, setSelected] = useState(undefined);
 
   //- 헤더바, 점3개 버튼누르면 작동
   const navigation = props.navigation;
@@ -204,6 +207,16 @@ const ChatRoomScreen = (props) => {
 
   return (
     <ScrollView style={styles.page}>
+      <View>
+        {!!selected && (
+          <Text>
+            Selected: label = {selected.label} and value = {selected.value}
+          </Text>
+        )}
+        <Dropdown label="Select Item" data={data} onSelect={setSelected} />
+        <Text>This is the rest of the form.</Text>
+      </View>
+
       <ViewProfilePartner />
       <AddAdditionalTime />
       <RequestAdditionalTime />
@@ -283,10 +296,8 @@ const ChatRoomScreen = (props) => {
     //       </Pressable>
     //     </TopBox>
     //   )}
-
     //   {/* //TODO: 어떠 컴포넌트로 위치시켜야 할까.. */}
     //   {/* <EjectModal /> */}
-
     //   <ProcessBox>
     //     <ProcessImg
     //       source={require("../../../assets/images/ChatRoomScreen/processBox/process_menuChecked.png")}
