@@ -27,7 +27,7 @@ const ImgBox = styled.View`
 
   width: auto;
   max-width: ${(props) => props.width * 0.61}%;
-  background: ${colors.mainBlue};
+  background: ${colors.primaryBlue};
   border-radius: 6px;
 `;
 
@@ -45,7 +45,7 @@ const MsgBox = styled.View`
 
   width: auto;
   max-width: ${(props) => props.width * 0.61}%;
-  background: ${(props) => (props.isMe ? colors.mainBlue : "white")};
+  background: ${(props) => (props.isMe ? colors.primaryBlue : "white")};
   border-radius: 14px;
   border-bottom-left-radius: ${(props) => (props.isMe ? "14px" : "0px")};
   border-bottom-right-radius: ${(props) => (props.isMe ? "0px" : "14px")};
@@ -56,8 +56,8 @@ const MsgBox = styled.View`
     (!props.isMaster && !props.isMe && "1.5px")};
 
   border-color: ${(props) =>
-    (props.isMaster && colors.mainBlue) ||
-    (props.isMe && colors.mainBlue) ||
+    (props.isMaster && colors.primaryBlue) ||
+    (props.isMe && colors.primaryBlue) ||
     (!props.isMaster && !props.isMe && colors.unselectedGrey)};
 `;
 
@@ -82,7 +82,7 @@ const ProfileImg = styled.Image`
   height: 38px;
   border-radius: 38px;
   border-width: ${(props) => (props.isMaster ? "1.5px" : "0px")};
-  border-color: ${colors.mainBlue};
+  border-color: ${colors.primaryBlue};
 `;
 
 //! 프로필이미지 그림자 효과를 주기위해 필요함

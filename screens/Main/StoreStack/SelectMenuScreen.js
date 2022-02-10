@@ -208,7 +208,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.unAccent,
   },
   topText: {
-    color: colors.mainBlue,
+    color: colors.primaryBlue,
     fontFamily: "noto-regular",
     fontWeight: "bold",
     fontSize: 18,
@@ -216,14 +216,14 @@ const styles = StyleSheet.create({
     marginVertical: 3,
   },
   buttonContainer: {
-    backgroundColor: colors.mainPink,
+    backgroundColor: colors.primaryPink,
     alignItems: "center",
     // backgroundColor: "red",
     padding: 2,
     marginBottom: 40,
   },
   buttonText: {
-    color: colors.mainBlue,
+    color: colors.primaryBlue,
     fontWeight: "bold",
     fontSize: 18,
     // marginVertical: 3,

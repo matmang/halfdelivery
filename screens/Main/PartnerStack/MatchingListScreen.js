@@ -26,7 +26,7 @@ const MatchingListScreen = () => {
     font-size: 17px;
     /* line-height: 20px; */
     color: ${({ id }) =>
-      id === categoryID ? colors.mainBlue : colors.blueGrey};
+      id === categoryID ? colors.primaryBlue : colors.blueGrey};
   `;
 
   const CategoryButton = (props) => {

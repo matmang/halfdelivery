@@ -22,13 +22,13 @@ const Ranking = styled.View`
   height: 27px;
   justify-content: center;
   align-items: center;
-  background-color: ${colors.mainPink};
+  background-color: ${colors.primaryPink};
   border-radius: 30px;
 `;
 
 const RankingText = styled.Text`
   font-family: "nunito-regular";
-  color: ${colors.mainBlue};
+  color: ${colors.primaryBlue};
   font-size: 17px;
   font-weight: bold;
 `;
@@ -89,7 +89,7 @@ const Popular = ({ index, storeInfo, navigation }) => (
         }
       />
       <Ionicons
-        color={colors.mainBlue}
+        color={colors.primaryBlue}
         size={32}
         name={
           Platform.OS === "android" ? "md-caret-up-sharp" : "ios-caret-up-sharp"

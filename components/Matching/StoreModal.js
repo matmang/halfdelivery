@@ -178,7 +178,7 @@ const Select = styled.Pressable`
   align-items: center;
 
   background-color: ${({ selectedName }) =>
-    selectedName !== null ? colors.mainBlue : colors.unAccent};
+    selectedName !== null ? colors.primaryBlue : colors.unAccent};
 
   border-radius: 40px;
   margin-top: auto;
@@ -202,7 +202,7 @@ const StoreModal = ({ isModal, setIsModal, storeInfo, category }) => {
         <Top>
           <StoreInfo_mini storeInfo={storeInfo} category={category} />
           <BlueLine />
-          <Noto17 style={{ color: colors.mainBlue, marginTop: 20 }}>
+          <Noto17 style={{ color: colors.primaryBlue, marginTop: 20 }}>
             배달 플랫폼 선택
           </Noto17>
           <Noto14>주문을 진행할 배달 플랫폼을 선택해주세요</Noto14>

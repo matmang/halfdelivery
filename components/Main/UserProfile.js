@@ -12,7 +12,7 @@ const ProfileHeader = styled.View`
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
-  border: 1px solid ${colors.mainBlue};
+  border: 1px solid ${colors.primaryBlue};
   border-radius: 30px;
 `;
 
@@ -35,7 +35,7 @@ const Bold = styled.Text`
 const StatName = styled.Text`
   margin-top: 5px;
   font-size: 12px;
-  color: ${colors.mainBlue};
+  color: ${colors.primaryBlue};
 `;
 
 const ProfileMeta = styled.View`
@@ -47,7 +47,7 @@ const Bio = styled.Text``;
 
 const ButtonContainer = styled.View`
   padding-vertical: 5px;
-  border: 1px solid ${colors.mainBlue};
+  border: 1px solid ${colors.primaryBlue};
   flex-direction: row;
   margin-top: 30px;
 `;
@@ -101,7 +101,7 @@ const UserProfile = ({ image, halfmoney, fullName }) => {
         <TouchableOpacity onPress={toggleGrid}>
           <Button>
             <Ionicons
-              color={isGrid ? colors.mainBlue : colors.mainPink}
+              color={isGrid ? colors.primaryBlue : colors.primaryPink}
               size={32}
               name={Platform.OS === "ios" ? "ios-grid" : "md-grid"}
             />
@@ -110,7 +110,7 @@ const UserProfile = ({ image, halfmoney, fullName }) => {
         <TouchableOpacity onPress={toggleGrid}>
           <Button>
             <Ionicons
-              color={!isGrid ? colors.mainBlue : colors.mainPink}
+              color={!isGrid ? colors.primaryBlue : colors.primaryPink}
               size={32}
               name={Platform.OS === "ios" ? "ios-list" : "md-list"}
             />

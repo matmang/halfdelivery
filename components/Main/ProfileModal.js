@@ -42,14 +42,14 @@ const Distributionline = styled.View`
   padding-top: 0;
   padding-bottom: 0;
   border-bottom-width: 2px;
-  border-bottom-color: ${colors.mainBlue};
+  border-bottom-color: ${colors.primaryBlue};
   margin-top: -15px;
 `;
 
 const AuthContainer = styled.View`
   width: 76px;
   height: 25px;
-  background-color: ${colors.mainPink};
+  background-color: ${colors.primaryPink};
   border-radius: 30px;
   margin-bottom: 11px;
   align-items: center;
@@ -80,7 +80,7 @@ const AccountInfoContainer = styled.View`
 const AuthText = styled.Text`
   font-family: "noto-regular";
   font-size: 12;
-  color: ${colors.mainBlue};
+  color: ${colors.primaryBlue};
 `;
 
 const UserInformation = styled.Text`
@@ -92,7 +92,7 @@ const UserInformation = styled.Text`
 const AccuontTitle = styled.Text`
   font-family: "noto-regular";
   font-size: 17;
-  color: ${colors.mainBlue};
+  color: ${colors.primaryBlue};
   margin-left: 28px;
 `;
 

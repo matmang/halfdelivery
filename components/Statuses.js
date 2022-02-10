@@ -22,14 +22,14 @@ const StatusText = styled.Text`
 const OnMatching = ({ style }) => {
   return (
     <StatusBox color={colors.unAccent} style={style}>
-      <StatusText color={colors.mainBlue}>매칭중</StatusText>
+      <StatusText color={colors.primaryBlue}>매칭중</StatusText>
     </StatusBox>
   );
 };
 
 const Matched = ({ style }) => {
   return (
-    <StatusBox color={colors.mainBlue} style={style}>
+    <StatusBox color={colors.primaryBlue} style={style}>
       <StatusText color={colors.unAccent}>매칭완료</StatusText>
     </StatusBox>
   );
@@ -45,16 +45,16 @@ const Failed = ({ style }) => {
 
 const OnTransfering = ({ style }) => {
   return (
-    <StatusBox color={colors.mainPink} style={style}>
-      <StatusText color={colors.mainBlue}>이체중</StatusText>
+    <StatusBox color={colors.primaryPink} style={style}>
+      <StatusText color={colors.primaryBlue}>이체중</StatusText>
     </StatusBox>
   );
 };
 
 const Transferred = ({ style }) => {
   return (
-    <StatusBox color={colors.mainBlue} style={style}>
-      <StatusText color={colors.mainPink}>이체완료</StatusText>
+    <StatusBox color={colors.primaryBlue} style={style}>
+      <StatusText color={colors.primaryPink}>이체완료</StatusText>
     </StatusBox>
   );
 };
