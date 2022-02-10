@@ -41,13 +41,6 @@ const IDContainer = styled.View`
   z-index: 10;
 `;
 
-const PasswordContainer = styled.View`
-  margin-top: ${height * 15}px;
-  margin-left: ${width * 23}px;
-  margin-right: auto;
-  justify-content: flex-start;
-`;
-
 const ButtonContainer = styled.View`
   align-items: center;
   background-color: white;
@@ -71,7 +64,7 @@ const Distributionline = styled.View`
 `;
 
 const PhaseText = styled.Text`
-  font-family: "noto-regular";
+  font-family: "noto-medium";
   font-size: 22px;
 `;
 
@@ -80,12 +73,6 @@ const ExplainText = styled.Text`
   font-size: 14px;
   color: #3c3c3c;
   margin-top: ${height * -20}px;
-`;
-
-const TermText = styled.Text`
-  font-family: "noto-regular";
-  font-size: 15px;
-  color: ${colors.primaryBlue};
 `;
 
 export default ({ route: { params }, navigation }) => {

@@ -53,12 +53,8 @@ const ButtonContainer = styled.View`
   bottom: 0px;
 `;
 
-const AuthContainer = styled.View`
-  flex-direction: row;
-`;
-
 const PhaseText = styled.Text`
-  font-family: "noto-regular";
+  font-family: "noto-medium";
   font-size: 22px;
 `;
 
@@ -70,21 +66,9 @@ const ExplainText = styled.Text`
 `;
 
 const NameText = styled.Text`
-  font-family: "noto-regular";
+  font-family: "noto-medium";
   font-size: 15px;
   color: ${colors.primaryBlue};
-`;
-
-const AuthText = styled.Text`
-  font-family: "noto-regular";
-  font-size: 14px;
-  text-decoration-line: underline;
-  margin-left: auto;
-  color: ${colors.subPink1};
-`;
-
-const AuthTouch = styled.TouchableOpacity`
-  margin-left: auto;
 `;
 
 export default () => {

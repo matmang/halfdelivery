@@ -38,13 +38,6 @@ const ExplainContainer = styled.View`
   justify-content: space-between;
 `;
 
-const TouchContainer = styled.TouchableOpacity`
-  flex-direction: row;
-  align-items: center;
-  margin-right: auto;
-  margin-left: ${width * 49}px;
-`;
-
 const Footer = styled.View`
   position: absolute;
   height: ${height * 65}px;
@@ -61,28 +54,19 @@ const SecondContainer = styled.View`
 `;
 
 const WelcomeText = styled.Text`
-  font-family: "nunito-regular";
+  font-family: "nunito-semibold";
   font-size: 40px;
-  font-weight: bold;
   color: ${colors.primaryBlue};
 `;
 
 const WelcomeTextKR = styled.Text`
-  font-family: "noto-regular";
+  font-family: "noto-bold";
   font-size: 20px;
-  font-weight: bold;
   color: ${colors.primaryBlue};
 `;
 
-const BlackText = styled.Text`
-  font-family: "noto-regular";
-  font-size: 15px;
-  margin-right: auto;
-  margin-left: ${width * 49}px;
-`;
-
 const BlueTextER = styled.Text`
-  font-family: "nunito-regular";
+  font-family: "nunito-semibold";
   font-size: 17px;
   color: ${colors.primaryBlue};
 `;
@@ -94,9 +78,9 @@ const BlueTextKR = styled.Text`
 `;
 
 const ExplainText = styled.Text`
-  font-family: "noto-regular";
+  font-family: "noto-medium";
   font-size: 12px;
-  color: ${colors.blueGray};
+  color: ${colors.captionGray};
 `;
 
 export default ({ navigation }) => {
@@ -126,7 +110,7 @@ export default ({ navigation }) => {
         </LogoContainer>
         <WelcomeContainer>
           <WelcomeText>Welcome</WelcomeText>
-          <WelcomeTextKR>어서오세요, 하프디 입니다 !</WelcomeTextKR>
+          <WelcomeTextKR>어서오세요, 하프딜리버리 입니다 :D</WelcomeTextKR>
         </WelcomeContainer>
         <BodyContainer>
           <Btn
@@ -156,6 +140,7 @@ export default ({ navigation }) => {
         <SignInModal
           isModalVisible={isModalVisible}
           onBackdropPress={() => setIsModalVisible(false)}
+          navigation={navigation}
         />
         <Footer>
           <BlueTextER>HALF DELIVERY </BlueTextER>

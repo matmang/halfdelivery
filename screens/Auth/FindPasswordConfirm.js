@@ -44,13 +44,6 @@ const NameContainer = styled.View`
   justify-content: flex-start;
 `;
 
-const PhoneNumberContainer = styled.View`
-  margin-top: ${height * 15}px;
-  margin-left: auto;
-  margin-right: auto;
-  justify-content: flex-start;
-`;
-
 const PasswordContainer = styled.View`
   margin-top: ${height * 15}px;
   margin-left: auto;
@@ -75,7 +68,7 @@ const GotoContainer = styled.View`
 `;
 
 const PhaseText = styled.Text`
-  font-family: "noto-regular";
+  font-family: "noto-medium";
   font-size: 22px;
 `;
 
@@ -87,13 +80,13 @@ const ExplainText = styled.Text`
 `;
 
 const NameText = styled.Text`
-  font-family: "noto-regular";
+  font-family: "noto-medium";
   font-size: 15px;
   color: ${colors.primaryBlue};
 `;
 
 const GotoText = styled.Text`
-  font-family: "noto-regular";
+  font-family: "noto-medium";
   font-size: 14px;
   color: ${colors.blueGray};
 `;

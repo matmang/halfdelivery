@@ -1,5 +1,5 @@
 import React from "react";
-import { TouchableOpacity } from "react-native";
+import { Image, TouchableOpacity } from "react-native";
 import styled from "styled-components";
 import { Ionicons } from "@expo/vector-icons";
 import Proptypes from "prop-types";
@@ -17,28 +17,30 @@ const Button = styled.View`
   background-color: ${(props) =>
     props.accent ? colors.primaryBlue : colors.blueGray2};
   color: ${(props) => (props.accent ? colors.primaryBlue : colors.blueGray2)};
-  font-family: "nunito-regular";
+  font-family: "nunito-semibold";
 `;
 
 const Text = styled.Text`
   color: ${(props) => (props.accent ? "#FFFFFF" : colors.blueGray)};
-  font-weight: 600;
   font-size: 14px;
-  font-family: "nunito-regular";
+  font-family: "noto-medium";
 `;
 
 const Btn = ({ onPress, text, accent = false, icon = false }) => (
   <TouchableOpacity onPress={onPress} disabled={!accent}>
     <Button accent={accent}>
       {icon ? (
-        <Ionicons
-          color={accent ? "#FFFFFF" : colors.blueGray}
-          size={15}
-          name={
-            Platform.OS === "android" ? "md-arrow-forward" : "ios-arrow-forward"
-          }
-          style={{ marginRight: width * 6 }}
-        />
+        accent ? (
+          <Image
+            source={require("../../assets/images/right-arrow-accent.png")}
+            style={{ width: 15, height: 12, marginRight: 6.2 }}
+          />
+        ) : (
+          <Image
+            source={require("../../assets/images/right-arrow.png")}
+            style={{ width: 15, height: 12, marginRight: 6.2 }}
+          />
+        )
       ) : null}
       <Text accent={accent}>{text}</Text>
     </Button>

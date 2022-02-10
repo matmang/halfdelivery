@@ -37,13 +37,6 @@ const IDContainer = styled.View`
   z-index: 10;
 `;
 
-const PasswordContainer = styled.View`
-  margin-top: ${height * 15}px;
-  margin-left: ${width * 23}px;
-  margin-right: auto;
-  justify-content: flex-start;
-`;
-
 const ButtonContainer = styled.View`
   align-items: center;
   background-color: white;
@@ -55,7 +48,7 @@ const ButtonContainer = styled.View`
 `;
 
 const PhaseText = styled.Text`
-  font-family: "noto-regular";
+  font-family: "noto-medium";
   font-size: 22px;
 `;
 
@@ -67,14 +60,14 @@ const ExplainText = styled.Text`
 `;
 
 const NameText = styled.Text`
-  font-family: "noto-regular";
+  font-family: "noto-medium";
   font-size: 15px;
   color: ${colors.primaryBlue};
 `;
 
 const AccountText = styled.Text`
   margin-top: ${height * 15}px;
-  font-family: "noto-regular";
+  font-family: "noto-medium";
   font-size: 15px;
   color: ${colors.primaryBlue};
 `;

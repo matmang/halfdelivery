@@ -12,7 +12,7 @@ const Button = styled.View`
   justify-content: center;
   align-items: center;
   border-radius: 30px;
-  width: ${width * 296}px;
+  width: ${width * 324}px;
   height: ${height * 48}px;
   background-color: ${(props) =>
     props.accent ? colors.primaryBlue : colors.blueGray2};
@@ -21,10 +21,9 @@ const Button = styled.View`
 `;
 
 const Text = styled.Text`
-  color: ${(props) => (props.accent ? colors.palePink : colors.blueGray)};
-  font-weight: 600;
+  color: ${(props) => (props.accent ? white : colors.blueGray)};
   font-size: 14px;
-  font-family: "nunito-regular";
+  font-family: "noto-medium";
 `;
 
 const SmallBtn = ({ onPress, text, accent = false, icon = false }) => (
