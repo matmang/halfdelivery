@@ -1,11 +1,23 @@
-import React, { useState } from "react";
-import { Modal, StyleSheet, Text, TouchableOpacity } from "react-native";
-import { SimpleLineIcons } from "@expo/vector-icons";
+// Reference: https://blog.logrocket.com/creating-custom-react-native-dropdown/
+import React, { useState, useRef } from "react";
+import {
+  Modal,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  FlatList,
+  Pressable,
+} from "react-native";
+import { MaterialIcons } from "@expo/vector-icons";
+import { width, height } from "../utils";
 
-const Dropdown = ({ label, data, onSelect }) => {
+const Dropdown = ({ placeholder, data, onSelect }) => {
   const [visible, setVisible] = useState(false);
   const DropdownButton = useRef();
   const [dropdownTop, setDropdownTop] = useState(0);
+  const [selected, setSelected] = useState(undefined);
+  const [isPressed, setIsPressed] = useState(false);
 
   const toggleDropdown = () => {
     visible ? setVisible(false) : openDropdown();
@@ -24,19 +36,28 @@ const Dropdown = ({ label, data, onSelect }) => {
     setVisible(false);
   };
 
-  const renderItem = ({ item }) => (
-    <TouchableOpacity style={styles.item} onPress={() => onItemPress(item)}>
-      <Text>{item.label}</Text>
-    </TouchableOpacity>
+  const renderItem = ({ item, index }) => (
+    <Pressable
+      style={{
+        // borderWidth: 1,
+        width: width * 364,
+        height: height * 42,
+        justifyContent: "center",
+        paddingLeft: width * 12,
+        backgroundColor: selected && item.label === selected.label && "#F5F6F6",
+      }}
+      onPress={() => onItemPress(item)}
+    >
+      <Text style={{ fontFamily: "noto-regular", fontSize: 17 }}>
+        {item.label}
+      </Text>
+    </Pressable>
   );
 
-  const renderDropdown = () => {
+  const RenderDropdown = () => {
     return (
       <Modal visible={visible} transparent animationType="none">
-        <TouchableOpacity
-          style={styles.overlay}
-          onPress={() => setVisible(false)}
-        >
+        <Pressable onPress={() => setVisible(false)}>
           <View style={[styles.dropdown, { top: dropdownTop }]}>
             <FlatList
               data={data}
@@ -44,48 +65,71 @@ const Dropdown = ({ label, data, onSelect }) => {
               keyExtractor={(item, index) => index.toString()}
             />
           </View>
-        </TouchableOpacity>
+        </Pressable>
       </Modal>
     );
   };
 
   return (
-    <TouchableOpacity
+    <Pressable
       ref={DropdownButton}
-      style={styles.button}
-      onPress={toggleDropdown}
+      style={styles.placeholderBox}
+      onPress={() => {
+        toggleDropdown();
+      }}
     >
-      {renderDropdown()}
-      <Text style={styles.buttonText}>
-        {(selected && selected.label) || label}
+      <RenderDropdown />
+      <Text
+        style={{
+          fontFamily: "noto-regular",
+          fontSize: 17,
+          color: selected === undefined ? "#ADB1C0" : "black",
+          paddingLeft: width * 12,
+          flex: 1,
+        }}
+      >
+        {(selected && selected.label) || placeholder}
       </Text>
-      <SimpleLineIcons name="arrow-down" size={24} color="black" />
-    </TouchableOpacity>
+      <MaterialIcons
+        name={visible ? "keyboard-arrow-up" : "keyboard-arrow-down"}
+        size={width * 24}
+        color="#ADB1C0"
+        style={{ paddingRight: width * 12 }}
+        // onPress={() => {
+        //   visible ? setVisible(false) : setVisible(true);
+        // }}
+      />
+    </Pressable>
   );
 };
 
 const styles = StyleSheet.create({
-  button: {
+  placeholderBox: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#efefef",
-    height: 50,
-    width: "90%",
-    paddingHorizontal: 10,
+    backgroundColor: "white",
+    borderBottomWidth: height * 1.5,
+    borderBottomColor: "#ADB1C0",
+    width: width * 364,
+    height: height * 42,
     zIndex: 1,
-  },
-  buttonText: {
-    flex: 1,
-    textAlign: "center",
   },
   dropdown: {
     position: "absolute",
-    backgroundColor: "#fff",
-    width: "100%",
-    shadowColor: "#000000",
-    shadowRadius: 4,
-    shadowOffset: { height: 4, width: 0 },
-    shadowOpacity: 0.5,
+    alignSelf: "center",
+    backgroundColor: "white",
+    width: width * 364,
+    paddingBottom: 10,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+
+    shadowColor: "black",
+    shadowOpacity: 0.16,
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowRadius: 6,
   },
 });
 
