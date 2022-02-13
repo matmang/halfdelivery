@@ -49,6 +49,7 @@ import {
   ViewProfilePartner,
 } from "../../../components/Matching/Modals/";
 import Dropdown from "../../../components/Dropdown";
+import SelectPlatform from "../../../components/Matching/Modals/SelectPlatform";
 
 const ChatRoomScreen = (props) => {
   const [messages, setMessages] = useState([]);
@@ -58,14 +59,6 @@ const ChatRoomScreen = (props) => {
   const [authUser, setAuthUser] = useState([]);
   const route = useRoute();
   const [selectedDropdown, setSelectedDropdown] = useState(undefined);
-
-  const data = [
-    { label: "One", value: "1" },
-    { label: "Two", value: "2" },
-    { label: "Three", value: "3" },
-    { label: "Four", value: "4" },
-    { label: "Five", value: "5" },
-  ];
 
   //- 헤더바, 점3개 버튼누르면 작동
   const navigation = props.navigation;

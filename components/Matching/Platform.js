@@ -2,11 +2,11 @@ import { StyleSheet, Text, View, Pressable } from "react-native";
 import React, { useState } from "react";
 import colors from "../../colors";
 import styled from "styled-components";
-
+import { width, height } from "../../utils";
 const RootView = styled.Pressable`
-  width: 68px;
+  width: ${width * 72}px;
   /* width: auto; */
-  height: 82px;
+  height: ${height * 82}px;
   /* background-color: lightpink; */
   justify-content: center;
   align-items: center;
@@ -14,9 +14,9 @@ const RootView = styled.Pressable`
 
 const Img = styled.Image`
   border-radius: 6px;
-  width: 54px;
-  height: 54px;
-  background-color: grey;
+  width: ${width * 60}px;
+  height: ${height * 60}px;
+  background-color: lightgrey;
   border-width: ${({ name, selectedName }) =>
     name === selectedName ? 1.5 : 0}px;
   border-color: ${({ name, selectedName }) =>
@@ -24,7 +24,8 @@ const Img = styled.Image`
 `;
 
 const Noto14 = styled.Text`
-  font-family: "noto-regular";
+  font-family: ${({ name, selectedName }) =>
+    name === selectedName ? "noto-medium" : "noto-regular"};
   font-size: 14px;
   margin-top: 12px;
   color: ${({ name, selectedName }) =>
@@ -37,8 +38,19 @@ const Noto14 = styled.Text`
 const Underline = styled.View`
   margin-top: 2px;
   width: ${({ name }) => (name === "배달의 민족" ? "68px" : "54px")};
+  width: auto;
   height: 1.5px;
   background-color: ${colors.primaryBlue};
+`;
+
+const PinkHighlight = styled.View`
+  margin-top: -7px;
+  width: ${({ name }) =>
+    name === "배달의 민족" ? "68px" : name === "요기요" ? "40px" : "54px"};
+  height: 7px;
+  background-color: ${colors.palePink};
+  /* position: absolute; */
+  z-index: -1;
 `;
 
 const Platforms = ({ name, selectedName, setSelectedName }) => {
@@ -56,7 +68,7 @@ const Platforms = ({ name, selectedName, setSelectedName }) => {
       >
         {name}
       </Noto14>
-      {name === selectedName && <Underline name={name} />}
+      {name === selectedName && <PinkHighlight name={name} />}
     </RootView>
   );
 };

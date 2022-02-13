@@ -37,6 +37,14 @@ const Categorries = styled.Pressable`
   justify-content: center;
 `;
 
+// const CatView = styled.View`
+//   flex-direction: row;
+//   justify-content: space-evenly;
+//   background: #ffffff 0% 0% no-repeat padding-box;
+//   box-shadow: 3px 3px 6px #00000029;
+//   opacity: 1;
+// `;
+
 const SelectStoreScreen = () => {
   const [categoryID, setCategoryID] = useState("ALL");
 
@@ -92,11 +100,24 @@ const SelectStoreScreen = () => {
         flexDirection: "column",
       }}
     >
-      {/* <View style={{ marginTop: 20 }}>
-        <Text style={styles.title}>음식 카테고리 선택</Text>
-      </View> */}
+      <View
+        style={{
+          flexDirection: "row",
+          backgroundColor: "white",
+          width: "100%",
+          paddingHorizontal: 30,
+          justifyContent: "space-evenly",
 
-      <View style={styles.categoryButtons}>
+          zIndex: 1,
+          shadowColor: "black",
+          shadowOpacity: 0.16,
+          shadowOffset: {
+            width: 3,
+            height: 3,
+          },
+          shadowRadius: 6,
+        }}
+      >
         <CategoryButton name="한식" id={KOREAN_ID} />
         <CategoryButton name="중식" id={CHINESE_ID} />
         <CategoryButton name="일식" id={JAPANESE_ID} />
@@ -106,7 +127,6 @@ const SelectStoreScreen = () => {
 
       <StoreList categoryID={categoryID} />
     </View>
-    // </SelectStoreScreenContext.Provider>
   );
 };
 
@@ -115,14 +135,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: "noto-regular",
     fontWeight: "bold",
-  },
-  categoryButtons: {
-    flexDirection: "row",
-    backgroundColor: "white",
-    width: "100%",
-    paddingHorizontal: 30,
-    justifyContent: "space-evenly",
-    marginBottom: 4,
   },
 });
 export default SelectStoreScreen;

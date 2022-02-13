@@ -3,6 +3,7 @@ import RequestAdditionalTime from "./RequestAdditionalTime";
 import AddAdditionalTime from "./AddAdditionalTime";
 import SendAccount from "./SendAccount";
 import ViewProfilePartner from "./ViewProfilePartner";
+import SelectPlatform from "./SelectPlatform";
 
 export {
   InputOrderPrice,
@@ -10,4 +11,5 @@ export {
   AddAdditionalTime,
   SendAccount,
   ViewProfilePartner,
+  SelectPlatform,
 };
