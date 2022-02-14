@@ -141,6 +141,7 @@ export default ({ navigation }) => {
           isModalVisible={isModalVisible}
           onBackdropPress={() => setIsModalVisible(false)}
           navigation={navigation}
+          setVisible={setIsModalVisible}
         />
         <Footer>
           <BlueTextER>HALF DELIVERY </BlueTextER>

@@ -9,7 +9,6 @@ import SmallBtn from "./SmallBtn";
 import { useDispatch } from "react-redux";
 import { userLogin } from "../../redux/usersSlice";
 import { height, width } from "../../utils";
-import { TouchableOpacity } from "react-native-gesture-handler";
 
 const Container = styled.View`
   width: ${width * 364}px;
@@ -39,7 +38,7 @@ const ExplainContainer = styled.View`
 `;
 
 const BtnContainer = styled.View`
-  margin-top: ${height * 20}px;
+  margin-top: ${height * 39}px;
   justify-content: center;
   align-items: center;
 `;
@@ -50,11 +49,15 @@ const ExplainText = styled.Text`
   color: ${colors.captionGray};
 `;
 
-const SignInModal = ({ isModalVisible, onBackdropPress, navigation }) => {
+const SignInModal = ({
+  isModalVisible,
+  onBackdropPress,
+  navigation,
+  setVisible,
+}) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [accent, setAccent] = useState(false);
-  const [visible, setVisible] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -86,14 +89,14 @@ const SignInModal = ({ isModalVisible, onBackdropPress, navigation }) => {
       <Container>
         <Pressable
           onPress={() => {
-            alert("모달창끄기");
+            setVisible(false);
           }}
         >
           <Image
             source={require("../../assets/images/delete.png")}
             style={{
-              width: 20,
-              height: 20,
+              width: 17.22,
+              height: 17.22,
               marginLeft: width * 323,
               marginRight: width * 12.5,
               marginTop: height * 7,
@@ -118,18 +121,28 @@ const SignInModal = ({ isModalVisible, onBackdropPress, navigation }) => {
             isValued={password ? true : false}
           />
         </PasswordContainer>
-        <ExplainContainer>
-          <Pressable onPress={() => navigation.navigate("FindId")}>
-            <ExplainText>아이디 찾기 </ExplainText>
-          </Pressable>
-          <ExplainText> | </ExplainText>
-          <Pressable onPress={() => navigation.navigate("FindPassword")}>
-            <ExplainText> 비밀번호 찾기</ExplainText>
-          </Pressable>
-        </ExplainContainer>
         <BtnContainer>
           <SmallBtn onPress={handleSubmit} text={"로그인"} accent={accent} />
         </BtnContainer>
+        <ExplainContainer>
+          <Pressable
+            onPress={() => {
+              setVisible(false);
+              navigation.navigate("FindId");
+            }}
+          >
+            <ExplainText>아이디 찾기 </ExplainText>
+          </Pressable>
+          <ExplainText> | </ExplainText>
+          <Pressable
+            onPress={() => {
+              setVisible(false);
+              navigation.navigate("FindPassword");
+            }}
+          >
+            <ExplainText> 비밀번호 찾기</ExplainText>
+          </Pressable>
+        </ExplainContainer>
       </Container>
     </ReactNativeModal>
   );

@@ -48,9 +48,7 @@ const ButtonContainer = styled.View`
   background-color: white;
   width: 100%;
   height: ${height * 82}px;
-  margin-top: ${height * 40}px;
-  position: absolute;
-  bottom: 0px;
+  bottom: -18px;
 `;
 
 const AuthContainer = styled.View`

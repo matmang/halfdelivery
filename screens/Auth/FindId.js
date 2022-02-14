@@ -1,4 +1,4 @@
-import { Auth, DataStore } from "aws-amplify";
+import { DataStore } from "aws-amplify";
 import React, { useEffect, useRef, useState } from "react";
 import { Image } from "react-native";
 import styled from "styled-components";
@@ -9,6 +9,7 @@ import Btn from "../../components/Auth/Btn";
 import ErrorMessage from "../../components/Auth/ErrorMessage";
 import DismissKeyboard from "../../components/DismissKeyboard";
 import { height, width } from "../../utils";
+import { Ionicons } from "@expo/vector-icons";
 
 const Container = styled.View`
   flex: 1;
@@ -17,7 +18,7 @@ const Container = styled.View`
 `;
 
 const LogoConatainer = styled.View`
-  margin-top: ${height * 62}px;
+  margin-top: ${height * 92}px;
   justify-content: center;
   align-items: center;
 `;
@@ -48,9 +49,16 @@ const ButtonContainer = styled.View`
   background-color: white;
   width: 100%;
   height: ${height * 82}px;
-  margin-top: ${height * 40}px;
-  position: absolute;
-  bottom: 0px;
+  bottom: -18px;
+`;
+
+const GotoContainer = styled.View`
+  width: 100%;
+  margin-left: auto;
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: row;
+  margin-top: ${height * 104}px;
 `;
 
 const PhaseText = styled.Text`
@@ -69,6 +77,13 @@ const NameText = styled.Text`
   font-family: "noto-medium";
   font-size: 15px;
   color: ${colors.primaryBlue};
+`;
+
+const GotoText = styled.Text`
+  font-family: "noto-medium";
+  font-size: 14px;
+  margin-right: ${width * 24};
+  color: ${colors.captionGray};
 `;
 
 export default () => {
@@ -173,6 +188,19 @@ export default () => {
             isValued={authCode ? true : false}
           />
         </PhoneNumberContainer>
+        <GotoContainer>
+          <Ionicons
+            color={accent ? "#FFFFFF" : colors.captionGray}
+            size={width * 15}
+            name={
+              Platform.OS === "android"
+                ? "md-arrow-forward"
+                : "ios-arrow-forward"
+            }
+            style={{ marginRight: width * 6 }}
+          />
+          <GotoText>비밀번호 찾기 바로가기</GotoText>
+        </GotoContainer>
         <ButtonContainer>
           <Btn
             text={"입력완료"}

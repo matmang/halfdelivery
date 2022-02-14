@@ -57,9 +57,8 @@ const ButtonContainer = styled.View`
   background-color: white;
   width: 100%;
   height: ${height * 82}px;
-  margin-top: ${height * 40}px;
-  position: absolute;
-  bottom: 0px;
+  margin-top: auto;
+  bottom: -18px;
 `;
 
 const AuthContainer = styled.View`
@@ -69,11 +68,12 @@ const AuthContainer = styled.View`
 `;
 
 const GotoContainer = styled.View`
+  width: 100%;
   margin-left: auto;
-  margin-right: ${width * 24}px;
   align-items: center;
+  justify-content: flex-end;
   flex-direction: row;
-  margin-top: auto;
+  margin-top: ${height * 180}px;
 `;
 
 const PhaseText = styled.Text`
@@ -97,7 +97,8 @@ const NameText = styled.Text`
 const GotoText = styled.Text`
   font-family: "noto-medium";
   font-size: 14px;
-  color: ${colors.blueGray};
+  margin-right: ${width * 24};
+  color: ${colors.captionGray};
 `;
 
 export default ({ navigation }) => {
@@ -202,7 +203,7 @@ export default ({ navigation }) => {
             </PasswordContainer>
             <GotoContainer>
               <Ionicons
-                color={accent ? "#FFFFFF" : colors.blueGray}
+                color={accent ? "#FFFFFF" : colors.captionGray}
                 size={width * 15}
                 name={
                   Platform.OS === "android"
@@ -214,16 +215,16 @@ export default ({ navigation }) => {
               <GotoText>아이디 찾기 바로가기</GotoText>
             </GotoContainer>
           </Container>
+          <ButtonContainer>
+            <Btn
+              text={"다음"}
+              accent={accent == true}
+              onPress={() => {
+                handleSubmit();
+              }}
+            />
+          </ButtonContainer>
         </ScrollView>
-        <ButtonContainer>
-          <Btn
-            text={"다음"}
-            accent={accent == true}
-            onPress={() => {
-              handleSubmit();
-            }}
-          />
-        </ButtonContainer>
         <FindPasswordModal
           isModalVisible={isModalVisible}
           onBackdropPress={() => setIsModalVisible(false)}
