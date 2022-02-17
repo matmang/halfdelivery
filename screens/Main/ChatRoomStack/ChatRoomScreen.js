@@ -52,6 +52,7 @@ import Dropdown from "../../../components/Dropdown";
 import SelectPlatform from "../../../components/Matching/Modals/SelectPlatform";
 import TEST_react_native_expo_image_cropper from "./TEST_react_native_expo_image_cropper";
 import TEST_expo_image_crop from "./TEST_expo_image_crop";
+import Participant from "../../../components/Matching/Participant";
 
 import ImageView from "react-native-image-viewing";
 
@@ -189,7 +190,9 @@ const ChatRoomScreen = (props) => {
 
   return (
     <View>
-      <ImageView
+      <Participant />
+
+      {/* <ImageView
         images={images}
         imageIndex={0}
         visible={true}
@@ -213,7 +216,8 @@ const ChatRoomScreen = (props) => {
             </Text>
           </View>
         )}
-      />
+      /> */}
+
       {/* <TEST_react_native_expo_image_cropper /> */}
       {/* <TEST_expo_image_crop /> */}
     </View>
