@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  View,
-  Text,
-  Dimensions,
-  ActivityIndicator,
-  Button,
-} from "react-native";
+import { Text, Dimensions } from "react-native";
 import styled from "styled-components";
 import { Ionicons } from "@expo/vector-icons";
 import colors from "../../colors";
@@ -13,11 +7,10 @@ import Auth from "@aws-amplify/auth";
 import Btn from "../Auth/Btn";
 import Popular from "./Popular";
 import Swiper from "react-native-swiper";
-import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import { logOut } from "../../redux/usersSlice";
 import { useDispatch, useSelector } from "react-redux";
 import ProfileModal from "./ProfileModal";
-import tailwind from "tailwind-rn";
 
 const { width } = Dimensions.get("screen");
 

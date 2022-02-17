@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Image } from "react-native";
+import { Image, KeyboardAvoidingView } from "react-native";
 import styled from "styled-components";
 import Btn from "../../components/Auth/Btn";
 import BarInput from "../../components/Auth/BarInput";
@@ -42,11 +42,15 @@ const PasswordContainer = styled.View`
 `;
 
 const ButtonContainer = styled.View`
+  flex: 1;
+  justify-content: flex-end;
   align-items: center;
   background-color: white;
   width: 100%;
+  padding-top: ${height * 12}px;
+  padding-bottom: ${height * 24}px;
   height: ${height * 82}px;
-  bottom: -18px;
+  bottom: 0;
 `;
 
 const PhaseText = styled.Text`

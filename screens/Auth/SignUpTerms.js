@@ -42,11 +42,15 @@ const IDContainer = styled.View`
 `;
 
 const ButtonContainer = styled.View`
+  flex: 1;
+  justify-content: flex-end;
   align-items: center;
   background-color: white;
   width: 100%;
+  padding-top: ${height * 12}px;
+  padding-bottom: ${height * 24}px;
   height: ${height * 82}px;
-  bottom: -18px;
+  bottom: 0;
 `;
 
 const Distributionline = styled.View`
@@ -107,7 +111,7 @@ export default ({ route: { params }, navigation }) => {
         <ProgressContainer>
           <Image
             source={require("../../assets/images/SignUp4.png")}
-            style={{ width: width * 180, height: height * 44 }}
+            style={{ width: width * 42, height: height * 42 }}
           />
         </ProgressContainer>
         <PhaseContainer>
