@@ -53,6 +53,20 @@ import SelectPlatform from "../../../components/Matching/Modals/SelectPlatform";
 import TEST_react_native_expo_image_cropper from "./TEST_react_native_expo_image_cropper";
 import TEST_expo_image_crop from "./TEST_expo_image_crop";
 
+import ImageView from "react-native-image-viewing";
+
+const images = [
+  {
+    uri: "https://images.unsplash.com/photo-1571501679680-de32f1e7aad4",
+  },
+  {
+    uri: "https://images.unsplash.com/photo-1573273787173-0eb81a833b34",
+  },
+  {
+    uri: "https://images.unsplash.com/photo-1569569970363-df7b6160d111",
+  },
+];
+
 const ChatRoomScreen = (props) => {
   const [messages, setMessages] = useState([]);
   const [chatRoom, setChatRoom] = useState(null);
@@ -61,6 +75,8 @@ const ChatRoomScreen = (props) => {
   const [authUser, setAuthUser] = useState([]);
   const route = useRoute();
   const [selectedDropdown, setSelectedDropdown] = useState(undefined);
+
+  const [visible, setIsVisible] = useState(false);
 
   //- 헤더바, 점3개 버튼누르면 작동
   const navigation = props.navigation;
@@ -173,8 +189,33 @@ const ChatRoomScreen = (props) => {
 
   return (
     <View>
+      <ImageView
+        images={images}
+        imageIndex={0}
+        visible={true}
+        onRequestClose={() => setIsVisible(false)}
+        FooterComponent={({ imageIndex }) => (
+          <View
+            style={{
+              height: "20%",
+              backgroundColor: "red",
+              marginBottom: 100,
+              justifyContent: "center",
+            }}
+          >
+            <Text
+              style={{
+                color: "white",
+                alignSelf: "center",
+              }}
+            >
+              {imageIndex}
+            </Text>
+          </View>
+        )}
+      />
       {/* <TEST_react_native_expo_image_cropper /> */}
-      <TEST_expo_image_crop />
+      {/* <TEST_expo_image_crop /> */}
     </View>
     // <ScrollView style={styles.page}>
     //   {/* <Pressable
