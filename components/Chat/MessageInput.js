@@ -363,7 +363,7 @@ const InputBox = styled.View`
   height: 65px;
   flex-direction: row;
   padding: 10px;
-  background-color: ${colors.mainBlue};
+  background-color: ${colors.primaryBlue};
 `;
 
 const PlusBox = styled.Pressable`
@@ -393,7 +393,7 @@ const Btm = styled.View`
   align-items: center;
   width: 100%;
   height: 153px;
-  background-color: ${colors.unAccent};
+  background-color: ${colors.blueGray2};
 `;
 
 const ImgProgress = styled.View`
@@ -418,7 +418,7 @@ const BlueText = styled.Text`
   font-family: "noto-regular";
   font-size: 17px;
   margin-left: 8px;
-  color: ${colors.mainBlue};
+  color: ${colors.primaryBlue};
 `;
 
 export default MessageInput;

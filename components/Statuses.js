@@ -21,40 +21,40 @@ const StatusText = styled.Text`
 
 const OnMatching = ({ style }) => {
   return (
-    <StatusBox color={colors.unAccent} style={style}>
-      <StatusText color={colors.mainBlue}>매칭중</StatusText>
+    <StatusBox color={colors.blueGray2} style={style}>
+      <StatusText color={colors.primaryBlue}>매칭중</StatusText>
     </StatusBox>
   );
 };
 
 const Matched = ({ style }) => {
   return (
-    <StatusBox color={colors.mainBlue} style={style}>
-      <StatusText color={colors.unAccent}>매칭완료</StatusText>
+    <StatusBox color={colors.primaryBlue} style={style}>
+      <StatusText color={colors.blueGray2}>매칭완료</StatusText>
     </StatusBox>
   );
 };
 
 const Failed = ({ style }) => {
   return (
-    <StatusBox color={colors.failGrey} style={style}>
-      <StatusText color={colors.blueGrey}>매칭실패</StatusText>
+    <StatusBox color={colors.coolGray} style={style}>
+      <StatusText color={colors.blueGray}>매칭실패</StatusText>
     </StatusBox>
   );
 };
 
 const OnTransfering = ({ style }) => {
   return (
-    <StatusBox color={colors.mainPink} style={style}>
-      <StatusText color={colors.mainBlue}>이체중</StatusText>
+    <StatusBox color={colors.primaryPink} style={style}>
+      <StatusText color={colors.primaryBlue}>이체중</StatusText>
     </StatusBox>
   );
 };
 
 const Transferred = ({ style }) => {
   return (
-    <StatusBox color={colors.mainBlue} style={style}>
-      <StatusText color={colors.mainPink}>이체완료</StatusText>
+    <StatusBox color={colors.primaryBlue} style={style}>
+      <StatusText color={colors.primaryPink}>이체완료</StatusText>
     </StatusBox>
   );
 };

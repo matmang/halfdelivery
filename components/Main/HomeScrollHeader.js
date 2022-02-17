@@ -10,7 +10,7 @@ const HeaderContainer = styled.View`
   align-items: center;
   border-bottom-left-radius: 30px;
   border-bottom-right-radius: 30px;
-  background-color: ${colors.mainBlue};
+  background-color: ${colors.primaryBlue};
 `;
 
 const MapText = styled.Text`
@@ -28,8 +28,8 @@ const SearchContanier = styled.View`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  background-color: ${colors.snow};
-  border: 2px solid ${colors.mainBlue};
+  background-color: white;
+  border: 2px solid ${colors.primaryBlue};
   border-radius: 50px;
   margin-top: 24px;
 `;
@@ -37,7 +37,7 @@ const SearchContanier = styled.View`
 const SearchText = styled.Text`
   font-family: "noto-regular";
   margin-left: 19px;
-  color: ${colors.moon};
+  color: ${colors.unselectedGrey};
 `;
 
 export default ({ navigation }) => {
@@ -47,7 +47,7 @@ export default ({ navigation }) => {
         <TouchableOpacity onPress={() => navigation.navigate("Search")}>
           <SearchContanier>
             <Ionicons
-              color={colors.mainBlue}
+              color={colors.primaryBlue}
               size={32}
               name={Platform.OS === "android" ? "md-search" : "ios-search"}
               style={{ marginLeft: 22 }}

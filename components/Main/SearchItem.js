@@ -32,7 +32,7 @@ const SearchItem = ({ navigation, storeInfo }) => (
   >
     <Container>
       <Ionicons
-        color={colors.mainBlue}
+        color={colors.primaryBlue}
         size={20}
         name={Platform.OS === "android" ? "md-search" : "ios-search"}
         style={{ marginRight: 11 }}

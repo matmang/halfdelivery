@@ -80,7 +80,7 @@ export default ({
           >
             <Noto17
               style={{
-                color: colors.subPink3,
+                color: colors.palePink,
               }}
             >
               전송하기
@@ -157,7 +157,7 @@ const Send = styled.Pressable`
   justify-content: center;
   align-self: center;
   align-items: center;
-  background-color: ${colors.mainBlue};
+  background-color: ${colors.primaryBlue};
   border-radius: 40px;
   margin-top: auto;
   margin-bottom: 16px;

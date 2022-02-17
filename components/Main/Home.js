@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  View,
-  Text,
-  Dimensions,
-  ActivityIndicator,
-  Button,
-} from "react-native";
+import { Text, Dimensions } from "react-native";
 import styled from "styled-components";
 import { Ionicons } from "@expo/vector-icons";
 import colors from "../../colors";
@@ -13,11 +7,10 @@ import Auth from "@aws-amplify/auth";
 import Btn from "../Auth/Btn";
 import Popular from "./Popular";
 import Swiper from "react-native-swiper";
-import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import { logOut } from "../../redux/usersSlice";
 import { useDispatch, useSelector } from "react-redux";
 import ProfileModal from "./ProfileModal";
-import tailwind from "tailwind-rn";
 
 const { width } = Dimensions.get("screen");
 
@@ -31,7 +24,7 @@ const HeaderContainer = styled.View`
   width: ${width}px;
   justify-content: center;
   align-items: center;
-  background-color: ${colors.mainBlue};
+  background-color: ${colors.primaryBlue};
 `;
 
 const SwipeContanier = styled.View`
@@ -44,7 +37,7 @@ const SwipeContanier = styled.View`
 const SubTitle = styled.Text`
   font-family: "noto-regular";
   font-size: 20px;
-  color: ${colors.mainBlue};
+  color: ${colors.primaryBlue};
   font-weight: 600;
   margin-right: auto;
   margin-left: 24px;
@@ -74,15 +67,15 @@ const SearchContanier = styled.View`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  background-color: ${colors.snow};
-  border: 2px solid ${colors.mainBlue};
+  background-color: white;
+  border: 2px solid ${colors.primaryBlue};
   border-radius: 50px;
 `;
 
 const SearchText = styled.Text`
   font-family: "noto-regular";
   margin-left: 19px;
-  color: ${colors.moon};
+  color: ${colors.unselectedGrey};
 `;
 
 const Home = ({ stores, navigation, isModalVisible }) => {

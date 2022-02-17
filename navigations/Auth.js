@@ -9,11 +9,9 @@ import SignUpTerms from "../screens/Auth/SignUpTerms";
 import FindId from "../screens/Auth/FindId";
 import FindPassword from "../screens/Auth/FindPassword";
 import FindPasswordConfirm from "../screens/Auth/FindPasswordConfirm";
-import { Ionicons } from "@expo/vector-icons";
 import { height, width } from "../utils";
-import colors from "../colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { Platform } from "react-native";
+import { Image } from "react-native";
 
 const Auth = createStackNavigator();
 
@@ -46,11 +44,14 @@ export default () => (
         headerLeft: () => {},
         headerRight: () => (
           <TouchableOpacity onPress={() => navigation.navigate("Welcome")}>
-            <Ionicons
-              color={colors.primaryBlue}
-              size={width * 24}
-              name={Platform.OS === "android" ? "md-close" : "ios-close"}
-              style={{ marginRight: width * 24, marginTop: height * 20 }}
+            <Image
+              source={require("../assets/images/delete.png")}
+              style={{
+                width: width * 17.22,
+                height: height * 17.22,
+                marginTop: height * 20,
+                marginRight: width * 24,
+              }}
             />
           </TouchableOpacity>
         ),
@@ -69,23 +70,27 @@ export default () => (
         },
         headerLeft: () => (
           <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Ionicons
-              color={colors.primaryBlue}
-              size={width * 24}
-              name={
-                Platform.OS === "android" ? "md-arrow-back" : "ios-arrow-back"
-              }
-              style={{ marginLeft: width * 24, marginTop: height * 20 }}
+            <Image
+              source={require("../assets/images/left-arrow.png")}
+              style={{
+                width: width * 20,
+                height: height * 17.22,
+                marginTop: height * 20,
+                marginLeft: width * 24,
+              }}
             />
           </TouchableOpacity>
         ),
         headerRight: () => (
           <TouchableOpacity onPress={() => navigation.navigate("Welcome")}>
-            <Ionicons
-              color={colors.primaryBlue}
-              size={width * 24}
-              name={Platform.OS === "android" ? "md-close" : "ios-close"}
-              style={{ marginRight: width * 24, marginTop: height * 20 }}
+            <Image
+              source={require("../assets/images/delete.png")}
+              style={{
+                width: width * 17.22,
+                height: height * 17.22,
+                marginTop: height * 20,
+                marginRight: width * 24,
+              }}
             />
           </TouchableOpacity>
         ),
@@ -104,23 +109,27 @@ export default () => (
         },
         headerLeft: () => (
           <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Ionicons
-              color={colors.primaryBlue}
-              size={width * 24}
-              name={
-                Platform.OS === "android" ? "md-arrow-back" : "ios-arrow-back"
-              }
-              style={{ marginLeft: width * 24, marginTop: height * 20 }}
+            <Image
+              source={require("../assets/images/left-arrow.png")}
+              style={{
+                width: width * 20,
+                height: height * 17.22,
+                marginTop: height * 20,
+                marginLeft: width * 24,
+              }}
             />
           </TouchableOpacity>
         ),
         headerRight: () => (
           <TouchableOpacity onPress={() => navigation.navigate("Welcome")}>
-            <Ionicons
-              color={colors.primaryBlue}
-              size={width * 24}
-              name={Platform.OS === "android" ? "md-close" : "ios-close"}
-              style={{ marginRight: width * 24, marginTop: height * 20 }}
+            <Image
+              source={require("../assets/images/delete.png")}
+              style={{
+                width: width * 17.22,
+                height: height * 17.22,
+                marginTop: height * 20,
+                marginRight: width * 24,
+              }}
             />
           </TouchableOpacity>
         ),
@@ -139,23 +148,27 @@ export default () => (
         },
         headerLeft: () => (
           <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Ionicons
-              color={colors.primaryBlue}
-              size={width * 24}
-              name={
-                Platform.OS === "android" ? "md-arrow-back" : "ios-arrow-back"
-              }
-              style={{ marginLeft: width * 24, marginTop: height * 20 }}
+            <Image
+              source={require("../assets/images/left-arrow.png")}
+              style={{
+                width: width * 20,
+                height: height * 17.22,
+                marginTop: height * 20,
+                marginLeft: width * 24,
+              }}
             />
           </TouchableOpacity>
         ),
         headerRight: () => (
           <TouchableOpacity onPress={() => navigation.navigate("Welcome")}>
-            <Ionicons
-              color={colors.primaryBlue}
-              size={width * 24}
-              name={Platform.OS === "android" ? "md-close" : "ios-close"}
-              style={{ marginRight: width * 24, marginTop: height * 20 }}
+            <Image
+              source={require("../assets/images/delete.png")}
+              style={{
+                width: width * 17.22,
+                height: height * 17.22,
+                marginTop: height * 20,
+                marginRight: width * 24,
+              }}
             />
           </TouchableOpacity>
         ),
@@ -174,23 +187,27 @@ export default () => (
         },
         headerLeft: () => (
           <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Ionicons
-              color={colors.primaryBlue}
-              size={width * 24}
-              name={
-                Platform.OS === "android" ? "md-arrow-back" : "ios-arrow-back"
-              }
-              style={{ marginLeft: width * 24, marginTop: height * 20 }}
+            <Image
+              source={require("../assets/images/left-arrow.png")}
+              style={{
+                width: width * 20,
+                height: height * 17.22,
+                marginTop: height * 20,
+                marginLeft: width * 24,
+              }}
             />
           </TouchableOpacity>
         ),
         headerRight: () => (
           <TouchableOpacity onPress={() => navigation.navigate("Welcome")}>
-            <Ionicons
-              color={colors.primaryBlue}
-              size={width * 24}
-              name={Platform.OS === "android" ? "md-close" : "ios-close"}
-              style={{ marginRight: width * 24, marginTop: height * 20 }}
+            <Image
+              source={require("../assets/images/delete.png")}
+              style={{
+                width: width * 17.22,
+                height: height * 17.22,
+                marginTop: height * 20,
+                marginRight: width * 24,
+              }}
             />
           </TouchableOpacity>
         ),
@@ -209,23 +226,27 @@ export default () => (
         },
         headerLeft: () => (
           <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Ionicons
-              color={colors.primaryBlue}
-              size={width * 24}
-              name={
-                Platform.OS === "android" ? "md-arrow-back" : "ios-arrow-back"
-              }
-              style={{ marginLeft: width * 24, marginTop: height * 20 }}
+            <Image
+              source={require("../assets/images/left-arrow.png")}
+              style={{
+                width: width * 20,
+                height: height * 17.22,
+                marginTop: height * 20,
+                marginLeft: width * 24,
+              }}
             />
           </TouchableOpacity>
         ),
         headerRight: () => (
           <TouchableOpacity onPress={() => navigation.navigate("Welcome")}>
-            <Ionicons
-              color={colors.primaryBlue}
-              size={width * 24}
-              name={Platform.OS === "android" ? "md-close" : "ios-close"}
-              style={{ marginRight: width * 24, marginTop: height * 20 }}
+            <Image
+              source={require("../assets/images/delete.png")}
+              style={{
+                width: width * 17.22,
+                height: height * 17.22,
+                marginTop: height * 20,
+                marginRight: width * 24,
+              }}
             />
           </TouchableOpacity>
         ),
@@ -244,23 +265,27 @@ export default () => (
         },
         headerLeft: () => (
           <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Ionicons
-              color={colors.primaryBlue}
-              size={width * 24}
-              name={
-                Platform.OS === "android" ? "md-arrow-back" : "ios-arrow-back"
-              }
-              style={{ marginLeft: width * 24, marginTop: height * 20 }}
+            <Image
+              source={require("../assets/images/left-arrow.png")}
+              style={{
+                width: width * 20,
+                height: height * 17.22,
+                marginTop: height * 20,
+                marginLeft: width * 24,
+              }}
             />
           </TouchableOpacity>
         ),
         headerRight: () => (
           <TouchableOpacity onPress={() => navigation.navigate("Welcome")}>
-            <Ionicons
-              color={colors.primaryBlue}
-              size={width * 24}
-              name={Platform.OS === "android" ? "md-close" : "ios-close"}
-              style={{ marginRight: width * 24, marginTop: height * 20 }}
+            <Image
+              source={require("../assets/images/delete.png")}
+              style={{
+                width: width * 17.22,
+                height: height * 17.22,
+                marginTop: height * 20,
+                marginRight: width * 24,
+              }}
             />
           </TouchableOpacity>
         ),
@@ -279,23 +304,27 @@ export default () => (
         },
         headerLeft: () => (
           <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Ionicons
-              color={colors.primaryBlue}
-              size={width * 24}
-              name={
-                Platform.OS === "android" ? "md-arrow-back" : "ios-arrow-back"
-              }
-              style={{ marginLeft: width * 24, marginTop: height * 20 }}
+            <Image
+              source={require("../assets/images/left-arrow.png")}
+              style={{
+                width: width * 20,
+                height: height * 17.22,
+                marginTop: height * 20,
+                marginLeft: width * 24,
+              }}
             />
           </TouchableOpacity>
         ),
         headerRight: () => (
           <TouchableOpacity onPress={() => navigation.navigate("Welcome")}>
-            <Ionicons
-              color={colors.primaryBlue}
-              size={width * 24}
-              name={Platform.OS === "android" ? "md-close" : "ios-close"}
-              style={{ marginRight: width * 24, marginTop: height * 20 }}
+            <Image
+              source={require("../assets/images/delete.png")}
+              style={{
+                width: width * 17.22,
+                height: height * 17.22,
+                marginTop: height * 20,
+                marginRight: width * 24,
+              }}
             />
           </TouchableOpacity>
         ),

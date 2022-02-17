@@ -148,7 +148,7 @@ const Mid = styled.View`
 const Btm = styled.View`
   width: 364px;
   height: 56px;
-  background-color: ${colors.ligthGrey};
+  background-color: ${colors.whiteGray};
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 `;
@@ -167,7 +167,7 @@ const Warnning = styled.Text`
   font-family: "noto-regular";
   font-size: 10px;
   padding: 10px;
-  color: ${colors.coal};
+  color: ${colors.oxfordGray};
 `;
 
 const Select = styled.Pressable`
@@ -178,7 +178,7 @@ const Select = styled.Pressable`
   align-items: center;
 
   background-color: ${({ selectedName }) =>
-    selectedName !== null ? colors.mainBlue : colors.unAccent};
+    selectedName !== null ? colors.primaryBlue : colors.blueGray2};
 
   border-radius: 40px;
   margin-top: auto;
@@ -202,7 +202,7 @@ const StoreModal = ({ isModal, setIsModal, storeInfo, category }) => {
         <Top>
           <StoreInfo_mini storeInfo={storeInfo} category={category} />
           <BlueLine />
-          <Noto17 style={{ color: colors.mainBlue, marginTop: 20 }}>
+          <Noto17 style={{ color: colors.primaryBlue, marginTop: 20 }}>
             배달 플랫폼 선택
           </Noto17>
           <Noto14>주문을 진행할 배달 플랫폼을 선택해주세요</Noto14>
@@ -244,7 +244,7 @@ const StoreModal = ({ isModal, setIsModal, storeInfo, category }) => {
           >
             <Noto17
               style={{
-                color: selectedName ? "white" : colors.unselectedGrey,
+                color: selectedName ? "white" : colors.steelBlue2,
               }}
             >
               선택완료

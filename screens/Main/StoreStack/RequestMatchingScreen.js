@@ -49,7 +49,7 @@ const RequestMatchingScreen = (props) => {
           initialValue={timeNpersons.time}
           maxValue={timeNpersons.time}
           radius={120}
-          activeStrokeColor={colors.mainBlue}
+          activeStrokeColor={colors.primaryBlue}
           inActiveStrokeColor="grey"
           textColor={"#ecf0f1"}
           duration={timeNpersons.time * 60 * 1000} // ? ms 기준임.

@@ -25,7 +25,7 @@ import {
 const DividingLine = styled.View`
   width: 100%;
   height: 4px;
-  background-color: ${colors.unAccent};
+  background-color: ${colors.blueGray2};
 `;
 
 const ChatRoomBox = styled.Pressable`
@@ -40,7 +40,7 @@ const ImgBox = styled.View`
   width: 80px;
   height: 72px;
   border-radius: 10px;
-  background-color: ${colors.unAccent};
+  background-color: ${colors.blueGray2};
   margin-left: 24px;
 `;
 
@@ -98,7 +98,7 @@ const NunitoText = styled.Text`
 const TimeStamp = styled.Text`
   font-size: 14px;
   font-family: "nunito-regular";
-  color: ${colors.coal};
+  color: ${colors.oxfordGray};
   margin-left: auto;
 `;
 
@@ -316,11 +316,11 @@ export default ({ chatRoom }) => {
             <TimeStamp>{changeTimeStamp(lastMessage?.createdAt)}</TimeStamp>
           </InfoView>
           <InfoView style={{ marginTop: 8 }}>
-            <InfoText style={{ marginLeft: 3, color: colors.coal }}>
+            <InfoText style={{ marginLeft: 3, color: colors.oxfordGray }}>
               1인 배달비
             </InfoText>
-            <InfoText style={{ marginLeft: 4, color: colors.coal }}>
-              <NunitoText style={{ color: colors.coal }}>
+            <InfoText style={{ marginLeft: 4, color: colors.oxfordGray }}>
+              <NunitoText style={{ color: colors.oxfordGray }}>
                 10,000
                 {/* {storeInfo.minOrdPrice.toLocaleString("ko-KR")} */}
               </NunitoText>

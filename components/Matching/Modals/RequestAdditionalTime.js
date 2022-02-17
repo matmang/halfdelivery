@@ -127,7 +127,7 @@ export default ({ name }) => {
             style={{
               marginStart: 0.5,
               marginTop: 14,
-              backgroundColor: colors.mainBlue,
+              backgroundColor: colors.primaryBlue,
               width: 324,
               height: 1.5,
               alignSelf: "center",
@@ -139,7 +139,7 @@ export default ({ name }) => {
               fontFamily: "noto-regular",
               fontWeight: "400",
               fontSize: 17,
-              color: colors.mainBlue,
+              color: colors.primaryBlue,
               marginTop: 40,
               paddingLeft: 20,
             }}

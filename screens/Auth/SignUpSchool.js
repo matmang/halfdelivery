@@ -43,17 +43,19 @@ const PasswordContainer = styled.View`
 `;
 
 const ButtonContainer = styled.View`
+  flex: 1;
+  justify-content: flex-end;
   align-items: center;
   background-color: white;
   width: 100%;
+  padding-top: ${height * 12}px;
+  padding-bottom: ${height * 24}px;
   height: ${height * 82}px;
-  margin-top: ${height * 40}px;
-  position: absolute;
-  bottom: 0px;
+  bottom: 0;
 `;
 
 const PhaseText = styled.Text`
-  font-family: "noto-regular";
+  font-family: "noto-medium";
   font-size: 22px;
 `;
 
@@ -65,14 +67,14 @@ const ExplainText = styled.Text`
 `;
 
 const NameText = styled.Text`
-  font-family: "noto-regular";
+  font-family: "noto-medium";
   font-size: 15px;
   color: ${colors.primaryBlue};
 `;
 
 const CollegeText = styled.Text`
   margin-top: ${height * 10}px;
-  font-family: "noto-regular";
+  font-family: "noto-medium";
   font-size: 15px;
   color: ${colors.primaryBlue};
 `;

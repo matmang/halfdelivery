@@ -1,7 +1,6 @@
 import React from "react";
 import { Dimensions, Platform, Platfrom, Text } from "react-native";
 import styled from "styled-components";
-import PropTypes from "prop-types";
 import colors from "../../colors";
 import { Ionicons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -22,20 +21,20 @@ const Ranking = styled.View`
   height: 27px;
   justify-content: center;
   align-items: center;
-  background-color: ${colors.mainPink};
+  background-color: ${colors.primaryPink};
   border-radius: 30px;
 `;
 
 const RankingText = styled.Text`
   font-family: "nunito-regular";
-  color: ${colors.mainBlue};
+  color: ${colors.primaryBlue};
   font-size: 17px;
   font-weight: bold;
 `;
 
 const StoreInfo = styled.Text`
   font-family: "noto-regular";
-  color: ${colors.coal};
+  color: ${colors.captionGray};
   font-weight: bold;
 `;
 
@@ -89,7 +88,7 @@ const Popular = ({ index, storeInfo, navigation }) => (
         }
       />
       <Ionicons
-        color={colors.mainBlue}
+        color={colors.primaryBlue}
         size={32}
         name={
           Platform.OS === "android" ? "md-caret-up-sharp" : "ios-caret-up-sharp"

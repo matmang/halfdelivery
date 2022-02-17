@@ -41,21 +41,16 @@ const IDContainer = styled.View`
   z-index: 10;
 `;
 
-const PasswordContainer = styled.View`
-  margin-top: ${height * 15}px;
-  margin-left: ${width * 23}px;
-  margin-right: auto;
-  justify-content: flex-start;
-`;
-
 const ButtonContainer = styled.View`
+  flex: 1;
+  justify-content: flex-end;
   align-items: center;
   background-color: white;
   width: 100%;
+  padding-top: ${height * 12}px;
+  padding-bottom: ${height * 24}px;
   height: ${height * 82}px;
-  margin-top: ${height * 40}px;
-  position: absolute;
-  bottom: 0px;
+  bottom: 0;
 `;
 
 const Distributionline = styled.View`
@@ -71,7 +66,7 @@ const Distributionline = styled.View`
 `;
 
 const PhaseText = styled.Text`
-  font-family: "noto-regular";
+  font-family: "noto-medium";
   font-size: 22px;
 `;
 
@@ -80,12 +75,6 @@ const ExplainText = styled.Text`
   font-size: 14px;
   color: #3c3c3c;
   margin-top: ${height * -20}px;
-`;
-
-const TermText = styled.Text`
-  font-family: "noto-regular";
-  font-size: 15px;
-  color: ${colors.primaryBlue};
 `;
 
 export default ({ route: { params }, navigation }) => {
@@ -122,7 +111,7 @@ export default ({ route: { params }, navigation }) => {
         <ProgressContainer>
           <Image
             source={require("../../assets/images/SignUp4.png")}
-            style={{ width: width * 180, height: height * 44 }}
+            style={{ width: width * 42, height: height * 42 }}
           />
         </ProgressContainer>
         <PhaseContainer>

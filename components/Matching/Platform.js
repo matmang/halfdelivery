@@ -20,7 +20,7 @@ const Img = styled.Image`
   border-width: ${({ name, selectedName }) =>
     name === selectedName ? 1.5 : 0}px;
   border-color: ${({ name, selectedName }) =>
-    name === selectedName ? colors.mainBlue : "white"};
+    name === selectedName ? colors.primaryBlue : "white"};
 `;
 
 const Noto14 = styled.Text`
@@ -28,7 +28,7 @@ const Noto14 = styled.Text`
   font-size: 14px;
   margin-top: 12px;
   color: ${({ name, selectedName }) =>
-    name === selectedName ? colors.mainBlue : "black"};
+    name === selectedName ? colors.primaryBlue : "black"};
 
   /* text-decoration: ${({ name, selectedName }) =>
     name === selectedName ? "underline" : null}; */
@@ -38,7 +38,7 @@ const Underline = styled.View`
   margin-top: 2px;
   width: ${({ name }) => (name === "배달의 민족" ? "68px" : "54px")};
   height: 1.5px;
-  background-color: ${colors.mainBlue};
+  background-color: ${colors.primaryBlue};
 `;
 
 const Platforms = ({ name, selectedName, setSelectedName }) => {

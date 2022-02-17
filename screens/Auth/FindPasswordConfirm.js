@@ -25,7 +25,7 @@ const Container = styled.View`
 `;
 
 const LogoConatainer = styled.View`
-  margin-top: ${height * 62}px;
+  margin-top: ${height * 92}px;
   justify-content: center;
   align-items: center;
 `;
@@ -44,13 +44,6 @@ const NameContainer = styled.View`
   justify-content: flex-start;
 `;
 
-const PhoneNumberContainer = styled.View`
-  margin-top: ${height * 15}px;
-  margin-left: auto;
-  margin-right: auto;
-  justify-content: flex-start;
-`;
-
 const PasswordContainer = styled.View`
   margin-top: ${height * 15}px;
   margin-left: auto;
@@ -59,23 +52,28 @@ const PasswordContainer = styled.View`
 `;
 
 const ButtonContainer = styled.View`
+  flex: 1;
+  justify-content: flex-end;
   align-items: center;
   background-color: white;
   width: 100%;
+  padding-top: ${height * 12}px;
+  padding-bottom: ${height * 24}px;
   height: ${height * 82}px;
-  margin-top: ${height * 40}px;
-  position: absolute;
-  bottom: 0px;
+  bottom: 0;
 `;
 
 const GotoContainer = styled.View`
+  width: 100%;
+  margin-left: auto;
   align-items: center;
+  justify-content: flex-end;
   flex-direction: row;
-  justify-content: center;
+  margin-top: ${height * 104}px;
 `;
 
 const PhaseText = styled.Text`
-  font-family: "noto-regular";
+  font-family: "noto-medium";
   font-size: 22px;
 `;
 
@@ -87,15 +85,16 @@ const ExplainText = styled.Text`
 `;
 
 const NameText = styled.Text`
-  font-family: "noto-regular";
+  font-family: "noto-medium";
   font-size: 15px;
   color: ${colors.primaryBlue};
 `;
 
 const GotoText = styled.Text`
-  font-family: "noto-regular";
+  font-family: "noto-medium";
   font-size: 14px;
-  color: ${colors.blueGray};
+  margin-right: ${width * 24};
+  color: ${colors.captionGray};
 `;
 
 export default ({ navigation, route: { params } }) => {
@@ -212,17 +211,17 @@ export default ({ navigation, route: { params } }) => {
               />
               <GotoText>아이디 찾기 바로가기</GotoText>
             </GotoContainer>
+            <ButtonContainer>
+              <Btn
+                text={"설정완료"}
+                accent={accent == true}
+                onPress={() => {
+                  confirmFindId();
+                }}
+              />
+            </ButtonContainer>
           </Container>
         </ScrollView>
-        <ButtonContainer>
-          <Btn
-            text={"설정완료"}
-            accent={accent == true}
-            onPress={() => {
-              confirmFindId();
-            }}
-          />
-        </ButtonContainer>
         <FindPasswordModal
           isModalVisible={isModalVisible}
           onBackdropPress={() => setIsModalVisible(false)}

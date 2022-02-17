@@ -56,7 +56,7 @@ export default () => (
         },
         headerTitleAlign: "center",
         headerStyle: {
-          backgroundColor: colors.mainBlue,
+          backgroundColor: colors.primaryBlue,
           // alignItems: "center",
           // justifyContent: "center",
           // flex: 1,
