@@ -50,6 +50,23 @@ import {
 } from "../../../components/Matching/Modals/";
 import Dropdown from "../../../components/Dropdown";
 import SelectPlatform from "../../../components/Matching/Modals/SelectPlatform";
+import TEST_react_native_expo_image_cropper from "./TEST_react_native_expo_image_cropper";
+import TEST_expo_image_crop from "./TEST_expo_image_crop";
+import Participant from "../../../components/Matching/Participant";
+
+import ImageView from "react-native-image-viewing";
+
+const images = [
+  {
+    uri: "https://images.unsplash.com/photo-1571501679680-de32f1e7aad4",
+  },
+  {
+    uri: "https://images.unsplash.com/photo-1573273787173-0eb81a833b34",
+  },
+  {
+    uri: "https://images.unsplash.com/photo-1569569970363-df7b6160d111",
+  },
+];
 
 const ChatRoomScreen = (props) => {
   const [messages, setMessages] = useState([]);
@@ -59,6 +76,8 @@ const ChatRoomScreen = (props) => {
   const [authUser, setAuthUser] = useState([]);
   const route = useRoute();
   const [selectedDropdown, setSelectedDropdown] = useState(undefined);
+
+  const [visible, setIsVisible] = useState(false);
 
   //- 헤더바, 점3개 버튼누르면 작동
   const navigation = props.navigation;
@@ -154,180 +173,180 @@ const ChatRoomScreen = (props) => {
   }, []);
   console.log("authUser", authUser);
 
-  // // ? Order 테이블에 chatroomID 업데이트 하기.
-  // const updateOrder = async () => {
-  //   const authUser = await Auth.currentAuthenticatedUser();
-  //   console.log("유저ID", authUser.attributes.sub);
-
-  //   // //? 업데이트 할 Order 타겟팅.
-  //   // const allOrder = await DataStore.query(Order);
-  //   // console.log("allOrder", allOrder);
-  //   // const dbOrders = await DataStore.query(Order, (order) => order.userID("eq", authUser.attributes.sub), {
-  //   //   sort: (order) => order.orderDate(SortDirection.DESCENDING),
-  //   // });
-  //   // console.log("dbOrders", dbOrders);
-  //   // const lastOrderID = dbOrders[0].id;
-
-  //   const original = await DataStore.query(Order, route.params.orderID);
-  //   console.log("오리지날", original);
-  //   // ? 업데이트
-  //   await DataStore.save(
-  //     Order.copyOf(original, (updated) => {
-  //       updated.chatroomID = route.params.id;
-  //     })
-  //   );
-  // };
-
-  // const matchingRoomInfo = props.route.params !== undefined ? route.params.matchingRoomInfo : "No Data";
-
-  // // ! 임시 값.
-  // if (
-  //   // route.params.matchingRoomInfo === undefined ||
-  //   route.params.storeInfo === undefined ||
-  //   route.params.menuInfo === undefined
-  // ) {
-  //   const storeInfo = undefined;
-  //   const menuInfo = undefined;
-  // } else {
-  //   const matchingRoomInfo = route.params.matchingRoomInfo;
-  //   const storeInfo = route.params.storeInfo;
-  //   const menuInfo = route.params.menuInfo;
-  // }
-
-  // // const matchingRoomInfo = route.params.matchingRoomInfo;
-  // const storeInfo = route.params.storeInfo;
-  // const menuInfo = route.params.menuInfo;
-
-  // // console.log("파람스: ", props.route.params);
-
   // ? chatRoom 이 null 이면...
   if (!chatRoom) {
     return <ActivityIndicator />;
   }
 
+  const openImagePicker = () => {
+    ImagePicker.openPicker({
+      width: 300,
+      height: 400,
+      cropping: true,
+    }).then((image) => {
+      console.log(image);
+    });
+  };
+
   return (
-    <ScrollView style={styles.page}>
-      <View
-        style={{
-          width: 364,
-          height: 100,
-          backgroundColor: "lightgreen",
-          justifyContent: "center",
-          alignItems: "center",
-          alignSelf: "center",
-        }}
-      >
-        <Dropdown
-          placeholder="은행을 선택해주세요"
-          data={[
-            { label: "One", value: "1" },
-            { label: "Two", value: "2" },
-            { label: "Three", value: "3" },
-            { label: "Four", value: "4" },
-            { label: "Five", value: "5" },
-          ]}
-          onSelect={setSelectedDropdown}
-        />
-      </View>
+    <View>
+      <Participant />
 
-      <ViewProfilePartner />
-      <AddAdditionalTime />
-      <RequestAdditionalTime />
-      <InputOrderPrice />
-      <CancelMatching />
-      <MatchingCancelled />
-      <EjectPartner />
-    </ScrollView>
+      {/* <ImageView
+        images={images}
+        imageIndex={0}
+        visible={true}
+        onRequestClose={() => setIsVisible(false)}
+        FooterComponent={({ imageIndex }) => (
+          <View
+            style={{
+              height: "20%",
+              backgroundColor: "red",
+              marginBottom: 100,
+              justifyContent: "center",
+            }}
+          >
+            <Text
+              style={{
+                color: "white",
+                alignSelf: "center",
+              }}
+            >
+              {imageIndex}
+            </Text>
+          </View>
+        )}
+      /> */}
 
-    // ? View 대신 SafeAreaView 를 쓰면, 노치 같은 곳에 데이터가 표출되지 않는다. 굳!
-    // <SafeAreaView style={styles.page}>
-    //   {is3dots && (
-    //     <TopBox>
-    //       <Pressable
-    //         style={{
-    //           marginLeft: 20,
-    //           marginVertical: 10,
-    //           flexDirection: "row",
-    //         }}
-    //         onPress={() => {
-    //           console.log("Im pressed");
-    //           alert("신고해");
-    //         }}
-    //       >
-    //         <Image
-    //           source={require("../../../assets/images/ChatRoomScreen/alert4x.png")}
-    //           style={{ width: 18, height: 18.5 }}
-    //         />
-
-    //         <TextBox>신고하기</TextBox>
-    //         <MaterialCommunityIcons
-    //           name="arrow-top-right"
-    //           size={24}
-    //           color="black"
-    //           style={{ marginRight: 24 }}
-    //         />
-    //       </Pressable>
-    //       <Pressable
-    //         style={{
-    //           marginLeft: 20,
-    //           marginVertical: 10,
-    //           flexDirection: "row",
-    //         }}
-    //         onPress={() => {}}
-    //       >
-    //         <Image
-    //           source={require("../../../assets/images/ChatRoomScreen/ban4x.png")}
-    //           style={{ width: 18, height: 18 }}
-    //         />
-    //         <TextBox>차단하기</TextBox>
-    //         <MaterialCommunityIcons
-    //           name="arrow-top-right"
-    //           size={24}
-    //           color="black"
-    //           style={{ marginRight: 24 }}
-    //         />
-    //       </Pressable>
-    //       <Pressable
-    //         style={{
-    //           marginLeft: 20,
-    //           marginVertical: 10,
-    //           flexDirection: "row",
-    //         }}
-    //         onPress={() => {}}
-    //       >
-    //         <Image
-    //           source={require("../../../assets/images/ChatRoomScreen/leave4x.png")}
-    //           style={{ width: 15.95, height: 22.37 }}
-    //         />
-    //         <TextBox>채팅방 나가기</TextBox>
-    //         <MaterialCommunityIcons
-    //           name="arrow-top-right"
-    //           size={24}
-    //           color="black"
-    //           style={{ marginRight: 24 }}
-    //         />
-    //       </Pressable>
-    //     </TopBox>
-    //   )}
-    //   {/* //TODO: 어떠 컴포넌트로 위치시켜야 할까.. */}
-    //   {/* <EjectModal /> */}
-    //   <ProcessBox>
-    //     <ProcessImg
-    //       source={require("../../../assets/images/ChatRoomScreen/processBox/process_menuChecked.png")}
-    //     />
-    //   </ProcessBox>
-    //   {isDetail && <InfoDetail></InfoDetail>}
-    //   {/* 채팅메시지 */}
-    //   <FlatList
-    //     data={messages}
-    //     renderItem={({ item }) => (
-    //       <Message message={item} masterId={chatRoom.master} />
-    //     )}
-    //     inverted // ? 렌더링 순서 역전 - 왜 이렇게 하는지는, fechedMessages() 함수 속 "sort" 문장 확인해볼 것.
+      {/* <TEST_react_native_expo_image_cropper /> */}
+      {/* <TEST_expo_image_crop /> */}
+    </View>
+    // <ScrollView style={styles.page}>
+    //   {/* <Pressable
+    //     style={{ width: "100%", height: 50, backgroundColor: "blue" }}
+    //     // onPress={openImagePicker}
     //   />
-    //   {/* 채팅메시지 입력 */}
-    //   <MessageInput chatRoom={chatRoom} me={authUser.attributes} />
-    // </SafeAreaView>
+    //   <View
+    //     style={{
+    //       width: 364,
+    //       height: 100,
+    //       backgroundColor: "lightgreen",
+    //       justifyContent: "center",
+    //       alignItems: "center",
+    //       alignSelf: "center",
+    //     }}
+    //   >
+    //     <Dropdown
+    //       placeholder="은행을 선택해주세요"
+    //       data={[
+    //         { label: "One", value: "1" },
+    //         { label: "Two", value: "2" },
+    //         { label: "Three", value: "3" },
+    //         { label: "Four", value: "4" },
+    //         { label: "Five", value: "5" },
+    //       ]}
+    //       onSelect={setSelectedDropdown}
+    //     />
+    //   </View>
+
+    //   <ViewProfilePartner />
+    //   <AddAdditionalTime />
+    //   <RequestAdditionalTime />
+    //   <InputOrderPrice />
+    //   <CancelMatching />
+    //   <MatchingCancelled />
+    //   <EjectPartner /> */}
+    // </ScrollView>
+
+    // // ? View 대신 SafeAreaView 를 쓰면, 노치 같은 곳에 데이터가 표출되지 않는다. 굳!
+    // // <SafeAreaView style={styles.page}>
+    // //   {is3dots && (
+    // //     <TopBox>
+    // //       <Pressable
+    // //         style={{
+    // //           marginLeft: 20,
+    // //           marginVertical: 10,
+    // //           flexDirection: "row",
+    // //         }}
+    // //         onPress={() => {
+    // //           console.log("Im pressed");
+    // //           alert("신고해");
+    // //         }}
+    // //       >
+    // //         <Image
+    // //           source={require("../../../assets/images/ChatRoomScreen/alert4x.png")}
+    // //           style={{ width: 18, height: 18.5 }}
+    // //         />
+
+    // //         <TextBox>신고하기</TextBox>
+    // //         <MaterialCommunityIcons
+    // //           name="arrow-top-right"
+    // //           size={24}
+    // //           color="black"
+    // //           style={{ marginRight: 24 }}
+    // //         />
+    // //       </Pressable>
+    // //       <Pressable
+    // //         style={{
+    // //           marginLeft: 20,
+    // //           marginVertical: 10,
+    // //           flexDirection: "row",
+    // //         }}
+    // //         onPress={() => {}}
+    // //       >
+    // //         <Image
+    // //           source={require("../../../assets/images/ChatRoomScreen/ban4x.png")}
+    // //           style={{ width: 18, height: 18 }}
+    // //         />
+    // //         <TextBox>차단하기</TextBox>
+    // //         <MaterialCommunityIcons
+    // //           name="arrow-top-right"
+    // //           size={24}
+    // //           color="black"
+    // //           style={{ marginRight: 24 }}
+    // //         />
+    // //       </Pressable>
+    // //       <Pressable
+    // //         style={{
+    // //           marginLeft: 20,
+    // //           marginVertical: 10,
+    // //           flexDirection: "row",
+    // //         }}
+    // //         onPress={() => {}}
+    // //       >
+    // //         <Image
+    // //           source={require("../../../assets/images/ChatRoomScreen/leave4x.png")}
+    // //           style={{ width: 15.95, height: 22.37 }}
+    // //         />
+    // //         <TextBox>채팅방 나가기</TextBox>
+    // //         <MaterialCommunityIcons
+    // //           name="arrow-top-right"
+    // //           size={24}
+    // //           color="black"
+    // //           style={{ marginRight: 24 }}
+    // //         />
+    // //       </Pressable>
+    // //     </TopBox>
+    // //   )}
+    // //   {/* //TODO: 어떠 컴포넌트로 위치시켜야 할까.. */}
+    // //   {/* <EjectModal /> */}
+    // //   <ProcessBox>
+    // //     <ProcessImg
+    // //       source={require("../../../assets/images/ChatRoomScreen/processBox/process_menuChecked.png")}
+    // //     />
+    // //   </ProcessBox>
+    // //   {isDetail && <InfoDetail></InfoDetail>}
+    // //   {/* 채팅메시지 */}
+    // //   <FlatList
+    // //     data={messages}
+    // //     renderItem={({ item }) => (
+    // //       <Message message={item} masterId={chatRoom.master} />
+    // //     )}
+    // //     inverted // ? 렌더링 순서 역전 - 왜 이렇게 하는지는, fechedMessages() 함수 속 "sort" 문장 확인해볼 것.
+    // //   />
+    // //   {/* 채팅메시지 입력 */}
+    // //   <MessageInput chatRoom={chatRoom} me={authUser.attributes} />
+    // // </SafeAreaView>
   );
 };
 
