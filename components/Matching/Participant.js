@@ -2,7 +2,6 @@ import { View, Text, ScrollView, Image } from "react-native";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { width, height } from "../../utils";
-import RoundedBtn from "../RoundedBtn";
 import { SetAndViewImage } from ".";
 import colors from "../../colors";
 
@@ -41,6 +40,7 @@ export default ({ _isReady, imageUri, username, isHost, orderPrice }) => {
           </Status>
         </TopRight>
       </Top>
+
       <Mid>
         <ImagesZone
           contentContainerStyle={{
@@ -88,6 +88,7 @@ export default ({ _isReady, imageUri, username, isHost, orderPrice }) => {
           </PicNumIndicator>
         )}
       </Mid>
+
       <Bottom isReady={isReady}>
         <View
           style={{

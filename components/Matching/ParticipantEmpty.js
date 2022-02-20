@@ -35,6 +35,7 @@ export default () => {
           </EmptyStatus>
         </TopRight>
       </Top>
+
       <Mid>
         <ImagesZoneView
           style={{
@@ -63,6 +64,7 @@ export default () => {
           </ImageBox>
         </ImagesZoneView>
       </Mid>
+
       <Bottom>
         <View
           style={{

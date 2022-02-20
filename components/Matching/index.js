@@ -8,6 +8,8 @@ import QuantitySelector from "./QuantitySelector";
 import StoreComponent from "./StoreComponent";
 import StoreItem from "./StoreItem";
 import StoreList from "./StoreList";
+import PriceReadyBoxHost from "./PriceReadyBoxHost";
+import PriceReadyBoxPartner from "./PriceReadyBoxPartner";
 
 export {
   SetAndViewImage,
@@ -20,4 +22,6 @@ export {
   StoreComponent,
   StoreItem,
   StoreList,
+  PriceReadyBoxHost,
+  PriceReadyBoxPartner,
 };
