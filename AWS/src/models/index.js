@@ -4,16 +4,15 @@ import { schema } from './schema';
 
 
 
-const { OrderMenu, Order, StoreCategory, Store, Menu, ChatRoom, Message, ChatRoomUser, User } = initSchema(schema);
+const { Participant, User, ChatRoomUser, ChatRoom, Message, StoreCategory, Store, Menu } = initSchema(schema);
 
 export {
-  OrderMenu,
-  Order,
-  StoreCategory,
-  Store,
-  Menu,
+  Participant,
+  User,
+  ChatRoomUser,
   ChatRoom,
   Message,
-  ChatRoomUser,
-  User
+  StoreCategory,
+  Store,
+  Menu
 };

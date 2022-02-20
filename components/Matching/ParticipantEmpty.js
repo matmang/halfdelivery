@@ -3,74 +3,67 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { width, height } from "../../utils";
 import RoundedBtn from "../RoundedBtn";
-import { SetAndViewImage } from ".";
 import colors from "../../colors";
 
-export default ({ _isReady, imageUri, username, isHost, orderPrice }) => {
-  const isReady = true;
-  const [images, setImages] = useState([]);
-  console.log("images", images);
-
+export default () => {
   return (
     <Root>
       <Top>
         <TopLeft>
           <ProfileImg
-            source={
-              {
-                // uri: user.imageUri,
-              }
-            }
+            source={require("../../assets/images/default_prf_img_dimmed.png")}
           />
         </TopLeft>
         <TopRight>
           <Text style={{ fontSize: 12 }}>
-            <Text style={{ fontFamily: "nunito-regular" }}>Master</Text>
-            <Text style={{ fontFamily: "noto-regular" }}>{"   "}윤**</Text>
+            <Text
+              style={{ fontFamily: "nunito-regular", color: colors.steelBlue2 }}
+            >
+              Partner
+            </Text>
           </Text>
-          <Status isReady={isReady}>
+          <EmptyStatus>
             <Text
               style={{
-                color: isReady ? colors.primaryBlue : colors.steelBlue2,
+                color: colors.steelBlue2,
                 fontFamily: "noto-medium",
                 fontSize: 10,
               }}
             >
-              {isReady ? "준비완료" : "준비중"}
+              ˙˙˙
             </Text>
-          </Status>
+          </EmptyStatus>
         </TopRight>
       </Top>
       <Mid>
-        <ImagesZone
-          contentContainerStyle={{
+        <ImagesZoneView
+          style={{
             justifyConent: "center",
             alignItems: "center",
           }}
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}
         >
-          <SetAndViewImage
-            isReady={isReady}
-            setImages={setImages}
-            images={images}
-            index={0}
-          />
-          <SetAndViewImage
-            isReady={isReady}
-            setImages={setImages}
-            images={images}
-            index={1}
-          />
-          <SetAndViewImage
-            isReady={isReady}
-            setImages={setImages}
-            images={images}
-            index={2}
-          />
-        </ImagesZone>
+          <ImageBox>
+            <View
+              onPress={() => {
+                !image ? pickImage() : setIsVisible(true);
+              }}
+              style={{
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Image
+                source={require("../../assets/images/select_image.png")}
+                style={{
+                  width: width * 70,
+                  height: height * 70,
+                }}
+              />
+            </View>
+          </ImageBox>
+        </ImagesZoneView>
       </Mid>
-      <Bottom isReady={isReady}>
+      <Bottom>
         <View
           style={{
             flex: 3,
@@ -79,18 +72,14 @@ export default ({ _isReady, imageUri, username, isHost, orderPrice }) => {
           }}
         >
           <Image
-            source={
-              isReady
-                ? require("../../assets/images/won.png")
-                : require("../../assets/images/won_dimmed.png")
-            }
+            source={require("../../assets/images/won_dimmed.png")}
             style={{ width: width * 13, height: height * 13, marginLeft: 11 }}
           />
           <Text
             style={{
               fontFamily: "noto-regular",
               fontSize: 12,
-              color: isReady ? "white" : colors.steelBlue2,
+              color: colors.steelBlue2,
             }}
           >
             {"   "}주문금액
@@ -108,12 +97,10 @@ export default ({ _isReady, imageUri, username, isHost, orderPrice }) => {
             style={{
               fontSize: 15,
               fontFamily: "nunito-semibold",
-              color: isReady ? "white" : colors.steelBlue2,
+              color: colors.steelBlue2,
               marginTop: 1,
             }}
-          >
-            {"20000".toLocaleString("ko-KR")}
-          </Text>
+          ></Text>
         </View>
 
         <View
@@ -124,7 +111,7 @@ export default ({ _isReady, imageUri, username, isHost, orderPrice }) => {
           <Text
             style={{
               fontSize: 12,
-              color: isReady ? "white" : colors.steelBlue2,
+              color: colors.steelBlue2,
               fontFamily: "noto-regular",
             }}
           >
@@ -140,7 +127,7 @@ const Root = styled.View`
   width: ${width * 174}px;
   height: ${height * 182}px;
   background-color: white;
-  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.05);
   border-radius: 10px;
   opacity: 1;
 
@@ -161,8 +148,8 @@ const ProfileImg = styled.Image`
   height: ${height * 38}px;
   width: ${width * 38}px;
   border-radius: 38px;
-  border-width: 1.5px;
-  border-color: #0e257c;
+  /* border-width: 1.5px;
+  border-color: #0e257c; */
   margin-left: 10px;
 `;
 
@@ -174,11 +161,12 @@ const TopRight = styled.View`
 
 // const Name = styled.Text``;
 
-const Status = styled.View`
+const EmptyStatus = styled.View`
   width: ${width * 76}px;
   height: ${height * 19}px;
-  border-width: 1.5;
-  border-color: ${(props) => (props.isReady ? "#0e257c" : "#ADB1C0")};
+  /* border-width: 1.5;
+  border-color: ${colors.whiteGray}; */
+  background-color: ${colors.whiteGray};
   border-radius: 10px;
   justify-content: center;
   align-items: center;
@@ -189,10 +177,10 @@ const Mid = styled.View`
   flex: 0.52;
 `;
 
-const ImagesZone = styled.ScrollView`
+const ImagesZoneView = styled.View`
   width: ${width * 174}px;
   height: ${height * 87}px;
-  background: #f5f6f6;
+  background: ${colors.whiteGray};
   flex-direction: row;
   padding-left: 10px;
   /* justify-content: center;
@@ -200,16 +188,39 @@ const ImagesZone = styled.ScrollView`
   opacity: 1;
 `;
 
+// const ImageBox = styled.View`
+//   width: ${width * 75}px;
+//   height: ${height * 75}px;
+//   border-width: 1.5;
+//   border-color: #0e257c;
+//   border-radius: 10px;
+//   box-shadow: 3px 3px 6px #00000029;
+//   margin: 2px;
+//   opacity: 1;
+// `;
+
 const Bottom = styled.View`
   flex: 0.17;
   width: ${width * 174}px;
   height: ${height * 31}px;
-  background: ${(props) =>
-    props.isReady ? colors.primaryBlue : colors.blueGray2};
+  background: white;
   opacity: 1;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   flex-direction: row;
   /* justify-content: center; */
+  align-items: center;
+`;
+
+const ImageBox = styled.View`
+  width: ${width * 73}px;
+  height: ${height * 73}px;
+  border-width: 1.5px;
+  border-color: ${colors.coolGray};
+  border-radius: 10px;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.05);
+  margin: 2px;
+  opacity: 1;
+  justify-content: center;
   align-items: center;
 `;

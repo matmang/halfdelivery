@@ -37,11 +37,11 @@ const ChatListScreen = () => {
   useEffect(() => {
     const fetchChatRooms = async () => {
       const authUser = await Auth.currentAuthenticatedUser();
-      const chatRooms = (await DataStore.query(ChatRoomUser))
-        // .filter(
-        //   (ChatRoomUser) => ChatRoomUser.user.id === authUser.attributes.sub //! 채팅방기능 테스트 하는동안에는 주석처리할 것!
-        // )
-        .map((ChatRoomUser) => ChatRoomUser.chatroom);
+      const chatRooms = await DataStore.query(ChatRoom);
+      // .filter(
+      //   (ChatRoomUser) => ChatRoomUser.user.id === authUser.attributes.sub //! 채팅방기능 테스트 하는동안에는 주석처리할 것!
+      // )
+      // .map((ChatRoomUser) => ChatRoomUser.chatroom);
 
       setChatRooms(chatRooms);
     };
@@ -51,6 +51,7 @@ const ChatListScreen = () => {
     // };
     fetchChatRooms();
   }, []);
+  console.log(chatRooms);
 
   if (!authUser) {
     return <ActivityIndicator />;
