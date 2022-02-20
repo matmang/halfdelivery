@@ -21,86 +21,7 @@ import {
   OnTransfering,
   Transferred,
 } from "../Statuses";
-
-const DividingLine = styled.View`
-  width: 100%;
-  height: 4px;
-  background-color: ${colors.blueGray2};
-`;
-
-const ChatRoomBox = styled.Pressable`
-  width: 100%;
-  height: 92px;
-  flex-direction: row;
-  align-items: center;
-  background-color: lightgreen;
-`;
-
-const ImgBox = styled.View`
-  width: 80px;
-  height: 72px;
-  border-radius: 10px;
-  background-color: ${colors.blueGray2};
-  margin-left: 24px;
-`;
-
-const Img40 = styled.Image`
-  height: 45px;
-  width: 45px;
-  border-radius: 45px;
-  border-width: 2px;
-`;
-
-const Img35 = styled.Image`
-  height: 35px;
-  width: 35px;
-  border-radius: 35px;
-  border-width: 2px;
-`;
-
-const NonImgBox = styled.View`
-  margin-left: 20px;
-  flex: 1;
-  width: auto;
-  height: 92px;
-  justify-content: center;
-  background-color: white;
-  margin-right: 12px;
-`;
-
-const InfoView = styled.View`
-  flex-direction: row;
-  align-items: center;
-  background-color: white;
-`;
-
-const StoreText = styled.Text`
-  font-size: 17px;
-  line-height: 20px;
-  text-align: left;
-  font-family: "noto-regular";
-  margin-bottom: 3px;
-`;
-
-const InfoText = styled.Text`
-  font-size: 14px;
-  line-height: 16px;
-  text-align: left;
-  font-family: "noto-regular";
-`;
-
-const NunitoText = styled.Text`
-  font-size: 14px;
-  font-family: "nunito-regular";
-  text-align: right;
-`;
-
-const TimeStamp = styled.Text`
-  font-size: 14px;
-  font-family: "nunito-regular";
-  color: ${colors.oxfordGray};
-  margin-left: auto;
-`;
+import { width, height } from "../../utils";
 
 export default ({ chatRoom }) => {
   // const [users, setUsers] = useState([]); // ? All users in this chatRoom
@@ -109,7 +30,7 @@ export default ({ chatRoom }) => {
   const [persons, setPersons] = useState(2);
   //! 임시값
   const user_imageUri =
-    "https://media.istockphoto.com/photos/beauty-portrait-of-young-woman-picture-id1309405076?s=612x612";
+    "https://images.mktw.net/im-433977?width=700&height=487";
 
   const navigation = useNavigation();
 
@@ -175,28 +96,29 @@ export default ({ chatRoom }) => {
         {/* //- 2명일때 배치 */}
         {persons === 2 && (
           <ImgBox>
-            <Img40
+            <Img38
               source={{
                 // uri: user.imageUri,
                 uri: user_imageUri,
               }}
               style={{
-                marginLeft: 5,
-                marginTop: 5,
-                borderColor: "black",
+                marginLeft: width * 31,
+                marginTop: height * 27,
+                // borderColor: "black",
+                borderWidth: 0,
+                backgroundColor: "orange",
                 position: "absolute",
               }}
             />
-            <Img40
+            <Img38
               source={{
                 // uri: user.imageUri,
                 uri: user_imageUri,
               }}
               style={{
-                marginLeft: 32,
-                marginTop: 24,
-                borderColor: "red",
-                backgroundColor: "orange",
+                marginLeft: width * 3,
+                marginTop: height * 7,
+                borderColor: colors.primaryBlue,
                 position: "absolute",
               }}
             />
@@ -206,39 +128,41 @@ export default ({ chatRoom }) => {
         {/* //- 3명일때 배치 */}
         {persons === 3 && (
           <ImgBox>
-            <Img35
+            <Img32
               source={{
                 // uri: user.imageUri,
                 uri: user_imageUri,
               }}
               style={{
-                marginLeft: 8,
-                marginTop: 5,
-                borderColor: "black",
+                marginLeft: width * 4,
+                marginTop: height * 4,
+                borderColor: colors.primaryBlue,
                 position: "absolute",
               }}
             />
-            <Img35
+            <Img32
               source={{
                 // uri: user.imageUri,
                 uri: user_imageUri,
               }}
               style={{
-                marginLeft: 38,
-                marginTop: 5,
-                borderColor: "black",
+                marginLeft: width * 36,
+                marginTop: height * 4,
+                // borderColor: "black",
+                borderWidth: 0,
                 position: "absolute",
               }}
             />
-            <Img35
+            <Img32
               source={{
                 // uri: user.imageUri,
                 uri: user_imageUri,
               }}
               style={{
-                marginLeft: 22.5,
-                marginTop: 30,
-                borderColor: "red",
+                marginLeft: width * 20,
+                marginTop: height * 36,
+                // borderColor: "red",
+                borderWidth: 0,
                 backgroundColor: "orange",
                 position: "absolute",
               }}
@@ -249,51 +173,54 @@ export default ({ chatRoom }) => {
         {/* //- 4명일때 배치 */}
         {persons === 4 && (
           <ImgBox>
-            <Img35
+            <Img32
               source={{
                 // uri: user.imageUri,
                 uri: user_imageUri,
               }}
               style={{
-                marginLeft: 8,
-                marginTop: 5,
-                borderColor: "black",
+                marginLeft: width * 4,
+                marginTop: height * 4,
+                borderColor: colors.primaryBlue,
                 position: "absolute",
               }}
             />
-            <Img35
+            <Img32
               source={{
                 // uri: user.imageUri,
                 uri: user_imageUri,
               }}
               style={{
-                marginLeft: 38,
-                marginTop: 5,
-                borderColor: "black",
+                marginLeft: width * 36,
+                marginTop: height * 4,
+                // borderColor: "black",
+                borderWidth: 0,
                 position: "absolute",
               }}
             />
-            <Img35
+            <Img32
               source={{
                 // uri: user.imageUri,
                 uri: user_imageUri,
               }}
               style={{
-                marginLeft: 8,
-                marginTop: 30,
-                borderColor: "black",
+                marginLeft: width * 4,
+                marginTop: height * 36,
+                // borderColor: "black",
+                borderWidth: 0,
                 position: "absolute",
               }}
             />
-            <Img35
+            <Img32
               source={{
                 // uri: user.imageUri,
                 uri: user_imageUri,
               }}
               style={{
-                marginLeft: 38,
-                marginTop: 30,
-                borderColor: "red",
+                marginLeft: width * 36,
+                marginTop: height * 36,
+                // borderColor: "black",
+                borderWidth: 0,
                 backgroundColor: "orange",
                 position: "absolute",
               }}
@@ -311,15 +238,19 @@ export default ({ chatRoom }) => {
               name="arrow-forward-ios"
               size={12}
               color="black"
-              style={{ marginLeft: 12, marginBottom: 6 }}
+              style={{ marginLeft: width * 12, marginBottom: 6 }}
             />
             <TimeStamp>{changeTimeStamp(lastMessage?.createdAt)}</TimeStamp>
           </InfoView>
-          <InfoView style={{ marginTop: 8 }}>
-            <InfoText style={{ marginLeft: 3, color: colors.oxfordGray }}>
+          <InfoView style={{ marginTop: height * 8 }}>
+            <InfoText
+              style={{ marginLeft: width * 3, color: colors.oxfordGray }}
+            >
               1인 배달비
             </InfoText>
-            <InfoText style={{ marginLeft: 4, color: colors.oxfordGray }}>
+            <InfoText
+              style={{ marginLeft: width * 4, color: colors.oxfordGray }}
+            >
               <NunitoText style={{ color: colors.oxfordGray }}>
                 10,000
                 {/* {storeInfo.minOrdPrice.toLocaleString("ko-KR")} */}
@@ -364,3 +295,85 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
 });
+
+const DividingLine = styled.View`
+  width: 100%;
+  height: 4px;
+  background-color: ${colors.blueGray2};
+`;
+
+const ChatRoomBox = styled.Pressable`
+  width: 100%;
+  height: 92px;
+  flex-direction: row;
+  align-items: center;
+  background-color: lightgreen;
+`;
+
+const ImgBox = styled.View`
+  width: ${width * 72}px;
+  height: ${height * 72}px;
+  border-radius: 16px;
+  background-color: ${colors.blueGray2};
+  margin-left: 24px;
+`;
+
+const Img38 = styled.Image`
+  width: ${width * 38}px;
+  height: ${height * 38}px;
+  border-radius: 38px;
+  border-width: 1.5px;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+`;
+
+const Img32 = styled.Image`
+  width: ${width * 32}px;
+  height: ${height * 32}px;
+  border-radius: 32px;
+  border-width: 1.5px;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+`;
+
+const NonImgBox = styled.View`
+  margin-left: 20px;
+  flex: 1;
+  width: auto;
+  height: 92px;
+  justify-content: center;
+  background-color: white;
+  margin-right: 12px;
+`;
+
+const InfoView = styled.View`
+  flex-direction: row;
+  align-items: center;
+  background-color: white;
+`;
+
+const StoreText = styled.Text`
+  font-size: 17px;
+  line-height: 20px;
+  text-align: left;
+  font-family: "noto-regular";
+  margin-bottom: 3px;
+`;
+
+const InfoText = styled.Text`
+  font-size: 14px;
+  line-height: 16px;
+  text-align: left;
+  font-family: "noto-regular";
+`;
+
+const NunitoText = styled.Text`
+  font-size: 14px;
+  font-family: "nunito-regular";
+  text-align: right;
+`;
+
+const TimeStamp = styled.Text`
+  font-size: 14px;
+  font-family: "nunito-regular";
+  color: ${colors.oxfordGray};
+  margin-left: auto;
+`;

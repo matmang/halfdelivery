@@ -83,7 +83,7 @@ export default ({ _isReady, imageUri, username, isHost, orderPrice }) => {
                 marginLeft: 3,
               }}
             >
-              {images.length <= 2 ? images.length : 2}
+              {images.length <= 2 ? images.length : "+"}
             </Text>
           </PicNumIndicator>
         )}
