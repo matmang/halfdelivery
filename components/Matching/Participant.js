@@ -69,6 +69,24 @@ export default ({ _isReady, imageUri, username, isHost, orderPrice }) => {
             index={2}
           />
         </ImagesZone>
+        {!!images.length && (
+          <PicNumIndicator>
+            <Image
+              source={require("../../assets/images/pictures_10.png")}
+              style={{ width: width * 9, height: height * 9 }}
+            />
+            <Text
+              style={{
+                fontFamily: "nunito-regular",
+                color: "white",
+                fontSize: 8,
+                marginLeft: 3,
+              }}
+            >
+              {images.length <= 2 ? images.length : 2}
+            </Text>
+          </PicNumIndicator>
+        )}
       </Mid>
       <Bottom isReady={isReady}>
         <View
@@ -212,4 +230,20 @@ const Bottom = styled.View`
   flex-direction: row;
   /* justify-content: center; */
   align-items: center;
+`;
+
+const PicNumIndicator = styled.View`
+  width: ${width * 32}px;
+  height: ${height * 16}px;
+  background-color: black;
+  opacity: 0.8;
+  border-radius: 8px;
+  flex-direction: row;
+
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  margin-left: ${width * 128}px;
+  margin-right: ${width * 16}px;
+  margin-top: ${height * 60}px;
 `;
