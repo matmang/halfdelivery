@@ -11,15 +11,16 @@ export default ({ isReady, images, setImages, index }) => {
   const [visible, setIsVisible] = useState(false);
   console.log("images", images);
 
-  const pickImage = async (setIsModal) => {
+  const pickImage = async () => {
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    // console.log("ImagePermission status", status);
+    console.log("ImagePermission status", status);
 
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       aspect: [4, 3],
       quality: 1,
+      allowsMultipleSelection: true,
     });
 
     console.log("result", result);

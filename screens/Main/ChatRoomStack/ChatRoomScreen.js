@@ -60,6 +60,7 @@ import {
 } from "../../../components/Matching";
 import ImageView from "react-native-image-viewing";
 import Timer from "../../../components/Timer";
+import MyOrderImages from "../../../components/Matching/MyOrderImages";
 
 const images = [
   {
@@ -195,6 +196,7 @@ const ChatRoomScreen = (props) => {
 
   return (
     <View>
+      <MyOrderImages />
       <Participant />
       <ParticipantEmpty />
       <PriceReadyBoxHost />

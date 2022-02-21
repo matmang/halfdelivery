@@ -2,7 +2,7 @@ import { View, Text, ScrollView, Image } from "react-native";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { width, height } from "../../utils";
-import SetAndViewImage from "./pickImage/SetAndViewImage";
+import PickAndViewImage from "./renderImage/PickAndViewImage";
 import colors from "../../colors";
 
 export default ({ _isReady, imageUri, username, isHost, orderPrice }) => {
@@ -42,33 +42,69 @@ export default ({ _isReady, imageUri, username, isHost, orderPrice }) => {
       </Top>
 
       <Mid>
-        <ImagesZone
-          contentContainerStyle={{
-            justifyConent: "center",
-            alignItems: "center",
-          }}
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}
-        >
-          <SetAndViewImage
+        {/* //- 이미지가 없을떄 (최초) */}
+        {/* {!images.length && (
+          <ImagesZone>
+            <PickAndViewImage
+              isReady={isReady}
+              setImages={setImages}
+              images={images}
+              index={0}
+            />
+          </ImagesZone>
+        )} */}
+
+        {/* //- 이미지가 2개일때 */}
+        {/* {!!images.length && images.length === 1 && (
+          <ImagesZone>
+            <PickAndViewImage
+              isReady={isReady}
+              setImages={setImages}
+              images={images}
+              index={0}
+            />
+            <PickAndViewImage
+              isReady={isReady}
+              setImages={setImages}
+              images={images}
+              index={1}
+            />
+          </ImagesZone>
+        )} */}
+
+        {/* //- 이미지가 2개일때 */}
+        {/* {!!images.length && images.length === 2 && (
+          <ImagesZone>
+            <PickAndViewImage
+              isReady={isReady}
+              setImages={setImages}
+              images={images}
+              index={0}
+            />
+            <PickAndViewImage
+              isReady={isReady}
+              setImages={setImages}
+              images={images}
+              index={1}
+            />
+          </ImagesZone>
+        )} */}
+
+        <ImagesZone>
+          <PickAndViewImage
             isReady={isReady}
             setImages={setImages}
             images={images}
             index={0}
           />
-          <SetAndViewImage
+          <PickAndViewImage
             isReady={isReady}
             setImages={setImages}
             images={images}
             index={1}
           />
-          <SetAndViewImage
-            isReady={isReady}
-            setImages={setImages}
-            images={images}
-            index={2}
-          />
         </ImagesZone>
+
         {!!images.length && (
           <PicNumIndicator>
             <Image
@@ -208,14 +244,14 @@ const Mid = styled.View`
   flex: 0.52;
 `;
 
-const ImagesZone = styled.ScrollView`
+const ImagesZone = styled.View`
   width: ${width * 174}px;
   height: ${height * 87}px;
   background: white;
   flex-direction: row;
   padding-left: 10px;
-  /* justify-content: center;
-  align-items: center; */
+  /* justify-content: center; */
+  align-items: center;
   opacity: 1;
 `;
 
