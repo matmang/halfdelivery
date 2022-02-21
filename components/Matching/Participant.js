@@ -2,7 +2,7 @@ import { View, Text, ScrollView, Image } from "react-native";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { width, height } from "../../utils";
-import { SetAndViewImage } from "./SetAndViewImage";
+import SetAndViewImage from "./pickImage/SetAndViewImage";
 import colors from "../../colors";
 
 export default ({ _isReady, imageUri, username, isHost, orderPrice }) => {
@@ -196,7 +196,7 @@ const TopRight = styled.View`
 const Status = styled.View`
   width: ${width * 76}px;
   height: ${height * 19}px;
-  border-width: 1.5;
+  border-width: 1.5px;
   border-color: ${(props) => (props.isReady ? "#0e257c" : "#ADB1C0")};
   border-radius: 10px;
   justify-content: center;
@@ -211,7 +211,7 @@ const Mid = styled.View`
 const ImagesZone = styled.ScrollView`
   width: ${width * 174}px;
   height: ${height * 87}px;
-  background: #f5f6f6;
+  background: white;
   flex-direction: row;
   padding-left: 10px;
   /* justify-content: center;

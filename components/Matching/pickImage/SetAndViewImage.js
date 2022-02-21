@@ -1,10 +1,10 @@
 import { View, Text, Pressable, Image } from "react-native";
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { width, height } from "../../utils";
+import { width, height } from "../../../utils";
 import * as ImagePicker from "expo-image-picker";
 import ImageView from "react-native-image-viewing";
-import colors from "../../colors";
+import colors from "../../../colors";
 
 export default ({ isReady, images, setImages, index }) => {
   const [image, setImage] = useState(null);
@@ -45,7 +45,7 @@ export default ({ isReady, images, setImages, index }) => {
       >
         {!image ? (
           <Image
-            source={require("../../assets/images/select_image.png")}
+            source={require("../../../assets/images/select_image.png")}
             style={{
               width: width * 70,
               height: height * 70,

@@ -1,4 +1,3 @@
-import SetAndViewImage from "./SetAndViewImage";
 import MenuItem from "./MenuItem";
 import MenuList from "./MenuList";
 import Participant from "./Participant";
@@ -12,7 +11,6 @@ import PriceReadyBoxHost from "./PriceReadyBoxHost";
 import PriceReadyBoxPartner from "./PriceReadyBoxPartner";
 
 export {
-  SetAndViewImage,
   MenuItem,
   MenuList,
   Participant,

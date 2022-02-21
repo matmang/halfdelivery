@@ -28,12 +28,14 @@ export default ({ time, simple, style }) => {
           style={{
             fontFamily: "noto-regular",
             fontSize: 11,
+            color: colors.oxfordGray,
           }}
         >
           <Text
             style={{
               fontFamily: "nunito-regular",
               fontSize: 12,
+              color: colors.oxfordGray,
             }}
           >
             {" "}
@@ -46,6 +48,7 @@ export default ({ time, simple, style }) => {
           style={{
             fontFamily: "noto-regular",
             fontSize: 11,
+            color: colors.oxfordGray,
           }}
         >
           {"  "}
@@ -54,6 +57,7 @@ export default ({ time, simple, style }) => {
             style={{
               fontFamily: "nunito-regular",
               fontSize: 12,
+              color: colors.oxfordGray,
             }}
           >
             {time}

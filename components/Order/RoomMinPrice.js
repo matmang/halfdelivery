@@ -84,7 +84,7 @@ const RoomMinPrice = ({ chatRoomInfo }) => {
           <Noto14medium style={{ marginLeft: width * 8 }}>
             브라운돈까스 안산한양대점
           </Noto14medium>
-          <Timer style={{ marginLeft: width * 26 }} simple={true} />
+          <Timer style={{ marginLeft: width * 30 }} simple={true} />
         </Header>
         <InfoBox>
           <Top>
@@ -278,7 +278,7 @@ const TopLeft = styled.View`
   /* background-color: yellow; */
   flex-direction: row;
   align-items: center;
-  margin-left: ${width * 2}px;
+  /* margin-left: ${width * 2}px; */
   /* margin-right: ${width * 10}px; */
   /* justify-content: center; */
 `;

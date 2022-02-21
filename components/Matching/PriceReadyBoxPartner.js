@@ -37,25 +37,29 @@ export default ({ price }) => {
       </Left>
       <Right>
         <RoundedBtn
-          btnStyle={{
-            width: width * 172,
-            height: height * 40,
-            backgroundColor: !isReady ? colors.primaryBlue : colors.steelBlue2,
-            borderWidth: 0,
-            shadowColor: "black",
-            shadowOpacity: 0.1,
-            shadowOffset: {
-              width: 3,
-              height: 3,
+          btnStyle={[
+            {
+              width: width * 172,
+              height: height * 40,
+              backgroundColor: colors.primaryBlue,
+              borderWidth: 0,
             },
-            shadowRadius: 6,
-          }}
+            isReady && {
+              shadowColor: "black",
+              shadowOpacity: 0.16,
+              shadowOffset: {
+                width: 3,
+                height: 3,
+              },
+              shadowRadius: 6,
+            },
+          ]}
           textStyle={{
             fontFamily: "nunito-semibold",
             fontSize: 17,
             color: "white",
           }}
-          text={!isReady ? "Ready" : "준비완료"}
+          text={!isReady ? "Ready" : "Ready"}
           isPressed={isReady}
           onPress={() => {
             isReady ? setIsReady(false) : setIsReady(true);
