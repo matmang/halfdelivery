@@ -6,7 +6,7 @@ import {
   FlatList,
   ActivityIndicator,
 } from "react-native";
-import RoomItem from "./RoomItem";
+import RoomMinPrice from "./RoomMinPrice";
 import MatchingRooms from "../../sampleData/MatchingRooms";
 import { Auth, DataStore, SortDirection } from "aws-amplify";
 import {
@@ -33,9 +33,6 @@ function groupBy(objectArray, property) {
 
 const RoomList = ({ categoryID }) => {
   const [chatRooms, setChatRooms] = useState([]);
-  useEffect(() => {
-    fetchChatRooms();
-  }, []);
 
   //? Listening to new chatrooms. https://docs.amplify.aws/lib/datastore/real-time/q/platform/js/
   //? In Real Time!
@@ -60,55 +57,75 @@ const RoomList = ({ categoryID }) => {
     return () => subscription.unsubscribe();
   }, []);
 
-  const fetchChatRooms = async () => {
-    const authUser = await Auth.currentAuthenticatedUser();
-    const all_chatRoomUsers = (await DataStore.query(ChatRoomUser)).filter(
-      (ChatRoomUser) => ChatRoomUser._deleted !== null
-    );
+  useEffect(() => {
+    const fetchChatRooms = async () => {
+      const authUser = await Auth.currentAuthenticatedUser();
+      const chatRooms = await DataStore.query(ChatRoom);
+      // .filter(
+      //   (ChatRoomUser) => ChatRoomUser.user.id === authUser.attributes.sub //! 채팅방기능 테스트 하는동안에는 주석처리할 것!
+      // )
+      // .map((ChatRoomUser) => ChatRoomUser.chatroom);
 
-    //? 내가 만든 챗룸을 제외한, 챗룸 불러오기. (챗룸유저를 이용한다)
-    const all_chatRooms = (await DataStore.query(ChatRoomUser))
-      .filter(
-        (ChatRoomUser) => ChatRoomUser.user.id !== authUser.attributes.sub
-      )
-      .map((ChatRoomUser) => ChatRoomUser.chatroom)
-      .filter((chatroom) => chatroom.matchingInfo !== null);
+      setChatRooms(chatRooms);
+    };
 
-    const chatRoom_ids = all_chatRooms.map((item) => item.id);
-    const pairArray = []; //? {키: ChatRoom 아이디, 밸류: (대응되는) ChatRoomUser 객체} 가 원소들로 들어간다
+    // const chatRooms = await DataStore.query(ChatRoomUser);
+    // setChatRooms(chatRooms);
+    // };
+    fetchChatRooms();
+  }, []);
+  console.log(chatRooms);
 
-    // * 챗룸id 와 대응되는 챗룸유저id 를 찾아서 grouped_pairObject로 정리하는 과정.
-    for (let index in chatRoom_ids) {
-      let chatRoom_id = chatRoom_ids[index];
-      let ChatRoomUser = all_chatRoomUsers.find(
-        (ChatRoomUser) => ChatRoomUser.chatroom.id === chatRoom_id
-      );
+  //todo: 아래 fetchChatRooms 코드는 삭제/수정 예정
+  // const fetchChatRooms = async () => {
+  //   const authUser = await Auth.currentAuthenticatedUser();
+  //   const all_chatRoomUsers = (await DataStore.query(ChatRoomUser)).filter(
+  //     (ChatRoomUser) => ChatRoomUser._deleted !== null
+  //   );
 
-      let pair = { chatRoom_id: chatRoom_id, ChatRoomUser: ChatRoomUser };
-      pairArray.push(pair);
-    }
+  //   //? 내가 만든 챗룸을 제외한, 챗룸 불러오기. (챗룸유저를 이용한다)
+  //   const all_chatRooms = (await DataStore.query(ChatRoomUser))
+  //     .filter(
+  //       (ChatRoomUser) => ChatRoomUser.user.id !== authUser.attributes.sub
+  //     )
+  //     .map((ChatRoomUser) => ChatRoomUser.chatroom)
+  //     .filter((chatroom) => chatroom.matchingInfo !== null);
 
-    const grouped_pairObject = groupBy(pairArray, "chatRoom_id");
-    const keysArray = Object.keys(grouped_pairObject);
-    const except_chatRoom_ids = [];
+  //   const chatRoom_ids = all_chatRooms.map((item) => item.id);
+  //   const pairArray = []; //? {키: ChatRoom 아이디, 밸류: (대응되는) ChatRoomUser 객체} 가 원소들로 들어간다
 
-    for (let index in keysArray) {
-      let key = keysArray[index];
-      let valueArray = grouped_pairObject[key];
-      let length = valueArray.length;
+  //   // * 챗룸id 와 대응되는 챗룸유저id 를 찾아서 grouped_pairObject로 정리하는 과정.
+  //   for (let index in chatRoom_ids) {
+  //     let chatRoom_id = chatRoom_ids[index];
+  //     let ChatRoomUser = all_chatRoomUsers.find(
+  //       (ChatRoomUser) => ChatRoomUser.chatroom.id === chatRoom_id
+  //     );
 
-      if (length > 1) {
-        except_chatRoom_ids.push(key);
-      }
-    }
+  //     let pair = { chatRoom_id: chatRoom_id, ChatRoomUser: ChatRoomUser };
+  //     pairArray.push(pair);
+  //   }
 
-    //? 챗룸유저id 가 2개(인원수)미만인 채팅방만 고른다.
-    const fit_chatRooms = all_chatRooms.filter(
-      (chatroom) => chatroom.id !== except_chatRoom_ids.values
-    );
+  //   const grouped_pairObject = groupBy(pairArray, "chatRoom_id");
+  //   const keysArray = Object.keys(grouped_pairObject);
+  //   const except_chatRoom_ids = [];
 
-    setChatRooms(fit_chatRooms);
-  };
+  //   for (let index in keysArray) {
+  //     let key = keysArray[index];
+  //     let valueArray = grouped_pairObject[key];
+  //     let length = valueArray.length;
+
+  //     if (length > 1) {
+  //       except_chatRoom_ids.push(key);
+  //     }
+  //   }
+
+  //   //? 챗룸유저id 가 2개(인원수)미만인 채팅방만 고른다.
+  //   const fit_chatRooms = all_chatRooms.filter(
+  //     (chatroom) => chatroom.id !== except_chatRoom_ids.values
+  //   );
+
+  //   setChatRooms(fit_chatRooms);
+  // };
 
   // useEffect(() => {
   //   //? 채팅방들 가져오기.
@@ -142,7 +159,7 @@ const RoomList = ({ categoryID }) => {
         }
         renderItem={({ item }) =>
           item !== undefined ? (
-            <RoomItem chatRoomInfo={item} />
+            <RoomMinPrice chatRoomInfo={item} />
           ) : (
             <ActivityIndicator />
           )

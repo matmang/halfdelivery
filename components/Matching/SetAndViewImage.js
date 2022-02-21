@@ -6,7 +6,7 @@ import * as ImagePicker from "expo-image-picker";
 import ImageView from "react-native-image-viewing";
 import colors from "../../colors";
 
-const SetAndViewImage = ({ isReady, images, setImages, index }) => {
+export default ({ isReady, images, setImages, index }) => {
   const [image, setImage] = useState(null);
   const [visible, setIsVisible] = useState(false);
   console.log("images", images);
@@ -72,8 +72,6 @@ const SetAndViewImage = ({ isReady, images, setImages, index }) => {
     </Root>
   );
 };
-
-export default SetAndViewImage;
 
 const Root = styled.View`
   width: ${width * 75}px;

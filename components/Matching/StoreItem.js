@@ -23,60 +23,6 @@ import {
 } from "../../assets/constants";
 import { width, height } from "../../utils";
 
-const StoreRoomBox = styled.Pressable`
-  width: 100%;
-  height: ${height * 100}px;
-  flex-direction: row;
-  align-items: center;
-  background-color: white;
-  /* margin-top: 2px; */
-  margin-bottom: 2px;
-`;
-
-const Img = styled.Image`
-  margin-left: 24px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  border-radius: 16px;
-  width: ${width * 72}px;
-  height: ${height * 72}px;
-`;
-
-const NonImgBox = styled.View`
-  padding: 5px;
-  margin-left: 20px;
-  justify-content: center;
-`;
-
-const InfoView = styled.View`
-  flex-direction: row;
-  align-items: center;
-  padding: 2px;
-`;
-
-const StoreText = styled.Text`
-  font-size: 14px;
-  line-height: 20px;
-  text-align: left;
-  font-family: "noto-medium";
-  margin-left: 8px;
-  margin-bottom: 6px;
-`;
-
-const InfoText = styled.Text`
-  font-size: 14px;
-  line-height: 16px;
-  text-align: left;
-  font-family: "noto-regular";
-  padding: 2px;
-`;
-
-const NunitoText = styled.Text`
-  font-size: 14px;
-  font-family: "nunito-regular";
-  text-align: right;
-`;
-
 const StoreItem = ({ storeInfo }) => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -193,5 +139,59 @@ const StoreItem = ({ storeInfo }) => {
     </StoreRoomBox>
   );
 };
+
+const StoreRoomBox = styled.Pressable`
+  width: 100%;
+  height: ${height * 100}px;
+  flex-direction: row;
+  align-items: center;
+  background-color: white;
+  /* margin-top: 2px; */
+  margin-bottom: 2px;
+`;
+
+const Img = styled.Image`
+  margin-left: 24px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 16px;
+  width: ${width * 72}px;
+  height: ${height * 72}px;
+`;
+
+const NonImgBox = styled.View`
+  padding: 5px;
+  margin-left: 20px;
+  justify-content: center;
+`;
+
+const InfoView = styled.View`
+  flex-direction: row;
+  align-items: center;
+  padding: 2px;
+`;
+
+const StoreText = styled.Text`
+  font-size: 14px;
+  line-height: 20px;
+  text-align: left;
+  font-family: "noto-medium";
+  margin-left: 8px;
+  margin-bottom: 6px;
+`;
+
+const InfoText = styled.Text`
+  font-size: 14px;
+  line-height: 16px;
+  text-align: left;
+  font-family: "noto-regular";
+  padding: 2px;
+`;
+
+const NunitoText = styled.Text`
+  font-size: 14px;
+  font-family: "nunito-regular";
+  text-align: right;
+`;
 
 export default StoreItem;

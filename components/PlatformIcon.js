@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import colors from "../colors";
+import { width, height } from "../utils";
 
 export default ({ platfrom, viewStyle }) => {
   let style = null;
@@ -34,9 +35,7 @@ export default ({ platfrom, viewStyle }) => {
         viewStyle,
       ]}
     >
-      <Text
-        style={{ color: "white", fontFamily: "noto-regular", fontSize: 10 }}
-      >
+      <Text style={{ color: "white", fontFamily: "noto-medium", fontSize: 10 }}>
         {platfrom}
       </Text>
     </View>

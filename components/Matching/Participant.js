@@ -2,7 +2,7 @@ import { View, Text, ScrollView, Image } from "react-native";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { width, height } from "../../utils";
-import { SetAndViewImage } from ".";
+import { SetAndViewImage } from "./SetAndViewImage";
 import colors from "../../colors";
 
 export default ({ _isReady, imageUri, username, isHost, orderPrice }) => {
@@ -131,7 +131,7 @@ export default ({ _isReady, imageUri, username, isHost, orderPrice }) => {
               marginTop: 1,
             }}
           >
-            {"20000".toLocaleString("ko-KR")}
+            {parseInt("20000").toLocaleString("ko-KR")}
           </Text>
         </View>
 
