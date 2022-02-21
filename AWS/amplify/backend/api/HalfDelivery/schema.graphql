@@ -1,3 +1,25 @@
+enum Platform {
+  BAEMIN
+  YOGIYO
+  COUPANG
+}
+
+enum MatchingType {
+  MIN_PRICE
+  DLV_TIP
+}
+
+type MatchingInfo @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  requiredPersons: Int!
+  StoreCategory: StoreCategory @connection
+  Store: Store @connection
+  setTime: Int!
+  ChatRoom: ChatRoom @connection
+  type: MatchingType!
+  platform: Platform!
+}
+
 type Participant @model @auth(rules: [{allow: public}]) {
   id: ID!
   isReady: Boolean
@@ -26,8 +48,10 @@ type Store @model @key(name: "byStoreCategory", fields: ["storecategoryID"]) @au
   location: String
   Menus: [Menu] @connection(keyName: "byStore", fields: ["id"])
   storecategoryID: ID
-  baeminUri: String
   telephoneNumber: String
+  baeminUri: String
+  yogiyoUri: String
+  coupangUri: String
 }
 
 type Menu @model @key(name: "byStore", fields: ["storeID"]) @auth(rules: [{allow: public}]) {
