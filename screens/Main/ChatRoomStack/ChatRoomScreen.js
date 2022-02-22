@@ -62,6 +62,8 @@ import ImageView from "react-native-image-viewing";
 import Timer from "../../../components/Timer";
 import MyOrderImages from "../../../components/Matching/MyOrderImages";
 import Dropdown_noModal from "../../../components/Dropdown_noModal";
+import DeliveryInfo_DlvTip from "../../../components/Matching/waiting/DeliveryInfo_DlvTip";
+import BtmLastMessage from "../../../components/Chat/BtmLastMessage";
 
 const images = [
   {
@@ -197,7 +199,22 @@ const ChatRoomScreen = (props) => {
 
   return (
     <View>
-      <Dropdown_noModal
+      <BtmLastMessage
+        isMaster={true}
+        username="윤동현"
+        message="나는 누굴까 내일을 꿈꾸는가 "
+      />
+
+      <BtmLastMessage
+        isMaster={false}
+        username="최수민"
+        message="어떤이는 꿈을 잊은채로 살고 어떤이는 남의 꿈을 뺏고 살며 다른이는 꿈은 이런거라 하네
+        세상에 이처럼 많은 사람들과 세상에 이처럼 많은 개성들 저마다 자기가 옳다말을 하고 꿈이란 이런거라 말하지만"
+      />
+
+      <DeliveryInfo_DlvTip />
+
+      {/* <Dropdown_noModal
         placeholder="은행을 선택해주세요"
         data={[
           { label: "One", value: "1" },
@@ -221,7 +238,7 @@ const ChatRoomScreen = (props) => {
           ]}
           onSelect={setSelectedDropdown}
         />
-      </View>
+      </View> */}
 
       <MyOrderImages />
       <Participant />

@@ -10,6 +10,9 @@ export default ({ platfrom, viewStyle }) => {
     case "배민":
       style = styles.BaeMin;
       break;
+    case "배달의 민족":
+      style = styles.BaeMinFull;
+      break;
     case "요기요":
       style = styles.Yogiyo;
       break;
@@ -24,8 +27,8 @@ export default ({ platfrom, viewStyle }) => {
     <View
       style={[
         {
-          width: 44,
-          height: 20,
+          width: width * 44,
+          height: height * 20,
           borderRadius: 10,
           backgroundColor: "black",
           justifyContent: "center",
@@ -44,6 +47,11 @@ export default ({ platfrom, viewStyle }) => {
 
 const styles = StyleSheet.create({
   BaeMin: {
+    backgroundColor: "#2BC0BB",
+  },
+  BaeMinFull: {
+    width: width * 74,
+    height: height * 20,
     backgroundColor: "#2BC0BB",
   },
   Yogiyo: {

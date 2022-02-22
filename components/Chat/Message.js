@@ -14,87 +14,6 @@ import { S3Image } from "aws-amplify-react-native";
 import styled from "styled-components";
 import { color } from "react-native-reanimated";
 
-const ImgBox = styled.View`
-  padding-left: 4px;
-  padding-right: 4px;
-  padding-top: 4px;
-  padding-bottom: 4px;
-
-  margin-right: ${(props) => (props.isMe ? "32px" : "auto")};
-  margin-left: ${(props) => (props.isMe ? "auto" : "15px")};
-  margin-top: 5px;
-  margin-bottom: 5px;
-
-  width: auto;
-  max-width: ${(props) => props.width * 0.61}%;
-  background: ${colors.primaryBlue};
-  border-radius: 6px;
-`;
-
-const MsgBox = styled.View`
-  /* padding: 10px; */
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top: 4px;
-  padding-bottom: 5px;
-
-  margin-right: ${(props) => (props.isMe ? "32px" : "auto")};
-  margin-left: ${(props) => (props.isMe ? "auto" : "15px")};
-  margin-top: 5px;
-  margin-bottom: 5px;
-
-  width: auto;
-  max-width: ${(props) => props.width * 0.61}%;
-  background: ${(props) => (props.isMe ? colors.primaryBlue : "white")};
-  border-radius: 14px;
-  border-bottom-left-radius: ${(props) => (props.isMe ? "14px" : "0px")};
-  border-bottom-right-radius: ${(props) => (props.isMe ? "0px" : "14px")};
-
-  border-width: ${(props) =>
-    (props.isMaster && "1.5px") ||
-    (props.isMe && "1.5px") ||
-    (!props.isMaster && !props.isMe && "1.5px")};
-
-  border-color: ${(props) =>
-    (props.isMaster && colors.primaryBlue) ||
-    (props.isMe && colors.primaryBlue) ||
-    (!props.isMaster && !props.isMe && colors.steelBlue2)};
-`;
-
-const MsgText = styled.Text`
-  font-size: 13px;
-  line-height: 15px;
-  font-family: "noto-regular";
-  color: ${(props) => (props.isMe ? "white" : "black")};
-`;
-
-const TimeStamp = styled.Text`
-  font-size: 12px;
-  font-family: "nunito-regular";
-  color: #9c9c9c;
-  /* margin-left: auto; */
-  margin-right: ${(props) => (props.isMe ? 6 : 0)}px;
-  margin-left: ${(props) => (props.isMe ? 0 : 6)}px;
-`;
-
-const ProfileImg = styled.Image`
-  width: 38px;
-  height: 38px;
-  border-radius: 38px;
-  border-width: ${(props) => (props.isMaster ? "1.5px" : "0px")};
-  border-color: ${colors.primaryBlue};
-`;
-
-//! 프로필이미지 그림자 효과를 주기위해 필요함
-const ProfileView = styled.View`
-  /* background-color: red; */
-  /* width: 38px;
-  height: 38px;
-  border-radius: 38px; */
-  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
-  z-index: 1;
-`;
-
 const changeTimeStamp = (message_createdAt) => {
   // const KR_TIME_DIFF = 32400000; //? 9시간
   const UTCms = Date.parse(message_createdAt);
@@ -241,6 +160,87 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 0,
   },
 });
+
+const ImgBox = styled.View`
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+
+  margin-right: ${(props) => (props.isMe ? "32px" : "auto")};
+  margin-left: ${(props) => (props.isMe ? "auto" : "15px")};
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+  width: auto;
+  max-width: ${(props) => props.width * 0.61}%;
+  background: ${colors.primaryBlue};
+  border-radius: 6px;
+`;
+
+const MsgBox = styled.View`
+  /* padding: 10px; */
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 4px;
+  padding-bottom: 5px;
+
+  margin-right: ${(props) => (props.isMe ? "32px" : "auto")};
+  margin-left: ${(props) => (props.isMe ? "auto" : "15px")};
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+  width: auto;
+  max-width: ${(props) => props.width * 0.61}%;
+  background: ${(props) => (props.isMe ? colors.primaryBlue : "white")};
+  border-radius: 14px;
+  border-bottom-left-radius: ${(props) => (props.isMe ? "14px" : "0px")};
+  border-bottom-right-radius: ${(props) => (props.isMe ? "0px" : "14px")};
+
+  border-width: ${(props) =>
+    (props.isMaster && "1.5px") ||
+    (props.isMe && "1.5px") ||
+    (!props.isMaster && !props.isMe && "1.5px")};
+
+  border-color: ${(props) =>
+    (props.isMaster && colors.primaryBlue) ||
+    (props.isMe && colors.primaryBlue) ||
+    (!props.isMaster && !props.isMe && colors.steelBlue2)};
+`;
+
+const MsgText = styled.Text`
+  font-size: 13px;
+  line-height: 15px;
+  font-family: "noto-regular";
+  color: ${(props) => (props.isMe ? "white" : "black")};
+`;
+
+const TimeStamp = styled.Text`
+  font-size: 12px;
+  font-family: "nunito-regular";
+  color: #9c9c9c;
+  /* margin-left: auto; */
+  margin-right: ${(props) => (props.isMe ? 6 : 0)}px;
+  margin-left: ${(props) => (props.isMe ? 0 : 6)}px;
+`;
+
+const ProfileImg = styled.Image`
+  width: 38px;
+  height: 38px;
+  border-radius: 38px;
+  border-width: ${(props) => (props.isMaster ? "1.5px" : "0px")};
+  border-color: ${colors.primaryBlue};
+`;
+
+//! 프로필이미지 그림자 효과를 주기위해 필요함
+const ProfileView = styled.View`
+  /* background-color: red; */
+  /* width: 38px;
+  height: 38px;
+  border-radius: 38px; */
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+`;
 
 export { Message, changeTimeStamp };
 export default Message;

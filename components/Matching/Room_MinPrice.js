@@ -25,7 +25,7 @@ import { width, height } from "../../utils";
 import PlatformIcon from "../PlatformIcon";
 import Timer from "../Timer";
 
-const RoomMinPrice = ({ chatRoomInfo }) => {
+export default ({ chatRoomInfo }) => {
   const navigation = useNavigation();
 
   const storeInfo = chatRoomInfo.matchingInfo.storeNmenus.store;
@@ -150,8 +150,6 @@ const RoomMinPrice = ({ chatRoomInfo }) => {
                   flex: 1,
                   backgroundColor: "white",
                   marginTop: height * 2,
-                  // marginLeft: width * 38,s
-                  // padding: 4,
                 }}
               >
                 2
@@ -190,61 +188,6 @@ const styles = StyleSheet.create({
     width: width * 72,
     height: height * 72,
     resizeMode: "cover", // ? https://github.com/facebook/react-native/issues/17684#:~:text=resizeMode%3D%22contain%22&text=contain%20%3A%20Scale%20the%20image%20uniformly,the%20view%20(minus%20padding).
-  },
-
-  minPriceContainer: {
-    justifyContent: "center",
-    alignContent: "center",
-    padding: 5,
-    backgroundColor: "white",
-    borderWidth: 1,
-    borderColor: "black",
-    flex: 2,
-  },
-  personsContainer: {
-    justifyContent: "center",
-    alignContent: "center",
-    backgroundColor: "white",
-    borderWidth: 1,
-    borderColor: "black",
-  },
-  timeContainer: {
-    justifyContent: "center",
-    alignContent: "center",
-    backgroundColor: "white",
-    borderWidth: 1,
-    borderColor: "black",
-  },
-  text: {
-    fontSize: 15,
-    lineHeight: 17,
-    textAlign: "center",
-  },
-  storeText: {
-    fontSize: 17,
-    lineHeight: 20,
-    textAlign: "left",
-    fontFamily: "noto-regular",
-    marginLeft: 8,
-    marginBottom: 3,
-  },
-  priceText: {
-    fontSize: 17,
-    lineHeight: 20,
-    textAlign: "left",
-    fontFamily: "noto-regular",
-  },
-  personsText: {
-    fontSize: 14,
-    lineHeight: 16,
-    textAlign: "left",
-    fontFamily: "noto-regular",
-  },
-  timeText: {
-    fontSize: 12,
-    lineHeight: 14,
-    textAlign: "left",
-    fontFamily: "noto-regular",
   },
 });
 
@@ -323,5 +266,3 @@ const Nunito12right = styled(Noto12left)`
   font-family: "nunito-regular";
   text-align: right;
 `;
-
-export default RoomMinPrice;

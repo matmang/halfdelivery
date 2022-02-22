@@ -6,7 +6,6 @@ import {
   FlatList,
   ActivityIndicator,
 } from "react-native";
-import RoomMinPrice from "./RoomMinPrice";
 import MatchingRooms from "../../sampleData/MatchingRooms";
 import { Auth, DataStore, SortDirection } from "aws-amplify";
 import {
@@ -18,6 +17,8 @@ import {
   Store,
 } from "../../AWS/src/models";
 import AppLoading from "expo-app-loading";
+import Room_DlvTip from "./Room_DlvTip";
+import Room_MinPrice from "./Room_MinPrice";
 
 // https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce
 function groupBy(objectArray, property) {
@@ -157,9 +158,16 @@ const RoomList = ({ categoryID }) => {
                   categoryID
               )
         }
+        // renderItem={({ item }) =>
+        //   item !== undefined ? (
+        //     <RoomMinPrice chatRoomInfo={item} />
+        //   ) : (
+        //     <ActivityIndicator />
+        //   )
+        // }
         renderItem={({ item }) =>
           item !== undefined ? (
-            <RoomMinPrice chatRoomInfo={item} />
+            <Room_DlvTip chatRoomInfo={item} />
           ) : (
             <ActivityIndicator />
           )
