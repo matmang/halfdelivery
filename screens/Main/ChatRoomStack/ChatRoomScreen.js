@@ -61,6 +61,7 @@ import {
 import ImageView from "react-native-image-viewing";
 import Timer from "../../../components/Timer";
 import MyOrderImages from "../../../components/Matching/MyOrderImages";
+import Dropdown_noModal from "../../../components/Dropdown_noModal";
 
 const images = [
   {
@@ -196,13 +197,38 @@ const ChatRoomScreen = (props) => {
 
   return (
     <View>
+      <Dropdown_noModal
+        placeholder="은행을 선택해주세요"
+        data={[
+          { label: "One", value: "1" },
+          { label: "Two", value: "2" },
+          { label: "Three", value: "3" },
+          { label: "Four", value: "4" },
+          { label: "Five", value: "5" },
+        ]}
+        onSelect={setSelectedDropdown}
+      />
+
+      <View style={{ marginTop: 100 }}>
+        <Dropdown
+          placeholder="은행을 선택해주세요"
+          data={[
+            { label: "One", value: "1" },
+            { label: "Two", value: "2" },
+            { label: "Three", value: "3" },
+            { label: "Four", value: "4" },
+            { label: "Five", value: "5" },
+          ]}
+          onSelect={setSelectedDropdown}
+        />
+      </View>
+
       <MyOrderImages />
       <Participant />
       <ParticipantEmpty />
       <PriceReadyBoxHost />
       <PriceReadyBoxPartner />
       <Timer />
-      <Dropdown />
       {/* 
       <ImageView
         images={images}

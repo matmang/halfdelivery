@@ -24,9 +24,9 @@ export default ({ placeholder, data, onSelect }) => {
   };
 
   const openDropdown = () => {
-    DropdownButton.current.measure((_fx, _fy, _w, h, _px, py) => {
-      setDropdownTop(py + h);
-    });
+    // DropdownButton.current.measure((_fx, _fy, _w, h, _px, py) => {
+    //   setDropdownTop(py + h);
+    // });
     setVisible(true);
   };
 
@@ -56,50 +56,58 @@ export default ({ placeholder, data, onSelect }) => {
 
   const RenderDropdown = () => {
     return (
-      <Modal visible={visible} transparent animationType="none">
-        <Pressable onPress={() => setVisible(false)}>
-          <View style={[styles.dropdown, { top: dropdownTop }]}>
-            <FlatList
-              data={data}
-              renderItem={renderItem}
-              keyExtractor={(item, index) => index.toString()}
-            />
-          </View>
-        </Pressable>
-      </Modal>
+      <Pressable onPress={() => setVisible(false)}>
+        <View
+          style={[
+            styles.dropdown,
+            { top: dropdownTop },
+            { backgroundColor: "blue", borderWidth: 2 },
+          ]}
+        >
+          <FlatList
+            data={data}
+            renderItem={renderItem}
+            keyExtractor={(item, index) => index.toString()}
+          />
+        </View>
+      </Pressable>
+      // <Modal visible={visible} transparent animationType="none">
+      // </Modal>
     );
   };
 
   return (
-    <Pressable
-      ref={DropdownButton}
-      style={styles.placeholderBox}
-      onPress={() => {
-        toggleDropdown();
-      }}
-    >
-      <RenderDropdown />
-      <Text
-        style={{
-          fontFamily: "noto-regular",
-          fontSize: 17,
-          color: selected === undefined ? "#ADB1C0" : "black",
-          paddingLeft: width * 12,
-          flex: 1,
+    <View style={{ zIndex: 2, position: "absolute" }}>
+      <Pressable
+        // ref={DropdownButton}
+        style={styles.placeholderBox}
+        onPress={() => {
+          toggleDropdown();
         }}
       >
-        {(selected && selected.label) || placeholder}
-      </Text>
-      <MaterialIcons
-        name={visible ? "keyboard-arrow-up" : "keyboard-arrow-down"}
-        size={width * 24}
-        color="#ADB1C0"
-        style={{ paddingRight: width * 12 }}
-        // onPress={() => {
-        //   visible ? setVisible(false) : setVisible(true);
-        // }}
-      />
-    </Pressable>
+        <Text
+          style={{
+            fontFamily: "noto-regular",
+            fontSize: 17,
+            color: selected === undefined ? "#ADB1C0" : "black",
+            paddingLeft: width * 12,
+            flex: 1,
+          }}
+        >
+          {(selected && selected.label) || placeholder}
+        </Text>
+        <MaterialIcons
+          name={visible ? "keyboard-arrow-up" : "keyboard-arrow-down"}
+          size={width * 24}
+          color="#ADB1C0"
+          style={{ paddingRight: width * 12 }}
+          // onPress={() => {
+          //   visible ? setVisible(false) : setVisible(true);
+          // }}
+        />
+      </Pressable>
+      {visible && <RenderDropdown />}
+    </View>
   );
 };
 
@@ -116,8 +124,7 @@ const styles = StyleSheet.create({
   },
   dropdown: {
     position: "absolute",
-    // alignSelf: "center",
-    // marginLeft: width * 10,
+    zIndex: 1,
 
     backgroundColor: "white",
     width: width * 364,
