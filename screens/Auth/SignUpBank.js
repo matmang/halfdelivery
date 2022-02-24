@@ -38,13 +38,15 @@ const IDContainer = styled.View`
 `;
 
 const ButtonContainer = styled.View`
+  flex: 1;
+  justify-content: flex-end;
   align-items: center;
   background-color: white;
   width: 100%;
+  padding-top: ${height * 12}px;
+  padding-bottom: ${height * 24}px;
   height: ${height * 82}px;
-  margin-top: ${height * 40}px;
-  position: absolute;
-  bottom: 0px;
+  bottom: 0;
 `;
 
 const PhaseText = styled.Text`

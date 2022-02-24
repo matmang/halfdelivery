@@ -242,8 +242,8 @@ export default () => (
             <Image
               source={require("../assets/images/delete.png")}
               style={{
-                width: width * 31,
-                height: height * 31,
+                width: width * 17.22,
+                height: height * 17.22,
                 marginTop: height * 20,
                 marginRight: width * 24,
               }}

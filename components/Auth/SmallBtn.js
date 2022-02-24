@@ -21,7 +21,7 @@ const Button = styled.View`
 `;
 
 const Text = styled.Text`
-  color: ${(props) => (props.accent ? "white" : colors.blueGray)};
+  color: ${(props) => (props.accent ? white : colors.blueGray)};
   font-size: 14px;
   font-family: "noto-medium";
 `;
