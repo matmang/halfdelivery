@@ -371,7 +371,7 @@ export default ({ navigation }) => {
           <TimeContainer>
             <TitleContainer>
               <Image
-                source={require("../../../assets/images/timer.png")}
+                source={require("../../../assets/images/blue_timer.png")}
                 style={{
                   width: width * 19,
                   height: height * 19,
