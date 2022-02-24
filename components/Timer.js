@@ -27,6 +27,8 @@ export default ({ time, simple, style }) => {
         <Text
           style={{
             fontFamily: "noto-regular",
+            includeFontPadding: false,
+            textAlignVertical: "center",
             fontSize: 11,
             color: colors.oxfordGray,
           }}
@@ -34,6 +36,8 @@ export default ({ time, simple, style }) => {
           <Text
             style={{
               fontFamily: "nunito-regular",
+              includeFontPadding: false,
+              textAlignVertical: "center",
               fontSize: 12,
               color: colors.oxfordGray,
             }}
@@ -47,6 +51,8 @@ export default ({ time, simple, style }) => {
         <Text
           style={{
             fontFamily: "noto-regular",
+            includeFontPadding: false,
+            textAlignVertical: "center",
             fontSize: 11,
             color: colors.oxfordGray,
           }}
@@ -56,6 +62,8 @@ export default ({ time, simple, style }) => {
           <Text
             style={{
               fontFamily: "nunito-regular",
+              includeFontPadding: false,
+              textAlignVertical: "center",
               fontSize: 12,
               color: colors.oxfordGray,
             }}

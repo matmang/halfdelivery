@@ -48,7 +48,14 @@ export default ({ placeholder, data, onSelect }) => {
       }}
       onPress={() => onItemPress(item)}
     >
-      <Text style={{ fontFamily: "noto-regular", fontSize: 17 }}>
+      <Text
+        style={{
+          fontFamily: "noto-regular",
+          includeFontPadding: false,
+          textAlignVertical: "center",
+          fontSize: 17,
+        }}
+      >
         {item.label}
       </Text>
     </Pressable>
@@ -82,6 +89,8 @@ export default ({ placeholder, data, onSelect }) => {
       <Text
         style={{
           fontFamily: "noto-regular",
+          includeFontPadding: false,
+          textAlignVertical: "center",
           fontSize: 17,
           color: selected === undefined ? "#ADB1C0" : "black",
           paddingLeft: width * 12,

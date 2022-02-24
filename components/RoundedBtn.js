@@ -29,6 +29,8 @@ const RoundedBtn = ({ btnStyle, textStyle, text, isPressed, onPress }) => {
         style={[
           {
             fontFamily: "noto-regular",
+            includeFontPadding: false,
+            textAlignVertical: "center",
             fontWeight: "400",
             fontSize: 17,
             textAlign: "center",

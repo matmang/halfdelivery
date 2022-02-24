@@ -24,14 +24,32 @@ export default ({ _isReady, imageUri, username, isHost, orderPrice }) => {
         </TopLeft>
         <TopRight>
           <Text style={{ fontSize: 12 }}>
-            <Text style={{ fontFamily: "nunito-regular" }}>Master</Text>
-            <Text style={{ fontFamily: "noto-regular" }}>{"   "}윤**</Text>
+            <Text
+              style={{
+                fontFamily: "nunito-regular",
+                includeFontPadding: false,
+                textAlignVertical: "center",
+              }}
+            >
+              Master
+            </Text>
+            <Text
+              style={{
+                fontFamily: "noto-regular",
+                includeFontPadding: false,
+                textAlignVertical: "center",
+              }}
+            >
+              {"   "}윤**
+            </Text>
           </Text>
           <Status isReady={isReady}>
             <Text
               style={{
                 color: isReady ? colors.primaryBlue : colors.steelBlue2,
                 fontFamily: "noto-medium",
+                includeFontPadding: false,
+                textAlignVertical: "center",
                 fontSize: 10,
               }}
             >
@@ -114,6 +132,8 @@ export default ({ _isReady, imageUri, username, isHost, orderPrice }) => {
             <Text
               style={{
                 fontFamily: "nunito-regular",
+                includeFontPadding: false,
+                textAlignVertical: "center",
                 color: "white",
                 fontSize: 8,
                 marginLeft: 3,
@@ -144,6 +164,8 @@ export default ({ _isReady, imageUri, username, isHost, orderPrice }) => {
           <Text
             style={{
               fontFamily: "noto-regular",
+              includeFontPadding: false,
+              textAlignVertical: "center",
               fontSize: 12,
               color: isReady ? "white" : colors.steelBlue2,
             }}
@@ -163,6 +185,8 @@ export default ({ _isReady, imageUri, username, isHost, orderPrice }) => {
             style={{
               fontSize: 15,
               fontFamily: "nunito-semibold",
+              includeFontPadding: false,
+              textAlignVertical: "center",
               color: isReady ? "white" : colors.steelBlue2,
               marginTop: 1,
             }}
@@ -181,6 +205,8 @@ export default ({ _isReady, imageUri, username, isHost, orderPrice }) => {
               fontSize: 12,
               color: isReady ? "white" : colors.steelBlue2,
               fontFamily: "noto-regular",
+              includeFontPadding: false,
+              textAlignVertical: "center",
             }}
           >
             {"  "}원

@@ -143,7 +143,7 @@ export default ({ chatRoomInfo }) => {
             </BtmLeft>
 
             <BtmRight>
-              <Noto12left style={{ flex: 4 }}>매칭 대기 인원</Noto12left>
+              <Noto12left style={{ flex: 3 }}>매칭 대기 인원</Noto12left>
               <Nunito12right
                 style={{
                   flex: 1,
@@ -162,7 +162,7 @@ export default ({ chatRoomInfo }) => {
               </Nunito12right>
               <Noto12left
                 style={{
-                  flex: 0.8,
+                  flex: 0.6,
                 }}
               >
                 {"  "}명
@@ -259,6 +259,8 @@ const Noto14medium = styled.Text`
   /* font-size: 12px; */
   font-family: "noto-medium";
   text-align: left;
+  include-font-padding: false;
+  text-align-vertical: center;
 `;
 
 const Noto12left = styled.Text`
@@ -266,9 +268,13 @@ const Noto12left = styled.Text`
   /* font-size: 12px; */
   font-family: "noto-regular";
   text-align: left;
+  include-font-padding: false;
+  text-align-vertical: center;
 `;
 
 const Nunito12right = styled(Noto12left)`
   font-family: "nunito-regular";
   text-align: right;
+  include-font-padding: false;
+  text-align-vertical: center;
 `;

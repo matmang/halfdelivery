@@ -12,7 +12,14 @@ export default ({ price }) => {
   return (
     <Root>
       <Left>
-        <Text style={{ fontFamily: "noto-regular", fontSize: 14 }}>
+        <Text
+          style={{
+            fontFamily: "noto-regular",
+            includeFontPadding: false,
+            textAlignVertical: "center",
+            fontSize: 14,
+          }}
+        >
           나의 주문금액
         </Text>
         <PriceBox>
@@ -26,9 +33,23 @@ export default ({ price }) => {
               alignContent: "center",
             }}
           />
-          <Text style={{ fontFamily: "nunito-regular", fontSize: 24 }}>
+          <Text
+            style={{
+              fontFamily: "nunito-regular",
+              includeFontPadding: false,
+              textAlignVertical: "center",
+              fontSize: 24,
+            }}
+          >
             <Text style={{ color: colors.primaryBlue }}>{"   "}11,000</Text>
-            <Text style={{ fontFamily: "noto-regular", fontSize: 23 }}>
+            <Text
+              style={{
+                fontFamily: "noto-regular",
+                includeFontPadding: false,
+                textAlignVertical: "center",
+                fontSize: 23,
+              }}
+            >
               {" "}
               원
             </Text>
@@ -56,6 +77,8 @@ export default ({ price }) => {
           ]}
           textStyle={{
             fontFamily: "nunito-semibold",
+            includeFontPadding: false,
+            textAlignVertical: "center",
             fontSize: 17,
             color: "white",
           }}

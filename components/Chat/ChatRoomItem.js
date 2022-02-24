@@ -355,6 +355,8 @@ const StoreText = styled.Text`
   line-height: 20px;
   text-align: left;
   font-family: "noto-regular";
+  include-font-padding: false;
+  text-align-vertical: center;
   margin-bottom: 3px;
 `;
 
@@ -363,17 +365,23 @@ const InfoText = styled.Text`
   line-height: 16px;
   text-align: left;
   font-family: "noto-regular";
+  include-font-padding: false;
+  text-align-vertical: center;
 `;
 
 const NunitoText = styled.Text`
   font-size: 14px;
   font-family: "nunito-regular";
+  include-font-padding: false;
+  text-align-vertical: center;
   text-align: right;
 `;
 
 const TimeStamp = styled.Text`
   font-size: 14px;
   font-family: "nunito-regular";
+  include-font-padding: false;
+  text-align-vertical: center;
   color: ${colors.oxfordGray};
   margin-left: auto;
 `;

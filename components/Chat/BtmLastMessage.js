@@ -95,16 +95,22 @@ const ProfileInfo = styled.View`
 const Noto13left = styled.Text`
   font-size: ${width * 13}px;
   font-family: "noto-regular";
+  include-font-padding: false;
+  text-align-vertical: center;
   text-align: left;
 `;
 
 const Noto11left = styled.Text`
   font-size: ${width * 11}px;
   font-family: "noto-regular";
+  include-font-padding: false;
+  text-align-vertical: center;
   text-align: left;
 `;
 
 const Nunito11left = styled(Noto11left)`
   font-family: "nunito-regular";
+  include-font-padding: false;
+  text-align-vertical: center;
   text-align: left;
 `;

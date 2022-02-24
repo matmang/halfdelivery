@@ -237,6 +237,8 @@ const Noto14medium = styled.Text`
   font-size: ${width * 14}px;
   /* font-size: 12px; */
   font-family: "noto-medium";
+  include-font-padding: false;
+  text-align-vertical: center;
   text-align: left;
 `;
 
@@ -244,10 +246,14 @@ const Noto12left = styled.Text`
   font-size: ${width * 12}px;
   /* font-size: 12px; */
   font-family: "noto-regular";
+  include-font-padding: false;
+  text-align-vertical: center;
   text-align: left;
 `;
 
 const Nunito12right = styled(Noto12left)`
   font-family: "nunito-regular";
+  include-font-padding: false;
+  text-align-vertical: center;
   text-align: right;
 `;

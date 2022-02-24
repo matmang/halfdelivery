@@ -17,7 +17,12 @@ export default () => {
         <TopRight>
           <Text style={{ fontSize: 12 }}>
             <Text
-              style={{ fontFamily: "nunito-regular", color: colors.steelBlue2 }}
+              style={{
+                fontFamily: "nunito-regular",
+                includeFontPadding: false,
+                textAlignVertical: "center",
+                color: colors.steelBlue2,
+              }}
             >
               Partner
             </Text>
@@ -27,6 +32,9 @@ export default () => {
               style={{
                 color: colors.steelBlue2,
                 fontFamily: "noto-medium",
+                includeFontPadding: false,
+                textAlignVertical: "center",
+
                 fontSize: 10,
               }}
             >
@@ -80,6 +88,8 @@ export default () => {
           <Text
             style={{
               fontFamily: "noto-regular",
+              includeFontPadding: false,
+              textAlignVertical: "center",
               fontSize: 12,
               color: colors.steelBlue2,
             }}
@@ -99,6 +109,8 @@ export default () => {
             style={{
               fontSize: 15,
               fontFamily: "nunito-semibold",
+              includeFontPadding: false,
+              textAlignVertical: "center",
               color: colors.steelBlue2,
               marginTop: 1,
             }}
@@ -115,6 +127,8 @@ export default () => {
               fontSize: 12,
               color: colors.steelBlue2,
               fontFamily: "noto-regular",
+              includeFontPadding: false,
+              textAlignVertical: "center",
             }}
           >
             {"  "}원

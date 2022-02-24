@@ -198,7 +198,84 @@ const ChatRoomScreen = (props) => {
   };
 
   return (
-    <View>
+    <ScrollView>
+      <Text
+        style={{
+          color: "white",
+          backgroundColor: "grey",
+          // includeFontPadding: false,
+          // textAlignVertical: "center",
+        }}
+      >
+        안드로이드 기본폰트 테스트
+      </Text>
+      <Text
+        style={{
+          color: "white",
+          fontFamily: "noto-regular",
+          backgroundColor: "pink",
+          includeFontPadding: false,
+          textAlignVertical: "center",
+        }}
+      >
+        안드로이드 noto-regular 테스트
+      </Text>
+      <Text
+        style={{
+          color: "white",
+          fontFamily: "noto-medium",
+          backgroundColor: "pink",
+          includeFontPadding: false,
+          textAlignVertical: "center",
+        }}
+      >
+        안드로이드 noto-medium 테스트
+      </Text>
+      <Text
+        style={{
+          color: "white",
+          fontFamily: "noto-bold",
+          backgroundColor: "pink",
+          includeFontPadding: false,
+          textAlignVertical: "center",
+        }}
+      >
+        안드로이드 noto-bold 테스트
+      </Text>
+      <Text
+        style={{
+          color: "white",
+          fontFamily: "nunito-regular",
+          backgroundColor: "orange",
+          includeFontPadding: false,
+          textAlignVertical: "center",
+        }}
+      >
+        안드로이드 nunito-regular 테스트
+      </Text>
+      <Text
+        style={{
+          color: "white",
+          fontFamily: "nunito-semibold",
+          backgroundColor: "orange",
+          includeFontPadding: false,
+          textAlignVertical: "center",
+        }}
+      >
+        안드로이드 nunito-semibold 테스트
+      </Text>
+      <Text
+        style={{
+          color: "white",
+          fontFamily: "nunito-bold",
+          backgroundColor: "orange",
+          includeFontPadding: false,
+          textAlignVertical: "center",
+        }}
+      >
+        안드로이드 nunito-bold 테스트
+      </Text>
+
       <BtmLastMessage
         isMaster={true}
         username="윤동현"
@@ -211,10 +288,9 @@ const ChatRoomScreen = (props) => {
         message="어떤이는 꿈을 잊은채로 살고 어떤이는 남의 꿈을 뺏고 살며 다른이는 꿈은 이런거라 하네
         세상에 이처럼 많은 사람들과 세상에 이처럼 많은 개성들 저마다 자기가 옳다말을 하고 꿈이란 이런거라 말하지만"
       />
-
       <DeliveryInfo_DlvTip />
 
-      {/* <Dropdown_noModal
+      <Dropdown_noModal
         placeholder="은행을 선택해주세요"
         data={[
           { label: "One", value: "1" },
@@ -225,7 +301,6 @@ const ChatRoomScreen = (props) => {
         ]}
         onSelect={setSelectedDropdown}
       />
-
       <View style={{ marginTop: 100 }}>
         <Dropdown
           placeholder="은행을 선택해주세요"
@@ -238,7 +313,7 @@ const ChatRoomScreen = (props) => {
           ]}
           onSelect={setSelectedDropdown}
         />
-      </View> */}
+      </View>
 
       <MyOrderImages />
       <Participant />
@@ -272,10 +347,7 @@ const ChatRoomScreen = (props) => {
           </View>
         )}
       />
-
-      <TEST_react_native_expo_image_cropper />
-      <TEST_expo_image_crop /> */}
-    </View>
+    </ScrollView>
 
     // <ScrollView style={styles.page}>
     //   {/* <Pressable
@@ -312,7 +384,7 @@ const ChatRoomScreen = (props) => {
     //   <CancelMatching />
     //   <MatchingCancelled />
     //   <EjectPartner /> */}
-    // </ScrollView>
+    </ScrollView>
 
     //! View 대신 SafeAreaView 를 쓰면, 노치 같은 곳에 데이터가 표출되지 않는다. 굳!
     // <SafeAreaView style={styles.page}>
