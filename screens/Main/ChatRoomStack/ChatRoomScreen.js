@@ -276,6 +276,11 @@ const ChatRoomScreen = (props) => {
         안드로이드 nunito-bold 테스트
       </Text>
 
+      <InputOrderPrice />
+      <RequestAdditionalTime />
+      <AddAdditionalTime />
+      <ViewProfilePartner />
+
       <BtmLastMessage
         isMaster={true}
         username="윤동현"

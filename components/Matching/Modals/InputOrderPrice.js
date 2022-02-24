@@ -7,6 +7,8 @@ import RoundedBtn from "../../RoundedBtn";
 import { MaterialIcons } from "@expo/vector-icons";
 import BarInput from "../../Auth/BarInput";
 import SmallBarInput from "../../Auth/SmallBarInput";
+import { width, height } from "../../../utils";
+import DisclaimerFooter from "../../DisclaimerFooter";
 
 export default ({ name }) => {
   const [price, setPrice] = useState(null);
@@ -18,7 +20,6 @@ export default ({ name }) => {
       style={{
         shadowColor: "black",
         alignSelf: "center",
-
         shadowOpacity: 0.16,
         shadowOffset: {
           width: 3,
@@ -32,82 +33,85 @@ export default ({ name }) => {
           justifyContent: "flex-start",
           // alignItems: "center",
           // padding: 20,
-          width: 364,
-          height: 428,
+          width: width * 364,
+          height: height * 428,
           borderRadius: 16,
           backgroundColor: "rgba(255, 255, 255, 255)",
+          elevation: 6,
         }}
       >
-        <View
+        <Pressable
+          onPress={() => {
+            alert("모달창끄기");
+          }}
           style={{
-            alignItems: "flex-end",
+            position: "absolute",
+            marginRight: width * 20,
+            marginLeft: width * 330,
+            marginTop: height * 16.6,
+            marginBottom: height * 399.4,
           }}
         >
-          <Pressable
-            onPress={() => {
-              alert("모달창끄기");
+          <Image
+            source={require("../../../assets/images/real-delete.png")}
+            style={{
+              width: width * 14,
+              height: height * 14,
             }}
-          >
-            <Image
-              source={require("../../../assets/images/delete.png")}
-              style={{
-                width: 20,
-                height: 20,
-                marginRight: 12.5,
-                marginTop: 8.8,
-              }}
-            />
-          </Pressable>
-        </View>
+          />
+        </Pressable>
+
         <View
           style={{
             flexDirection: "row",
             alignItems: "flex-start",
-            paddingTop: 12,
-            paddingLeft: 20,
+            marginTop: height * 44,
+            marginLeft: width * 20,
           }}
         >
           <Text
             style={{
-              fontFamily: "noto-regular",
-              fontWeight: "400",
+              fontFamily: "noto-medium",
+              includeFontPadding: false,
+              textAlignVertical: "center",
               fontSize: 20,
               color: "rgba(14, 37, 124, 255)",
             }}
           >
             주문금액
           </Text>
-          <Text>
-            <Text
-              style={{
-                fontFamily: "noto-regular",
-                fontWeight: "400",
-                fontSize: 20,
-                color: "rgba(0, 0, 0, 255)",
-              }}
-            >
-              을{" "}
-            </Text>
-            <Text
-              style={{
-                fontFamily: "noto-regular",
-                fontWeight: "400",
-                fontSize: 20,
-                color: "rgba(14, 37, 124, 255)",
-              }}
-            >
-              입력
-            </Text>
-            <Text
-              style={{
-                fontFamily: "noto-regular",
-                fontWeight: "400",
-                fontSize: 20,
-                color: "rgba(0, 0, 0, 255)",
-              }}
-            >
-              해주세요{" "}
-            </Text>
+          <Text
+            style={{
+              fontFamily: "noto-medium",
+              includeFontPadding: false,
+              textAlignVertical: "center",
+              fontSize: 20,
+              color: "rgba(0, 0, 0, 255)",
+            }}
+          >
+            을{" "}
+          </Text>
+          <Text
+            style={{
+              fontFamily: "noto-medium",
+              includeFontPadding: false,
+              textAlignVertical: "center",
+              fontSize: 20,
+              color: "rgba(14, 37, 124, 255)",
+            }}
+          >
+            입력
+          </Text>
+          <Text
+            style={{
+              fontFamily: "noto-medium",
+              includeFontPadding: false,
+              textAlignVertical: "center",
+              fontSize: 20,
+              color: "rgba(0, 0, 0, 255)",
+            }}
+          >
+            해주세요{" "}
           </Text>
         </View>
 
@@ -115,21 +119,22 @@ export default ({ name }) => {
           <View
             style={{
               marginStart: 0.5,
-              marginTop: 14,
+              marginTop: height * 14,
               backgroundColor: "rgba(84, 101, 170, 255)",
-              width: 324,
-              height: 1.5,
+              width: width * 324,
+              height: height * 1.5,
               alignSelf: "center",
             }}
           />
           <Text
             style={{
-              fontFamily: "noto-regular",
-              fontWeight: "400",
+              fontFamily: "noto-medium",
+              includeFontPadding: false,
+              textAlignVertical: "center",
               fontSize: 17,
               color: "rgba(0, 0, 0, 255)",
-              marginTop: 21,
-              paddingLeft: 20,
+              marginTop: height * 21,
+              paddingLeft: width * 20,
             }}
           >
             {" "}
@@ -141,8 +146,8 @@ export default ({ name }) => {
               alert("매장정보로 이동");
             }}
             style={{
-              marginLeft: 20,
-              marginTop: 8,
+              marginLeft: width * 20,
+              marginTop: height * 8,
               flexDirection: "row",
               // backgroundColor: "pink",
             }}
@@ -150,12 +155,13 @@ export default ({ name }) => {
             <PlatformIcon platfrom={"배민"} />
             <Text
               style={{
-                marginTop: -2,
-                marginLeft: 12,
-                fontFamily: "noto-regular",
+                marginTop: height * -2,
+                marginLeft: width * 12,
+                fontFamily: "noto-medium",
+                includeFontPadding: false,
+                textAlignVertical: "center",
                 fontSize: 15,
                 color: "rgba(0, 0, 0, 255)",
-                textDecorationLine: "underline",
               }}
             >
               매장이름
@@ -167,19 +173,20 @@ export default ({ name }) => {
               color="black"
               style={{
                 alignSelf: "center",
-                marginLeft: 20,
+                marginLeft: width * 20,
               }}
             />
           </Pressable>
 
           <Text
             style={{
-              fontFamily: "noto-regular",
-              fontWeight: "400",
+              fontFamily: "noto-medium",
+              includeFontPadding: false,
+              textAlignVertical: "center",
               fontSize: 17,
               color: "rgba(0, 0, 0, 255)",
-              marginTop: 40,
-              paddingLeft: 20,
+              marginTop: height * 40,
+              paddingLeft: width * 20,
             }}
           >
             {" "}
@@ -191,7 +198,7 @@ export default ({ name }) => {
             value={price && price.toLocaleString("ko-KR")}
             isValued={price ? true : false}
             autoCapitalize="none"
-            viewStyle={{ marginLeft: 22, marginTop: 20 }}
+            viewStyle={{ marginLeft: width * 22, marginTop: height * 20 }}
           />
         </View>
 
@@ -199,7 +206,7 @@ export default ({ name }) => {
           style={{
             alignItems: "center",
             justifyContent: "center",
-            // marginTop: 20,
+            // marginTop: height*20,
           }}
         >
           <RoundedBtn
@@ -214,27 +221,14 @@ export default ({ name }) => {
             style={{
               backgroundColor: "#F5F6F6",
               justifyContent: "center",
-              width: 364,
-              height: 55,
-              marginTop: 16,
+              width: width * 364,
+              height: height * 55,
+              marginTop: height * 16,
               borderBottomLeftRadius: 16,
               borderBottomRightRadius: 16,
             }}
           >
-            <Text
-              style={{
-                color: "rgba(62, 63, 65, 1)",
-                fontSize: 10,
-                fontStyle: "normal",
-                fontFamily: "noto-regular",
-                textAlign: "left",
-                paddingHorizontal: 10,
-              }}
-            >
-              * 하프딜리버리는 상품거래에 대한 통신판매중개자이며, 통신판매의
-              당사자가 아닙니다. 따라서, 하프딜리버리는 상품거래에 대하여 책임을
-              지지 않습니다.
-            </Text>
+            <DisclaimerFooter />
           </View>
         </View>
       </View>
