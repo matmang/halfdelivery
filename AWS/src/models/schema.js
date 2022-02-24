@@ -1,7 +1,7 @@
 export const schema = {
     "models": {
-        "OrderMenu": {
-            "name": "OrderMenu",
+        "MatchingInfo": {
+            "name": "MatchingInfo",
             "fields": {
                 "id": {
                     "name": "id",
@@ -10,159 +10,76 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "menu": {
-                    "name": "menu",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "price": {
-                    "name": "price",
+                "requiredPersons": {
+                    "name": "requiredPersons",
                     "isArray": false,
                     "type": "Int",
                     "isRequired": true,
                     "attributes": []
                 },
-                "quantity": {
-                    "name": "quantity",
+                "StoreCategory": {
+                    "name": "StoreCategory",
                     "isArray": false,
-                    "type": "Int",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "orderID": {
-                    "name": "orderID",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "userID": {
-                    "name": "userID",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                }
-            },
-            "syncable": true,
-            "pluralName": "OrderMenus",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byOrder",
-                        "fields": [
-                            "orderID"
-                        ]
-                    }
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byUser",
-                        "fields": [
-                            "userID"
-                        ]
-                    }
-                },
-                {
-                    "type": "auth",
-                    "properties": {
-                        "rules": [
-                            {
-                                "allow": "public",
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
-                            }
-                        ]
-                    }
-                }
-            ]
-        },
-        "Order": {
-            "name": "Order",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "store": {
-                    "name": "store",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "orderDateTime": {
-                    "name": "orderDateTime",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "paymentAmount": {
-                    "name": "paymentAmount",
-                    "isArray": false,
-                    "type": "Int",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "userID": {
-                    "name": "userID",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "chatroomID": {
-                    "name": "chatroomID",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "OrderMenus": {
-                    "name": "OrderMenus",
-                    "isArray": true,
                     "type": {
-                        "model": "OrderMenu"
+                        "model": "StoreCategory"
                     },
                     "isRequired": false,
                     "attributes": [],
-                    "isArrayNullable": true,
                     "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "orderID"
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "matchingInfoStoreCategoryId"
                     }
+                },
+                "Store": {
+                    "name": "Store",
+                    "isArray": false,
+                    "type": {
+                        "model": "Store"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "matchingInfoStoreId"
+                    }
+                },
+                "setTime": {
+                    "name": "setTime",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "ChatRoom": {
+                    "name": "ChatRoom",
+                    "isArray": false,
+                    "type": {
+                        "model": "ChatRoom"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "matchingInfoChatRoomId"
+                    }
+                },
+                "type": {
+                    "name": "type",
+                    "isArray": false,
+                    "type": {
+                        "enum": "MatchingType"
+                    },
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "platform": {
+                    "name": "platform",
+                    "isArray": false,
+                    "type": {
+                        "enum": "Platform"
+                    },
+                    "isRequired": true,
+                    "attributes": []
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -182,29 +99,11 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "Orders",
+            "pluralName": "MatchingInfos",
             "attributes": [
                 {
                     "type": "model",
                     "properties": {}
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byUser",
-                        "fields": [
-                            "userID"
-                        ]
-                    }
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byChatRoom",
-                        "fields": [
-                            "chatroomID"
-                        ]
-                    }
                 },
                 {
                     "type": "auth",
@@ -384,6 +283,13 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "telephoneNumber": {
+                    "name": "telephoneNumber",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "baeminUri": {
                     "name": "baeminUri",
                     "isArray": false,
@@ -391,8 +297,15 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "telephoneNumber": {
-                    "name": "telephoneNumber",
+                "yogiyoUri": {
+                    "name": "yogiyoUri",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "coupangUri": {
+                    "name": "coupangUri",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -603,25 +516,18 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "Orders": {
-                    "name": "Orders",
-                    "isArray": true,
-                    "type": {
-                        "model": "Order"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "chatroomID"
-                    }
-                },
                 "master": {
                     "name": "master",
                     "isArray": false,
                     "type": "String",
                     "isRequired": true,
+                    "attributes": []
+                },
+                "onSetting": {
+                    "name": "onSetting",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": false,
                     "attributes": []
                 },
                 "createdAt": {
@@ -946,34 +852,6 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "Orders": {
-                    "name": "Orders",
-                    "isArray": true,
-                    "type": {
-                        "model": "Order"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "userID"
-                    }
-                },
-                "OrderMenus": {
-                    "name": "OrderMenus",
-                    "isArray": true,
-                    "type": {
-                        "model": "OrderMenu"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "userID"
-                    }
-                },
                 "accountnumber": {
                     "name": "accountnumber",
                     "isArray": false,
@@ -1016,6 +894,13 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "participantID": {
+                    "name": "participantID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -1041,6 +926,122 @@ export const schema = {
                     "properties": {}
                 },
                 {
+                    "type": "key",
+                    "properties": {
+                        "name": "byParticipant",
+                        "fields": [
+                            "participantID"
+                        ]
+                    }
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "Participant": {
+            "name": "Participant",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "isReady": {
+                    "name": "isReady",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "orderImages": {
+                    "name": "orderImages",
+                    "isArray": false,
+                    "type": "AWSJSON",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "orderPrice": {
+                    "name": "orderPrice",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "isMaster": {
+                    "name": "isMaster",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "Users": {
+                    "name": "Users",
+                    "isArray": true,
+                    "type": {
+                        "model": "User"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "participantID"
+                    }
+                },
+                "ChatRoom": {
+                    "name": "ChatRoom",
+                    "isArray": false,
+                    "type": {
+                        "model": "ChatRoom"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "participantChatRoomId"
+                    }
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "Participants",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
                     "type": "auth",
                     "properties": {
                         "rules": [
@@ -1059,7 +1060,23 @@ export const schema = {
             ]
         }
     },
-    "enums": {},
+    "enums": {
+        "Platform": {
+            "name": "Platform",
+            "values": [
+                "BAEMIN",
+                "YOGIYO",
+                "COUPANG"
+            ]
+        },
+        "MatchingType": {
+            "name": "MatchingType",
+            "values": [
+                "MIN_PRICE",
+                "DLV_TIP"
+            ]
+        }
+    },
     "nonModels": {},
-    "version": "d246b21f932da5b8ac66709d7397f1d0"
+    "version": "a9bbd24439c1e96c4d24daa356ab4c2b"
 };

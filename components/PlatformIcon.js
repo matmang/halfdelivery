@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import colors from "../colors";
+import { width, height } from "../utils";
 
 export default ({ platfrom, viewStyle }) => {
   let style = null;
@@ -8,6 +9,9 @@ export default ({ platfrom, viewStyle }) => {
   switch (platfrom) {
     case "배민":
       style = styles.BaeMin;
+      break;
+    case "배달의 민족":
+      style = styles.BaeMinFull;
       break;
     case "요기요":
       style = styles.Yogiyo;
@@ -23,8 +27,8 @@ export default ({ platfrom, viewStyle }) => {
     <View
       style={[
         {
-          width: 44,
-          height: 20,
+          width: width * 44,
+          height: height * 20,
           borderRadius: 10,
           backgroundColor: "black",
           justifyContent: "center",
@@ -34,9 +38,7 @@ export default ({ platfrom, viewStyle }) => {
         viewStyle,
       ]}
     >
-      <Text
-        style={{ color: "white", fontFamily: "noto-regular", fontSize: 10 }}
-      >
+      <Text style={{ color: "white", fontFamily: "noto-medium", fontSize: 10 }}>
         {platfrom}
       </Text>
     </View>
@@ -45,6 +47,11 @@ export default ({ platfrom, viewStyle }) => {
 
 const styles = StyleSheet.create({
   BaeMin: {
+    backgroundColor: "#2BC0BB",
+  },
+  BaeMinFull: {
+    width: width * 74,
+    height: height * 20,
     backgroundColor: "#2BC0BB",
   },
   Yogiyo: {

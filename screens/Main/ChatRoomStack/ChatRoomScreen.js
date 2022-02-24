@@ -48,6 +48,34 @@ import {
   AddAdditionalTime,
   ViewProfilePartner,
 } from "../../../components/Matching/Modals/";
+import Dropdown from "../../../components/Dropdown";
+import SelectPlatform from "../../../components/Matching/Modals/SelectPlatform";
+import TEST_react_native_expo_image_cropper from "./TEST_react_native_expo_image_cropper";
+import TEST_expo_image_crop from "./TEST_expo_image_crop";
+import {
+  Participant,
+  ParticipantEmpty,
+  PriceReadyBoxHost,
+  PriceReadyBoxPartner,
+} from "../../../components/Matching";
+import ImageView from "react-native-image-viewing";
+import Timer from "../../../components/Timer";
+import MyOrderImages from "../../../components/Matching/MyOrderImages";
+import Dropdown_noModal from "../../../components/Dropdown_noModal";
+import DeliveryInfo_DlvTip from "../../../components/Matching/waiting/DeliveryInfo_DlvTip";
+import BtmLastMessage from "../../../components/Chat/BtmLastMessage";
+
+const images = [
+  {
+    uri: "https://images.unsplash.com/photo-1571501679680-de32f1e7aad4",
+  },
+  {
+    uri: "https://images.unsplash.com/photo-1573273787173-0eb81a833b34",
+  },
+  {
+    uri: "https://images.unsplash.com/photo-1569569970363-df7b6160d111",
+  },
+];
 
 const ChatRoomScreen = (props) => {
   const [messages, setMessages] = useState([]);
@@ -56,6 +84,9 @@ const ChatRoomScreen = (props) => {
   const [isDetail, setIsDetail] = useState(false);
   const [authUser, setAuthUser] = useState([]);
   const route = useRoute();
+  const [selectedDropdown, setSelectedDropdown] = useState(undefined);
+
+  const [visible, setIsVisible] = useState(false);
 
   //- 헤더바, 점3개 버튼누르면 작동
   const navigation = props.navigation;
@@ -121,7 +152,7 @@ const ChatRoomScreen = (props) => {
     if (!chatRoom) {
       console.error("Couldn't find a chat room with this id");
     } else {
-      console.log("chatRoom이다", chatRoom);
+      // console.log("chatRoom이다", chatRoom);
       setChatRoom(chatRoom);
     }
   };
@@ -151,69 +182,211 @@ const ChatRoomScreen = (props) => {
   }, []);
   console.log("authUser", authUser);
 
-  // // ? Order 테이블에 chatroomID 업데이트 하기.
-  // const updateOrder = async () => {
-  //   const authUser = await Auth.currentAuthenticatedUser();
-  //   console.log("유저ID", authUser.attributes.sub);
-
-  //   // //? 업데이트 할 Order 타겟팅.
-  //   // const allOrder = await DataStore.query(Order);
-  //   // console.log("allOrder", allOrder);
-  //   // const dbOrders = await DataStore.query(Order, (order) => order.userID("eq", authUser.attributes.sub), {
-  //   //   sort: (order) => order.orderDate(SortDirection.DESCENDING),
-  //   // });
-  //   // console.log("dbOrders", dbOrders);
-  //   // const lastOrderID = dbOrders[0].id;
-
-  //   const original = await DataStore.query(Order, route.params.orderID);
-  //   console.log("오리지날", original);
-  //   // ? 업데이트
-  //   await DataStore.save(
-  //     Order.copyOf(original, (updated) => {
-  //       updated.chatroomID = route.params.id;
-  //     })
-  //   );
-  // };
-
-  // const matchingRoomInfo = props.route.params !== undefined ? route.params.matchingRoomInfo : "No Data";
-
-  // // ! 임시 값.
-  // if (
-  //   // route.params.matchingRoomInfo === undefined ||
-  //   route.params.storeInfo === undefined ||
-  //   route.params.menuInfo === undefined
-  // ) {
-  //   const storeInfo = undefined;
-  //   const menuInfo = undefined;
-  // } else {
-  //   const matchingRoomInfo = route.params.matchingRoomInfo;
-  //   const storeInfo = route.params.storeInfo;
-  //   const menuInfo = route.params.menuInfo;
-  // }
-
-  // // const matchingRoomInfo = route.params.matchingRoomInfo;
-  // const storeInfo = route.params.storeInfo;
-  // const menuInfo = route.params.menuInfo;
-
-  // // console.log("파람스: ", props.route.params);
-
   // ? chatRoom 이 null 이면...
   if (!chatRoom) {
     return <ActivityIndicator />;
   }
 
+  const openImagePicker = () => {
+    ImagePicker.openPicker({
+      width: 300,
+      height: 400,
+      cropping: true,
+    }).then((image) => {
+      console.log(image);
+    });
+  };
+
   return (
-    <ScrollView style={styles.page}>
-      <ViewProfilePartner />
-      <AddAdditionalTime />
-      <RequestAdditionalTime />
-      <InputOrderPrice />
-      <CancelMatching />
-      <MatchingCancelled />
-      <EjectPartner />
+    <ScrollView>
+      <Text
+        style={{
+          color: "white",
+          backgroundColor: "grey",
+          // includeFontPadding: false,
+          // textAlignVertical: "center",
+        }}
+      >
+        안드로이드 기본폰트 테스트
+      </Text>
+      <Text
+        style={{
+          color: "white",
+          fontFamily: "noto-regular",
+          backgroundColor: "pink",
+          includeFontPadding: false,
+          textAlignVertical: "center",
+        }}
+      >
+        안드로이드 noto-regular 테스트
+      </Text>
+      <Text
+        style={{
+          color: "white",
+          fontFamily: "noto-medium",
+          backgroundColor: "pink",
+          includeFontPadding: false,
+          textAlignVertical: "center",
+        }}
+      >
+        안드로이드 noto-medium 테스트
+      </Text>
+      <Text
+        style={{
+          color: "white",
+          fontFamily: "noto-bold",
+          backgroundColor: "pink",
+          includeFontPadding: false,
+          textAlignVertical: "center",
+        }}
+      >
+        안드로이드 noto-bold 테스트
+      </Text>
+      <Text
+        style={{
+          color: "white",
+          fontFamily: "nunito-regular",
+          backgroundColor: "orange",
+          includeFontPadding: false,
+          textAlignVertical: "center",
+        }}
+      >
+        안드로이드 nunito-regular 테스트
+      </Text>
+      <Text
+        style={{
+          color: "white",
+          fontFamily: "nunito-semibold",
+          backgroundColor: "orange",
+          includeFontPadding: false,
+          textAlignVertical: "center",
+        }}
+      >
+        안드로이드 nunito-semibold 테스트
+      </Text>
+      <Text
+        style={{
+          color: "white",
+          fontFamily: "nunito-bold",
+          backgroundColor: "orange",
+          includeFontPadding: false,
+          textAlignVertical: "center",
+        }}
+      >
+        안드로이드 nunito-bold 테스트
+      </Text>
+
+      <BtmLastMessage
+        isMaster={true}
+        username="윤동현"
+        message="나는 누굴까 내일을 꿈꾸는가 "
+      />
+
+      <BtmLastMessage
+        isMaster={false}
+        username="최수민"
+        message="어떤이는 꿈을 잊은채로 살고 어떤이는 남의 꿈을 뺏고 살며 다른이는 꿈은 이런거라 하네
+        세상에 이처럼 많은 사람들과 세상에 이처럼 많은 개성들 저마다 자기가 옳다말을 하고 꿈이란 이런거라 말하지만"
+      />
+      <DeliveryInfo_DlvTip />
+
+      <Dropdown_noModal
+        placeholder="은행을 선택해주세요"
+        data={[
+          { label: "One", value: "1" },
+          { label: "Two", value: "2" },
+          { label: "Three", value: "3" },
+          { label: "Four", value: "4" },
+          { label: "Five", value: "5" },
+        ]}
+        onSelect={setSelectedDropdown}
+      />
+      <View style={{ marginTop: 100 }}>
+        <Dropdown
+          placeholder="은행을 선택해주세요"
+          data={[
+            { label: "One", value: "1" },
+            { label: "Two", value: "2" },
+            { label: "Three", value: "3" },
+            { label: "Four", value: "4" },
+            { label: "Five", value: "5" },
+          ]}
+          onSelect={setSelectedDropdown}
+        />
+      </View>
+
+      <MyOrderImages />
+      <Participant />
+      <ParticipantEmpty />
+      <PriceReadyBoxHost />
+      <PriceReadyBoxPartner />
+      <Timer />
+      {/* 
+      <ImageView
+        images={images}
+        imageIndex={0}
+        visible={true}
+        onRequestClose={() => setIsVisible(false)}
+        FooterComponent={({ imageIndex }) => (
+          <View
+            style={{
+              height: "20%",
+              backgroundColor: "red",
+              marginBottom: 100,
+              justifyContent: "center",
+            }}
+          >
+            <Text
+              style={{
+                color: "white",
+                alignSelf: "center",
+              }}
+            >
+              {imageIndex}
+            </Text>
+          </View>
+        )}
+      />
     </ScrollView>
 
-    // ? View 대신 SafeAreaView 를 쓰면, 노치 같은 곳에 데이터가 표출되지 않는다. 굳!
+    // <ScrollView style={styles.page}>
+    //   {/* <Pressable
+    //     style={{ width: "100%", height: 50, backgroundColor: "blue" }}
+    //     // onPress={openImagePicker}
+    //   />
+    //   <View
+    //     style={{
+    //       width: 364,
+    //       height: 100,
+    //       backgroundColor: "lightgreen",
+    //       justifyContent: "center",
+    //       alignItems: "center",
+    //       alignSelf: "center",
+    //     }}
+    //   >
+    //     <Dropdown
+    //       placeholder="은행을 선택해주세요"
+    //       data={[
+    //         { label: "One", value: "1" },
+    //         { label: "Two", value: "2" },
+    //         { label: "Three", value: "3" },
+    //         { label: "Four", value: "4" },
+    //         { label: "Five", value: "5" },
+    //       ]}
+    //       onSelect={setSelectedDropdown}
+    //     />
+    //   </View>
+
+    //   <ViewProfilePartner />
+    //   <AddAdditionalTime />
+    //   <RequestAdditionalTime />
+    //   <InputOrderPrice />
+    //   <CancelMatching />
+    //   <MatchingCancelled />
+    //   <EjectPartner /> */}
+    </ScrollView>
+
+    //! View 대신 SafeAreaView 를 쓰면, 노치 같은 곳에 데이터가 표출되지 않는다. 굳!
     // <SafeAreaView style={styles.page}>
     //   {is3dots && (
     //     <TopBox>
@@ -283,10 +456,8 @@ const ChatRoomScreen = (props) => {
     //       </Pressable>
     //     </TopBox>
     //   )}
-
     //   {/* //TODO: 어떠 컴포넌트로 위치시켜야 할까.. */}
     //   {/* <EjectModal /> */}
-
     //   <ProcessBox>
     //     <ProcessImg
     //       source={require("../../../assets/images/ChatRoomScreen/processBox/process_menuChecked.png")}

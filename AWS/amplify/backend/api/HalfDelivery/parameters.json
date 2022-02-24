@@ -2,11 +2,5 @@
   "AppSyncApiName": "HalfDelivery",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
   "DynamoDBEnableServerSideEncryption": false,
-  "AuthCognitoUserPoolId": {
-    "Fn::GetAtt": [
-      "authhalfdeliveryNewAuth220124",
-      "Outputs.UserPoolId"
-    ]
-  },
-  "AuthModeLastUpdated": "2022-01-24T12:05:45.524Z"
+  "AuthModeLastUpdated": "2022-02-17T13:23:42.964Z"
 }

@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
-const StoreCategory = ({category}) => {
+const StoreCategory = ({ category }) => {
   return (
     <View
       style={{
@@ -13,7 +13,10 @@ const StoreCategory = ({category}) => {
         marginBottom: 5,
       }}
     >
-      <Text style={styles.categoryText} numberOfLines={1}>
+      <Text
+        style={{ fontSize: 10, textAlign: "center", fontFamily: "noto-medium" }}
+        numberOfLines={1}
+      >
         {category}
       </Text>
     </View>
@@ -21,11 +24,3 @@ const StoreCategory = ({category}) => {
 };
 
 export default StoreCategory;
-
-const styles = StyleSheet.create({
-  categoryText: {
-    fontSize: 12,
-    textAlign: "center",
-    fontFamily: "noto-regular",
-  },
-});

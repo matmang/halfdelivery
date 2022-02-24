@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { View, Button, Text, StyleSheet } from "react-native";
-import RoomList from "../../../components/Order/RoomList";
+import RoomList from "../../../components/Matching/RoomList";
 import styled from "styled-components";
 import colors from "../../../colors";
 import {

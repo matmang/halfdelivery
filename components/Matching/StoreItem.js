@@ -12,7 +12,7 @@ import logos from "../../images";
 import { useDispatch } from "react-redux";
 import { MaterialIcons } from "@expo/vector-icons";
 import styled from "styled-components";
-import StoreModal from "./StoreModal";
+import { SelectPlatform } from "../../components/Matching/Modals/";
 import StoreCategory from "../StoreCategory";
 import {
   KOREAN_ID,
@@ -21,60 +21,7 @@ import {
   WESTERN_ID,
   CAFE_ID,
 } from "../../assets/constants";
-
-const StoreRoomBox = styled.Pressable`
-  width: 100%;
-  height: 100px;
-  flex-direction: row;
-  align-items: center;
-  background-color: white;
-  margin-top: 2px;
-  margin-bottom: 2px;
-`;
-
-const Img = styled.Image`
-  margin-left: 24px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  border-radius: 10px;
-  width: 80px;
-  height: 72px;
-`;
-
-const NonImgBox = styled.View`
-  padding: 5px;
-  margin-left: 20px;
-  justify-content: center;
-`;
-
-const InfoView = styled.View`
-  flex-direction: row;
-  align-items: center;
-  padding: 2px;
-`;
-
-const StoreText = styled.Text`
-  font-size: 17px;
-  line-height: 20px;
-  text-align: left;
-  font-family: "noto-regular";
-  margin-left: 8px;
-  margin-bottom: 3px;
-`;
-
-const InfoText = styled.Text`
-  font-size: 14px;
-  line-height: 16px;
-  text-align: left;
-  font-family: "noto-regular";
-  padding: 2px;
-`;
-
-const NunitoText = styled.Text`
-  font-size: 14px;
-  font-family: "nunito-regular";
-  text-align: right;
-`;
+import { width, height } from "../../utils";
 
 const StoreItem = ({ storeInfo }) => {
   const dispatch = useDispatch();
@@ -127,7 +74,7 @@ const StoreItem = ({ storeInfo }) => {
       }}
     >
       {isModal && (
-        <StoreModal
+        <SelectPlatform
           isModal={isModal}
           setIsModal={setIsModal}
           storeInfo={storeInfo}
@@ -148,18 +95,18 @@ const StoreItem = ({ storeInfo }) => {
         <InfoView>
           <StoreCategory category={category} />
           <StoreText>{storeInfo.store}</StoreText>
-          <MaterialIcons
+          {/* <MaterialIcons
             name="arrow-forward-ios"
             size={12}
             color="black"
             style={{ marginLeft: 12, marginBottom: 6 }}
-          />
+          /> */}
         </InfoView>
 
         <InfoView>
           <View>
             <InfoText numberOfLines={1}>최소주문금액</InfoText>
-            <InfoText numberOfLines={1}>배달팁</InfoText>
+            <InfoText numberOfLines={1}>배달비</InfoText>
           </View>
 
           <View style={{ marginLeft: 18 }}>
@@ -192,5 +139,59 @@ const StoreItem = ({ storeInfo }) => {
     </StoreRoomBox>
   );
 };
+
+const StoreRoomBox = styled.Pressable`
+  width: 100%;
+  height: ${height * 100}px;
+  flex-direction: row;
+  align-items: center;
+  background-color: white;
+  /* margin-top: 2px; */
+  margin-bottom: 2px;
+`;
+
+const Img = styled.Image`
+  margin-left: 24px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 16px;
+  width: ${width * 72}px;
+  height: ${height * 72}px;
+`;
+
+const NonImgBox = styled.View`
+  padding: 5px;
+  margin-left: 20px;
+  justify-content: center;
+`;
+
+const InfoView = styled.View`
+  flex-direction: row;
+  align-items: center;
+  padding: 2px;
+`;
+
+const StoreText = styled.Text`
+  font-size: 14px;
+  line-height: 20px;
+  text-align: left;
+  font-family: "noto-medium";
+  margin-left: 8px;
+  margin-bottom: 6px;
+`;
+
+const InfoText = styled.Text`
+  font-size: 14px;
+  line-height: 16px;
+  text-align: left;
+  font-family: "noto-regular";
+  padding: 2px;
+`;
+
+const NunitoText = styled.Text`
+  font-size: 14px;
+  font-family: "nunito-regular";
+  text-align: right;
+`;
 
 export default StoreItem;

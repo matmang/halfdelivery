@@ -1,4 +1,5 @@
 {
   "editor.scrollbar.horizontal": "visible",
-  "editor.scrollbar.scrollByPage": true
+  "editor.scrollbar.scrollByPage": true,
+  "typescript.updateImportsOnFileMove.enabled": "always"
 }

@@ -1,10 +1,83 @@
 import { View, Text, Pressable } from "react-native";
 import React, { useState } from "react";
 import Modal from "react-native-modal";
-import colors from "../../colors";
+import colors from "../../../colors";
 import styled from "styled-components";
-import StoreCategory from "../StoreCategory";
-import Platform from "./Platform";
+import StoreCategory from "../../StoreCategory";
+import Platform from "./../Platform";
+import { width, height } from "../../../utils";
+
+export default ({ isModal, setIsModal, storeInfo, category }) => {
+  const [selectedName, setSelectedName] = useState(null);
+
+  return (
+    <Modal
+      animationIn="zoomInDown"
+      animationOut="zoomOutUp"
+      isVisible={isModal}
+      style={{ justifyContent: "center", alignItems: "center" }}
+      onBackdropPress={() => {
+        setIsModal(false);
+      }}
+    >
+      <ModalBox>
+        <Top>
+          <StoreInfo_mini storeInfo={storeInfo} category={category} />
+          <BlueLine />
+          <Noto17 style={{ color: colors.primaryBlue, marginTop: 20 }}>
+            배달 플랫폼 선택
+          </Noto17>
+          <Noto14>주문을 진행할 배달 플랫폼을 선택해주세요</Noto14>
+        </Top>
+        <Mid>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-evenly",
+              marginTop: 20,
+            }}
+          >
+            <Platform
+              name={"배달의 민족"}
+              selectedName={selectedName}
+              setSelectedName={setSelectedName}
+            />
+            <Platform
+              name={"요기요"}
+              selectedName={selectedName}
+              setSelectedName={setSelectedName}
+            />
+            <Platform
+              name={"쿠팡잇츠"}
+              selectedName={selectedName}
+              setSelectedName={setSelectedName}
+            />
+          </View>
+          <Select
+            selectedName={selectedName}
+            onPress={() => {
+              alert(selectedName);
+            }}
+          >
+            <Noto17
+              style={{
+                color: selectedName ? "white" : colors.steelBlue2,
+              }}
+            >
+              선택완료
+            </Noto17>
+          </Select>
+        </Mid>
+        <Btm>
+          <Warnning>
+            * 하프하프는 상품거래에 대한 통신판매중개자이며, 통신판매의 당사자가
+            아닙니다. 따라서, 하프하프는 상품거래에 대하여 책임을 지지 않습니다.
+          </Warnning>
+        </Btm>
+      </ModalBox>
+    </Modal>
+  );
+};
 
 const StoreInfo_mini = ({ storeInfo, category }) => {
   const StoreRoomBox = styled.View`
@@ -21,9 +94,9 @@ const StoreInfo_mini = ({ storeInfo, category }) => {
     /* margin-left: 24px; */
     margin-top: 10px;
     margin-bottom: 10px;
-    border-radius: 10px;
-    width: 80px;
-    height: 72px;
+    border-radius: 16px;
+    width: ${width * 72}px;
+    height: ${height * 72}px;
   `;
 
   const NonImgBox = styled.View`
@@ -184,82 +257,3 @@ const Select = styled.Pressable`
   margin-top: auto;
   margin-bottom: 16px;
 `;
-
-const StoreModal = ({ isModal, setIsModal, storeInfo, category }) => {
-  const [selectedName, setSelectedName] = useState(null);
-
-  return (
-    <Modal
-      animationIn="zoomInDown"
-      animationOut="zoomOutUp"
-      isVisible={isModal}
-      style={{ justifyContent: "center", alignItems: "center" }}
-      onBackdropPress={() => {
-        setIsModal(false);
-      }}
-    >
-      <ModalBox>
-        <Top>
-          <StoreInfo_mini storeInfo={storeInfo} category={category} />
-          <BlueLine />
-          <Noto17 style={{ color: colors.primaryBlue, marginTop: 20 }}>
-            배달 플랫폼 선택
-          </Noto17>
-          <Noto14>주문을 진행할 배달 플랫폼을 선택해주세요</Noto14>
-        </Top>
-        <Mid>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-evenly",
-              marginTop: 20,
-            }}
-          >
-            <Platform
-              name={"배달의 민족"}
-              selectedName={selectedName}
-              setSelectedName={setSelectedName}
-            />
-            <Platform
-              name={"요기요"}
-              selectedName={selectedName}
-              setSelectedName={setSelectedName}
-            />
-            <Platform
-              name={"배달통"}
-              selectedName={selectedName}
-              setSelectedName={setSelectedName}
-            />
-            <Platform
-              name={"쿠팡잇츠"}
-              selectedName={selectedName}
-              setSelectedName={setSelectedName}
-            />
-          </View>
-          <Select
-            selectedName={selectedName}
-            onPress={() => {
-              alert(selectedName);
-            }}
-          >
-            <Noto17
-              style={{
-                color: selectedName ? "white" : colors.steelBlue2,
-              }}
-            >
-              선택완료
-            </Noto17>
-          </Select>
-        </Mid>
-        <Btm>
-          <Warnning>
-            * 하프하프는 상품거래에 대한 통신판매중개자이며, 통신판매의 당사자가
-            아닙니다. 따라서, 하프하프는 상품거래에 대하여 책임을 지지 않습니다.
-          </Warnning>
-        </Btm>
-      </ModalBox>
-    </Modal>
-  );
-};
-
-export default StoreModal;

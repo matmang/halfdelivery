@@ -1,14 +1,19 @@
 import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplify/datastore";
 
-
-
-
-
-type OrderMenuMetaData = {
-  readOnlyFields: 'createdAt' | 'updatedAt';
+export enum Platform {
+  BAEMIN = "BAEMIN",
+  YOGIYO = "YOGIYO",
+  COUPANG = "COUPANG"
 }
 
-type OrderMetaData = {
+export enum MatchingType {
+  MIN_PRICE = "MIN_PRICE",
+  DLV_TIP = "DLV_TIP"
+}
+
+
+
+type MatchingInfoMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
@@ -40,31 +45,23 @@ type UserMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-export declare class OrderMenu {
-  readonly id: string;
-  readonly menu: string;
-  readonly price: number;
-  readonly quantity: number;
-  readonly orderID?: string;
-  readonly userID?: string;
-  readonly createdAt?: string;
-  readonly updatedAt?: string;
-  constructor(init: ModelInit<OrderMenu, OrderMenuMetaData>);
-  static copyOf(source: OrderMenu, mutator: (draft: MutableModel<OrderMenu, OrderMenuMetaData>) => MutableModel<OrderMenu, OrderMenuMetaData> | void): OrderMenu;
+type ParticipantMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-export declare class Order {
+export declare class MatchingInfo {
   readonly id: string;
-  readonly store: string;
-  readonly orderDateTime: string;
-  readonly paymentAmount: number;
-  readonly userID?: string;
-  readonly chatroomID?: string;
-  readonly OrderMenus?: (OrderMenu | null)[];
+  readonly requiredPersons: number;
+  readonly StoreCategory?: StoreCategory;
+  readonly Store?: Store;
+  readonly setTime: number;
+  readonly ChatRoom?: ChatRoom;
+  readonly type: MatchingType | keyof typeof MatchingType;
+  readonly platform: Platform | keyof typeof Platform;
   readonly createdAt?: string;
   readonly updatedAt?: string;
-  constructor(init: ModelInit<Order, OrderMetaData>);
-  static copyOf(source: Order, mutator: (draft: MutableModel<Order, OrderMetaData>) => MutableModel<Order, OrderMetaData> | void): Order;
+  constructor(init: ModelInit<MatchingInfo, MatchingInfoMetaData>);
+  static copyOf(source: MatchingInfo, mutator: (draft: MutableModel<MatchingInfo, MatchingInfoMetaData>) => MutableModel<MatchingInfo, MatchingInfoMetaData> | void): MatchingInfo;
 }
 
 export declare class StoreCategory {
@@ -89,8 +86,10 @@ export declare class Store {
   readonly location?: string;
   readonly Menus?: (Menu | null)[];
   readonly storecategoryID?: string;
-  readonly baeminUri?: string;
   readonly telephoneNumber?: string;
+  readonly baeminUri?: string;
+  readonly yogiyoUri?: string;
+  readonly coupangUri?: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Store, StoreMetaData>);
@@ -117,8 +116,8 @@ export declare class ChatRoom {
   readonly LastMessage?: Message;
   readonly ChatRoomUsers?: (ChatRoomUser | null)[];
   readonly matchingInfo?: string;
-  readonly Orders?: (Order | null)[];
   readonly master: string;
+  readonly onSetting?: boolean;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<ChatRoom, ChatRoomMetaData>);
@@ -156,16 +155,29 @@ export declare class User {
   readonly chatrooms?: (ChatRoomUser | null)[];
   readonly Messages?: (Message | null)[];
   readonly bank?: string;
-  readonly Orders?: (Order | null)[];
-  readonly OrderMenus?: (OrderMenu | null)[];
   readonly accountnumber?: string;
   readonly school?: string;
   readonly college?: string;
   readonly birthday?: string;
   readonly status?: string;
   readonly agree?: boolean;
+  readonly participantID: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<User, UserMetaData>);
   static copyOf(source: User, mutator: (draft: MutableModel<User, UserMetaData>) => MutableModel<User, UserMetaData> | void): User;
+}
+
+export declare class Participant {
+  readonly id: string;
+  readonly isReady?: boolean;
+  readonly orderImages?: string;
+  readonly orderPrice?: number;
+  readonly isMaster?: boolean;
+  readonly Users?: (User | null)[];
+  readonly ChatRoom?: ChatRoom;
+  readonly createdAt?: string;
+  readonly updatedAt?: string;
+  constructor(init: ModelInit<Participant, ParticipantMetaData>);
+  static copyOf(source: Participant, mutator: (draft: MutableModel<Participant, ParticipantMetaData>) => MutableModel<Participant, ParticipantMetaData> | void): Participant;
 }
