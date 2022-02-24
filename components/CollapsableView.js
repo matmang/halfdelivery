@@ -12,7 +12,6 @@ import Animated, {
   withTiming,
   runOnJS,
 } from "react-native-reanimated";
-import MIcon from "react-native-vector-icons/MaterialIcons";
 import colors from "../colors";
 import { height, width } from "../utils";
 

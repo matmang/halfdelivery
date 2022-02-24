@@ -186,13 +186,13 @@ const ExplainText = styled.Text`
 `;
 
 const SelectTitleText = styled.Text`
-  font-size: 14px;
+  font-size: ${width * 14}px;
   font-family: "noto-medium";
   color: ${colors.primaryBlue};
 `;
 
 const SelectExplainText = styled.Text`
-  font-size: 11px;
+  font-size: ${width * 11}px;
   font-family: "noto-regular";
 `;
 
