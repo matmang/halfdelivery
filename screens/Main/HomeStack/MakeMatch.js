@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Image } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Image, Pressable } from "react-native";
 import styled from "styled-components";
 import colors from "../../../colors";
 import CollapsibleView from "../../../components/CollapsableView";
@@ -8,6 +8,9 @@ import BarInput from "../../../components/Auth/BarInput";
 import { ScrollView } from "react-native-gesture-handler";
 import DismissKeyboard from "../../../components/DismissKeyboard";
 import Btn from "../../../components/Auth/Btn";
+import MatchingImagePicker from "../../../components/Main/renderImage/MatchingImagePicker";
+import Dropdown from "../../../components/Dropdown";
+import Dropdown_noModal from "../../../components/Dropdown_noModal";
 
 const Container = styled.View`
   justify-content: center;
@@ -117,6 +120,15 @@ const ButtonContainer = styled.View`
   bottom: ${height * 23}px;
 `;
 
+const ImageContainer = styled.View`
+  margin-left: ${width * 24}px;
+  margin-top: ${height * 18}px;
+`;
+
+const DropDownContainer = styled.View`
+  margin-left: ${width * 24}px;
+`;
+
 const NoneImage = styled.View`
   width: ${width * 72}px;
   height: ${height * 72}px;
@@ -140,7 +152,8 @@ const SelectBox = styled.View`
   height: ${height * 190}px;
   border-radius: 16px;
   border: 1.5px;
-  border-color: ${colors.primaryBlue};
+  border-color: ${(props) =>
+    props.isSelected ? colors.primaryBlue : colors.unselectedGrey};
   align-items: center;
   justify-content: center;
 `;
@@ -188,16 +201,33 @@ const ExplainText = styled.Text`
 const SelectTitleText = styled.Text`
   font-size: ${width * 14}px;
   font-family: "noto-medium";
-  color: ${colors.primaryBlue};
+  color: ${(props) =>
+    props.isSelected ? colors.primaryBlue : colors.unselectedGrey};
 `;
 
 const SelectExplainText = styled.Text`
   font-size: ${width * 11}px;
   font-family: "noto-regular";
+  color: ${(props) => (props.isSelected ? "#000000" : colors.unselectedGrey)};
 `;
 
 export default ({ navigation }) => {
+  const [isMinOrderFee, setIsMinOrderFee] = useState(false);
+  const [isDelivery, setIsDelivery] = useState(false);
   const [orderFee, setOrderFee] = useState("");
+  const [image, setImage] = useState([]);
+  const [selectMember, setSelectMember] = useState(0);
+  const [members, setMembers] = useState([
+    { label: "2명", value: "1" },
+    { label: "3명", value: "2" },
+    { label: "4명", value: "3" },
+  ]);
+  const [selectMinute, setSelectMinute] = useState(0);
+  const [minutes, setMinutes] = useState([
+    { label: "5분", value: "5" },
+    { label: "7분", value: "7" },
+    { label: "10분", value: "10" },
+  ]);
   return (
     <DismissKeyboard>
       <ScrollView>
@@ -270,16 +300,14 @@ export default ({ navigation }) => {
               />
               <TitleText>주문 메뉴 정보</TitleText>
             </TitleContainer>
-            <Image
-              source={require("../../../assets/images/add-picture.png")}
-              style={{
-                width: width * 92,
-                height: height * 92,
-                resizeMode: "contain",
-                marginLeft: width * 24,
-                marginTop: height * 18,
-              }}
-            />
+            <ImageContainer>
+              <MatchingImagePicker
+                isReady={false}
+                images={image}
+                setImages={setImage}
+                index={0}
+              />
+            </ImageContainer>
             <ExplainContainer>
               <Image
                 source={require("../../../assets/images/right-arrow.png")}
@@ -305,52 +333,114 @@ export default ({ navigation }) => {
               <TitleText>매칭 유형</TitleText>
             </TitleContainer>
             <MatchingSelectContainer>
-              <SelectBox>
-                <Image
-                  source={require("../../../assets/images/min-ordering-fee-unselected.png")}
-                  style={{
-                    width: width * 49,
-                    height: height * 47,
-                    resizeMode: "contain",
-                  }}
-                />
-                <SelectTitleText>최소주문금액 매칭</SelectTitleText>
-                <SelectExplainText>
-                  {`최소주문금액 도달을 목표로 
+              <Pressable
+                onPress={() => {
+                  setIsMinOrderFee(!isMinOrderFee);
+                  setIsDelivery(false);
+                }}
+              >
+                <SelectBox isSelected={isMinOrderFee}>
+                  {isMinOrderFee ? (
+                    <Image
+                      source={require("../../../assets/images/min-ordering-fee.png")}
+                      style={{
+                        width: width * 49,
+                        height: height * 47,
+                        resizeMode: "contain",
+                      }}
+                    />
+                  ) : (
+                    <Image
+                      source={require("../../../assets/images/min-ordering-fee-unselected.png")}
+                      style={{
+                        width: width * 49,
+                        height: height * 47,
+                        resizeMode: "contain",
+                      }}
+                    />
+                  )}
+                  <SelectTitleText isSelected={isMinOrderFee}>
+                    최소주문금액 매칭
+                  </SelectTitleText>
+                  <SelectExplainText isSelected={isMinOrderFee}>
+                    {`최소주문금액 도달을 목표로 
           매칭을 진행합니다`}
-                </SelectExplainText>
-                <Image
-                  source={require("../../../assets/images/unselected.png")}
-                  style={{
-                    width: width * 20,
-                    height: height * 20,
-                    resizeMode: "contain",
-                  }}
-                />
-              </SelectBox>
-              <SelectBox>
-                <Image
-                  source={require("../../../assets/images/delivery-fee-selected.png")}
-                  style={{
-                    width: width * 49,
-                    height: height * 47,
-                    resizeMode: "contain",
-                  }}
-                />
-                <SelectTitleText>배달비 매칭</SelectTitleText>
-                <SelectExplainText>
-                  {`      설정된 인원에 맞는 배달비
+                  </SelectExplainText>
+                  {isMinOrderFee ? (
+                    <Image
+                      source={require("../../../assets/images/selected.png")}
+                      style={{
+                        width: width * 20,
+                        height: height * 20,
+                        resizeMode: "contain",
+                      }}
+                    />
+                  ) : (
+                    <Image
+                      source={require("../../../assets/images/unselected.png")}
+                      style={{
+                        width: width * 20,
+                        height: height * 20,
+                        resizeMode: "contain",
+                      }}
+                    />
+                  )}
+                </SelectBox>
+              </Pressable>
+              <Pressable
+                onPress={() => {
+                  setIsDelivery(!isDelivery);
+                  setIsMinOrderFee(false);
+                }}
+              >
+                <SelectBox isSelected={isDelivery}>
+                  {isDelivery ? (
+                    <Image
+                      source={require("../../../assets/images/delivery-fee-selected.png")}
+                      style={{
+                        width: width * 49,
+                        height: height * 47,
+                        resizeMode: "contain",
+                      }}
+                    />
+                  ) : (
+                    <Image
+                      source={require("../../../assets/images/delivery-fee-unselected.png")}
+                      style={{
+                        width: width * 49,
+                        height: height * 47,
+                        resizeMode: "contain",
+                      }}
+                    />
+                  )}
+                  <SelectTitleText isSelected={isDelivery}>
+                    배달비 매칭
+                  </SelectTitleText>
+                  <SelectExplainText isSelected={isDelivery}>
+                    {`      설정된 인원에 맞는 배달비
 분배를 목표로 매칭을 진행합니다`}
-                </SelectExplainText>
-                <Image
-                  source={require("../../../assets/images/selected.png")}
-                  style={{
-                    width: width * 20,
-                    height: height * 20,
-                    resizeMode: "contain",
-                  }}
-                />
-              </SelectBox>
+                  </SelectExplainText>
+                  {isDelivery ? (
+                    <Image
+                      source={require("../../../assets/images/selected.png")}
+                      style={{
+                        width: width * 20,
+                        height: height * 20,
+                        resizeMode: "contain",
+                      }}
+                    />
+                  ) : (
+                    <Image
+                      source={require("../../../assets/images/unselected.png")}
+                      style={{
+                        width: width * 20,
+                        height: height * 20,
+                        resizeMode: "contain",
+                      }}
+                    />
+                  )}
+                </SelectBox>
+              </Pressable>
             </MatchingSelectContainer>
           </CollapsibleView>
           <DistributionLine></DistributionLine>
@@ -366,6 +456,13 @@ export default ({ navigation }) => {
               />
               <TitleText>매칭 희망 인원</TitleText>
             </TitleContainer>
+            <DropDownContainer>
+              <Dropdown_noModal
+                placeholder={"매칭할 파트너 인원을 설정합니다"}
+                data={members}
+                onSelect={setSelectMember}
+              />
+            </DropDownContainer>
           </MemberContainer>
           <DistributionLine></DistributionLine>
           <TimeContainer>
@@ -380,6 +477,13 @@ export default ({ navigation }) => {
               />
               <TitleText>매칭 대기 시간</TitleText>
             </TitleContainer>
+            <DropDownContainer>
+              <Dropdown_noModal
+                placeholder={"해당 매칭이 노출되는 시간을 설정합니다"}
+                data={minutes}
+                onSelect={setSelectMinute}
+              />
+            </DropDownContainer>
           </TimeContainer>
         </Container>
         <ButtonContainer>
