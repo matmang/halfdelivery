@@ -38,11 +38,11 @@ export default ({ _isReady, imageUri, username, myImages, orderPrice }) => {
 };
 
 const Root = styled.ScrollView`
-  width: ${width * 364}px;
+  width: ${width * 344}px;
   height: ${height * 200}px;
   background: white;
   flex-direction: row;
   opacity: 1;
-  margin-top: 100px;
-  margin-left: ${width * 20}px;
+  /* margin-top: 100px; */
+  /* margin-left: ${width * 20}px; */
 `;

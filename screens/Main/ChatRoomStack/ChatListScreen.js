@@ -13,12 +13,6 @@ import { ChatRoom, ChatRoomUser } from "../../../AWS/src/models";
 import styled from "styled-components";
 import colors from "../../../colors";
 
-const RoomsView = styled.View`
-  width: 100%;
-  height: 100%;
-  background-color: white;
-`;
-
 const ChatListScreen = () => {
   const [chatRooms, setChatRooms] = useState([]);
   const [authUser, setAuthUser] = useState(undefined);
@@ -58,7 +52,7 @@ const ChatListScreen = () => {
   }
 
   return (
-    <RoomsView>
+    <Root>
       <FlatList
         data={chatRooms}
         // ? { item } 은 chatRoomsData 안에 있는 원소들(item)을 가리킨다!
@@ -66,7 +60,7 @@ const ChatListScreen = () => {
         // ? 아래와 같은 표현식도 가능하다!
         // renderItem={({ item: chatRoom }) => <ChatRoomItem chatRoom={chatRoom} />}
       />
-    </RoomsView>
+    </Root>
   );
 };
 
@@ -80,5 +74,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+
+const Root = styled.View`
+  width: 100%;
+  height: 100%;
+  background-color: white;
+`;
 
 export default ChatListScreen;

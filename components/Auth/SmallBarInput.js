@@ -16,6 +16,7 @@ const Container = styled.TextInput`
   font-family: "nunito-regular";
   font-size: 17px;
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
+  color: ${colors.steelBlue2};
 `;
 
 const SmallBarInput = ({
