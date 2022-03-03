@@ -47,6 +47,7 @@ import {
   RequestAdditionalTime,
   AddAdditionalTime,
   ViewProfilePartner,
+  FinalCheck,
 } from "../../../components/Matching/Modals/";
 import Dropdown from "../../../components/Dropdown";
 import SelectPlatform from "../../../components/Matching/Modals/SelectPlatform";
@@ -276,6 +277,7 @@ const ChatRoomScreen = (props) => {
         안드로이드 nunito-bold 테스트
       </Text>
 
+      <FinalCheck />
       <InputOrderPrice />
       <RequestAdditionalTime />
       <AddAdditionalTime />

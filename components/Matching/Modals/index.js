@@ -4,6 +4,7 @@ import AddAdditionalTime from "./AddAdditionalTime";
 import SendAccount from "./SendAccount";
 import ViewProfilePartner from "./ViewProfilePartner";
 import SelectPlatform from "./SelectPlatform";
+import FinalCheck from "./FinalCheck";
 
 export {
   InputOrderPrice,
@@ -12,4 +13,5 @@ export {
   SendAccount,
   ViewProfilePartner,
   SelectPlatform,
+  FinalCheck,
 };

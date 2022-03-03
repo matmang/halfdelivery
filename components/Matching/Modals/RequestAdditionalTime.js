@@ -65,9 +65,8 @@ export default ({ name }) => {
           style={{
             flexDirection: "row",
             alignItems: "flex-start",
-            // paddingTop: 12,
-            marginTop: height * 44,
             marginLeft: width * 20,
+            marginTop: height * 44,
           }}
         >
           <Text
