@@ -124,7 +124,6 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
   dropdown: {
-    position: "absolute",
     // alignSelf: "center",
     // marginLeft: width * 10,
 

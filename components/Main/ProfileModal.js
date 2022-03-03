@@ -120,7 +120,7 @@ const ProfileModal = ({ isModalVisible, onBackdropPress }) => {
   useEffect(() => {
     const fetchUser = async () => {
       const currentUserInfo = await Auth.currentUserInfo();
-      setName(currentUserInfo.attributes["custom:nickname"]);
+      setName(currentUserInfo.attributes["name"]);
       setSchool(currentUserInfo.attributes["custom:school"]);
       setCollege(currentUserInfo.attributes["custom:college"]);
       setBank(currentUserInfo.attributes["custom:bank"]);

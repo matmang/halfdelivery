@@ -6,6 +6,7 @@ const userSlice = createSlice({
   initialState: {
     isLoggedIn: false,
     token: null,
+    isMatcing: false,
     termService: false,
     termPersonal: false,
     termAd: false,
@@ -28,11 +29,20 @@ const userSlice = createSlice({
     setTermAd(state, action) {
       state.termAd = action.payload;
     },
+    setIsMatching(state, action) {
+      state.isMatcing = action.payload;
+    },
   },
 });
 
-export const { logIn, logOut, setTermService, setTermPersonal, setTermAd } =
-  userSlice.actions;
+export const {
+  logIn,
+  logOut,
+  setTermService,
+  setTermPersonal,
+  setTermAd,
+  setIsMatching,
+} = userSlice.actions;
 export const userLogin = (username, password) => async (dispatch) => {
   try {
     const data = await Auth.signIn(username, password);
@@ -60,6 +70,13 @@ export const toggleTermPersonal = (agree) => async (dispatch) => {
 export const toggleTermAd = (agree) => async (dispatch) => {
   try {
     dispatch(setTermAd(agree));
+  } catch (e) {
+    console.warn(e);
+  }
+};
+export const toggleIsMatching = (agree) => async (dispatch) => {
+  try {
+    dispatch(setIsMatching(agree));
   } catch (e) {
     console.warn(e);
   }

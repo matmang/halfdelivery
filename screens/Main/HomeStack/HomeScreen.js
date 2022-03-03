@@ -5,15 +5,13 @@ import { Store } from "../../../AWS/src/models";
 import { Auth, DataStore } from "aws-amplify";
 import { Button, Text } from "react-native";
 import { useNavigation } from "@react-navigation/core";
+import { useSelector } from "react-redux";
+import MakeMatch from "./MakeMatch";
 
 export default ({ isModalVisible }) => {
   const navigation = useNavigation();
   const [search, setSearch] = useState("");
   const [stores, setStores] = useState([]);
-
-  const logOut = () => {
-    Auth.signOut();
-  };
 
   useEffect(() => {
     const fetchStores = async () => {
@@ -26,12 +24,10 @@ export default ({ isModalVisible }) => {
   }, []);
 
   return (
-    <ScrollView>
-      <Home
-        stores={stores}
-        navigation={navigation}
-        isModalVisible={isModalVisible}
-      />
-    </ScrollView>
+    <Home
+      stores={stores}
+      navigation={navigation}
+      isModalVisible={isModalVisible}
+    />
   );
 };

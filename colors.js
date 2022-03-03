@@ -19,4 +19,6 @@ export default {
   whiteGray: "#F5F6F6",
   unselectedGrey: "#ADB1C0",
   baeminMint: "#2BC0BB",
+  yogiyoRed: "#D52A2A",
+  coupangSky: "#02AFFD",
 };

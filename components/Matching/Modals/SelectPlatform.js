@@ -6,10 +6,27 @@ import styled from "styled-components";
 import StoreCategory from "../../StoreCategory";
 import Platform from "./../Platform";
 import { width, height } from "../../../utils";
+import { useNavigation } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
+import { toggleIsMatching } from "../../../redux/usersSlice";
 import DisclaimerFooter from "../../DisclaimerFooter";
 
 export default ({ isModal, setIsModal, storeInfo, category }) => {
+  const navigation = useNavigation();
   const [selectedName, setSelectedName] = useState(null);
+  const dispatch = useDispatch();
+
+  const onPress = () => {
+    navigation.navigate("btHomeStack", {
+      screen: "MakeMatch",
+      params: {
+        storeInfo,
+        platform: selectedName,
+      },
+    });
+    dispatch(toggleIsMatching(true));
+    setIsModal(false);
+  };
 
   return (
     <Modal
@@ -75,7 +92,7 @@ export default ({ isModal, setIsModal, storeInfo, category }) => {
           <Select
             selectedName={selectedName}
             onPress={() => {
-              alert(selectedName);
+              onPress();
             }}
           >
             <Noto17medium

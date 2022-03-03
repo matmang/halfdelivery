@@ -30,7 +30,7 @@ const BarInput = ({
   error = false,
 }) => (
   <Container
-    KeyboardType={KeyboardType}
+    keyboardType={KeyboardType}
     value={value}
     placeholder={placeholder}
     secureTextEntry={isPassword ? true : false}
