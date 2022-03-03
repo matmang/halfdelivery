@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, Text, Image, Pressable } from "react-native";
 import colors from "../../../colors";
 import RoundedBtn from "../../RoundedBtn";
-import BtmWarnningMessage from "../../BtmWarnningMessage";
+import DisclaimerFooter from "../../DisclaimerFooter";
 import CheckBox from "../../CheckBox";
 
 export default ({ name }) => {
@@ -223,7 +223,7 @@ export default ({ name }) => {
             }}
           />
 
-          <BtmWarnningMessage viewStyle={{ marginTop: 16 }} />
+          <DisclaimerFooter viewStyle={{ marginTop: 16 }} />
         </View>
       </View>
     </View>

@@ -7,6 +7,7 @@ import RoundedBtn from "../../RoundedBtn";
 import { MaterialIcons } from "@expo/vector-icons";
 import BarInput from "../../Auth/BarInput";
 import SmallBarInput from "../../Auth/SmallBarInput";
+import { width, height } from "../../../utils";
 
 export default ({ name }) => {
   const [time, setTime] = useState(null);
@@ -32,105 +33,108 @@ export default ({ name }) => {
           justifyContent: "flex-start",
           // alignItems: "center",
           // padding: 20,
-          width: 364,
-          height: 348,
+          width: width * 364,
+          height: height * 348,
           borderRadius: 16,
           backgroundColor: "rgba(255, 255, 255, 255)",
+          elevation: 6,
         }}
       >
-        <View
+        <Pressable
+          onPress={() => {
+            alert("모달창끄기");
+          }}
           style={{
-            alignItems: "flex-end",
+            position: "absolute",
+            marginRight: width * 20,
+            marginLeft: width * 330,
+            marginTop: height * 16.6,
+            marginBottom: height * 399.4,
           }}
         >
-          <Pressable
-            onPress={() => {
-              alert("모달창끄기");
+          <Image
+            source={require("../../../assets/images/real-delete.png")}
+            style={{
+              width: width * 14,
+              height: height * 14,
             }}
-          >
-            <Image
-              source={require("../../../assets/images/delete.png")}
-              style={{
-                width: 20,
-                height: 20,
-                marginRight: 12.5,
-                marginTop: 8.8,
-              }}
-            />
-          </Pressable>
-        </View>
+          />
+        </Pressable>
+
         <View
           style={{
+            // backgroundColor: "red",
             flexDirection: "row",
-            alignItems: "flex-start",
-            paddingTop: 12,
-            paddingLeft: 20,
+            marginLeft: width * 20,
+            marginTop: height * 44,
           }}
         >
           <Text
             style={{
-              fontFamily: "noto-regular",
-              fontWeight: "400",
+              fontFamily: "noto-medium",
+              includeFontPadding: false,
+              textAlignVertical: "center",
               fontSize: 20,
               color: "rgba(14, 37, 124, 255)",
             }}
           >
             매칭 시간
           </Text>
-          <Text>
-            <Text
-              style={{
-                fontFamily: "noto-regular",
-                fontWeight: "400",
-                fontSize: 20,
-                color: "rgba(0, 0, 0, 255)",
-              }}
-            >
-              을{" "}
-            </Text>
-            <Text
-              style={{
-                fontFamily: "noto-regular",
-                fontWeight: "400",
-                fontSize: 20,
-                color: "rgba(14, 37, 124, 255)",
-              }}
-            >
-              추가
-            </Text>
-            <Text
-              style={{
-                fontFamily: "noto-regular",
-                fontWeight: "400",
-                fontSize: 20,
-                color: "rgba(0, 0, 0, 255)",
-              }}
-            >
-              합니다{" "}
-            </Text>
+          <Text
+            style={{
+              fontFamily: "noto-medium",
+              includeFontPadding: false,
+              textAlignVertical: "center",
+              fontSize: 20,
+              color: "rgba(0, 0, 0, 255)",
+            }}
+          >
+            을{" "}
+          </Text>
+          <Text
+            style={{
+              fontFamily: "noto-medium",
+              includeFontPadding: false,
+              textAlignVertical: "center",
+              fontSize: 20,
+              color: "rgba(14, 37, 124, 255)",
+            }}
+          >
+            추가
+          </Text>
+          <Text
+            style={{
+              fontFamily: "noto-medium",
+              includeFontPadding: false,
+              textAlignVertical: "center",
+              fontSize: 20,
+              color: "rgba(0, 0, 0, 255)",
+            }}
+          >
+            합니다{" "}
           </Text>
         </View>
 
-        <View style={{ flex: 1 }}>
+        <View>
           <View
             style={{
-              marginStart: 0.5,
-              marginTop: 14,
               backgroundColor: colors.primaryBlue,
-              width: 324,
-              height: 1.5,
+              width: width * 324,
+              height: height * 1.5,
               alignSelf: "center",
+              marginTop: height * 16,
             }}
           />
 
           <Text
             style={{
-              fontFamily: "noto-regular",
-              fontWeight: "400",
+              fontFamily: "noto-medium",
+              includeFontPadding: false,
+              textAlignVertical: "center",
               fontSize: 17,
               color: colors.primaryBlue,
-              marginTop: 40,
-              paddingLeft: 20,
+              marginTop: height * 36,
+              marginLeft: width * 20,
             }}
           >
             {" "}
@@ -142,7 +146,7 @@ export default ({ name }) => {
             value={time && time.toLocaleString("ko-KR")}
             isValued={time ? true : false}
             autoCapitalize="none"
-            viewStyle={{ marginTop: 20, alignSelf: "center" }}
+            viewStyle={{ marginTop: height * 20, alignSelf: "center" }}
           />
         </View>
 
@@ -158,7 +162,7 @@ export default ({ name }) => {
             onPress={() => {
               time ? alert("추가하기") : null;
             }}
-            btnStyle={{ marginTop: 56, marginBottom: 44 }}
+            btnStyle={{ marginTop: height * 56, marginBottom: width * 44 }}
           />
         </View>
       </View>
