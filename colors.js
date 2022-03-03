@@ -18,4 +18,5 @@ export default {
   coolGray: "#E5E6E7",
   whiteGray: "#F5F6F6",
   unselectedGrey: "#ADB1C0",
+  baeminMint: "#2BC0BB",
 };

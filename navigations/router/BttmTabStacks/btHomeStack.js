@@ -12,6 +12,7 @@ import colors from "../../../colors";
 import Auth from "@aws-amplify/auth";
 
 import { TouchableOpacity } from "react-native-gesture-handler";
+import MakeMatch from "../../../screens/Main/HomeStack/MakeMatch";
 
 const Container = styled.View`
   flex-direction: row;
@@ -72,7 +73,7 @@ export default () => {
           title: "",
           headerTitleAlign: "center",
           headerStyle: {
-            elevation: 0,
+            elevation: 10,
             backgroundColor: "#0E257C",
             shadowOpacity: 0,
           },
@@ -110,7 +111,7 @@ export default () => {
       />
       <Stack.Screen
         name="Profile"
-        component={ProfileScreen}
+        component={MakeMatch}
         options={{
           title: "프로필",
           headerTitleAlign: "center",

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Text, Dimensions } from "react-native";
+import { Text, Dimensions, Button } from "react-native";
 import styled from "styled-components";
 import { Ionicons } from "@expo/vector-icons";
 import colors from "../../colors";
@@ -11,6 +11,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { logOut } from "../../redux/usersSlice";
 import { useDispatch, useSelector } from "react-redux";
 import ProfileModal from "./ProfileModal";
+import MatchingInfomation from "./MatchinInfomation";
 
 const { width } = Dimensions.get("screen");
 
@@ -115,20 +116,7 @@ const Home = ({ stores, navigation, isModalVisible }) => {
         <MapText>지도로 식당 찾기</MapText>
       </HeaderContainer>
       <SubTitle>실시간 주문 랭킹</SubTitle>
-      <NowPopularContainer>
-        {stores.map((item, index) => {
-          if (index < 5) {
-            return (
-              <Popular
-                key={index}
-                index={index}
-                storeInfo={item}
-                navigation={navigation}
-              />
-            );
-          }
-        })}
-      </NowPopularContainer>
+      <MatchingInfomation />
       <Swiper
         autoplay={true}
         autoplayTimeout={5}
