@@ -9,8 +9,6 @@ import colors from "../../../colors";
 export default ({ isReady, images, setImages, index }) => {
   const [image, setImage] = useState(null);
   const [visible, setIsVisible] = useState(false);
-  console.log("images", images);
-
   const pickImage = async () => {
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
     console.log("ImagePermission status", status);

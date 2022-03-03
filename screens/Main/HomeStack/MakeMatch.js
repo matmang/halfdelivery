@@ -5,7 +5,7 @@ import colors from "../../../colors";
 import CollapsibleView from "../../../components/CollapsableView";
 import { height, width } from "../../../utils";
 import BarInput from "../../../components/Auth/BarInput";
-import { ScrollView } from "react-native-gesture-handler";
+import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import DismissKeyboard from "../../../components/DismissKeyboard";
 import Btn from "../../../components/Auth/Btn";
 import MatchingImagePicker from "../../../components/Main/renderImage/MatchingImagePicker";
@@ -18,6 +18,14 @@ const Container = styled.View`
   background-color: white;
 `;
 
+const HeaderContainer = styled.View`
+  width: 100%;
+  height: ${height * 57}px;
+  justify-content: center;
+  align-items: center;
+  background-color: ${colors.primaryBlue};
+`;
+
 const InfoBox = styled.View`
   width: ${width * 364}px;
   height: ${height * 124}px;
@@ -28,12 +36,14 @@ const InfoBox = styled.View`
 `;
 
 const InfoTopContainer = styled.View`
+  margin-top: ${12 * height}px;
   width: 100%;
   align-items: center;
   flex-direction: row;
 `;
 
 const InfoBottomContainer = styled.View`
+  margin-top: ${8 * height}px;
   align-items: center;
   flex-direction: row;
 `;
@@ -65,7 +75,7 @@ const OrderFeeContainer = styled.View`
 
 const TitleContainer = styled.View`
   flex-direction: row;
-  margin-top: ${height * 10}px;
+  margin-top: ${height * 23}px;
   margin-left: ${width * 24}px;
   align-items: center;
 `;
@@ -126,7 +136,18 @@ const ImageContainer = styled.View`
 `;
 
 const DropDownContainer = styled.View`
+  margin-top: ${height * 26}px;
   margin-left: ${width * 24}px;
+`;
+
+const SearchContanier = styled.View`
+  width: ${width * 365}px;
+  height: ${height * 41}px;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: white;
+  border-radius: 41px;
 `;
 
 const NoneImage = styled.View`
@@ -137,11 +158,31 @@ const NoneImage = styled.View`
   background-color: ${colors.steelBlue2};
 `;
 
-const PlatformBubble = styled.View`
+const BaeminBubble = styled.View`
   width: ${width * 74}px;
   height: ${height * 20}px;
   margin-left: ${width * 20}px;
   background-color: ${colors.baeminMint};
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+`;
+
+const YogiyoBubble = styled.View`
+  width: ${width * 74}px;
+  height: ${height * 20}px;
+  margin-left: ${width * 20}px;
+  background-color: ${colors.yogiyoRed};
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+`;
+
+const CoupangBubble = styled.View`
+  width: ${width * 74}px;
+  height: ${height * 20}px;
+  margin-left: ${width * 20}px;
+  background-color: ${colors.coupangSky};
   border-radius: 10px;
   align-items: center;
   justify-content: center;
@@ -162,6 +203,8 @@ const PlatformText = styled.Text`
   font-size: 10px;
   font-family: "noto-medium";
   color: white;
+  include-font-padding: false;
+  text-align-vertical: center;
 `;
 
 const StoreText = styled.Text`
@@ -169,11 +212,15 @@ const StoreText = styled.Text`
   font-size: 14px;
   font-family: "noto-medium";
   text-decoration-line: underline;
+  include-font-padding: false;
+  text-align-vertical: center;
 `;
 
 const MoneyText = styled.Text`
   font-size: 14px;
   font-family: "noto-regular";
+  include-font-padding: false;
+  text-align-vertical: center;
 `;
 
 const NumberText = styled.Text`
@@ -182,6 +229,8 @@ const NumberText = styled.Text`
   font-size: 14px;
   font-family: "nunito-regular";
   color: ${colors.primaryBlue};
+  include-font-padding: false;
+  text-align-vertical: center;
 `;
 
 const TitleText = styled.Text`
@@ -189,6 +238,8 @@ const TitleText = styled.Text`
   font-size: 17px;
   font-family: "noto-medium";
   color: ${colors.primaryBlue};
+  include-font-padding: false;
+  text-align-vertical: center;
 `;
 
 const ExplainText = styled.Text`
@@ -196,49 +247,95 @@ const ExplainText = styled.Text`
   font-size: 14px;
   font-family: "noto-regular";
   color: ${colors.steelBlue2};
+  include-font-padding: false;
+  text-align-vertical: center;
 `;
 
 const SelectTitleText = styled.Text`
   font-size: ${width * 14}px;
   font-family: "noto-medium";
+  margin-top: ${height * 13.7};
   color: ${(props) =>
     props.isSelected ? colors.primaryBlue : colors.unselectedGrey};
+  include-font-padding: false;
+  text-align-vertical: center;
 `;
 
 const SelectExplainText = styled.Text`
   font-size: ${width * 11}px;
   font-family: "noto-regular";
+  margin-top: ${height * 11}px;
   color: ${(props) => (props.isSelected ? "#000000" : colors.unselectedGrey)};
+  include-font-padding: false;
+  text-align-vertical: center;
 `;
 
-export default ({ navigation }) => {
+const SearchText = styled.Text`
+  font-family: "noto-regular";
+  margin-left: ${width * 17}px;
+  color: ${colors.unselectedGrey};
+`;
+
+export default ({ navigation, route: { params } }) => {
   const [isMinOrderFee, setIsMinOrderFee] = useState(false);
   const [isDelivery, setIsDelivery] = useState(false);
   const [orderFee, setOrderFee] = useState("");
   const [image, setImage] = useState([]);
-  const [selectMember, setSelectMember] = useState(0);
+  const [accent, setAccent] = useState(false);
+  const [selectMember, setSelectMember] = useState("");
   const [members, setMembers] = useState([
     { label: "2명", value: "1" },
     { label: "3명", value: "2" },
     { label: "4명", value: "3" },
   ]);
-  const [selectMinute, setSelectMinute] = useState(0);
+  const [selectMinute, setSelectMinute] = useState("");
   const [minutes, setMinutes] = useState([
     { label: "5분", value: "5" },
     { label: "7분", value: "7" },
     { label: "10분", value: "10" },
   ]);
+
+  useEffect(() => {
+    setAccent(orderFee && image && selectMember && selectMinute);
+  }, [orderFee, image, selectMember, selectMinute]);
+
   return (
     <DismissKeyboard>
       <ScrollView>
         <Container>
+          <HeaderContainer>
+            <TouchableOpacity onPress={() => navigation.navigate("Search")}>
+              <SearchContanier>
+                <Image
+                  source={require("../../../assets/images/glasses.png")}
+                  style={{
+                    width: width * 20,
+                    height: height * 20,
+                    marginLeft: width * 13,
+                    resizeMode: "contain",
+                  }}
+                />
+                <SearchText>원하는 식당/메뉴를 검색하세요</SearchText>
+              </SearchContanier>
+            </TouchableOpacity>
+          </HeaderContainer>
           <CollapsibleView sectionTitle={"배달 정보"} maxheight={height * 158}>
             <InfoBox>
               <InfoTopContainer>
-                <PlatformBubble>
-                  <PlatformText>배달의 민족</PlatformText>
-                </PlatformBubble>
-                <StoreText>브라운돈까스 안산한양대점</StoreText>
+                {params.platform === "배달의 민족" ? (
+                  <BaeminBubble>
+                    <PlatformText>{params.platform}</PlatformText>
+                  </BaeminBubble>
+                ) : params.platform === "요기요" ? (
+                  <YogiyoBubble>
+                    <PlatformText>{params.platform}</PlatformText>
+                  </YogiyoBubble>
+                ) : (
+                  <CoupangBubble>
+                    <PlatformText>{params.platform}</PlatformText>
+                  </CoupangBubble>
+                )}
+                <StoreText>{params.storeInfo.store}</StoreText>
                 <Image
                   source={require("../../../assets/images/chevon_left.png")}
                   style={{
@@ -249,16 +346,37 @@ export default ({ navigation }) => {
                 />
               </InfoTopContainer>
               <InfoBottomContainer>
-                <NoneImage></NoneImage>
+                {params.storeInfo.storeImgUri !== undefined ? (
+                  <Image
+                    resizeMode="cover"
+                    source={{ uri: params.storeInfo.storeImgUri }}
+                    style={{
+                      width: width * 72,
+                      height: height * 72,
+                      marginLeft: width * 20,
+                      borderRadius: 10,
+                    }}
+                  />
+                ) : (
+                  <NoneImage></NoneImage>
+                )}
                 <InfoBottomRightContiner>
                   <InfoTextContainer>
                     <MoneyText>최소주문금액</MoneyText>
-                    <NumberText>18,000</NumberText>
+                    <NumberText>
+                      {params.storeInfo.maxDlvTip
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                    </NumberText>
                     <MoneyText>원</MoneyText>
                   </InfoTextContainer>
                   <InfoTextContainer>
                     <MoneyText>배달비</MoneyText>
-                    <NumberText>4,000</NumberText>
+                    <NumberText>
+                      {params.storeInfo.minOrdPrice
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                    </NumberText>
                     <MoneyText>원</MoneyText>
                   </InfoTextContainer>
                 </InfoBottomRightContiner>
@@ -280,6 +398,7 @@ export default ({ navigation }) => {
             </TitleContainer>
             <OrderFeeInputContainer>
               <BarInput
+                KeyboardType="numeric"
                 placeholder={"선택한 메뉴의 금액을 입력해주세요"}
                 stateFn={setOrderFee}
                 value={orderFee}
@@ -373,6 +492,7 @@ export default ({ navigation }) => {
                         width: width * 20,
                         height: height * 20,
                         resizeMode: "contain",
+                        marginTop: height * 16,
                       }}
                     />
                   ) : (
@@ -382,6 +502,7 @@ export default ({ navigation }) => {
                         width: width * 20,
                         height: height * 20,
                         resizeMode: "contain",
+                        marginTop: height * 16,
                       }}
                     />
                   )}
@@ -427,6 +548,7 @@ export default ({ navigation }) => {
                         width: width * 20,
                         height: height * 20,
                         resizeMode: "contain",
+                        marginTop: height * 16,
                       }}
                     />
                   ) : (
@@ -436,6 +558,7 @@ export default ({ navigation }) => {
                         width: width * 20,
                         height: height * 20,
                         resizeMode: "contain",
+                        marginTop: height * 16,
                       }}
                     />
                   )}
@@ -489,7 +612,7 @@ export default ({ navigation }) => {
         <ButtonContainer>
           <Btn
             text={"매칭 시작"}
-            accent={true}
+            accent={accent}
             onPress={() => {
               console.log("눌림");
             }}

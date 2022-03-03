@@ -13,6 +13,8 @@ import Auth from "@aws-amplify/auth";
 
 import { TouchableOpacity } from "react-native-gesture-handler";
 import MakeMatch from "../../../screens/Main/HomeStack/MakeMatch";
+import { height } from "../../../utils";
+import { useSelector } from "react-redux";
 
 const Container = styled.View`
   flex-direction: row;
@@ -57,11 +59,14 @@ export default () => {
   useEffect(() => {
     const fetchUser = async () => {
       const currentUserInfo = await Auth.currentUserInfo();
-      setUsername(currentUserInfo.attributes["custom:nickname"]);
+      setUsername(currentUserInfo.attributes["name"]);
       setSchool(currentUserInfo.attributes["custom:school"]);
     };
     fetchUser();
   }, []);
+
+  const { isMatching } = useSelector((state) => state.usersReducer);
+
   return (
     <Stack.Navigator initialRouteName="HomeScreen">
       <Stack.Screen
@@ -73,9 +78,9 @@ export default () => {
           title: "",
           headerTitleAlign: "center",
           headerStyle: {
-            elevation: 10,
-            backgroundColor: "#0E257C",
-            shadowOpacity: 0,
+            backgroundColor: colors.primaryBlue,
+            height: height * 53,
+            marginTop: height * 20,
           },
           headerRight: () => (
             <HeaderButtons HeaderButtonComponent={HomeHeaderButton}>
@@ -87,15 +92,6 @@ export default () => {
                     : "ios-notifications"
                 }
                 onPress={() => alert("알림")}
-              />
-              <Item
-                title="Profile"
-                iconName={
-                  Platform.OS === "android" ? "md-person" : "ios-person"
-                }
-                onPress={() => {
-                  navigation.navigate("Profile");
-                }}
               />
             </HeaderButtons>
           ),
@@ -110,12 +106,16 @@ export default () => {
         })}
       />
       <Stack.Screen
-        name="Profile"
+        name="MakeMatch"
         component={MakeMatch}
-        options={{
-          title: "프로필",
+        options={({ navigation }) => ({
+          title: "",
           headerTitleAlign: "center",
-          headerTitle: (props) => <LogoHeader {...props} />,
+          headerStyle: {
+            backgroundColor: colors.primaryBlue,
+            height: height * 53,
+            marginTop: height * 20,
+          },
           headerRight: () => (
             <HeaderButtons HeaderButtonComponent={HomeHeaderButton}>
               <Item
@@ -127,15 +127,17 @@ export default () => {
                 }
                 onPress={() => alert("알림")}
               />
-              <Item
-                title="Profile"
-                iconName={
-                  Platform.OS === "android" ? "md-person" : "ios-person"
-                }
-              />
             </HeaderButtons>
           ),
-        }}
+          headerLeft: () => (
+            <Container>
+              <UserInfo>{username}님은 지금 </UserInfo>
+              <TouchableOpacity onPress={toggleModal}>
+                <UserSchool>{school}</UserSchool>
+              </TouchableOpacity>
+            </Container>
+          ),
+        })}
       />
       <Stack.Screen
         name="Search"
