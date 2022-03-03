@@ -5,6 +5,7 @@ import logos from "../../../images";
 import styled from "styled-components";
 import colors from "../../../colors";
 import MatchingListScreen from "../../../screens/Main/PartnerStack/MatchingListScreen";
+import MatchingWaitingScreen from "../../../screens/Main/MatchingWaitingScreen";
 
 const Stack = createStackNavigator();
 
@@ -45,6 +46,13 @@ export default () => (
       component={MatchingListScreen}
       options={{
         title: "매칭 리스트",
+      }}
+    />
+    <Stack.Screen
+      name="MatchingWaitingScreen"
+      component={MatchingWaitingScreen}
+      options={{
+        title: "카테고리, 가게명",
       }}
     />
   </Stack.Navigator>

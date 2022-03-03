@@ -271,7 +271,13 @@ export default ({ name, school, college, bank, accountnumber }) => {
           >
             나의 주문금액
           </Text>
-          <Text>￦ 11,000원</Text>
+          <Text
+            style={{
+              marginLeft: width * 102.4,
+            }}
+          >
+            ￦ 11,000원
+          </Text>
         </MyOrderPrice>
 
         <RoundedBtn

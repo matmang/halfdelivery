@@ -56,8 +56,8 @@ export default ({ chatRoomInfo }) => {
   }
 
   const onPress = () => {
-    navigation.navigate("StoreStack", {
-      screen: "SelectMenuScreen",
+    navigation.navigate("btPartnerStack", {
+      screen: "MatchingWaitingScreen",
       params: {
         chatRoomID: chatRoomInfo.id,
         storeInfo,
