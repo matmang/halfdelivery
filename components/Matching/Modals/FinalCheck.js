@@ -90,7 +90,7 @@ export default ({ name, school, college, bank, accountnumber }) => {
                 color: "rgba(14, 37, 124, 255)",
               }}
             >
-              현재 정보로 매칭이 시작됩니다.
+              현재 정보로 매칭이 시작됩니다
             </Text>
           </View>
 
@@ -156,10 +156,10 @@ export default ({ name, school, college, bank, accountnumber }) => {
                 style={{
                   marginTop: height * 7,
                   backgroundColor: "#C3CDD5",
-                  width: width * 291.34,
+                  width: width * 292,
                   height: height * 1.5,
                   alignSelf: "center",
-                  marginLeft: -20,
+                  marginLeft: width * -20,
                 }}
               />
 

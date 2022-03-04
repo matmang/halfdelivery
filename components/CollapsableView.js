@@ -16,7 +16,7 @@ import colors from "../colors";
 import { height, width } from "../utils";
 
 function CollapsibleView(props) {
-  const { sectionTitle, maxheight, children } = props;
+  const { sectionTitle, maxheight, children, style } = props;
   const [isEnableCollapsible, setIsEnableCollapsible] = useState(true);
   const [isFirst, setIsFirst] = useState(true);
   const [contentLineHeight, setContentLineHeight] = useState(0);
@@ -71,7 +71,7 @@ function CollapsibleView(props) {
   );
 
   return (
-    <View style={styles.rootContainer}>
+    <View style={[styles.rootContainer, style]}>
       <TouchableWithoutFeedback
         onPress={onPress}
         disabled={isEnableCollapsible}
@@ -112,7 +112,8 @@ const styles = StyleSheet.create({
   sectionTItle: {
     fontFamily: "noto-medium",
     fontSize: 14,
-    lineHeight: 22,
+    includeFontPadding: false,
+    textAlignVertical: "center",
     color: "#000000",
   },
   contentContainer: {
@@ -122,7 +123,8 @@ const styles = StyleSheet.create({
   content: {
     fontFamily: "noto-medium",
     fontSize: 15,
-    lineHeight: 17,
+    includeFontPadding: false,
+    textAlignVertical: "center",
     color: "rgb(26, 26, 26)",
   },
 });

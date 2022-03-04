@@ -84,7 +84,10 @@ export default ({ chatRoomInfo }) => {
           <Noto14medium style={{ marginLeft: width * 8 }}>
             브라운돈까스 안산한양대점
           </Noto14medium>
-          <Timer style={{ marginLeft: width * 30 }} simple={true} />
+          <Timer
+            style={{ marginLeft: "auto", marginRight: width * 24 }}
+            simple={true}
+          />
         </Header>
         <InfoBox>
           <Top>
@@ -151,14 +154,7 @@ export default ({ chatRoomInfo }) => {
                   marginTop: height * 2,
                 }}
               >
-                <Text
-                  style={{
-                    color: colors.primaryBlue,
-                  }}
-                >
-                  2{" "}
-                </Text>
-                / 4
+                2 / 4
               </Nunito12right>
               <Noto12left
                 style={{

@@ -43,7 +43,7 @@ const BottomTabView = styled.View`
   height: 80px;
   width: 100%;
   position: absolute;
-  bottom: 2px;
+  bottom: -2px;
 `;
 
 const BottomTab = (props) => {

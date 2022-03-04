@@ -5,12 +5,12 @@ import { width, height } from "../../utils";
 import colors from "../../colors";
 import RoundedBtn from "../RoundedBtn";
 
-export default ({ price }) => {
+export default ({ price, style }) => {
   //   const isReady = true;
   const [isReady, setIsReady] = useState(false);
 
   return (
-    <Root>
+    <Root style={style}>
       <Left>
         <Text
           style={{

@@ -5,11 +5,11 @@ import { width, height } from "../../utils";
 import colors from "../../colors";
 import RoundedBtn from "../RoundedBtn";
 
-export default ({ totalPrice, _isAllReady }) => {
+export default ({ totalPrice, _isAllReady, style }) => {
   const isAllReady = false;
 
   return (
-    <Root>
+    <Root style={style}>
       <Left>
         <Text
           style={{
@@ -79,7 +79,7 @@ export default ({ totalPrice, _isAllReady }) => {
             fontSize: 17,
             color: "white",
           }}
-          text={!isAllReady ? "매칭시작" : "매칭시작"}
+          text={!isAllReady ? "Start" : "Start"}
           isPressed={isAllReady}
           onPress={() => {
             // isReady ? setIsReady(false) : setIsReady(true);

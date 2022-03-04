@@ -53,7 +53,7 @@ export default ({ chatRoomInfo }) => {
   // }
 
   const onPress = () => {
-    alert("gi");
+    alert("매장링크로 이동");
   };
 
   return (

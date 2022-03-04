@@ -222,6 +222,7 @@ const Root = styled.View`
   height: ${height * 182}px;
   background-color: white;
   box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
+  elevation: 6;
   border-radius: 10px;
   opacity: 1;
 

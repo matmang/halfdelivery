@@ -160,7 +160,7 @@ const RoomList = ({ categoryID }) => {
         }
         // renderItem={({ item }) =>
         //   item !== undefined ? (
-        //     <RoomMinPrice chatRoomInfo={item} />
+        //     <Room_MinPrice chatRoomInfo={item} />
         //   ) : (
         //     <ActivityIndicator />
         //   )

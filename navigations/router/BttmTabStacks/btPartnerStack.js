@@ -4,55 +4,31 @@ import { View, Image, Text, SafeAreaView, Button } from "react-native";
 import logos from "../../../images";
 import styled from "styled-components";
 import colors from "../../../colors";
+MatchingListScreen;
+import { width, height } from "../../../utils";
+import {
+  MatchingListScreenHeader,
+  MatchingWaitingScreenHeader,
+} from "../../../components/screenHeaders";
 import MatchingListScreen from "../../../screens/Main/PartnerStack/MatchingListScreen";
 import MatchingWaitingScreen from "../../../screens/Main/MatchingWaitingScreen";
 
 const Stack = createStackNavigator();
 
-const HeaderView = styled.SafeAreaView`
-  margin-top: 24px;
-  justify-content: center;
-  align-items: center;
-  background-color: ${colors.primaryBlue};
-  height: 56px;
-  width: 100%;
-  /* position: relative; */
-`;
-
-const Title = styled.Text`
-  font-family: "noto-regular";
-  font-size: 20px;
-  color: #ffffff;
-  font-weight: bold;
-`;
-
-const BlueHeader = (props) => {
-  return (
-    <HeaderView>
-      <Title>파트너 리스트</Title>
-    </HeaderView>
-  );
-};
-
 export default () => (
-  <Stack.Navigator
-    initialRouteName="MatchingListScreen"
-    screenOptions={{
-      header: (props) => <BlueHeader {...props} />,
-    }}
-  >
+  <Stack.Navigator initialRouteName="MatchingListScreen">
     <Stack.Screen
       name="MatchingListScreen"
       component={MatchingListScreen}
       options={{
-        title: "매칭 리스트",
+        header: () => <MatchingListScreenHeader />,
       }}
     />
     <Stack.Screen
       name="MatchingWaitingScreen"
       component={MatchingWaitingScreen}
       options={{
-        title: "카테고리, 가게명",
+        header: (props) => <MatchingWaitingScreenHeader />,
       }}
     />
   </Stack.Navigator>
