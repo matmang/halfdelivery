@@ -59,7 +59,7 @@ export default ({ chatRoomInfo }) => {
   return (
     <Root>
       <Header>
-        <PlatformIcon platfrom="배달의 민족" />
+        <PlatformIcon platform={platform} isLong={true} />
 
         <Noto14medium
           style={{
@@ -91,7 +91,9 @@ export default ({ chatRoomInfo }) => {
                 color: colors.primaryBlue,
               }}
             >
-              {parseInt(11000).toLocaleString("ko-KR")}
+              {parseInt(11000)
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
             </Nunito12right>
             <Noto12left style={{ flex: 1 }}>{"  "}원</Noto12left>
           </TopLeft>
@@ -106,7 +108,9 @@ export default ({ chatRoomInfo }) => {
                 color: colors.primaryBlue,
               }}
             >
-              {parseInt(3600).toLocaleString("ko-KR")}
+              {parseInt(3600)
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
             </Nunito12right>
             <Noto12left
               style={{
@@ -156,7 +160,9 @@ export default ({ chatRoomInfo }) => {
                 color: colors.primaryBlue,
               }}
             >
-              {parseInt(800).toLocaleString("ko-KR")}
+              {parseInt(800)
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
             </Nunito12right>
             <Noto12left
               style={{

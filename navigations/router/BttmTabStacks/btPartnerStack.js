@@ -6,10 +6,7 @@ import styled from "styled-components";
 import colors from "../../../colors";
 MatchingListScreen;
 import { width, height } from "../../../utils";
-import {
-  MatchingListScreenHeader,
-  MatchingWaitingScreenHeader,
-} from "../../../screens/screenHeaders";
+import { MatchingWaitingScreenHeader } from "../../../screens/screenHeaders";
 import MatchingListScreen from "../../../screens/Main/PartnerStack/MatchingListScreen";
 import MatchingWaitingScreen from "../../../screens/Main/MatchingWaitingScreen";
 
@@ -17,13 +14,7 @@ const Stack = createStackNavigator();
 
 export default () => (
   <Stack.Navigator initialRouteName="MatchingListScreen">
-    <Stack.Screen
-      name="MatchingListScreen"
-      component={MatchingListScreen}
-      options={{
-        header: () => <MatchingListScreenHeader />,
-      }}
-    />
+    <Stack.Screen name="MatchingListScreen" component={MatchingListScreen} />
     <Stack.Screen
       name="MatchingWaitingScreen"
       component={MatchingWaitingScreen}

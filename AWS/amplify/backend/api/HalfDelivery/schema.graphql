@@ -15,19 +15,17 @@ type MatchingInfo @model @auth(rules: [{allow: public}]) {
   StoreCategory: StoreCategory @connection
   Store: Store @connection
   setTime: Int!
-  ChatRoom: ChatRoom @connection
   type: MatchingType!
   platform: Platform!
 }
 
 type Participant @model @auth(rules: [{allow: public}]) {
   id: ID!
-  isReady: Boolean
+  isAllReady: Boolean
   orderImages: AWSJSON
   orderPrice: Int
-  isMaster: Boolean
+  master: String!
   Users: [User] @connection(keyName: "byParticipant", fields: ["id"])
-  ChatRoom: ChatRoom @connection
 }
 
 type StoreCategory @model @auth(rules: [{allow: public}]) {
@@ -68,10 +66,10 @@ type ChatRoom @model @auth(rules: [{allow: public}]) {
   id: ID!
   newMessages: Int
   LastMessage: Message @connection
-  ChatRoomUsers: [ChatRoomUser] @connection(keyName: "byChatRoom", fields: ["id"])
-  matchingInfo: AWSJSON
   master: String!
   onSetting: Boolean
+  Participant: Participant @connection
+  MatchingInfo: MatchingInfo @connection
 }
 
 type Message @model @key(name: "byChatRoom", fields: ["userID"]) @key(name: "byUser", fields: ["userID"]) @auth(rules: [{allow: public}]) {
@@ -88,7 +86,6 @@ type User @model @auth(rules: [{allow: public}]) @key(name: "byParticipant", fie
   name: String!
   imageUri: String
   phone_number: String
-  chatrooms: [ChatRoomUser] @connection(keyName: "byUser", fields: ["id"])
   Messages: [Message] @connection(keyName: "byUser", fields: ["id"])
   bank: String
   accountnumber: String
@@ -98,13 +95,5 @@ type User @model @auth(rules: [{allow: public}]) @key(name: "byParticipant", fie
   status: String
   agree: Boolean
   participantID: ID!
-}
-
-type ChatRoomUser @model(queries: null) @key(name: "byChatRoom", fields: ["chatroomID", "userID"]) @key(name: "byUser", fields: ["userID", "chatroomID"]) @auth(rules: [{allow: public}, {allow: public}]) {
-  id: ID!
-  chatroomID: ID!
-  userID: ID!
-  chatroom: ChatRoom! @connection(fields: ["chatroomID"])
-  user: User! @connection(fields: ["userID"])
 }
  

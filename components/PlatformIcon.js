@@ -3,24 +3,32 @@ import { View, Text, StyleSheet } from "react-native";
 import colors from "../colors";
 import { width, height } from "../utils";
 
-export default ({ platfrom, viewStyle }) => {
+export default ({ platform, viewStyle, isLong }) => {
   let style = null;
 
-  switch (platfrom) {
-    case "배민":
+  if (isLong === undefined) {
+    isLong = false;
+  }
+
+  switch (platform) {
+    case "BAEMIN":
       style = styles.BaeMin;
+      platform = "배민";
       break;
-    case "배달의 민족":
+    case "BAEMIN" && isLong:
       style = styles.BaeMinFull;
+      platform = "배달의 민족";
       break;
-    case "요기요":
+    case "YOGIYO":
       style = styles.Yogiyo;
+      platform = "요기요";
       break;
-    case "쿠팡잇츠":
+    case "COUPANG":
       style = styles.Coupang;
+      platform = "쿠팡잇츠";
       break;
     default:
-      platfrom = "error";
+      platform = "error";
   }
 
   return (
@@ -39,7 +47,7 @@ export default ({ platfrom, viewStyle }) => {
       ]}
     >
       <Text style={{ color: "white", fontFamily: "noto-medium", fontSize: 10 }}>
-        {platfrom}
+        {platform}
       </Text>
     </View>
   );

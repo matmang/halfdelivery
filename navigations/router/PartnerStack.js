@@ -36,6 +36,7 @@ export default () => (
       options={{
         header: (props) => <LogoHeader {...props} />,
         title: "매칭 리스트",
+        headerRight: () => <Text>ㅇㅁㄴ</Text>,
       }}
     />
   </Stack.Navigator>

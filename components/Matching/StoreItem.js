@@ -112,7 +112,9 @@ const StoreItem = ({ storeInfo }) => {
           <View style={{ marginLeft: 18 }}>
             <InfoText numberOfLines={1}>
               <NunitoText>
-                {storeInfo.minOrdPrice.toLocaleString("ko-KR")}
+                {storeInfo.minOrdPrice
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
               </NunitoText>
               원
             </InfoText>
@@ -123,11 +125,15 @@ const StoreItem = ({ storeInfo }) => {
                 <InfoText>
                   <NunitoText>
                     {/*  //! minDlvTip 자리*/}
-                    {storeInfo.maxDlvTip.toLocaleString("ko-KR")}
+                    {storeInfo.maxDlvTip
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                   </NunitoText>
                   원{"   "}~{"   "}
                   <NunitoText>
-                    {storeInfo.maxDlvTip.toLocaleString("ko-KR")}
+                    {storeInfo.maxDlvTip
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                   </NunitoText>
                   원
                 </InfoText>

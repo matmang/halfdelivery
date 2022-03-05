@@ -16,6 +16,7 @@ import {
 import logos from "../../../images";
 import MyOrderImages from "../MyOrderImages";
 import RoundedBtn from "../../RoundedBtn";
+import { useNavigation } from "@react-navigation/native";
 
 const images = [
   {
@@ -30,6 +31,8 @@ const images = [
 ];
 
 export default ({ name, school, college, bank, accountnumber }) => {
+  const navigation = useNavigation();
+
   return (
     <View
       style={{
@@ -145,7 +148,7 @@ export default ({ name, school, college, bank, accountnumber }) => {
           <MatInfoRoot>
             <InfoRoot>
               <Header2>
-                <PlatformIcon platfrom="요기요" />
+                <PlatformIcon platform="요기요" />
                 <Noto14medium style={{ marginLeft: width * 8 }}>
                   {/* { 매장이름 } */}
                   브라운돈까스 안산한양대점
@@ -175,7 +178,9 @@ export default ({ name, school, college, bank, accountnumber }) => {
                         marginTop: height * 2,
                       }}
                     >
-                      {parseInt(11000).toLocaleString("ko-KR")}
+                      {parseInt(11000)
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                     </Nunito12right>
                     <Noto12left style={{ flex: 1 }}>{"  "}원</Noto12left>
                   </TopLeft>
@@ -190,7 +195,9 @@ export default ({ name, school, college, bank, accountnumber }) => {
                         color: colors.primaryBlue,
                       }}
                     >
-                      {parseInt(11000).toLocaleString("ko-KR")}
+                      {parseInt(11000)
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                     </Nunito12right>
                     <Noto12left
                       style={{
@@ -213,7 +220,9 @@ export default ({ name, school, college, bank, accountnumber }) => {
                         color: colors.primaryBlue,
                       }}
                     >
-                      {parseInt(11000).toLocaleString("ko-KR")}
+                      {parseInt(11000)
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                     </Nunito12right>
                     <Noto12left style={{ flex: 1 }}>{"  "}원</Noto12left>
                   </BtmLeft>

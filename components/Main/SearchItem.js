@@ -1,5 +1,5 @@
 import React from "react";
-import { Dimensions, Platform, Platfrom } from "react-native";
+import { Dimensions, Platform } from "react-native";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import colors from "../../colors";

@@ -16,244 +16,313 @@ import {
 import logos from "../../../images";
 import MyOrderImages from "../MyOrderImages";
 import RoundedBtn from "../../RoundedBtn";
+import Modal from "react-native-modal";
+import { useNavigation } from "@react-navigation/native";
 
-export default ({ name, school, college, bank, accountnumber }) => {
+export default ({
+  isModal,
+  setIsModal,
+  name,
+  school,
+  college,
+  bank,
+  accountnumber,
+
+  matchingInfo,
+  storeInfo,
+}) => {
+  const {
+    matchingInfoStoreCategoryId,
+    matchingInfoStoreId,
+    platform,
+    requiredPersons,
+    setTime,
+    type,
+  } = matchingInfo;
+
+  const {
+    baeminUri,
+    coupangUri,
+    createdAt,
+    id,
+    location,
+    maxDlvTime,
+    maxDlvTip,
+    minDlvTime,
+    minOrdPrice,
+    openHours,
+    store,
+    storeImgUri,
+    storecategoryID,
+    telephoneNumber,
+    updatedAt,
+    yogiyoUri,
+  } = storeInfo;
+
+  const navigation = useNavigation();
+
   return (
-    <View
-      style={{
-        alignItems: "flex-start",
-        alignSelf: "center",
-        shadowColor: "black",
-        shadowOpacity: 0.16,
-        shadowOffset: {
-          width: width * 3,
-          height: height * 3,
-        },
-        shadowRadius: 6,
-      }}
+    <Modal
+      animationIn="fadeIn"
+      animationOut="fadeOut"
+      isVisible={isModal}
+      style={{ justifyContent: "center", alignItems: "center" }}
     >
       <View
         style={{
-          paddingLeft: width * 20,
-          width: width * 364,
-          height: height * 390,
-          borderRadius: 16,
-          backgroundColor: "rgba(255, 255, 255, 255)",
-          elevation: 6,
+          alignItems: "flex-start",
+          alignSelf: "center",
+          shadowColor: "black",
+          shadowOpacity: 0.16,
+          shadowOffset: {
+            width: width * 3,
+            height: height * 3,
+          },
+          shadowRadius: 6,
         }}
       >
-        <Pressable
-          onPress={() => {
-            alert("모달창끄기");
-          }}
+        <View
           style={{
-            position: "absolute",
-            marginRight: width * 20,
-            marginLeft: width * 330,
-            marginTop: height * 16.6,
-            marginBottom: height * 399.4,
+            paddingLeft: width * 20,
+            width: width * 364,
+            height: height * 390,
+            borderRadius: 16,
+            backgroundColor: "rgba(255, 255, 255, 255)",
+            elevation: 6,
           }}
         >
-          <Image
-            source={require("../../../assets/images/real-delete.png")}
-            style={{
-              width: width * 14,
-              height: height * 14,
+          <Pressable
+            onPress={() => {
+              setIsModal(false);
             }}
-          />
-        </Pressable>
-
-        <Header>
-          <View
             style={{
-              flexDirection: "row",
+              position: "absolute",
+              marginRight: width * 20,
+              marginLeft: width * 330,
+              marginTop: height * 16.6,
+              marginBottom: height * 399.4,
             }}
           >
-            <Text
+            <Image
+              source={require("../../../assets/images/real-delete.png")}
               style={{
-                fontFamily: "noto-medium",
-                includeFontPadding: false,
-                textAlignVertical: "center",
-                fontSize: 17,
-                color: "rgba(14, 37, 124, 255)",
+                width: width * 14,
+                height: height * 14,
+              }}
+            />
+          </Pressable>
+
+          <Header>
+            <View
+              style={{
+                flexDirection: "row",
               }}
             >
-              해당 매칭에 참여합니다
-            </Text>
-          </View>
+              <Text
+                style={{
+                  fontFamily: "noto-medium",
+                  includeFontPadding: false,
+                  textAlignVertical: "center",
+                  fontSize: 17,
+                  color: "rgba(14, 37, 124, 255)",
+                }}
+              >
+                해당 매칭에 참여합니다
+              </Text>
+            </View>
 
-          <View
-            style={{
-              flexDirection: "row",
-              marginTop: height * 2,
-            }}
-          >
+            <View
+              style={{
+                flexDirection: "row",
+                marginTop: height * 2,
+              }}
+            >
+              <Text
+                style={{
+                  fontFamily: "noto-regular",
+                  includeFontPadding: false,
+                  textAlignVertical: "center",
+                  fontSize: 14,
+                  color: "rgba(0, 0, 0, 255)",
+                }}
+              >
+                선택한 매칭방의 정보가 일치하는지 확인해주세요.
+              </Text>
+            </View>
+          </Header>
+
+          <MatchingInfo>
             <Text
               style={{
                 fontFamily: "noto-regular",
                 includeFontPadding: false,
                 textAlignVertical: "center",
-                fontSize: 14,
-                color: "rgba(0, 0, 0, 255)",
+                fontSize: 12,
+                color: "#3E3F41",
               }}
             >
-              선택한 매칭방의 정보가 일치하는지 확인해주세요.
-            </Text>
-          </View>
-        </Header>
-
-        <MatchingInfo>
-          <Text
-            style={{
-              fontFamily: "noto-regular",
-              includeFontPadding: false,
-              textAlignVertical: "center",
-              fontSize: 12,
-              color: "#3E3F41",
-            }}
-          >
-            <View
-              style={{
-                marginBottom: height * 1,
-              }}
-            >
-              <Image
-                source={require("../../../assets/images/right-arrow-deepgrey.png")}
-                style={{
-                  width: width * 10,
-                  height: height * 9.37,
-                }}
-              />
-            </View>
-            {/* {매칭타입 === 최수주문금액 ? "  최소주문금액 매칭" : "  배달비 매칭"} */}
-            {"  "}
-            최소주문금액 매칭
-          </Text>
-
-          <MatInfoRoot>
-            <InfoRoot>
-              <Header2>
-                <PlatformIcon platfrom="요기요" />
-                <Noto14medium style={{ marginLeft: width * 8 }}>
-                  {/* { 매장이름 } */}
-                  브라운돈까스 안산한양대점
-                </Noto14medium>
-              </Header2>
-
               <View
                 style={{
-                  marginTop: height * 7,
-                  backgroundColor: "#C3CDD5",
-                  width: width * 292,
-                  height: height * 1.5,
-                  alignSelf: "center",
-                  marginLeft: width * -20,
+                  marginBottom: height * 1,
                 }}
-              />
+              >
+                <Image
+                  source={require("../../../assets/images/right-arrow-deepgrey.png")}
+                  style={{
+                    width: width * 10,
+                    height: height * 9.37,
+                  }}
+                />
+              </View>
+              {type === "MIN_PRICE"
+                ? "  최소주문금액 매칭"
+                : type === "DLV_TIP"
+                ? "  배달비 매칭"
+                : "error"}
+            </Text>
 
-              <InfoBox>
-                <Top>
-                  <TopLeft>
-                    <Noto12left style={{ flex: 4 }}>최소주문금액</Noto12left>
-                    <Nunito12right
-                      style={{
-                        flex: 0.2,
-                        color: colors.primaryBlue,
-                        minWidth: 46 * width,
-                        marginTop: height * 2,
-                      }}
-                    >
-                      {parseInt(11000).toLocaleString("ko-KR")}
-                    </Nunito12right>
-                    <Noto12left style={{ flex: 1 }}>{"  "}원</Noto12left>
-                  </TopLeft>
+            <MatInfoRoot>
+              <InfoRoot>
+                <Header2>
+                  <PlatformIcon platform={platform} />
+                  <Noto14medium style={{ marginLeft: width * 8 }}>
+                    {/* { 매장이름 } */}
+                    {store}
+                  </Noto14medium>
+                </Header2>
 
-                  <TopRight>
-                    <Noto12left style={{ flex: 4 }}>1인배달비</Noto12left>
-                    <Nunito12right
-                      style={{
-                        flex: 0.2,
-                        minWidth: 46 * width,
-                        marginTop: height * 2,
-                        color: colors.primaryBlue,
-                      }}
-                    >
-                      {parseInt(11000).toLocaleString("ko-KR")}
-                    </Nunito12right>
-                    <Noto12left
-                      style={{
-                        flex: 1,
-                      }}
-                    >
-                      {"  "}원
-                    </Noto12left>
-                  </TopRight>
-                </Top>
+                <View
+                  style={{
+                    marginTop: height * 7,
+                    backgroundColor: "#C3CDD5",
+                    width: width * 292,
+                    height: height * 1.5,
+                    alignSelf: "center",
+                    marginLeft: width * -20,
+                  }}
+                />
 
-                <Btm>
-                  <BtmLeft>
-                    <Noto12left style={{ flex: 4 }}>매칭주문금액</Noto12left>
-                    <Nunito12right
-                      style={{
-                        flex: 0.2,
-                        minWidth: 46 * width,
-                        marginTop: height * 2,
-                        color: colors.primaryBlue,
-                      }}
-                    >
-                      {parseInt(11000).toLocaleString("ko-KR")}
-                    </Nunito12right>
-                    <Noto12left style={{ flex: 1 }}>{"  "}원</Noto12left>
-                  </BtmLeft>
+                <InfoBox>
+                  <Top>
+                    <TopLeft>
+                      <Noto12left style={{ flex: 4 }}>최소주문금액</Noto12left>
+                      <Nunito12right
+                        style={{
+                          flex: 0.2,
+                          color: colors.primaryBlue,
+                          minWidth: 46 * width,
+                          marginTop: height * 2,
+                        }}
+                      >
+                        {parseInt(minOrdPrice)
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                      </Nunito12right>
+                      <Noto12left style={{ flex: 1 }}>{"  "}원</Noto12left>
+                    </TopLeft>
 
-                  <BtmRight>
-                    <Noto12left style={{ flex: 3 }}>매칭 완료 인원</Noto12left>
-                    <Nunito12right
-                      style={{
-                        flex: 1,
-                        backgroundColor: "white",
-                        marginTop: height * 2,
-                        color: colors.primaryBlue,
-                      }}
-                    >
-                      2
-                    </Nunito12right>
-                    <Noto12left
-                      style={{
-                        flex: 0.6,
-                      }}
-                    >
-                      {"  "}명
-                    </Noto12left>
-                  </BtmRight>
-                </Btm>
-              </InfoBox>
-            </InfoRoot>
-          </MatInfoRoot>
-        </MatchingInfo>
+                    <TopRight>
+                      <Noto12left style={{ flex: 4 }}>1인배달비</Noto12left>
+                      <Nunito12right
+                        style={{
+                          flex: 0.2,
+                          minWidth: 46 * width,
+                          marginTop: height * 2,
+                          color: colors.primaryBlue,
+                        }}
+                      >
+                        {parseInt(maxDlvTip / requiredPersons)
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                      </Nunito12right>
+                      <Noto12left
+                        style={{
+                          flex: 1,
+                        }}
+                      >
+                        {"  "}원
+                      </Noto12left>
+                    </TopRight>
+                  </Top>
 
-        <RoundedBtn
-          onPress={() => {
-            alert("매칭시작 화면으로 이동");
-          }}
-          btnStyle={{
-            borderColor: colors.primaryBlue,
-            backgroundColor: colors.primaryBlue,
-            marginTop: height * 36.2,
-          }}
-          textStyle={{ color: "white" }}
-          text="참여하기"
-        />
+                  <Btm>
+                    <BtmLeft>
+                      <Noto12left style={{ flex: 4 }}>매칭주문금액</Noto12left>
+                      <Nunito12right
+                        style={{
+                          flex: 0.2,
+                          minWidth: 46 * width,
+                          marginTop: height * 2,
+                          color: colors.primaryBlue,
+                        }}
+                      >
+                        {parseInt(11000)
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                      </Nunito12right>
+                      <Noto12left style={{ flex: 1 }}>{"  "}원</Noto12left>
+                    </BtmLeft>
 
-        <DisclaimerFooter
-          viewStyle={{
-            marginLeft: width * -20,
-            marginBottom: 0,
-            marginTop: "auto",
-          }}
-        />
+                    <BtmRight>
+                      <Noto12left style={{ flex: 3 }}>
+                        매칭 대기 인원
+                      </Noto12left>
+                      <Nunito12right
+                        style={{
+                          flex: 1,
+                          backgroundColor: "white",
+                          marginTop: height * 2,
+                          color: colors.primaryBlue,
+                        }}
+                      >
+                        2
+                      </Nunito12right>
+                      <Noto12left
+                        style={{
+                          flex: 0.6,
+                        }}
+                      >
+                        {"  "}명
+                      </Noto12left>
+                    </BtmRight>
+                  </Btm>
+                </InfoBox>
+              </InfoRoot>
+            </MatInfoRoot>
+          </MatchingInfo>
+
+          <RoundedBtn
+            onPress={() => {
+              navigation.navigate("MatchingWaitingScreen", {
+                screen: "MatchingWaitingScreen",
+                params: {
+                  // chatRoomID: chatRoomInfo.id,
+                  // storeInfo,
+                  // menus,
+                  // timeNpersons,
+                },
+              });
+              setIsModal(false);
+            }}
+            btnStyle={{
+              borderColor: colors.primaryBlue,
+              backgroundColor: colors.primaryBlue,
+              marginTop: height * 36.2,
+            }}
+            textStyle={{ color: "white" }}
+            text="참여하기"
+          />
+
+          <DisclaimerFooter
+            viewStyle={{
+              marginLeft: width * -20,
+              marginBottom: 0,
+              marginTop: "auto",
+            }}
+          />
+        </View>
       </View>
-    </View>
+    </Modal>
   );
 };
 

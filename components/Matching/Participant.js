@@ -191,7 +191,9 @@ export default ({ _isReady, imageUri, username, isHost, orderPrice }) => {
               marginTop: 1,
             }}
           >
-            {parseInt("20000").toLocaleString("ko-KR")}
+            {parseInt("20000")
+              .toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
           </Text>
         </View>
 

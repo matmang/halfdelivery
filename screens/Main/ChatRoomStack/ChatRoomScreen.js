@@ -67,6 +67,9 @@ import Dropdown_noModal from "../../../components/Dropdown_noModal";
 import DeliveryInfo_DlvTip from "../../../components/Matching/waiting/DeliveryInfo_DlvTip";
 import BtmLastMessage from "../../../components/Chat/BtmLastMessage";
 
+import talkOn from "../../../assets/images/BottomTabNav/talk.png";
+import onMatching from "../../../assets/images/BottomTabNav/onMatching.png";
+
 const images = [
   {
     uri: "https://images.unsplash.com/photo-1571501679680-de32f1e7aad4",
@@ -78,6 +81,14 @@ const images = [
     uri: "https://images.unsplash.com/photo-1569569970363-df7b6160d111",
   },
 ];
+
+const BottomTab = (props) => {
+  return (
+    <BottomTabView>
+      <Image source={props} style={{ width: "110%", height: "110%" }} />
+    </BottomTabView>
+  );
+};
 
 const ChatRoomScreen = (props) => {
   const [messages, setMessages] = useState([]);
@@ -104,6 +115,10 @@ const ChatRoomScreen = (props) => {
           <Entypo name="dots-three-horizontal" size={24} color="white" />
         </Pressable>
       ),
+
+      tabBarBackground: () => {
+        return BottomTab(onMatching);
+      },
     });
   }, [navigation, is3dots]);
   // console.log("is3dots", is3dots);

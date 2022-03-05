@@ -152,7 +152,7 @@ export default ({ name }) => {
               // backgroundColor: "pink",
             }}
           >
-            <PlatformIcon platfrom={"배민"} />
+            <PlatformIcon platform={platform} />
             <Text
               style={{
                 marginTop: height * -2,
