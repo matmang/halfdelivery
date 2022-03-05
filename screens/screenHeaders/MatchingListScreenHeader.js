@@ -7,12 +7,13 @@ import {
   SafeAreaView,
   Button,
   Platform,
+  StatusBar,
 } from "react-native";
 import logos from "../../images";
 import styled from "styled-components";
 import colors from "../../colors";
-import MatchingListScreen from "../../screens/Main/PartnerStack/MatchingListScreen";
-import MatchingWaitingScreen from "../../screens/Main/MatchingWaitingScreen";
+import MatchingListScreen from "../Main/PartnerStack/MatchingListScreen";
+import MatchingWaitingScreen from "../Main/MatchingWaitingScreen";
 import { width, height } from "../../utils";
 
 export default () => {
@@ -36,7 +37,9 @@ export default () => {
 };
 
 const Root = styled.View`
-  margin-top: ${Platform.OS === "android" ? height * 24 : height * 47}px;
+  margin-top: ${Platform.OS === "android"
+    ? height * StatusBar.currentHeight
+    : height * 47}px;
   /* justify-content: center; */
   align-items: center;
   background-color: ${colors.primaryBlue};

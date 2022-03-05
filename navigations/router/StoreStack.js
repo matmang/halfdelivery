@@ -4,7 +4,6 @@ import { View, Image, Text, SafeAreaView, Button } from "react-native";
 
 import logos from "../../images";
 
-import SelectMenuScreen from "../../screens/Main/StoreStack/SelectMenuScreen";
 import SetMatchingTimeScreen from "../../screens/Main/StoreStack/SetMatchingTimeScreen";
 import ChatRoomScreen from "../../screens/Main/ChatRoomStack/ChatRoomScreen";
 import RequestMatchingScreen from "../../screens/Main/StoreStack/RequestMatchingScreen";
@@ -28,18 +27,11 @@ const LogoHeader = (props) => {
 
 export default () => (
   <Stack.Navigator
-    initialRouteName="SelectMenuScreen"
+    initialRouteName="SetMatchingTimeScreen"
     screenOptions={{
       header: (props) => <LogoHeader {...props} />,
     }}
   >
-    <Stack.Screen
-      name="SelectMenuScreen"
-      component={SelectMenuScreen}
-      options={{
-        title: "메뉴 고르기",
-      }}
-    />
     <Stack.Screen
       name="SetMatchingTimeScreen"
       component={SetMatchingTimeScreen}

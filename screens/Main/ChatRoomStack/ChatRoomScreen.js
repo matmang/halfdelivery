@@ -48,6 +48,7 @@ import {
   AddAdditionalTime,
   ViewProfilePartner,
   FinalCheck,
+  EnterMatching,
 } from "../../../components/Matching/Modals/";
 import Dropdown from "../../../components/Dropdown";
 import SelectPlatform from "../../../components/Matching/Modals/SelectPlatform";
@@ -200,84 +201,10 @@ const ChatRoomScreen = (props) => {
 
   return (
     <ScrollView>
-      <Text
-        style={{
-          color: "white",
-          backgroundColor: "grey",
-          // includeFontPadding: false,
-          // textAlignVertical: "center",
-        }}
-      >
-        안드로이드 기본폰트 테스트
-      </Text>
-      <Text
-        style={{
-          color: "white",
-          fontFamily: "noto-regular",
-          backgroundColor: "pink",
-          includeFontPadding: false,
-          textAlignVertical: "center",
-        }}
-      >
-        안드로이드 noto-regular 테스트
-      </Text>
-      <Text
-        style={{
-          color: "white",
-          fontFamily: "noto-medium",
-          backgroundColor: "pink",
-          includeFontPadding: false,
-          textAlignVertical: "center",
-        }}
-      >
-        안드로이드 noto-medium 테스트
-      </Text>
-      <Text
-        style={{
-          color: "white",
-          fontFamily: "noto-bold",
-          backgroundColor: "pink",
-          includeFontPadding: false,
-          textAlignVertical: "center",
-        }}
-      >
-        안드로이드 noto-bold 테스트
-      </Text>
-      <Text
-        style={{
-          color: "white",
-          fontFamily: "nunito-regular",
-          backgroundColor: "orange",
-          includeFontPadding: false,
-          textAlignVertical: "center",
-        }}
-      >
-        안드로이드 nunito-regular 테스트
-      </Text>
-      <Text
-        style={{
-          color: "white",
-          fontFamily: "nunito-semibold",
-          backgroundColor: "orange",
-          includeFontPadding: false,
-          textAlignVertical: "center",
-        }}
-      >
-        안드로이드 nunito-semibold 테스트
-      </Text>
-      <Text
-        style={{
-          color: "white",
-          fontFamily: "nunito-bold",
-          backgroundColor: "orange",
-          includeFontPadding: false,
-          textAlignVertical: "center",
-        }}
-      >
-        안드로이드 nunito-bold 테스트
-      </Text>
+      <EnterMatching />
 
       <FinalCheck />
+
       <InputOrderPrice />
       <RequestAdditionalTime />
       <AddAdditionalTime />

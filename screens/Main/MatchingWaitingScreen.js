@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { View, Button, Text, StyleSheet, Image } from "react-native";
+import {
+  View,
+  Button,
+  Text,
+  StyleSheet,
+  Image,
+  ScrollView,
+} from "react-native";
 import styled from "styled-components";
 import colors from "../../colors";
 import { width, height } from "../../utils";
@@ -13,6 +20,8 @@ import {
   PriceReadyBoxPartner,
 } from "../../components/Matching";
 import Timer from "../../components/Timer";
+
+const MatchingInfoRoot_HEIGHT = 456;
 
 export default MatchingWaitingScreen = () => {
   const navigation = useNavigation();
@@ -27,7 +36,7 @@ export default MatchingWaitingScreen = () => {
       {/* 매칭 정보 */}
       <CollapsibleView
         sectionTitle={"매칭 정보"}
-        maxheight={height * 421}
+        maxheight={height * MatchingInfoRoot_HEIGHT}
         style={{ marginTop: height * 4 }}
       >
         <MatchingInfoRoot>
@@ -63,7 +72,7 @@ export default MatchingWaitingScreen = () => {
           <MatchingInfoRootRow>
             <Participant />
             <ParticipantEmpty
-              style={{ marginLeft: "auto", marginRight: "auto" }}
+              style={{ marginLeft: width * 16, marginRight: "auto" }}
             />
           </MatchingInfoRootRow>
           <MatchingInfoRootRow
@@ -74,7 +83,7 @@ export default MatchingWaitingScreen = () => {
           >
             <ParticipantEmpty />
             <ParticipantEmpty
-              style={{ marginLeft: "auto", marginRight: "auto" }}
+              style={{ marginLeft: width * 16, marginRight: "auto" }}
             />
           </MatchingInfoRootRow>
         </MatchingInfoRoot>
@@ -94,6 +103,7 @@ const Root = styled.View`
 
 const MatchingInfoRoot = styled.View`
   background-color: #f5f6f6;
+  height: ${height * MatchingInfoRoot_HEIGHT}px;
 `;
 
 const MatchingInfoHeader = styled.View`

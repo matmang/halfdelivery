@@ -17,18 +17,6 @@ import logos from "../../../images";
 import MyOrderImages from "../MyOrderImages";
 import RoundedBtn from "../../RoundedBtn";
 
-const images = [
-  {
-    uri: "https://images.unsplash.com/photo-1571501679680-de32f1e7aad4",
-  },
-  {
-    uri: "https://images.unsplash.com/photo-1573273787173-0eb81a833b34",
-  },
-  {
-    uri: "https://images.unsplash.com/photo-1569569970363-df7b6160d111",
-  },
-];
-
 export default ({ name, school, college, bank, accountnumber }) => {
   return (
     <View
@@ -48,7 +36,7 @@ export default ({ name, school, college, bank, accountnumber }) => {
         style={{
           paddingLeft: width * 20,
           width: width * 364,
-          height: height * 714,
+          height: height * 390,
           borderRadius: 16,
           backgroundColor: "rgba(255, 255, 255, 255)",
           elevation: 6,
@@ -90,7 +78,7 @@ export default ({ name, school, college, bank, accountnumber }) => {
                 color: "rgba(14, 37, 124, 255)",
               }}
             >
-              현재 정보로 매칭이 시작됩니다
+              해당 매칭에 참여합니다
             </Text>
           </View>
 
@@ -109,7 +97,7 @@ export default ({ name, school, college, bank, accountnumber }) => {
                 color: "rgba(0, 0, 0, 255)",
               }}
             >
-              입력된 주문 정보가 일치하는지 확인해주세요
+              선택한 매칭방의 정보가 일치하는지 확인해주세요.
             </Text>
           </View>
         </Header>
@@ -244,42 +232,6 @@ export default ({ name, school, college, bank, accountnumber }) => {
           </MatInfoRoot>
         </MatchingInfo>
 
-        <MyOrderInfo>
-          <Text
-            style={{
-              fontFamily: "noto-medium",
-              includeFontPadding: false,
-              textAlignVertical: "center",
-              fontSize: 14,
-              color: "rgba(14, 37, 124, 255)",
-            }}
-          >
-            나의 주문정보
-          </Text>
-          <MyOrderImages />
-        </MyOrderInfo>
-
-        <MyOrderPrice>
-          <Text
-            style={{
-              fontFamily: "noto-medium",
-              includeFontPadding: false,
-              textAlignVertical: "center",
-              fontSize: 14,
-              color: "rgba(14, 37, 124, 255)",
-            }}
-          >
-            나의 주문금액
-          </Text>
-          <Text
-            style={{
-              marginLeft: width * 102.4,
-            }}
-          >
-            ￦ 11,000원
-          </Text>
-        </MyOrderPrice>
-
         <RoundedBtn
           onPress={() => {
             alert("매칭시작 화면으로 이동");
@@ -290,7 +242,7 @@ export default ({ name, school, college, bank, accountnumber }) => {
             marginTop: height * 36.2,
           }}
           textStyle={{ color: "white" }}
-          text="매칭 시작"
+          text="참여하기"
         />
 
         <DisclaimerFooter
@@ -319,20 +271,6 @@ const MatchingInfo = styled.View`
   /* background-color: yellowgreen; */
 `;
 
-const MyOrderInfo = styled.View`
-  /* flex-direction: row; */
-  margin-top: ${height * 32.4}px;
-  /* height: ${height * 90}px; */
-  /* background-color: lime; */
-`;
-
-const MyOrderPrice = styled.View`
-  margin-top: ${height * 28}px;
-  flex-direction: row;
-  align-items: center;
-  background-color: lightyellow;
-`;
-
 const MatInfoRoot = styled.View`
   /* background-color: grey; */
   flex-direction: row;
@@ -342,7 +280,7 @@ const MatInfoRoot = styled.View`
   background-color: white;
   border-radius: 10px;
   border-width: 1.5px;
-  border-color: ${colors.primaryBlue};
+  border-color: #c3cdd5;
   /* margin-bottom: 100px; */
   padding-left: 16px;
   margin-top: ${height * 8}px;

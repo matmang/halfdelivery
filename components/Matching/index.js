@@ -4,7 +4,6 @@ import Participant from "./Participant";
 import ParticipantEmpty from "./ParticipantEmpty";
 import Platform from "./Platform";
 import QuantitySelector from "./QuantitySelector";
-import StoreComponent from "./StoreComponent";
 import StoreItem from "./StoreItem";
 import StoreList from "./StoreList";
 import PriceReadyBoxHost from "./PriceReadyBoxHost";
@@ -17,7 +16,6 @@ export {
   ParticipantEmpty,
   Platform,
   QuantitySelector,
-  StoreComponent,
   StoreItem,
   StoreList,
   PriceReadyBoxHost,

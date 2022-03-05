@@ -9,7 +9,7 @@ import { width, height } from "../../../utils";
 import {
   MatchingListScreenHeader,
   MatchingWaitingScreenHeader,
-} from "../../../components/screenHeaders";
+} from "../../../screens/screenHeaders";
 import MatchingListScreen from "../../../screens/Main/PartnerStack/MatchingListScreen";
 import MatchingWaitingScreen from "../../../screens/Main/MatchingWaitingScreen";
 

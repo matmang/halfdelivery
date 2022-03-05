@@ -274,7 +274,7 @@ const Mid = styled.View`
 const ImagesZone = styled.View`
   width: ${width * 174}px;
   height: ${height * 87}px;
-  background: white;
+  background: #f5f6f6;
   flex-direction: row;
   padding-left: 10px;
   /* justify-content: center; */
