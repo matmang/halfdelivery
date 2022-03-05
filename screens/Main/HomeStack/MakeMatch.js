@@ -9,7 +9,6 @@ import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import DismissKeyboard from "../../../components/DismissKeyboard";
 import Btn from "../../../components/Auth/Btn";
 import MatchingImagePicker from "../../../components/Main/renderImage/MatchingImagePicker";
-import Dropdown from "../../../components/Dropdown";
 import Dropdown_noModal from "../../../components/Dropdown_noModal";
 
 const Container = styled.View`
