@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { Image, SafeAreaView, Platform } from "react-native";
-import logos from "../../../images";
+import { Platform } from "react-native";
 import HomeScreen from "../../../screens/Main/HomeStack/HomeScreen";
-import ProfileScreen from "../../../screens/Main/ProfileStack/ProfileScreen";
 import HomeHeaderButton from "../../../components/Main/HomeHeaderButton";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import SearchScreen from "../../../screens/Main/HomeStack/SearchScreen";
@@ -33,19 +31,6 @@ const UserSchool = styled.Text`
 `;
 
 const Stack = createStackNavigator();
-const LogoHeader = (props) => {
-  return (
-    <SafeAreaView
-      style={{
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "white",
-      }}
-    >
-      <Image source={logos.halfLogo} style={{ width: 40, height: 40 }} />
-    </SafeAreaView>
-  );
-};
 
 export default () => {
   const [username, setUsername] = useState("");

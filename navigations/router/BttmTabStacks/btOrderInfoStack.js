@@ -8,6 +8,11 @@ import MatchingSuccessScreen from "../../../screens/Main/OrderInfoStack/Matching
 import MatchingFailedScreen from "../../../screens/Main/OrderInfoStack/MatchingFailedScreen";
 import MatchingReqHostScreen from "../../../screens/Main/OrderInfoStack/MatchingReqHostScreen";
 import MatchingReqClientScreen from "../../../screens/Main/OrderInfoStack/MatchingReqClientScreen";
+import ProfileScreen from "../../../screens/Main/ProfileStack/ProfileScreen";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import HomeHeaderButton from "../../../components/Main/HomeHeaderButton";
+import colors from "../../../colors";
+import { height, width } from "../../../utils";
 
 const Stack = createStackNavigator();
 const LogoHeader = (props) => {
@@ -26,40 +31,37 @@ const LogoHeader = (props) => {
 };
 
 export default () => (
-  <Stack.Navigator
-    initialRouteName="MatchingSuccessScreen"
-    screenOptions={{
-      header: (props) => <LogoHeader {...props} />,
-    }}
-  >
+  <Stack.Navigator initialRouteName="ProfileScreen">
     <Stack.Screen
-      name="MatchingSuccessScreen"
-      component={MatchingSuccessScreen}
-      options={{
-        header: (props) => <LogoHeader {...props} />,
-        title: "매칭 성공",
-      }}
-    />
-    <Stack.Screen
-      name="MatchingFailedScreen"
-      component={MatchingFailedScreen}
-      options={{
-        title: "매칭 실패",
-      }}
-    />
-    <Stack.Screen
-      name="MatchingReqHostScreen"
-      component={MatchingReqHostScreen}
-      options={{
-        title: "매칭 요청 - 호스트",
-      }}
-    />
-    <Stack.Screen
-      name="MatchingReqClientScreen"
-      component={MatchingReqClientScreen}
-      options={{
-        title: "매칭 요청 - 클라이언트",
-      }}
+      name="ProfileScreen"
+      component={ProfileScreen}
+      options={({ navigation }) => ({
+        title: "내 정보",
+        headerTitleAlign: "center",
+        headerStyle: {
+          backgroundColor: colors.primaryBlue,
+          height: height * 56,
+          marginTop: height * 20,
+        },
+        headerTintColor: "#ffffff",
+        headerTitleStyle: {
+          fontFamily: "noto-medium",
+          fontSize: width * 17,
+        },
+        headerRight: () => (
+          <HeaderButtons HeaderButtonComponent={HomeHeaderButton}>
+            <Item
+              title="Notification"
+              iconName={
+                Platform.OS === "android"
+                  ? "md-notifications"
+                  : "ios-notifications"
+              }
+              onPress={() => alert("알림")}
+            />
+          </HeaderButtons>
+        ),
+      })}
     />
   </Stack.Navigator>
 );
