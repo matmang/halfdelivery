@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { View, Button, Text, StyleSheet } from "react-native";
 import RoomList from "../../../components/Matching/RoomList";
@@ -11,15 +11,47 @@ import {
   WESTERN_ID,
   CAFE_ID,
 } from "../../../assets/constants";
+import { width, height } from "../../../utils";
+import { StatusBar } from "expo-status-bar";
 
-const Categorries = styled.Pressable`
-  height: 52px;
-  justify-content: center;
-`;
-
-const MatchingListScreen = () => {
+const MatchingListScreen = (props) => {
   const [categoryID, setCategoryID] = useState("ALL");
-  const navigation = useNavigation();
+  const [type, setType] = useState("MIN_PRICE");
+  // const navigation = useNavigation();
+  //- 헤더바, 점3개 버튼누르면 작동
+  const navigation = props.navigation;
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      header: () => (
+        <Root style={{ flexDirection: "row" }}>
+          <Title>매칭리스트</Title>
+          <Text
+            onPress={() => {
+              type === "MIN_PRICE" ? setType("DLV_TIP") : setType("MIN_PRICE");
+            }}
+            style={{
+              // position: "absolute",
+              color: "white",
+              marginLeft: "auto",
+              // marginLeft: width * 250,
+              marginRight: width * 25,
+              textDecorationLine: "underline",
+            }}
+          >
+            {type === "MIN_PRICE"
+              ? "최소주문금액 매칭"
+              : type === "DLV_TIP"
+              ? "배달비 매칭"
+              : "error"}
+          </Text>
+        </Root>
+      ),
+
+      tabBarBackground: () => {
+        return BottomTab(onMatching);
+      },
+    });
+  }, [navigation, type]);
 
   const ButtonTitle = styled.Text`
     font-family: "noto-regular";
@@ -80,7 +112,7 @@ const MatchingListScreen = () => {
         <Text style={styles.title}>배달음식 파트너 모집중</Text>
       </View> */}
 
-      <RoomList categoryID={categoryID} />
+      <RoomList categoryID={categoryID} type={type} />
     </View>
   );
 };
@@ -105,5 +137,31 @@ const styles = StyleSheet.create({
     marginLeft: 24,
   },
 });
+
+const Categorries = styled.Pressable`
+  height: 52px;
+  justify-content: center;
+`;
+
+const Root = styled.View`
+  margin-top: ${Platform.OS === "android"
+    ? height * StatusBar.currentHeight
+    : height * 47}px;
+  /* justify-content: center; */
+  align-items: center;
+  background-color: ${colors.primaryBlue};
+  height: ${height * 56}px;
+  width: 100%;
+  /* position: relative; */
+`;
+
+const Title = styled.Text`
+  font-family: "noto-medium";
+  font-size: 17px;
+  color: #ffffff;
+  include-font-padding: false;
+  text-align-vertical: center;
+  margin-left: ${width * 167}px; ;
+`;
 
 export default MatchingListScreen;

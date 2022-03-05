@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useLayoutEffect, useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -20,35 +20,26 @@ import AppLoading from "expo-app-loading";
 import Room_DlvTip from "./Room_DlvTip";
 import Room_MinPrice from "./Room_MinPrice";
 
-// https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce
-function groupBy(objectArray, property) {
-  return objectArray.reduce(function (acc, obj) {
-    var key = obj[property];
-    if (!acc[key]) {
-      acc[key] = [];
-    }
-    acc[key].push(obj);
-    return acc;
-  }, {});
-}
+const RoomList = ({ categoryID, type }) => {
+  // const type = "DLV_TIP";
 
-const RoomList = ({ categoryID }) => {
   const [chatRooms, setChatRooms] = useState([]);
+  const [matchings, setMatchings] = useState([]);
 
   //? Listening to new chatrooms. https://docs.amplify.aws/lib/datastore/real-time/q/platform/js/
   //? In Real Time!
-  //? 새 채팅방이 생길때마다 렌더링 하기위해서, chatRooms state를 수정하자.
+  //? 새 매칭이 생길때마다 렌더링 한다
   useEffect(() => {
-    //? 그러기 위해서 우선, chatrooms 모델을 구독, subscription 해야 한다.
+    //? 그러기 위해서 subscription 해야 한다
     const subscription = DataStore.observe(ChatRoom).subscribe((ChatRoom) => {
-      console.log("ChatRoom 섭스", ChatRoom);
-      // console.log(msg.model, msg.opType, msg.element);
-
-      //? 새 챗룸 추가!
       if (ChatRoom.opType === "INSERT") {
         //* setState 에 callback 함수를 넣으면, 첫번쨰 인자로 현재 state를 갖는다.
-        setChatRooms((existingChatRooms) => [
-          ChatRoom.element,
+        setMatchings((existingChatRooms) => [
+          ChatRoom.element.filter(
+            (chatroom) =>
+              chatroom.master !== authUser.attributes.sub &&
+              chatroom.MatchingInfo.type === type
+          ),
           ...existingChatRooms,
         ]);
       }
@@ -58,116 +49,60 @@ const RoomList = ({ categoryID }) => {
     return () => subscription.unsubscribe();
   }, []);
 
-  useEffect(() => {
-    const fetchChatRooms = async () => {
+  useLayoutEffect(() => {
+    //? 매칭방 가져오기
+    const fetchMatchings = async () => {
       const authUser = await Auth.currentAuthenticatedUser();
-      const chatRooms = await DataStore.query(ChatRoom);
-      // .filter(
-      //   (ChatRoomUser) => ChatRoomUser.user.id === authUser.attributes.sub //! 채팅방기능 테스트 하는동안에는 주석처리할 것!
-      // )
-      // .map((ChatRoomUser) => ChatRoomUser.chatroom);
+      // console.log(authUser);
 
-      setChatRooms(chatRooms);
+      //? onSetting === true 인 매칭방만 불러옴
+      const matchings = await DataStore.query(ChatRoom, (chatroom) =>
+        chatroom.onSetting("eq", true)
+      );
+
+      setMatchings(
+        matchings.filter(
+          (chatroom) =>
+            //? 내가 만든 매칭방은 제외
+            chatroom.master !== authUser.attributes.sub &&
+            //? 매칭타입에 해당하는 매칭방만 불러옴
+            chatroom.MatchingInfo.type === type
+        )
+      );
     };
 
-    // const chatRooms = await DataStore.query(ChatRoomUser);
-    // setChatRooms(chatRooms);
-    // };
-    fetchChatRooms();
-  }, []);
-  console.log(chatRooms);
-
-  //todo: 아래 fetchChatRooms 코드는 삭제/수정 예정
-  // const fetchChatRooms = async () => {
-  //   const authUser = await Auth.currentAuthenticatedUser();
-  //   const all_chatRoomUsers = (await DataStore.query(ChatRoomUser)).filter(
-  //     (ChatRoomUser) => ChatRoomUser._deleted !== null
-  //   );
-
-  //   //? 내가 만든 챗룸을 제외한, 챗룸 불러오기. (챗룸유저를 이용한다)
-  //   const all_chatRooms = (await DataStore.query(ChatRoomUser))
-  //     .filter(
-  //       (ChatRoomUser) => ChatRoomUser.user.id !== authUser.attributes.sub
-  //     )
-  //     .map((ChatRoomUser) => ChatRoomUser.chatroom)
-  //     .filter((chatroom) => chatroom.matchingInfo !== null);
-
-  //   const chatRoom_ids = all_chatRooms.map((item) => item.id);
-  //   const pairArray = []; //? {키: ChatRoom 아이디, 밸류: (대응되는) ChatRoomUser 객체} 가 원소들로 들어간다
-
-  //   // * 챗룸id 와 대응되는 챗룸유저id 를 찾아서 grouped_pairObject로 정리하는 과정.
-  //   for (let index in chatRoom_ids) {
-  //     let chatRoom_id = chatRoom_ids[index];
-  //     let ChatRoomUser = all_chatRoomUsers.find(
-  //       (ChatRoomUser) => ChatRoomUser.chatroom.id === chatRoom_id
-  //     );
-
-  //     let pair = { chatRoom_id: chatRoom_id, ChatRoomUser: ChatRoomUser };
-  //     pairArray.push(pair);
-  //   }
-
-  //   const grouped_pairObject = groupBy(pairArray, "chatRoom_id");
-  //   const keysArray = Object.keys(grouped_pairObject);
-  //   const except_chatRoom_ids = [];
-
-  //   for (let index in keysArray) {
-  //     let key = keysArray[index];
-  //     let valueArray = grouped_pairObject[key];
-  //     let length = valueArray.length;
-
-  //     if (length > 1) {
-  //       except_chatRoom_ids.push(key);
-  //     }
-  //   }
-
-  //   //? 챗룸유저id 가 2개(인원수)미만인 채팅방만 고른다.
-  //   const fit_chatRooms = all_chatRooms.filter(
-  //     (chatroom) => chatroom.id !== except_chatRoom_ids.values
-  //   );
-
-  //   setChatRooms(fit_chatRooms);
-  // };
-
-  // useEffect(() => {
-  //   //? 채팅방들 가져오기.
-  //   const fetchChatRooms = async () => {
-  //     const authUser = await Auth.currentAuthenticatedUser();
-
-  //     //! 내가 만든 방들은 보여주면 안 된다.
-  //     const chatRooms = (await DataStore.query(ChatRoomUser))
-  //       .filter((ChatRoomUser) => ChatRoomUser.user.id !== authUser.attributes.sub)
-  //       .map((ChatRoomUser) => ChatRoomUser.chatroom)
-  //       .filter((chatroom) => chatroom.matchingInfo !== null);
-
-  //     // const filteredChatRooms = chatRooms.filter((element) => element.matchingInfo === null);
-  //     setChatRooms(chatRooms);
-  //   };
-
-  //   fetchChatRooms();
-  // }, []);
+    fetchMatchings();
+  }, [type]);
+  console.log(matchings);
 
   return (
     <View style={styles.root}>
       <FlatList
         data={
+          //? 카테고리에 해당하는 매칭방만 고르기
           categoryID === "ALL"
-            ? chatRooms
-            : chatRooms.filter(
+            ? matchings
+            : matchings.filter(
                 (obj) =>
-                  obj.matchingInfo.storeNmenus.store.storecategoryID ===
-                  categoryID
+                  obj.MatchingInfo.matchingInfoStoreCategoryId === categoryID
               )
         }
         // renderItem={({ item }) =>
         //   item !== undefined ? (
-        //     <RoomMinPrice chatRoomInfo={item} />
+        //     <Room_MinPrice chatRoomInfo={item} />
         //   ) : (
         //     <ActivityIndicator />
         //   )
         // }
         renderItem={({ item }) =>
           item !== undefined ? (
-            <Room_DlvTip chatRoomInfo={item} />
+            type === "DLV_TIP" ? (
+              <Room_DlvTip matchingInfo={item.MatchingInfo} />
+            ) : type === "MIN_PRICE" ? (
+              <Room_MinPrice matchingInfo={item.MatchingInfo} />
+            ) : (
+              <ActivityIndicator />
+            )
           ) : (
             <ActivityIndicator />
           )

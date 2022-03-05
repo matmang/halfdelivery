@@ -5,9 +5,9 @@ import { width, height } from "../../utils";
 import RoundedBtn from "../RoundedBtn";
 import colors from "../../colors";
 
-export default () => {
+export default ({ style }) => {
   return (
-    <Root>
+    <Root style={style}>
       <Top>
         <TopLeft>
           <ProfileImg
@@ -144,6 +144,7 @@ const Root = styled.View`
   height: ${height * 182}px;
   background-color: white;
   box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.05);
+  elevation: 6;
   border-radius: 10px;
   opacity: 1;
 

@@ -25,10 +25,13 @@ export default ({ images, index }) => {
         <Image
           source={{ uri: images[index].uri }}
           style={{
-            width: width * 137,
-            height: height * 197,
+            width: width * 140,
+            height: height * 200,
             borderRadius: 10,
+            borderWidth: 1.5,
+            borderColor: colors.primaryBlue,
           }}
+          resizeMode="stretch"
         />
         <ImageView
           images={images}

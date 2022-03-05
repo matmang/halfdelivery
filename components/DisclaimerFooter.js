@@ -8,7 +8,7 @@ export default ({ viewStyle, textStyle }) => {
     <View
       style={[
         {
-          backgroundColor: "#F5F6F6",
+          color: "rgba(62, 63, 65, 0.6)",
           justifyContent: "center",
           width: width * 364,
           height: height * 55,
@@ -22,12 +22,12 @@ export default ({ viewStyle, textStyle }) => {
         style={[
           {
             color: "rgba(62, 63, 65, 1)",
-            fontSize: 10,
+            fontSize: width * 10,
             fontFamily: "noto-regular",
             includeFontPadding: false,
             textAlignVertical: "center",
             textAlign: "left",
-            marginLeft: width * 20,
+            marginHorizontal: width * 20,
           },
           textStyle,
         ]}
@@ -38,12 +38,12 @@ export default ({ viewStyle, textStyle }) => {
         style={[
           {
             color: "rgba(62, 63, 65, 1)",
-            fontSize: 10,
+            fontSize: width * 10,
             fontFamily: "noto-regular",
             includeFontPadding: false,
             textAlignVertical: "center",
             textAlign: "left",
-            marginLeft: width * 20,
+            marginHorizontal: width * 20,
             marginTop: height * 2,
           },
           textStyle,

@@ -16,6 +16,7 @@ import {
 import logos from "../../../images";
 import MyOrderImages from "../MyOrderImages";
 import RoundedBtn from "../../RoundedBtn";
+import { useNavigation } from "@react-navigation/native";
 
 const images = [
   {
@@ -30,6 +31,8 @@ const images = [
 ];
 
 export default ({ name, school, college, bank, accountnumber }) => {
+  const navigation = useNavigation();
+
   return (
     <View
       style={{
@@ -90,7 +93,7 @@ export default ({ name, school, college, bank, accountnumber }) => {
                 color: "rgba(14, 37, 124, 255)",
               }}
             >
-              현재 정보로 매칭이 시작됩니다.
+              현재 정보로 매칭이 시작됩니다
             </Text>
           </View>
 
@@ -145,7 +148,7 @@ export default ({ name, school, college, bank, accountnumber }) => {
           <MatInfoRoot>
             <InfoRoot>
               <Header2>
-                <PlatformIcon platfrom="요기요" />
+                <PlatformIcon platform="요기요" />
                 <Noto14medium style={{ marginLeft: width * 8 }}>
                   {/* { 매장이름 } */}
                   브라운돈까스 안산한양대점
@@ -156,10 +159,10 @@ export default ({ name, school, college, bank, accountnumber }) => {
                 style={{
                   marginTop: height * 7,
                   backgroundColor: "#C3CDD5",
-                  width: width * 291.34,
+                  width: width * 292,
                   height: height * 1.5,
                   alignSelf: "center",
-                  marginLeft: -20,
+                  marginLeft: width * -20,
                 }}
               />
 
@@ -175,7 +178,9 @@ export default ({ name, school, college, bank, accountnumber }) => {
                         marginTop: height * 2,
                       }}
                     >
-                      {parseInt(11000).toLocaleString("ko-KR")}
+                      {parseInt(11000)
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                     </Nunito12right>
                     <Noto12left style={{ flex: 1 }}>{"  "}원</Noto12left>
                   </TopLeft>
@@ -190,7 +195,9 @@ export default ({ name, school, college, bank, accountnumber }) => {
                         color: colors.primaryBlue,
                       }}
                     >
-                      {parseInt(11000).toLocaleString("ko-KR")}
+                      {parseInt(11000)
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                     </Nunito12right>
                     <Noto12left
                       style={{
@@ -213,7 +220,9 @@ export default ({ name, school, college, bank, accountnumber }) => {
                         color: colors.primaryBlue,
                       }}
                     >
-                      {parseInt(11000).toLocaleString("ko-KR")}
+                      {parseInt(11000)
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                     </Nunito12right>
                     <Noto12left style={{ flex: 1 }}>{"  "}원</Noto12left>
                   </BtmLeft>
@@ -372,30 +381,37 @@ const Top = styled.View`
   /* flex: 1; */
   height: ${height * 20}px;
   margin-top: ${height * 8}px;
+  /* padding-left: ${width * 16}px; */
 `;
 
 const TopLeft = styled.View`
-  flex: 1;
-  /* background-color: yellow; */
+  /* flex: 1; */
+  /* background-color: red; */
   flex-direction: row;
   align-items: center;
-  /* margin-left: ${width * 2}px; */
+  /* margin-left: ${width * 16}px; */
+  width: ${width * 138}px;
+  height: ${height * 17}px;
   /* margin-right: ${width * 10}px; */
   /* justify-content: center; */
 `;
 
 const TopRight = styled.View`
-  flex: 1;
+  /* flex: 1; */
   /* background-color: orange; */
   flex-direction: row;
   align-items: center;
-  margin-left: ${width * 18}px;
+  width: ${width * 138}px;
+  height: ${height * 17}px;
+  margin-left: auto;
   margin-right: ${width * 16}px;
+
   /* justify-content: center; */
 `;
 
 const Btm = styled(Top)`
-  margin-top: 0px;
+  margin-top: ${height * 4}px;
+  margin-bottom: auto;
 `;
 
 const BtmLeft = styled(TopLeft)`

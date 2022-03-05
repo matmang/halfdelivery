@@ -5,6 +5,7 @@ import SendAccount from "./SendAccount";
 import ViewProfilePartner from "./ViewProfilePartner";
 import SelectPlatform from "./SelectPlatform";
 import FinalCheck from "./FinalCheck";
+import EnterMatching from "./EnterMatching";
 
 export {
   InputOrderPrice,
@@ -14,4 +15,5 @@ export {
   ViewProfilePartner,
   SelectPlatform,
   FinalCheck,
+  EnterMatching,
 };

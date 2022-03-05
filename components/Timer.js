@@ -43,7 +43,7 @@ export default ({ time, simple, style }) => {
             }}
           >
             {" "}
-            10
+            {time}
           </Text>
           분
         </Text>

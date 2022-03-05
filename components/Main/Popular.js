@@ -1,5 +1,5 @@
 import React from "react";
-import { Dimensions, Platform, Platfrom, Text } from "react-native";
+import { Dimensions, Platform, Text } from "react-native";
 import styled from "styled-components";
 import colors from "../../colors";
 import { Ionicons } from "@expo/vector-icons";

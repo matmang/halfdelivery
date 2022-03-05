@@ -191,7 +191,9 @@ export default ({ _isReady, imageUri, username, isHost, orderPrice }) => {
               marginTop: 1,
             }}
           >
-            {parseInt("20000").toLocaleString("ko-KR")}
+            {parseInt("20000")
+              .toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
           </Text>
         </View>
 
@@ -222,6 +224,7 @@ const Root = styled.View`
   height: ${height * 182}px;
   background-color: white;
   box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
+  elevation: 6;
   border-radius: 10px;
   opacity: 1;
 
@@ -273,7 +276,7 @@ const Mid = styled.View`
 const ImagesZone = styled.View`
   width: ${width * 174}px;
   height: ${height * 87}px;
-  background: white;
+  background: #f5f6f6;
   flex-direction: row;
   padding-left: 10px;
   /* justify-content: center; */

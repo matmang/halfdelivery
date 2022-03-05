@@ -12,10 +12,12 @@ import {
 import { useNavigation } from "@react-navigation/core";
 import logos from "../../../images";
 import { FontAwesome, Feather, AntDesign } from "@expo/vector-icons";
-import ChatListScreen from "../../../screens/Main/ChatRoomStack/ChatListScreen";
 import { User } from "../../../AWS/src/models";
 import { Auth, DataStore } from "aws-amplify";
 import colors from "../../../colors";
+import ChatListScreen from "../../../screens/Main/ChatRoomStack/ChatListScreen";
+import ChatRoomScreen from "../../../screens/Main/ChatRoomStack/ChatRoomScreen";
+import { Entypo } from "@expo/vector-icons";
 
 const Stack = createStackNavigator();
 
@@ -120,6 +122,51 @@ export default () => (
             color="white"
             style={{ marginLeft: 20 }}
             onPress={navigation.goBack}
+          />
+        ),
+      })}
+    />
+
+    <Stack.Screen
+      name="ChatRoomScreen"
+      component={ChatRoomScreen}
+      options={({ navigation }) => ({
+        title: "OOOO 매칭방",
+        headerTitleStyle: {
+          color: "white",
+          fontFamily: "noto-regular",
+          fontSize: 17,
+        },
+        headerTitleAlign: "center",
+        headerStyle: {
+          backgroundColor: colors.primaryBlue,
+          // alignItems: "center",
+          // justifyContent: "center",
+          // flex: 1,
+        },
+        headerLeft: () => (
+          <AntDesign
+            name="arrowleft"
+            size={24}
+            color="white"
+            style={{ marginLeft: 20 }}
+            onPress={navigation.goBack}
+          />
+        ),
+        headerRight: (props) => (
+          // <Button
+          //   onPress={() => navigation.navigate("ChatListScreen")} //! useNavigation 훅 대신에, options 의 navigation 프로퍼티를 사용해야 한다!!
+          //   title="채팅방 목록"
+          //   color="grey"
+          // />
+          //! screen 과의 상호작용은, screen 컴포넌트 내에서 코드작성해야 한다. 참고: https://reactnavigation.org/docs/header-buttons/#header-interaction-with-its-screen-component
+
+          <Entypo
+            name="dots-three-horizontal"
+            size={24}
+            color="white"
+            style={{ marginRight: 20 }}
+            onPress={() => {}}
           />
         ),
       })}

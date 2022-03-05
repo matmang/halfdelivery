@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import {
   View,
   Text,
@@ -24,17 +24,36 @@ import colors from "../../colors";
 import { width, height } from "../../utils";
 import PlatformIcon from "../PlatformIcon";
 import Timer from "../Timer";
+import { EnterMatching } from "./Modals";
+import { DataStore } from "aws-amplify";
+import { Store } from "../../AWS/src/models";
 
-export default ({ chatRoomInfo }) => {
+export default ({ matchingInfo }) => {
+  const {
+    matchingInfoStoreCategoryId,
+    matchingInfoStoreId,
+    platform,
+    requiredPersons,
+    setTime,
+    type,
+  } = matchingInfo;
+
   const navigation = useNavigation();
+  const [isModal, setIsModal] = useState(false);
+  const [store, setStore] = useState(null);
 
-  const storeInfo = chatRoomInfo.matchingInfo.storeNmenus.store;
-  const menus = chatRoomInfo.matchingInfo.storeNmenus.menus;
-  const timeNpersons = chatRoomInfo.matchingInfo.timeNpersons;
+  useLayoutEffect(() => {
+    const fetchStore = async () => {
+      const store = await DataStore.query(Store, matchingInfoStoreId);
+      setStore(store);
+      console.log(store);
+    };
+
+    fetchStore();
+  }, []);
 
   let category = "-";
-
-  switch (storeInfo.storecategoryID) {
+  switch (matchingInfoStoreCategoryId) {
     case KOREAN_ID:
       category = "한식";
       break;
@@ -55,36 +74,37 @@ export default ({ chatRoomInfo }) => {
       break;
   }
 
+  if (!store) {
+    return <ActivityIndicator />;
+  }
+
   const onPress = () => {
-    navigation.navigate("btPartnerStack", {
-      screen: "MatchingWaitingScreen",
-      params: {
-        chatRoomID: chatRoomInfo.id,
-        storeInfo,
-        menus,
-        timeNpersons,
-      },
-    });
+    setIsModal(true);
   };
 
   return (
     <Pressable style={styles.root} onPress={onPress}>
-      <Image
-        style={styles.image}
-        source={
-          storeInfo.storeImgUri !== undefined
-            ? { uri: storeInfo.storeImgUri }
-            : logos.halfLogo
-        }
-      />
+      {isModal && (
+        <EnterMatching
+          isModal={isModal}
+          setIsModal={setIsModal}
+          matchingInfo={matchingInfo}
+          storeInfo={store}
+        />
+      )}
+      <Image style={styles.image} source={{ uri: store.storeImgUri }} />
 
       <InfoRoot>
         <Header>
-          <PlatformIcon platfrom="요기요" />
+          <PlatformIcon platform={platform} />
           <Noto14medium style={{ marginLeft: width * 8 }}>
-            브라운돈까스 안산한양대점
+            {store.store}
           </Noto14medium>
-          <Timer style={{ marginLeft: width * 30 }} simple={true} />
+          <Timer
+            style={{ marginLeft: "auto", marginRight: width * 24 }}
+            simple={true}
+            time={setTime}
+          />
         </Header>
         <InfoBox>
           <Top>
@@ -98,7 +118,9 @@ export default ({ chatRoomInfo }) => {
                   marginTop: height * 2,
                 }}
               >
-                {parseInt(11000).toLocaleString("ko-KR")}
+                {parseInt(store.minOrdPrice)
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
               </Nunito12right>
               <Noto12left style={{ flex: 1 }}>{"  "}원</Noto12left>
             </TopLeft>
@@ -115,7 +137,9 @@ export default ({ chatRoomInfo }) => {
                   color: colors.primaryBlue,
                 }}
               >
-                {parseInt(11000).toLocaleString("ko-KR")}
+                {parseInt(11000)
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
               </Nunito12right>
               <Noto12left
                 style={{
@@ -138,7 +162,9 @@ export default ({ chatRoomInfo }) => {
                   marginTop: height * 2,
                 }}
               >
-                {parseInt(11000).toLocaleString("ko-KR")}
+                {parseInt(11000)
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
               </Nunito12right>
               <Noto12left style={{ flex: 1 }}>{"  "}원</Noto12left>
             </BtmLeft>
@@ -152,7 +178,7 @@ export default ({ chatRoomInfo }) => {
                   marginTop: height * 2,
                 }}
               >
-                2
+                2 / {requiredPersons}
               </Nunito12right>
               <Noto12left
                 style={{

@@ -27,9 +27,9 @@ import matList from "../../assets/images/BottomTabNav/matList.png";
 import homeOn from "../../assets/images/BottomTabNav/home.png";
 import talkOn from "../../assets/images/BottomTabNav/talk.png";
 import myInfo from "../../assets/images/BottomTabNav/myInfo.png";
+import onMatching from "../../assets/images/BottomTabNav/onMatching.png";
 
 import empty from "../../assets/images/empty.png";
-import NavigationHOME from "../../assets/images/BottomTabNav/HomeCI.svg";
 
 const Tab = createBottomTabNavigator();
 
@@ -43,7 +43,7 @@ const BottomTabView = styled.View`
   height: 80px;
   width: 100%;
   position: absolute;
-  bottom: 2px;
+  bottom: -2px;
 `;
 
 const BottomTab = (props) => {
@@ -54,16 +54,7 @@ const BottomTab = (props) => {
   );
 };
 
-// const SVGtest = () => {
-//   return (
-//     <BottomTabView>
-//       <NavigationHOME width={430} height={98} />
-//       {/* <NavigationHOME width="100%" height="100%" /> */}
-//     </BottomTabView>
-//   );
-// };
-
-const customBottomTabNEW = () => {
+export default () => {
   // const [image, setImage] = useState(storeOn); //! 리액트훅 Tab 네비게이션 prop 안에 못 넣는다..!
 
   return (
@@ -128,5 +119,3 @@ const customBottomTabNEW = () => {
     </Tab.Navigator>
   );
 };
-
-export default customBottomTabNEW;

@@ -13,18 +13,17 @@ const MatchingType = {
   "DLV_TIP": "DLV_TIP"
 };
 
-const { MatchingInfo, StoreCategory, Store, Menu, ChatRoom, Message, ChatRoomUser, User, Participant } = initSchema(schema);
+const { MatchingInfo, StoreCategory, Store, Menu, Participant, User, Message, ChatRoom } = initSchema(schema);
 
 export {
   MatchingInfo,
   StoreCategory,
   Store,
   Menu,
-  ChatRoom,
-  Message,
-  ChatRoomUser,
-  User,
   Participant,
+  User,
+  Message,
+  ChatRoom,
   Platform,
   MatchingType
 };
