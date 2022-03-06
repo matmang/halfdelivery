@@ -10,7 +10,8 @@ import colors from "../../../colors";
 import Auth from "@aws-amplify/auth";
 
 import { TouchableOpacity } from "react-native-gesture-handler";
-import MakeMatch from "../../../screens/Main/HomeStack/MakeMatch";
+import MakeMatchScreen from "../../../screens/Main/HomeStack/MakeMatchScreen";
+import EnterMatchScreen from "../../../screens/Main/HomeStack/EnterMatchScreen";
 import { height } from "../../../utils";
 import { useSelector } from "react-redux";
 
@@ -91,8 +92,8 @@ export default () => {
         })}
       />
       <Stack.Screen
-        name="MakeMatch"
-        component={MakeMatch}
+        name="MakeMatchScreen"
+        component={MakeMatchScreen}
         options={({ navigation }) => ({
           title: "",
           headerTitleAlign: "center",
@@ -117,6 +118,40 @@ export default () => {
           headerLeft: () => (
             <Container>
               <UserInfo>{username}님은 지금 </UserInfo>
+              <TouchableOpacity onPress={toggleModal}>
+                <UserSchool>{school}</UserSchool>
+              </TouchableOpacity>
+            </Container>
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="EnterMatchScreen"
+        component={EnterMatchScreen}
+        options={({ navigation }) => ({
+          title: "",
+          headerTitleAlign: "center",
+          headerStyle: {
+            backgroundColor: colors.primaryBlue,
+            height: height * 53,
+            marginTop: height * 20,
+          },
+          headerRight: () => (
+            <HeaderButtons HeaderButtonComponent={HomeHeaderButton}>
+              <Item
+                title="Notification"
+                iconName={
+                  Platform.OS === "android"
+                    ? "md-notifications"
+                    : "ios-notifications"
+                }
+                onPress={() => alert("알림")}
+              />
+            </HeaderButtons>
+          ),
+          headerLeft: () => (
+            <Container>
+              <UserInfo>EnterMatchScreen </UserInfo>
               <TouchableOpacity onPress={toggleModal}>
                 <UserSchool>{school}</UserSchool>
               </TouchableOpacity>

@@ -47,7 +47,7 @@ const RoomList = ({ categoryID, type }) => {
 
     //? 죽을땐 unsubscribe
     return () => subscription.unsubscribe();
-  }, []);
+  }, [matchings]);
 
   useLayoutEffect(() => {
     //? 매칭방 가져오기
@@ -65,6 +65,7 @@ const RoomList = ({ categoryID, type }) => {
           (chatroom) =>
             //? 내가 만든 매칭방은 제외
             chatroom.master !== authUser.attributes.sub &&
+            chatroom.MatchingInfo !== null &&
             //? 매칭타입에 해당하는 매칭방만 불러옴
             chatroom.MatchingInfo.type === type
         )
@@ -95,7 +96,7 @@ const RoomList = ({ categoryID, type }) => {
         //   )
         // }
         renderItem={({ item }) =>
-          item !== undefined ? (
+          item.MatchingInfo !== null ? (
             type === "DLV_TIP" ? (
               <Room_DlvTip matchingInfo={item.MatchingInfo} />
             ) : type === "MIN_PRICE" ? (

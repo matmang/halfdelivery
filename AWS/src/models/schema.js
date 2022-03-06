@@ -462,8 +462,8 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "isAllReady": {
-                    "name": "isAllReady",
+                "isReady": {
+                    "name": "isReady",
                     "isArray": false,
                     "type": "Boolean",
                     "isRequired": false,
@@ -483,26 +483,32 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "master": {
-                    "name": "master",
+                "isMaster": {
+                    "name": "isMaster",
                     "isArray": false,
-                    "type": "String",
+                    "type": "Boolean",
                     "isRequired": true,
                     "attributes": []
                 },
-                "Users": {
-                    "name": "Users",
-                    "isArray": true,
+                "User": {
+                    "name": "User",
+                    "isArray": false,
                     "type": {
                         "model": "User"
                     },
                     "isRequired": false,
                     "attributes": [],
-                    "isArrayNullable": true,
                     "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "participantID"
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "participantUserId"
                     }
+                },
+                "chatroomID": {
+                    "name": "chatroomID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -527,6 +533,15 @@ export const schema = {
                 {
                     "type": "model",
                     "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byChatRoom",
+                        "fields": [
+                            "chatroomID"
+                        ]
+                    }
                 },
                 {
                     "type": "auth",
@@ -640,13 +655,6 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "participantID": {
-                    "name": "participantID",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -670,15 +678,6 @@ export const schema = {
                 {
                     "type": "model",
                     "properties": {}
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byParticipant",
-                        "fields": [
-                            "participantID"
-                        ]
-                    }
                 },
                 {
                     "type": "auth",
@@ -847,17 +846,18 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "Participant": {
-                    "name": "Participant",
-                    "isArray": false,
+                "Participants": {
+                    "name": "Participants",
+                    "isArray": true,
                     "type": {
                         "model": "Participant"
                     },
                     "isRequired": false,
                     "attributes": [],
+                    "isArrayNullable": true,
                     "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "chatRoomParticipantId"
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "chatroomID"
                     }
                 },
                 "MatchingInfo": {
@@ -934,5 +934,5 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "version": "fb0ad3f4695a4899aa7276e1e9d077bf"
+    "version": "ed37d017347f8ec1073112f80c7c3c10"
 };

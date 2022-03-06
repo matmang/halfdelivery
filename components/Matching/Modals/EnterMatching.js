@@ -19,18 +19,7 @@ import RoundedBtn from "../../RoundedBtn";
 import Modal from "react-native-modal";
 import { useNavigation } from "@react-navigation/native";
 
-export default ({
-  isModal,
-  setIsModal,
-  name,
-  school,
-  college,
-  bank,
-  accountnumber,
-
-  matchingInfo,
-  storeInfo,
-}) => {
+export default ({ isModal, setIsModal, matchingInfo, storeInfo }) => {
   const {
     matchingInfoStoreCategoryId,
     matchingInfoStoreId,
@@ -293,13 +282,11 @@ export default ({
 
           <RoundedBtn
             onPress={() => {
-              navigation.navigate("MatchingWaitingScreen", {
-                screen: "MatchingWaitingScreen",
+              navigation.navigate("btHomeStack", {
+                screen: "MakeMatchScreen",
                 params: {
-                  // chatRoomID: chatRoomInfo.id,
-                  // storeInfo,
-                  // menus,
-                  // timeNpersons,
+                  matchingInfo,
+                  storeInfo,
                 },
               });
               setIsModal(false);

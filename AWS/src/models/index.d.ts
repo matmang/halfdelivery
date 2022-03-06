@@ -107,11 +107,12 @@ export declare class Menu {
 
 export declare class Participant {
   readonly id: string;
-  readonly isAllReady?: boolean;
+  readonly isReady?: boolean;
   readonly orderImages?: string;
   readonly orderPrice?: number;
-  readonly master: string;
-  readonly Users?: (User | null)[];
+  readonly isMaster: boolean;
+  readonly User?: User;
+  readonly chatroomID: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Participant, ParticipantMetaData>);
@@ -131,7 +132,6 @@ export declare class User {
   readonly birthday?: string;
   readonly status?: string;
   readonly agree?: boolean;
-  readonly participantID: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<User, UserMetaData>);
@@ -157,7 +157,7 @@ export declare class ChatRoom {
   readonly LastMessage?: Message;
   readonly master: string;
   readonly onSetting?: boolean;
-  readonly Participant?: Participant;
+  readonly Participants?: (Participant | null)[];
   readonly MatchingInfo?: MatchingInfo;
   readonly createdAt?: string;
   readonly updatedAt?: string;
