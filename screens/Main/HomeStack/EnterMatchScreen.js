@@ -321,17 +321,17 @@ export default ({ navigation, route: { params } }) => {
           <CollapsibleView sectionTitle={"배달 정보"} maxheight={height * 158}>
             <InfoBox>
               <InfoTopContainer>
-                {params.platform === "배달의 민족" ? (
+                {params.platform === "BAEMIN" ? (
                   <BaeminBubble>
-                    <PlatformText>{params.platform}</PlatformText>
+                    <PlatformText>배달의 민족</PlatformText>
                   </BaeminBubble>
-                ) : params.platform === "요기요" ? (
+                ) : params.platform === "YOGIYO" ? (
                   <YogiyoBubble>
-                    <PlatformText>{params.platform}</PlatformText>
+                    <PlatformText>요기요</PlatformText>
                   </YogiyoBubble>
                 ) : (
                   <CoupangBubble>
-                    <PlatformText>{params.platform}</PlatformText>
+                    <PlatformText>쿠팡잇츠</PlatformText>
                   </CoupangBubble>
                 )}
                 <StoreText>{params.storeInfo.store}</StoreText>
