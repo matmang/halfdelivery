@@ -283,7 +283,7 @@ export default ({ isModal, setIsModal, matchingInfo, storeInfo }) => {
           <RoundedBtn
             onPress={() => {
               navigation.navigate("btHomeStack", {
-                screen: "MakeMatchScreen",
+                screen: "EnterMatchScreen",
                 params: {
                   matchingInfo,
                   storeInfo,
