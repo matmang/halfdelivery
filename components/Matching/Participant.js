@@ -227,7 +227,6 @@ const Root = styled.View`
   elevation: 6;
   border-radius: 10px;
   opacity: 1;
-
   align-items: center;
 `;
 

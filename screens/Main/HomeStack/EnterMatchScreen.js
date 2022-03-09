@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useRoute } from "@react-navigation/native";
-import { Image, Pressable, Text, View } from "react-native";
+import { Image, Linking, Pressable, Text, View } from "react-native";
 import styled from "styled-components";
 import colors from "../../../colors";
 import CollapsibleView from "../../../components/CollapsableView";
@@ -12,6 +12,7 @@ import Btn from "../../../components/Auth/Btn";
 import MatchingImagePicker from "../../../components/Main/renderImage/MatchingImagePicker";
 import Dropdown_noModal from "../../../components/Dropdown_noModal";
 import Timer from "../../../components/Timer";
+import PinkHighlightText from "../../../components/PinkHighlightText";
 
 export default ({ navigation, route: { params } }) => {
   const [isMinOrderFee, setIsMinOrderFee] = useState(false);
@@ -61,6 +62,9 @@ export default ({ navigation, route: { params } }) => {
     updatedAt,
     yogiyoUri,
   } = route.params.storeInfo;
+
+  const LEFT_MONEY = 12000;
+  const LEFT_TIME = setTime;
 
   useEffect(() => {
     setAccent(orderFee && image && selectMember && selectMinute);
@@ -120,7 +124,7 @@ export default ({ navigation, route: { params } }) => {
               <Timer
                 style={{ marginLeft: "auto" }}
                 simple={false}
-                time={setTime}
+                time={LEFT_TIME}
               />
             </MatchingTypeContainer>
             <InfoBox>
@@ -140,7 +144,8 @@ export default ({ navigation, route: { params } }) => {
                 )}
                 <StoreText
                   onPress={() => {
-                    alert("이동");
+                    // alert("이동");
+                    Linking.openURL("https://baemin.me/f1N3n9AEk");
                   }}
                 >
                   {params.storeInfo.store}
@@ -208,6 +213,7 @@ export default ({ navigation, route: { params } }) => {
               />
               <TitleText>나의 주문 금액</TitleText>
             </TitleContainer>
+
             <OrderFeeInputContainer>
               <BarInput
                 style={{
@@ -221,7 +227,38 @@ export default ({ navigation, route: { params } }) => {
                 isValued={orderFee ? true : false}
               />
             </OrderFeeInputContainer>
+
+            <HowMuchLeftContainer>
+              <Image
+                source={require("../../../assets/images/question-mark.png")}
+                style={{
+                  width: width * 17,
+                  height: height * 17,
+                }}
+              />
+              <PinkHighlightText
+                viewStyle={{
+                  marginLeft: width * 6,
+                }}
+                textStyle={{
+                  fontSize: 12,
+                  fontFamily: "nunito-regular",
+                  // lineHeight: 14,
+                }}
+                standardHeight={12}
+              >
+                {LEFT_MONEY.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+              </PinkHighlightText>
+              <PinkHighlightText
+                textStyle={{ fontSize: 12 }}
+                standardHeight={12}
+              >
+                {" "}
+                원 이상 주문 시 매칭 시작 조건에 도달합니다.
+              </PinkHighlightText>
+            </HowMuchLeftContainer>
           </OrderFeeContainer>
+
           <DistributionLine></DistributionLine>
           <MenuImageConatiner>
             <TitleContainer>
@@ -261,9 +298,10 @@ export default ({ navigation, route: { params } }) => {
         <ButtonContainer>
           <Btn
             text={"설정완료"}
+            textStyle={{ fontSize: 17 }}
             accent={accent}
             onPress={() => {
-              console.log("눌림");
+              console.log("다음화면으로 이동!");
             }}
           />
         </ButtonContainer>
@@ -292,9 +330,10 @@ const MatchingTypeContainer = styled.View`
   height: ${height * 17}px;
   align-items: center;
   flex-direction: row;
-  background-color: pink;
+  /* background-color: pink; */
   margin-top: ${height * 8}px;
   margin-left: ${width * 24}px;
+  margin-right: ${width * 24}px;
   margin-right: ${width * 24}px;
 `;
 
@@ -303,6 +342,7 @@ const InfoBox = styled.View`
   height: ${height * 124}px;
   margin-top: ${height * 8}px;
   margin-left: ${width * 24}px;
+  margin-right: ${width * 24}px;
   border-radius: 10px;
   background-color: ${colors.whiteGray};
 `;
@@ -341,7 +381,7 @@ const DistributionLine = styled.View`
 
 const OrderFeeContainer = styled.View`
   width: 100%;
-  height: ${height * 141}px;
+  height: ${height * 158}px;
   background-color: white;
 `;
 
@@ -349,6 +389,7 @@ const TitleContainer = styled.View`
   flex-direction: row;
   margin-top: ${height * 23}px;
   margin-left: ${width * 24}px;
+  margin-right: ${width * 24}px;
   align-items: center;
 `;
 
@@ -356,6 +397,17 @@ const OrderFeeInputContainer = styled.View`
   align-items: center;
   justify-content: center;
   margin-top: ${height * 23}px;
+`;
+
+const HowMuchLeftContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+  height: auto;
+  /* background-color: orange; */
+  margin-top: ${height * 25}px;
+  margin-left: ${width * 24}px;
+  margin-right: ${width * 24}px;
+  margin-bottom: ${width * 20}px;
 `;
 
 const MenuImageConatiner = styled.View`
@@ -368,6 +420,7 @@ const ExplainContainer = styled.View`
   flex-direction: row;
   margin-top: ${height * 11}px;
   margin-left: ${width * 24}px;
+  margin-right: ${width * 24}px;
   align-items: center;
 `;
 
@@ -404,12 +457,14 @@ const ButtonContainer = styled.View`
 
 const ImageContainer = styled.View`
   margin-left: ${width * 24}px;
+  margin-right: ${width * 24}px;
   margin-top: ${height * 18}px;
 `;
 
 const DropDownContainer = styled.View`
   margin-top: ${height * 26}px;
   margin-left: ${width * 24}px;
+  margin-right: ${width * 24}px;
 `;
 
 const SearchContanier = styled.View`

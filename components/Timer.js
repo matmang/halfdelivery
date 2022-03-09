@@ -4,15 +4,7 @@ import colors from "../colors";
 import styled from "styled-components";
 import { width, height } from "../utils";
 
-export default ({ time, simple, style }) => {
-  if (simple === undefined) {
-    simple = false;
-  }
-
-  if (time === undefined) {
-    time = -1;
-  }
-
+export default ({ time = -1, simple = false, style }) => {
   return (
     <Root simple={simple} style={style}>
       <Image

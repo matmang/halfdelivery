@@ -26,7 +26,7 @@ const Text = styled.Text`
   font-family: "noto-medium";
 `;
 
-const Btn = ({ onPress, text, accent = false, icon = false }) => (
+const Btn = ({ onPress, text, accent = false, icon = false, textStyle }) => (
   <TouchableOpacity onPress={onPress} disabled={!accent}>
     <Button accent={accent}>
       {icon ? (
@@ -42,7 +42,9 @@ const Btn = ({ onPress, text, accent = false, icon = false }) => (
           />
         )
       ) : null}
-      <Text accent={accent}>{text}</Text>
+      <Text accent={accent} style={textStyle}>
+        {text}
+      </Text>
     </Button>
   </TouchableOpacity>
 );
