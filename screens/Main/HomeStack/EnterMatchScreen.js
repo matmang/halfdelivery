@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Image, Pressable } from "react-native";
+import { useRoute } from "@react-navigation/native";
+import { Image, Pressable, Text, View } from "react-native";
 import styled from "styled-components";
 import colors from "../../../colors";
 import CollapsibleView from "../../../components/CollapsableView";
@@ -10,6 +11,266 @@ import DismissKeyboard from "../../../components/DismissKeyboard";
 import Btn from "../../../components/Auth/Btn";
 import MatchingImagePicker from "../../../components/Main/renderImage/MatchingImagePicker";
 import Dropdown_noModal from "../../../components/Dropdown_noModal";
+import Timer from "../../../components/Timer";
+
+export default ({ navigation, route: { params } }) => {
+  const [isMinOrderFee, setIsMinOrderFee] = useState(false);
+  const [isDelivery, setIsDelivery] = useState(false);
+  const [orderFee, setOrderFee] = useState("");
+  const [image, setImage] = useState([]);
+  const [accent, setAccent] = useState(false);
+  const [selectMember, setSelectMember] = useState("");
+  const [members, setMembers] = useState([
+    { label: "2명", value: "1" },
+    { label: "3명", value: "2" },
+    { label: "4명", value: "3" },
+  ]);
+  const [selectMinute, setSelectMinute] = useState("");
+  const [minutes, setMinutes] = useState([
+    { label: "5분", value: "5" },
+    { label: "7분", value: "7" },
+    { label: "10분", value: "10" },
+  ]);
+
+  const route = useRoute();
+
+  const {
+    matchingInfoStoreCategoryId,
+    matchingInfoStoreId,
+    platform,
+    requiredPersons,
+    setTime,
+    type,
+  } = route.params.matchingInfo;
+
+  const {
+    baeminUri,
+    coupangUri,
+    createdAt,
+    id,
+    location,
+    maxDlvTime,
+    maxDlvTip,
+    minDlvTime,
+    minOrdPrice,
+    openHours,
+    store,
+    storeImgUri,
+    storecategoryID,
+    telephoneNumber,
+    updatedAt,
+    yogiyoUri,
+  } = route.params.storeInfo;
+
+  useEffect(() => {
+    setAccent(orderFee && image && selectMember && selectMinute);
+  }, [orderFee, image, selectMember, selectMinute]);
+
+  return (
+    <DismissKeyboard>
+      <ScrollView>
+        <Container>
+          <HeaderContainer>
+            <TouchableOpacity onPress={() => navigation.navigate("Search")}>
+              <SearchContanier>
+                <Image
+                  source={require("../../../assets/images/glasses.png")}
+                  style={{
+                    width: width * 20,
+                    height: height * 20,
+                    marginLeft: width * 13,
+                    resizeMode: "contain",
+                  }}
+                />
+                <SearchText>원하는 식당/메뉴를 검색하세요</SearchText>
+              </SearchContanier>
+            </TouchableOpacity>
+          </HeaderContainer>
+
+          <CollapsibleView sectionTitle={"배달 정보"} maxheight={height * 158}>
+            <MatchingTypeContainer>
+              <Text
+                style={{
+                  fontFamily: "noto-regular",
+                  includeFontPadding: false,
+                  textAlignVertical: "center",
+                  fontSize: 12,
+                  color: "#3E3F41",
+                }}
+              >
+                <View
+                  style={{
+                    marginBottom: height * 1,
+                  }}
+                >
+                  <Image
+                    source={require("../../../assets/images/right-arrow-deepgrey.png")}
+                    style={{
+                      width: width * 10,
+                      height: height * 9.37,
+                    }}
+                  />
+                </View>
+                {type === "MIN_PRICE"
+                  ? "  최소주문금액 매칭"
+                  : type === "DLV_TIP"
+                  ? "  배달비 매칭"
+                  : "error"}
+              </Text>
+              <Timer
+                style={{ marginLeft: "auto" }}
+                simple={false}
+                time={setTime}
+              />
+            </MatchingTypeContainer>
+            <InfoBox>
+              <InfoTopContainer>
+                {params.platform === "BAEMIN" ? (
+                  <BaeminBubble>
+                    <PlatformText>배달의 민족</PlatformText>
+                  </BaeminBubble>
+                ) : params.platform === "YOGIYO" ? (
+                  <YogiyoBubble>
+                    <PlatformText>요기요</PlatformText>
+                  </YogiyoBubble>
+                ) : (
+                  <CoupangBubble>
+                    <PlatformText>쿠팡잇츠</PlatformText>
+                  </CoupangBubble>
+                )}
+                <StoreText
+                  onPress={() => {
+                    alert("이동");
+                  }}
+                >
+                  {params.storeInfo.store}
+                </StoreText>
+                <Image
+                  source={require("../../../assets/images/chevon_left.png")}
+                  style={{
+                    width: width * 7.41,
+                    height: height * 12,
+                    marginLeft: width * 7.59,
+                    marginTop: height * 2,
+                  }}
+                />
+              </InfoTopContainer>
+              <InfoBottomContainer>
+                {params.storeInfo.storeImgUri !== undefined ? (
+                  <Image
+                    resizeMode="cover"
+                    source={{ uri: params.storeInfo.storeImgUri }}
+                    style={{
+                      width: width * 72,
+                      height: height * 72,
+                      marginLeft: width * 20,
+                      borderRadius: 10,
+                    }}
+                  />
+                ) : (
+                  <NoneImage></NoneImage>
+                )}
+                <InfoBottomRightContiner>
+                  <InfoTextContainer>
+                    <MoneyText>최소주문금액</MoneyText>
+                    <NumberText>
+                      {params.storeInfo.maxDlvTip
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                    </NumberText>
+                    <MoneyText>원</MoneyText>
+                  </InfoTextContainer>
+                  <InfoTextContainer style={{ marginTop: height * 4 }}>
+                    <MoneyText>배달비</MoneyText>
+                    <NumberText>
+                      {params.storeInfo.minOrdPrice
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                    </NumberText>
+                    <MoneyText>원</MoneyText>
+                  </InfoTextContainer>
+                </InfoBottomRightContiner>
+              </InfoBottomContainer>
+            </InfoBox>
+          </CollapsibleView>
+
+          <DistributionLine style={{ marginTop: height * 12 }} />
+
+          <OrderFeeContainer>
+            <TitleContainer>
+              <Image
+                source={require("../../../assets/images/won-mark.png")}
+                style={{
+                  width: width * 19,
+                  height: height * 19,
+                  resizeMode: "contain",
+                }}
+              />
+              <TitleText>나의 주문 금액</TitleText>
+            </TitleContainer>
+            <OrderFeeInputContainer>
+              <BarInput
+                style={{
+                  fontSize: 17,
+                  fontFamily: "noto-regular",
+                }}
+                KeyboardType="numeric"
+                placeholder={"선택한 메뉴의 금액을 입력해주세요"}
+                stateFn={setOrderFee}
+                value={orderFee}
+                isValued={orderFee ? true : false}
+              />
+            </OrderFeeInputContainer>
+          </OrderFeeContainer>
+          <DistributionLine></DistributionLine>
+          <MenuImageConatiner>
+            <TitleContainer>
+              <Image
+                source={require("../../../assets/images/picture-icon.png")}
+                style={{
+                  width: width * 19,
+                  height: height * 19,
+                  resizeMode: "contain",
+                }}
+              />
+              <TitleText>주문 메뉴 정보</TitleText>
+            </TitleContainer>
+            <ImageContainer>
+              <MatchingImagePicker
+                isReady={false}
+                images={image}
+                setImages={setImage}
+                index={0}
+              />
+            </ImageContainer>
+            <ExplainContainer>
+              <Image
+                source={require("../../../assets/images/right-arrow.png")}
+                style={{
+                  width: width * 15,
+                  height: height * 12,
+                  resizeMode: "contain",
+                }}
+              />
+              <ExplainText>선택한 메뉴의 이미지를 첨부해주세요</ExplainText>
+            </ExplainContainer>
+          </MenuImageConatiner>
+
+          <DistributionLine />
+        </Container>
+        <ButtonContainer>
+          <Btn
+            text={"설정완료"}
+            accent={accent}
+            onPress={() => {
+              console.log("눌림");
+            }}
+          />
+        </ButtonContainer>
+      </ScrollView>
+    </DismissKeyboard>
+  );
+};
 
 const Container = styled.View`
   justify-content: center;
@@ -25,10 +286,22 @@ const HeaderContainer = styled.View`
   background-color: ${colors.primaryBlue};
 `;
 
+const MatchingTypeContainer = styled.View`
+  margin-top: ${12 * height}px;
+  width: ${width * 364}px;
+  height: ${height * 17}px;
+  align-items: center;
+  flex-direction: row;
+  background-color: pink;
+  margin-top: ${height * 8}px;
+  margin-left: ${width * 24}px;
+  margin-right: ${width * 24}px;
+`;
+
 const InfoBox = styled.View`
   width: ${width * 364}px;
   height: ${height * 124}px;
-  margin-top: ${height * 16}px;
+  margin-top: ${height * 8}px;
   margin-left: ${width * 24}px;
   border-radius: 10px;
   background-color: ${colors.whiteGray};
@@ -82,7 +355,7 @@ const TitleContainer = styled.View`
 const OrderFeeInputContainer = styled.View`
   align-items: center;
   justify-content: center;
-  margin-top: ${height * 23};
+  margin-top: ${height * 23}px;
 `;
 
 const MenuImageConatiner = styled.View`
@@ -227,6 +500,7 @@ const NumberText = styled.Text`
   margin-right: ${width * 5}px;
   font-size: 14px;
   font-family: "nunito-regular";
+  margin-top: ${height * 2}px;
   color: ${colors.primaryBlue};
   include-font-padding: false;
   text-align-vertical: center;
@@ -253,7 +527,7 @@ const ExplainText = styled.Text`
 const SelectTitleText = styled.Text`
   font-size: ${width * 14}px;
   font-family: "noto-medium";
-  margin-top: ${height * 13.7};
+  margin-top: ${height * 13.7}px;
   color: ${(props) =>
     props.isSelected ? colors.primaryBlue : colors.unselectedGrey};
   include-font-padding: false;
@@ -274,185 +548,3 @@ const SearchText = styled.Text`
   margin-left: ${width * 17}px;
   color: ${colors.unselectedGrey};
 `;
-
-export default ({ navigation, route: { params } }) => {
-  const [isMinOrderFee, setIsMinOrderFee] = useState(false);
-  const [isDelivery, setIsDelivery] = useState(false);
-  const [orderFee, setOrderFee] = useState("");
-  const [image, setImage] = useState([]);
-  const [accent, setAccent] = useState(false);
-  const [selectMember, setSelectMember] = useState("");
-  const [members, setMembers] = useState([
-    { label: "2명", value: "1" },
-    { label: "3명", value: "2" },
-    { label: "4명", value: "3" },
-  ]);
-  const [selectMinute, setSelectMinute] = useState("");
-  const [minutes, setMinutes] = useState([
-    { label: "5분", value: "5" },
-    { label: "7분", value: "7" },
-    { label: "10분", value: "10" },
-  ]);
-
-  useEffect(() => {
-    setAccent(orderFee && image && selectMember && selectMinute);
-  }, [orderFee, image, selectMember, selectMinute]);
-
-  return (
-    <DismissKeyboard>
-      <ScrollView>
-        <Container>
-          <HeaderContainer>
-            <TouchableOpacity onPress={() => navigation.navigate("Search")}>
-              <SearchContanier>
-                <Image
-                  source={require("../../../assets/images/glasses.png")}
-                  style={{
-                    width: width * 20,
-                    height: height * 20,
-                    marginLeft: width * 13,
-                    resizeMode: "contain",
-                  }}
-                />
-                <SearchText>원하는 식당/메뉴를 검색하세요</SearchText>
-              </SearchContanier>
-            </TouchableOpacity>
-          </HeaderContainer>
-          <CollapsibleView sectionTitle={"배달 정보"} maxheight={height * 158}>
-            <InfoBox>
-              <InfoTopContainer>
-                {params.platform === "BAEMIN" ? (
-                  <BaeminBubble>
-                    <PlatformText>배달의 민족</PlatformText>
-                  </BaeminBubble>
-                ) : params.platform === "YOGIYO" ? (
-                  <YogiyoBubble>
-                    <PlatformText>요기요</PlatformText>
-                  </YogiyoBubble>
-                ) : (
-                  <CoupangBubble>
-                    <PlatformText>쿠팡잇츠</PlatformText>
-                  </CoupangBubble>
-                )}
-                <StoreText>{params.storeInfo.store}</StoreText>
-                <Image
-                  source={require("../../../assets/images/chevon_left.png")}
-                  style={{
-                    width: width * 7.41,
-                    height: height * 12,
-                    marginLeft: width * 16.6,
-                  }}
-                />
-              </InfoTopContainer>
-              <InfoBottomContainer>
-                {params.storeInfo.storeImgUri !== undefined ? (
-                  <Image
-                    resizeMode="cover"
-                    source={{ uri: params.storeInfo.storeImgUri }}
-                    style={{
-                      width: width * 72,
-                      height: height * 72,
-                      marginLeft: width * 20,
-                      borderRadius: 10,
-                    }}
-                  />
-                ) : (
-                  <NoneImage></NoneImage>
-                )}
-                <InfoBottomRightContiner>
-                  <InfoTextContainer>
-                    <MoneyText>최소주문금액</MoneyText>
-                    <NumberText>
-                      {params.storeInfo.maxDlvTip
-                        .toString()
-                        .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                    </NumberText>
-                    <MoneyText>원</MoneyText>
-                  </InfoTextContainer>
-                  <InfoTextContainer>
-                    <MoneyText>배달비</MoneyText>
-                    <NumberText>
-                      {params.storeInfo.minOrdPrice
-                        .toString()
-                        .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                    </NumberText>
-                    <MoneyText>원</MoneyText>
-                  </InfoTextContainer>
-                </InfoBottomRightContiner>
-              </InfoBottomContainer>
-            </InfoBox>
-          </CollapsibleView>
-          <DistributionLine></DistributionLine>
-          <OrderFeeContainer>
-            <TitleContainer>
-              <Image
-                source={require("../../../assets/images/won-mark.png")}
-                style={{
-                  width: width * 19,
-                  height: height * 19,
-                  resizeMode: "contain",
-                }}
-              />
-              <TitleText>나의 주문 금액</TitleText>
-            </TitleContainer>
-            <OrderFeeInputContainer>
-              <BarInput
-                KeyboardType="numeric"
-                placeholder={"선택한 메뉴의 금액을 입력해주세요"}
-                stateFn={setOrderFee}
-                value={orderFee}
-                isValued={orderFee ? true : false}
-              />
-            </OrderFeeInputContainer>
-          </OrderFeeContainer>
-          <DistributionLine></DistributionLine>
-          <MenuImageConatiner>
-            <TitleContainer>
-              <Image
-                source={require("../../../assets/images/picture-icon.png")}
-                style={{
-                  width: width * 19,
-                  height: height * 19,
-                  resizeMode: "contain",
-                }}
-              />
-              <TitleText>주문 메뉴 정보</TitleText>
-            </TitleContainer>
-            <ImageContainer>
-              <MatchingImagePicker
-                isReady={false}
-                images={image}
-                setImages={setImage}
-                index={0}
-              />
-            </ImageContainer>
-            <ExplainContainer>
-              <Image
-                source={require("../../../assets/images/right-arrow.png")}
-                style={{
-                  width: width * 15,
-                  height: height * 12,
-                  resizeMode: "contain",
-                }}
-              />
-              <ExplainText>선택한 메뉴의 이미지를 첨부해주세요</ExplainText>
-            </ExplainContainer>
-          </MenuImageConatiner>
-
-          <DistributionLine></DistributionLine>
-
-          <DistributionLine></DistributionLine>
-        </Container>
-        <ButtonContainer>
-          <Btn
-            text={"설정완료"}
-            accent={accent}
-            onPress={() => {
-              console.log("눌림");
-            }}
-          />
-        </ButtonContainer>
-      </ScrollView>
-    </DismissKeyboard>
-  );
-};

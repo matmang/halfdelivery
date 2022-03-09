@@ -14,6 +14,8 @@ const Container = styled.TextInput`
   border-bottom-color: ${({ isValued, error }) =>
     error ? colors.errorPink : isValued ? colors.primaryBlue : colors.blueGray};
   font-family: "nunito-regular";
+  include-font-padding: false;
+  text-align-vertical: center;
   font-size: 15px;
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
 `;
@@ -28,6 +30,7 @@ const BarInput = ({
   disabled = false,
   isValued = false,
   error = false,
+  style,
 }) => (
   <Container
     keyboardType={KeyboardType}
@@ -40,6 +43,7 @@ const BarInput = ({
     editable={disabled ? false : true}
     isValued={isValued}
     error={error}
+    style={style}
   />
 );
 

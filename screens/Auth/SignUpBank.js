@@ -19,7 +19,7 @@ const Container = styled.View`
 const ProgressContainer = styled.View`
   justify-content: center;
   align-items: center;
-  margin-top: ${height * 80};
+  margin-top: ${height * 80}px;
 `;
 
 const PhaseContainer = styled.View`

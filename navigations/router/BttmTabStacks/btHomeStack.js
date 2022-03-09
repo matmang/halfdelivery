@@ -65,8 +65,8 @@ export default () => {
           headerTitleAlign: "center",
           headerStyle: {
             backgroundColor: colors.primaryBlue,
-            height: height * 53,
-            marginTop: height * 20,
+            height: height * 110,
+            // marginTop: height * 20,
           },
           headerRight: () => (
             <HeaderButtons HeaderButtonComponent={HomeHeaderButton}>
@@ -99,8 +99,8 @@ export default () => {
           headerTitleAlign: "center",
           headerStyle: {
             backgroundColor: colors.primaryBlue,
-            height: height * 53,
-            marginTop: height * 20,
+            height: height * 110,
+            // marginTop: height * 20,
           },
           headerRight: () => (
             <HeaderButtons HeaderButtonComponent={HomeHeaderButton}>
@@ -133,8 +133,8 @@ export default () => {
           headerTitleAlign: "center",
           headerStyle: {
             backgroundColor: colors.primaryBlue,
-            height: height * 53,
-            marginTop: height * 20,
+            height: height * 110,
+            // marginTop: height * 20,
           },
           headerRight: () => (
             <HeaderButtons HeaderButtonComponent={HomeHeaderButton}>
