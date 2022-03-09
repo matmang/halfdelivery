@@ -13,28 +13,17 @@ import MatchingImagePicker from "../../../components/Main/renderImage/MatchingIm
 import Dropdown_noModal from "../../../components/Dropdown_noModal";
 import Timer from "../../../components/Timer";
 import PinkHighlightText from "../../../components/PinkHighlightText";
+import PickAndViewImage from "../../../components/Matching/renderImage/PickAndViewImage";
 
 export default ({ navigation, route: { params } }) => {
-  const [isMinOrderFee, setIsMinOrderFee] = useState(false);
-  const [isDelivery, setIsDelivery] = useState(false);
   const [orderFee, setOrderFee] = useState("");
   const [image, setImage] = useState([]);
   const [accent, setAccent] = useState(false);
   const [selectMember, setSelectMember] = useState("");
-  const [members, setMembers] = useState([
-    { label: "2명", value: "1" },
-    { label: "3명", value: "2" },
-    { label: "4명", value: "3" },
-  ]);
   const [selectMinute, setSelectMinute] = useState("");
-  const [minutes, setMinutes] = useState([
-    { label: "5분", value: "5" },
-    { label: "7분", value: "7" },
-    { label: "10분", value: "10" },
-  ]);
+  const [images, setImages] = useState([]);
 
   const route = useRoute();
-
   const {
     matchingInfoStoreCategoryId,
     matchingInfoStoreId,
@@ -72,7 +61,7 @@ export default ({ navigation, route: { params } }) => {
 
   return (
     <DismissKeyboard>
-      <ScrollView>
+      <ScrollView style={{ backgroundColor: "white" }}>
         <Container>
           <HeaderContainer>
             <TouchableOpacity onPress={() => navigation.navigate("Search")}>
@@ -279,6 +268,13 @@ export default ({ navigation, route: { params } }) => {
                 setImages={setImage}
                 index={0}
               />
+
+              <PickAndViewImage
+                isReady={false}
+                setImages={setImages}
+                images={images}
+                index={0}
+              />
             </ImageContainer>
             <ExplainContainer>
               <Image
@@ -292,9 +288,8 @@ export default ({ navigation, route: { params } }) => {
               <ExplainText>선택한 메뉴의 이미지를 첨부해주세요</ExplainText>
             </ExplainContainer>
           </MenuImageConatiner>
-
-          <DistributionLine />
         </Container>
+
         <ButtonContainer>
           <Btn
             text={"설정완료"}
@@ -424,47 +419,20 @@ const ExplainContainer = styled.View`
   align-items: center;
 `;
 
-const MatchingSelectContainer = styled.View`
-  margin-top: ${height * 18}px;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-evenly;
-`;
-
-const MemberContainer = styled.View`
-  width: 100%;
-  height: ${height * 142}px;
-  background-color: white;
-`;
-
-const TimeContainer = styled.View`
-  width: 100%;
-  height: ${height * 285}px;
-  background-color: white;
-`;
-
 const ButtonContainer = styled.View`
-  flex: 1;
-  justify-content: flex-end;
   align-items: center;
   background-color: white;
   width: 100%;
-  padding-top: ${height * 12}px;
-  padding-bottom: ${height * 24}px;
-  height: ${height * 82}px;
-  bottom: ${height * 23}px;
+  height: ${height * 48}px;
+  margin-top: ${height * 108}px;
+  margin-bottom: ${height * 22}px;
 `;
 
 const ImageContainer = styled.View`
   margin-left: ${width * 24}px;
   margin-right: ${width * 24}px;
   margin-top: ${height * 18}px;
-`;
-
-const DropDownContainer = styled.View`
-  margin-top: ${height * 26}px;
-  margin-left: ${width * 24}px;
-  margin-right: ${width * 24}px;
+  flex-direction: row;
 `;
 
 const SearchContanier = styled.View`
@@ -511,17 +479,6 @@ const CoupangBubble = styled.View`
   margin-left: ${width * 20}px;
   background-color: ${colors.coupangSky};
   border-radius: 10px;
-  align-items: center;
-  justify-content: center;
-`;
-
-const SelectBox = styled.View`
-  width: ${width * 174}px;
-  height: ${height * 190}px;
-  border-radius: 16px;
-  border: 1.5px;
-  border-color: ${(props) =>
-    props.isSelected ? colors.primaryBlue : colors.unselectedGrey};
   align-items: center;
   justify-content: center;
 `;
@@ -585,15 +542,6 @@ const SelectTitleText = styled.Text`
   margin-top: ${height * 13.7}px;
   color: ${(props) =>
     props.isSelected ? colors.primaryBlue : colors.unselectedGrey};
-  include-font-padding: false;
-  text-align-vertical: center;
-`;
-
-const SelectExplainText = styled.Text`
-  font-size: ${width * 11}px;
-  font-family: "noto-regular";
-  margin-top: ${height * 11}px;
-  color: ${(props) => (props.isSelected ? "#000000" : colors.unselectedGrey)};
   include-font-padding: false;
   text-align-vertical: center;
 `;
