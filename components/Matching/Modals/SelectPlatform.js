@@ -18,7 +18,7 @@ export default ({ isModal, setIsModal, storeInfo, category }) => {
 
   const onPress = () => {
     navigation.navigate("btHomeStack", {
-      screen: "MakeMatch",
+      screen: "MakeMatchScreen",
       params: {
         storeInfo,
         platform: selectedName,

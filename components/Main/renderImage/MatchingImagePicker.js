@@ -79,7 +79,7 @@ const Root = styled.View`
   border-color: ${(props) =>
     props.isReady ? colors.primaryBlue : colors.unselectedGrey};
   border-radius: 10px;
-  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1); */
   opacity: 1;
   justify-content: center;
   align-items: center;

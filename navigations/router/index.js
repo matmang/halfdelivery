@@ -9,7 +9,6 @@ import BottomTabNav from "./BottomTabNav";
 import StoreStack from "./StoreStack";
 import PartnerStack from "./PartnerStack";
 import HomeStack from "./HomeStack";
-import OrderInfoStack from "./OrderInfoStack";
 import ChatRoomStack from "./ChatRoomStack";
 
 const Root = createStackNavigator();
@@ -22,7 +21,6 @@ const Router = () => {
       <Root.Screen name="StoreStack" component={StoreStack} />
       <Root.Screen name="PartnerStack" component={PartnerStack} />
       {/* <Root.Screen name="HomeStack" component={HomeStack} /> */}
-      {/* <Root.Screen name="OrderInfoStack" component={OrderInfoStack} /> */}
       <Root.Screen name="ChatRoomStack" component={ChatRoomStack} />
     </Root.Navigator>
   );

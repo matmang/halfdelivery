@@ -4,7 +4,6 @@ import { View, Image, Text, SafeAreaView, Button } from "react-native";
 import logos from "../../../images";
 import styled from "styled-components";
 import colors from "../../../colors";
-MatchingListScreen;
 import { width, height } from "../../../utils";
 import { MatchingWaitingScreenHeader } from "../../../screens/screenHeaders";
 import MatchingListScreen from "../../../screens/Main/PartnerStack/MatchingListScreen";

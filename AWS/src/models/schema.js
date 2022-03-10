@@ -443,6 +443,13 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "chatroomID": {
+                    "name": "chatroomID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,

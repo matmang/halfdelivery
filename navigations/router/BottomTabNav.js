@@ -21,35 +21,34 @@ import colors from "../../colors";
 import images from "../../images";
 import styled from "styled-components";
 import Svg, { Path } from "react-native-svg";
-
 import storeOn from "../../assets/images/BottomTabNav/store.png";
 import matList from "../../assets/images/BottomTabNav/matList.png";
 import homeOn from "../../assets/images/BottomTabNav/home.png";
 import talkOn from "../../assets/images/BottomTabNav/talk.png";
 import myInfo from "../../assets/images/BottomTabNav/myInfo.png";
 import onMatching from "../../assets/images/BottomTabNav/onMatching.png";
-
 import empty from "../../assets/images/empty.png";
+import { width, height } from "../../utils";
 
 const Tab = createBottomTabNavigator();
 
-const BottomTabView = styled.View`
+const BottomTabView = styled.SafeAreaView`
   justify-content: center;
   align-items: center;
-  /* background-color: red; */
+  background-color: white;
   flex-direction: row;
 
-  padding: 0px;
-  height: 80px;
   width: 100%;
+  height: ${height * 80}px;
   position: absolute;
   bottom: -2px;
+  /* z-index: 3; */
 `;
 
 const BottomTab = (props) => {
   return (
     <BottomTabView>
-      <Image source={props} style={{ width: "110%", height: "110%" }} />
+      <Image source={props} style={{ width: "105%", height: height * 80 }} />
     </BottomTabView>
   );
 };

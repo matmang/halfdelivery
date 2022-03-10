@@ -51,7 +51,7 @@ const StartText = styled.Text`
   font-family: "noto-regular";
   margin-top: ${height * 46}px;
   color: ${colors.unselectedGrey};
-  font-size: ${width * 17};
+  font-size: ${width * 17}px;
 `;
 
 const Home = ({ stores, navigation, isModalVisible }) => {

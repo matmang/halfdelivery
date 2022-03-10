@@ -15,7 +15,7 @@ const Container = styled.View`
 `;
 
 const ProgressContainer = styled.View`
-  margin-top: ${height * 110};
+  margin-top: ${height * 110}px;
   justify-content: center;
   align-items: center;
 `;
