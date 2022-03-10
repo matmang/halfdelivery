@@ -8,6 +8,6 @@
     "CREATE_AND_UPDATE",
     "READ"
   ],
-  "triggerFunction": "NONE",
-  "groupAccess": {}
+  "groupAccess": {},
+  "triggerFunction": "halfdeliveryNewAuth220124PostConfirmation"
 }

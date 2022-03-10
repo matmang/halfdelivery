@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { Image, Pressable } from "react-native";
 import styled from "styled-components";
 import colors from "../../../colors";
@@ -10,6 +10,13 @@ import DismissKeyboard from "../../../components/DismissKeyboard";
 import Btn from "../../../components/Auth/Btn";
 import MatchingImagePicker from "../../../components/Main/renderImage/MatchingImagePicker";
 import Dropdown_noModal from "../../../components/Dropdown_noModal";
+import { Auth, DataStore } from "aws-amplify";
+import {
+  ChatRoom,
+  MatchingInfo,
+  Participant,
+  StoreCategory,
+} from "../../../AWS/src/models";
 
 const Container = styled.View`
   justify-content: center;
@@ -276,27 +283,95 @@ const SearchText = styled.Text`
 `;
 
 export default ({ navigation, route: { params } }) => {
+  const [platformName, setPlatformName] = useState(params?.platform);
+  const [authUser, setAuthUser] = useState(undefined);
+  const [category, setCategory] = useState(undefined);
   const [isMinOrderFee, setIsMinOrderFee] = useState(false);
   const [isDelivery, setIsDelivery] = useState(false);
   const [orderFee, setOrderFee] = useState("");
   const [image, setImage] = useState([]);
   const [accent, setAccent] = useState(false);
-  const [selectMember, setSelectMember] = useState("");
+  const [selectMember, setSelectMember] = useState("ab");
   const [members, setMembers] = useState([
     { label: "2명", value: "1" },
     { label: "3명", value: "2" },
     { label: "4명", value: "3" },
   ]);
-  const [selectMinute, setSelectMinute] = useState("");
+  const [selectMinute, setSelectMinute] = useState("ab");
   const [minutes, setMinutes] = useState([
     { label: "5분", value: "5" },
     { label: "7분", value: "7" },
     { label: "10분", value: "10" },
   ]);
 
+  useLayoutEffect(() => {
+    const fetchUsers = async () => {
+      const userData = await Auth.currentAuthenticatedUser();
+      const storeCategory = (await DataStore.query(StoreCategory)).filter(
+        (c) => c.Stores === params.storeInfo.id
+      );
+      setAuthUser(userData);
+      setCategory(storeCategory);
+    };
+    fetchUsers();
+  }, []);
+
   useEffect(() => {
-    setAccent(orderFee && image && selectMember && selectMinute);
-  }, [orderFee, image, selectMember, selectMinute]);
+    setAccent(
+      orderFee &&
+        image &&
+        selectMember &&
+        selectMinute &&
+        (isMinOrderFee || isDelivery)
+    );
+  }, [orderFee, image, selectMember, selectMinute, isMinOrderFee, isDelivery]);
+
+  const handleSubmit = async () => {
+    try {
+      console.log(authUser.attributes.sub);
+      const newChatRoom = await DataStore.save(
+        new ChatRoom({
+          newMessages: 0,
+          master: authUser.attributes.sub,
+          onSetting: true,
+        })
+      );
+      console.log(newChatRoom);
+      const newParticiant = await DataStore.save(
+        new Participant({
+          isReady: false,
+          orderImages: image,
+          orderPrice: parseInt(orderFee),
+          isMaster: true,
+          chatroomID: newChatRoom.id,
+          User: authUser.attributes.sub,
+        })
+      );
+      console.log(newParticiant);
+      const newMatchingInfo = await DataStore.save(
+        new MatchingInfo({
+          requiredPersons: 4,
+          setTime: 10,
+          type: isMinOrderFee
+            ? "MIN_PRICE"
+            : isDelivery
+            ? "DLV_TIP"
+            : undefined,
+          platform:
+            platformName === "배달의 민족"
+              ? "BAEMIN"
+              : platformName === "요기요"
+              ? "YOGIYO"
+              : "COUPANG",
+          Store: params.storeInfo.id,
+          StoreCategory: category.id,
+        })
+      );
+      console.log(newMatchingInfo);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <DismissKeyboard>
@@ -613,7 +688,7 @@ export default ({ navigation, route: { params } }) => {
             text={"매칭 시작"}
             accent={accent}
             onPress={() => {
-              console.log("눌림");
+              handleSubmit();
             }}
           />
         </ButtonContainer>

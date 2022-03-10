@@ -6,7 +6,7 @@ import { Auth, DataStore } from "aws-amplify";
 import { Button, Text } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 import { useSelector } from "react-redux";
-import MakeMatch from "./MakeMatch";
+import MakeMatch from "./MakeMatchScreen";
 
 export default ({ isModalVisible }) => {
   const navigation = useNavigation();

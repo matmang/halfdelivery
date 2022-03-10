@@ -10,7 +10,7 @@ import colors from "../../../colors";
 import Auth from "@aws-amplify/auth";
 
 import { TouchableOpacity } from "react-native-gesture-handler";
-import MakeMatch from "../../../screens/Main/HomeStack/MakeMatch";
+import MakeMatch from "../../../screens/Main/HomeStack/MakeMatchScreen";
 import { height } from "../../../utils";
 import { useSelector } from "react-redux";
 
