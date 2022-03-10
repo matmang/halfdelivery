@@ -1,5 +1,5 @@
 import { View, Text, Pressable, Image } from "react-native";
-import React, { useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import Modal from "react-native-modal";
 import colors from "../../../colors";
 import styled from "styled-components";
@@ -10,11 +10,21 @@ import { useNavigation } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
 import { toggleIsMatching } from "../../../redux/usersSlice";
 import DisclaimerFooter from "../../DisclaimerFooter";
+import { Auth } from "aws-amplify";
 
 export default ({ isModal, setIsModal, storeInfo, category }) => {
   const navigation = useNavigation();
   const [selectedName, setSelectedName] = useState(null);
+  const [authUser, setAuthUser] = useState(undefined);
   const dispatch = useDispatch();
+
+  useLayoutEffect(() => {
+    const fetchUsers = async () => {
+      const userData = await Auth.currentAuthenticatedUser();
+      setAuthUser(userData);
+    };
+    fetchUsers();
+  }, []);
 
   const onPress = () => {
     navigation.navigate("btHomeStack", {
@@ -22,6 +32,8 @@ export default ({ isModal, setIsModal, storeInfo, category }) => {
       params: {
         storeInfo,
         platform: selectedName,
+        category,
+        authUser,
       },
     });
     dispatch(toggleIsMatching(true));
