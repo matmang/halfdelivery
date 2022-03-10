@@ -48,6 +48,8 @@ type ChatRoomMetaData = {
 export declare class MatchingInfo {
   readonly id: string;
   readonly requiredPersons: number;
+  readonly StoreCategory?: StoreCategory;
+  readonly Store?: Store;
   readonly setTime: number;
   readonly type: MatchingType | keyof typeof MatchingType;
   readonly platform: Platform | keyof typeof Platform;
@@ -60,6 +62,7 @@ export declare class MatchingInfo {
 export declare class StoreCategory {
   readonly id: string;
   readonly category: string;
+  readonly Stores?: (Store | null)[];
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<StoreCategory, StoreCategoryMetaData>);
@@ -76,6 +79,7 @@ export declare class Store {
   readonly maxDlvTip: number;
   readonly openHours: string;
   readonly location?: string;
+  readonly Menus?: (Menu | null)[];
   readonly storecategoryID?: string;
   readonly telephoneNumber?: string;
   readonly baeminUri?: string;
@@ -107,6 +111,7 @@ export declare class Participant {
   readonly orderImages?: string;
   readonly orderPrice?: number;
   readonly isMaster: boolean;
+  readonly User?: User;
   readonly chatroomID: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
@@ -119,6 +124,7 @@ export declare class User {
   readonly name: string;
   readonly imageUri?: string;
   readonly phone_number?: string;
+  readonly Messages?: (Message | null)[];
   readonly bank?: string;
   readonly accountnumber?: string;
   readonly school?: string;
@@ -148,8 +154,11 @@ export declare class Message {
 export declare class ChatRoom {
   readonly id: string;
   readonly newMessages?: number;
+  readonly LastMessage?: Message;
   readonly master: string;
   readonly onSetting?: boolean;
+  readonly Participants?: (Participant | null)[];
+  readonly MatchingInfo?: MatchingInfo;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<ChatRoom, ChatRoomMetaData>);

@@ -15,6 +15,7 @@ import {
   OrderMenu,
   Order,
   Store,
+  MatchingInfo,
 } from "../../AWS/src/models";
 import AppLoading from "expo-app-loading";
 import Room_DlvTip from "./Room_DlvTip";
@@ -45,6 +46,8 @@ const RoomList = ({ categoryID, type }) => {
       }
     });
 
+    console.log("matchings", matchings);
+
     //? 죽을땐 unsubscribe
     return () => subscription.unsubscribe();
   }, [matchings]);
@@ -64,7 +67,8 @@ const RoomList = ({ categoryID, type }) => {
         matchings.filter(
           (chatroom) =>
             //? 내가 만든 매칭방은 제외
-            chatroom.master !== authUser.attributes.sub &&
+            // chatroom.master !== authUser.attributes.sub
+            // &&
             chatroom.MatchingInfo !== null &&
             //? 매칭타입에 해당하는 매칭방만 불러옴
             chatroom.MatchingInfo.type === type

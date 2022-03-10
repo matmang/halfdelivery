@@ -304,18 +304,6 @@ export default ({ navigation, route: { params } }) => {
     { label: "10분", value: "10" },
   ]);
 
-  useLayoutEffect(() => {
-    const fetchUsers = async () => {
-      const userData = await Auth.currentAuthenticatedUser();
-      const storeCategory = (await DataStore.query(StoreCategory)).filter(
-        (c) => c.Stores === params.storeInfo.id
-      );
-      setAuthUser(userData);
-      setCategory(storeCategory);
-    };
-    fetchUsers();
-  }, []);
-
   useEffect(() => {
     setAccent(
       orderFee &&
@@ -328,26 +316,7 @@ export default ({ navigation, route: { params } }) => {
 
   const handleSubmit = async () => {
     try {
-      console.log(authUser.attributes.sub);
-      const newChatRoom = await DataStore.save(
-        new ChatRoom({
-          newMessages: 0,
-          master: authUser.attributes.sub,
-          onSetting: true,
-        })
-      );
-      console.log(newChatRoom);
-      const newParticiant = await DataStore.save(
-        new Participant({
-          isReady: false,
-          orderImages: image,
-          orderPrice: parseInt(orderFee),
-          isMaster: true,
-          chatroomID: newChatRoom.id,
-          User: authUser.attributes.sub,
-        })
-      );
-      console.log(newParticiant);
+      console.log(params.authUser.attributes.sub);
       const newMatchingInfo = await DataStore.save(
         new MatchingInfo({
           requiredPersons: 4,
@@ -364,10 +333,30 @@ export default ({ navigation, route: { params } }) => {
               ? "YOGIYO"
               : "COUPANG",
           Store: params.storeInfo.id,
-          StoreCategory: category.id,
+          StoreCategory: params.category,
         })
       );
       console.log(newMatchingInfo);
+      const newChatRoom = await DataStore.save(
+        new ChatRoom({
+          newMessages: 0,
+          master: params.authUser.attributes.sub,
+          onSetting: true,
+          chatRoomMatchingInfoId: newMatchingInfo.id,
+        })
+      );
+      console.log(newChatRoom);
+      const newParticiant = await DataStore.save(
+        new Participant({
+          isReady: false,
+          orderImages: image,
+          orderPrice: parseInt(orderFee),
+          isMaster: true,
+          chatroomID: newChatRoom.id,
+          User: params.authUser.attributes.sub,
+        })
+      );
+      console.log(newParticiant);
     } catch (e) {
       console.log(e);
     }
