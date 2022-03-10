@@ -8,6 +8,7 @@ import { logOut } from "../../redux/usersSlice";
 import { useDispatch, useSelector } from "react-redux";
 import ProfileModal from "./ProfileModal";
 import { height, width } from "../../utils";
+import Btn from "../Auth/Btn";
 
 const Container = styled.View`
   justify-content: center;

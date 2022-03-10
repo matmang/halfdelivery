@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { Image, Pressable } from "react-native";
 import styled from "styled-components";
 import colors from "../../../colors";
@@ -284,6 +284,8 @@ const SearchText = styled.Text`
 
 export default ({ navigation, route: { params } }) => {
   const [platformName, setPlatformName] = useState(params?.platform);
+  const [authUser, setAuthUser] = useState(undefined);
+  const [category, setCategory] = useState(undefined);
   const [isMinOrderFee, setIsMinOrderFee] = useState(false);
   const [isDelivery, setIsDelivery] = useState(false);
   const [orderFee, setOrderFee] = useState("");
@@ -302,19 +304,31 @@ export default ({ navigation, route: { params } }) => {
     { label: "10분", value: "10" },
   ]);
 
-  useEffect(() => {
-    setAccent(orderFee && image && selectMember && selectMinute);
-  }, [orderFee, image, selectMember, selectMinute]);
-
-  const handleSubmit = async () => {
-    try {
-      const authUser = await Auth.currentAuthenticatedUser();
-      console.log("유저는 불러옴.", authUser);
+  useLayoutEffect(() => {
+    const fetchUsers = async () => {
+      const userData = await Auth.currentAuthenticatedUser();
       const storeCategory = (await DataStore.query(StoreCategory)).filter(
         (c) => c.Stores === params.storeInfo.id
       );
-      console.log("쿼리는 찾음.");
-      console.log("이미지", image);
+      setAuthUser(userData);
+      setCategory(storeCategory);
+    };
+    fetchUsers();
+  }, []);
+
+  useEffect(() => {
+    setAccent(
+      orderFee &&
+        image &&
+        selectMember &&
+        selectMinute &&
+        (isMinOrderFee || isDelivery)
+    );
+  }, [orderFee, image, selectMember, selectMinute, isMinOrderFee, isDelivery]);
+
+  const handleSubmit = async () => {
+    try {
+      console.log(authUser.attributes.sub);
       const newChatRoom = await DataStore.save(
         new ChatRoom({
           newMessages: 0,
@@ -338,10 +352,19 @@ export default ({ navigation, route: { params } }) => {
         new MatchingInfo({
           requiredPersons: 4,
           setTime: 10,
-          type: isMinOrderFee ? "MIN_PRICE" : isDelivery ? "DLV_TIP" : null,
-          platform: "BAEMIN",
+          type: isMinOrderFee
+            ? "MIN_PRICE"
+            : isDelivery
+            ? "DLV_TIP"
+            : undefined,
+          platform:
+            platformName === "배달의 민족"
+              ? "BAEMIN"
+              : platformName === "요기요"
+              ? "YOGIYO"
+              : "COUPANG",
           Store: params.storeInfo.id,
-          StoreCategory: storeCategory.id,
+          StoreCategory: category.id,
         })
       );
       console.log(newMatchingInfo);
