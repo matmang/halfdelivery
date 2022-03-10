@@ -78,7 +78,7 @@ const StoreItem = ({ storeInfo }) => {
           isModal={isModal}
           setIsModal={setIsModal}
           storeInfo={storeInfo}
-          category={category}
+          category={storeInfo.storecategoryID}
         />
       )}
       <Img

@@ -283,6 +283,7 @@ const SearchText = styled.Text`
 `;
 
 export default ({ navigation, route: { params } }) => {
+  console.log("메이크매치스트린 params", params);
   const [platformName, setPlatformName] = useState(params?.platform);
   const [authUser, setAuthUser] = useState(undefined);
   const [category, setCategory] = useState(undefined);
@@ -332,8 +333,8 @@ export default ({ navigation, route: { params } }) => {
               : platformName === "요기요"
               ? "YOGIYO"
               : "COUPANG",
-          Store: params.storeInfo.id,
-          StoreCategory: params.category,
+          // Store: params.storeInfo.id,
+          // StoreCategory: params.category,
         })
       );
       console.log(newMatchingInfo);
@@ -342,7 +343,7 @@ export default ({ navigation, route: { params } }) => {
           newMessages: 0,
           master: params.authUser.attributes.sub,
           onSetting: true,
-          chatRoomMatchingInfoId: newMatchingInfo.id,
+          // chatRoomMatchingInfoId: newMatchingInfo.id,
         })
       );
       console.log(newChatRoom);
@@ -353,7 +354,7 @@ export default ({ navigation, route: { params } }) => {
           orderPrice: parseInt(orderFee),
           isMaster: true,
           chatroomID: newChatRoom.id,
-          User: params.authUser.attributes.sub,
+          // User: params.authUser.attributes.sub,
         })
       );
       console.log(newParticiant);
