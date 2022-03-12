@@ -39,7 +39,7 @@ const RoomList = ({ categoryID, type }) => {
   //         ChatRoom.element.filter(
   //           (chatroom) =>
   //             chatroom.master !== authUser.attributes.sub &&
-  //             chatroom.MatchingInfo.type === type
+  //             chatroom.LinkedMatchingInfo.type === type
   //         ),
   //         ...existingChatRooms,
   //       ]);
@@ -64,16 +64,16 @@ const RoomList = ({ categoryID, type }) => {
       );
 
       setMatchings(
-        // matchings.filter(
-        //   (chatroom) =>
-        //     //? 내가 만든 매칭방은 제외
-        //     // chatroom.master !== authUser.attributes.sub
-        //     // &&
-        //     chatroom.MatchingInfo !== null &&
-        //     //? 매칭타입에 해당하는 매칭방만 불러옴
-        //     chatroom.MatchingInfo.type === type
-        // )
-        matchings
+        matchings.filter(
+          (chatroom) =>
+            //? 내가 만든 매칭방은 제외
+            // chatroom.master !== authUser.attributes.sub
+            // &&
+            chatroom.LinkedMatchingInfo !== null &&
+            //? 매칭타입에 해당하는 매칭방만 불러옴
+            chatroom.LinkedMatchingInfo.type === type
+        )
+        // matchings
       );
     };
 
@@ -96,11 +96,11 @@ const RoomList = ({ categoryID, type }) => {
           //     )
         }
         renderItem={({ item }) =>
-          item.MatchingInfo === null ? (
+          item.LinkedMatchingInfo !== null ? (
             type === "DLV_TIP" ? (
-              <Room_DlvTip matchingInfo={item.MatchingInfo} />
+              <Room_DlvTip matchingInfo={item.LinkedMatchingInfo} />
             ) : type === "MIN_PRICE" ? (
-              <Room_MinPrice matchingInfo={item.MatchingInfo} />
+              <Room_MinPrice matchingInfo={item.LinkedMatchingInfo} />
             ) : (
               <ActivityIndicator />
             )

@@ -22,13 +22,13 @@
     }
   },
   "auth": {
-    "halfdeliveryNewAuth220124": {
+    "halfdelivery1aa5cbdb1aa5cbdb": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [
         {
           "category": "function",
-          "resourceName": "halfdeliveryNewAuth220124PostConfirmation",
+          "resourceName": "halfdelivery1aa5cbdb1aa5cbdbPostConfirmation",
           "triggerProvider": "Cognito",
           "attributes": [
             "Arn",
@@ -59,10 +59,11 @@
     }
   },
   "function": {
-    "halfdeliveryNewAuth220124PostConfirmation": {
+    "halfdelivery1aa5cbdb1aa5cbdbPostConfirmation": {
       "build": true,
       "providerPlugin": "awscloudformation",
-      "service": "Lambda"
+      "service": "Lambda",
+      "dependsOn": []
     }
   },
   "data": {

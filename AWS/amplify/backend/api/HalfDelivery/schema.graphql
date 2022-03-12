@@ -9,39 +9,33 @@ enum MatchingType {
   DLV_TIP
 }
 
-type MatchingInfo @model @auth(rules: [{ allow: public }]) {
+type MatchingInfo @model @auth(rules: [{allow: public}]) {
   id: ID!
   requiredPersons: Int!
-  StoreCategory: StoreCategory @connection
-  Store: Store @connection
+  StoreCategoryInfo: StoreCategory! @connection
+  StoreInfo: Store! @connection
   setTime: Int!
   type: MatchingType!
   platform: Platform!
 }
 
-type Participant
-  @model
-  @auth(rules: [{ allow: public }])
-  @key(name: "byChatRoom", fields: ["chatroomID"]) {
+type Participant @model @auth(rules: [{allow: public}]) @key(name: "byChatRoom", fields: ["LinkedChatRoom"]) {
   id: ID!
   isReady: Boolean
   orderImages: AWSJSON
   orderPrice: Int
   isMaster: Boolean!
-  User: User @connection
-  chatroomID: ID!
+  LinkedChatRoom: ID!
+  LinkedUser: User! @connection
 }
 
-type StoreCategory @model @auth(rules: [{ allow: public }]) {
+type StoreCategory @model @auth(rules: [{allow: public}]) {
   id: ID!
   category: String!
   Stores: [Store] @connection(keyName: "byStoreCategory", fields: ["id"])
 }
 
-type Store
-  @model
-  @key(name: "byStoreCategory", fields: ["storecategoryID"])
-  @auth(rules: [{ allow: public }]) {
+type Store @model @key(name: "byStoreCategory", fields: ["storecategoryID"]) @auth(rules: [{allow: public}]) {
   id: ID!
   store: String!
   storeImgUri: String
@@ -59,10 +53,7 @@ type Store
   coupangUri: String
 }
 
-type Menu
-  @model
-  @key(name: "byStore", fields: ["storeID"])
-  @auth(rules: [{ allow: public }]) {
+type Menu @model @key(name: "byStore", fields: ["storeID"]) @auth(rules: [{allow: public}]) {
   id: ID!
   menuCategory: String!
   menu: String!
@@ -72,21 +63,17 @@ type Menu
   storeID: ID
 }
 
-type ChatRoom @model @auth(rules: [{ allow: public }]) {
+type ChatRoom @model @auth(rules: [{allow: public}]) {
   id: ID!
   newMessages: Int
   LastMessage: Message @connection
   master: String!
   onSetting: Boolean
   Participants: [Participant] @connection(keyName: "byChatRoom", fields: ["id"])
-  MatchingInfo: MatchingInfo @connection
+  LinkedMatchingInfo: MatchingInfo! @connection
 }
 
-type Message
-  @model
-  @key(name: "byChatRoom", fields: ["userID"])
-  @key(name: "byUser", fields: ["userID"])
-  @auth(rules: [{ allow: public }]) {
+type Message @model @key(name: "byChatRoom", fields: ["userID"]) @key(name: "byUser", fields: ["userID"]) @auth(rules: [{allow: public}]) {
   id: ID!
   content: String
   chatroomID: ID
@@ -95,7 +82,7 @@ type Message
   audio: String
 }
 
-type User @model @auth(rules: [{ allow: public }]) {
+type User @model @auth(rules: [{allow: public}]) {
   id: ID!
   name: String!
   imageUri: String
@@ -109,3 +96,4 @@ type User @model @auth(rules: [{ allow: public }]) {
   status: String
   agree: Boolean
 }
+ 

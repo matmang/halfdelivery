@@ -1,6 +1,6 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "{\"createdOn\":\"Mac\",\"createdBy\":\"Amplify\",\"createdWith\":\"7.6.12\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
+  "Description": "{\"createdOn\":\"Mac\",\"createdBy\":\"Amplify\",\"createdWith\":\"7.6.21\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
   "Parameters": {
     "GROUP": {
       "Type": "String",
@@ -67,12 +67,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "halfdeliveryNewAuth220124PostConfirmation",
+            "halfdelivery1aa5cbdb1aa5cbdbPostConfirmation",
             {
               "Fn::Join": [
                 "",
                 [
-                  "halfdeliveryNewAuth220124PostConfirmation",
+                  "halfdelivery1aa5cbdb1aa5cbdbPostConfirmation",
                   "-",
                   {
                     "Ref": "env"
@@ -122,12 +122,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "halfdeliveryNewAuth220124PostConfirmation",
+            "halfdelivery1aa5cbdb1aa5cbdbPostConfirmation",
             {
               "Fn::Join": [
                 "",
                 [
-                  "halfdeliveryNewAuth220124PostConfirmation",
+                  "halfdelivery1aa5cbdb1aa5cbdbPostConfirmation",
                   "-",
                   {
                     "Ref": "env"

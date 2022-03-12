@@ -17,30 +17,30 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "StoreCategory": {
-                    "name": "StoreCategory",
+                "StoreCategoryInfo": {
+                    "name": "StoreCategoryInfo",
                     "isArray": false,
                     "type": {
                         "model": "StoreCategory"
                     },
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": [],
                     "association": {
                         "connectionType": "BELONGS_TO",
-                        "targetName": "matchingInfoStoreCategoryId"
+                        "targetName": "matchingInfoStoreCategoryInfoId"
                     }
                 },
-                "Store": {
-                    "name": "Store",
+                "StoreInfo": {
+                    "name": "StoreInfo",
                     "isArray": false,
                     "type": {
                         "model": "Store"
                     },
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": [],
                     "association": {
                         "connectionType": "BELONGS_TO",
-                        "targetName": "matchingInfoStoreId"
+                        "targetName": "matchingInfoStoreInfoId"
                     }
                 },
                 "setTime": {
@@ -490,25 +490,25 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "User": {
-                    "name": "User",
-                    "isArray": false,
-                    "type": {
-                        "model": "User"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "participantUserId"
-                    }
-                },
-                "chatroomID": {
-                    "name": "chatroomID",
+                "LinkedChatRoom": {
+                    "name": "LinkedChatRoom",
                     "isArray": false,
                     "type": "ID",
                     "isRequired": true,
                     "attributes": []
+                },
+                "LinkedUser": {
+                    "name": "LinkedUser",
+                    "isArray": false,
+                    "type": {
+                        "model": "User"
+                    },
+                    "isRequired": true,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "participantLinkedUserId"
+                    }
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -539,7 +539,7 @@ export const schema = {
                     "properties": {
                         "name": "byChatRoom",
                         "fields": [
-                            "chatroomID"
+                            "LinkedChatRoom"
                         ]
                     }
                 },
@@ -857,20 +857,20 @@ export const schema = {
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "chatroomID"
+                        "associatedWith": "LinkedChatRoom"
                     }
                 },
-                "MatchingInfo": {
-                    "name": "MatchingInfo",
+                "LinkedMatchingInfo": {
+                    "name": "LinkedMatchingInfo",
                     "isArray": false,
                     "type": {
                         "model": "MatchingInfo"
                     },
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": [],
                     "association": {
                         "connectionType": "BELONGS_TO",
-                        "targetName": "chatRoomMatchingInfoId"
+                        "targetName": "chatRoomLinkedMatchingInfoId"
                     }
                 },
                 "createdAt": {
@@ -934,5 +934,5 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "version": "ed37d017347f8ec1073112f80c7c3c10"
+    "version": "961ab06f318d63f3590d8eafee8de427"
 };

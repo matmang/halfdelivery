@@ -48,8 +48,8 @@ type ChatRoomMetaData = {
 export declare class MatchingInfo {
   readonly id: string;
   readonly requiredPersons: number;
-  readonly StoreCategory?: StoreCategory;
-  readonly Store?: Store;
+  readonly StoreCategoryInfo: StoreCategory;
+  readonly StoreInfo: Store;
   readonly setTime: number;
   readonly type: MatchingType | keyof typeof MatchingType;
   readonly platform: Platform | keyof typeof Platform;
@@ -111,8 +111,8 @@ export declare class Participant {
   readonly orderImages?: string;
   readonly orderPrice?: number;
   readonly isMaster: boolean;
-  readonly User?: User;
-  readonly chatroomID: string;
+  readonly LinkedChatRoom: string;
+  readonly LinkedUser: User;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Participant, ParticipantMetaData>);
@@ -158,7 +158,7 @@ export declare class ChatRoom {
   readonly master: string;
   readonly onSetting?: boolean;
   readonly Participants?: (Participant | null)[];
-  readonly MatchingInfo?: MatchingInfo;
+  readonly LinkedMatchingInfo: MatchingInfo;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<ChatRoom, ChatRoomMetaData>);

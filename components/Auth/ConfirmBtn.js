@@ -6,7 +6,8 @@ import colors from "../../colors";
 import { height, width } from "../../utils";
 
 const Button = styled.View`
-  padding: ${height * 12.5}px 0px;
+  /* padding: ${height *
+  12.5}px 0px;  //? iOS 에서는 폰트가 안보여서 주석처리함*/
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -21,7 +22,6 @@ const Button = styled.View`
 
 const Text = styled.Text`
   color: ${(props) => (props.accent ? colors.primaryBlue : colors.oxfordGray)};
-  font-weight: 600;
   font-size: 12px;
   font-family: "noto-regular";
 `;
