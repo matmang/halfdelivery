@@ -6,7 +6,7 @@ export type AmplifyDependentResourcesAttributes = {
         }
     },
     "auth": {
-        "halfdeliveryNewAuth220124": {
+        "halfdelivery1aa5cbdb1aa5cbdb": {
             "IdentityPoolId": "string",
             "IdentityPoolName": "string",
             "UserPoolId": "string",
@@ -18,7 +18,7 @@ export type AmplifyDependentResourcesAttributes = {
         }
     },
     "function": {
-        "halfdeliveryNewAuth220124PostConfirmation": {
+        "halfdelivery1aa5cbdb1aa5cbdbPostConfirmation": {
             "Name": "string",
             "Arn": "string",
             "LambdaExecutionRole": "string",

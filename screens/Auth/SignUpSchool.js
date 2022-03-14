@@ -40,6 +40,7 @@ const PasswordContainer = styled.View`
   margin-left: ${width * 23}px;
   margin-right: auto;
   justify-content: flex-start;
+  z-index: 1;
 `;
 
 const ButtonContainer = styled.View`
@@ -47,11 +48,13 @@ const ButtonContainer = styled.View`
   justify-content: flex-end;
   align-items: center;
   background-color: white;
+  /* background-color: red; */
   width: 100%;
   padding-top: ${height * 12}px;
   padding-bottom: ${height * 24}px;
   height: ${height * 82}px;
   bottom: 0;
+  z-index: 0;
 `;
 
 const PhaseText = styled.Text`
