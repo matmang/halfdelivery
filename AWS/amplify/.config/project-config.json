@@ -11,7 +11,7 @@
       "SourceDir": "src",
       "DistributionDir": "/",
       "BuildCommand": "npm run-script build",
-      "StartCommand": "expo start"
+      "StartCommand": "npm run-script start"
     }
   }
 }
