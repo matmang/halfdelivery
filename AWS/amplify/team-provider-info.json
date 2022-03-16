@@ -17,10 +17,15 @@
         "halfdeliveryNewAuth220124PostConfirmation": {
           "deploymentBucketName": "amplify-halfdelivery-staging-72919-deployment",
           "s3Key": "amplify-builds/halfdeliveryNewAuth220124PostConfirmation-31545361676c38477672-build.zip"
+        },
+        "halfdelivery1aa5cbdb1aa5cbdbPostConfirmation": {
+          "deploymentBucketName": "amplify-halfdelivery-staging-72919-deployment",
+          "s3Key": "amplify-builds/halfdelivery1aa5cbdb1aa5cbdbPostConfirmation-6f43376b567053693444-build.zip"
         }
       },
       "auth": {
-        "halfdeliveryNewAuth220124": {}
+        "halfdeliveryNewAuth220124": {},
+        "halfdelivery1aa5cbdb1aa5cbdb": {}
       }
     }
   }

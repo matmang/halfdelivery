@@ -1,5 +1,5 @@
 import { Auth, DataStore } from "aws-amplify";
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Image, Pressable } from "react-native";
 import styled from "styled-components";
 import { User } from "../../../AWS/src/models";
@@ -11,13 +11,14 @@ const Container = styled.View`
   align-items: center;
 `;
 
-const ProfileContainer = styled.Pressable`
+const ProfileContainer = styled.View`
   width: ${width * 416}px;
-  height: ${height * 116}px;
-  background-color: white;
-  flex-direction: row;
+  height: ${height * 226}px;
   align-items: center;
+  justify-content: center;
 `;
+
+const ImageContainer = styled.View``;
 
 const ProfileRightContainer = styled.View`
   justify-content: flex-start;
@@ -27,6 +28,7 @@ const ProfileRightContainer = styled.View`
 const ProfileInfoContainer = styled.View`
   flex-direction: row;
   align-items: center;
+  margin-top: ${height * 7};
 `;
 
 const ButtonBounder = styled.View`
@@ -51,6 +53,14 @@ const DistributionLine = styled.View`
 const NameText = styled.Text`
   font-size: ${width * 17};
   font-family: "noto-medium";
+  include-font-padding: false;
+  text-align-vertical: center;
+`;
+
+const UserNameText = styled.Text`
+  font-size: ${width * 17};
+  font-family: "noto-medium";
+  margin-top: ${height * 21}px;
   include-font-padding: false;
   text-align-vertical: center;
 `;
@@ -94,66 +104,52 @@ export default ({ navigation }) => {
 
   return (
     <Container>
-      <ProfileContainer onPress={() => navigation.navigate("MyInfoScreen")}>
+      <ProfileContainer>
         <Image
           source={require("../../../assets/images/default_prf_img.png")}
           style={{
-            height: height * 68,
-            width: width * 68,
-            marginLeft: width * 24,
+            height: height * 105,
+            width: width * 105,
             resizeMode: "contain",
           }}
         />
-        <ProfileRightContainer>
-          <ProfileInfoContainer>
-            <NameText>김지우</NameText>
-            <NameText> 님</NameText>
-            <Image
-              source={require("../../../assets/images/active-arrow-right.png")}
-              style={{
-                height: height * 10.29,
-                width: width * 4.73,
-                marginLeft: width * 4.5,
-                resizeMode: "cover",
-              }}
-            />
-          </ProfileInfoContainer>
-          <ProfileInfoContainer>
-            <InfoText>{school} 캠퍼스</InfoText>
-            <InfoText> {college}</InfoText>
-          </ProfileInfoContainer>
-        </ProfileRightContainer>
+        <Image
+          source={require("../../../assets/images/add_profile_image.png")}
+          style={{
+            height: height * 28,
+            width: width * 28,
+            resizeMode: "contain",
+            position: "absolute",
+            top: height * 103,
+            left: width * 235,
+          }}
+        />
+        <UserNameText>김지우</UserNameText>
+        <ProfileInfoContainer>
+          <InfoText>{school} 캠퍼스</InfoText>
+          <InfoText> {college}</InfoText>
+        </ProfileInfoContainer>
       </ProfileContainer>
       <ButtonBounder>
         <ProfileButtonContainer onPress={() => alert("1")}>
-          <ButtonName>매칭내역</ButtonName>
+          <ButtonName>나의 계정 관리</ButtonName>
+        </ProfileButtonContainer>
+        <DistributionLine></DistributionLine>
+        <ProfileButtonContainer onPress={() => alert("2")}>
+          <ButtonName>학과 정보 관리</ButtonName>
+        </ProfileButtonContainer>
+        <DistributionLine></DistributionLine>
+        <ProfileButtonContainer onPress={() => alert("3")}>
+          <ButtonName>금융 정보 관리</ButtonName>
         </ProfileButtonContainer>
       </ButtonBounder>
       <ButtonBounder>
         <ProfileButtonContainer onPress={() => alert("2")}>
-          <ButtonName>공지사항</ButtonName>
+          <ButtonName>알림설정</ButtonName>
         </ProfileButtonContainer>
         <DistributionLine></DistributionLine>
         <ProfileButtonContainer onPress={() => alert("3")}>
-          <ButtonName>자주 묻는 질문</ButtonName>
-        </ProfileButtonContainer>
-      </ButtonBounder>
-      <ButtonBounder>
-        <ProfileButtonContainer onPress={() => alert("2")}>
-          <ButtonName>차단 관리</ButtonName>
-        </ProfileButtonContainer>
-        <DistributionLine></DistributionLine>
-        <ProfileButtonContainer onPress={() => alert("3")}>
-          <ButtonName>신고 내역</ButtonName>
-        </ProfileButtonContainer>
-      </ButtonBounder>
-      <ButtonBounder>
-        <ProfileButtonContainer onPress={() => alert("2")}>
-          <ButtonName>약관 및 정책</ButtonName>
-        </ProfileButtonContainer>
-        <DistributionLine></DistributionLine>
-        <ProfileButtonContainer onPress={() => alert("3")}>
-          <ButtonName>현재 버전 0.0.0</ButtonName>
+          <ButtonName>하프딜리버리 계정</ButtonName>
         </ProfileButtonContainer>
       </ButtonBounder>
     </Container>
