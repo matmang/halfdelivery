@@ -330,12 +330,12 @@ export default ({ navigation, route: { params } }) => {
       );
       const ME = await DataStore.query(User, params.authUser.attributes.sub);
       console.log("ME", ME);
-
       const newMatchingInfo = await DataStore.save(
         new MatchingInfo({
           requiredPersons: 4,
           setTime: 10,
           type: isMinOrderFee
+
             ? MatchingType.MIN_PRICE
             : isDelivery
             ? MatchingType.DLV_TIP
@@ -351,12 +351,12 @@ export default ({ navigation, route: { params } }) => {
         })
       );
       console.log(newMatchingInfo);
-
       const newChatRoom = await DataStore.save(
         new ChatRoom({
           newMessages: 0,
           master: params.authUser.attributes.sub,
           onSetting: true,
+
           LinkedMatchingInfo: newMatchingInfo,
         })
       );

@@ -1,10 +1,11 @@
 import { Auth, DataStore } from "aws-amplify";
-import React, { useEffect, useLayoutEffect, useState } from "react";
-import { Image, Pressable } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Image } from "react-native";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { User } from "../../../AWS/src/models";
 import colors from "../../../colors";
 import { height, width } from "../../../utils";
+import { logOut } from "../../../redux/usersSlice";
 
 const Container = styled.View`
   flex: 1;
@@ -75,6 +76,8 @@ export default ({ navigation }) => {
   const [userImgUri, setUserImgUri] = useState("");
   const [userHalfMoney, setUserHalfMoney] = useState(0);
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const fetchUserData = async () => {
       const userData = await Auth.currentAuthenticatedUser().then(setAuthUser);
@@ -85,13 +88,17 @@ export default ({ navigation }) => {
     fetchUserData();
   }, []);
 
+  const logOutPress = () => {
+    Auth.signOut();
+    dispatch(logOut());
+  };
+
   const fetchImageUri = async () => {
     const user = await DataStore.query(User, authUser.attributes.sub);
     setUserImgUri(user?.imageUri);
     setUserHalfMoney(user?.halfmoney);
   };
   fetchImageUri();
-
   return (
     <Container>
       <ProfileContainer onPress={() => navigation.navigate("MyInfoScreen")}>
@@ -125,37 +132,12 @@ export default ({ navigation }) => {
         </ProfileRightContainer>
       </ProfileContainer>
       <ButtonBounder>
-        <ProfileButtonContainer onPress={() => alert("1")}>
-          <ButtonName>매칭내역</ButtonName>
-        </ProfileButtonContainer>
-      </ButtonBounder>
-      <ButtonBounder>
-        <ProfileButtonContainer
-          onPress={() => navigation.navigate("AnnouncementScreen")}
-        >
-          <ButtonName>공지사항</ButtonName>
+        <ProfileButtonContainer onPress={() => logOutPress()}>
+          <ButtonName>로그아웃</ButtonName>
         </ProfileButtonContainer>
         <DistributionLine></DistributionLine>
-        <ProfileButtonContainer onPress={() => alert("3")}>
-          <ButtonName>자주 묻는 질문</ButtonName>
-        </ProfileButtonContainer>
-      </ButtonBounder>
-      <ButtonBounder>
-        <ProfileButtonContainer onPress={() => alert("2")}>
-          <ButtonName>차단 관리</ButtonName>
-        </ProfileButtonContainer>
-        <DistributionLine></DistributionLine>
-        <ProfileButtonContainer onPress={() => alert("3")}>
-          <ButtonName>신고 내역</ButtonName>
-        </ProfileButtonContainer>
-      </ButtonBounder>
-      <ButtonBounder>
-        <ProfileButtonContainer onPress={() => alert("2")}>
-          <ButtonName>약관 및 정책</ButtonName>
-        </ProfileButtonContainer>
-        <DistributionLine></DistributionLine>
-        <ProfileButtonContainer onPress={() => alert("3")}>
-          <ButtonName>현재 버전 0.0.0</ButtonName>
+        <ProfileButtonContainer>
+          <ButtonName>회원 탈퇴</ButtonName>
         </ProfileButtonContainer>
       </ButtonBounder>
     </Container>
