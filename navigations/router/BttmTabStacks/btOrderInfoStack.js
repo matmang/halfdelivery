@@ -7,11 +7,13 @@ import colors from "../../../colors";
 import { height, width } from "../../../utils";
 import MyInfoScreen from "../../../screens/Main/ProfileStack/MyInfoScreen";
 import AnnouncementScreen from "../../../screens/Main/ProfileStack/AnnouncementScreen";
+import AnnouncementDetailScreen from "../../../screens/Main/ProfileStack/AnnouncementDetailScreen";
 import UpdateSchoolScreen from "../../../screens/Main/ProfileStack/UpdateSchoolScreen";
 import UpdateBankScreen from "../../../screens/Main/ProfileStack/UpdateBankScreen";
 import UpdateAccountScreen from "../../../screens/Main/ProfileStack/UpdateAccountScreen";
 import UpdatePhoneNumberScreen from "../../../screens/Main/ProfileStack/UpdatePhoneNumberScreen";
 import AccountScreen from "../../../screens/Main/ProfileStack/AccountScreen";
+import CheckInfoScreen from "../../../screens/Main/ProfileStack/CheckInfoScreen";
 
 const Stack = createStackNavigator();
 
@@ -82,6 +84,37 @@ export default () => (
     <Stack.Screen
       name="AnnouncementScreen"
       component={AnnouncementScreen}
+      options={({ navigation }) => ({
+        title: "공지사항",
+        headerTitleAlign: "center",
+        headerStyle: {
+          backgroundColor: colors.primaryBlue,
+          height: height * 56,
+          marginTop: height * 20,
+        },
+        headerTintColor: "#ffffff",
+        headerTitleStyle: {
+          fontFamily: "noto-medium",
+          fontSize: width * 17,
+        },
+        headerRight: () => (
+          <HeaderButtons HeaderButtonComponent={HomeHeaderButton}>
+            <Item
+              title="Notification"
+              iconName={
+                Platform.OS === "android"
+                  ? "md-notifications"
+                  : "ios-notifications"
+              }
+              onPress={() => alert("알림")}
+            />
+          </HeaderButtons>
+        ),
+      })}
+    />
+    <Stack.Screen
+      name="AnnouncementDetailScreen"
+      component={AnnouncementDetailScreen}
       options={({ navigation }) => ({
         title: "공지사항",
         headerTitleAlign: "center",
