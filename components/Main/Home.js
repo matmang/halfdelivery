@@ -38,7 +38,7 @@ const NoneBox = styled.View`
   height: ${height * 162}px;
   margin-top: ${height * 208}px;
   background-color: white;
-  border-width: 1;
+  border-width: 1px;
 `;
 
 const SearchText = styled.Text`

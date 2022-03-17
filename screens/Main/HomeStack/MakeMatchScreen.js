@@ -15,7 +15,11 @@ import {
   ChatRoom,
   MatchingInfo,
   Participant,
+  Platform,
+  MatchingType,
   StoreCategory,
+  Store,
+  User,
 } from "../../../AWS/src/models";
 
 const Container = styled.View`
@@ -283,6 +287,7 @@ const SearchText = styled.Text`
 `;
 
 export default ({ navigation, route: { params } }) => {
+  console.log("메이크매치스트린 params", params);
   const [platformName, setPlatformName] = useState(params?.platform);
   const [authUser, setAuthUser] = useState(undefined);
   const [category, setCategory] = useState(undefined);
@@ -317,23 +322,32 @@ export default ({ navigation, route: { params } }) => {
   const handleSubmit = async () => {
     try {
       console.log(params.authUser.attributes.sub);
+
+      const targetStore = await DataStore.query(Store, params.storeInfo.id);
+      const targetStoreCategory = await DataStore.query(
+        StoreCategory,
+        params.category
+      );
+      const ME = await DataStore.query(User, params.authUser.attributes.sub);
+      console.log("ME", ME);
       const newMatchingInfo = await DataStore.save(
         new MatchingInfo({
           requiredPersons: 4,
           setTime: 10,
           type: isMinOrderFee
-            ? "MIN_PRICE"
+
+            ? MatchingType.MIN_PRICE
             : isDelivery
-            ? "DLV_TIP"
-            : undefined,
+            ? MatchingType.DLV_TIP
+            : "ERROR",
           platform:
             platformName === "배달의 민족"
-              ? "BAEMIN"
+              ? Platform.BAEMIN
               : platformName === "요기요"
-              ? "YOGIYO"
-              : "COUPANG",
-          Store: params.storeInfo.id,
-          StoreCategory: params.category,
+              ? Platform.YOGIYO
+              : Platform.COUPANG,
+          StoreInfo: targetStore,
+          StoreCategoryInfo: targetStoreCategory,
         })
       );
       console.log(newMatchingInfo);
@@ -342,23 +356,25 @@ export default ({ navigation, route: { params } }) => {
           newMessages: 0,
           master: params.authUser.attributes.sub,
           onSetting: true,
-          chatRoomMatchingInfoId: newMatchingInfo.id,
+
+          LinkedMatchingInfo: newMatchingInfo,
         })
       );
       console.log(newChatRoom);
+
       const newParticiant = await DataStore.save(
         new Participant({
           isReady: false,
-          orderImages: image,
+          orderImages: image[0],
           orderPrice: parseInt(orderFee),
           isMaster: true,
-          chatroomID: newChatRoom.id,
-          User: params.authUser.attributes.sub,
+          LinkedChatRoom: newChatRoom.id,
+          LinkedUser: ME,
         })
       );
       console.log(newParticiant);
     } catch (e) {
-      console.log(e);
+      console.log("에러", e);
     }
   };
 

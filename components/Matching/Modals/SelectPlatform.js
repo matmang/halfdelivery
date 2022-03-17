@@ -194,10 +194,8 @@ const Select = styled.Pressable`
   justify-content: center;
   align-self: center;
   align-items: center;
-
   background-color: ${({ selectedName }) =>
     selectedName !== null ? colors.primaryBlue : colors.blueGray2};
-
   border-radius: 40px;
   margin-top: auto;
   margin-bottom: 16px;

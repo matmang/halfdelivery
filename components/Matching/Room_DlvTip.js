@@ -30,8 +30,8 @@ import { Store } from "../../AWS/src/models";
 
 export default ({ matchingInfo }) => {
   const {
-    matchingInfoStoreCategoryId,
-    matchingInfoStoreId,
+    matchingInfoStoreCategoryInfoId,
+    matchingInfoStoreInfoId,
     platform,
     requiredPersons,
     setTime,
@@ -44,7 +44,7 @@ export default ({ matchingInfo }) => {
 
   useLayoutEffect(() => {
     const fetchStore = async () => {
-      const store = await DataStore.query(Store, matchingInfoStoreId);
+      const store = await DataStore.query(Store, matchingInfoStoreInfoId);
       setStore(store);
       console.log(store);
     };
@@ -52,30 +52,8 @@ export default ({ matchingInfo }) => {
     fetchStore();
   }, []);
 
-  // if (store === undefined && store === null) {
-  //   store = {
-  //     location: -1,
-  //     maxDlvTime: -1,
-  //     maxDlvTip: -1,
-  //     minDlvTime: -1,
-  //     minOrdPrice: -1,
-  //     openHours: "error",
-  //     store: "error",
-  //     storeImgUri: "error",
-  //     storecategoryID: "error",
-  //     telephoneNumber: -1,
-  //     baeminUri: "error",
-  //     coupangUri: "error",
-  //     yogiyoUri: "error",
-  //   };
-  // }
-
-  if (!store) {
-    return <ActivityIndicator />;
-  }
-
   let category = "-";
-  switch (matchingInfoStoreCategoryId) {
+  switch (matchingInfoStoreCategoryInfoId) {
     case KOREAN_ID:
       category = "한식";
       break;
@@ -99,6 +77,10 @@ export default ({ matchingInfo }) => {
   const onPress = () => {
     setIsModal(true);
   };
+
+  if (!store) {
+    return <ActivityIndicator />;
+  }
 
   return (
     <Pressable style={styles.root} onPress={onPress}>
