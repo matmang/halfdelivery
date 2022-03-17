@@ -130,7 +130,9 @@ export default ({ navigation }) => {
         </ProfileButtonContainer>
       </ButtonBounder>
       <ButtonBounder>
-        <ProfileButtonContainer onPress={() => alert("2")}>
+        <ProfileButtonContainer
+          onPress={() => navigation.navigate("AnnouncementScreen")}
+        >
           <ButtonName>공지사항</ButtonName>
         </ProfileButtonContainer>
         <DistributionLine></DistributionLine>

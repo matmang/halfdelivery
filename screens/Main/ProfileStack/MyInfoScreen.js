@@ -131,15 +131,21 @@ export default ({ navigation }) => {
         </ProfileInfoContainer>
       </ProfileContainer>
       <ButtonBounder>
-        <ProfileButtonContainer onPress={() => alert("1")}>
+        <ProfileButtonContainer
+          onPress={() => navigation.navigate("UpdateAccountScreen")}
+        >
           <ButtonName>나의 계정 관리</ButtonName>
         </ProfileButtonContainer>
         <DistributionLine></DistributionLine>
-        <ProfileButtonContainer onPress={() => alert("2")}>
+        <ProfileButtonContainer
+          onPress={() => navigation.navigate("UpdateSchoolScreen")}
+        >
           <ButtonName>학과 정보 관리</ButtonName>
         </ProfileButtonContainer>
         <DistributionLine></DistributionLine>
-        <ProfileButtonContainer onPress={() => alert("3")}>
+        <ProfileButtonContainer
+          onPress={() => navigation.navigate("UpdateBankScreen")}
+        >
           <ButtonName>금융 정보 관리</ButtonName>
         </ProfileButtonContainer>
       </ButtonBounder>
@@ -148,7 +154,9 @@ export default ({ navigation }) => {
           <ButtonName>알림설정</ButtonName>
         </ProfileButtonContainer>
         <DistributionLine></DistributionLine>
-        <ProfileButtonContainer onPress={() => alert("3")}>
+        <ProfileButtonContainer
+          onPress={() => navigation.navigate("AccountScreen")}
+        >
           <ButtonName>하프딜리버리 계정</ButtonName>
         </ProfileButtonContainer>
       </ButtonBounder>
