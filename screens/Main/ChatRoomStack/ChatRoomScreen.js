@@ -11,6 +11,7 @@ import {
   ActivityIndicator,
   Modal,
   ScrollView,
+  Platform,
 } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/core";
 import { Auth, DataStore, SortDirection } from "aws-amplify";
@@ -69,6 +70,8 @@ import BtmLastMessage from "../../../components/Chat/BtmLastMessage";
 
 import talkOn from "../../../assets/images/BottomTabNav/talk.png";
 import onMatching from "../../../assets/images/BottomTabNav/onMatching.png";
+import DropDownPicker from "react-native-dropdown-picker";
+import { width, height } from "../../../utils";
 
 const images = [
   {
@@ -121,12 +124,6 @@ const ChatRoomScreen = (props) => {
       },
     });
   }, [navigation, is3dots]);
-  // console.log("is3dots", is3dots);
-
-  // const storeInfo = route.params.storeInfo;
-  // console.log("storeInfo", storeInfo);
-  // const storeName = storeInfo.store;
-  // const menus = route.params.menus;
 
   // ? 첫 렌더링에만 호출. ChatRoom 가져오기.
   useEffect(() => {
@@ -200,13 +197,13 @@ const ChatRoomScreen = (props) => {
   console.log("authUser", authUser);
 
   // ? chatRoom 이 null 이면...
-  if (!chatRoom) {
-    return <ActivityIndicator />;
-  }
+  // if (!chatRoom) {
+  //   return <ActivityIndicator />;
+  // }
 
   const openImagePicker = () => {
     ImagePicker.openPicker({
-      width: 300,
+      width: DROPDOWN_WIDTH,
       height: 400,
       cropping: true,
     }).then((image) => {
@@ -214,18 +211,109 @@ const ChatRoomScreen = (props) => {
     });
   };
 
+  const [school, setSchool] = useState("");
+  const [college, setCollege] = useState("");
+  const [accent, setAccent] = useState(false);
+  const [schoolOpen, setSchoolOpen] = useState(false);
+  const [collegeOpen, setCollegeOpen] = useState(false);
+  const [value, setValue] = useState(null);
+  const [schoolItems, setSchoolItems] = useState([
+    { label: "한양대학교 ERICA", value: "ERICA" },
+  ]);
+  const [collegeItems, setCollegeItems] = useState([
+    { label: "공학대학", value: "1" },
+    { label: "소프트웨어융합대학", value: "2" },
+    { label: "약학대학", value: "3" },
+    { label: "과학기술융합대학", value: "4" },
+    { label: "국제문화대학", value: "5" },
+    { label: "언론정보대학", value: "6" },
+    { label: "경상대학", value: "7" },
+    { label: "디자인대학", value: "8" },
+    { label: "예체능대학", value: "9" },
+    { label: "창의융합교육원", value: "10" },
+  ]);
+
+  const DROPDOWN_WIDTH = width * 300;
+
+  const PLACE_HOLDER = "단과대학을 선택해주세요";
+
+  const [collegePlaceholder, setCollegePlaceholder] = useState(PLACE_HOLDER);
+
+  console.log("collegePlaceholder", collegePlaceholder);
   return (
-    <ScrollView>
-      <EnterMatching />
+    <View>
+      <DropDownPicker
+        //! DropDown 은 ScrollView 안에 있으면 안 된다. (같은 스크롤 방향이면 안 됨, Nested ScrollView error)
+        open={collegeOpen}
+        value={value}
+        setOpen={setCollegeOpen}
+        setValue={setValue}
+        setItems={setCollegeItems}
+        items={collegeItems}
+        placeholder={collegePlaceholder}
+        textStyle={{
+          color: collegePlaceholder === PLACE_HOLDER ? "#ADB1C0" : "black",
+        }}
+        //! border 스타일링 주의: containerStyle 로 borderColor, backgroundColor 를 주면, Dropdown 정상 작동 하지 않는다. : https://hossein-zare.github.io/react-native-dropdown-picker-website/docs/rules/#avoid-inappropriate-styles
+        style={{
+          width: DROPDOWN_WIDTH,
+          borderRadius: 8,
+          borderWidth: 1.5,
+          borderColor:
+            collegePlaceholder === PLACE_HOLDER ? "#ADB1C0" : "#0E257C",
+        }}
+        disableBorderRadius={false}
+        dropDownContainerStyle={{
+          width: DROPDOWN_WIDTH,
+          borderTopWidth: 0,
+          marginTop: height * 1,
+          borderColor: "white",
+          paddingTop: height * 8,
+          paddingBottom: height * 8,
+          elevation: 6, //! 안드로이드는 여기다가 쓰는게 맞음
+        }}
+        renderListItem={(props) => {
+          return (
+            <Pressable
+              {...props}
+              style={{
+                backgroundColor:
+                  props.label === collegePlaceholder ? "#F5F6F6" : "#FFFFFF",
+                width: DROPDOWN_WIDTH,
+                height: height * 48,
+                justifyContent: "center",
+                paddingLeft: width * 16,
+              }}
+              onPress={() => {
+                setCollege(props.label);
+                setCollegePlaceholder(props.label);
+                setCollegeOpen(false);
+                // setIsSelected(true);
+              }}
+              onSelectItem={(item) => {
+                setCollege(item.label);
+                setCollegePlaceholder(item.label);
+              }}
+            >
+              <Text>최소주문금액 </Text>
+              <Text>{props.label}</Text>
+
+              {/* <Text>은행명</Text> */}
+            </Pressable>
+          );
+        }}
+      />
+
+      {/* <EnterMatching />
 
       <FinalCheck />
 
       <InputOrderPrice />
       <RequestAdditionalTime />
       <AddAdditionalTime />
-      <ViewProfilePartner />
+      <ViewProfilePartner /> */}
 
-      <BtmLastMessage
+      {/* <BtmLastMessage
         isMaster={true}
         username="윤동현"
         message="나는 누굴까 내일을 꿈꾸는가 "
@@ -236,35 +324,12 @@ const ChatRoomScreen = (props) => {
         username="최수민"
         message="어떤이는 꿈을 잊은채로 살고 어떤이는 남의 꿈을 뺏고 살며 다른이는 꿈은 이런거라 하네
         세상에 이처럼 많은 사람들과 세상에 이처럼 많은 개성들 저마다 자기가 옳다말을 하고 꿈이란 이런거라 말하지만"
-      />
-      <DeliveryInfo_DlvTip />
+      /> */}
+      {/* <DeliveryInfo_DlvTip /> */}
 
-      <Dropdown_noModal
-        placeholder="은행을 선택해주세요"
-        data={[
-          { label: "One", value: "1" },
-          { label: "Two", value: "2" },
-          { label: "Three", value: "3" },
-          { label: "Four", value: "4" },
-          { label: "Five", value: "5" },
-        ]}
-        onSelect={setSelectedDropdown}
-      />
-      <View style={{ marginTop: 100 }}>
-        <Dropdown
-          placeholder="은행을 선택해주세요"
-          data={[
-            { label: "One", value: "1" },
-            { label: "Two", value: "2" },
-            { label: "Three", value: "3" },
-            { label: "Four", value: "4" },
-            { label: "Five", value: "5" },
-          ]}
-          onSelect={setSelectedDropdown}
-        />
+      <View style={{ marginTop: 300 }}>
+        <MyOrderImages />
       </View>
-
-      <MyOrderImages />
       <Participant />
       <ParticipantEmpty />
       <PriceReadyBoxHost />
@@ -298,7 +363,7 @@ const ChatRoomScreen = (props) => {
       />
     </ScrollView>
 
-    // <ScrollView style={styles.page}>
+    // <View style={styles.page}>
     //   {/* <Pressable
     //     style={{ width: "100%", height: 50, backgroundColor: "blue" }}
     //     // onPress={openImagePicker}
@@ -333,7 +398,7 @@ const ChatRoomScreen = (props) => {
     //   <CancelMatching />
     //   <MatchingCancelled />
     //   <EjectPartner /> */}
-    </ScrollView>
+    </View>
 
     //! View 대신 SafeAreaView 를 쓰면, 노치 같은 곳에 데이터가 표출되지 않는다. 굳!
     // <SafeAreaView style={styles.page}>
