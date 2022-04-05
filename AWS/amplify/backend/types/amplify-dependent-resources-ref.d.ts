@@ -1,12 +1,6 @@
 export type AmplifyDependentResourcesAttributes = {
-    "api": {
-        "HalfDelivery": {
-            "GraphQLAPIIdOutput": "string",
-            "GraphQLAPIEndpointOutput": "string"
-        }
-    },
     "auth": {
-        "halfdelivery1aa5cbdb1aa5cbdb": {
+        "HalfDelivery": {
             "IdentityPoolId": "string",
             "IdentityPoolName": "string",
             "UserPoolId": "string",
@@ -17,8 +11,15 @@ export type AmplifyDependentResourcesAttributes = {
             "CreatedSNSRole": "string"
         }
     },
+    "api": {
+        "halfdelivery": {
+            "GraphQLAPIKeyOutput": "string",
+            "GraphQLAPIIdOutput": "string",
+            "GraphQLAPIEndpointOutput": "string"
+        }
+    },
     "function": {
-        "halfdelivery1aa5cbdb1aa5cbdbPostConfirmation": {
+        "HalfDeliveryPostConfirmation": {
             "Name": "string",
             "Arn": "string",
             "LambdaExecutionRole": "string",
@@ -26,7 +27,7 @@ export type AmplifyDependentResourcesAttributes = {
         }
     },
     "storage": {
-        "s3fd8cfc0a": {
+        "s3halfdeliverystorage8c741499": {
             "BucketName": "string",
             "Region": "string"
         }

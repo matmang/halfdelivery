@@ -1,0 +1,11 @@
+{
+  "resourceName": "s3halfdeliverystorage8c741499",
+  "bucketName": "halfdelivery-storage-8c741499",
+  "policyUUID": "b05c3678",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ"
+  ]
+}

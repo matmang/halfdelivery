@@ -1,10 +1,10 @@
 {
   "version": "1",
   "cognitoConfig": {
-    "identityPoolName": "halfdelivery1aa5cbdb_identitypool_1aa5cbdb",
+    "identityPoolName": "HalfDelivery_identitypool_d61c7529",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "halfde1aa5cbdb",
-    "userPoolName": "halfdelivery1aa5cbdb_userpool_1aa5cbdb",
+    "resourceNameTruncated": "halfde09c262b1",
+    "userPoolName": "HalfDelivery",
     "autoVerifiedAttributes": [
       "phone_number"
     ],
@@ -13,11 +13,11 @@
       "SMS Text Message"
     ],
     "smsAuthenticationMessage": "Your authentication code is {####}",
-    "smsVerificationMessage": "Your verification code is {####}",
+    "smsVerificationMessage": "Forgot password code: {####}",
     "emailVerificationSubject": "Your verification code",
     "emailVerificationMessage": "Your verification code is {####}",
     "defaultPasswordPolicy": false,
-    "passwordPolicyMinLength": 8,
+    "passwordPolicyMinLength": 6,
     "passwordPolicyCharacters": [],
     "requiredAttributes": [
       "name",
@@ -25,32 +25,21 @@
     ],
     "aliasAttributes": [],
     "userpoolClientGenerateSecret": false,
-    "userpoolClientRefreshTokenValidity": 30,
-    "userpoolClientWriteAttributes": [
-      "email"
-    ],
-    "userpoolClientReadAttributes": [
-      "email"
-    ],
-    "userpoolClientLambdaRole": "halfde1aa5cbdb_userpoolclient_lambda_role",
+    "userpoolClientRefreshTokenValidity": "300",
+    "userpoolClientWriteAttributes": [],
+    "userpoolClientReadAttributes": [],
+    "userpoolClientLambdaRole": "HalfDe09c262b1_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "1aa5cbdb",
-    "resourceName": "halfdelivery1aa5cbdb1aa5cbdb",
+    "sharedId": "09c262b1",
+    "resourceName": "HalfDelivery",
     "authSelections": "identityPoolAndUserPool",
-    "useDefault": "manual",
-    "thirdPartyAuth": false,
-    "userPoolGroups": false,
-    "adminQueries": false,
-    "triggers": {
-      "PostConfirmation": [
-        "custom"
-      ]
-    },
-    "hostedUI": false,
-    "userPoolGroupList": [],
     "serviceName": "Cognito",
+    "useDefault": "manual",
+    "userPoolGroups": false,
+    "userPoolGroupList": [],
+    "adminQueries": false,
     "usernameCaseSensitive": false,
-    "useEnabledMfas": false,
+    "useEnabledMfas": true,
     "authRoleArn": {
       "Fn::GetAtt": [
         "AuthRole",
@@ -67,7 +56,7 @@
     "dependsOn": [
       {
         "category": "function",
-        "resourceName": "halfdelivery1aa5cbdb1aa5cbdbPostConfirmation",
+        "resourceName": "HalfDeliveryPostConfirmation",
         "triggerProvider": "Cognito",
         "attributes": [
           "Arn",
@@ -75,11 +64,19 @@
         ]
       }
     ],
-    "permissions": [],
-    "authTriggerConnections": "[\n  {\n    \"triggerType\": \"PostConfirmation\",\n    \"lambdaFunctionName\": \"halfdelivery1aa5cbdb1aa5cbdbPostConfirmation\"\n  }\n]",
+    "triggers": {
+      "PostConfirmation": [
+        "custom"
+      ]
+    },
+    "hostedUI": false,
     "authProviders": [],
     "parentStack": {
       "Ref": "AWS::StackId"
-    }
+    },
+    "authTriggerConnections": [
+      "{\"triggerType\":\"PostConfirmation\",\"lambdaFunctionName\":\"HalfDeliveryPostConfirmation\"}"
+    ],
+    "permissions": []
   }
 }
