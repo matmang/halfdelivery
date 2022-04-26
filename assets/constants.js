@@ -2,11 +2,11 @@ import { StyleSheet } from "react-native";
 import React from "react";
 import { width, height } from "../utils";
 
-const KOREAN_ID = "8314af0c-1d8e-4112-869b-15689debb495";
-const CHINESE_ID = "382f8bce-5182-4402-ab8d-564618a335fd";
-const JAPANESE_ID = "f9db956b-5bcb-4ddf-ba96-2010ae7c7ee5";
-const WESTERN_ID = "2634afad-acdb-4b9f-a5cc-feafbd9dbaa4";
-const CAFE_ID = "b26daa27-f6c3-4243-a73e-f9d9352d06e7";
+const KOREAN_ID = "9dcc616b-2c49-4247-9ddd-ce360d320848";
+const CHINESE_ID = "d5a58fc2-7c09-4da2-9c08-3a0a2aea7481";
+const JAPANESE_ID = "a6a63b4e-27a7-448a-9d4b-f1a21700b7f5";
+const WESTERN_ID = "0deb571b-4d3f-4164-8e25-f44ba725fb77";
+const CAFE_ID = "41294b0f-6d62-4693-8414-431cac70fca0";
 
 //! react-native-dropdown-picker 패키지를 위한 styles
 const collegePlaceholder = "테스트";
