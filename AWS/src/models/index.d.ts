@@ -6,12 +6,19 @@ export enum Platform {
   COUPANG = "COUPANG"
 }
 
-export enum MatchingType {
-  MIN_PRICE = "MIN_PRICE",
-  DLV_TIP = "DLV_TIP"
+
+
+type QnAMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
+type UserMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
 
+type BoardMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
 
 type MatchingInfoMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
@@ -29,10 +36,6 @@ type ParticipantMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-type UserMetaData = {
-  readOnlyFields: 'createdAt' | 'updatedAt';
-}
-
 type MessageMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
@@ -41,14 +44,61 @@ type ChatRoomMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
+export declare class QnA {
+  readonly id: string;
+  readonly tag: number;
+  readonly title: string;
+  readonly content: string;
+  readonly images?: string[];
+  readonly email: string;
+  readonly questioner: User;
+  readonly createdAt?: string;
+  readonly updatedAt?: string;
+  readonly qnAQuestionerId: string;
+  constructor(init: ModelInit<QnA, QnAMetaData>);
+  static copyOf(source: QnA, mutator: (draft: MutableModel<QnA, QnAMetaData>) => MutableModel<QnA, QnAMetaData> | void): QnA;
+}
+
+export declare class User {
+  readonly id: string;
+  readonly name: string;
+  readonly profileImgUri?: string;
+  readonly studentIdImgUri: string;
+  readonly bank: string;
+  readonly accountnumber: string;
+  readonly school: string;
+  readonly college: string;
+  readonly birthday: string;
+  readonly bannedDateTime?: string;
+  readonly banUserList?: (string | null)[];
+  readonly requiredTermsAgree: boolean;
+  readonly optionalTermsAgree: boolean;
+  readonly phone_number: string;
+  readonly createdAt?: string;
+  readonly updatedAt?: string;
+  constructor(init: ModelInit<User, UserMetaData>);
+  static copyOf(source: User, mutator: (draft: MutableModel<User, UserMetaData>) => MutableModel<User, UserMetaData> | void): User;
+}
+
+export declare class Board {
+  readonly id: string;
+  readonly title: string;
+  readonly content: string;
+  readonly isImportant: boolean;
+  readonly createdAt?: string;
+  readonly updatedAt?: string;
+  constructor(init: ModelInit<Board, BoardMetaData>);
+  static copyOf(source: Board, mutator: (draft: MutableModel<Board, BoardMetaData>) => MutableModel<Board, BoardMetaData> | void): Board;
+}
+
 export declare class MatchingInfo {
   readonly id: string;
-  readonly requiredPersons: number;
-  readonly setTime: number;
-  readonly type: MatchingType | keyof typeof MatchingType;
-  readonly platform: Platform | keyof typeof Platform;
+  readonly endTime: string;
   readonly StoreCategoryInfo?: StoreCategory;
   readonly StoreInfo?: Store;
+  readonly isRapid: boolean;
+  readonly platform: Platform | keyof typeof Platform;
+  readonly targetPrice: number;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   readonly matchingInfoStoreCategoryInfoId?: string;
@@ -70,8 +120,8 @@ export declare class StoreCategory {
 export declare class Store {
   readonly id: string;
   readonly name: string;
-  readonly imgUri?: string;
-  readonly openHours: string;
+  readonly logoImgUri?: string;
+  readonly backgroundImgUri?: string;
   readonly location?: string;
   readonly baeminUri?: string;
   readonly yogiyoUri?: string;
@@ -83,6 +133,7 @@ export declare class Store {
   readonly baeminOrderPrice?: number;
   readonly yogiyoOrderPrice?: number;
   readonly coupangOrderPrice?: number;
+  readonly openHours: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Store, StoreMetaData>);
@@ -104,25 +155,6 @@ export declare class Participant {
   readonly participantLinkedUserId?: string;
   constructor(init: ModelInit<Participant, ParticipantMetaData>);
   static copyOf(source: Participant, mutator: (draft: MutableModel<Participant, ParticipantMetaData>) => MutableModel<Participant, ParticipantMetaData> | void): Participant;
-}
-
-export declare class User {
-  readonly id: string;
-  readonly name: string;
-  readonly imageUri?: string;
-  readonly phone_number?: string;
-  readonly bank?: string;
-  readonly accountnumber?: string;
-  readonly school?: string;
-  readonly college?: string;
-  readonly birthday?: string;
-  readonly bannedDateTime?: string;
-  readonly agree?: boolean;
-  readonly banUserList?: (string | null)[];
-  readonly createdAt?: string;
-  readonly updatedAt?: string;
-  constructor(init: ModelInit<User, UserMetaData>);
-  static copyOf(source: User, mutator: (draft: MutableModel<User, UserMetaData>) => MutableModel<User, UserMetaData> | void): User;
 }
 
 export declare class Message {
