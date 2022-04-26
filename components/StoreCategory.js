@@ -8,7 +8,7 @@ const StoreCategory = ({ category }) => {
         width: 44,
         height: 20,
         borderRadius: 12,
-        backgroundColor: "#E5E6E7",
+        backgroundColor: "#E6EDF3",
         justifyContent: "center",
         marginBottom: 5,
       }}
