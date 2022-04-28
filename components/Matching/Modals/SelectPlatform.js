@@ -28,15 +28,17 @@ export default ({ isModal, setIsModal, storeInfo, category }) => {
   }, []);
 
   const onPress = () => {
-    navigation.navigate("btHomeStack", {
-      screen: "MakeMatchScreen",
-      params: {
-        storeInfo,
-        platform: selectedName,
-        category,
-        authUser,
-      },
-    });
+    selectedName == null
+      ? alert("플랫폼을 선택해주세요")
+      : navigation.navigate("btHomeStack", {
+          screen: "MakeMatchScreen",
+          params: {
+            storeInfo,
+            platform: selectedName,
+            category,
+            authUser,
+          },
+        });
     dispatch(toggleIsMatching(true));
     setIsModal(false);
   };
@@ -104,7 +106,7 @@ export default ({ isModal, setIsModal, storeInfo, category }) => {
               setSelectedName={setSelectedName}
             />
           </View>
-          <Select
+          <SelectButton
             selectedName={selectedName}
             onPress={() => {
               onPress();
@@ -117,7 +119,7 @@ export default ({ isModal, setIsModal, storeInfo, category }) => {
             >
               선택완료
             </Noto17medium>
-          </Select>
+          </SelectButton>
         </Mid>
         <Btm>
           <DisclaimerFooter />
@@ -191,7 +193,7 @@ const Warnning = styled.Text`
   color: ${colors.oxfordGray};
 `;
 
-const Select = styled.Pressable`
+const SelectButton = styled.Pressable`
   width: 324px;
   height: 48px;
   justify-content: center;
