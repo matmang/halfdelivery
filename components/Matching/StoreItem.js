@@ -50,6 +50,7 @@ const StoreItem = ({ storeInfo }) => {
     "yogiyoOrderPrice": null,
     "yogiyoUri": null,
   } */
+
   const { baeminDlvTip } = storeInfo;
   const { baeminOrderPrice } = storeInfo;
   const { baeminUri } = storeInfo;
@@ -116,7 +117,7 @@ const StoreItem = ({ storeInfo }) => {
           isModal={isModal}
           setIsModal={setIsModal}
           storeInfo={storeInfo}
-          category={storecategoryID}
+          category={category}
         />
       )}
       <Img
