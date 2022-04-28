@@ -127,6 +127,30 @@ export default ({ navigation, route: { params } }) => {
       const me = await DataStore.query(User);
       setMeee(me);
 
+      /*       User {
+        "_deleted": null,
+        "_lastChangedAt": 1651161603691,
+        "_version": 1,
+        "accountnumber": "temporexercitationpariaturino",
+        "banUserList": Array [
+          "Loremididfugiat",
+        ],
+        "bank": "ullamcodolorirureconse",
+        "bannedDateTime": "2023-01-05T15:55:55.290Z",
+        "birthday": "temporineanonesseessenisiquism",
+        "college": "minimculpaconsequatirur",
+        "createdAt": "2022-04-28T16:00:03.656Z",
+        "id": "ff3b41fd-f5d2-41e3-94bb-8335a8fc9836",
+        "name": "cillumsitaliquipqui",
+        "optionalTermsAgree": true,
+        "phone_number": "laborisdeseruntfugiatcons",
+        "profileImgUri": "commodoofficiamollit",
+        "requiredTermsAgree": false,
+        "school": "etpariatursuntsuntveni",
+        "studentIdImgUri": "cupidatatminimfu",
+        "updatedAt": "2022-04-28T16:00:03.656Z",
+      }, */
+
       // await DataStore.save(
       //   new User({
       //     name: "Lorem ipsum dolor sit amet",
