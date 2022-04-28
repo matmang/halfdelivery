@@ -10,13 +10,13 @@ import DismissKeyboard from "../../../components/DismissKeyboard";
 import Btn from "../../../components/Auth/Btn";
 import MatchingImagePicker from "../../../components/Main/renderImage/MatchingImagePicker";
 import Dropdown_noModal from "../../../components/Dropdown_noModal";
-import { Auth, DataStore } from "aws-amplify";
+import { Auth } from "aws-amplify";
+import { DataStore } from "@aws-amplify/datastore";
 import {
   ChatRoom,
   MatchingInfo,
   Participant,
   Platform,
-  MatchingType,
   StoreCategory,
   Store,
   User,
@@ -25,7 +25,7 @@ import {
 export default ({ navigation, route: { params } }) => {
   const { platform } = params;
   const { storeInfo } = params;
-  console.log("메이크매치스트린", storeInfo);
+  const { authUser } = params;
   const { baeminDlvTip } = storeInfo;
   const { baeminOrderPrice } = storeInfo;
   const { baeminUri } = storeInfo;
@@ -42,8 +42,13 @@ export default ({ navigation, route: { params } }) => {
   const { openHours } = storeInfo;
   const { storecategoryID } = storeInfo;
 
+  const [meee, setMeee] = useState(null);
+  console.log("meee");
+  useEffect(() => {
+    console.log(meee);
+  }, [meee]);
+
   // const [platform, setPlatformName] = useState(params?.platform);
-  const [authUser, setAuthUser] = useState(undefined);
   const [category, setCategory] = useState(undefined);
   const [isMinOrderFee, setIsMinOrderFee] = useState(false);
   const [isDelivery, setIsDelivery] = useState(false);
@@ -75,58 +80,113 @@ export default ({ navigation, route: { params } }) => {
 
   const handleSubmit = async () => {
     try {
-      console.log(params.authUser.attributes.sub);
+      // console.log(params.authUser.attributes.sub);
 
-      const targetStore = await DataStore.query(Store, params.storeInfo.id);
-      const targetStoreCategory = await DataStore.query(
-        StoreCategory,
-        params.category
-      );
-      const ME = await DataStore.query(User, params.authUser.attributes.sub);
-      console.log("ME", ME);
+      const _Store = await DataStore.query(Store, params.storeInfo.id);
+      /*       Store {
+        "_deleted": null,
+        "_lastChangedAt": 1649082966294,
+        "_version": 1,
+        "backgroundImgUri": null,
+        "baeminDlvTip": Object {
+          "12000": 2000,
+        },
+        "baeminOrderPrice": 12000,
+        "baeminUri": "https://baemin.me/13Wy_3rQE",
+        "coupangDlvTip": null,
+        "coupangOrderPrice": null,
+        "coupangUri": null,
+        "createdAt": "2022-04-04T14:36:06.261Z",
+        "id": "368db5fd-27a1-426e-92af-aabd9b6aacbc",
+        "location": null,
+        "logoImgUri": null,
+        "name": "레이즈오븐",
+        "openHours": Object {
+          "Fri": "11:00~20:00",
+          "Mon": "11:00~20:00",
+          "Sat": "11:00~20:00",
+          "Sun": "OFF",
+          "Thu": "11:00~20:00",
+          "Tue": "11:00~20:00",
+          "Wed": "11:00~20:00",
+        },
+        "storecategoryID": "41294b0f-6d62-4693-8414-431cac70fca0",
+        "updatedAt": "2022-04-04T14:36:06.261Z",
+        "yogiyoDlvTip": null,
+        "yogiyoOrderPrice": null,
+        "yogiyoUri": null,
+      } */
 
-      const newMatchingInfo = await DataStore.save(
-        new MatchingInfo({
-          requiredPersons: 4,
-          setTime: 10,
-          type: isMinOrderFee
-            ? MatchingType.MIN_PRICE
-            : isDelivery
-            ? MatchingType.DLV_TIP
-            : "ERROR",
-          platform:
-            platform === "배달의 민족"
-              ? Platform.BAEMIN
-              : platform === "요기요"
-              ? Platform.YOGIYO
-              : Platform.COUPANG,
-          StoreInfo: targetStore,
-          StoreCategoryInfo: targetStoreCategory,
-        })
-      );
-      console.log(newMatchingInfo);
+      const storecategoryID = _Store.storecategoryID;
 
-      const newChatRoom = await DataStore.save(
-        new ChatRoom({
-          newMessages: 0,
-          master: params.authUser.attributes.sub,
-          onSetting: true,
-          LinkedMatchingInfo: newMatchingInfo,
-        })
-      );
-      console.log(newChatRoom);
+      // console.log("authUser");
+      // console.log(authUser);
 
-      const newParticiant = await DataStore.save(
-        new Participant({
-          isReady: false,
-          orderImages: image[0],
-          orderPrice: parseInt(orderFee),
-          isMaster: true,
-          LinkedChatRoom: newChatRoom.id,
-          LinkedUser: ME,
-        })
-      );
-      console.log(newParticiant);
+      // const me = await DataStore.query(User, authUser.attributes.sub);
+
+      const me = await DataStore.query(User);
+      setMeee(me);
+
+      // await DataStore.save(
+      //   new User({
+      //     name: "Lorem ipsum dolor sit amet",
+      //     profileImgUri: "Lorem ipsum dolor sit amet",
+      //     studentIdImgUri: "Lorem ipsum dolor sit amet",
+      //     bank: "Lorem ipsum dolor sit amet",
+      //     accountnumber: "Lorem ipsum dolor sit amet",
+      //     school: "Lorem ipsum dolor sit amet",
+      //     college: "Lorem ipsum dolor sit amet",
+      //     birthday: "Lorem ipsum dolor sit amet",
+      //     bannedDateTime: "1970-01-01T12:30:23.999Z",
+      //     banUserList: [],
+      //     requiredTermsAgree: true,
+      //     optionalTermsAgree: true,
+      //     phone_number: "Lorem ipsum dolor sit amet",
+      //   })
+      // );
+
+      // const newMatchingInfo = await DataStore.save(
+      //   new MatchingInfo({
+      //     requiredPersons: 4,
+      //     setTime: 10,
+      //     type: isMinOrderFee
+      //       ? MatchingType.MIN_PRICE
+      //       : isDelivery
+      //       ? MatchingType.DLV_TIP
+      //       : "ERROR",
+      //     platform:
+      //       platform === "배달의 민족"
+      //         ? Platform.BAEMIN
+      //         : platform === "요기요"
+      //         ? Platform.YOGIYO
+      //         : Platform.COUPANG,
+      //     StoreInfo: _Store,
+      //     StoreCategoryInfo: storecategoryID,
+      //   })
+      // );
+      // console.log(newMatchingInfo);
+
+      // const newChatRoom = await DataStore.save(
+      //   new ChatRoom({
+      //     newMessages: 0,
+      //     master: params.authUser.attributes.sub,
+      //     onSetting: true,
+      //     LinkedMatchingInfo: newMatchingInfo,
+      //   })
+      // );
+      // console.log(newChatRoom);
+
+      // const newParticiant = await DataStore.save(
+      //   new Participant({
+      //     isReady: false,
+      //     orderImages: image[0],
+      //     orderPrice: parseInt(orderFee),
+      //     isMaster: true,
+      //     LinkedChatRoom: newChatRoom.id,
+      //     LinkedUser: me,
+      //   })
+      // );
+      // console.log(newParticiant);
     } catch (e) {
       console.log("에러", e);
     }
@@ -152,7 +212,12 @@ export default ({ navigation, route: { params } }) => {
               </SearchContanier>
             </TouchableOpacity>
           </HeaderContainer>
-          <CollapsibleView sectionTitle={"배달 정보"} maxheight={height * 158}>
+
+          <CollapsibleView
+            sectionTitle={"배달 정보"}
+            maxheight={height * 158}
+            isOpen={true}
+          >
             <InfoBox>
               <InfoTopContainer>
                 {params.platform === "배달의 민족" ? (
@@ -208,7 +273,19 @@ export default ({ navigation, route: { params } }) => {
               </InfoBottomContainer>
             </InfoBox>
           </CollapsibleView>
+
+          <ButtonContainer>
+            <Btn
+              text={"매칭 시작"}
+              // accent={accent}
+              accent={true}
+              onPress={() => {
+                handleSubmit();
+              }}
+            />
+          </ButtonContainer>
           <DistributionLine></DistributionLine>
+
           <OrderFeeContainer>
             <TitleContainer>
               <Image
@@ -434,15 +511,6 @@ export default ({ navigation, route: { params } }) => {
             </DropDownContainer>
           </TimeContainer>
         </Container>
-        <ButtonContainer>
-          <Btn
-            text={"매칭 시작"}
-            accent={accent}
-            onPress={() => {
-              handleSubmit();
-            }}
-          />
-        </ButtonContainer>
       </ScrollView>
     </DismissKeyboard>
   );
