@@ -1,99 +1,106 @@
+type QnA @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  tag: Int!
+  title: String!
+  content: String!
+  images: [String!]
+  email: String!
+  questioner: User! @hasOne
+}
+
+type Board @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  title: String!
+  content: String!
+  isImportant: Boolean!
+}
+
 enum Platform {
   BAEMIN
   YOGIYO
   COUPANG
 }
 
-enum MatchingType {
-  MIN_PRICE
-  DLV_TIP
-}
-
 type MatchingInfo @model @auth(rules: [{allow: public}]) {
   id: ID!
-  requiredPersons: Int!
-  StoreCategoryInfo: StoreCategory! @connection
-  StoreInfo: Store! @connection
-  setTime: Int!
-  type: MatchingType!
+  endTime: AWSDateTime!
+  StoreCategoryInfo: StoreCategory @hasOne
+  StoreInfo: Store @hasOne
+  isRapid: Boolean!
   platform: Platform!
+  targetPrice: Int!
 }
 
-type Participant @model @auth(rules: [{allow: public}]) @key(name: "byChatRoom", fields: ["LinkedChatRoom"]) {
+type Participant @model @auth(rules: [{allow: public}]) {
   id: ID!
-  isReady: Boolean
   orderImages: AWSJSON
-  orderPrice: Int
+  orderPrice: Int!
   isMaster: Boolean!
-  LinkedChatRoom: ID!
-  LinkedUser: User! @connection
+  LinkedUser: User @hasOne
+  LinkedChatRoom: ID! @index(name: "byChatRoom")
+  Messages: [Message] @hasMany(indexName: "byParticipant", fields: ["id"])
+  isReady: Boolean!
+  isFinished: Boolean!
 }
 
 type StoreCategory @model @auth(rules: [{allow: public}]) {
   id: ID!
   category: String!
-  Stores: [Store] @connection(keyName: "byStoreCategory", fields: ["id"])
+  Stores: [Store] @hasMany(indexName: "byStoreCategory", fields: ["id"])
 }
 
-type Store @model @key(name: "byStoreCategory", fields: ["storecategoryID"]) @auth(rules: [{allow: public}]) {
+type Store @model @auth(rules: [{allow: public}]) {
   id: ID!
-  store: String!
-  storeImgUri: String
-  minOrdPrice: Int!
-  minDlvTime: Int!
-  maxDlvTime: Int!
-  maxDlvTip: Int!
-  openHours: String!
+  name: String!
+  logoImgUri: String
+  backgroundImgUri: String
   location: String
-  Menus: [Menu] @connection(keyName: "byStore", fields: ["id"])
-  storecategoryID: ID
-  telephoneNumber: String
   baeminUri: String
   yogiyoUri: String
   coupangUri: String
-}
-
-type Menu @model @key(name: "byStore", fields: ["storeID"]) @auth(rules: [{allow: public}]) {
-  id: ID!
-  menuCategory: String!
-  menu: String!
-  menuImgUri: String
-  menuDetail: String
-  price: Int!
-  storeID: ID
+  storecategoryID: ID! @index(name: "byStoreCategory")
+  baeminDlvTip: AWSJSON
+  yogiyoDlvTip: AWSJSON
+  coupangDlvTip: AWSJSON
+  baeminOrderPrice: Int
+  yogiyoOrderPrice: Int
+  coupangOrderPrice: Int
+  openHours: AWSJSON!
 }
 
 type ChatRoom @model @auth(rules: [{allow: public}]) {
   id: ID!
   newMessages: Int
-  LastMessage: Message @connection
   master: String!
-  onSetting: Boolean
-  Participants: [Participant] @connection(keyName: "byChatRoom", fields: ["id"])
-  LinkedMatchingInfo: MatchingInfo! @connection
+  onSetting: Boolean!
+  LastMessage: Message @hasOne
+  Participants: [Participant] @hasMany(indexName: "byChatRoom", fields: ["id"])
+  LinkedMatchingInfo: MatchingInfo @hasOne
 }
 
-type Message @model @key(name: "byChatRoom", fields: ["userID"]) @key(name: "byUser", fields: ["userID"]) @auth(rules: [{allow: public}]) {
+type Message @model @auth(rules: [{allow: public}]) {
   id: ID!
   content: String
   chatroomID: ID
-  userID: ID
   image: String
   audio: String
+  participantID: ID! @index(name: "byParticipant")
 }
 
 type User @model @auth(rules: [{allow: public}]) {
   id: ID!
   name: String!
-  imageUri: String
-  phone_number: String
-  Messages: [Message] @connection(keyName: "byUser", fields: ["id"])
-  bank: String
-  accountnumber: String
-  school: String
-  college: String
-  birthday: String
-  status: String
-  agree: Boolean
+  profileImgUri: String
+  studentIdImgUri: String!
+  bank: String!
+  accountnumber: String!
+  school: String!
+  college: String!
+  birthday: String!
+  bannedDateTime: AWSDateTime
+  banUserList: [String]
+  requiredTermsAgree: Boolean!
+  optionalTermsAgree: Boolean!
+  phone_number: String!
 }
  

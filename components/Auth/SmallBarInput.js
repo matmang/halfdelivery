@@ -8,7 +8,7 @@ const Container = styled.TextInput`
   width: ${width * 324}px;
   height: ${height * 28}px;
   padding-top: 0;
-  padding-left: ${width * 26};
+  padding-left: ${width * 12};
   padding-bottom: ${height * 7};
   border-bottom-width: 1px;
   border-bottom-color: ${({ isValued, error }) =>
@@ -16,7 +16,6 @@ const Container = styled.TextInput`
   font-family: "nunito-regular";
   font-size: 17px;
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
-  color: ${colors.steelBlue2};
 `;
 
 const SmallBarInput = ({

@@ -7,6 +7,7 @@ import styled from "styled-components";
 import colors from "../../../colors";
 import BarInput from "../../../components/Auth/BarInput";
 import Btn from "../../../components/Auth/Btn";
+import ConfirmBtn from "../../../components/Auth/ConfirmBtn";
 import { height, width } from "../../../utils";
 
 const Container = styled.View`
@@ -26,6 +27,14 @@ const InputAreaContainer = styled.View`
   background-color: white;
   width: 100%;
   margin-top: ${height * 8}px;
+`;
+
+const AuthContainer = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: ${height * 21}px;
+  padding-right: ${width * 24}px;
 `;
 
 const FirstContainer = styled.View`
@@ -62,13 +71,19 @@ const NameText = styled.Text`
   font-size: ${width * 17}px;
   color: ${colors.primaryBlue};
   margin-left: ${width * 24}px;
+  include-font-padding: false;
+  text-align-vertical: center;
 `;
 
 export default ({ navigation }) => {
   const [bank, setBank] = useState("");
   const [bankOpen, setBankOpen] = useState(false);
+  const [phonenumber, setPhonenumber] = useState("");
+  const [authCode, setAuthCode] = useState("");
   const [value, setValue] = useState(null);
   const [accountNumber, setaccountNumber] = useState("");
+  const [authCodeErrorMessage, setAuthCodeErrorMessage] = useState("");
+  const [phonenumberErrorMessage, setPhoneNumberErrorMessage] = useState("");
   const [accent, setAccent] = useState(false);
 
   const [bankItems, setBankItems] = useState([
@@ -90,22 +105,69 @@ export default ({ navigation }) => {
   const refDidMount = useRef(null);
 
   useEffect(() => {
-    setAccent(bank && accountNumber);
-  }, [bank, accountNumber]);
+    setAccent(
+      bank &&
+        accountNumber &&
+        phonenumber &&
+        authCode &&
+        !phonenumberErrorMessage &&
+        !authCodeErrorMessage
+    );
+  }, [
+    bank,
+    accountNumber,
+    phonenumber,
+    authCode,
+    phonenumberErrorMessage,
+    authCodeErrorMessage,
+  ]);
+
+  useEffect(() => {
+    if (refDidMount.current) {
+      let authCodeError = "";
+      let phonenumberError = "";
+      if (!phonenumber) {
+        phonenumberError = "전화번호를 입력해주세요.";
+      } else if (authCode.length !== 6) {
+        authCodeError = "인증번호 6자리를 입력해주세요.";
+      } else {
+        authCodeError = "";
+      }
+      setAuthCodeErrorMessage(authCodeError);
+      setPhoneNumberErrorMessage(phonenumberError);
+    } else {
+      refDidMount.current = true;
+    }
+  });
+
+  const confirmFindId = () => {
+    Auth.verifyCurrentUserAttribute("phone_number")
+      .then(() => {
+        console.log("a verification code is sent");
+      })
+      .catch((e) => {
+        console.log("failed with error", e);
+      });
+    alert("입력하신 전화번호로 인증문자가 전송되었습니다.");
+  };
 
   const handleSubmit = async () => {
     try {
       const user = await Auth.currentAuthenticatedUser();
-      await Auth.updateUserAttributes(user, {
-        "custom:bank": bank.toString(),
-        "custom:accountnumber": accountNumber.toString(),
-      });
-      console.log("Update Complete");
-      const currentUserInfo = await Auth.currentUserInfo();
-      console.log(
-        currentUserInfo.attributes["custom:bank"],
-        currentUserInfo.attributes["custom:accountnumber"]
-      );
+      Auth.verifyCurrentUserAttributeSubmit("phone_number", authCode)
+        .then(async () => {
+          console.log("phone_number verified");
+          await Auth.updateUserAttributes(user, {
+            "custom:bank": bank.toString(),
+            "custom:accountnumber": accountNumber.toString(),
+          });
+          alert("회원정보 변경에 성공했습니다.");
+          navigation.goBack();
+        })
+        .catch((e) => {
+          console.log("failed with error", e);
+          alert("회원정보 변경에 실패했습니다.");
+        });
     } catch (error) {
       console.log("Error signing up...", error);
     }
@@ -143,6 +205,37 @@ export default ({ navigation }) => {
               autoCapitalize="none"
               value={accountNumber}
               isValued={accountNumber ? true : false}
+            />
+          </View>
+        </InputContainer>
+        <InputContainer>
+          <AuthContainer>
+            <NameText>휴대폰 번호</NameText>
+            <ConfirmBtn
+              onPress={confirmFindId}
+              text={"인증번호 요청"}
+              accent={false}
+            />
+          </AuthContainer>
+          <View style={{ marginLeft: 24 * width, marginTop: 19 * height }}>
+            <BarInput
+              placeholder={"'-'구분 없이 입력해주세요"}
+              stateFn={setPhonenumber}
+              autoCapitalize="none"
+              value={phonenumber}
+              isValued={phonenumber ? true : false}
+            />
+          </View>
+        </InputContainer>
+        <InputContainer>
+          <NameText>인증번호</NameText>
+          <View style={{ marginLeft: 24 * width, marginTop: 19 * height }}>
+            <BarInput
+              placeholder={"인증번호 6자리를 입력해주세요"}
+              stateFn={setAuthCode}
+              autoCapitalize="none"
+              value={authCode}
+              isValued={authCode ? true : false}
             />
           </View>
         </InputContainer>

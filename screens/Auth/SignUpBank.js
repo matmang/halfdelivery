@@ -19,13 +19,13 @@ const Container = styled.View`
 const ProgressContainer = styled.View`
   justify-content: center;
   align-items: center;
-  margin-top: ${height * 80}px;
+  margin-top: ${height * 110}px;
 `;
 
 const PhaseContainer = styled.View`
   justify-content: center;
   align-items: center;
-  margin-top: ${height * 22}px;
+  margin-top: ${height * 23}px;
   height: ${height * 56}px;
 `;
 
@@ -35,6 +35,14 @@ const IDContainer = styled.View`
   margin-right: auto;
   justify-content: flex-start;
   z-index: 10;
+`;
+
+const PasswordContainer = styled.View`
+  margin-top: ${height * 46}px;
+  margin-left: ${width * 24}px;
+  margin-right: auto;
+  justify-content: flex-start;
+  z-index: 1;
 `;
 
 const ButtonContainer = styled.View`
@@ -52,26 +60,35 @@ const ButtonContainer = styled.View`
 const PhaseText = styled.Text`
   font-family: "noto-medium";
   font-size: 22px;
+  include-font-padding: false;
+  text-align-vertical: center;
 `;
 
 const ExplainText = styled.Text`
   font-family: "noto-regular";
   font-size: 14px;
   color: #3c3c3c;
-  margin-top: ${height * -20}px;
+  margin-top: ${height * 10}px;
+  include-font-padding: false;
+  text-align-vertical: center;
 `;
 
 const NameText = styled.Text`
   font-family: "noto-medium";
   font-size: 15px;
+  margin-bottom: ${height * 21}px;
   color: ${colors.primaryBlue};
+  include-font-padding: false;
+  text-align-vertical: center;
 `;
 
 const AccountText = styled.Text`
-  margin-top: ${height * 15}px;
+  margin-bottom: ${height * 21}px;
   font-family: "noto-medium";
   font-size: 15px;
   color: ${colors.primaryBlue};
+  include-font-padding: false;
+  text-align-vertical: center;
 `;
 
 export default ({ route: { params }, navigation }) => {
@@ -153,6 +170,8 @@ export default ({ route: { params }, navigation }) => {
             containerStyle={{ width: 336 }}
             placeholder="은행을 선택해주세요"
           />
+        </IDContainer>
+        <PasswordContainer>
           <AccountText>계좌번호</AccountText>
           <BarInput
             placeholder={"'-'구분 없이 계좌번호를 입력해주세요"}
@@ -161,7 +180,7 @@ export default ({ route: { params }, navigation }) => {
             value={accountNumber}
             isValued={accountNumber ? true : false}
           />
-        </IDContainer>
+        </PasswordContainer>
         <ButtonContainer>
           <Btn
             text={"다음"}

@@ -3,17 +3,15 @@
   "modules": [
     "custom"
   ],
-  "parentResource": "halfdelivery1aa5cbdb1aa5cbdb",
-  "functionName": "halfdelivery1aa5cbdb1aa5cbdbPostConfirmation",
-  "resourceName": "halfdelivery1aa5cbdb1aa5cbdbPostConfirmation",
+  "parentResource": "HalfDelivery",
+  "functionName": "HalfDeliveryPostConfirmation",
+  "resourceName": "HalfDeliveryPostConfirmation",
   "parentStack": "auth",
-  "triggerEnvs": "[]",
+  "triggerEnvs": [],
   "triggerDir": "/snapshot/node_modules/@aws-amplify/amplify-category-auth/provider-utils/awscloudformation/triggers/PostConfirmation",
   "triggerTemplate": "PostConfirmation.json.ejs",
   "triggerEventPath": "PostConfirmation.event.json",
-  "roleName": "halfdelivery1aa5cbdb1aa5cbdbPostConfirmation",
+  "roleName": "HalfDeliveryPostConfirmation",
   "skipEdit": true,
-  "GROUP": "",
-  "enableCors": false,
-  "permissions": {}
+  "enableCors": false
 }

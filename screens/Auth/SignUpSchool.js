@@ -17,27 +17,27 @@ const Container = styled.View`
 const ProgressContainer = styled.View`
   justify-content: center;
   align-items: center;
-  margin-top: ${height * 80}px;
+  margin-top: ${height * 110}px;
 `;
 
 const PhaseContainer = styled.View`
   justify-content: center;
   align-items: center;
-  margin-top: ${height * 22}px;
+  margin-top: ${height * 23}px;
   height: ${height * 56}px;
 `;
 
 const IDContainer = styled.View`
   margin-top: ${height * 74}px;
-  margin-left: ${width * 23}px;
+  margin-left: ${width * 24}px;
   margin-right: auto;
   justify-content: flex-start;
   z-index: 10;
 `;
 
 const PasswordContainer = styled.View`
-  margin-top: ${height * 5}px;
-  margin-left: ${width * 23}px;
+  margin-top: ${height * 46}px;
+  margin-left: ${width * 24}px;
   margin-right: auto;
   justify-content: flex-start;
   z-index: 1;
@@ -48,7 +48,6 @@ const ButtonContainer = styled.View`
   justify-content: flex-end;
   align-items: center;
   background-color: white;
-  /* background-color: red; */
   width: 100%;
   padding-top: ${height * 12}px;
   padding-bottom: ${height * 24}px;
@@ -60,26 +59,35 @@ const ButtonContainer = styled.View`
 const PhaseText = styled.Text`
   font-family: "noto-medium";
   font-size: 22px;
+  include-font-padding: false;
+  text-align-vertical: center;
 `;
 
 const ExplainText = styled.Text`
   font-family: "noto-regular";
   font-size: 14px;
   color: #3c3c3c;
-  margin-top: ${height * -20}px;
+  margin-top: ${height * 10}px;
+  include-font-padding: false;
+  text-align-vertical: center;
 `;
 
 const NameText = styled.Text`
   font-family: "noto-medium";
   font-size: 15px;
+  margin-bottom: ${height * 21}px;
   color: ${colors.primaryBlue};
+  include-font-padding: false;
+  text-align-vertical: center;
 `;
 
 const CollegeText = styled.Text`
-  margin-top: ${height * 10}px;
   font-family: "noto-medium";
   font-size: 15px;
+  margin-bottom: ${height * 21}px;
   color: ${colors.primaryBlue};
+  include-font-padding: false;
+  text-align-vertical: center;
 `;
 
 export default ({ route: { params }, navigation }) => {
@@ -169,9 +177,9 @@ export default ({ route: { params }, navigation }) => {
             placeholder={schoolPlaceholder}
             zIndex={100}
           />
-          <CollegeText>단과대학</CollegeText>
         </IDContainer>
         <PasswordContainer>
+          <CollegeText>단과대학</CollegeText>
           <DropDownPicker
             open={collegeOpen}
             value={value}
