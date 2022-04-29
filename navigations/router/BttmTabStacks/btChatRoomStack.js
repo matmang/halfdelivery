@@ -94,7 +94,7 @@ const ChatListHeader = (props) => {
 
 export default () => (
   <Stack.Navigator
-    initialRouteName="ChatListScreen"
+    initialRouteName="ChatRoomScreen"
     // ! 여기(screenOptions) 에다가 header 컴포넌트 바로 넣으면, "ChatRoomScreen" 에서 우측 상단 버튼 안 보임.
     screenOptions={{ headerShown: true }}
   >

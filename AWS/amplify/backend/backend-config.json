@@ -1,6 +1,43 @@
 {
-  "api": {
+  "auth": {
     "HalfDelivery": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "HalfDeliveryPostConfirmation",
+          "triggerProvider": "Cognito",
+          "attributes": [
+            "Arn",
+            "Name"
+          ]
+        }
+      ],
+      "customAuth": false,
+      "frontendAuthConfig": {
+        "socialProviders": [],
+        "usernameAttributes": [],
+        "signupAttributes": [
+          "NAME",
+          "PHONE_NUMBER"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 6,
+          "passwordPolicyCharacters": []
+        },
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "verificationMechanisms": [
+          "PHONE_NUMBER"
+        ]
+      }
+    }
+  },
+  "api": {
+    "halfdelivery": {
       "service": "AppSync",
       "providerPlugin": "awscloudformation",
       "output": {
@@ -21,59 +58,15 @@
       }
     }
   },
-  "auth": {
-    "halfdelivery1aa5cbdb1aa5cbdb": {
-      "service": "Cognito",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [
-        {
-          "category": "function",
-          "resourceName": "halfdelivery1aa5cbdb1aa5cbdbPostConfirmation",
-          "triggerProvider": "Cognito",
-          "attributes": [
-            "Arn",
-            "Name"
-          ]
-        }
-      ],
-      "customAuth": false,
-      "frontendAuthConfig": {
-        "socialProviders": [],
-        "usernameAttributes": [],
-        "signupAttributes": [
-          "NAME",
-          "PHONE_NUMBER"
-        ],
-        "passwordProtectionSettings": {
-          "passwordPolicyMinLength": 8,
-          "passwordPolicyCharacters": []
-        },
-        "mfaConfiguration": "OPTIONAL",
-        "mfaTypes": [
-          "SMS"
-        ],
-        "verificationMechanisms": [
-          "PHONE_NUMBER"
-        ]
-      }
-    }
-  },
   "function": {
-    "halfdelivery1aa5cbdb1aa5cbdbPostConfirmation": {
+    "HalfDeliveryPostConfirmation": {
       "build": true,
       "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": []
-    }
-  },
-  "data": {
-    "DynamoDBDataImporter": {
-      "providerPlugin": "awscloudformation",
-      "service": "S3AndLambda"
+      "service": "Lambda"
     }
   },
   "storage": {
-    "s3fd8cfc0a": {
+    "s3halfdeliverystorage8c741499": {
       "service": "S3",
       "providerPlugin": "awscloudformation",
       "dependsOn": []

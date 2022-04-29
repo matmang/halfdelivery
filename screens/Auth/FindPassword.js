@@ -82,19 +82,25 @@ const GotoContainer = styled.View`
 const PhaseText = styled.Text`
   font-family: "noto-medium";
   font-size: 22px;
+  include-font-padding: false;
+  text-align-vertical: center;
 `;
 
 const ExplainText = styled.Text`
   font-family: "noto-regular";
   font-size: 14px;
   color: #3c3c3c;
-  margin-top: ${height * -20}px;
+  margin-top: ${height * 9}px;
+  include-font-padding: false;
+  text-align-vertical: center;
 `;
 
 const NameText = styled.Text`
   font-family: "noto-medium";
   font-size: 15px;
   color: ${colors.primaryBlue};
+  include-font-padding: false;
+  text-align-vertical: center;
 `;
 
 const GotoText = styled.Text`
@@ -102,6 +108,8 @@ const GotoText = styled.Text`
   font-size: 14px;
   margin-right: ${width * 24};
   color: ${colors.captionGray};
+  include-font-padding: false;
+  text-align-vertical: center;
 `;
 
 export default ({ navigation }) => {

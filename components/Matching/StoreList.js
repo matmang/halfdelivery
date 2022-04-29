@@ -73,7 +73,7 @@ const StoreList = ({ categoryID }) => {
 
 const styles = StyleSheet.create({
   root: {
-    backgroundColor: "#E5E6E7",
+    backgroundColor: "#E6EDF3",
     justifyContent: "center",
     width: "100%",
     height: "100%",

@@ -1,27 +1,29 @@
 {
   "staging": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-halfdelivery-staging-72919-authRole",
-      "UnauthRoleArn": "arn:aws:iam::852939695325:role/amplify-halfdelivery-staging-72919-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::852939695325:role/amplify-halfdelivery-staging-72919-authRole",
+      "AuthRoleName": "amplify-halfdelivery-staging-160207-authRole",
+      "UnauthRoleArn": "arn:aws:iam::571787833425:role/amplify-halfdelivery-staging-160207-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::571787833425:role/amplify-halfdelivery-staging-160207-authRole",
       "Region": "ap-northeast-2",
-      "DeploymentBucketName": "amplify-halfdelivery-staging-72919-deployment",
-      "UnauthRoleName": "amplify-halfdelivery-staging-72919-unauthRole",
-      "StackName": "amplify-halfdelivery-staging-72919",
-      "StackId": "arn:aws:cloudformation:ap-northeast-2:852939695325:stack/amplify-halfdelivery-staging-72919/765d1a60-1e9b-11ec-ace0-029790e2806e",
-      "AmplifyAppId": "d2ftg9z1s631ih",
-      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-halfdelivery-staging-72919-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
+      "DeploymentBucketName": "amplify-halfdelivery-staging-160207-deployment",
+      "UnauthRoleName": "amplify-halfdelivery-staging-160207-unauthRole",
+      "StackName": "amplify-halfdelivery-staging-160207",
+      "StackId": "arn:aws:cloudformation:ap-northeast-2:571787833425:stack/amplify-halfdelivery-staging-160207/9a775780-a154-11ec-950b-0a850e8563e0",
+      "AmplifyAppId": "d1wfcqk0nvtez1",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-halfdelivery-staging-160207-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
     },
     "categories": {
       "auth": {
-        "halfdelivery1aa5cbdb1aa5cbdb": {}
+        "HalfDelivery": {}
       },
       "function": {
-        "halfdelivery1aa5cbdb1aa5cbdbPostConfirmation": {
-          "GROUP": "",
-          "deploymentBucketName": "amplify-halfdelivery-staging-72919-deployment",
-          "s3Key": "amplify-builds/halfdelivery1aa5cbdb1aa5cbdbPostConfirmation-6f43376b567053693444-build.zip"
+        "HalfDeliveryPostConfirmation": {
+          "deploymentBucketName": "amplify-halfdelivery-staging-160207-deployment",
+          "s3Key": "amplify-builds/HalfDeliveryPostConfirmation-414667736e73584d4c7a-build.zip"
         }
+      },
+      "auth": {
+        "HalfDelivery": {}
       }
     }
   }
