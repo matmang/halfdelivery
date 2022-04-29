@@ -1,8 +1,7 @@
 import { Auth, DataStore } from "aws-amplify";
-import React, { useEffect, useLayoutEffect, useState } from "react";
-import { Image, Pressable } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Image } from "react-native";
 import styled from "styled-components";
-import { User } from "../../../AWS/src/models";
 import colors from "../../../colors";
 import { height, width } from "../../../utils";
 
@@ -39,7 +38,14 @@ const ProfileButtonContainer = styled.Pressable`
   width: ${width * 416}px;
   height: ${height * 57}px;
   background-color: white;
-  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+`;
+
+const InlineContainer = styled.View`
+  flex-direction: row;
+  margin-left: ${width * 24}px;
+  justify-content: space-between;
 `;
 
 const DistributionLine = styled.View`
@@ -55,9 +61,10 @@ const NameText = styled.Text`
   text-align-vertical: center;
 `;
 
-const InfoText = styled.Text`
-  font-size: ${width * 14};
-  font-family: "noto-regular";
+const ActiveNameText = styled.Text`
+  font-size: ${width * 17};
+  font-family: "noto-medium";
+  color: ${colors.primaryBlue};
   include-font-padding: false;
   text-align-vertical: center;
 `;
@@ -65,11 +72,30 @@ const InfoText = styled.Text`
 const ButtonName = styled.Text`
   font-family: "noto-medium";
   font-size: ${width * 17};
-  margin-left: ${width * 24}px;
+`;
+
+const InfoText = styled.Text`
+  font-size: ${width * 14};
+  font-family: "noto-regular";
+  include-font-padding: false;
+  text-align-vertical: center;
+`;
+
+const ButtonInfoText = styled.Text`
+  font-size: ${width * 17};
+  font-family: "noto-regular";
+  include-font-padding: false;
+  text-align-vertical: center;
+  position: absolute;
+  left: ${width * 134}px;
 `;
 
 export default ({ navigation }) => {
   const [authUser, setAuthUser] = useState(undefined);
+  const [username, setUsername] = useState("");
+  const [name, setName] = useState("");
+  const [birthday, setBirthday] = useState("");
+  const [phonenumber, setPhoneNumber] = useState("");
   const [school, setSchool] = useState("");
   const [college, setCollege] = useState("");
   const [userImgUri, setUserImgUri] = useState("");
@@ -81,6 +107,10 @@ export default ({ navigation }) => {
       const currentUserInfo = await Auth.currentUserInfo();
       setCollege(currentUserInfo.attributes["custom:college"]);
       setSchool(currentUserInfo.attributes["custom:school"]);
+      setBirthday(currentUserInfo.attributes["custom:birthday"]);
+      setName(currentUserInfo.attributes["name"]);
+      setPhoneNumber(currentUserInfo.attributes["phone_number"]);
+      setUsername(currentUserInfo["username"]);
     };
     fetchUserData();
   }, []);
@@ -94,7 +124,7 @@ export default ({ navigation }) => {
 
   return (
     <Container>
-      <ProfileContainer onPress={() => navigation.navigate("MyInfoScreen")}>
+      <ProfileContainer>
         <Image
           source={require("../../../assets/images/default_prf_img.png")}
           style={{
@@ -108,15 +138,6 @@ export default ({ navigation }) => {
           <ProfileInfoContainer>
             <NameText>김지우</NameText>
             <NameText> 님</NameText>
-            <Image
-              source={require("../../../assets/images/active-arrow-right.png")}
-              style={{
-                height: height * 10.29,
-                width: width * 4.73,
-                marginLeft: width * 4.5,
-                resizeMode: "cover",
-              }}
-            />
           </ProfileInfoContainer>
           <ProfileInfoContainer>
             <InfoText>{school} 캠퍼스</InfoText>
@@ -125,37 +146,63 @@ export default ({ navigation }) => {
         </ProfileRightContainer>
       </ProfileContainer>
       <ButtonBounder>
-        <ProfileButtonContainer onPress={() => alert("1")}>
-          <ButtonName>매칭내역</ButtonName>
+        <ProfileButtonContainer>
+          <InlineContainer>
+            <ButtonName>아이디</ButtonName>
+            <ButtonInfoText>{username}</ButtonInfoText>
+          </InlineContainer>
+        </ProfileButtonContainer>
+        <DistributionLine></DistributionLine>
+        <ProfileButtonContainer>
+          <InlineContainer>
+            <ActiveNameText>비밀번호</ActiveNameText>
+            <ButtonInfoText></ButtonInfoText>
+          </InlineContainer>
+          <Image
+            source={require("../../../assets/images/active-arrow-right.png")}
+            style={{
+              height: height * 10.29,
+              width: width * 4.73,
+              marginLeft: "auto",
+              marginRight: width * 24,
+              resizeMode: "cover",
+            }}
+          />
+        </ProfileButtonContainer>
+      </ButtonBounder>
+      <ButtonBounder>
+        <ProfileButtonContainer>
+          <InlineContainer>
+            <ButtonName>이름</ButtonName>
+            <ButtonInfoText>{name}</ButtonInfoText>
+          </InlineContainer>
+        </ProfileButtonContainer>
+        <DistributionLine></DistributionLine>
+        <ProfileButtonContainer>
+          <InlineContainer>
+            <ButtonName>생년월일</ButtonName>
+            <ButtonInfoText>{birthday}</ButtonInfoText>
+          </InlineContainer>
         </ProfileButtonContainer>
       </ButtonBounder>
       <ButtonBounder>
         <ProfileButtonContainer
-          onPress={() => navigation.navigate("AnnouncementScreen")}
+          onPress={() => navigation.navigate("UpdatePhoneNumberScreen")}
         >
-          <ButtonName>공지사항</ButtonName>
-        </ProfileButtonContainer>
-        <DistributionLine></DistributionLine>
-        <ProfileButtonContainer onPress={() => alert("3")}>
-          <ButtonName>자주 묻는 질문</ButtonName>
-        </ProfileButtonContainer>
-      </ButtonBounder>
-      <ButtonBounder>
-        <ProfileButtonContainer onPress={() => alert("2")}>
-          <ButtonName>차단 관리</ButtonName>
-        </ProfileButtonContainer>
-        <DistributionLine></DistributionLine>
-        <ProfileButtonContainer onPress={() => alert("3")}>
-          <ButtonName>신고 내역</ButtonName>
-        </ProfileButtonContainer>
-      </ButtonBounder>
-      <ButtonBounder>
-        <ProfileButtonContainer onPress={() => alert("2")}>
-          <ButtonName>약관 및 정책</ButtonName>
-        </ProfileButtonContainer>
-        <DistributionLine></DistributionLine>
-        <ProfileButtonContainer onPress={() => alert("3")}>
-          <ButtonName>현재 버전 0.0.0</ButtonName>
+          <InlineContainer>
+            <ActiveNameText>연락처</ActiveNameText>
+            <ButtonInfoText>{phonenumber}</ButtonInfoText>
+          </InlineContainer>
+          <Image
+            source={require("../../../assets/images/active-arrow-right.png")}
+            style={{
+              height: height * 10.29,
+              width: width * 4.73,
+              marginLeft: "auto",
+              marginRight: width * 24,
+              resizeMode: "cover",
+            }}
+          />
         </ProfileButtonContainer>
       </ButtonBounder>
     </Container>
