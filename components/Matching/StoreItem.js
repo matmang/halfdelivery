@@ -1,16 +1,6 @@
-import { useNavigation } from "@react-navigation/core";
 import React, { useState, useEffect } from "react";
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  StyleSheet,
-  Pressable,
-} from "react-native";
+import { View } from "react-native";
 import logos from "../../images";
-import { useDispatch } from "react-redux";
-import { MaterialIcons } from "@expo/vector-icons";
 import styled from "styled-components";
 import { SelectPlatform } from "../../components/Matching/Modals/";
 import StoreCategory from "../StoreCategory";
@@ -24,15 +14,64 @@ import {
 import { width, height } from "../../utils";
 
 const StoreItem = ({ storeInfo }) => {
-  const dispatch = useDispatch();
-  const navigation = useNavigation();
   const [isModal, setIsModal] = useState(false);
   const [category, setCategory] = useState(null);
 
+  /*   Store {
+    "_deleted": null,
+    "_lastChangedAt": 1649084860404,
+    "_version": 2,
+    "backgroundImgUri": null,
+    "baeminDlvTip": Object {
+      "12000": 2000,
+    },
+    "baeminOrderPrice": 12000,
+    "baeminUri": "https://baemin.me/n_PfMUXGr",
+    "coupangDlvTip": null,
+    "coupangOrderPrice": null,
+    "coupangUri": null,
+    "createdAt": "2022-03-29T11:41:38.598Z",
+    "id": "c02d26e1-ad08-4848-b982-fc89a3170747",
+    "location": null,
+    "logoImgUri": null,
+    "name": "도스마스 한양대점",
+    "openHours": Object {
+      "Fri": "11:00~23:00",
+      "Mon": "11:00~23:00",
+      "Sat": "11:00~23:00",
+      "Sun": "11:00~23:00",
+      "Thu": "11:00~23:00",
+      "Tue": "11:00~23:00",
+      "Wed": "11:00~23:00",
+    },
+    "storecategoryID": "0deb571b-4d3f-4164-8e25-f44ba725fb77",
+    "updatedAt": "2022-04-04T15:07:40.334Z",
+    "yogiyoDlvTip": null,
+    "yogiyoOrderPrice": null,
+    "yogiyoUri": null,
+  } */
+
+  const { baeminDlvTip } = storeInfo;
+  const { baeminOrderPrice } = storeInfo;
+  const { baeminUri } = storeInfo;
+  const { coupangDlvTip } = storeInfo;
+  const { coupangOrderPrice } = storeInfo;
+  const { coupangUri } = storeInfo;
+  const { yogiyoDlvTip } = storeInfo;
+  const { yogiyoOrderPrice } = storeInfo;
+  const { yogiyoUri } = storeInfo;
+  const { backgroundImgUri } = storeInfo;
+  const { logoImgUri } = storeInfo;
+  const { name } = storeInfo;
+  const { location } = storeInfo;
+  const { openHours } = storeInfo;
+  const { storecategoryID } = storeInfo;
+
+  // console.log("baeminUri", baeminUri);
   console.log(storeInfo);
 
   useEffect(() => {
-    switch (storeInfo.storecategoryID) {
+    switch (storecategoryID) {
       case KOREAN_ID:
         setCategory("한식");
         break;
@@ -52,7 +91,7 @@ const StoreItem = ({ storeInfo }) => {
         setCategory("-");
         break;
     }
-  }, [storeInfo.storecategoryID]);
+  }, [storecategoryID]);
 
   return (
     <StoreRoomBox
@@ -78,23 +117,21 @@ const StoreItem = ({ storeInfo }) => {
           isModal={isModal}
           setIsModal={setIsModal}
           storeInfo={storeInfo}
-          category={storeInfo.storecategoryID}
+          category={category}
         />
       )}
       <Img
         resizeMode="cover"
         source={
           // logos.halfLogo
-          // { uri: storeInfo.storeImgUri }
-          storeInfo.storeImgUri !== undefined
-            ? { uri: storeInfo.storeImgUri }
-            : logos.halfLogo
+          // { uri: logoImgUri }
+          logoImgUri == null ? logos.halfLogo : { uri: logoImgUri }
         }
       />
       <NonImgBox>
         <InfoView>
           <StoreCategory category={category} />
-          <StoreText>{storeInfo.store}</StoreText>
+          <StoreText>{name}</StoreText>
           {/* <MaterialIcons
             name="arrow-forward-ios"
             size={12}
@@ -112,33 +149,13 @@ const StoreItem = ({ storeInfo }) => {
           <View style={{ marginLeft: 18 }}>
             <InfoText numberOfLines={1}>
               <NunitoText>
-                {storeInfo.minOrdPrice
+                {baeminOrderPrice
                   .toString()
                   .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
               </NunitoText>
               원
             </InfoText>
-            <InfoText numberOfLines={1}>
-              {/* //? JS Magic! storeInfo.delivTip 값이 존재할 때에만, && 뒤에값을 표출한다! */}
-              {/* //? Conditional components 를 다루는 법이다. */}
-              {storeInfo.maxDlvTip && (
-                <InfoText>
-                  <NunitoText>
-                    {/*  //! minDlvTip 자리*/}
-                    {storeInfo.maxDlvTip
-                      .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                  </NunitoText>
-                  원{"   "}~{"   "}
-                  <NunitoText>
-                    {storeInfo.maxDlvTip
-                      .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                  </NunitoText>
-                  원
-                </InfoText>
-              )}
-            </InfoText>
+            <InfoText numberOfLines={1}>was storeInfo.maxDlvTip</InfoText>
           </View>
         </InfoView>
       </NonImgBox>

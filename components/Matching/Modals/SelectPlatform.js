@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import { toggleIsMatching } from "../../../redux/usersSlice";
 import DisclaimerFooter from "../../DisclaimerFooter";
 import { Auth } from "aws-amplify";
+import logos from "../../../images";
 
 export default ({ isModal, setIsModal, storeInfo, category }) => {
   const navigation = useNavigation();
@@ -27,18 +28,22 @@ export default ({ isModal, setIsModal, storeInfo, category }) => {
   }, []);
 
   const onPress = () => {
-    navigation.navigate("btHomeStack", {
-      screen: "MakeMatchScreen",
-      params: {
-        storeInfo,
-        platform: selectedName,
-        category,
-        authUser,
-      },
-    });
+    selectedName == null
+      ? alert("플랫폼을 선택해주세요")
+      : navigation.navigate("btHomeStack", {
+          screen: "MakeMatchScreen",
+          params: {
+            storeInfo,
+            platform: selectedName,
+            category,
+            authUser,
+          },
+        });
     dispatch(toggleIsMatching(true));
     setIsModal(false);
   };
+
+  const { storecategoryID } = storeInfo;
 
   return (
     <Modal
@@ -101,7 +106,7 @@ export default ({ isModal, setIsModal, storeInfo, category }) => {
               setSelectedName={setSelectedName}
             />
           </View>
-          <Select
+          <SelectButton
             selectedName={selectedName}
             onPress={() => {
               onPress();
@@ -114,7 +119,7 @@ export default ({ isModal, setIsModal, storeInfo, category }) => {
             >
               선택완료
             </Noto17medium>
-          </Select>
+          </SelectButton>
         </Mid>
         <Btm>
           <DisclaimerFooter />
@@ -188,7 +193,7 @@ const Warnning = styled.Text`
   color: ${colors.oxfordGray};
 `;
 
-const Select = styled.Pressable`
+const SelectButton = styled.Pressable`
   width: 324px;
   height: 48px;
   justify-content: center;
@@ -202,22 +207,36 @@ const Select = styled.Pressable`
 `;
 
 const StoreInfo_mini = ({ storeInfo, category }) => {
+  const { baeminDlvTip } = storeInfo;
+  const { baeminOrderPrice } = storeInfo;
+  const { baeminUri } = storeInfo;
+  const { coupangDlvTip } = storeInfo;
+  const { coupangOrderPrice } = storeInfo;
+  const { coupangUri } = storeInfo;
+  const { yogiyoDlvTip } = storeInfo;
+  const { yogiyoOrderPrice } = storeInfo;
+  const { yogiyoUri } = storeInfo;
+  const { backgroundImgUri } = storeInfo;
+  const { logoImgUri } = storeInfo;
+  const { name } = storeInfo;
+  const { location } = storeInfo;
+  const { openHours } = storeInfo;
+  const { storecategoryID } = storeInfo;
+
   return (
     <StoreRoomBox>
       <Img
         resizeMode="cover"
         source={
           // logos.halfLogo
-          // { uri: storeInfo.storeImgUri }
-          storeInfo.storeImgUri !== undefined
-            ? { uri: storeInfo.storeImgUri }
-            : logos.halfLogo
+          // { uri: logoImgUri }
+          logoImgUri !== undefined ? { uri: logoImgUri } : logos.halfLogo
         }
       />
       <NonImgBox>
         <InfoView>
           <StoreCategory category={category} />
-          <StoreText>{storeInfo.store}</StoreText>
+          <StoreText>{name}</StoreText>
         </InfoView>
 
         <InfoView>
@@ -229,33 +248,13 @@ const StoreInfo_mini = ({ storeInfo, category }) => {
           <View style={{ marginLeft: 18 }}>
             <InfoText numberOfLines={1}>
               <NunitoText>
-                {storeInfo.minOrdPrice
+                {baeminOrderPrice
                   .toString()
                   .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
               </NunitoText>
               원
             </InfoText>
-            <InfoText numberOfLines={1}>
-              {/* //? JS Magic! storeInfo.delivTip 값이 존재할 때에만, && 뒤에값을 표출한다! */}
-              {/* //? Conditional components 를 다루는 법이다. */}
-              {storeInfo.maxDlvTip && (
-                <InfoText>
-                  <NunitoText>
-                    {/*  //! minDlvTip 자리*/}
-                    {storeInfo.maxDlvTip
-                      .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                  </NunitoText>
-                  원{"   "}~{"   "}
-                  <NunitoText>
-                    {storeInfo.maxDlvTip
-                      .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                  </NunitoText>
-                  원
-                </InfoText>
-              )}
-            </InfoText>
+            <InfoText numberOfLines={1}>was maxDlvTip</InfoText>
           </View>
         </InfoView>
       </NonImgBox>

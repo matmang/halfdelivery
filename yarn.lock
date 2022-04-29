@@ -4172,6 +4172,13 @@
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.4.tgz#fcf7205c25dff795ee79af1e30da2c9790808f11"
   integrity sha512-rZ5drC/jWjrArrS8BR6SIr4cWpW09RNTYt9AMZo3Jwwif+iacXAqgVjm0B0Bv/S1jhDXKHqRVNCbACkJ89RAnQ==
 
+"@types/react-native@~0.63.2":
+  version "0.63.61"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.63.61.tgz#44fd2ec982bb15a0ee12dbfa70fb0f779e54465e"
+  integrity sha512-9WgPhoDCmz0TZl3LKaGG2YDlN+N7AW/bio4kEhzitNLANPuaagfUr4KbcSx1wuUPmb9AFks1V/PG+2L3Y2rdkg==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-redux@^7.1.20":
   version "7.1.21"
   resolved "https://registry.npmjs.org/@types/react-redux/-/react-redux-7.1.21.tgz"
@@ -10909,6 +10916,11 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
+
+typescript@~4.0.0:
+  version "4.0.8"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.0.8.tgz#5739105541db80a971fdbd0d56511d1a6f17d37f"
+  integrity sha512-oz1765PN+imfz1MlZzSZPtC/tqcwsCyIYA8L47EkRnRW97ztRk83SzMiWLrnChC0vqoYxSU1fcFUDA5gV/ZiPg==
 
 ua-parser-js@^0.7.18, ua-parser-js@^0.7.30:
   version "0.7.31"
