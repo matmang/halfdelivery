@@ -7,6 +7,8 @@ import SignInModal from "../../components/Auth/SignInModal";
 import loginbackground from "../../assets/images/loginbackground.png";
 import Btn from "../../components/Auth/Btn";
 import { height, width } from "../../utils";
+import { useRecoilState } from "recoil";
+import { loginState } from "../../recoil/atoms";
 
 const Container = styled.View`
   flex: 1;
@@ -90,6 +92,8 @@ export default ({ navigation }) => {
     setIsModalVisible(!isModalVisible);
   };
 
+  const [loggedIn, setLoggedIn] = useRecoilState(loginState);
+
   return (
     <Container>
       <ImageBackground
@@ -113,11 +117,7 @@ export default ({ navigation }) => {
           <WelcomeTextKR>어서오세요, 하프딜리버리 입니다 :D</WelcomeTextKR>
         </WelcomeContainer>
         <BodyContainer>
-          <Btn
-            onPress={() => setIsModalVisible(true)}
-            text="로그인"
-            accent={true}
-          />
+          <Btn onPress={() => setLoggedIn(true)} text="로그인" accent={true} />
           <SecondContainer>
             <Btn
               onPress={() => navigation.navigate("SignUpAuth")}

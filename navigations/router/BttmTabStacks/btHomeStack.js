@@ -13,7 +13,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import MakeMatchScreen from "../../../screens/Main/HomeStack/MakeMatchScreen";
 import EnterMatchScreen from "../../../screens/Main/HomeStack/EnterMatchScreen";
 import { height } from "../../../utils";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 
 const Container = styled.View`
   flex-direction: row;
@@ -51,7 +51,7 @@ export default () => {
     fetchUser();
   }, []);
 
-  const { isMatching } = useSelector((state) => state.usersReducer);
+  // const { isMatching } = useSelector((state) => state.usersReducer);
 
   return (
     <Stack.Navigator initialRouteName="HomeScreen">

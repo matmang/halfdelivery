@@ -9,7 +9,6 @@ import {
   Pressable,
 } from "react-native";
 import logos from "../../images";
-import { useDispatch } from "react-redux";
 import { MaterialIcons } from "@expo/vector-icons";
 import styled from "styled-components";
 import { SelectPlatform } from "../../components/Matching/Modals/";
@@ -24,7 +23,6 @@ import {
 import { width, height } from "../../utils";
 
 const StoreItem = ({ storeInfo }) => {
-  const dispatch = useDispatch();
   const navigation = useNavigation();
   const [isModal, setIsModal] = useState(false);
   const [category, setCategory] = useState(null);

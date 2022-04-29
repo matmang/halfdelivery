@@ -7,16 +7,14 @@ import StoreCategory from "../../StoreCategory";
 import Platform from "./../Platform";
 import { width, height } from "../../../utils";
 import { useNavigation } from "@react-navigation/native";
-import { useDispatch } from "react-redux";
-import { toggleIsMatching } from "../../../redux/usersSlice";
 import DisclaimerFooter from "../../DisclaimerFooter";
 import { Auth } from "aws-amplify";
+// import { toggleIsMatching } from "../../../redux/usersSlice";
 
 export default ({ isModal, setIsModal, storeInfo, category }) => {
   const navigation = useNavigation();
   const [selectedName, setSelectedName] = useState(null);
   const [authUser, setAuthUser] = useState(undefined);
-  const dispatch = useDispatch();
 
   useLayoutEffect(() => {
     const fetchUsers = async () => {
@@ -36,7 +34,7 @@ export default ({ isModal, setIsModal, storeInfo, category }) => {
         authUser,
       },
     });
-    dispatch(toggleIsMatching(true));
+    // dispatch(toggleIsMatching(true));
     setIsModal(false);
   };
 
