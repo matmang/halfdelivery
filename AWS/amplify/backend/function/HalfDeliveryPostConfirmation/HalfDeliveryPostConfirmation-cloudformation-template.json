@@ -67,12 +67,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "halfdelivery1aa5cbdb1aa5cbdbPostConfirmation",
+            "HalfDeliveryPostConfirmation",
             {
               "Fn::Join": [
                 "",
                 [
-                  "halfdelivery1aa5cbdb1aa5cbdbPostConfirmation",
+                  "HalfDeliveryPostConfirmation",
                   "-",
                   {
                     "Ref": "env"
@@ -122,12 +122,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "halfdelivery1aa5cbdb1aa5cbdbPostConfirmation",
+            "HalfDeliveryPostConfirmation",
             {
               "Fn::Join": [
                 "",
                 [
-                  "halfdelivery1aa5cbdb1aa5cbdbPostConfirmation",
+                  "HalfDeliveryPostConfirmation",
                   "-",
                   {
                     "Ref": "env"

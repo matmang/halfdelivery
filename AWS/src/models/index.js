@@ -8,22 +8,17 @@ const Platform = {
   "COUPANG": "COUPANG"
 };
 
-const MatchingType = {
-  "MIN_PRICE": "MIN_PRICE",
-  "DLV_TIP": "DLV_TIP"
-};
-
-const { MatchingInfo, StoreCategory, Store, Menu, Participant, User, Message, ChatRoom } = initSchema(schema);
+const { QnA, User, Board, MatchingInfo, StoreCategory, Store, Participant, Message, ChatRoom } = initSchema(schema);
 
 export {
+  QnA,
+  User,
+  Board,
   MatchingInfo,
   StoreCategory,
   Store,
-  Menu,
   Participant,
-  User,
   Message,
   ChatRoom,
-  Platform,
-  MatchingType
+  Platform
 };

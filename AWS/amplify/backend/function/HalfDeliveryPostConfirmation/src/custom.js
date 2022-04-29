@@ -37,12 +37,6 @@ exports.handler = async (event, context, callback) => {
     id: { S: event.request.userAttributes.sub },
     name: { S: event.request.userAttributes.name },
     phone_number: { S: event.request.userAttributes.phone_number },
-    bank: { S: event.request.userAttributes["custom:bank"] },
-    accountnumber: { S: event.request.userAttributes["custom:accountnumber"] },
-    school: { S: event.request.userAttributes["custom:school"] },
-    college: { S: event.request.userAttributes["custom:college"] },
-    birthday: { S: event.request.userAttributes["custom:birthday"] },
-    agree: { BOOL: true },
   };
 
   const params = {
