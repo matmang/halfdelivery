@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import * as Font from "expo-font";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
@@ -9,18 +9,9 @@ import AppLoading from "expo-app-loading";
 import Amplify, { AuthModeStrategyType } from "aws-amplify";
 import config from "./AWS/src/aws-exports";
 import { withAuthenticator } from "aws-amplify-react-native";
-
-// Amplify.configure({
-//   ...config,
-//   Analytics: {
-//     disabled: true,
-//   },
-//   DataStore: {
-//     authModeStrategyType: AuthModeStrategyType.MULTI_AUTH,
-//   },
-// });
-
-// Amplify.configure(config);
+import { atom, RecoilRoot } from "recoil";
+import { recoilPersist } from "recoil-persist";
+import { Text } from "react-native";
 
 Amplify.configure({
   ...config,
@@ -31,9 +22,12 @@ Amplify.configure({
 
 const getFonts = () => {
   return Font.loadAsync({
-    "noto-regular": require("./assets/fonts/NotoSansKR-Regular.otf"),
-    "noto-medium": require("./assets/fonts/NotoSansKR-Medium.otf"),
-    "noto-bold": require("./assets/fonts/NotoSansKR-Bold.otf"),
+    // "noto-regular": require("./assets/fonts/NotoSansKR-Regular.otf"),
+    // "noto-medium": require("./assets/fonts/NotoSansKR-Medium.otf"),
+    // "noto-bold": require("./assets/fonts/NotoSansKR-Bold.otf"),
+    "noto-regular": require("./assets/fonts/GothicA1-Regular.ttf"),
+    "noto-medium": require("./assets/fonts/GothicA1-Medium.ttf"),
+    "noto-bold": require("./assets/fonts/GothicA1-Bold.ttf"),
     "nunito-regular": require("./assets/fonts/NunitoSans-Regular.ttf"),
     "nunito-semibold": require("./assets/fonts/NunitoSans-SemiBold.ttf"),
     "nunito-bold": require("./assets/fonts/NunitoSans-Bold.ttf"),
@@ -44,11 +38,11 @@ function App() {
   const [isReady, setIsReady] = useState(false);
   const handleFinish = () => setIsReady(true);
   return isReady ? (
-    <Provider store={store}>
-      <PersistGate persistor={persistor}>
+    <RecoilRoot>
+      <Suspense fallback={<Text>로딩...</Text>}>
         <Gate />
-      </PersistGate>
-    </Provider>
+      </Suspense>
+    </RecoilRoot>
   ) : (
     <AppLoading
       onError={console.error}

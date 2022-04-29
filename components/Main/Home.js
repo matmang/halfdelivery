@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Image } from "react-native";
+import { Image, Pressable } from "react-native";
 import styled from "styled-components";
 import colors from "../../colors";
 import Auth from "@aws-amplify/auth";
@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from "react-redux";
 import ProfileModal from "./ProfileModal";
 import { height, width } from "../../utils";
 import Btn from "../Auth/Btn";
+import { useRecoilState } from "recoil";
+import { loginState } from "../../recoil/atoms";
 
 const Container = styled.View`
   justify-content: center;
@@ -55,12 +57,12 @@ const StartText = styled.Text`
 `;
 
 const Home = ({ stores, navigation, isModalVisible }) => {
-  const dispatch = useDispatch();
   const [isVisible, setIsVisible] = useState(false);
+  const [loggedIn, setLoggedIn] = useRecoilState(loginState);
 
   const logOutPress = () => {
     Auth.signOut();
-    dispatch(logOut());
+    setLoggedIn(false);
   };
 
   useEffect(() => {
@@ -89,7 +91,9 @@ const Home = ({ stores, navigation, isModalVisible }) => {
           </SearchContanier>
         </TouchableOpacity>
       </HeaderContainer>
-      <NoneBox></NoneBox>
+      <Pressable onPress={() => logOutPress()}>
+        <NoneBox></NoneBox>
+      </Pressable>
       <StartText>매칭을 시작해주세요</StartText>
       <ProfileModal
         isModalVisible={isVisible}

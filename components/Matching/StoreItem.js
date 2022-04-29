@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View } from "react-native";
 import logos from "../../images";
+import { MaterialIcons } from "@expo/vector-icons";
 import styled from "styled-components";
 import { SelectPlatform } from "../../components/Matching/Modals/";
 import StoreCategory from "../StoreCategory";
@@ -14,6 +15,7 @@ import {
 import { width, height } from "../../utils";
 
 const StoreItem = ({ storeInfo }) => {
+  const navigation = useNavigation();
   const [isModal, setIsModal] = useState(false);
   const [category, setCategory] = useState(null);
 

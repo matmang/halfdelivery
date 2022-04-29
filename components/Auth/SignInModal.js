@@ -9,6 +9,8 @@ import SmallBtn from "./SmallBtn";
 import { useDispatch } from "react-redux";
 import { userLogin } from "../../redux/usersSlice";
 import { height, width } from "../../utils";
+import { useRecoilState } from "recoil";
+import { loginState } from "../../recoil/atoms";
 
 const Container = styled.View`
   width: ${width * 364}px;
@@ -58,8 +60,9 @@ const SignInModal = ({
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [accent, setAccent] = useState(false);
+  const [loggedIn, setLoggedIn] = useRecoilState(loginState);
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   useEffect(() => {
     setAccent(username && password);
@@ -77,7 +80,8 @@ const SignInModal = ({
     if (!isFormValid()) {
       return;
     }
-    dispatch(userLogin(username, password));
+    // dispatch(userLogin(username, password));
+    setLoggedIn(true);
   };
 
   return (

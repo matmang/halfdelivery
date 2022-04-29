@@ -7,6 +7,8 @@ import SignInModal from "../../components/Auth/SignInModal";
 import loginbackground from "../../assets/images/welcome.png";
 import Btn from "../../components/Auth/Btn";
 import { height, width } from "../../utils";
+import { useRecoilState } from "recoil";
+import { loginState } from "../../recoil/atoms";
 import { checkFirstLaunch } from "../../redux/checkFirstLaunch";
 
 const Container = styled.View`
@@ -101,16 +103,7 @@ export default ({ navigation }) => {
     setIsModalVisible(!isModalVisible);
   };
 
-  useEffect(() => {
-    const checkIsFirst = async () => {
-      const isFirstLaunch = await checkFirstLaunch();
-      console.log(isFirstLaunch);
-      if (isFirstLaunch) {
-        alert("첫번째 실행입니다.");
-      }
-    };
-    checkIsFirst();
-  }, []);
+  const [loggedIn, setLoggedIn] = useRecoilState(loginState);
 
   return (
     <Container>
@@ -135,11 +128,7 @@ export default ({ navigation }) => {
           <WelcomeTextKR>어서오세요, 하프딜리버리 입니다 :D</WelcomeTextKR>
         </WelcomeContainer>
         <BodyContainer>
-          <Btn
-            onPress={() => setIsModalVisible(true)}
-            text="로그인"
-            accent={true}
-          />
+          <Btn onPress={() => setLoggedIn(true)} text="로그인" accent={true} />
           <SecondContainer>
             <Btn
               onPress={() => navigation.navigate("SignUpAuth")}
