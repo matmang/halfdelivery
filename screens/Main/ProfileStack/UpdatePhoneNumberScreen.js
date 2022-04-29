@@ -33,7 +33,7 @@ const LogoConatainer = styled.View`
 const PhaseContainer = styled.View`
   justify-content: center;
   align-items: center;
-  margin-top: ${height * 22}px;
+  margin-top: ${height * 25.7}px;
   height: ${height * 56}px;
 `;
 
@@ -67,15 +67,7 @@ const AuthContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-`;
-
-const GotoContainer = styled.View`
-  width: 100%;
-  margin-left: auto;
-  align-items: center;
-  justify-content: flex-end;
-  flex-direction: row;
-  margin-top: ${height * 180}px;
+  margin-bottom: ${height * 21}px;
 `;
 
 const PhaseText = styled.Text`
@@ -83,6 +75,7 @@ const PhaseText = styled.Text`
   font-size: 22px;
   include-font-padding: false;
   text-align-vertical: center;
+  margin-bottom: ${height * 10}px;
 `;
 
 const ExplainText = styled.Text`
@@ -101,6 +94,14 @@ const NameText = styled.Text`
   text-align-vertical: center;
 `;
 
+const UnAccentedText = styled.Text`
+  font-family: "noto-medium";
+  font-size: 15px;
+  color: ${colors.unselectedGrey};
+  include-font-padding: false;
+  text-align-vertical: center;
+`;
+
 const GotoText = styled.Text`
   font-family: "noto-medium";
   font-size: 14px;
@@ -111,51 +112,36 @@ const GotoText = styled.Text`
 `;
 
 export default ({ navigation }) => {
-  const [userName, setUserName] = useState("");
+  const [name, setName] = useState("김지우");
   const [phonenumber, setPhonenumber] = useState("");
   const [authCode, setAuthCode] = useState("");
-  const [userNameErrorMessage, setUserNameErrorMessage] = useState("");
   const [authCodeErrorMessage, setAuthCodeErrorMessage] = useState("");
   const [phonenumberErrorMessage, setPhoneNumberErrorMessage] = useState("");
   const [accent, setAccent] = useState(false);
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const refDidMount = useRef(null);
 
   useEffect(() => {
     setAccent(
-      userName &&
-        phonenumber &&
+      phonenumber &&
         authCode &&
-        !userNameErrorMessage &&
         !phonenumberErrorMessage &&
         !authCodeErrorMessage
     );
-  }, [
-    userName,
-    phonenumber,
-    authCode,
-    userNameErrorMessage,
-    phonenumberErrorMessage,
-    authCodeErrorMessage,
-  ]);
+  }, [phonenumber, authCode, phonenumberErrorMessage, authCodeErrorMessage]);
 
   useEffect(() => {
     if (refDidMount.current) {
-      let userNameError = "";
       let authCodeError = "";
       let phonenumberError = "";
-      if (!userName) {
-        userNameError = "가입한 아이디를 입력해주세요.";
-      } else if (!phonenumber) {
+      if (!phonenumber) {
         phonenumberError = "전화번호를 입력해주세요.";
       } else if (authCode.length !== 6) {
         authCodeError = "인증번호 6자리를 입력해주세요.";
       } else {
-        userNameError = "";
         authCodeError = "";
       }
-      setUserNameErrorMessage(userNameError);
       setAuthCodeErrorMessage(authCodeError);
       setPhoneNumberErrorMessage(phonenumberError);
     } else {
@@ -163,19 +149,22 @@ export default ({ navigation }) => {
     }
   });
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     try {
-      Auth.verifyCurrentUserAttributeSubmit(
-        "+82" + phonenumber.slice(1, 11),
-        authCode
-      )
-        .then(() => {
+      Auth.verifyCurrentUserAttributeSubmit("phone_number", authCode)
+        .then(async () => {
           console.log("phone_number verified");
+          const user = await Auth.currentAuthenticatedUser();
+          await Auth.updateUserAttributes(user, {
+            phone_number: "+82" + phonenumber.slice(1, 11),
+          });
+          console.log("phone_number changed");
+          navigation.goBack();
         })
         .catch((e) => {
           console.log("failed with error", e);
+          alert("변경에 실패했습니다.");
         });
-      console.log("phone_number changed");
     } catch (error) {
       console.log("Error find password...", error);
     }
@@ -189,7 +178,7 @@ export default ({ navigation }) => {
       .catch((e) => {
         console.log("failed with error", e);
       });
-    alert("회원가입시 입력한 전화번호로 인증문자가 전송되었습니다.");
+    alert("새로운 전화번호로 인증문자가 전송되었습니다.");
   };
 
   return (
@@ -211,16 +200,16 @@ export default ({ navigation }) => {
               </ExplainText>
             </PhaseContainer>
             <NameContainer>
-              <NameText>아이디</NameText>
-
+              <AuthContainer>
+                <UnAccentedText>이름</UnAccentedText>
+              </AuthContainer>
               <BarInput
-                placeholder={"아이디를 입력해주세요"}
-                stateFn={setUserName}
-                value={userName}
-                isValued={userName ? true : false}
-                error={userNameErrorMessage ? true : false}
+                placeholder={name}
+                stateFn={setName}
+                value={name}
+                disabled={true}
+                error={false}
               />
-              <ErrorMessage message={userNameErrorMessage} />
             </NameContainer>
             <PasswordContainer>
               <AuthContainer>
@@ -241,7 +230,9 @@ export default ({ navigation }) => {
               <ErrorMessage message={phonenumberErrorMessage} />
             </PasswordContainer>
             <PasswordContainer>
-              <NameText>인증번호</NameText>
+              <AuthContainer>
+                <NameText>인증번호</NameText>
+              </AuthContainer>
               <BarInput
                 placeholder={"인증번호 숫자 6자리 입력해주세요"}
                 stateFn={setAuthCode}

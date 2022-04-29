@@ -21,6 +21,9 @@
           "deploymentBucketName": "amplify-halfdelivery-staging-160207-deployment",
           "s3Key": "amplify-builds/HalfDeliveryPostConfirmation-414667736e73584d4c7a-build.zip"
         }
+      },
+      "auth": {
+        "HalfDelivery": {}
       }
     }
   }

@@ -136,7 +136,7 @@ export default ({ navigation }) => {
         />
         <ProfileRightContainer>
           <ProfileInfoContainer>
-            <NameText>김지우</NameText>
+            <NameText>{name}</NameText>
             <NameText> 님</NameText>
           </ProfileInfoContainer>
           <ProfileInfoContainer>
@@ -191,7 +191,7 @@ export default ({ navigation }) => {
         >
           <InlineContainer>
             <ActiveNameText>연락처</ActiveNameText>
-            <ButtonInfoText>{phonenumber}</ButtonInfoText>
+            <ButtonInfoText>{"0" + phonenumber.slice(3, 13)}</ButtonInfoText>
           </InlineContainer>
           <Image
             source={require("../../../assets/images/active-arrow-right.png")}

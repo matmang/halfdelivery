@@ -18,14 +18,14 @@ const Container = styled.View`
 
 const ProgressContainer = styled.View`
   justify-content: center;
-  margin-top: ${height * 80}px;
+  margin-top: ${height * 110}px;
   align-items: center;
 `;
 
 const PhaseContainer = styled.View`
   justify-content: center;
   align-items: center;
-  margin-top: ${height * 22}px;
+  margin-top: ${height * 24}px;
   height: ${height * 56}px;
 `;
 
@@ -37,7 +37,7 @@ const IDContainer = styled.View`
 `;
 
 const PasswordContainer = styled.View`
-  margin-top: ${height * 15}px;
+  margin-top: ${height * 24}px;
   margin-left: ${width * 23}px;
   margin-right: auto;
   justify-content: flex-start;
@@ -64,19 +64,26 @@ const AuthContainer = styled.View`
 const PhaseText = styled.Text`
   font-family: "noto-medium";
   font-size: 22px;
+  include-font-padding: false;
+  text-align-vertical: center;
 `;
 
 const ExplainText = styled.Text`
   font-family: "noto-regular";
   font-size: 14px;
   color: #3c3c3c;
-  margin-top: ${height * -20}px;
+  margin-top: ${height * 10}px;
+  include-font-padding: false;
+  text-align-vertical: center;
 `;
 
 const NameText = styled.Text`
   font-family: "noto-medium";
   font-size: 15px;
+  margin-bottom: ${height * 21}px;
   color: ${colors.primaryBlue};
+  include-font-padding: false;
+  text-align-vertical: center;
 `;
 
 export default ({ route: { params }, navigation }) => {

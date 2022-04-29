@@ -1,9 +1,12 @@
 import { Auth } from "aws-amplify";
 import React, { useEffect, useRef, useState } from "react";
 import DropDownPicker from "react-native-dropdown-picker";
+import { acc } from "react-native-reanimated";
 import styled from "styled-components";
 import colors from "../../../colors";
+import BarInput from "../../../components/Auth/BarInput";
 import Btn from "../../../components/Auth/Btn";
+import ConfirmBtn from "../../../components/Auth/ConfirmBtn";
 import { height, width } from "../../../utils";
 
 const Container = styled.View`
@@ -26,13 +29,23 @@ const InputAreaContainer = styled.View`
 `;
 
 const FirstContainer = styled.View`
-  margin-top: ${width * 41};
+  margin-top: ${height * 41}px;
   width: 100%;
+  margin-left: ${width * 24}px;
 `;
 
 const InputContainer = styled.View`
-  margin-top: ${width * 45};
+  margin-top: ${height * 45}px;
   width: 100%;
+  margin-left: ${width * 24}px;
+`;
+
+const AuthContainer = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: ${height * 21}px;
+  padding-right: ${width * 48}px;
 `;
 
 const ButtonContainer = styled.View`
@@ -58,15 +71,18 @@ const NameText = styled.Text`
   font-family: "noto-medium";
   font-size: ${width * 17}px;
   color: ${colors.primaryBlue};
-  margin-left: ${width * 24}px;
 `;
 
 export default ({ navigation }) => {
   const [school, setSchool] = useState("");
   const [college, setCollege] = useState("");
+  const [phonenumber, setPhonenumber] = useState("");
+  const [authCode, setAuthCode] = useState("");
   const [accent, setAccent] = useState(false);
   const [schoolOpen, setSchoolOpen] = useState(false);
   const [collegeOpen, setCollegeOpen] = useState(false);
+  const [authCodeErrorMessage, setAuthCodeErrorMessage] = useState("");
+  const [phonenumberErrorMessage, setPhoneNumberErrorMessage] = useState("");
   const [value, setValue] = useState(null);
   const [schoolItems, setSchoolItems] = useState([
     { label: "한양대학교 ERICA", value: "ERICA" },
@@ -92,22 +108,69 @@ export default ({ navigation }) => {
   const refDidMount = useRef(null);
 
   useEffect(() => {
-    setAccent(school && college);
-  }, [school, college]);
+    setAccent(
+      school &&
+        college &&
+        phonenumber &&
+        authCode &&
+        !phonenumberErrorMessage &&
+        !authCodeErrorMessage
+    );
+  }, [
+    school,
+    college,
+    phonenumber,
+    authCode,
+    phonenumberErrorMessage,
+    authCodeErrorMessage,
+  ]);
+
+  useEffect(() => {
+    if (refDidMount.current) {
+      let authCodeError = "";
+      let phonenumberError = "";
+      if (!phonenumber) {
+        phonenumberError = "전화번호를 입력해주세요.";
+      } else if (authCode.length !== 6) {
+        authCodeError = "인증번호 6자리를 입력해주세요.";
+      } else {
+        authCodeError = "";
+      }
+      setAuthCodeErrorMessage(authCodeError);
+      setPhoneNumberErrorMessage(phonenumberError);
+    } else {
+      refDidMount.current = true;
+    }
+  });
+
+  const confirmFindId = () => {
+    Auth.verifyCurrentUserAttribute("phone_number")
+      .then(() => {
+        console.log("a verification code is sent");
+      })
+      .catch((e) => {
+        console.log("failed with error", e);
+      });
+    alert("입력하신 전화번호로 인증문자가 전송되었습니다.");
+  };
 
   const handleSubmit = async () => {
     try {
       const user = await Auth.currentAuthenticatedUser();
-      await Auth.updateUserAttributes(user, {
-        "custom:school": school.toString(),
-        "custom:college": college.toString(),
-      });
-      console.log("Update Complete");
-      const currentUserInfo = await Auth.currentUserInfo();
-      console.log(
-        currentUserInfo.attributes["custom:school"],
-        currentUserInfo.attributes["custom:college"]
-      );
+      Auth.verifyCurrentUserAttributeSubmit("phone_number", authCode)
+        .then(async () => {
+          console.log("phone_number verified");
+          await Auth.updateUserAttributes(user, {
+            "custom:school": school.toString(),
+            "custom:college": college.toString(),
+          });
+          alert("회원정보 변경에 성공했습니다.");
+          navigation.goBack();
+        })
+        .catch((e) => {
+          console.log("failed with error", e);
+          alert("회원정보 변경에 실패했습니다.");
+        });
     } catch (error) {
       console.log("Error update...", error);
     }
@@ -133,7 +196,7 @@ export default ({ navigation }) => {
               setSchool(item.label);
               setSchoolPlaceholder(item.label);
             }}
-            containerStyle={{ width: 336, marginLeft: 24, marginTop: 21 }}
+            containerStyle={{ width: 336, marginTop: 21 }}
             placeholder={schoolPlaceholder}
             zIndex={100}
           />
@@ -151,14 +214,43 @@ export default ({ navigation }) => {
               setCollege(item.label);
               setCollegePlaceholder(item.label);
             }}
-            containerStyle={{ width: 336, marginLeft: 24, marginTop: 21 }}
+            containerStyle={{ width: 336, marginTop: 21 }}
             placeholder={collegePlaceholder}
             zIndex={100}
           />
         </InputContainer>
+        <InputContainer>
+          <AuthContainer>
+            <NameText>휴대폰 번호</NameText>
+            <ConfirmBtn
+              onPress={confirmFindId}
+              text={"인증번호 요청"}
+              accent={false}
+            />
+          </AuthContainer>
+          <BarInput
+            placeholder={"- 구분 없이 입력해주세요"}
+            stateFn={setPhonenumber}
+            value={phonenumber}
+            isValued={phonenumber ? true : false}
+            error={phonenumberErrorMessage ? true : false}
+          />
+        </InputContainer>
+        <InputContainer>
+          <AuthContainer>
+            <NameText>인증번호</NameText>
+          </AuthContainer>
+          <BarInput
+            placeholder={"인증번호 숫자 6자리 입력해주세요"}
+            stateFn={setAuthCode}
+            value={authCode}
+            isValued={authCode ? true : false}
+            error={authCodeErrorMessage ? true : false}
+          />
+        </InputContainer>
       </InputAreaContainer>
       <ButtonContainer>
-        <Btn text={"확인"} accent={true} onPress={handleSubmit} />
+        <Btn text={"확인"} accent={accent} onPress={handleSubmit} />
       </ButtonContainer>
     </Container>
   );

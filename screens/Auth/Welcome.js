@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Image, ImageBackground } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import styled from "styled-components";
 import colors from "../../colors";
 import SignInModal from "../../components/Auth/SignInModal";
-import loginbackground from "../../assets/images/loginbackground.png";
+import loginbackground from "../../assets/images/welcome.png";
 import Btn from "../../components/Auth/Btn";
 import { height, width } from "../../utils";
+import { checkFirstLaunch } from "../../redux/checkFirstLaunch";
 
 const Container = styled.View`
   flex: 1;
@@ -57,30 +58,40 @@ const WelcomeText = styled.Text`
   font-family: "nunito-semibold";
   font-size: 40px;
   color: ${colors.primaryBlue};
+  include-font-padding: false;
+  text-align-vertical: center;
 `;
 
 const WelcomeTextKR = styled.Text`
   font-family: "noto-bold";
   font-size: 20px;
   color: ${colors.primaryBlue};
+  include-font-padding: false;
+  text-align-vertical: center;
 `;
 
 const BlueTextER = styled.Text`
   font-family: "nunito-semibold";
   font-size: 17px;
   color: ${colors.primaryBlue};
+  include-font-padding: false;
+  text-align-vertical: center;
 `;
 
 const BlueTextKR = styled.Text`
   font-family: "noto-regular";
   font-size: 17px;
   color: ${colors.primaryBlue};
+  include-font-padding: false;
+  text-align-vertical: center;
 `;
 
 const ExplainText = styled.Text`
   font-family: "noto-medium";
   font-size: 12px;
   color: ${colors.captionGray};
+  include-font-padding: false;
+  text-align-vertical: center;
 `;
 
 export default ({ navigation }) => {
@@ -89,6 +100,17 @@ export default ({ navigation }) => {
   const toggleModal = () => {
     setIsModalVisible(!isModalVisible);
   };
+
+  useEffect(() => {
+    const checkIsFirst = async () => {
+      const isFirstLaunch = await checkFirstLaunch();
+      console.log(isFirstLaunch);
+      if (isFirstLaunch) {
+        alert("첫번째 실행입니다.");
+      }
+    };
+    checkIsFirst();
+  }, []);
 
   return (
     <Container>
@@ -104,7 +126,7 @@ export default ({ navigation }) => {
       >
         <LogoContainer>
           <Image
-            source={require("../../assets/images/halfLogo.png")}
+            source={require("../../assets/images/halfd_logo.png")}
             style={{ width: width * 83.19, height: height * 120.64 }}
           />
         </LogoContainer>
