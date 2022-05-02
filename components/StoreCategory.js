@@ -14,7 +14,11 @@ const StoreCategory = ({ category }) => {
       }}
     >
       <Text
-        style={{ fontSize: 10, textAlign: "center", fontFamily: "noto-medium" }}
+        style={{
+          fontSize: 10,
+          textAlign: "center",
+          fontFamily: "gothica1-medium",
+        }}
         numberOfLines={1}
       >
         {category}

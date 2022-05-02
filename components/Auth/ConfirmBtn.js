@@ -23,7 +23,7 @@ const Button = styled.View`
 const Text = styled.Text`
   color: ${(props) => (props.accent ? colors.primaryBlue : colors.oxfordGray)};
   font-size: 12px;
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
 `;
 
 const ConfirmBtn = ({ onPress, text, accent = false }) => (

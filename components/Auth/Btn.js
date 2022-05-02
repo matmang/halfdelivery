@@ -23,7 +23,7 @@ const Button = styled.View`
 const Text = styled.Text`
   color: ${(props) => (props.accent ? "#FFFFFF" : colors.blueGray)};
   font-size: 14px;
-  font-family: "noto-medium";
+  font-family: "gothica1-medium";
 `;
 
 const Btn = ({ onPress, text, accent = false, icon = false, textStyle }) => (

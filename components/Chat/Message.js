@@ -211,7 +211,7 @@ const MsgBox = styled.View`
 const MsgText = styled.Text`
   font-size: 13px;
   line-height: 15px;
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
   color: ${(props) => (props.isMe ? "white" : "black")};
 `;
 

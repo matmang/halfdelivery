@@ -31,7 +31,7 @@ export default ({
       </Pressable>
       <Text
         style={[
-          { marginLeft: 10, fontFamily: "noto-regular", fontSize: 14 },
+          { marginLeft: 10, fontFamily: "gothica1-regular", fontSize: 14 },
           textStyle,
         ]}
       >

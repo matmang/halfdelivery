@@ -27,13 +27,13 @@ const styles = StyleSheet.create({
   },
   orderLogCategory: {
     fontSize: 40,
-    fontFamily: "noto-regular",
+    fontFamily: "gothica1-regular",
     fontWeight: "bold",
     textAlign: "left",
   },
   orderLogMinPrice: {
     fontSize: 30,
-    fontFamily: "noto-regular",
+    fontFamily: "gothica1-regular",
     fontWeight: "bold",
     textAlign: "left",
   },
@@ -160,20 +160,20 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: 15,
-    fontFamily: "noto-regular",
+    fontFamily: "gothica1-regular",
     fontWeight: "bold",
   },
   textPressed: {
     color: "white",
     textAlign: "center",
     fontSize: 30,
-    fontFamily: "noto-regular",
+    fontFamily: "gothica1-regular",
   },
   textNotPressed: {
     color: "white",
     textAlign: "center",
     fontSize: 40,
-    fontFamily: "noto-regular",
+    fontFamily: "gothica1-regular",
   },
 });
 

@@ -105,7 +105,7 @@ export default () => (
         title: "하프톡",
         headerTitleStyle: {
           color: "white",
-          fontFamily: "noto-regular",
+          fontFamily: "gothica1-regular",
           fontSize: 17,
         },
         headerTitleAlign: "center",
@@ -134,7 +134,7 @@ export default () => (
         title: "OOOO 매칭방",
         headerTitleStyle: {
           color: "white",
-          fontFamily: "noto-regular",
+          fontFamily: "gothica1-regular",
           fontSize: 17,
         },
         headerTitleAlign: "center",

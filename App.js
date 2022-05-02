@@ -22,12 +22,12 @@ Amplify.configure({
 
 const getFonts = () => {
   return Font.loadAsync({
-    // "noto-regular": require("./assets/fonts/NotoSansKR-Regular.otf"),
-    // "noto-medium": require("./assets/fonts/NotoSansKR-Medium.otf"),
-    // "noto-bold": require("./assets/fonts/NotoSansKR-Bold.otf"),
-    "noto-regular": require("./assets/fonts/GothicA1-Regular.ttf"),
-    "noto-medium": require("./assets/fonts/GothicA1-Medium.ttf"),
-    "noto-bold": require("./assets/fonts/GothicA1-Bold.ttf"),
+    // "gothica1-regular": require("./assets/fonts/NotoSansKR-Regular.otf"),
+    // "gothica1-medium": require("./assets/fonts/NotoSansKR-Medium.otf"),
+    // "gothica1-semibold": require("./assets/fonts/NotoSansKR-Bold.otf"),
+    "gothica1-regular": require("./assets/fonts/GothicA1-Regular.ttf"),
+    "gothica1-medium": require("./assets/fonts/GothicA1-Medium.ttf"),
+    "gothica1-semibold": require("./assets/fonts/GothicA1-SemiBold.ttf"),
     "nunito-regular": require("./assets/fonts/NunitoSans-Regular.ttf"),
     "nunito-semibold": require("./assets/fonts/NunitoSans-SemiBold.ttf"),
     "nunito-bold": require("./assets/fonts/NunitoSans-Bold.ttf"),

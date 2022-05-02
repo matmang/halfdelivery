@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { View, Text, Image, TouchableOpacity, StyleSheet, Button } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  StyleSheet,
+  Button,
+} from "react-native";
 import { useNavigation } from "@react-navigation/core";
 import { connect } from "react-redux";
 import logos from "../../images";
@@ -104,7 +111,7 @@ const styles = StyleSheet.create({
   menu: {
     fontSize: 17,
     lineHeight: 20,
-    fontFamily: "noto-regular",
+    fontFamily: "gothica1-regular",
     fontWeight: "bold",
     textAlign: "left",
     marginTop: 16,
@@ -113,13 +120,13 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 15,
     marginTop: 5,
-    fontFamily: "noto-regular",
+    fontFamily: "gothica1-regular",
     textAlign: "left",
   },
   price: {
     fontSize: 17,
     lineHeight: 20,
-    fontFamily: "noto-regular",
+    fontFamily: "gothica1-regular",
     fontWeight: "bold",
     textAlign: "left",
     marginTop: 11,

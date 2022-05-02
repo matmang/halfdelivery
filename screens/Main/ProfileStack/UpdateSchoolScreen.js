@@ -61,14 +61,14 @@ const ButtonContainer = styled.View`
 `;
 
 const ExplainText = styled.Text`
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
   font-size: ${width * 14};
   include-font-padding: false;
   text-align-vertical: center;
 `;
 
 const NameText = styled.Text`
-  font-family: "noto-medium";
+  font-family: "gothica1-medium";
   font-size: ${width * 17}px;
   color: ${colors.primaryBlue};
 `;

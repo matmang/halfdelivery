@@ -62,12 +62,12 @@ const UserInfoText = styled.Text`
 `;
 
 const TopInfoText = styled.Text`
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
   font-size: 17px;
 `;
 
 const TopBlueInfoText = styled.Text`
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
   font-size: 17px;
   margin-left: ${width * 28}px;
   color: ${colors.primaryBlue};
@@ -75,7 +75,7 @@ const TopBlueInfoText = styled.Text`
 
 const BtInfoText = styled.Text`
   margin-left: ${width * 28}px;
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
   font-size: 14px;
 `;
 

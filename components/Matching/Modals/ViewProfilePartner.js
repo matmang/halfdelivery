@@ -59,7 +59,7 @@ export default ({ name, school, college, bank, accountnumber }) => {
           >
             <Text
               style={{
-                fontFamily: "noto-medium",
+                fontFamily: "gothica1-medium",
                 includeFontPadding: false,
                 textAlignVertical: "center",
                 fontSize: 17,
@@ -70,7 +70,7 @@ export default ({ name, school, college, bank, accountnumber }) => {
             </Text>
             <Text
               style={{
-                fontFamily: "noto-medium",
+                fontFamily: "gothica1-medium",
                 includeFontPadding: false,
                 textAlignVertical: "center",
                 fontSize: 17,
@@ -90,7 +90,7 @@ export default ({ name, school, college, bank, accountnumber }) => {
           >
             <Text
               style={{
-                fontFamily: "noto-regular",
+                fontFamily: "gothica1-regular",
                 includeFontPadding: false,
                 textAlignVertical: "center",
                 fontSize: 14,
@@ -101,7 +101,7 @@ export default ({ name, school, college, bank, accountnumber }) => {
             </Text>
             <Text
               style={{
-                fontFamily: "noto-medium",
+                fontFamily: "gothica1-medium",
                 includeFontPadding: false,
                 textAlignVertical: "center",
                 fontSize: 14,
@@ -132,7 +132,7 @@ export default ({ name, school, college, bank, accountnumber }) => {
         >
           <Text
             style={{
-              fontFamily: "noto-medium",
+              fontFamily: "gothica1-medium",
               includeFontPadding: false,
               textAlignVertical: "center",
               fontSize: 14,
@@ -144,7 +144,7 @@ export default ({ name, school, college, bank, accountnumber }) => {
 
           <Text
             style={{
-              fontFamily: "noto-regular",
+              fontFamily: "gothica1-regular",
               includeFontPadding: false,
               textAlignVertical: "center",
               fontSize: 14,
@@ -172,7 +172,7 @@ export default ({ name, school, college, bank, accountnumber }) => {
 
           <Text
             style={{
-              fontFamily: "noto-regular",
+              fontFamily: "gothica1-regular",
               includeFontPadding: false,
               textAlignVertical: "center",
               fontSize: 12,

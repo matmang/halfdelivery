@@ -46,7 +46,7 @@ const BtnContainer = styled.View`
 `;
 
 const ExplainText = styled.Text`
-  font-family: "noto-medium";
+  font-family: "gothica1-medium";
   font-size: 12px;
   color: ${colors.captionGray};
 `;

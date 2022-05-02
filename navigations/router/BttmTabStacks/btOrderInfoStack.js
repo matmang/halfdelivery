@@ -32,7 +32,7 @@ export default () => (
         },
         headerTintColor: "#ffffff",
         headerTitleStyle: {
-          fontFamily: "noto-medium",
+          fontFamily: "gothica1-medium",
           fontSize: width * 17,
         },
         headerRight: () => (
@@ -63,7 +63,7 @@ export default () => (
         },
         headerTintColor: "#ffffff",
         headerTitleStyle: {
-          fontFamily: "noto-medium",
+          fontFamily: "gothica1-medium",
           fontSize: width * 17,
         },
         headerRight: () => (
@@ -94,7 +94,7 @@ export default () => (
         },
         headerTintColor: "#ffffff",
         headerTitleStyle: {
-          fontFamily: "noto-medium",
+          fontFamily: "gothica1-medium",
           fontSize: width * 17,
         },
         headerRight: () => (
@@ -125,7 +125,7 @@ export default () => (
         },
         headerTintColor: "#ffffff",
         headerTitleStyle: {
-          fontFamily: "noto-medium",
+          fontFamily: "gothica1-medium",
           fontSize: width * 17,
         },
         headerRight: () => (
@@ -156,7 +156,7 @@ export default () => (
         },
         headerTintColor: "#ffffff",
         headerTitleStyle: {
-          fontFamily: "noto-medium",
+          fontFamily: "gothica1-medium",
           fontSize: width * 17,
         },
         headerRight: () => (
@@ -187,7 +187,7 @@ export default () => (
         },
         headerTintColor: "#ffffff",
         headerTitleStyle: {
-          fontFamily: "noto-medium",
+          fontFamily: "gothica1-medium",
           fontSize: width * 17,
         },
         headerRight: () => (
@@ -218,7 +218,7 @@ export default () => (
         },
         headerTintColor: "#ffffff",
         headerTitleStyle: {
-          fontFamily: "noto-medium",
+          fontFamily: "gothica1-medium",
           fontSize: width * 17,
         },
         headerRight: () => (
@@ -249,7 +249,7 @@ export default () => (
         },
         headerTintColor: "#ffffff",
         headerTitleStyle: {
-          fontFamily: "noto-medium",
+          fontFamily: "gothica1-medium",
           fontSize: width * 17,
         },
         headerRight: () => (
@@ -280,7 +280,7 @@ export default () => (
         },
         headerTintColor: "#ffffff",
         headerTitleStyle: {
-          fontFamily: "noto-medium",
+          fontFamily: "gothica1-medium",
           fontSize: width * 17,
         },
         headerRight: () => (
@@ -311,7 +311,7 @@ export default () => (
         },
         headerTintColor: "#ffffff",
         headerTitleStyle: {
-          fontFamily: "noto-medium",
+          fontFamily: "gothica1-medium",
           fontSize: width * 17,
         },
         headerRight: () => (

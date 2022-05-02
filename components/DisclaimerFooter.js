@@ -23,7 +23,7 @@ export default ({ viewStyle, textStyle }) => {
           {
             color: "rgba(62, 63, 65, 1)",
             fontSize: width * 10,
-            fontFamily: "noto-regular",
+            fontFamily: "gothica1-regular",
             includeFontPadding: false,
             textAlignVertical: "center",
             textAlign: "left",
@@ -39,7 +39,7 @@ export default ({ viewStyle, textStyle }) => {
           {
             color: "rgba(62, 63, 65, 1)",
             fontSize: width * 10,
-            fontFamily: "noto-regular",
+            fontFamily: "gothica1-regular",
             includeFontPadding: false,
             textAlignVertical: "center",
             textAlign: "left",

@@ -109,7 +109,7 @@ export default ({ isModal, setIsModal, matchingInfo, storeInfo }) => {
             >
               <Text
                 style={{
-                  fontFamily: "noto-medium",
+                  fontFamily: "gothica1-medium",
                   includeFontPadding: false,
                   textAlignVertical: "center",
                   fontSize: 17,
@@ -128,7 +128,7 @@ export default ({ isModal, setIsModal, matchingInfo, storeInfo }) => {
             >
               <Text
                 style={{
-                  fontFamily: "noto-regular",
+                  fontFamily: "gothica1-regular",
                   includeFontPadding: false,
                   textAlignVertical: "center",
                   fontSize: 14,
@@ -143,7 +143,7 @@ export default ({ isModal, setIsModal, matchingInfo, storeInfo }) => {
           <MatchingInfo>
             <Text
               style={{
-                fontFamily: "noto-regular",
+                fontFamily: "gothica1-regular",
                 includeFontPadding: false,
                 textAlignVertical: "center",
                 fontSize: 12,
@@ -410,7 +410,7 @@ const BtmRight = styled(TopRight)`
 const Noto14medium = styled.Text`
   font-size: ${width * 14}px;
   /* font-size: 12px; */
-  font-family: "noto-medium";
+  font-family: "gothica1-medium";
   include-font-padding: false;
   text-align-vertical: center;
   text-align: left;
@@ -419,7 +419,7 @@ const Noto14medium = styled.Text`
 const Noto12left = styled.Text`
   font-size: ${width * 12}px;
   /* font-size: 12px; */
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
   include-font-padding: false;
   text-align-vertical: center;
   text-align: left;

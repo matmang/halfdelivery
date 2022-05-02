@@ -71,7 +71,7 @@ const AuthContainer = styled.View`
 `;
 
 const PhaseText = styled.Text`
-  font-family: "noto-medium";
+  font-family: "gothica1-medium";
   font-size: 22px;
   include-font-padding: false;
   text-align-vertical: center;
@@ -79,7 +79,7 @@ const PhaseText = styled.Text`
 `;
 
 const ExplainText = styled.Text`
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
   font-size: 14px;
   color: #3c3c3c;
   include-font-padding: false;
@@ -87,7 +87,7 @@ const ExplainText = styled.Text`
 `;
 
 const NameText = styled.Text`
-  font-family: "noto-medium";
+  font-family: "gothica1-medium";
   font-size: 15px;
   color: ${colors.primaryBlue};
   include-font-padding: false;
@@ -95,7 +95,7 @@ const NameText = styled.Text`
 `;
 
 const UnAccentedText = styled.Text`
-  font-family: "noto-medium";
+  font-family: "gothica1-medium";
   font-size: 15px;
   color: ${colors.unselectedGrey};
   include-font-padding: false;
@@ -103,7 +103,7 @@ const UnAccentedText = styled.Text`
 `;
 
 const GotoText = styled.Text`
-  font-family: "noto-medium";
+  font-family: "gothica1-medium";
   font-size: 14px;
   margin-right: ${width * 24};
   color: ${colors.captionGray};

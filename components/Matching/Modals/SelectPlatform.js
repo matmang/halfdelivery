@@ -179,21 +179,21 @@ const Btm = styled.View`
 `;
 
 const Noto17medium = styled.Text`
-  font-family: "noto-medium";
+  font-family: "gothica1-medium";
   include-font-padding: false;
   text-align-vertical: center;
   font-size: 17px;
 `;
 
 const Noto14 = styled.Text`
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
   include-font-padding: false;
   text-align-vertical: center;
   font-size: 14px;
 `;
 
 const Warnning = styled.Text`
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
   include-font-padding: false;
   text-align-vertical: center;
   font-size: 10px;
@@ -305,7 +305,7 @@ const StoreText = styled.Text`
   font-size: 17px;
   line-height: 20px;
   text-align: left;
-  font-family: "noto-medium";
+  font-family: "gothica1-medium";
   include-font-padding: false;
   text-align-vertical: center;
   margin-left: 8px;
@@ -316,7 +316,7 @@ const InfoText = styled.Text`
   font-size: 14px;
   line-height: 16px;
   text-align: left;
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
   include-font-padding: false;
   text-align-vertical: center;
   padding: 2px;

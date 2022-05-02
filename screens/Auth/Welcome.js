@@ -65,7 +65,7 @@ const WelcomeText = styled.Text`
 `;
 
 const WelcomeTextKR = styled.Text`
-  font-family: "noto-bold";
+  font-family: "gothica1-semibold";
   font-size: 20px;
   color: ${colors.primaryBlue};
   include-font-padding: false;
@@ -81,7 +81,7 @@ const BlueTextER = styled.Text`
 `;
 
 const BlueTextKR = styled.Text`
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
   font-size: 17px;
   color: ${colors.primaryBlue};
   include-font-padding: false;
@@ -89,7 +89,7 @@ const BlueTextKR = styled.Text`
 `;
 
 const ExplainText = styled.Text`
-  font-family: "noto-medium";
+  font-family: "gothica1-medium";
   font-size: 12px;
   color: ${colors.captionGray};
   include-font-padding: false;

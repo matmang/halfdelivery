@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.blueGray2,
   },
   sectionTItle: {
-    fontFamily: "noto-medium",
+    fontFamily: "gothica1-medium",
     fontSize: 14,
     includeFontPadding: false,
     textAlignVertical: "center",
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   content: {
-    fontFamily: "noto-medium",
+    fontFamily: "gothica1-medium",
     fontSize: 15,
     includeFontPadding: false,
     textAlignVertical: "center",

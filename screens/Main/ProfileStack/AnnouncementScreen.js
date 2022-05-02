@@ -43,14 +43,14 @@ const ButtonBounder = styled.View`
 `;
 
 const TitleText = styled.Text`
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
   font-size: ${width * 17};
   include-font-padding: false;
   text-align-vertical: center;
 `;
 
 const MustReadText = styled.Text`
-  font-family: "noto-medium";
+  font-family: "gothica1-medium";
   font-size: ${width * 9};
   include-font-padding: false;
   text-align-vertical: center;

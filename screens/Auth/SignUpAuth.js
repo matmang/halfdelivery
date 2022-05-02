@@ -54,14 +54,14 @@ const ButtonContainer = styled.View`
 `;
 
 const PhaseText = styled.Text`
-  font-family: "noto-medium";
+  font-family: "gothica1-medium";
   font-size: 22px;
   include-font-padding: false;
   text-align-vertical: center;
 `;
 
 const ExplainText = styled.Text`
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
   font-size: 14px;
   color: #3c3c3c;
   margin-top: ${height * 9}px;
@@ -70,7 +70,7 @@ const ExplainText = styled.Text`
 `;
 
 const NameText = styled.Text`
-  font-family: "noto-medium";
+  font-family: "gothica1-medium";
   font-size: 15px;
   margin-bottom: ${height * 21}px;
   color: ${colors.primaryBlue};

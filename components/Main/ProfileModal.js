@@ -78,26 +78,26 @@ const AccountInfoContainer = styled.View`
 `;
 
 const AuthText = styled.Text`
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
   font-size: 12;
   color: ${colors.primaryBlue};
 `;
 
 const UserInformation = styled.Text`
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
   font-size: 17;
   margin-left: -20px;
 `;
 
 const AccuontTitle = styled.Text`
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
   font-size: 17;
   color: ${colors.primaryBlue};
   margin-left: 28px;
 `;
 
 const CopyText = styled.Text`
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
   font-size: 14;
   color: ${colors.unselectedGrey};
   text-decoration: underline;
@@ -105,7 +105,7 @@ const CopyText = styled.Text`
 `;
 
 const AccountInfo = styled.Text`
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
   font-size: 14;
   color: #121212;
 `;

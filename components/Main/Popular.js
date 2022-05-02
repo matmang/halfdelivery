@@ -33,7 +33,7 @@ const RankingText = styled.Text`
 `;
 
 const StoreInfo = styled.Text`
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
   color: ${colors.captionGray};
   font-weight: bold;
 `;

@@ -215,12 +215,12 @@ const StoreItem = ({ storeInfo }) => {
                 {DlvTipsArray[0][0]
                   .toString()
                   .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                <Text style={{ fontFamily: "noto-regular" }}> 원</Text>
+                <Text style={{ fontFamily: "gothica1-regular" }}> 원</Text>
                 {"   "}~{"   "}
                 {DlvTipsArray[DlvTipsArray.length - 1][0]
                   .toString()
                   .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                <Text style={{ fontFamily: "noto-regular" }}> 원</Text>
+                <Text style={{ fontFamily: "gothica1-regular" }}> 원</Text>
               </NunitoText>
             </InfoText>
 
@@ -229,19 +229,19 @@ const StoreItem = ({ storeInfo }) => {
                 {DlvTipsArray[DlvTipsArray.length - 1][1]
                   .toString()
                   .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                <Text style={{ fontFamily: "noto-regular" }}> 원</Text>
+                <Text style={{ fontFamily: "gothica1-regular" }}> 원</Text>
                 {"   "}~{"   "}
                 {DlvTipsArray[0][1]
                   .toString()
                   .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                <Text style={{ fontFamily: "noto-regular" }}> 원</Text>
+                <Text style={{ fontFamily: "gothica1-regular" }}> 원</Text>
               </InfoText>
             ) : (
               <InfoText numberOfLines={1}>
                 {DlvTipsArray[0][1]
                   .toString()
                   .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                <Text style={{ fontFamily: "noto-regular" }}> 원</Text>
+                <Text style={{ fontFamily: "gothica1-regular" }}> 원</Text>
               </InfoText>
             )}
           </View>
@@ -286,7 +286,7 @@ const StoreText = styled.Text`
   font-size: 14px;
   line-height: 20px;
   text-align: left;
-  font-family: "noto-medium";
+  font-family: "gothica1-medium";
   include-font-padding: false;
   text-align-vertical: center;
   margin-left: 8px;
@@ -297,7 +297,7 @@ const InfoText = styled.Text`
   font-size: 14px;
   line-height: 16px;
   text-align: left;
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
   include-font-padding: false;
   text-align-vertical: center;
   padding: 2px;

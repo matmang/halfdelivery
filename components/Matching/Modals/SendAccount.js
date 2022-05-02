@@ -137,12 +137,12 @@ const Btm = styled.View`
 `;
 
 const Noto17 = styled.Text`
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
   font-size: 17px;
 `;
 
 const Noto14 = styled.Text`
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
   font-size: 14px;
 `;
 

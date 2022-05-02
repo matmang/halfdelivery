@@ -50,20 +50,20 @@ const DistributionLine = styled.View`
 
 const NameText = styled.Text`
   font-size: ${width * 17};
-  font-family: "noto-medium";
+  font-family: "gothica1-medium";
   include-font-padding: false;
   text-align-vertical: center;
 `;
 
 const InfoText = styled.Text`
   font-size: ${width * 14};
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
   include-font-padding: false;
   text-align-vertical: center;
 `;
 
 const ButtonName = styled.Text`
-  font-family: "noto-medium";
+  font-family: "gothica1-medium";
   font-size: ${width * 17};
   margin-left: ${width * 24}px;
 `;

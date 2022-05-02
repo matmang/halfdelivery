@@ -21,7 +21,7 @@ const Content = styled.View`
 
 const StoreText = styled.Text`
   font-size: 17px;
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
 `;
 
 const DateText = styled.Text`

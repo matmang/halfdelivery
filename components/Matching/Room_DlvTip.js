@@ -275,7 +275,7 @@ const BtmRight = styled(TopRight)`
 const Noto14medium = styled.Text`
   font-size: ${width * 14}px;
   /* font-size: 12px; */
-  font-family: "noto-medium";
+  font-family: "gothica1-medium";
   text-align: left;
   include-font-padding: false;
   text-align-vertical: center;
@@ -284,7 +284,7 @@ const Noto14medium = styled.Text`
 const Noto12left = styled.Text`
   font-size: ${width * 12}px;
   /* font-size: 12px; */
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
   text-align: left;
   include-font-padding: false;
   text-align-vertical: center;

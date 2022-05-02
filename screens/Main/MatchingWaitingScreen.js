@@ -43,7 +43,7 @@ export default MatchingWaitingScreen = () => {
           <MatchingInfoHeader>
             <Text
               style={{
-                fontFamily: "noto-regular",
+                fontFamily: "gothica1-regular",
                 includeFontPadding: false,
                 textAlignVertical: "center",
                 fontSize: 12,

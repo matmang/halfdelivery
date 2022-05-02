@@ -354,7 +354,7 @@ const StoreText = styled.Text`
   font-size: 17px;
   line-height: 20px;
   text-align: left;
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
   include-font-padding: false;
   text-align-vertical: center;
   margin-bottom: 3px;
@@ -364,7 +364,7 @@ const InfoText = styled.Text`
   font-size: 14px;
   line-height: 16px;
   text-align: left;
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
   include-font-padding: false;
   text-align-vertical: center;
 `;
