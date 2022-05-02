@@ -65,7 +65,7 @@ const SignInModal = ({
   // const dispatch = useDispatch();
 
   useEffect(() => {
-    setAccent(username && password);
+    setAccent(username && password ? true : false);
   }, [username, password]);
 
   const isFormValid = () => {
