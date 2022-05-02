@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { View } from "react-native";
+import React, { useState, useEffect, useLayoutEffect } from "react";
+import { View, Text, ActivityIndicator } from "react-native";
 import logos from "../../images";
 import { MaterialIcons } from "@expo/vector-icons";
 import styled from "styled-components";
@@ -14,12 +14,7 @@ import {
 } from "../../assets/constants";
 import { width, height } from "../../utils";
 
-const StoreItem = ({ storeInfo }) => {
-  const navigation = useNavigation();
-  const [isModal, setIsModal] = useState(false);
-  const [category, setCategory] = useState(null);
-
-  /*   Store {
+/*   Store {
     "_deleted": null,
     "_lastChangedAt": 1649084860404,
     "_version": 2,
@@ -53,8 +48,14 @@ const StoreItem = ({ storeInfo }) => {
     "yogiyoUri": null,
   } */
 
-  const { baeminDlvTip } = storeInfo;
+const StoreItem = ({ storeInfo }) => {
+  const [isModal, setIsModal] = useState(false);
+  const [category, setCategory] = useState(null);
+  const [DlvTipsArray, setDlvTipsArray] = useState([]);
+  const [priceExceptions, setpriceExceptions] = useState([]);
+
   const { baeminOrderPrice } = storeInfo;
+  const { baeminDlvTip } = storeInfo;
   const { baeminUri } = storeInfo;
   const { coupangDlvTip } = storeInfo;
   const { coupangOrderPrice } = storeInfo;
@@ -69,8 +70,63 @@ const StoreItem = ({ storeInfo }) => {
   const { openHours } = storeInfo;
   const { storecategoryID } = storeInfo;
 
-  // console.log("baeminUri", baeminUri);
-  console.log(storeInfo);
+  useEffect(() => {
+    const _baeminDlvTip = { ...baeminDlvTip };
+    setDlvTipsArray(makeDlvTipsArray(_baeminDlvTip));
+  }, []);
+
+  // ? 개같은 우리 DB 주문금엑/배달비 순서쌍 JSON 데이터를, 이중배열 자료형으로 바꿔준다.
+  const makeDlvTipsArray = (DlvTipsObject) => {
+    /*  //? BEFORE
+      const baeminDlvTip =  {
+      "14000": 2500,
+      "35000": 0,
+      "8500": 3500,
+      "법정공휴일": "+1000",
+    
+      //? AFTER
+      Array [
+        Array [
+          8500,
+          3500,
+        ],
+        Array [
+          14000,
+          2500,
+        ],
+        Array [
+          35000,
+          0,
+        ],
+      ]  */
+
+    const keys = Object.keys(DlvTipsObject);
+    const values = Object.values(DlvTipsObject);
+    const targetPrices = keys
+      .map((price) => parseInt(price))
+      .filter((price) => !isNaN(price));
+    const priceExceptions = keys.filter((price) => isNaN(parseInt(price)));
+    const dlvTips = values.filter((tip) => typeof tip !== "string");
+    const dlvTipsExceptions = values.filter((tip) => typeof tip == "string");
+
+    priceExceptions.forEach((value) => {
+      delete DlvTipsObject[value];
+    });
+
+    // ? 예외처리
+    if (priceExceptions.length !== 0) {
+      // priceExceptions.push(dlvTipsExceptions[0]);
+      // setpriceExceptions(priceExceptions);
+    }
+
+    if (dlvTipsExceptions.length !== 0) {
+    }
+
+    const DlvTipsArray = Object.entries(DlvTipsObject);
+    DlvTipsArray.forEach((ele) => (ele[0] = parseInt(ele[0])));
+
+    return DlvTipsArray;
+  };
 
   useEffect(() => {
     switch (storecategoryID) {
@@ -94,6 +150,10 @@ const StoreItem = ({ storeInfo }) => {
         break;
     }
   }, [storecategoryID]);
+
+  if (DlvTipsArray.length === 0) {
+    return <ActivityIndicator />;
+  }
 
   return (
     <StoreRoomBox
@@ -122,6 +182,7 @@ const StoreItem = ({ storeInfo }) => {
           category={category}
         />
       )}
+
       <Img
         resizeMode="cover"
         source={
@@ -151,12 +212,17 @@ const StoreItem = ({ storeInfo }) => {
           <View style={{ marginLeft: 18 }}>
             <InfoText numberOfLines={1}>
               <NunitoText>
-                {baeminOrderPrice
+                {DlvTipsArray[0][0]
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                ~
+                {DlvTipsArray[0][0]
                   .toString()
                   .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
               </NunitoText>
               원
             </InfoText>
+            {/* <InfoText numberOfLines={1}>was storeInfo.maxDlvTip</InfoText> */}
             <InfoText numberOfLines={1}>was storeInfo.maxDlvTip</InfoText>
           </View>
         </InfoView>
