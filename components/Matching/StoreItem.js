@@ -215,15 +215,35 @@ const StoreItem = ({ storeInfo }) => {
                 {DlvTipsArray[0][0]
                   .toString()
                   .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                ~
-                {DlvTipsArray[0][0]
+                <Text style={{ fontFamily: "noto-regular" }}> 원</Text>
+                {"   "}~{"   "}
+                {DlvTipsArray[DlvTipsArray.length - 1][0]
                   .toString()
                   .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                <Text style={{ fontFamily: "noto-regular" }}> 원</Text>
               </NunitoText>
-              원
             </InfoText>
-            {/* <InfoText numberOfLines={1}>was storeInfo.maxDlvTip</InfoText> */}
-            <InfoText numberOfLines={1}>was storeInfo.maxDlvTip</InfoText>
+
+            {DlvTipsArray.length !== 1 ? (
+              <InfoText numberOfLines={1}>
+                {DlvTipsArray[DlvTipsArray.length - 1][1]
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                <Text style={{ fontFamily: "noto-regular" }}> 원</Text>
+                {"   "}~{"   "}
+                {DlvTipsArray[0][1]
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                <Text style={{ fontFamily: "noto-regular" }}> 원</Text>
+              </InfoText>
+            ) : (
+              <InfoText numberOfLines={1}>
+                {DlvTipsArray[0][1]
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                <Text style={{ fontFamily: "noto-regular" }}> 원</Text>
+              </InfoText>
+            )}
           </View>
         </InfoView>
       </NonImgBox>
