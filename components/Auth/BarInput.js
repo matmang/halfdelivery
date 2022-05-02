@@ -7,16 +7,16 @@ import { height, width } from "../../utils";
 const Container = styled.TextInput`
   width: ${width * 364}px;
   height: ${height * 29}px;
-  padding: 0px ${height * 8}px ${width * 20}px;
+  padding: 0px ${height * 8}px ${width * 10}px;
   padding-top: 0;
-  padding-bottom: ${height * 8}px;
-  border-bottom-width: 1px;
+  padding-bottom: ${height * 10}px;
+  border-bottom-width: 1.5px;
   border-bottom-color: ${({ isValued, error }) =>
     error ? colors.errorPink : isValued ? colors.primaryBlue : colors.blueGray};
-  font-family: "nunito-regular";
+  font-family: "noto-regular";
   include-font-padding: false;
   text-align-vertical: center;
-  font-size: 15px;
+  font-size: 17px;
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
 `;
 

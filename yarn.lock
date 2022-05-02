@@ -9640,11 +9640,6 @@ reanimated-bottom-sheet@^1.0.0-alpha.22:
   resolved "https://registry.yarnpkg.com/reanimated-bottom-sheet/-/reanimated-bottom-sheet-1.0.0-alpha.22.tgz#01a200946f1a461f01f1e773e5b4961c2df2e53b"
   integrity sha512-NxecCn+2iA4YzkFuRK5/b86GHHS2OhZ9VRgiM4q18AC20YE/psRilqxzXCKBEvkOjP5AaAvY0yfE7EkEFBjTvw==
 
-recoil-persist@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/recoil-persist/-/recoil-persist-4.1.0.tgz#7406ce14f448783fbff9f9011da8235c84838249"
-  integrity sha512-7ruOsLhrEqBpl8EM6j5OITSKJXvH7BfSDxO5m1Heb3dJo6mnCJ3t4ln1KDJhZrvFOkqyO37Ufv3VB1wU06tfCA==
-
 recoil@^0.7.2:
   version "0.7.2"
   resolved "https://registry.yarnpkg.com/recoil/-/recoil-0.7.2.tgz#37aafc9e0674abae639263354a11c910e71bf78a"
