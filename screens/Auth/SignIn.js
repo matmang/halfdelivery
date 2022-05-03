@@ -7,6 +7,9 @@ import ErrorMessage from "../../components/Auth/ErrorMessage";
 import DismissKeyboard from "../../components/DismissKeyboard";
 import colors from "../../colors";
 import { height, width } from "../../utils";
+import { useRecoilState } from "recoil";
+import { loginState } from "../../recoil/atoms";
+import { Auth } from "aws-amplify";
 
 const Container = styled.View`
   flex: 1;
@@ -57,6 +60,7 @@ export default ({ navigation }) => {
   const [IDerrorMessage, setIDErrorMessage] = useState("");
   const [PWerrorMessage, setPWErrorMessage] = useState("");
   const [accent, setAccent] = useState(false);
+  const [loggedIn, setLoggedIn] = useRecoilState(loginState);
 
   const refDidMount = useRef(null);
 
@@ -83,12 +87,22 @@ export default ({ navigation }) => {
     }
   });
 
+  const userLogin = async () => {
+    try {
+      const data = await Auth.signIn(username, password);
+      console.log(data);
+      setLoggedIn(true);
+    } catch (e) {
+      console.log(e);
+      alert("학번이나 비밀번호가 잘못되었습니다.");
+    }
+  };
+
   const handleSubmit = () => {
     try {
-      console.log("Sign-up Confirmed");
-      navigation.navigate("SignUpAuthConfirm", { username, password });
+      userLogin();
     } catch (error) {
-      console.log("Error signing up...", error);
+      console.log("로그인 에러 발생.", error);
     }
   };
 
