@@ -85,7 +85,7 @@ export default ({ navigation }) => {
     } else {
       refDidMount.current = true;
     }
-  });
+  }, [username, password]);
 
   const userLogin = async () => {
     try {

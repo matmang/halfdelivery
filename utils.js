@@ -6,6 +6,12 @@ export const isEmail = (email) => {
   return regEx.test(email);
 };
 
+export const validPassword = (password) => {
+  const regEx =
+    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
+  return regEx.test(password);
+};
+
 export const isPhoneNum = (phonenumber) => {
   const regEx = /^\d{3}\d{3,4}\d{4}$/;
   return regEx.test(phonenumber);

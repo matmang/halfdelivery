@@ -13,6 +13,7 @@ import { height, width } from "../utils";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Image } from "react-native";
 import SignIn from "../screens/Auth/SignIn";
+import SignUpPassword from "../screens/Auth/SignUpPassword";
 
 const Auth = createStackNavigator();
 
@@ -96,6 +97,38 @@ export default () => (
       })}
     />
     <Auth.Screen
+      name="SignUpPassword"
+      component={SignUpPassword}
+      options={({ navigation }) => ({
+        title: "회원 정보",
+        headerTitleAlign: "center",
+        headerStyle: {
+          elevation: 0,
+          backgroundColor: "white",
+          shadowOpacity: 0,
+        },
+        headerTitleStyle: {
+          marginTop: height * 20,
+          fontFamily: "noto-medium",
+          fontSize: 17,
+        },
+        headerLeft: () => (
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Image
+              source={require("../assets/images/left-arrow.png")}
+              style={{
+                width: width * 16,
+                height: height * 16,
+                marginTop: height * 20,
+                marginLeft: width * 24,
+              }}
+            />
+          </TouchableOpacity>
+        ),
+        headerRight: () => {},
+      })}
+    />
+    <Auth.Screen
       name="SignUpAuthConfirm"
       component={SignUpAuthConfirm}
       options={({ navigation }) => ({
@@ -112,7 +145,7 @@ export default () => (
           fontSize: 17,
         },
         headerLeft: () => (
-          <TouchableOpacity onPress={() => navigation.navigate("Welcome")}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
             <Image
               source={require("../assets/images/left-arrow.png")}
               style={{
