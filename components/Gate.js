@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRecoilState } from "recoil";
 import Auth from "../navigations/Auth";
 import Router from "../navigations/router";
-import { loginState } from "../recoil/atoms";
+import { loginState } from "../recoil/atoms/loginAtom";
 
 export default () => {
   // const { isLoggedIn } = useSelector((state) => state.usersReducer);

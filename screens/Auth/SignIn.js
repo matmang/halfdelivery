@@ -8,7 +8,7 @@ import DismissKeyboard from "../../components/DismissKeyboard";
 import colors from "../../colors";
 import { height, width } from "../../utils";
 import { useRecoilState } from "recoil";
-import { loginState } from "../../recoil/atoms";
+import { loginState } from "../../recoil/atoms/loginAtom";
 import { Auth } from "aws-amplify";
 
 const Container = styled.View`
@@ -94,7 +94,7 @@ export default ({ navigation }) => {
       setLoggedIn(true);
     } catch (e) {
       console.log(e);
-      alert("학번이나 비밀번호가 잘못되었습니다.");
+      alert("학번 혹은 비밀번호가 잘못되었습니다.");
     }
   };
 

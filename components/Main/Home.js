@@ -10,7 +10,7 @@ import ProfileModal from "./ProfileModal";
 import { height, width } from "../../utils";
 import Btn from "../Auth/Btn";
 import { useRecoilState } from "recoil";
-import { loginState } from "../../recoil/atoms";
+import { loginState } from "../../recoil/atoms/loginAtom";
 
 const Container = styled.View`
   justify-content: center;

@@ -1,4 +1,4 @@
-import { atom, AtomEffect, selector, DefaultValue } from "recoil";
+import { atom, DefaultValue } from "recoil";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // https://github.com/polemius/recoil-persist/issues/20
