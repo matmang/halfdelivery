@@ -5,7 +5,7 @@ import Proptypes from "prop-types";
 import colors from "../../../colors";
 import { height, width } from "../../../utils";
 
-const ButtonModalBottom = ({ onPress, text, accent = false, textStyle }) => {
+const ButtonBottomTab = ({ onPress, text, accent = false, textStyle }) => {
   if (typeof accent != "boolean") {
     accent = !!accent;
   }
@@ -21,7 +21,7 @@ const ButtonModalBottom = ({ onPress, text, accent = false, textStyle }) => {
   );
 };
 
-ButtonModalBottom.propTypes = {
+ButtonBottomTab.propTypes = {
   onPress: Proptypes.func.isRequired,
   text: Proptypes.string.isRequired,
   accent: Proptypes.bool,
@@ -44,4 +44,4 @@ const Text = styled.Text`
   font-family: "gothica1-medium";
 `;
 
-export default ButtonModalBottom;
+export default ButtonBottomTab;
