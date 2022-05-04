@@ -3,7 +3,7 @@ import { View, Text, ActivityIndicator } from "react-native";
 import logos from "../../images";
 import { MaterialIcons } from "@expo/vector-icons";
 import styled from "styled-components";
-import { SelectPlatform } from "../../components/Matching/Modals/";
+import { SelectPlatform } from "../../components/Matching/modals/";
 import StoreCategory from "../StoreCategory";
 import {
   KOREAN_ID,

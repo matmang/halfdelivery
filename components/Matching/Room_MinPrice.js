@@ -24,7 +24,7 @@ import colors from "../../colors";
 import { width, height } from "../../utils";
 import PlatformIcon from "../PlatformIcon";
 import Timer from "../Timer";
-import { EnterMatching } from "./Modals";
+import { EnterMatching } from "./modals";
 import { DataStore } from "aws-amplify";
 import { Store } from "../../AWS/src/models";
 
