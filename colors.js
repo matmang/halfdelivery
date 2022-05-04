@@ -3,6 +3,7 @@ export default {
   subPink1: "#FF969B",
   coralPink: "#FFB6B6",
   palePink: "#FFE6E6",
+  lightPink: "#FFEDED",
   primaryBlue: "#0E257C",
   steelBlue: "#435390",
   blueGray: "#C3CDD5",

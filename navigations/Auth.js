@@ -132,7 +132,7 @@ export default () => (
       name="SignUpAuthConfirm"
       component={SignUpAuthConfirm}
       options={({ navigation }) => ({
-        title: "회원 정보",
+        title: "본인 인증",
         headerTitleAlign: "center",
         headerStyle: {
           elevation: 0,

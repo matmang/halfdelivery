@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Image, KeyboardAvoidingView } from "react-native";
+import { Image } from "react-native";
 import styled from "styled-components";
 import Btn from "../../components/Auth/Btn";
 import BarInput from "../../components/Auth/BarInput";
