@@ -4,7 +4,7 @@ import Modal from "react-native-modal";
 import colors from "../../../colors";
 import styled from "styled-components";
 import StoreCategory from "../../StoreCategory";
-import Platform from "./../Platform";
+import Platform from "../Platform";
 import { width, height } from "../../../utils";
 import { useNavigation } from "@react-navigation/native";
 import DisclaimerFooter from "../../DisclaimerFooter";
@@ -12,7 +12,7 @@ import { Auth } from "aws-amplify";
 // import { toggleIsMatching } from "../../../redux/usersSlice";
 import logos from "../../../images";
 
-export default ({ isModal, setIsModal, storeInfo, category }) => {
+const SelectPlatform = ({ isModal, setIsModal, storeInfo, category }) => {
   const navigation = useNavigation();
   const [selectedName, setSelectedName] = useState(null);
   const [authUser, setAuthUser] = useState(undefined);
@@ -334,3 +334,5 @@ const NunitoText = styled.Text`
   text-align-vertical: center;
   text-align: right;
 `;
+
+export default SelectPlatform;

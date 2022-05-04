@@ -41,7 +41,7 @@ import {
   MatchingCancelled,
   EjectPartner,
   CancelMatching,
-} from "../../../components/Chat/modals/";
+} from "../../../components/Chat/modals";
 import {
   InputOrderPrice,
   RequestAdditionalTime,
