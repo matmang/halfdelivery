@@ -113,6 +113,11 @@ export default ({ isModal, setIsModal, storeInfo, category }) => {
               selectedName={selectedName}
               setSelectedName={setSelectedName}
             />
+            <Platform
+              name={"배달특급"}
+              selectedName={selectedName}
+              setSelectedName={setSelectedName}
+            />
           </View>
           <SelectButton
             selectedName={selectedName}
@@ -143,9 +148,9 @@ export default ({ isModal, setIsModal, storeInfo, category }) => {
 
 const ModalBox = styled.View`
   width: 364px;
-  height: 452px;
+  height: 469px;
+  border-radius: 16px;
   background-color: white;
-  border-radius: 10px;
 `;
 
 const Top = styled.View`
@@ -166,7 +171,7 @@ const BlueLine = styled.View`
 
 const Mid = styled.View`
   width: 364px;
-  height: 204px;
+  height: 221px;
   /* background-color: lightgoldenrodyellow; */
 `;
 

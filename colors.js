@@ -12,6 +12,7 @@ export default {
   oxfordGray: "#3E3F41",
   zetBlack: "#000000",
   steelBlue2: "#ADB1C0",
+  softgray: "#ADB1C0",
   error: "#E3004E",
   errorPink: "#ED0069",
   errorOrange: "#FF3B30",
@@ -21,4 +22,6 @@ export default {
   baeminMint: "#2BC0BB",
   yogiyoRed: "#D52A2A",
   coupangSky: "#02AFFD",
+  mediumGray: "#70778F",
+  lightGray: "#E7E9ED",
 };

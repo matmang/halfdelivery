@@ -3,19 +3,19 @@ import React, { useState } from "react";
 import colors from "../../colors";
 import styled from "styled-components";
 import { width, height } from "../../utils";
+
 const RootView = styled.Pressable`
   width: ${width * 72}px;
-  /* width: auto; */
-  height: ${height * 82}px;
+  height: ${height * 99}px;
   /* background-color: lightpink; */
   justify-content: center;
   align-items: center;
 `;
 
 const Img = styled.Image`
-  border-radius: 6px;
-  width: ${width * 60}px;
-  height: ${height * 60}px;
+  border-radius: 16px;
+  width: ${width * 72}px;
+  height: ${height * 72}px;
   background-color: lightgrey;
   border-width: ${({ name, selectedName }) =>
     name === selectedName ? 1.5 : 0}px;
