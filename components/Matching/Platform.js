@@ -23,7 +23,7 @@ const Img = styled.Image`
     name === selectedName ? colors.primaryBlue : "white"};
 `;
 
-const Noto14 = styled.Text`
+const Gothic14 = styled.Text`
   font-family: ${({ name, selectedName }) =>
     name === selectedName ? "gothica1-medium" : "gothica1-regular"};
   font-size: 14px;
@@ -53,21 +53,22 @@ const PinkHighlight = styled.View`
   z-index: -1;
 `;
 
-const Platforms = ({ name, selectedName, setSelectedName }) => {
+const Platforms = ({ name, selectedName, setSelectedName, viewStyle }) => {
   return (
     <RootView
+      style={viewStyle}
       onPress={() => {
         setSelectedName(name);
       }}
     >
       <Img name={name} selectedName={selectedName} />
-      <Noto14
+      <Gothic14
         name={name}
         selectedName={selectedName}
         style={{ includeFontPadding: false, textAlignVertical: "center" }}
       >
         {name}
-      </Noto14>
+      </Gothic14>
       {name === selectedName && <PinkHighlight name={name} />}
     </RootView>
   );

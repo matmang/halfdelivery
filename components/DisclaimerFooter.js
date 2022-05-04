@@ -8,10 +8,11 @@ export default ({ viewStyle, textStyle }) => {
     <View
       style={[
         {
-          color: "rgba(62, 63, 65, 0.6)",
+          backgroundColor: colors.whiteGray,
+          // backgroundColor: "red",
           justifyContent: "center",
           width: width * 364,
-          height: height * 55,
+          height: height * 42,
           borderBottomLeftRadius: 16,
           borderBottomRightRadius: 16,
         },
@@ -21,7 +22,7 @@ export default ({ viewStyle, textStyle }) => {
       <Text
         style={[
           {
-            color: "rgba(62, 63, 65, 1)",
+            color: colors.darkGray,
             fontSize: width * 10,
             fontFamily: "gothica1-regular",
             includeFontPadding: false,

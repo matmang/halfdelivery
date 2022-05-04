@@ -6,3 +6,4 @@ export * from "./ViewProfilePartner";
 export * from "./SelectPlatform";
 export * from "./FinalCheck";
 export * from "./EnterMatching";
+export * from "./StoreInfoSelectPlatform";

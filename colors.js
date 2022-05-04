@@ -24,4 +24,5 @@ export default {
   coupangSky: "#02AFFD",
   mediumGray: "#70778F",
   lightGray: "#E7E9ED",
+  darkGray: "#3A3F53",
 };

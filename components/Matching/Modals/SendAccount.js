@@ -32,14 +32,14 @@ export default ({
         <Top>
           <TopRow>
             <View style={{ flex: 4, justifyContent: "center" }}>
-              <Noto17
+              <Gothic17
                 style={{
                   marginTop: 20,
                   marginLeft: 28,
                 }}
               >
                 {name} 님의 계좌번호입니다
-              </Noto17>
+              </Gothic17>
             </View>
             <View
               style={{
@@ -65,10 +65,10 @@ export default ({
               marginTop: 20,
             }}
           >
-            <Noto14>
+            <Gothic14>
               <AntDesign name="arrowright" size={16} color="black" /> {bank}
-            </Noto14>
-            <Noto14>{name}</Noto14>
+            </Gothic14>
+            <Gothic14>{name}</Gothic14>
             <Nunito14>{accountnumber}</Nunito14>
           </View>
         </Mid>
@@ -78,13 +78,13 @@ export default ({
               sendAccount();
             }}
           >
-            <Noto17
+            <Gothic17
               style={{
                 color: colors.palePink,
               }}
             >
               전송하기
-            </Noto17>
+            </Gothic17>
           </Send>
         </Btm>
       </ModalBox>
@@ -136,17 +136,17 @@ const Btm = styled.View`
   border-bottom-right-radius: 10px;
 `;
 
-const Noto17 = styled.Text`
+const Gothic17 = styled.Text`
   font-family: "gothica1-regular";
   font-size: 17px;
 `;
 
-const Noto14 = styled.Text`
+const Gothic14 = styled.Text`
   font-family: "gothica1-regular";
   font-size: 14px;
 `;
 
-const Nunito14 = styled(Noto14)`
+const Nunito14 = styled(Gothic14)`
   font-family: "nunito-regular";
   margin-top: 1px;
 `;

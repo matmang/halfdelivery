@@ -174,10 +174,10 @@ export default ({ isModal, setIsModal, matchingInfo, storeInfo }) => {
               <InfoRoot>
                 <Header2>
                   <PlatformIcon platform={platform} />
-                  <Noto14medium style={{ marginLeft: width * 8 }}>
+                  <Gothic14medium style={{ marginLeft: width * 8 }}>
                     {/* { 매장이름 } */}
                     {store}
-                  </Noto14medium>
+                  </Gothic14medium>
                 </Header2>
 
                 <View
@@ -194,7 +194,9 @@ export default ({ isModal, setIsModal, matchingInfo, storeInfo }) => {
                 <InfoBox>
                   <Top>
                     <TopLeft>
-                      <Noto12left style={{ flex: 4 }}>최소주문금액</Noto12left>
+                      <Gothic12left style={{ flex: 4 }}>
+                        최소주문금액
+                      </Gothic12left>
                       <Nunito12right
                         style={{
                           flex: 0.2,
@@ -207,11 +209,11 @@ export default ({ isModal, setIsModal, matchingInfo, storeInfo }) => {
                           .toString()
                           .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                       </Nunito12right>
-                      <Noto12left style={{ flex: 1 }}>{"  "}원</Noto12left>
+                      <Gothic12left style={{ flex: 1 }}>{"  "}원</Gothic12left>
                     </TopLeft>
 
                     <TopRight>
-                      <Noto12left style={{ flex: 4 }}>1인배달비</Noto12left>
+                      <Gothic12left style={{ flex: 4 }}>1인배달비</Gothic12left>
                       <Nunito12right
                         style={{
                           flex: 0.2,
@@ -224,19 +226,21 @@ export default ({ isModal, setIsModal, matchingInfo, storeInfo }) => {
                           .toString()
                           .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                       </Nunito12right>
-                      <Noto12left
+                      <Gothic12left
                         style={{
                           flex: 1,
                         }}
                       >
                         {"  "}원
-                      </Noto12left>
+                      </Gothic12left>
                     </TopRight>
                   </Top>
 
                   <Btm>
                     <BtmLeft>
-                      <Noto12left style={{ flex: 4 }}>매칭주문금액</Noto12left>
+                      <Gothic12left style={{ flex: 4 }}>
+                        매칭주문금액
+                      </Gothic12left>
                       <Nunito12right
                         style={{
                           flex: 0.2,
@@ -249,13 +253,13 @@ export default ({ isModal, setIsModal, matchingInfo, storeInfo }) => {
                           .toString()
                           .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                       </Nunito12right>
-                      <Noto12left style={{ flex: 1 }}>{"  "}원</Noto12left>
+                      <Gothic12left style={{ flex: 1 }}>{"  "}원</Gothic12left>
                     </BtmLeft>
 
                     <BtmRight>
-                      <Noto12left style={{ flex: 3 }}>
+                      <Gothic12left style={{ flex: 3 }}>
                         매칭 대기 인원
-                      </Noto12left>
+                      </Gothic12left>
                       <Nunito12right
                         style={{
                           flex: 1,
@@ -266,13 +270,13 @@ export default ({ isModal, setIsModal, matchingInfo, storeInfo }) => {
                       >
                         2
                       </Nunito12right>
-                      <Noto12left
+                      <Gothic12left
                         style={{
                           flex: 0.6,
                         }}
                       >
                         {"  "}명
-                      </Noto12left>
+                      </Gothic12left>
                     </BtmRight>
                   </Btm>
                 </InfoBox>
@@ -407,7 +411,7 @@ const BtmRight = styled(TopRight)`
   /* background-color: blue; */
 `;
 
-const Noto14medium = styled.Text`
+const Gothic14medium = styled.Text`
   font-size: ${width * 14}px;
   /* font-size: 12px; */
   font-family: "gothica1-medium";
@@ -416,7 +420,7 @@ const Noto14medium = styled.Text`
   text-align: left;
 `;
 
-const Noto12left = styled.Text`
+const Gothic12left = styled.Text`
   font-size: ${width * 12}px;
   /* font-size: 12px; */
   font-family: "gothica1-regular";
@@ -425,7 +429,7 @@ const Noto12left = styled.Text`
   text-align: left;
 `;
 
-const Nunito12right = styled(Noto12left)`
+const Nunito12right = styled(Gothic12left)`
   font-family: "nunito-regular";
   include-font-padding: false;
   text-align-vertical: center;
