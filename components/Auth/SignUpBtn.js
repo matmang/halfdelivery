@@ -13,32 +13,36 @@ const Button = styled.View`
   border-radius: 30px;
   width: ${width * 364}px;
   height: ${height * 50}px;
-  background-color: ${(props) =>
-    props.accent ? colors.primaryBlue : colors.lightGray};
-  font-family: "nunito-semibold";
+  background-color: white;
 `;
 
 const Text = styled.Text`
-  color: ${(props) => (props.accent ? "#FFFFFF" : colors.mediumGray)};
+  color: ${colors.primaryBlue};
   font-size: 17px;
   font-family: "noto-medium";
 `;
 
-const Btn = ({ onPress, text, accent = false, textStyle }) => (
-  <TouchableOpacity onPress={onPress} disabled={!accent}>
-    <Button accent={accent}>
-      <Text accent={accent} style={textStyle}>
-        {text}
-      </Text>
+const Circle = styled.View`
+  width: ${width * 17}px;
+  height: ${height * 17}px;
+  border-radius: 30px;
+  margin-left: ${width * 120}px;
+  background-color: ${colors.primaryBlue};
+`;
+
+const SignUpBtn = ({ onPress, text, textStyle }) => (
+  <TouchableOpacity onPress={onPress}>
+    <Button>
+      <Text style={textStyle}>{text}</Text>
     </Button>
   </TouchableOpacity>
 );
 
-Btn.propTypes = {
+SignUpBtn.propTypes = {
   onPress: Proptypes.func.isRequired,
   text: Proptypes.string.isRequired,
   accent: Proptypes.bool,
   disabled: Proptypes.bool,
 };
 
-export default Btn;
+export default SignUpBtn;

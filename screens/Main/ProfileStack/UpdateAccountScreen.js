@@ -46,6 +46,7 @@ const InlineContainer = styled.View`
   flex-direction: row;
   margin-left: ${width * 24}px;
   justify-content: space-between;
+  align-items: center;
 `;
 
 const DistributionLine = styled.View`
@@ -156,7 +157,16 @@ export default ({ navigation }) => {
         <ProfileButtonContainer>
           <InlineContainer>
             <ActiveNameText>비밀번호</ActiveNameText>
-            <ButtonInfoText></ButtonInfoText>
+            <Image
+              source={require("../../../assets/images/password_preview.png")}
+              style={{
+                width: width * 92,
+                height: height * 7,
+                left: width * 134,
+                resizeMode: "contain",
+                position: "absolute",
+              }}
+            />
           </InlineContainer>
           <Image
             source={require("../../../assets/images/active-arrow-right.png")}
@@ -181,7 +191,9 @@ export default ({ navigation }) => {
         <ProfileButtonContainer>
           <InlineContainer>
             <ButtonName>생년월일</ButtonName>
-            <ButtonInfoText>{birthday}</ButtonInfoText>
+            <ButtonInfoText>
+              {birthday.replace(/^(\d{4})(\d{2})(\d{2})$/, `$1/$2/$3`)}
+            </ButtonInfoText>
           </InlineContainer>
         </ProfileButtonContainer>
       </ButtonBounder>
@@ -191,7 +203,12 @@ export default ({ navigation }) => {
         >
           <InlineContainer>
             <ActiveNameText>연락처</ActiveNameText>
-            <ButtonInfoText>{"0" + phonenumber.slice(3, 13)}</ButtonInfoText>
+            <ButtonInfoText>
+              {("0" + phonenumber.slice(3, 13)).replace(
+                /^(\d{2,3})(\d{3,4})(\d{4})$/,
+                `$1-$2-$3`
+              )}
+            </ButtonInfoText>
           </InlineContainer>
           <Image
             source={require("../../../assets/images/active-arrow-right.png")}

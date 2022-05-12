@@ -3,24 +3,31 @@ import styled from "styled-components";
 import Proptypes from "prop-types";
 import colors from "../../colors";
 import { height, width } from "../../utils";
+import ConfirmBtn from "./ConfirmBtn";
 
-const Container = styled.TextInput`
+const Container = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
   width: ${width * 364}px;
   height: ${height * 29}px;
-  padding: 0px ${height * 8}px ${width * 10}px;
+  padding-left: ${width * 8}px;
   padding-top: 0;
-  padding-bottom: ${height * 10}px;
+  padding-bottom: ${height * 8}px;
   border-bottom-width: 1.5px;
   border-bottom-color: ${({ isValued, error }) =>
     error ? colors.errorPink : isValued ? colors.primaryBlue : colors.blueGray};
+`;
+
+const InputContainer = styled.TextInput`
+  height: ${height * 29}px;
   font-family: "noto-regular";
   include-font-padding: false;
   text-align-vertical: center;
   font-size: 17px;
-  opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
 `;
 
-const BarInput = ({
+const PhBarInput = ({
   value,
   placeholder,
   isPassword = false,
@@ -31,23 +38,27 @@ const BarInput = ({
   isValued = false,
   error = false,
   style,
+  onPress,
 }) => (
-  <Container
-    keyboardType={KeyboardType}
-    value={value}
-    placeholder={placeholder}
-    secureTextEntry={isPassword ? true : false}
-    autoCapitalize={autoCapitalize}
-    onChangeText={(text) => stateFn(text)}
-    disabled={disabled}
-    editable={disabled ? false : true}
-    isValued={isValued}
-    error={error}
-    style={style}
-  />
+  <Container isValued={isValued} error={error}>
+    <InputContainer
+      keyboardType={KeyboardType}
+      value={value}
+      placeholder={placeholder}
+      secureTextEntry={isPassword ? true : false}
+      autoCapitalize={autoCapitalize}
+      onChangeText={(text) => stateFn(text)}
+      disabled={disabled}
+      editable={disabled ? false : true}
+      isValued={isValued}
+      error={error}
+      style={style}
+    />
+    <ConfirmBtn text="인증번호 요청" onPress={() => onPress()} />
+  </Container>
 );
 
-BarInput.proptypes = {
+PhBarInput.proptypes = {
   value: Proptypes.string,
   placeholder: Proptypes.string,
   isPassword: Proptypes.bool,
@@ -57,4 +68,4 @@ BarInput.proptypes = {
   isValued: Proptypes.bool,
 };
 
-export default BarInput;
+export default PhBarInput;

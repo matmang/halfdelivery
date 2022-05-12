@@ -5,40 +5,32 @@ import Btn from "../../components/Auth/Btn";
 import BarInput from "../../components/Auth/BarInput";
 import ErrorMessage from "../../components/Auth/ErrorMessage";
 import DismissKeyboard from "../../components/DismissKeyboard";
-import Auth from "@aws-amplify/auth";
 import colors from "../../colors";
 import ConfirmBtn from "../../components/Auth/ConfirmBtn";
-import { height, width } from "../../utils";
+import { height, isPhoneNum, width } from "../../utils";
+import { Auth } from "aws-amplify";
+import PhBarInput from "../../components/Auth/PhBarInput";
 
 const Container = styled.View`
   flex: 1;
-  align-items: center;
   background-color: white;
 `;
 
 const ProgressContainer = styled.View`
-  justify-content: center;
-  margin-top: ${height * 110}px;
-  align-items: center;
+  margin-top: ${height * 109}px;
+  margin-left: ${width * 24}px;
 `;
 
-const PhaseContainer = styled.View`
-  justify-content: center;
-  align-items: center;
-  margin-top: ${height * 24}px;
-  height: ${height * 56}px;
-`;
-
-const IDContainer = styled.View`
-  margin-top: ${height * 74}px;
-  margin-left: ${width * 23}px;
-  margin-right: auto;
+const PhonenumberContainer = styled.View`
+  margin-top: ${height * 68}px;
+  margin-left: ${width * 24}px;
+  margin-right: ${width * 24}px;
   justify-content: flex-start;
 `;
 
-const PasswordContainer = styled.View`
+const AuthCodeContainer = styled.View`
   margin-top: ${height * 24}px;
-  margin-left: ${width * 23}px;
+  margin-left: ${width * 24}px;
   margin-right: auto;
   justify-content: flex-start;
 `;
@@ -55,31 +47,28 @@ const ButtonContainer = styled.View`
   bottom: 0;
 `;
 
-const AuthContainer = styled.View`
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const PhaseText = styled.Text`
+const TitleText = styled.Text`
   font-family: "noto-medium";
-  font-size: 22px;
+  font-size: 24px;
+  margin-top: ${height * 22}px;
+  margin-left: ${width * 24}px;
+  line-height: 40px;
   include-font-padding: false;
   text-align-vertical: center;
 `;
 
-const ExplainText = styled.Text`
+const SubTitleText = styled.Text`
   font-family: "noto-regular";
   font-size: 14px;
-  color: #3c3c3c;
-  margin-top: ${height * 10}px;
+  margin-left: ${width * 24}px;
+  line-height: 40px;
   include-font-padding: false;
   text-align-vertical: center;
 `;
 
 const NameText = styled.Text`
   font-family: "noto-medium";
-  font-size: 15px;
+  font-size: 17px;
   margin-bottom: ${height * 21}px;
   color: ${colors.primaryBlue};
   include-font-padding: false;
@@ -87,58 +76,31 @@ const NameText = styled.Text`
 `;
 
 export default ({ route: { params }, navigation }) => {
-  const [username, setusername] = useState(params?.username);
   const [password, setPassword] = useState(params?.password);
-  const [name, setName] = useState("");
-  const [birthday, setBirthday] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [name, setName] = useState(params?.name);
+  const [birthday, setBirthday] = useState(params?.birthday);
+  const [phonenumber, setPhonenumber] = useState("");
   const [authCode, setAuthCode] = useState("");
-  const [IDerrorMessage, setIDErrorMessage] = useState("");
-  const [PWerrorMessage, setPWErrorMessage] = useState("");
-  const [PWCerrorMessage, setPWCErrorMessage] = useState("");
+  const [phonenumberErrorMessage, setPhonenumberErrorMessage] = useState("");
   const [accent, setAccent] = useState(false);
 
   const refDidMount = useRef(null);
 
   useEffect(() => {
-    setAccent(
-      name &&
-        birthday &&
-        phoneNumber &&
-        authCode &&
-        !IDerrorMessage &&
-        !PWerrorMessage &&
-        !PWCerrorMessage
-    );
-  }, [
-    name,
-    birthday,
-    phoneNumber,
-    authCode,
-    IDerrorMessage,
-    PWerrorMessage,
-    PWCerrorMessage,
-  ]);
+    setAccent(phonenumber && authCode && !phonenumberErrorMessage);
+  }, [phonenumber, authCode, phonenumberErrorMessage]);
 
   useEffect(() => {
     if (refDidMount.current) {
-      let IDerror = "";
-      let PWerror = "";
-      let PWCerror = "";
-      if (!name) {
-        IDerror = "실명을 입력해주세요.";
-      } else if (birthday.length !== 6) {
-        PWerror = "생년월일은 6자리여야합니다 ex) 980424";
-      } else if (!phoneNumber) {
-        PWCerror = "휴대폰 번호를 입력해주세요.";
+      let phonenumberError = "";
+      if (!phonenumber) {
+        phonenumberError = "휴대폰 번호를 입력해주세요.";
+      } else if (!isPhoneNum(phonenumber)) {
+        phonenumberError = "올바른 휴대폰 번호를 입력해주세요.";
       } else {
-        IDerror = "";
-        PWerror = "";
-        PWCerror = "";
+        phonenumberError = "";
       }
-      setIDErrorMessage(IDerror);
-      setPWErrorMessage(PWerror);
-      setPWCErrorMessage(PWCerror);
+      setPhonenumberErrorMessage(phonenumberError);
     } else {
       refDidMount.current = true;
     }
@@ -147,11 +109,11 @@ export default ({ route: { params }, navigation }) => {
   const handleSubmit = async () => {
     try {
       await Auth.signUp({
-        username,
+        username: birthday,
         password,
         attributes: {
           name: name,
-          phone_number: "+82" + phoneNumber.slice(1, 11),
+          phone_number: "+82" + phonenumber.slice(1, 11),
           "custom:birthday": birthday,
           "custom:school": "0000",
           "custom:college": "0000",
@@ -168,7 +130,14 @@ export default ({ route: { params }, navigation }) => {
 
   const confirmSignUp = async () => {
     try {
-      await Auth.confirmSignUp(username, authCode);
+      await Auth.confirmSignUp(birthday, authCode);
+      Auth.signIn(birthday, password);
+      navigation.navigate("SignUpSchool", {
+        name,
+        birthday,
+        password,
+        phonenumber,
+      });
       console.log("code confirmed");
     } catch (error) {
       console.log("verification code dose not match.", error.code);
@@ -180,54 +149,31 @@ export default ({ route: { params }, navigation }) => {
       <Container>
         <ProgressContainer>
           <Image
-            source={require("../../assets/images/SignUp1.png")}
-            style={{ width: width * 180, height: height * 44 }}
+            source={require("../../assets/images/halfd_color_logo.png")}
+            style={{
+              width: width * 40,
+              height: height * 58.01,
+              resizeMode: "contain",
+            }}
           />
         </ProgressContainer>
-        <PhaseContainer>
-          <PhaseText>본인인증을 해주세요</PhaseText>
-          <ExplainText>
-            본인 확인 절차이며, 다른 용도로 사용되지 않습니다.
-          </ExplainText>
-        </PhaseContainer>
-        <IDContainer>
-          <NameText>이름</NameText>
-          <BarInput
-            placeholder={"실명을 입력해주세요"}
-            stateFn={setName}
-            autoCapitalize="none"
-            value={name}
-            isValued={name ? true : false}
-            error={IDerrorMessage ? true : false}
-          />
-          <ErrorMessage message={IDerrorMessage} />
-        </IDContainer>
-        <PasswordContainer>
-          <NameText>생년월일</NameText>
-          <BarInput
-            placeholder={"6자리 입력 (ex. 980424)"}
-            stateFn={setBirthday}
-            value={birthday}
-            isValued={birthday ? true : false}
-            error={PWerrorMessage ? true : false}
-          />
-          <ErrorMessage message={PWerrorMessage} />
-        </PasswordContainer>
-        <PasswordContainer>
-          <AuthContainer>
-            <NameText>휴대폰 번호</NameText>
-            <ConfirmBtn onPress={handleSubmit} text={"인증번호 요청"} />
-          </AuthContainer>
-          <BarInput
+        <TitleText>본인인증을 진행해 주세요</TitleText>
+        <SubTitleText>
+          본인 확인 절차이며, 다른 용도로 사용되지 않습니다.
+        </SubTitleText>
+        <PhonenumberContainer>
+          <NameText>휴대폰 번호</NameText>
+          <PhBarInput
             placeholder={"'-'구분 없이 입력해주세요"}
-            stateFn={setPhoneNumber}
-            value={phoneNumber}
-            isValued={phoneNumber ? true : false}
-            error={PWCerrorMessage ? true : false}
+            stateFn={setPhonenumber}
+            value={phonenumber}
+            isValued={phonenumber ? true : false}
+            error={phonenumberErrorMessage ? true : false}
+            onPress={handleSubmit}
           />
-          <ErrorMessage message={PWCerrorMessage} />
-        </PasswordContainer>
-        <PasswordContainer>
+          <ErrorMessage message={phonenumberErrorMessage} />
+        </PhonenumberContainer>
+        <AuthCodeContainer>
           <NameText>인증번호</NameText>
           <BarInput
             placeholder={"인증번호 숫자 6자리를 입력해주세요"}
@@ -236,15 +182,13 @@ export default ({ route: { params }, navigation }) => {
             value={authCode}
             isValued={authCode ? true : false}
           />
-        </PasswordContainer>
+        </AuthCodeContainer>
         <ButtonContainer>
           <Btn
             text={"다음"}
             accent={accent}
             onPress={() => {
               confirmSignUp();
-              Auth.signIn(username, password);
-              navigation.navigate("SignUpSchool", { username, password });
             }}
             icon={true}
           />

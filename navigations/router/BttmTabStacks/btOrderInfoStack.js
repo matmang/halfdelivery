@@ -14,6 +14,10 @@ import UpdateAccountScreen from "../../../screens/Main/ProfileStack/UpdateAccoun
 import UpdatePhoneNumberScreen from "../../../screens/Main/ProfileStack/UpdatePhoneNumberScreen";
 import AccountScreen from "../../../screens/Main/ProfileStack/AccountScreen";
 import CheckInfoScreen from "../../../screens/Main/ProfileStack/CheckInfoScreen";
+import FAQScreen from "../../../screens/Main/ProfileStack/FAQScreen";
+import ConfirmUserInfoScreen from "../../../screens/Main/ProfileStack/ConfirmUserInfoScreen";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { Image } from "react-native";
 
 const Stack = createStackNavigator();
 
@@ -27,8 +31,6 @@ export default () => (
         headerTitleAlign: "center",
         headerStyle: {
           backgroundColor: colors.primaryBlue,
-          height: height * 56,
-          marginTop: height * 20,
         },
         headerTintColor: "#ffffff",
         headerTitleStyle: {
@@ -37,6 +39,15 @@ export default () => (
         },
         headerRight: () => (
           <HeaderButtons HeaderButtonComponent={HomeHeaderButton}>
+            <Item
+              title="Search"
+              iconName={Platform.OS === "android" ? "md-search" : "ios-search"}
+              onPress={() =>
+                navigation.navigate("HomeStack", {
+                  screen: "Search",
+                })
+              }
+            />
             <Item
               title="Notification"
               iconName={
@@ -58,8 +69,6 @@ export default () => (
         headerTitleAlign: "center",
         headerStyle: {
           backgroundColor: colors.primaryBlue,
-          height: height * 56,
-          marginTop: height * 20,
         },
         headerTintColor: "#ffffff",
         headerTitleStyle: {
@@ -89,26 +98,26 @@ export default () => (
         headerTitleAlign: "center",
         headerStyle: {
           backgroundColor: colors.primaryBlue,
-          height: height * 56,
-          marginTop: height * 20,
+          alignItems: "center",
         },
         headerTintColor: "#ffffff",
         headerTitleStyle: {
           fontFamily: "noto-medium",
           fontSize: width * 17,
         },
-        headerRight: () => (
-          <HeaderButtons HeaderButtonComponent={HomeHeaderButton}>
-            <Item
-              title="Notification"
-              iconName={
-                Platform.OS === "android"
-                  ? "md-notifications"
-                  : "ios-notifications"
-              }
-              onPress={() => alert("알림")}
+        headerLeft: () => (
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Image
+              source={require("../../../assets/images/left_arrow_white.png")}
+              style={{
+                width: width * 16,
+                height: height * 16,
+                marginTop: height * 20,
+                marginLeft: width * 24,
+                resizeMode: "contain",
+              }}
             />
-          </HeaderButtons>
+          </TouchableOpacity>
         ),
       })}
     />
@@ -120,26 +129,25 @@ export default () => (
         headerTitleAlign: "center",
         headerStyle: {
           backgroundColor: colors.primaryBlue,
-          height: height * 56,
-          marginTop: height * 20,
         },
         headerTintColor: "#ffffff",
         headerTitleStyle: {
           fontFamily: "noto-medium",
           fontSize: width * 17,
         },
-        headerRight: () => (
-          <HeaderButtons HeaderButtonComponent={HomeHeaderButton}>
-            <Item
-              title="Notification"
-              iconName={
-                Platform.OS === "android"
-                  ? "md-notifications"
-                  : "ios-notifications"
-              }
-              onPress={() => alert("알림")}
+        headerLeft: () => (
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Image
+              source={require("../../../assets/images/delete_white.png")}
+              style={{
+                width: width * 16,
+                height: height * 16,
+                marginTop: height * 20,
+                marginLeft: width * 24,
+                resizeMode: "contain",
+              }}
             />
-          </HeaderButtons>
+          </TouchableOpacity>
         ),
       })}
     />
@@ -151,26 +159,25 @@ export default () => (
         headerTitleAlign: "center",
         headerStyle: {
           backgroundColor: colors.primaryBlue,
-          height: height * 56,
-          marginTop: height * 20,
         },
         headerTintColor: "#ffffff",
         headerTitleStyle: {
           fontFamily: "noto-medium",
           fontSize: width * 17,
         },
-        headerRight: () => (
-          <HeaderButtons HeaderButtonComponent={HomeHeaderButton}>
-            <Item
-              title="Notification"
-              iconName={
-                Platform.OS === "android"
-                  ? "md-notifications"
-                  : "ios-notifications"
-              }
-              onPress={() => alert("알림")}
+        headerLeft: () => (
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Image
+              source={require("../../../assets/images/delete_white.png")}
+              style={{
+                width: width * 16,
+                height: height * 16,
+                marginTop: height * 20,
+                marginLeft: width * 24,
+                resizeMode: "contain",
+              }}
             />
-          </HeaderButtons>
+          </TouchableOpacity>
         ),
       })}
     />
@@ -182,26 +189,25 @@ export default () => (
         headerTitleAlign: "center",
         headerStyle: {
           backgroundColor: colors.primaryBlue,
-          height: height * 56,
-          marginTop: height * 20,
         },
         headerTintColor: "#ffffff",
         headerTitleStyle: {
           fontFamily: "noto-medium",
           fontSize: width * 17,
         },
-        headerRight: () => (
-          <HeaderButtons HeaderButtonComponent={HomeHeaderButton}>
-            <Item
-              title="Notification"
-              iconName={
-                Platform.OS === "android"
-                  ? "md-notifications"
-                  : "ios-notifications"
-              }
-              onPress={() => alert("알림")}
+        headerLeft: () => (
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Image
+              source={require("../../../assets/images/delete_white.png")}
+              style={{
+                width: width * 16,
+                height: height * 16,
+                marginTop: height * 20,
+                marginLeft: width * 24,
+                resizeMode: "contain",
+              }}
             />
-          </HeaderButtons>
+          </TouchableOpacity>
         ),
       })}
     />
@@ -213,57 +219,25 @@ export default () => (
         headerTitleAlign: "center",
         headerStyle: {
           backgroundColor: colors.primaryBlue,
-          height: height * 56,
-          marginTop: height * 20,
         },
         headerTintColor: "#ffffff",
         headerTitleStyle: {
           fontFamily: "noto-medium",
           fontSize: width * 17,
         },
-        headerRight: () => (
-          <HeaderButtons HeaderButtonComponent={HomeHeaderButton}>
-            <Item
-              title="Notification"
-              iconName={
-                Platform.OS === "android"
-                  ? "md-notifications"
-                  : "ios-notifications"
-              }
-              onPress={() => alert("알림")}
+        headerLeft: () => (
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Image
+              source={require("../../../assets/images/left_arrow_white.png")}
+              style={{
+                width: width * 16,
+                height: height * 16,
+                marginTop: height * 20,
+                marginLeft: width * 24,
+                resizeMode: "contain",
+              }}
             />
-          </HeaderButtons>
-        ),
-      })}
-    />
-    <Stack.Screen
-      name="UpdatePhoneNumberScreen"
-      component={UpdatePhoneNumberScreen}
-      options={({ navigation }) => ({
-        title: "내 정보",
-        headerTitleAlign: "center",
-        headerStyle: {
-          backgroundColor: colors.primaryBlue,
-          height: height * 56,
-          marginTop: height * 20,
-        },
-        headerTintColor: "#ffffff",
-        headerTitleStyle: {
-          fontFamily: "noto-medium",
-          fontSize: width * 17,
-        },
-        headerRight: () => (
-          <HeaderButtons HeaderButtonComponent={HomeHeaderButton}>
-            <Item
-              title="Notification"
-              iconName={
-                Platform.OS === "android"
-                  ? "md-notifications"
-                  : "ios-notifications"
-              }
-              onPress={() => alert("알림")}
-            />
-          </HeaderButtons>
+          </TouchableOpacity>
         ),
       })}
     />
@@ -275,26 +249,25 @@ export default () => (
         headerTitleAlign: "center",
         headerStyle: {
           backgroundColor: colors.primaryBlue,
-          height: height * 56,
-          marginTop: height * 20,
         },
         headerTintColor: "#ffffff",
         headerTitleStyle: {
           fontFamily: "noto-medium",
           fontSize: width * 17,
         },
-        headerRight: () => (
-          <HeaderButtons HeaderButtonComponent={HomeHeaderButton}>
-            <Item
-              title="Notification"
-              iconName={
-                Platform.OS === "android"
-                  ? "md-notifications"
-                  : "ios-notifications"
-              }
-              onPress={() => alert("알림")}
+        headerLeft: () => (
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Image
+              source={require("../../../assets/images/delete_white.png")}
+              style={{
+                width: width * 16,
+                height: height * 16,
+                marginTop: height * 20,
+                marginLeft: width * 24,
+                resizeMode: "contain",
+              }}
             />
-          </HeaderButtons>
+          </TouchableOpacity>
         ),
       })}
     />
@@ -306,26 +279,85 @@ export default () => (
         headerTitleAlign: "center",
         headerStyle: {
           backgroundColor: colors.primaryBlue,
-          height: height * 56,
-          marginTop: height * 20,
         },
         headerTintColor: "#ffffff",
         headerTitleStyle: {
           fontFamily: "noto-medium",
           fontSize: width * 17,
         },
-        headerRight: () => (
-          <HeaderButtons HeaderButtonComponent={HomeHeaderButton}>
-            <Item
-              title="Notification"
-              iconName={
-                Platform.OS === "android"
-                  ? "md-notifications"
-                  : "ios-notifications"
-              }
-              onPress={() => alert("알림")}
+        headerLeft: () => (
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Image
+              source={require("../../../assets/images/left_arrow_white.png")}
+              style={{
+                width: width * 16,
+                height: height * 16,
+                marginTop: height * 20,
+                marginLeft: width * 24,
+                resizeMode: "contain",
+              }}
             />
-          </HeaderButtons>
+          </TouchableOpacity>
+        ),
+      })}
+    />
+    <Stack.Screen
+      name="ConfirmUserInfoScreen"
+      component={ConfirmUserInfoScreen}
+      options={({ navigation }) => ({
+        title: "회원 정보 확인",
+        headerTitleAlign: "center",
+        headerStyle: {
+          backgroundColor: colors.primaryBlue,
+        },
+        headerTintColor: "#ffffff",
+        headerTitleStyle: {
+          fontFamily: "noto-medium",
+          fontSize: width * 17,
+        },
+        headerLeft: () => (
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Image
+              source={require("../../../assets/images/delete_white.png")}
+              style={{
+                width: width * 16,
+                height: height * 16,
+                marginTop: height * 20,
+                marginLeft: width * 24,
+                resizeMode: "contain",
+              }}
+            />
+          </TouchableOpacity>
+        ),
+      })}
+    />
+    <Stack.Screen
+      name="FAQScreen"
+      component={FAQScreen}
+      options={({ navigation }) => ({
+        title: "자주 묻는 질문",
+        headerTitleAlign: "center",
+        headerStyle: {
+          backgroundColor: colors.primaryBlue,
+        },
+        headerTintColor: "#ffffff",
+        headerTitleStyle: {
+          fontFamily: "noto-medium",
+          fontSize: width * 17,
+        },
+        headerLeft: () => (
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Image
+              source={require("../../../assets/images/delete_white.png")}
+              style={{
+                width: width * 16,
+                height: height * 16,
+                marginTop: height * 20,
+                marginLeft: width * 24,
+                resizeMode: "contain",
+              }}
+            />
+          </TouchableOpacity>
         ),
       })}
     />

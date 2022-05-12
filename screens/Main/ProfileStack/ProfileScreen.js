@@ -32,6 +32,9 @@ const ProfileInfoContainer = styled.View`
 const ButtonBounder = styled.View`
   background-color: white;
   align-items: center;
+  /* border-bottom: 1.5;
+  border-top: 1.5; */
+  border-color: ${colors.blueGray2};
   margin-top: ${height * 8}px;
 `;
 
@@ -136,7 +139,9 @@ export default ({ navigation }) => {
           <ButtonName>공지사항</ButtonName>
         </ProfileButtonContainer>
         <DistributionLine></DistributionLine>
-        <ProfileButtonContainer onPress={() => alert("3")}>
+        <ProfileButtonContainer
+          onPress={() => navigation.navigate("FAQScreen")}
+        >
           <ButtonName>자주 묻는 질문</ButtonName>
         </ProfileButtonContainer>
       </ButtonBounder>

@@ -1,109 +1,41 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Image, ImageBackground } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import styled from "styled-components";
-import colors from "../../colors";
-import SignInModal from "../../components/Auth/SignInModal";
 import loginbackground from "../../assets/images/welcome.png";
-import Btn from "../../components/Auth/Btn";
 import { height, width } from "../../utils";
-import { useRecoilState } from "recoil";
-import { loginState } from "../../recoil/atoms";
-import { checkFirstLaunch } from "../../redux/checkFirstLaunch";
+import LoginBtn from "../../components/Auth/LoginBtn";
+import SignUpBtn from "../../components/Auth/SignUpBtn";
+import TermBottomSheet from "../../components/Auth/TermBottomSheet";
 
 const Container = styled.View`
   flex: 1;
-  justify-content: center;
-  align-items: center;
   background-color: white;
 `;
 
 const LogoContainer = styled.View`
   justify-content: center;
   align-items: center;
+  margin-top: ${height * 241.8}px;
 `;
 
 const WelcomeContainer = styled.View`
   justify-content: center;
   align-items: center;
-  margin-top: ${height * 24}px;
+  margin-top: ${height * 32}px;
 `;
 
 const BodyContainer = styled.View`
   width: 100%;
-  align-items: center;
-  margin-top: ${height * 53}px;
-`;
-
-const ExplainContainer = styled.View`
-  flex-direction: row;
-  margin-top: ${height * 19}px;
-  justify-content: space-between;
-`;
-
-const Footer = styled.View`
-  position: absolute;
-  height: ${height * 65}px;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-  bottom: 0;
-  background-color: ${colors.blueGray2};
+  margin-left: ${width * 24}px;
+  margin-top: ${height * 226.4}px;
 `;
 
 const SecondContainer = styled.View`
-  margin-top: ${height * 20}px;
-`;
-
-const WelcomeText = styled.Text`
-  font-family: "nunito-semibold";
-  font-size: 40px;
-  color: ${colors.primaryBlue};
-  include-font-padding: false;
-  text-align-vertical: center;
-`;
-
-const WelcomeTextKR = styled.Text`
-  font-family: "noto-bold";
-  font-size: 20px;
-  color: ${colors.primaryBlue};
-  include-font-padding: false;
-  text-align-vertical: center;
-`;
-
-const BlueTextER = styled.Text`
-  font-family: "nunito-semibold";
-  font-size: 17px;
-  color: ${colors.primaryBlue};
-  include-font-padding: false;
-  text-align-vertical: center;
-`;
-
-const BlueTextKR = styled.Text`
-  font-family: "noto-regular";
-  font-size: 17px;
-  color: ${colors.primaryBlue};
-  include-font-padding: false;
-  text-align-vertical: center;
-`;
-
-const ExplainText = styled.Text`
-  font-family: "noto-medium";
-  font-size: 12px;
-  color: ${colors.captionGray};
-  include-font-padding: false;
-  text-align-vertical: center;
+  margin-top: ${height * 40}px;
 `;
 
 export default ({ navigation }) => {
-  const [isModalVisible, setIsModalVisible] = useState(false);
-
-  const toggleModal = () => {
-    setIsModalVisible(!isModalVisible);
-  };
-
-  const [loggedIn, setLoggedIn] = useRecoilState(loginState);
+  const [modalVisible, setModalVisible] = useState(false);
 
   return (
     <Container>
@@ -112,52 +44,38 @@ export default ({ navigation }) => {
         style={{
           width: "100%",
           height: "100%",
-          justifyContent: "center",
-          alignItems: "center",
         }}
         resizeMode="stretch"
       >
         <LogoContainer>
           <Image
             source={require("../../assets/images/halfd_logo.png")}
-            style={{ width: width * 83.19, height: height * 120.64 }}
+            style={{ width: width * 60, height: height * 87.02 }}
           />
         </LogoContainer>
         <WelcomeContainer>
-          <WelcomeText>Welcome</WelcomeText>
-          <WelcomeTextKR>어서오세요, 하프딜리버리 입니다 :D</WelcomeTextKR>
+          <Image
+            source={require("../../assets/images/font_logo.png")}
+            style={{
+              width: width * 203.06,
+              height: height * 20.72,
+              resizeMode: "stretch",
+            }}
+          />
         </WelcomeContainer>
         <BodyContainer>
-          <Btn onPress={() => setLoggedIn(true)} text="로그인" accent={true} />
+          <LoginBtn
+            onPress={() => navigation.navigate("SignIn")}
+            text="로그인"
+          />
           <SecondContainer>
-            <Btn
-              onPress={() => navigation.navigate("SignUpAuth")}
-              text="회원가입"
-              accent={true}
-            />
+            <SignUpBtn onPress={() => setModalVisible(true)} text="회원가입" />
           </SecondContainer>
-          <ExplainContainer>
-            <TouchableOpacity onPress={() => navigation.navigate("FindId")}>
-              <ExplainText>아이디 찾기 </ExplainText>
-            </TouchableOpacity>
-            <ExplainText> | </ExplainText>
-            <TouchableOpacity
-              onPress={() => navigation.navigate("FindPassword")}
-            >
-              <ExplainText> 비밀번호 찾기</ExplainText>
-            </TouchableOpacity>
-          </ExplainContainer>
         </BodyContainer>
-        <SignInModal
-          isModalVisible={isModalVisible}
-          onBackdropPress={() => setIsModalVisible(false)}
-          navigation={navigation}
-          setVisible={setIsModalVisible}
+        <TermBottomSheet
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
         />
-        <Footer>
-          <BlueTextER>HALF DELIVERY </BlueTextER>
-          <BlueTextKR>사용가이드 바로가기</BlueTextKR>
-        </Footer>
       </ImageBackground>
     </Container>
   );
