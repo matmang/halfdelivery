@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Image, KeyboardAvoidingView } from "react-native";
+import { Image, KeyboardAvoidingView, Pressable, Text } from "react-native";
 import styled from "styled-components";
 import Btn from "../../components/Auth/Btn";
 import BarInput from "../../components/Auth/BarInput";
@@ -10,6 +10,7 @@ import { height, width } from "../../utils";
 import { useRecoilState } from "recoil";
 import { loginState } from "../../recoil/atoms/loginAtom";
 import { Auth } from "aws-amplify";
+import FindIdModal from "../../components/Auth/FindIdModal";
 
 const Container = styled.View`
   flex: 1;
@@ -61,6 +62,7 @@ export default ({ navigation }) => {
   const [PWerrorMessage, setPWErrorMessage] = useState("");
   const [accent, setAccent] = useState(false);
   const [loggedIn, setLoggedIn] = useRecoilState(loginState);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const refDidMount = useRef(null);
 
@@ -143,6 +145,12 @@ export default ({ navigation }) => {
           />
           <ErrorMessage message={PWerrorMessage} />
         </PasswordContainer>
+        <Pressable onPress={() => setIsModalVisible(true)}>
+          <Text>아이디 찾기</Text>
+        </Pressable>
+        <Pressable onPress={() => navigation.navigate("FindPassword")}>
+          <Text>비밀번호 찾기</Text>
+        </Pressable>
         <ButtonContainer>
           <Btn
             text={"다음"}
@@ -151,6 +159,12 @@ export default ({ navigation }) => {
             icon={true}
           />
         </ButtonContainer>
+        <FindIdModal
+          isModalVisible={isModalVisible}
+          onBackdropPress={() => setIsModalVisible(false)}
+          navigation={navigation}
+          setIsModalVisible={setIsModalVisible}
+        />
       </Container>
     </DismissKeyboard>
   );

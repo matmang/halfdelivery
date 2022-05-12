@@ -47,12 +47,6 @@ const ButtonContainer = styled.View`
   bottom: 0;
 `;
 
-const AuthContainer = styled.View`
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-`;
-
 const TitleText = styled.Text`
   font-family: "noto-medium";
   font-size: 24px;
@@ -169,7 +163,6 @@ export default ({ route: { params }, navigation }) => {
         </SubTitleText>
         <PhonenumberContainer>
           <NameText>휴대폰 번호</NameText>
-          {/* <ConfirmBtn onPress={handleSubmit} text={"인증번호 요청"} /> */}
           <PhBarInput
             placeholder={"'-'구분 없이 입력해주세요"}
             stateFn={setPhonenumber}

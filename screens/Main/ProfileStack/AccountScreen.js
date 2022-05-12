@@ -1,11 +1,12 @@
 import { Auth, DataStore } from "aws-amplify";
 import React, { useEffect, useState } from "react";
 import { Image } from "react-native";
-import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import colors from "../../../colors";
 import { height, width } from "../../../utils";
 import { logOut } from "../../../redux/usersSlice";
+import { useRecoilState } from "recoil";
+import { loginState } from "../../../recoil/atoms/loginAtom";
 
 const Container = styled.View`
   flex: 1;
@@ -73,10 +74,9 @@ export default ({ navigation }) => {
   const [authUser, setAuthUser] = useState(undefined);
   const [school, setSchool] = useState("");
   const [college, setCollege] = useState("");
+  const [loggedIn, setLoggedIn] = useRecoilState(loginState);
   const [userImgUri, setUserImgUri] = useState("");
   const [userHalfMoney, setUserHalfMoney] = useState(0);
-
-  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -132,7 +132,12 @@ export default ({ navigation }) => {
         </ProfileRightContainer>
       </ProfileContainer>
       <ButtonBounder>
-        <ProfileButtonContainer onPress={() => logOutPress()}>
+        <ProfileButtonContainer
+          onPress={() => {
+            Auth.signOut();
+            setLoggedIn(false);
+          }}
+        >
           <ButtonName>로그아웃</ButtonName>
         </ProfileButtonContainer>
         <DistributionLine></DistributionLine>

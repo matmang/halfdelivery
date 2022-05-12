@@ -3,7 +3,6 @@ import styled from "styled-components";
 import Proptypes from "prop-types";
 import colors from "../../colors";
 import { height, width } from "../../utils";
-import ConfirmBtn from "./ConfirmBtn";
 
 const Container = styled.TextInput`
   width: ${width * 364}px;
