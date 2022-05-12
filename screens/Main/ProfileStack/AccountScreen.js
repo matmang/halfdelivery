@@ -7,6 +7,7 @@ import { height, width } from "../../../utils";
 import { logOut } from "../../../redux/usersSlice";
 import { useRecoilState } from "recoil";
 import { loginState } from "../../../recoil/atoms/loginAtom";
+import { User } from "../../../AWS/src/models";
 
 const Container = styled.View`
   flex: 1;
@@ -74,6 +75,7 @@ export default ({ navigation }) => {
   const [authUser, setAuthUser] = useState(undefined);
   const [school, setSchool] = useState("");
   const [college, setCollege] = useState("");
+  const [name, setName] = useState("");
   const [loggedIn, setLoggedIn] = useRecoilState(loginState);
   const [userImgUri, setUserImgUri] = useState("");
   const [userHalfMoney, setUserHalfMoney] = useState(0);
@@ -84,6 +86,7 @@ export default ({ navigation }) => {
       const currentUserInfo = await Auth.currentUserInfo();
       setCollege(currentUserInfo.attributes["custom:college"]);
       setSchool(currentUserInfo.attributes["custom:school"]);
+      setName(currentUserInfo.attributes["name"]);
     };
     fetchUserData();
   }, []);
@@ -113,7 +116,7 @@ export default ({ navigation }) => {
         />
         <ProfileRightContainer>
           <ProfileInfoContainer>
-            <NameText>김지우</NameText>
+            <NameText>{name}</NameText>
             <NameText> 님</NameText>
             <Image
               source={require("../../../assets/images/active-arrow-right.png")}
@@ -141,7 +144,11 @@ export default ({ navigation }) => {
           <ButtonName>로그아웃</ButtonName>
         </ProfileButtonContainer>
         <DistributionLine></DistributionLine>
-        <ProfileButtonContainer>
+        <ProfileButtonContainer
+          onPress={() => {
+            navigation.navigate("ConfirmUserInfoScreen");
+          }}
+        >
           <ButtonName>회원 탈퇴</ButtonName>
         </ProfileButtonContainer>
       </ButtonBounder>

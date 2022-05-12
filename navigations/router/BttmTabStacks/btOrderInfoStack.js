@@ -14,6 +14,8 @@ import UpdateAccountScreen from "../../../screens/Main/ProfileStack/UpdateAccoun
 import UpdatePhoneNumberScreen from "../../../screens/Main/ProfileStack/UpdatePhoneNumberScreen";
 import AccountScreen from "../../../screens/Main/ProfileStack/AccountScreen";
 import CheckInfoScreen from "../../../screens/Main/ProfileStack/CheckInfoScreen";
+import FAQScreen from "../../../screens/Main/ProfileStack/FAQScreen";
+import ConfirmUserInfoScreen from "../../../screens/Main/ProfileStack/ConfirmUserInfoScreen";
 
 const Stack = createStackNavigator();
 
@@ -27,8 +29,6 @@ export default () => (
         headerTitleAlign: "center",
         headerStyle: {
           backgroundColor: colors.primaryBlue,
-          height: height * 56,
-          marginTop: height * 20,
         },
         headerTintColor: "#ffffff",
         headerTitleStyle: {
@@ -37,6 +37,15 @@ export default () => (
         },
         headerRight: () => (
           <HeaderButtons HeaderButtonComponent={HomeHeaderButton}>
+            <Item
+              title="Search"
+              iconName={Platform.OS === "android" ? "md-search" : "ios-search"}
+              onPress={() =>
+                navigation.navigate("HomeStack", {
+                  screen: "Search",
+                })
+              }
+            />
             <Item
               title="Notification"
               iconName={
@@ -58,8 +67,6 @@ export default () => (
         headerTitleAlign: "center",
         headerStyle: {
           backgroundColor: colors.primaryBlue,
-          height: height * 56,
-          marginTop: height * 20,
         },
         headerTintColor: "#ffffff",
         headerTitleStyle: {
@@ -89,8 +96,6 @@ export default () => (
         headerTitleAlign: "center",
         headerStyle: {
           backgroundColor: colors.primaryBlue,
-          height: height * 56,
-          marginTop: height * 20,
         },
         headerTintColor: "#ffffff",
         headerTitleStyle: {
@@ -120,8 +125,6 @@ export default () => (
         headerTitleAlign: "center",
         headerStyle: {
           backgroundColor: colors.primaryBlue,
-          height: height * 56,
-          marginTop: height * 20,
         },
         headerTintColor: "#ffffff",
         headerTitleStyle: {
@@ -151,8 +154,6 @@ export default () => (
         headerTitleAlign: "center",
         headerStyle: {
           backgroundColor: colors.primaryBlue,
-          height: height * 56,
-          marginTop: height * 20,
         },
         headerTintColor: "#ffffff",
         headerTitleStyle: {
@@ -182,8 +183,6 @@ export default () => (
         headerTitleAlign: "center",
         headerStyle: {
           backgroundColor: colors.primaryBlue,
-          height: height * 56,
-          marginTop: height * 20,
         },
         headerTintColor: "#ffffff",
         headerTitleStyle: {
@@ -213,8 +212,6 @@ export default () => (
         headerTitleAlign: "center",
         headerStyle: {
           backgroundColor: colors.primaryBlue,
-          height: height * 56,
-          marginTop: height * 20,
         },
         headerTintColor: "#ffffff",
         headerTitleStyle: {
@@ -244,8 +241,6 @@ export default () => (
         headerTitleAlign: "center",
         headerStyle: {
           backgroundColor: colors.primaryBlue,
-          height: height * 56,
-          marginTop: height * 20,
         },
         headerTintColor: "#ffffff",
         headerTitleStyle: {
@@ -275,8 +270,6 @@ export default () => (
         headerTitleAlign: "center",
         headerStyle: {
           backgroundColor: colors.primaryBlue,
-          height: height * 56,
-          marginTop: height * 20,
         },
         headerTintColor: "#ffffff",
         headerTitleStyle: {
@@ -306,8 +299,64 @@ export default () => (
         headerTitleAlign: "center",
         headerStyle: {
           backgroundColor: colors.primaryBlue,
-          height: height * 56,
-          marginTop: height * 20,
+        },
+        headerTintColor: "#ffffff",
+        headerTitleStyle: {
+          fontFamily: "noto-medium",
+          fontSize: width * 17,
+        },
+        headerRight: () => (
+          <HeaderButtons HeaderButtonComponent={HomeHeaderButton}>
+            <Item
+              title="Notification"
+              iconName={
+                Platform.OS === "android"
+                  ? "md-notifications"
+                  : "ios-notifications"
+              }
+              onPress={() => alert("알림")}
+            />
+          </HeaderButtons>
+        ),
+      })}
+    />
+    <Stack.Screen
+      name="ConfirmUserInfoScreen"
+      component={ConfirmUserInfoScreen}
+      options={({ navigation }) => ({
+        title: "회원 정보 확인",
+        headerTitleAlign: "center",
+        headerStyle: {
+          backgroundColor: colors.primaryBlue,
+        },
+        headerTintColor: "#ffffff",
+        headerTitleStyle: {
+          fontFamily: "noto-medium",
+          fontSize: width * 17,
+        },
+        headerRight: () => (
+          <HeaderButtons HeaderButtonComponent={HomeHeaderButton}>
+            <Item
+              title="Notification"
+              iconName={
+                Platform.OS === "android"
+                  ? "md-notifications"
+                  : "ios-notifications"
+              }
+              onPress={() => alert("알림")}
+            />
+          </HeaderButtons>
+        ),
+      })}
+    />
+    <Stack.Screen
+      name="FAQScreen"
+      component={FAQScreen}
+      options={({ navigation }) => ({
+        title: "자주 묻는 질문",
+        headerTitleAlign: "center",
+        headerStyle: {
+          backgroundColor: colors.primaryBlue,
         },
         headerTintColor: "#ffffff",
         headerTitleStyle: {

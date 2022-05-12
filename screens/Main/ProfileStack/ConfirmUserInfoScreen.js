@@ -5,7 +5,11 @@ import styled from "styled-components";
 import colors from "../../../colors";
 import BarInput from "../../../components/Auth/BarInput";
 import Btn from "../../../components/Auth/Btn";
+import ErrorMessage from "../../../components/Auth/ErrorMessage";
 import PhBarInput from "../../../components/Auth/PhBarInput";
+import UserDeleteFinalModal from "../../../components/Profile/UserDeleteFinalModal";
+import UserDeleteModal from "../../../components/Profile/UserDeleteModal";
+import UserDeleteSurvey from "../../../components/Profile/UserDeleteSurvey";
 import { height, width } from "../../../utils";
 
 const Container = styled.View`
@@ -75,53 +79,39 @@ const NameText = styled.Text`
 `;
 
 export default ({ navigation }) => {
-  const [school, setSchool] = useState("");
-  const [college, setCollege] = useState("");
   const [phonenumber, setPhonenumber] = useState("");
   const [authCode, setAuthCode] = useState("");
   const [accent, setAccent] = useState(false);
-  const [schoolOpen, setSchoolOpen] = useState(false);
-  const [collegeOpen, setCollegeOpen] = useState(false);
   const [authCodeErrorMessage, setAuthCodeErrorMessage] = useState("");
   const [phonenumberErrorMessage, setPhoneNumberErrorMessage] = useState("");
-  const [value, setValue] = useState(null);
   const [confirmed, setConfirmed] = useState(false);
-  const [schoolItems, setSchoolItems] = useState([
-    { label: "한양대학교 ERICA", value: "ERICA" },
-  ]);
-  const [collegeItems, setCollegeItems] = useState([
-    { label: "공학대학", value: "1" },
-    { label: "소프트웨어융합대학", value: "2" },
-    { label: "약학대학", value: "3" },
-    { label: "과학기술융합대학", value: "4" },
-    { label: "국제문화대학", value: "5" },
-    { label: "언론정보대학", value: "6" },
-    { label: "경상대학", value: "7" },
-    { label: "디자인대학", value: "8" },
-    { label: "예체능대학", value: "9" },
-    { label: "창의융합교육원", value: "10" },
-  ]);
-
-  const [schoolPlaceholder, setSchoolPlaceholder] =
-    useState("학교를 선택해주세요");
-  const [collegePlaceholder, setCollegePlaceholder] =
-    useState("단과대학을 선택해주세요");
+  const [authUser, setAuthUser] = useState(undefined);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isSurveyVisible, setIsSurveyVisible] = useState(false);
+  const [isDeleteVisible, setIsDeleteVisible] = useState(false);
+  const [name, setName] = useState("");
 
   const refDidMount = useRef(null);
 
   useEffect(() => {
+    const fetchUserData = async () => {
+      const userData = await Auth.currentAuthenticatedUser().then(setAuthUser);
+      const currentUserInfo = await Auth.currentUserInfo();
+      setName(currentUserInfo.attributes["name"]);
+    };
+    fetchUserData();
+    console.log(isSurveyVisible);
+  }, []);
+
+  useEffect(() => {
     setAccent(
-      school &&
-        college &&
-        phonenumber &&
+      phonenumber &&
         authCode &&
         confirmed &&
         !phonenumberErrorMessage &&
         !authCodeErrorMessage
     );
   }, [
-    school,
-    college,
     phonenumber,
     authCode,
     confirmed,
@@ -161,22 +151,7 @@ export default ({ navigation }) => {
 
   const handleSubmit = async () => {
     try {
-      const user = await Auth.currentAuthenticatedUser();
-
-      Auth.verifyCurrentUserAttributeSubmit("phone_number", authCode)
-        .then(async () => {
-          console.log("phone_number verified");
-          await Auth.updateUserAttributes(user, {
-            "custom:school": school.toString(),
-            "custom:college": college.toString(),
-          });
-          alert("회원정보 변경에 성공했습니다.");
-          navigation.goBack();
-        })
-        .catch((e) => {
-          console.log("failed with error", e);
-          alert("회원정보 변경에 실패했습니다.");
-        });
+      setIsModalVisible(true);
     } catch (error) {
       console.log("Error update...", error);
     }
@@ -186,47 +161,24 @@ export default ({ navigation }) => {
     <Container>
       <ExplainContainer>
         <ExplainText>
-          본인 명의의 학과 정보를 입력해주세요.{"\n"}안전한 거래를 위해서
-          사용되는 정보입니다.
+          회원님의 소중한 정보 보호를 위해,{"\n"}하프딜리버리 계정의 회원정보를
+          확인해 주세요.
         </ExplainText>
       </ExplainContainer>
       <InputAreaContainer>
         <FirstContainer>
-          <NameText>학교</NameText>
-          <DropDownPicker
-            open={schoolOpen}
-            value={value}
-            setOpen={setSchoolOpen}
-            setValue={setValue}
-            setItems={setSchoolItems}
-            items={schoolItems}
-            onSelectItem={(item) => {
-              setSchool(item.label);
-              setSchoolPlaceholder(item.label);
-            }}
-            containerStyle={{ width: 364, marginTop: 10 }}
-            placeholder={schoolPlaceholder}
-            zIndex={100}
+          <AuthContainer>
+            <NameText>이름</NameText>
+          </AuthContainer>
+          <BarInput
+            placeholder={"이름을 입력해주세요"}
+            stateFn={setAuthCode}
+            value={name}
+            isValued={name ? true : false}
+            error={false}
+            disabled
           />
         </FirstContainer>
-        <InputContainer>
-          <NameText>단과대학</NameText>
-          <DropDownPicker
-            open={collegeOpen}
-            value={value}
-            setOpen={setCollegeOpen}
-            setValue={setValue}
-            setItems={setCollegeItems}
-            items={collegeItems}
-            onSelectItem={(item) => {
-              setCollege(item.label);
-              setCollegePlaceholder(item.label);
-            }}
-            containerStyle={{ width: 364, marginTop: 10 }}
-            placeholder={collegePlaceholder}
-            zIndex={100}
-          />
-        </InputContainer>
         <InputContainer>
           <AuthContainer>
             <NameText>휴대폰 번호</NameText>
@@ -239,6 +191,7 @@ export default ({ navigation }) => {
             error={phonenumberErrorMessage ? true : false}
             onPress={confirmFindId}
           />
+          <ErrorMessage>{phonenumberErrorMessage}</ErrorMessage>
         </InputContainer>
         <InputContainer>
           <AuthContainer>
@@ -251,11 +204,30 @@ export default ({ navigation }) => {
             isValued={authCode ? true : false}
             error={authCodeErrorMessage ? true : false}
           />
+          <ErrorMessage>{authCodeErrorMessage}</ErrorMessage>
         </InputContainer>
       </InputAreaContainer>
       <ButtonContainer>
         <Btn text={"확인"} accent={accent} onPress={handleSubmit} />
       </ButtonContainer>
+      <UserDeleteModal
+        isModalVisible={isModalVisible}
+        onBackdropPress={() => setIsModalVisible(false)}
+        navigation={navigation}
+        setIsModalVisible={setIsModalVisible}
+      />
+      <UserDeleteSurvey
+        isModalVisible={isSurveyVisible}
+        onBackdropPress={() => setIsSurveyVisible(false)}
+        navigation={navigation}
+        setIsModalVisible={setIsSurveyVisible}
+      />
+      <UserDeleteFinalModal
+        isModalVisible={isDeleteVisible}
+        onBackdropPress={() => setIsDeleteVisible(false)}
+        navigation={navigation}
+        setIsModalVisible={setIsDeleteVisible}
+      />
     </Container>
   );
 };

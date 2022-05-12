@@ -136,7 +136,9 @@ export default ({ navigation }) => {
           <ButtonName>공지사항</ButtonName>
         </ProfileButtonContainer>
         <DistributionLine></DistributionLine>
-        <ProfileButtonContainer onPress={() => alert("3")}>
+        <ProfileButtonContainer
+          onPress={() => navigation.navigate("FAQScreen")}
+        >
           <ButtonName>자주 묻는 질문</ButtonName>
         </ProfileButtonContainer>
       </ButtonBounder>
