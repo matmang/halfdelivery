@@ -39,6 +39,8 @@ const DateText = styled.Text`
 const BodyText = styled.Text`
   font-family: "noto-regular";
   font-size: ${width * 14};
+  text-align: left;
+  line-height: ${height * 24}px;
   margin-top: ${height * 20}px;
   margin-left: ${width * 24}px;
   margin-right: ${width * 24}px;

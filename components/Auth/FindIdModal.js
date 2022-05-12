@@ -11,8 +11,6 @@ const Container = styled.View`
   height: ${height * 229}px;
   background-color: white;
   border-radius: 10px;
-  align-items: center;
-  justify-content: center;
 `;
 
 const InfoConatiner = styled.View`
@@ -79,7 +77,6 @@ const FindIdModal = ({
     <ReactNativeModal
       isVisible={isModalVisible}
       onBackdropPress={onBackdropPress}
-      style={{ alignItems: "center", justifyContent: "center" }}
     >
       <Container>
         <InfoConatiner>

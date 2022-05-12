@@ -88,7 +88,7 @@ export default ({ navigation }) => {
   const [authUser, setAuthUser] = useState(undefined);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isSurveyVisible, setIsSurveyVisible] = useState(false);
-  const [isDeleteVisible, setIsDeleteVisible] = useState(false);
+  const [isDeleteVisible, setIsDeleteVisible] = useState(true);
   const [name, setName] = useState("");
 
   const refDidMount = useRef(null);

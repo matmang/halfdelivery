@@ -75,7 +75,7 @@ const CollegeText = styled.Text`
 `;
 
 export default ({ route: { params }, navigation }) => {
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState(params?.birthday);
   const [password, setPassword] = useState(params?.password);
   const [school, setSchool] = useState("");
   const [college, setCollege] = useState("");
@@ -124,7 +124,7 @@ export default ({ route: { params }, navigation }) => {
         currentUserInfo.attributes["custom:college"],
         currentUserInfo.username
       );
-      navigation.navigate("SignUpBank", { birthday, password });
+      navigation.navigate("SignUpBank", { username, password });
     } catch (error) {
       console.log("Error signing up...", error);
     }

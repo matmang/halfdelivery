@@ -36,9 +36,9 @@ const SearchContanier = styled.View`
 `;
 
 const NoneBox = styled.View`
-  width: ${width * 162}px;
-  height: ${height * 162}px;
-  margin-top: ${height * 208}px;
+  width: ${width * 364}px;
+  height: ${height * 128}px;
+  margin-top: ${height * 24}px;
   background-color: white;
   border-width: 1px;
 `;
@@ -91,9 +91,16 @@ const Home = ({ stores, navigation, isModalVisible }) => {
           </SearchContanier>
         </TouchableOpacity>
       </HeaderContainer>
-      <Pressable onPress={() => logOutPress()}>
-        <NoneBox></NoneBox>
-      </Pressable>
+      <NoneBox></NoneBox>
+      <Image
+        source={require("../../assets/images/empty_main.png")}
+        style={{
+          width: width * 259.19,
+          height: height * 160.09,
+          resizeMode: "contain",
+          marginTop: height * 117.8,
+        }}
+      />
       <StartText>매칭을 시작해주세요</StartText>
       <ProfileModal
         isModalVisible={isVisible}

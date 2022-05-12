@@ -32,6 +32,9 @@ const ProfileInfoContainer = styled.View`
 const ButtonBounder = styled.View`
   background-color: white;
   align-items: center;
+  /* border-bottom: 1.5;
+  border-top: 1.5; */
+  border-color: ${colors.blueGray2};
   margin-top: ${height * 8}px;
 `;
 

@@ -103,8 +103,6 @@ const UserDeleteFinalModal = ({
                 if (this.props.onSessionChange) {
                   this.props.onSessionChange();
                 }
-                document.location.href = "/login";
-
                 resolve();
               });
             })
