@@ -17,6 +17,7 @@ import {
   WESTERN_ID,
   CAFE_ID,
 } from "../../assets/constants";
+import styled from "styled-components";
 
 const StoreList = ({ categoryID }) => {
   const [serverData, setServerData] = useState([]);
@@ -61,23 +62,21 @@ const StoreList = ({ categoryID }) => {
   };
 
   return (
-    <View style={styles.root}>
+    <Root>
       <FlatList
         data={serverData} // ? 임시 설정
         renderItem={({ item }) => <StoreItem storeInfo={item} />}
         keyExtractor={(item, index) => index.toString()} // ? Warning 메시지 해결. https://github.com/facebook/react-native/issues/18291
       />
-    </View>
+    </Root>
   );
 };
 
-const styles = StyleSheet.create({
-  root: {
-    backgroundColor: "#E6EDF3",
-    justifyContent: "center",
-    width: "100%",
-    height: "100%",
-  },
-});
+const Root = styled.Pressable`
+  background-color: red;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+`;
 
 export default StoreList;

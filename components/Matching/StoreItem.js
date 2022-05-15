@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useLayoutEffect } from "react";
 import { View, Text, ActivityIndicator } from "react-native";
 import logos from "../../images";
-import { MaterialIcons } from "@expo/vector-icons";
 import styled from "styled-components";
 import StoreCategory from "../StoreCategory";
 import {
@@ -124,6 +123,7 @@ const StoreItem = ({ storeInfo }) => {
 
     const DlvTipsArray = Object.entries(DlvTipsObject);
     DlvTipsArray.forEach((ele) => (ele[0] = parseInt(ele[0])));
+    console.log(DlvTipsArray);
 
     return DlvTipsArray;
   };
@@ -156,151 +156,267 @@ const StoreItem = ({ storeInfo }) => {
   }
 
   return (
-    <StoreRoomBox
-      // onPress={() => {
-      //   // ? nested screen 상태에선, navigation 방법이 조금 다르다.
-      //   // 참조: https://reactnavigation.org/docs/nesting-navigators/#navigating-to-a-screen-in-a-nested-navigator
-      //   navigation.navigate("StoreStack", {
-      //     screen: "SelectMenuScreen",
-      //     params: {
-      //       storeInfo,
-      //       isHost: true,
-      //     },
-      //   });
-      // }}
-      onPress={() => {
-        setIsModal(true);
-        // alert("s");
-        // return <StoreModal isModal={true} setIsModal={setIsModal} />;
-      }}
-    >
-      {isModal && (
-        <SelectPlatform
-          isModal={isModal}
-          setIsModal={setIsModal}
-          storeInfo={storeInfo}
-          category={category}
+    <Root>
+      <HorizontalLine />
+      <StoreRoomBox
+        // onPress={() => {
+        //   // ? nested screen 상태에선, navigation 방법이 조금 다르다.
+        //   // 참조: https://reactnavigation.org/docs/nesting-navigators/#navigating-to-a-screen-in-a-nested-navigator
+        //   navigation.navigate("StoreStack", {
+        //     screen: "SelectMenuScreen",
+        //     params: {
+        //       storeInfo,
+        //       isHost: true,
+        //     },
+        //   });
+        // }}
+        onPress={() => {
+          setIsModal(true);
+          // alert("s");
+          // return <StoreModal isModal={true} setIsModal={setIsModal} />;
+        }}
+      >
+        {isModal && (
+          <SelectPlatform
+            isModal={isModal}
+            setIsModal={setIsModal}
+            storeInfo={storeInfo}
+            category={category}
+          />
+        )}
+        <ImageRoot
+          resizeMode="cover"
+          source={
+            // logos.halfLogo
+            // { uri: logoImgUri }
+            logoImgUri == null ? logos.halfLogo : { uri: logoImgUri }
+          }
         />
-      )}
+        <InfoRoot>
+          <Row0>
+            <StoreCategory category={category} />
+            <StoreText>{name}</StoreText>
+          </Row0>
 
-      <Img
-        resizeMode="cover"
-        source={
-          // logos.halfLogo
-          // { uri: logoImgUri }
-          logoImgUri == null ? logos.halfLogo : { uri: logoImgUri }
-        }
-      />
-      <NonImgBox>
-        <InfoView>
-          <StoreCategory category={category} />
-          <StoreText>{name}</StoreText>
-          {/* <MaterialIcons
-            name="arrow-forward-ios"
-            size={12}
-            color="black"
-            style={{ marginLeft: 12, marginBottom: 6 }}
-          /> */}
-        </InfoView>
+          <Row1>
+            <InfoText>최소주문금액</InfoText>
+            <Price1>
+              {DlvTipsArray[0][0]
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+            </Price1>
+            <Won1>원</Won1>
+            <Wave>~</Wave>
+            <Price2>
+              {DlvTipsArray[DlvTipsArray.length - 1][0]
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+            </Price2>
+            <Won2>원</Won2>
+          </Row1>
 
-        <InfoView>
-          <View>
-            <InfoText numberOfLines={1}>최소주문금액</InfoText>
-            <InfoText numberOfLines={1}>배달비</InfoText>
-          </View>
-
-          <View style={{ marginLeft: 18 }}>
-            <InfoText numberOfLines={1}>
-              <NunitoText>
-                {DlvTipsArray[0][0]
-                  .toString()
-                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                <Text style={{ fontFamily: "gothica1-regular" }}> 원</Text>
-                {"   "}~{"   "}
-                {DlvTipsArray[DlvTipsArray.length - 1][0]
-                  .toString()
-                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                <Text style={{ fontFamily: "gothica1-regular" }}> 원</Text>
-              </NunitoText>
-            </InfoText>
-
-            {DlvTipsArray.length !== 1 ? (
-              <InfoText numberOfLines={1}>
+          {DlvTipsArray.length !== 1 ? (
+            <Row2>
+              <InfoText>배달비</InfoText>
+              <Price1>
+                {" "}
                 {DlvTipsArray[DlvTipsArray.length - 1][1]
                   .toString()
                   .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                <Text style={{ fontFamily: "gothica1-regular" }}> 원</Text>
-                {"   "}~{"   "}
+              </Price1>
+              <Won1>원</Won1>
+              <Wave>~</Wave>
+              <Price3>
+                {" "}
                 {DlvTipsArray[0][1]
                   .toString()
                   .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                <Text style={{ fontFamily: "gothica1-regular" }}> 원</Text>
-              </InfoText>
-            ) : (
+              </Price3>
+              <Won2>원</Won2>
+            </Row2>
+          ) : (
+            <Row2>
+              <InfoText>배달비</InfoText>
+              <Price1>
+                {" "}
+                {DlvTipsArray[DlvTipsArray.length - 1][1]
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+              </Price1>
+              <Won1>원</Won1>
+              <Wave>~</Wave>
+              <Price3>
+                {" "}
+                {DlvTipsArray[0][1]
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+              </Price3>
+              <Won2>원</Won2>
+            </Row2>
+          )}
+
+          {/* <InfoView>
+            <View>
+              <InfoText numberOfLines={1}>최소주문금액</InfoText>
+              <InfoText numberOfLines={1}>배달비</InfoText>
+            </View>
+
+            <View style={{ marginLeft: 18 }}>
               <InfoText numberOfLines={1}>
-                {DlvTipsArray[0][1]
-                  .toString()
-                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                <Text style={{ fontFamily: "gothica1-regular" }}> 원</Text>
+                <NunitoText>
+                  {DlvTipsArray[0][0]
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                  <Text style={{ fontFamily: "gothica1-regular" }}> 원</Text>
+                  {"   "}~{"   "}
+                  {DlvTipsArray[DlvTipsArray.length - 1][0]
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                  <Text style={{ fontFamily: "gothica1-regular" }}> 원</Text>
+                </NunitoText>
               </InfoText>
-            )}
-          </View>
-        </InfoView>
-      </NonImgBox>
-    </StoreRoomBox>
+
+              {DlvTipsArray.length !== 1 ? (
+                <InfoText numberOfLines={1}>
+                  {DlvTipsArray[DlvTipsArray.length - 1][1]
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                  <Text style={{ fontFamily: "gothica1-regular" }}> 원</Text>
+                  {"   "}~{"   "}
+                  {DlvTipsArray[0][1]
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                  <Text style={{ fontFamily: "gothica1-regular" }}> 원</Text>
+                </InfoText>
+              ) : (
+                <InfoText numberOfLines={1}>
+                  {DlvTipsArray[0][1]
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                  <Text style={{ fontFamily: "gothica1-regular" }}> 원</Text>
+                </InfoText>
+              )}
+            </View>
+          </InfoView> */}
+        </InfoRoot>
+      </StoreRoomBox>
+      <HorizontalLine />
+    </Root>
   );
 };
 
+const Root = styled.View`
+  width: 100%;
+  height: ${height * 108}px;
+  background-color: #e6edf3;
+  margin-top: -1.5px;
+`;
+
 const StoreRoomBox = styled.Pressable`
   width: 100%;
-  height: ${height * 100}px;
+  height: ${height * 105}px;
   flex-direction: row;
   align-items: center;
   background-color: white;
-  /* margin-top: 2px; */
-  margin-bottom: 2px;
 `;
 
-const Img = styled.Image`
+const HorizontalLine = styled.View`
+  width: 100%;
+  height: ${height * 1.5}px;
+  background-color: #e6edf3;
+`;
+
+const ImageRoot = styled.Image`
   margin-left: 24px;
   margin-top: 10px;
   margin-bottom: 10px;
   border-radius: 16px;
   width: ${width * 72}px;
   height: ${height * 72}px;
+
+  border-width: 1px;
+  border-color: black;
 `;
 
-const NonImgBox = styled.View`
-  padding: 5px;
-  margin-left: 20px;
-  justify-content: center;
+const InfoRoot = styled.View`
+  padding-left: ${width * 20}px;
+  width: ${width * 316}px;
+
+  background-color: pink;
 `;
 
-const InfoView = styled.View`
+const Row0 = styled.View`
+  background-color: lightblue;
+  width: ${width * 316}px;
+  height: auto;
   flex-direction: row;
-  align-items: center;
-  padding: 2px;
+  margin-top: ${height * 19}px;
+`;
+
+const Row1 = styled.View`
+  background-color: yellow;
+  width: ${width * 316}px;
+  height: auto;
+  flex-direction: row;
+  margin-top: ${height * 8}px;
+`;
+
+const Row2 = styled(Row1)`
+  background-color: orange;
+  margin-top: ${height * 4}px;
+  margin-bottom: ${height * 19}px;
+`;
+
+const Price1 = styled.Text`
+  font-size: 13px;
+  font-family: "nunito-regular";
+  text-align: right;
+  margin-left: auto;
+`;
+
+const Won1 = styled.Text`
+  font-size: 13px;
+  font-family: "gothica1-regular";
+  margin-left: ${width * 2}px;
+`;
+
+const Wave = styled.Text`
+  font-size: 13px;
+  font-family: "nunito-regular";
+  margin-left: ${width * 16}px;
+`;
+
+const Price2 = styled.Text`
+  font-size: 13px;
+  font-family: "nunito-regular";
+  text-align: right;
+  margin-left: ${width * 8}px;
+`;
+
+const Price3 = styled.Text`
+  font-size: 13px;
+  font-family: "nunito-regular";
+  text-align: right;
+  margin-left: ${width * 16}px;
+`;
+
+const Won2 = styled.Text`
+  font-size: 13px;
+  font-family: "gothica1-regular";
+  margin-left: ${width * 2}px;
+  margin-right: ${width * 58}px;
 `;
 
 const StoreText = styled.Text`
   font-size: 14px;
-  line-height: 20px;
-  text-align: left;
+  margin-left: ${width * 4}px;
   font-family: "gothica1-medium";
-  include-font-padding: false;
-  text-align-vertical: center;
-  margin-left: 8px;
-  margin-bottom: 6px;
 `;
 
 const InfoText = styled.Text`
-  font-size: 14px;
-  line-height: 16px;
-  text-align: left;
+  font-size: 13px;
   font-family: "gothica1-regular";
-  include-font-padding: false;
-  text-align-vertical: center;
-  padding: 2px;
+  text-align: left;
 `;
 
 const NunitoText = styled.Text`

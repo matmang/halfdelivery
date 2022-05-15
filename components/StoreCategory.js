@@ -10,7 +10,6 @@ const StoreCategory = ({ category }) => {
         borderRadius: 12,
         backgroundColor: "#E6EDF3",
         justifyContent: "center",
-        marginBottom: 5,
       }}
     >
       <Text
