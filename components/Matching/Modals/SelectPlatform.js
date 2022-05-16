@@ -49,7 +49,7 @@ const SelectPlatform = ({ isModal, setIsModal, storeInfo, category }) => {
             authUser,
           },
         });
-    dispatch(toggleIsMatching(true));
+    // dispatch(toggleIsMatching(true));
     setIsModal(false);
   };
 

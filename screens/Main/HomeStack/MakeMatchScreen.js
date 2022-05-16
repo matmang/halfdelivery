@@ -80,9 +80,7 @@ export default ({ navigation, route: { params } }) => {
 
   const handleSubmit = async () => {
     try {
-      // console.log(params.authUser.attributes.sub);
-
-      const _Store = await DataStore.query(Store, params.storeInfo.id);
+      console.log("기도합시다");
       /*       Store {
         "_deleted": null,
         "_lastChangedAt": 1649082966294,
@@ -117,15 +115,13 @@ export default ({ navigation, route: { params } }) => {
         "yogiyoUri": null,
       } */
 
-      const storecategoryID = _Store.storecategoryID;
-
       // console.log("authUser");
       // console.log(authUser);
 
       // const me = await DataStore.query(User, authUser.attributes.sub);
 
-      const me = await DataStore.query(User);
-      setMeee(me);
+      // const me = await DataStore.query(User);
+      // setMeee(me);
 
       /*       User {
         "_deleted": null,
@@ -150,6 +146,34 @@ export default ({ navigation, route: { params } }) => {
         "studentIdImgUri": "cupidatatminimfu",
         "updatedAt": "2022-04-28T16:00:03.656Z",
       }, */
+
+      const testStoreCategoryInfo = await DataStore.query(
+        StoreCategory,
+        "9dcc616b-2c49-4247-9ddd-ce360d320848"
+      );
+      console.log("testStoreCategoryInfo");
+      console.log(testStoreCategoryInfo);
+      const testStore = await DataStore.query(
+        Store,
+        "b3b04695-20a9-43c1-bbb8-7cecb5d52eea"
+      );
+      console.log("testStore");
+      console.log(testStore);
+
+      const retrun = await DataStore.save(
+        new MatchingInfo({
+          endTime: "1970-01-01T12:30:23.999Z",
+          StoreCategoryInfo:
+            testStoreCategoryInfo /* Provide a StoreCategory instance here */,
+          StoreInfo: testStore /* Provide a Store instance here */,
+          isRapid: true,
+          platform: Platform.BAEMIN,
+          targetPrice: 1020,
+        })
+      );
+
+      console.log("retrun");
+      console.log(retrun);
 
       // await DataStore.save(
       //   new User({
@@ -212,7 +236,8 @@ export default ({ navigation, route: { params } }) => {
       // );
       // console.log(newParticiant);
     } catch (e) {
-      console.log("에러", e);
+      console.log("기도가 안통했네요");
+      console.log(e);
     }
   };
 
