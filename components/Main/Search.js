@@ -73,11 +73,6 @@ const Search = ({ navigation, token }) => {
   const [results, setResults] = useState([]);
   const [tempArray, setTempArray] = useState([]);
   const [search, setSearch] = useState("");
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(cleanMenus());
-  }, []);
 
   const SearchFn = async (text, token) => {
     var name, i;

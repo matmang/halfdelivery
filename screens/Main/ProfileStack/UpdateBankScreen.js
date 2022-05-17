@@ -2,12 +2,12 @@ import { Auth } from "aws-amplify";
 import React, { useEffect, useRef, useState } from "react";
 import { View } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
-import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import colors from "../../../colors";
 import BarInput from "../../../components/Auth/BarInput";
 import Btn from "../../../components/Auth/Btn";
 import ConfirmBtn from "../../../components/Auth/ConfirmBtn";
+import PhBarInput from "../../../components/Auth/PhBarInput";
 import { height, width } from "../../../utils";
 
 const Container = styled.View`
@@ -38,12 +38,12 @@ const AuthContainer = styled.View`
 `;
 
 const FirstContainer = styled.View`
-  margin-top: ${width * 41};
+  margin-top: ${width * 23};
   width: 100%;
 `;
 
 const InputContainer = styled.View`
-  margin-top: ${width * 45};
+  margin-top: ${width * 41};
   width: 100%;
 `;
 
@@ -62,6 +62,8 @@ const ButtonContainer = styled.View`
 const ExplainText = styled.Text`
   font-family: "gothica1-regular";
   font-size: ${width * 14};
+  text-align: center;
+  line-height: 20px;
   include-font-padding: false;
   text-align-vertical: center;
 `;
@@ -85,6 +87,7 @@ export default ({ navigation }) => {
   const [authCodeErrorMessage, setAuthCodeErrorMessage] = useState("");
   const [phonenumberErrorMessage, setPhoneNumberErrorMessage] = useState("");
   const [accent, setAccent] = useState(false);
+  const [confirmed, setConfirmed] = useState(false);
 
   const [bankItems, setBankItems] = useState([
     { label: "KB국민은행", value: "1" },
@@ -100,8 +103,6 @@ export default ({ navigation }) => {
     { label: "카카오뱅크", value: "11" },
   ]);
 
-  const dispatch = useDispatch();
-
   const refDidMount = useRef(null);
 
   useEffect(() => {
@@ -110,6 +111,7 @@ export default ({ navigation }) => {
         accountNumber &&
         phonenumber &&
         authCode &&
+        confirmed &&
         !phonenumberErrorMessage &&
         !authCodeErrorMessage
     );
@@ -118,31 +120,37 @@ export default ({ navigation }) => {
     accountNumber,
     phonenumber,
     authCode,
+    confirmed,
     phonenumberErrorMessage,
     authCodeErrorMessage,
   ]);
 
-  useEffect(() => {
-    if (refDidMount.current) {
-      let authCodeError = "";
-      let phonenumberError = "";
-      if (!phonenumber) {
-        phonenumberError = "전화번호를 입력해주세요.";
-      } else if (authCode.length !== 6) {
-        authCodeError = "인증번호 6자리를 입력해주세요.";
+  useEffect(
+    () => {
+      if (refDidMount.current) {
+        let authCodeError = "";
+        let phonenumberError = "";
+        if (!phonenumber) {
+          phonenumberError = "전화번호를 입력해주세요.";
+        } else if (authCode.length !== 6) {
+          authCodeError = "인증번호 6자리를 입력해주세요.";
+        } else {
+          authCodeError = "";
+        }
+        setAuthCodeErrorMessage(authCodeError);
+        setPhoneNumberErrorMessage(phonenumberError);
       } else {
-        authCodeError = "";
+        refDidMount.current = true;
       }
-      setAuthCodeErrorMessage(authCodeError);
-      setPhoneNumberErrorMessage(phonenumberError);
-    } else {
-      refDidMount.current = true;
-    }
-  });
+    },
+    phonenumber,
+    authCode
+  );
 
   const confirmFindId = () => {
     Auth.verifyCurrentUserAttribute("phone_number")
       .then(() => {
+        setConfirmed(true);
         console.log("a verification code is sent");
       })
       .catch((e) => {
@@ -176,8 +184,10 @@ export default ({ navigation }) => {
   return (
     <Container>
       <ExplainContainer>
-        <ExplainText>본인 명의의 학과 정보를 입력해주세요.</ExplainText>
-        <ExplainText>안전한 거래를 위해서 사용되는 정보입니다.</ExplainText>
+        <ExplainText>
+          본인 명의의 계좌번호를 입력해주세요.{"\n"}안전한 거래를 위해서
+          사용되는 정보입니다.
+        </ExplainText>
       </ExplainContainer>
       <InputAreaContainer>
         <FirstContainer>
@@ -192,13 +202,13 @@ export default ({ navigation }) => {
             onSelectItem={(item) => {
               setBank(item.label);
             }}
-            containerStyle={{ width: 336, marginLeft: 24, marginTop: 21 }}
+            containerStyle={{ width: 364, marginLeft: 24, marginTop: 10 }}
             placeholder="은행을 선택해주세요"
           />
         </FirstContainer>
         <InputContainer>
           <NameText>계좌번호</NameText>
-          <View style={{ marginLeft: 24 * width, marginTop: 19 * height }}>
+          <View style={{ marginLeft: 24 * width, marginTop: 21 * height }}>
             <BarInput
               placeholder={"'-'구분 없이 계좌번호를 입력해주세요"}
               stateFn={setaccountNumber}
@@ -209,21 +219,15 @@ export default ({ navigation }) => {
           </View>
         </InputContainer>
         <InputContainer>
-          <AuthContainer>
-            <NameText>휴대폰 번호</NameText>
-            <ConfirmBtn
-              onPress={confirmFindId}
-              text={"인증번호 요청"}
-              accent={false}
-            />
-          </AuthContainer>
-          <View style={{ marginLeft: 24 * width, marginTop: 19 * height }}>
-            <BarInput
+          <NameText>휴대폰 번호</NameText>
+          <View style={{ marginLeft: 24 * width, marginTop: 21 * height }}>
+            <PhBarInput
               placeholder={"'-'구분 없이 입력해주세요"}
               stateFn={setPhonenumber}
               autoCapitalize="none"
               value={phonenumber}
               isValued={phonenumber ? true : false}
+              onPress={confirmFindId}
             />
           </View>
         </InputContainer>
@@ -241,7 +245,7 @@ export default ({ navigation }) => {
         </InputContainer>
       </InputAreaContainer>
       <ButtonContainer>
-        <Btn text={"확인"} accent={true} onPress={handleSubmit} />
+        <Btn text={"확인"} accent={accent} onPress={handleSubmit} />
       </ButtonContainer>
     </Container>
   );

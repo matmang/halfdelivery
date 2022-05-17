@@ -1,7 +1,6 @@
 import { Auth } from "aws-amplify";
 import React, { useEffect, useRef, useState } from "react";
 import { Image } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
 import styled from "styled-components";
 import colors from "../../colors";
 import BarInput from "../../components/Auth/BarInput";
@@ -9,9 +8,7 @@ import Btn from "../../components/Auth/Btn";
 import ErrorMessage from "../../components/Auth/ErrorMessage";
 import FindPasswordModal from "../../components/Auth/FindPasswordModal";
 import DismissKeyboard from "../../components/DismissKeyboard";
-import { Ionicons } from "@expo/vector-icons";
-import { width, height } from "../../utils";
-import PhBarInput from "../../components/Auth/PhBarInput";
+import { width, height, validPassword } from "../../utils";
 
 const Container = styled.View`
   flex: 1;
@@ -30,6 +27,13 @@ const NameContainer = styled.View`
   justify-content: flex-start;
 `;
 
+const ConfirmContainer = styled.View`
+  margin-top: ${height * 13}px;
+  margin-left: ${width * 24}px;
+  margin-right: auto;
+  justify-content: flex-start;
+`;
+
 const ButtonContainer = styled.View`
   flex: 1;
   justify-content: flex-end;
@@ -42,9 +46,8 @@ const ButtonContainer = styled.View`
   bottom: 0;
 `;
 
-
 const TitleText = styled.Text`
-  font-family: "gothica1-medium";
+  font-family: "noto-medium";
   font-size: 24px;
   margin-top: ${height * 22}px;
   margin-left: ${width * 24}px;
@@ -52,7 +55,7 @@ const TitleText = styled.Text`
 `;
 
 const NameText = styled.Text`
-  font-family: "gothica1-semibold";
+  font-family: "noto-semibold";
   font-size: 17px;
   margin-bottom: ${height * 21}px;
   color: ${colors.primaryBlue};
@@ -60,9 +63,8 @@ const NameText = styled.Text`
   text-align-vertical: center;
 `;
 
-
 const SubTitleText = styled.Text`
-  font-family: "gothica1-regular";
+  font-family: "noto-regular";
   font-size: 14px;
   margin-left: ${width * 24};
   include-font-padding: false;
@@ -71,40 +73,60 @@ const SubTitleText = styled.Text`
 
 export default ({ navigation, route: { params } }) => {
   const [userName, setUserName] = useState(params?.userName);
-  const [authCode, setAuthCode] = useState("");
-  const [authCodeErrorMessage, setAuthCodeErrorMessage] = useState("");
+  const [authCode, setAuthCode] = useState(params?.authCode);
+  const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
+  const [passwordConfirmErrorMessage, setPasswordConfirmErrorMessage] =
+    useState("");
   const [accent, setAccent] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [isConfirm, setIsConfirm] = useState(false);
 
   const refDidMount = useRef(null);
 
   useEffect(() => {
-    setAccent(userName && authCode && isConfirm && !authCodeErrorMessage);
-  }, [userName, authCode, authCodeErrorMessage]);
+    setAccent(
+      password &&
+        passwordConfirm &&
+        !passwordErrorMessage &&
+        !passwordConfirmErrorMessage
+    );
+  }, [
+    password,
+    passwordConfirm,
+    passwordErrorMessage,
+    passwordConfirmErrorMessage,
+  ]);
 
   useEffect(() => {
     if (refDidMount.current) {
-      let authCodeError = "";
-      if (authCode.length !== 6) {
-        authCodeError = "인증번호는 6자리이어야 합니다.";
+      let passwordError = "";
+      let passwordConfirmError = "";
+      if (password.length < 8) {
+        passwordError = "비밀번호는 8자리 이상이어야 합니다.";
+      } else if (!validPassword(password)) {
+        passwordError =
+          "비밀번호는 최소 하나 이상의 영문자, 숫자, 특수문자를 포함해야합니다.";
+      } else if (password !== passwordConfirm) {
+        passwordConfirmError = "비밀번호 확인과 비밀번호가 다릅니다.";
       } else {
-        authCodeError = "";
+        passwordError = "";
+        passwordConfirmError = "";
       }
-      setAuthCodeErrorMessage(authCodeError);
+      setPasswordErrorMessage(passwordError);
+      setPasswordConfirmErrorMessage(passwordConfirmError);
     } else {
       refDidMount.current = true;
     }
-  }, [authCode]);
+  }, [password, passwordConfirm]);
 
-  const confirmFindPassword = () => {
-    Auth.forgotPassword(userName)
+  const confirmFindId = () => {
+    Auth.forgotPasswordSubmit(userName, authCode, password)
       .then((data) => {
-        setIsConfirm(true);
         console.log(data);
+        setIsModalVisible(true);
       })
       .catch((err) => console.log(err));
-    alert("회원가입시 입력한 전화번호로 인증문자가 전송되었습니다.");
   };
 
   return (
@@ -125,30 +147,43 @@ export default ({ navigation, route: { params } }) => {
           가입 시 입력된 핸드폰 번호로 인증번호를 발송했습니다.{" "}
         </SubTitleText>
         <NameContainer>
-          <NameText>인증번호</NameText>
-          <PhBarInput
-            placeholder={"인증번호를 입력해주세요"}
-            stateFn={setAuthCode}
-            value={authCode}
-            isValued={authCode ? true : false}
-            error={authCodeErrorMessage ? true : false}
-            onPress={confirmFindPassword}
+          <NameText>새 비밀번호</NameText>
+          <BarInput
+            placeholder={"비밀번호를 입력해주세요"}
+            stateFn={setPassword}
+            autoCapitalize="none"
+            value={password}
+            isValued={password ? true : false}
+            error={passwordErrorMessage ? true : false}
+            isPassword
           />
-          <ErrorMessage message={authCodeErrorMessage} />
+          <ErrorMessage message={passwordErrorMessage} />
         </NameContainer>
+        <ConfirmContainer>
+          <NameText>새 비밀번호 확인</NameText>
+          <BarInput
+            placeholder={"비밀번호를 확인해주세요"}
+            stateFn={setPasswordConfirm}
+            isbirthday={true}
+            value={passwordConfirm}
+            isValued={passwordConfirm ? true : false}
+            error={passwordConfirmErrorMessage ? true : false}
+            isPassword
+          />
+          <ErrorMessage message={passwordConfirmErrorMessage} />
+        </ConfirmContainer>
         <ButtonContainer>
           <Btn
             text={"다음"}
             accent={accent == true}
             onPress={() => {
-              navigation.navigate("FindPasswordReset", { userName, authCode });
+              confirmFindId();
             }}
           />
         </ButtonContainer>
         <FindPasswordModal
           isModalVisible={isModalVisible}
           onBackdropPress={() => setIsModalVisible(false)}
-          userName={userName}
           navigation={navigation}
         />
       </Container>

@@ -3,17 +3,14 @@ import styled from "styled-components";
 import Proptypes from "prop-types";
 import colors from "../../colors";
 import ReactNativeModal from "react-native-modal";
-import SmallBtn from "./SmallBtn";
 import { height, width } from "../../utils";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 const Container = styled.View`
   width: ${width * 364}px;
-  height: ${height * 201}px;
+  height: ${height * 229}px;
   background-color: white;
   border-radius: 10px;
-  align-items: center;
-  justify-content: center;
 `;
 
 const InfoConatiner = styled.View`
@@ -59,44 +56,49 @@ const UserInfoText = styled.Text`
 
 const BtInfoText = styled.Text`
   margin-left: ${width * 24}px;
-  font-family: "gothica1-regular";
+  font-family: "noto-regular";
   font-size: 14px;
   line-height: ${height * 24}px;
 `;
 
 const ButtonText = styled.Text`
-  font-family: "gothica1-regular";
+  font-family: "noto-regular";
   font-size: 17px;
   color: ${colors.primaryBlue};
 `;
 
-const FindPasswordModal = ({ isModalVisible, onBackdropPress, navigation }) => {
+const FindIdModal = ({
+  isModalVisible,
+  onBackdropPress,
+  navigation,
+  setIsModalVisible,
+}) => {
   return (
     <ReactNativeModal
       isVisible={isModalVisible}
       onBackdropPress={onBackdropPress}
-      style={{ alignItems: "center", justifyContent: "center" }}
     >
       <Container>
         <InfoConatiner>
           <TopInfoLineContainer>
-            <UserInfoText>비밀번호 재설정이 완료되었습니다.</UserInfoText>
+            <UserInfoText>아이디를 잊으셨나요 ?</UserInfoText>
           </TopInfoLineContainer>
           <Distributionline></Distributionline>
           <BottomInfoContainer>
             <BtInfoText>
-              개인 정보 보호를 위해 자동으로 로그아웃 되었습니다.{"\n"}
-              새로운 비밀번호로 로그인 해주세요.
+              하프딜리버리는 아이디를 대학교 학번으로 사용하고 있{"\n"}
+              습니다. 본인의 대학 내 행정 문의를 통해 확인해 주시기{"\n"}
+              바랍니다.
             </BtInfoText>
           </BottomInfoContainer>
         </InfoConatiner>
         <BtnContainer>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate("SignIn");
+              setIsModalVisible(false);
             }}
           >
-            <ButtonText>로그인 하기</ButtonText>
+            <ButtonText>확인</ButtonText>
           </TouchableOpacity>
         </BtnContainer>
       </Container>
@@ -104,9 +106,9 @@ const FindPasswordModal = ({ isModalVisible, onBackdropPress, navigation }) => {
   );
 };
 
-FindPasswordModal.propTypes = {
+FindIdModal.propTypes = {
   isModalVisible: Proptypes.bool.isRequired,
   onBackdropPress: Proptypes.func,
 };
 
-export default FindPasswordModal;
+export default FindIdModal;

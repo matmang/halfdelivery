@@ -12,7 +12,7 @@ const Button = styled.View`
   border-radius: 30px;
   width: ${width * 289}px;
   height: ${height * 56}px;
-  elevation: 2;
+  elevation: 12;
   background-color: white;
 `;
 

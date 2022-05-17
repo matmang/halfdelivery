@@ -3,44 +3,34 @@ import { Image } from "react-native";
 import styled from "styled-components";
 import Btn from "../../components/Auth/Btn";
 import DismissKeyboard from "../../components/DismissKeyboard";
-import Auth from "@aws-amplify/auth";
 import colors from "../../colors";
 import DropDownPicker from "react-native-dropdown-picker";
 import { height, width } from "../../utils";
+import { Auth } from "aws-amplify";
+import BarInput from "../../components/Auth/BarInput";
 
 const Container = styled.View`
   flex: 1;
-  align-items: center;
   background-color: white;
 `;
 
 const ProgressContainer = styled.View`
-  justify-content: center;
-  align-items: center;
-  margin-top: ${height * 110}px;
+  margin-top: ${height * 109}px;
+  margin-left: ${width * 24}px;
 `;
 
-const PhaseContainer = styled.View`
-  justify-content: center;
-  align-items: center;
-  margin-top: ${height * 23}px;
-  height: ${height * 56}px;
+const SchoolContainer = styled.View`
+  margin-top: ${height * 68}px;
+  margin-left: ${width * 24}px;
+  margin-right: ${width * 24}px;
+  justify-content: flex-start;
 `;
 
-const IDContainer = styled.View`
-  margin-top: ${height * 74}px;
+const CollageContainer = styled.View`
+  margin-top: ${height * 24}px;
   margin-left: ${width * 24}px;
   margin-right: auto;
   justify-content: flex-start;
-  z-index: 10;
-`;
-
-const PasswordContainer = styled.View`
-  margin-top: ${height * 46}px;
-  margin-left: ${width * 24}px;
-  margin-right: auto;
-  justify-content: flex-start;
-  z-index: 1;
 `;
 
 const ButtonContainer = styled.View`
@@ -56,18 +46,13 @@ const ButtonContainer = styled.View`
   z-index: 0;
 `;
 
-const PhaseText = styled.Text`
-  font-family: "gothica1-medium";
-  font-size: 22px;
-  include-font-padding: false;
-  text-align-vertical: center;
-`;
 
-const ExplainText = styled.Text`
-  font-family: "gothica1-regular";
-  font-size: 14px;
-  color: #3c3c3c;
-  margin-top: ${height * 10}px;
+const TitleText = styled.Text`
+  font-family: "gothica1-medium";
+  font-size: 24px;
+  margin-top: ${height * 22}px;
+  margin-left: ${width * 24}px;
+  line-height: 40px;
   include-font-padding: false;
   text-align-vertical: center;
 `;
@@ -91,7 +76,7 @@ const CollegeText = styled.Text`
 `;
 
 export default ({ route: { params }, navigation }) => {
-  const [username, setusername] = useState(params?.username);
+  const [username, setUsername] = useState(params?.birthday);
   const [password, setPassword] = useState(params?.password);
   const [school, setSchool] = useState("");
   const [college, setCollege] = useState("");
@@ -128,8 +113,7 @@ export default ({ route: { params }, navigation }) => {
 
   const handleSubmit = async () => {
     try {
-      const user = await Auth.signIn(params.username, params.password);
-      console.log(user);
+      const user = await Auth.signIn(params.birthday, params.password);
       await Auth.updateUserAttributes(user, {
         "custom:school": school.toString(),
         "custom:college": college.toString(),
@@ -139,7 +123,7 @@ export default ({ route: { params }, navigation }) => {
       console.log(
         currentUserInfo.attributes["custom:school"],
         currentUserInfo.attributes["custom:college"],
-        currentUserInfo.attributes["custom:birthday"]
+        currentUserInfo.username
       );
       navigation.navigate("SignUpBank", { username, password });
     } catch (error) {
@@ -152,15 +136,16 @@ export default ({ route: { params }, navigation }) => {
       <Container>
         <ProgressContainer>
           <Image
-            source={require("../../assets/images/SignUp2.png")}
-            style={{ width: width * 180, height: height * 44 }}
+            source={require("../../assets/images/halfd_color_logo.png")}
+            style={{
+              width: width * 40,
+              height: height * 58.01,
+              resizeMode: "contain",
+            }}
           />
         </ProgressContainer>
-        <PhaseContainer>
-          <PhaseText>학과정보를 입력해주세요</PhaseText>
-          <ExplainText>안전한 거래를 위해서 사용되는 정보입니다.</ExplainText>
-        </PhaseContainer>
-        <IDContainer>
+        <TitleText>학과 정보를 입력해주세요</TitleText>
+        <SchoolContainer>
           <NameText>학교</NameText>
           <DropDownPicker
             open={schoolOpen}
@@ -177,8 +162,8 @@ export default ({ route: { params }, navigation }) => {
             placeholder={schoolPlaceholder}
             zIndex={100}
           />
-        </IDContainer>
-        <PasswordContainer>
+        </SchoolContainer>
+        <CollageContainer>
           <CollegeText>단과대학</CollegeText>
           <DropDownPicker
             open={collegeOpen}
@@ -194,7 +179,16 @@ export default ({ route: { params }, navigation }) => {
             containerStyle={{ width: 336 }}
             placeholder={collegePlaceholder}
           />
-        </PasswordContainer>
+        </CollageContainer>
+        <CollageContainer>
+          <NameText>학번 / 교번</NameText>
+          <BarInput
+            placeholder={"학번 또는 교번을 입력해주세요"}
+            stateFn={setUsername}
+            value={username}
+            isValued={username ? true : false}
+          />
+        </CollageContainer>
         <ButtonContainer>
           <Btn
             text={"다음"}

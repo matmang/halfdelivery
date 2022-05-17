@@ -13,6 +13,8 @@ import { height, width } from "../utils";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Image } from "react-native";
 import SignIn from "../screens/Auth/SignIn";
+import SignUpPassword from "../screens/Auth/SignUpPassword";
+import FindPasswordReset from "../screens/Auth/FindPasswordReset";
 
 const Auth = createStackNavigator();
 
@@ -96,8 +98,8 @@ export default () => (
       })}
     />
     <Auth.Screen
-      name="SignUpAuthConfirm"
-      component={SignUpAuthConfirm}
+      name="SignUpPassword"
+      component={SignUpPassword}
       options={({ navigation }) => ({
         title: "회원 정보",
         headerTitleAlign: "center",
@@ -112,7 +114,39 @@ export default () => (
           fontSize: 17,
         },
         headerLeft: () => (
-          <TouchableOpacity onPress={() => navigation.navigate("Welcome")}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Image
+              source={require("../assets/images/left-arrow.png")}
+              style={{
+                width: width * 16,
+                height: height * 16,
+                marginTop: height * 20,
+                marginLeft: width * 24,
+              }}
+            />
+          </TouchableOpacity>
+        ),
+        headerRight: () => {},
+      })}
+    />
+    <Auth.Screen
+      name="SignUpAuthConfirm"
+      component={SignUpAuthConfirm}
+      options={({ navigation }) => ({
+        title: "본인 인증",
+        headerTitleAlign: "center",
+        headerStyle: {
+          elevation: 0,
+          backgroundColor: "white",
+          shadowOpacity: 0,
+        },
+        headerTitleStyle: {
+          marginTop: height * 20,
+          fontFamily: "noto-medium",
+          fontSize: 17,
+        },
+        headerLeft: () => (
+          <TouchableOpacity onPress={() => navigation.goBack()}>
             <Image
               source={require("../assets/images/left-arrow.png")}
               style={{
@@ -131,39 +165,32 @@ export default () => (
       name="SignUpSchool"
       component={SignUpSchool}
       options={({ navigation }) => ({
-        title: "",
+        title: "본인 인증",
         headerTitleAlign: "center",
         headerStyle: {
           elevation: 0,
           backgroundColor: "white",
           shadowOpacity: 0,
         },
+        headerTitleStyle: {
+          marginTop: height * 20,
+          fontFamily: "noto-medium",
+          fontSize: 17,
+        },
         headerLeft: () => (
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Image
               source={require("../assets/images/left-arrow.png")}
               style={{
-                width: width * 20,
-                height: height * 17.22,
+                width: width * 16,
+                height: height * 16,
                 marginTop: height * 20,
                 marginLeft: width * 24,
               }}
             />
           </TouchableOpacity>
         ),
-        headerRight: () => (
-          <TouchableOpacity onPress={() => navigation.navigate("Welcome")}>
-            <Image
-              source={require("../assets/images/delete.png")}
-              style={{
-                width: width * 17.22,
-                height: height * 17.22,
-                marginTop: height * 20,
-                marginRight: width * 24,
-              }}
-            />
-          </TouchableOpacity>
-        ),
+        headerRight: () => {},
       })}
     />
     <Auth.Screen
@@ -287,35 +314,27 @@ export default () => (
       name="FindPassword"
       component={FindPassword}
       options={({ navigation }) => ({
-        title: "",
+        title: "본인 인증",
         headerTitleAlign: "center",
         headerStyle: {
           elevation: 0,
           backgroundColor: "white",
           shadowOpacity: 0,
         },
+        headerTitleStyle: {
+          marginTop: height * 20,
+          fontFamily: "noto-medium",
+          fontSize: 17,
+        },
         headerLeft: () => (
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Image
               source={require("../assets/images/left-arrow.png")}
               style={{
-                width: width * 20,
-                height: height * 17.22,
+                width: width * 16,
+                height: height * 16,
                 marginTop: height * 20,
                 marginLeft: width * 24,
-              }}
-            />
-          </TouchableOpacity>
-        ),
-        headerRight: () => (
-          <TouchableOpacity onPress={() => navigation.navigate("Welcome")}>
-            <Image
-              source={require("../assets/images/delete.png")}
-              style={{
-                width: width * 17.22,
-                height: height * 17.22,
-                marginTop: height * 20,
-                marginRight: width * 24,
               }}
             />
           </TouchableOpacity>
@@ -326,35 +345,58 @@ export default () => (
       name="FindPasswordConfirm"
       component={FindPasswordConfirm}
       options={({ navigation }) => ({
-        title: "",
+        title: "본인 인증",
         headerTitleAlign: "center",
         headerStyle: {
           elevation: 0,
           backgroundColor: "white",
           shadowOpacity: 0,
         },
+        headerTitleStyle: {
+          marginTop: height * 20,
+          fontFamily: "noto-medium",
+          fontSize: 17,
+        },
         headerLeft: () => (
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Image
               source={require("../assets/images/left-arrow.png")}
               style={{
-                width: width * 20,
-                height: height * 17.22,
+                width: width * 16,
+                height: height * 16,
                 marginTop: height * 20,
                 marginLeft: width * 24,
               }}
             />
           </TouchableOpacity>
         ),
-        headerRight: () => (
-          <TouchableOpacity onPress={() => navigation.navigate("Welcome")}>
+      })}
+    />
+    <Auth.Screen
+      name="FindPasswordReset"
+      component={FindPasswordReset}
+      options={({ navigation }) => ({
+        title: "비밀번호 재설정",
+        headerTitleAlign: "center",
+        headerStyle: {
+          elevation: 0,
+          backgroundColor: "white",
+          shadowOpacity: 0,
+        },
+        headerTitleStyle: {
+          marginTop: height * 20,
+          fontFamily: "noto-medium",
+          fontSize: 17,
+        },
+        headerLeft: () => (
+          <TouchableOpacity onPress={() => navigation.goBack()}>
             <Image
-              source={require("../assets/images/delete.png")}
+              source={require("../assets/images/left-arrow.png")}
               style={{
-                width: width * 17.22,
-                height: height * 17.22,
+                width: width * 16,
+                height: height * 16,
                 marginTop: height * 20,
-                marginRight: width * 24,
+                marginLeft: width * 24,
               }}
             />
           </TouchableOpacity>

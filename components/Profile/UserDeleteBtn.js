@@ -11,20 +11,21 @@ const Button = styled.View`
   justify-content: center;
   align-items: center;
   border-radius: 30px;
-  width: ${width * 364}px;
-  height: ${height * 50}px;
-  background-color: ${(props) =>
-    props.accent ? colors.primaryBlue : colors.lightGray};
+  border-width: 1.5px;
+  border-color: ${colors.error};
+  width: ${width * 328}px;
+  height: ${height * 48}px;
+  background-color: white;
   font-family: "nunito-semibold";
 `;
 
 const Text = styled.Text`
-  color: ${(props) => (props.accent ? "#FFFFFF" : colors.mediumGray)};
+  color: ${(props) => (props.accent ? colors.error : colors.mediumGray)};
   font-size: 17px;
-  font-family: "gothica1-medium";
+  font-family: "noto-medium";
 `;
 
-const Btn = ({ onPress, text, accent = false, textStyle }) => (
+const UserDeleteBtn = ({ onPress, text, accent = true, textStyle }) => (
   <TouchableOpacity onPress={onPress} disabled={!accent}>
     <Button accent={accent}>
       <Text accent={accent} style={textStyle}>
@@ -34,11 +35,11 @@ const Btn = ({ onPress, text, accent = false, textStyle }) => (
   </TouchableOpacity>
 );
 
-Btn.propTypes = {
+UserDeleteBtn.propTypes = {
   onPress: Proptypes.func.isRequired,
   text: Proptypes.string.isRequired,
   accent: Proptypes.bool,
   disabled: Proptypes.bool,
 };
 
-export default Btn;
+export default UserDeleteBtn;

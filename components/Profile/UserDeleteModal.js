@@ -3,13 +3,13 @@ import styled from "styled-components";
 import Proptypes from "prop-types";
 import colors from "../../colors";
 import ReactNativeModal from "react-native-modal";
-import SmallBtn from "./SmallBtn";
 import { height, width } from "../../utils";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { Image } from "react-native";
 
 const Container = styled.View`
   width: ${width * 364}px;
-  height: ${height * 201}px;
+  height: ${height * 300}px;
   background-color: white;
   border-radius: 10px;
   align-items: center;
@@ -17,7 +17,7 @@ const Container = styled.View`
 `;
 
 const InfoConatiner = styled.View`
-  margin-top: auto;
+  margin-top: ${height * 28}px;
   width: 100%;
 `;
 
@@ -29,14 +29,17 @@ const TopInfoLineContainer = styled.View`
 
 const BottomInfoContainer = styled.View`
   margin-top: ${height * 19}px;
+  justify-content: space-evenly;
   width: 100%;
 `;
 
 const BtnContainer = styled.View`
   margin-top: ${height * 31}px;
+  width: 100%;
   margin-bottom: ${height * 14}px;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
+  flex-direction: row;
 `;
 
 const Distributionline = styled.View`
@@ -48,29 +51,39 @@ const Distributionline = styled.View`
   padding-top: 0;
   padding-bottom: 0;
   border-bottom-width: 1px;
-  border-bottom-color: ${colors.steelBlue};
+  border-bottom-color: ${colors.error};
 `;
 
 const UserInfoText = styled.Text`
   font-family: "noto-regular";
-  margin-left: ${width * 24}px;
   font-size: 17px;
 `;
 
 const BtInfoText = styled.Text`
   margin-left: ${width * 24}px;
-  font-family: "gothica1-regular";
+  font-family: "noto-regular";
   font-size: 14px;
   line-height: ${height * 24}px;
 `;
 
 const ButtonText = styled.Text`
-  font-family: "gothica1-regular";
+  font-family: "noto-regular";
   font-size: 17px;
   color: ${colors.primaryBlue};
 `;
 
-const FindPasswordModal = ({ isModalVisible, onBackdropPress, navigation }) => {
+const CancelText = styled.Text`
+  font-family: "noto-regular";
+  font-size: 17px;
+  color: ${colors.error};
+`;
+
+const UserDeleteModal = ({
+  isModalVisible,
+  onBackdropPress,
+  navigation,
+  setIsModalVisible,
+}) => {
   return (
     <ReactNativeModal
       isVisible={isModalVisible}
@@ -80,23 +93,46 @@ const FindPasswordModal = ({ isModalVisible, onBackdropPress, navigation }) => {
       <Container>
         <InfoConatiner>
           <TopInfoLineContainer>
-            <UserInfoText>비밀번호 재설정이 완료되었습니다.</UserInfoText>
+            <Image
+              source={require("../../assets/images/caution.png")}
+              style={{
+                height: height * 18,
+                width: width * 22,
+                marginRight: width * 8,
+                marginLeft: width * 24,
+                resizeMode: "contain",
+              }}
+            />
+            <UserInfoText>정말로 탈퇴 하시겠습니까?</UserInfoText>
           </TopInfoLineContainer>
           <Distributionline></Distributionline>
           <BottomInfoContainer>
             <BtInfoText>
-              개인 정보 보호를 위해 자동으로 로그아웃 되었습니다.{"\n"}
-              새로운 비밀번호로 로그인 해주세요.
+              회원님의 계정을 영구적으로 삭제합니다. 회원탈퇴를 요{"\n"}청한
+              후에는 계정을 다시 활성화하고 탈퇴를 취소할 수{"\n"}있는 30일의
+              유예 기간이 주어집니다.
+            </BtInfoText>
+            <BtInfoText>
+              회원탈퇴를 하시면 해당 아이디 및 비밀번호를 사용하여{"\n"}서비스를
+              이용하실 수 없으며, 아이디와 함께 제공하신{"\n"}
+              개인정보가 모두 삭제됩니다.
             </BtInfoText>
           </BottomInfoContainer>
         </InfoConatiner>
         <BtnContainer>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate("SignIn");
+              setIsModalVisible(false);
             }}
           >
-            <ButtonText>로그인 하기</ButtonText>
+            <ButtonText>탈퇴</ButtonText>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              setIsModalVisible(false);
+            }}
+          >
+            <CancelText>취소</CancelText>
           </TouchableOpacity>
         </BtnContainer>
       </Container>
@@ -104,9 +140,11 @@ const FindPasswordModal = ({ isModalVisible, onBackdropPress, navigation }) => {
   );
 };
 
-FindPasswordModal.propTypes = {
+UserDeleteModal.propTypes = {
   isModalVisible: Proptypes.bool.isRequired,
   onBackdropPress: Proptypes.func,
+  setIsModalVisible: Proptypes.func,
+  setNextModalVisible: Proptypes.func,
 };
 
-export default FindPasswordModal;
+export default UserDeleteModal;

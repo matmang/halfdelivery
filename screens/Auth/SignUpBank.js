@@ -114,8 +114,6 @@ export default ({ route: { params }, navigation }) => {
     { label: "카카오뱅크", value: "11" },
   ]);
 
-  const dispatch = useDispatch();
-
   const refDidMount = useRef(null);
 
   useEffect(() => {

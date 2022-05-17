@@ -6,30 +6,26 @@ import colors from "../../colors";
 import { height, width } from "../../utils";
 
 const Button = styled.View`
-  /* padding: ${height *
-  12.5}px 0px;  //? iOS 에서는 폰트가 안보여서 주석처리함*/
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  border-radius: 30px;
-  width: ${width * 97}px;
-  height: ${height * 25}px;
-  background-color: ${(props) =>
-    props.accent ? colors.palePink : colors.coolGray};
-  color: ${(props) => (props.accent ? colors.primaryBlue : colors.oxfordGray)};
-  font-family: "nunito-regular";
+  border-radius: 17px;
+  margin-left: auto;
+  width: ${width * 104}px;
+  height: ${height * 28}px;
+  background-color: ${colors.lightPink};
 `;
 
 const Text = styled.Text`
-  color: ${(props) => (props.accent ? colors.primaryBlue : colors.oxfordGray)};
+  color: ${colors.darkGray};
   font-size: 12px;
   font-family: "gothica1-regular";
 `;
 
-const ConfirmBtn = ({ onPress, text, accent = false }) => (
-  <TouchableOpacity onPress={onPress} disabled={accent}>
-    <Button accent={accent}>
-      <Text accent={accent}>{text}</Text>
+const ConfirmBtn = ({ onPress, text }) => (
+  <TouchableOpacity onPress={onPress}>
+    <Button>
+      <Text>{text}</Text>
     </Button>
   </TouchableOpacity>
 );
@@ -37,8 +33,6 @@ const ConfirmBtn = ({ onPress, text, accent = false }) => (
 ConfirmBtn.propTypes = {
   onPress: Proptypes.func.isRequired,
   text: Proptypes.string.isRequired,
-  accent: Proptypes.bool,
-  disabled: Proptypes.bool,
 };
 
 export default ConfirmBtn;

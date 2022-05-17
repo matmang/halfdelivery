@@ -10,33 +10,24 @@ import { height, width } from "../../utils";
 
 const Container = styled.View`
   flex: 1;
-  align-items: center;
   background-color: white;
 `;
 
 const ProgressContainer = styled.View`
-  margin-top: ${height * 110}px;
-  justify-content: center;
-  align-items: center;
+  margin-top: ${height * 109}px;
+  margin-left: ${width * 24}px;
 `;
 
-const PhaseContainer = styled.View`
-  justify-content: center;
-  align-items: center;
-  margin-top: ${height * 24}px;
-  height: ${height * 56}px;
-`;
-
-const IDContainer = styled.View`
-  margin-top: ${height * 74}px;
-  margin-left: ${width * 23}px;
+const NameContainer = styled.View`
+  margin-top: ${height * 53}px;
+  margin-left: ${width * 24}px;
   margin-right: auto;
   justify-content: flex-start;
 `;
 
-const PasswordContainer = styled.View`
-  margin-top: ${height * 24}px;
-  margin-left: ${width * 23}px;
+const BirthdayContainer = styled.View`
+  margin-top: ${height * 13}px;
+  margin-left: ${width * 24}px;
   margin-right: auto;
   justify-content: flex-start;
 `;
@@ -53,25 +44,18 @@ const ButtonContainer = styled.View`
   bottom: 0;
 `;
 
-const PhaseText = styled.Text`
-  font-family: "gothica1-medium";
-  font-size: 22px;
-  include-font-padding: false;
-  text-align-vertical: center;
-`;
 
-const ExplainText = styled.Text`
-  font-family: "gothica1-regular";
-  font-size: 14px;
-  color: #3c3c3c;
-  margin-top: ${height * 9}px;
-  include-font-padding: false;
-  text-align-vertical: center;
+const TitleText = styled.Text`
+  font-family: "gothica1-medium";
+  font-size: 24px;
+  margin-top: ${height * 22}px;
+  margin-left: ${width * 24}px;
+  line-height: 40px;
 `;
 
 const NameText = styled.Text`
-  font-family: "gothica1-medium";
-  font-size: 15px;
+  font-family: "gothica1-semibold";
+  font-size: 17px;
   margin-bottom: ${height * 21}px;
   color: ${colors.primaryBlue};
   include-font-padding: false;
@@ -79,62 +63,40 @@ const NameText = styled.Text`
 `;
 
 export default ({ navigation }) => {
-  const [username, setusername] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirm, setPasswordConfirm] = useState("");
-  const [IDerrorMessage, setIDErrorMessage] = useState("");
-  const [PWerrorMessage, setPWErrorMessage] = useState("");
-  const [PWCerrorMessage, setPWCErrorMessage] = useState("");
+  const [name, setName] = useState("");
+  const [birthday, setBirthday] = useState("");
+  const [nameErrorMessage, setNameErrorMessage] = useState("");
+  const [birthdayErrorMessage, setBirthdayErrorMessage] = useState("");
   const [accent, setAccent] = useState(false);
 
   const refDidMount = useRef(null);
 
   useEffect(() => {
-    setAccent(
-      username &&
-        password &&
-        passwordConfirm &&
-        !IDerrorMessage &&
-        !PWerrorMessage &&
-        !PWCerrorMessage
-    );
-  }, [
-    username,
-    password,
-    passwordConfirm,
-    IDerrorMessage,
-    PWerrorMessage,
-    PWCerrorMessage,
-  ]);
+    setAccent(name && birthday && !nameErrorMessage && !birthdayErrorMessage);
+  }, [name, birthday, nameErrorMessage, birthdayErrorMessage]);
 
   useEffect(() => {
     if (refDidMount.current) {
-      let IDerror = "";
-      let PWerror = "";
-      let PWCerror = "";
-      if (!username) {
-        IDerror = "아이디를 입력해주세요.";
-      } else if (password.length < 8) {
-        PWerror = "비밀번호는 8자리 이상이어야 합니다.";
-      } else if (password !== passwordConfirm) {
-        PWCerror = "비밀번호 확인과 비밀번호가 다릅니다.";
+      let nameError = "";
+      let birthdayError = "";
+      if (!name) {
+        nameError = "이름을 입력해주세요.";
+      } else if (birthday.length != 8) {
+        birthdayError = "생년월일 8자리를 입력해주세요.";
       } else {
-        IDerror = "";
-        PWerror = "";
-        PWCerror = "";
+        nameError = "";
+        birthdayError = "";
       }
-      setIDErrorMessage(IDerror);
-      setPWErrorMessage(PWerror);
-      setPWCErrorMessage(PWCerror);
+      setNameErrorMessage(nameError);
+      setBirthdayErrorMessage(birthdayError);
     } else {
       refDidMount.current = true;
     }
-  });
+  }, [name, birthday]);
 
   const handleSubmit = () => {
     try {
-      console.log("Sign-up Confirmed");
-      navigation.navigate("SignUpAuthConfirm", { username, password });
+      navigation.navigate("SignUpPassword", { name, birthday });
     } catch (error) {
       console.log("Error signing up...", error);
     }
@@ -145,59 +107,41 @@ export default ({ navigation }) => {
       <Container>
         <ProgressContainer>
           <Image
-            source={require("../../assets/images/SignUp1.png")}
-            style={{ width: width * 180, height: height * 44 }}
+            source={require("../../assets/images/halfd_color_logo.png")}
+            style={{
+              width: width * 40,
+              height: height * 58.01,
+              resizeMode: "contain",
+            }}
           />
         </ProgressContainer>
-        <PhaseContainer>
-          <PhaseText>회원 정보를 입력해주세요</PhaseText>
-          <ExplainText>
-            본인 확인 절차이며, 다른 용도로 사용되지 않습니다.
-          </ExplainText>
-        </PhaseContainer>
-        <IDContainer>
-          <NameText>아이디</NameText>
+        <TitleText>{"환영합니다 !\n회원 정보를 입력해주세요"}</TitleText>
+        <NameContainer>
+          <NameText>이름</NameText>
           <BarInput
-            placeholder={"아이디를 입력해주세요"}
-            stateFn={setusername}
+            placeholder={"실명을 입력해주세요"}
+            stateFn={setName}
             autoCapitalize="none"
-            value={username}
-            isValued={username ? true : false}
-            error={IDerrorMessage ? true : false}
+            value={name}
+            isValued={name ? true : false}
+            error={nameErrorMessage ? true : false}
           />
-          <ErrorMessage message={IDerrorMessage} />
-        </IDContainer>
-        <PasswordContainer>
-          <NameText>비밀번호</NameText>
+          <ErrorMessage message={nameErrorMessage} />
+        </NameContainer>
+        <BirthdayContainer>
+          <NameText>생년월일</NameText>
           <BarInput
-            placeholder={"비밀번호를 입력해주세요"}
-            stateFn={setPassword}
-            isPassword={true}
-            value={password}
-            isValued={password ? true : false}
-            error={PWerrorMessage ? true : false}
+            placeholder={"생년월일을 입력해주세요     (ex. 19980216)"}
+            stateFn={setBirthday}
+            isbirthday={true}
+            value={birthday}
+            isValued={birthday ? true : false}
+            error={birthdayErrorMessage ? true : false}
           />
-          <ErrorMessage message={PWerrorMessage} />
-        </PasswordContainer>
-        <PasswordContainer>
-          <NameText>비밀번호 확인</NameText>
-          <BarInput
-            placeholder={"비밀번호를 확인해주세요"}
-            stateFn={setPasswordConfirm}
-            isPassword={true}
-            value={passwordConfirm}
-            isValued={passwordConfirm ? true : false}
-            error={PWCerrorMessage ? true : false}
-          />
-          <ErrorMessage message={PWCerrorMessage} />
-        </PasswordContainer>
+          <ErrorMessage message={birthdayErrorMessage} />
+        </BirthdayContainer>
         <ButtonContainer>
-          <Btn
-            text={"다음"}
-            accent={accent}
-            onPress={handleSubmit}
-            icon={true}
-          />
+          <Btn text={"다음"} accent={accent} onPress={handleSubmit} />
         </ButtonContainer>
       </Container>
     </DismissKeyboard>

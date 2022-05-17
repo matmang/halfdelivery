@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Image, ImageBackground } from "react-native";
 import styled from "styled-components";
 import loginbackground from "../../assets/images/welcome.png";
 import { height, width } from "../../utils";
 import LoginBtn from "../../components/Auth/LoginBtn";
 import SignUpBtn from "../../components/Auth/SignUpBtn";
+import TermBottomSheet from "../../components/Auth/TermBottomSheet";
+
 
 const Container = styled.View`
   flex: 1;
@@ -34,6 +36,8 @@ const SecondContainer = styled.View`
 `;
 
 export default ({ navigation }) => {
+  const [modalVisible, setModalVisible] = useState(false);
+  
   return (
     <Container>
       <ImageBackground
@@ -66,12 +70,14 @@ export default ({ navigation }) => {
             text="로그인"
           />
           <SecondContainer>
-            <SignUpBtn
-              onPress={() => navigation.navigate("SignUpAuth")}
-              text="회원가입"
-            />
+
+            <SignUpBtn onPress={() => setModalVisible(true)} text="회원가입" />
           </SecondContainer>
         </BodyContainer>
+        <TermBottomSheet
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
+        />
       </ImageBackground>
     </Container>
   );
