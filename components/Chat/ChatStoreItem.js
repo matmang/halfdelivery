@@ -41,7 +41,10 @@ const ChatStoreItem = ({ storeInfo }) => {
           배달팁
           {/* //? JS Magic! storeInfo.delivTip 값이 존재할 때에만, && 뒤에값을 표출한다! */}
           {/* //? Conditional components 를 다루는 법이다. */}
-          {storeInfo.delivTip && <Text style={styles.title}> {storeInfo.delivTip}</Text>}원
+          {storeInfo.delivTip && (
+            <Text style={styles.title}> {storeInfo.delivTip}</Text>
+          )}
+          원
         </Text>
       </View>
     </View>
@@ -71,7 +74,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 15,
-    fontFamily: "noto-regular",
+    fontFamily: "gothica1-regular",
     fontWeight: "bold",
     textAlign: "right",
   },

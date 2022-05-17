@@ -61,7 +61,7 @@ export default ({ chatRoomInfo }) => {
       <Header>
         <PlatformIcon platform={platform} isLong={true} />
 
-        <Noto14medium
+        <Gothic14medium
           style={{
             marginLeft: width * 8,
             color: colors.primaryBlue,
@@ -70,7 +70,7 @@ export default ({ chatRoomInfo }) => {
           onPress={onPress}
         >
           브라운돈까스 안산한양대점
-        </Noto14medium>
+        </Gothic14medium>
 
         <MaterialIcons
           name="arrow-forward-ios"
@@ -82,7 +82,7 @@ export default ({ chatRoomInfo }) => {
       <InfoBox>
         <Top>
           <TopLeft>
-            <Noto12left style={{ flex: 4 }}>최소주문금액</Noto12left>
+            <Gothic12left style={{ flex: 4 }}>최소주문금액</Gothic12left>
             <Nunito12right
               style={{
                 flex: 0.2,
@@ -95,11 +95,11 @@ export default ({ chatRoomInfo }) => {
                 .toString()
                 .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
             </Nunito12right>
-            <Noto12left style={{ flex: 1 }}>{"  "}원</Noto12left>
+            <Gothic12left style={{ flex: 1 }}>{"  "}원</Gothic12left>
           </TopLeft>
 
           <TopRight>
-            <Noto12left style={{ flex: 4 }}>기본 배달비</Noto12left>
+            <Gothic12left style={{ flex: 4 }}>기본 배달비</Gothic12left>
             <Nunito12right
               style={{
                 flex: 0.2,
@@ -112,19 +112,19 @@ export default ({ chatRoomInfo }) => {
                 .toString()
                 .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
             </Nunito12right>
-            <Noto12left
+            <Gothic12left
               style={{
                 flex: 1,
               }}
             >
               {"  "}원
-            </Noto12left>
+            </Gothic12left>
           </TopRight>
         </Top>
 
         <Btm>
           <BtmLeft>
-            <Noto12left style={{ flex: 4 }}>매칭 대기 인원</Noto12left>
+            <Gothic12left style={{ flex: 4 }}>매칭 대기 인원</Gothic12left>
             <Nunito12right
               style={{
                 flex: 1,
@@ -141,17 +141,17 @@ export default ({ chatRoomInfo }) => {
               </Text>
               / 4
             </Nunito12right>
-            <Noto12left
+            <Gothic12left
               style={{
                 flex: 0.8,
               }}
             >
               {"  "}명
-            </Noto12left>
+            </Gothic12left>
           </BtmLeft>
 
           <BtmRight>
-            <Noto12left style={{ flex: 4 }}>1인 배달비</Noto12left>
+            <Gothic12left style={{ flex: 4 }}>1인 배달비</Gothic12left>
             <Nunito12right
               style={{
                 flex: 0.2,
@@ -164,13 +164,13 @@ export default ({ chatRoomInfo }) => {
                 .toString()
                 .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
             </Nunito12right>
-            <Noto12left
+            <Gothic12left
               style={{
                 flex: 1,
               }}
             >
               {"  "}원
-            </Noto12left>
+            </Gothic12left>
           </BtmRight>
         </Btm>
       </InfoBox>
@@ -239,25 +239,25 @@ const BtmRight = styled(TopRight)`
   /* background-color: blue; */
 `;
 
-const Noto14medium = styled.Text`
+const Gothic14medium = styled.Text`
   font-size: ${width * 14}px;
   /* font-size: 12px; */
-  font-family: "noto-medium";
+  font-family: "gothica1-medium";
   include-font-padding: false;
   text-align-vertical: center;
   text-align: left;
 `;
 
-const Noto12left = styled.Text`
+const Gothic12left = styled.Text`
   font-size: ${width * 12}px;
   /* font-size: 12px; */
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
   include-font-padding: false;
   text-align-vertical: center;
   text-align: left;
 `;
 
-const Nunito12right = styled(Noto12left)`
+const Nunito12right = styled(Gothic12left)`
   font-family: "nunito-regular";
   include-font-padding: false;
   text-align-vertical: center;

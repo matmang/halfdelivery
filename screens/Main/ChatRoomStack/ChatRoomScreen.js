@@ -37,12 +37,11 @@ import {
 } from "../../../components/Statuses";
 import colors from "../../../colors";
 import { MaterialIcons } from "@expo/vector-icons";
-import EjectModal from "../../../components/Chat/Modals/EjectModal_deprecated/EjectModal";
 import {
   MatchingCancelled,
   EjectPartner,
   CancelMatching,
-} from "../../../components/Chat/Modals/";
+} from "../../../components/Chat/modals";
 import {
   InputOrderPrice,
   RequestAdditionalTime,
@@ -50,9 +49,9 @@ import {
   ViewProfilePartner,
   FinalCheck,
   EnterMatching,
-} from "../../../components/Matching/Modals/";
+} from "../../../components/Matching/modals/";
 import Dropdown from "../../../components/Dropdown";
-import SelectPlatform from "../../../components/Matching/Modals/SelectPlatform";
+import SelectPlatform from "../../../components/Matching/modals/SelectPlatform";
 import TEST_react_native_expo_image_cropper from "./TEST_react_native_expo_image_cropper";
 import TEST_expo_image_crop from "./TEST_expo_image_crop";
 import {
@@ -72,6 +71,9 @@ import talkOn from "../../../assets/images/BottomTabNav/talk.png";
 import onMatching from "../../../assets/images/BottomTabNav/onMatching.png";
 import DropDownPicker from "react-native-dropdown-picker";
 import { width, height } from "../../../utils";
+import ButtonBottomTab from "../../../components/common/buttons/ButtonBottomTab";
+import ButtonModalBottom from "../../../components/common/buttons/ButtonModalBottom";
+import ButtonModalBottomOutlined from "../../../components/common/buttons/ButtonModalBottomOutlined";
 
 const images = [
   {
@@ -194,7 +196,7 @@ const ChatRoomScreen = (props) => {
     };
     fetchAuthUser();
   }, []);
-  console.log("authUser", authUser);
+  // console.log("authUser", authUser);
 
   // ? chatRoom 이 null 이면...
   // if (!chatRoom) {
@@ -207,7 +209,7 @@ const ChatRoomScreen = (props) => {
       height: 400,
       cropping: true,
     }).then((image) => {
-      console.log(image);
+      // console.log(image);
     });
   };
 
@@ -239,9 +241,32 @@ const ChatRoomScreen = (props) => {
 
   const [collegePlaceholder, setCollegePlaceholder] = useState(PLACE_HOLDER);
 
-  console.log("collegePlaceholder", collegePlaceholder);
+  // console.log("collegePlaceholder", collegePlaceholder);
   return (
     <View>
+      <ButtonBottomTab
+        text={"확인"}
+        accent={""}
+        onPress={() => {
+          handleSubmit();
+        }}
+      />
+      <ButtonModalBottom
+        text={"확인"}
+        accent={""}
+        onPress={() => {
+          handleSubmit();
+        }}
+      />
+
+      <ButtonModalBottomOutlined
+        text={"확인"}
+        accent={""}
+        onPress={() => {
+          handleSubmit();
+        }}
+      />
+
       <DropDownPicker
         //! DropDown 은 ScrollView 안에 있으면 안 된다. (같은 스크롤 방향이면 안 됨, Nested ScrollView error)
         open={collegeOpen}
@@ -554,7 +579,7 @@ const InfoDetail = styled.View`
 `;
 
 const RoomText = styled.Text`
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
   font-size: 17px;
   text-decoration: underline;
   color: ${colors.primaryBlue};
@@ -582,7 +607,7 @@ const ProfileImg = styled.Image`
 
 const TextBox = styled.Text`
   /* //! noto로 폰트바꾸면 이상하게 줄맞춤이 깨진다.. */
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
   font-size: 17px;
   line-height: 19px;
   margin-left: 12px;

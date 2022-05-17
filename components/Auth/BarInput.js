@@ -13,7 +13,7 @@ const Container = styled.TextInput`
   border-bottom-width: 1.5px;
   border-bottom-color: ${({ isValued, error }) =>
     error ? colors.errorPink : isValued ? colors.primaryBlue : colors.blueGray};
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
   include-font-padding: false;
   text-align-vertical: center;
   font-size: 17px;

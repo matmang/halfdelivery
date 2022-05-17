@@ -14,7 +14,7 @@ const Container = styled.TextInput`
   background-color: white;
   border-radius: 30px;
   margin-top: ${height * 20}px;
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
 `;
 

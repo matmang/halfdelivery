@@ -3,19 +3,19 @@ import React, { useState } from "react";
 import colors from "../../colors";
 import styled from "styled-components";
 import { width, height } from "../../utils";
+
 const RootView = styled.Pressable`
   width: ${width * 72}px;
-  /* width: auto; */
-  height: ${height * 82}px;
+  height: ${height * 99}px;
   /* background-color: lightpink; */
   justify-content: center;
   align-items: center;
 `;
 
 const Img = styled.Image`
-  border-radius: 6px;
-  width: ${width * 60}px;
-  height: ${height * 60}px;
+  border-radius: 16px;
+  width: ${width * 72}px;
+  height: ${height * 72}px;
   background-color: lightgrey;
   border-width: ${({ name, selectedName }) =>
     name === selectedName ? 1.5 : 0}px;
@@ -23,9 +23,9 @@ const Img = styled.Image`
     name === selectedName ? colors.primaryBlue : "white"};
 `;
 
-const Noto14 = styled.Text`
+const Gothic14 = styled.Text`
   font-family: ${({ name, selectedName }) =>
-    name === selectedName ? "noto-medium" : "noto-regular"};
+    name === selectedName ? "gothica1-medium" : "gothica1-regular"};
   font-size: 14px;
   margin-top: 12px;
   color: ${({ name, selectedName }) =>
@@ -53,21 +53,22 @@ const PinkHighlight = styled.View`
   z-index: -1;
 `;
 
-const Platforms = ({ name, selectedName, setSelectedName }) => {
+const Platforms = ({ name, selectedName, setSelectedName, viewStyle }) => {
   return (
     <RootView
+      style={viewStyle}
       onPress={() => {
         setSelectedName(name);
       }}
     >
       <Img name={name} selectedName={selectedName} />
-      <Noto14
+      <Gothic14
         name={name}
         selectedName={selectedName}
         style={{ includeFontPadding: false, textAlignVertical: "center" }}
       >
         {name}
-      </Noto14>
+      </Gothic14>
       {name === selectedName && <PinkHighlight name={name} />}
     </RootView>
   );

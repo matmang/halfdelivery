@@ -18,7 +18,7 @@ export default ({ time = -1, simple = false, style }) => {
       {simple ? (
         <Text
           style={{
-            fontFamily: "noto-regular",
+            fontFamily: "gothica1-regular",
             includeFontPadding: false,
             textAlignVertical: "center",
             fontSize: 11,
@@ -42,7 +42,7 @@ export default ({ time = -1, simple = false, style }) => {
       ) : (
         <Text
           style={{
-            fontFamily: "noto-regular",
+            fontFamily: "gothica1-regular",
             includeFontPadding: false,
             textAlignVertical: "center",
             fontSize: 11,

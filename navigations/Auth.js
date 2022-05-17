@@ -46,7 +46,7 @@ export default () => (
         },
         headerTitleStyle: {
           marginTop: height * 20,
-          fontFamily: "noto-medium",
+          fontFamily: "gothica1-medium",
           fontSize: 17,
         },
         headerLeft: () => (
@@ -78,7 +78,7 @@ export default () => (
         },
         headerTitleStyle: {
           marginTop: height * 20,
-          fontFamily: "noto-medium",
+          fontFamily: "gothica1-medium",
           fontSize: 17,
         },
         headerLeft: () => (
@@ -110,7 +110,7 @@ export default () => (
         },
         headerTitleStyle: {
           marginTop: height * 20,
-          fontFamily: "noto-medium",
+          fontFamily: "gothica1-medium",
           fontSize: 17,
         },
         headerLeft: () => (

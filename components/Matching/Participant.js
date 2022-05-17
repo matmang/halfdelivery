@@ -35,7 +35,7 @@ export default ({ _isReady, imageUri, username, isHost, orderPrice }) => {
             </Text>
             <Text
               style={{
-                fontFamily: "noto-regular",
+                fontFamily: "gothica1-regular",
                 includeFontPadding: false,
                 textAlignVertical: "center",
               }}
@@ -47,7 +47,7 @@ export default ({ _isReady, imageUri, username, isHost, orderPrice }) => {
             <Text
               style={{
                 color: isReady ? colors.primaryBlue : colors.steelBlue2,
-                fontFamily: "noto-medium",
+                fontFamily: "gothica1-medium",
                 includeFontPadding: false,
                 textAlignVertical: "center",
                 fontSize: 10,
@@ -163,7 +163,7 @@ export default ({ _isReady, imageUri, username, isHost, orderPrice }) => {
           />
           <Text
             style={{
-              fontFamily: "noto-regular",
+              fontFamily: "gothica1-regular",
               includeFontPadding: false,
               textAlignVertical: "center",
               fontSize: 12,
@@ -206,7 +206,7 @@ export default ({ _isReady, imageUri, username, isHost, orderPrice }) => {
             style={{
               fontSize: 12,
               color: isReady ? "white" : colors.steelBlue2,
-              fontFamily: "noto-regular",
+              fontFamily: "gothica1-regular",
               includeFontPadding: false,
               textAlignVertical: "center",
             }}

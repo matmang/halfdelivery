@@ -28,7 +28,7 @@ import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
 import styled from "styled-components";
 import Modal from "react-native-modal";
-import { SendAccount } from "../Matching/Modals";
+import { SendAccount } from "../Matching/modals";
 
 const MessageInput = ({ chatRoom, me }) => {
   const [message, setMessage] = useState("");
@@ -415,7 +415,7 @@ const ModalBox = styled.View`
 `;
 
 const BlueText = styled.Text`
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
   font-size: 17px;
   margin-left: 8px;
   color: ${colors.primaryBlue};

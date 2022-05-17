@@ -80,9 +80,7 @@ export default ({ navigation, route: { params } }) => {
 
   const handleSubmit = async () => {
     try {
-      // console.log(params.authUser.attributes.sub);
-
-      const _Store = await DataStore.query(Store, params.storeInfo.id);
+      console.log("기도합시다");
       /*       Store {
         "_deleted": null,
         "_lastChangedAt": 1649082966294,
@@ -117,15 +115,13 @@ export default ({ navigation, route: { params } }) => {
         "yogiyoUri": null,
       } */
 
-      const storecategoryID = _Store.storecategoryID;
-
       // console.log("authUser");
       // console.log(authUser);
 
       // const me = await DataStore.query(User, authUser.attributes.sub);
 
-      const me = await DataStore.query(User);
-      setMeee(me);
+      // const me = await DataStore.query(User);
+      // setMeee(me);
 
       /*       User {
         "_deleted": null,
@@ -150,6 +146,34 @@ export default ({ navigation, route: { params } }) => {
         "studentIdImgUri": "cupidatatminimfu",
         "updatedAt": "2022-04-28T16:00:03.656Z",
       }, */
+
+      const testStoreCategoryInfo = await DataStore.query(
+        StoreCategory,
+        "9dcc616b-2c49-4247-9ddd-ce360d320848"
+      );
+      console.log("testStoreCategoryInfo");
+      console.log(testStoreCategoryInfo);
+      const testStore = await DataStore.query(
+        Store,
+        "b3b04695-20a9-43c1-bbb8-7cecb5d52eea"
+      );
+      console.log("testStore");
+      console.log(testStore);
+
+      const retrun = await DataStore.save(
+        new MatchingInfo({
+          endTime: "1970-01-01T12:30:23.999Z",
+          StoreCategoryInfo:
+            testStoreCategoryInfo /* Provide a StoreCategory instance here */,
+          StoreInfo: testStore /* Provide a Store instance here */,
+          isRapid: true,
+          platform: Platform.BAEMIN,
+          targetPrice: 1020,
+        })
+      );
+
+      console.log("retrun");
+      console.log(retrun);
 
       // await DataStore.save(
       //   new User({
@@ -212,7 +236,8 @@ export default ({ navigation, route: { params } }) => {
       // );
       // console.log(newParticiant);
     } catch (e) {
-      console.log("에러", e);
+      console.log("기도가 안통했네요");
+      console.log(e);
     }
   };
 
@@ -729,7 +754,7 @@ const SelectBox = styled.View`
 
 const PlatformText = styled.Text`
   font-size: 10px;
-  font-family: "noto-medium";
+  font-family: "gothica1-medium";
   color: white;
   include-font-padding: false;
   text-align-vertical: center;
@@ -738,7 +763,7 @@ const PlatformText = styled.Text`
 const StoreText = styled.Text`
   margin-left: ${width * 14}px;
   font-size: 14px;
-  font-family: "noto-medium";
+  font-family: "gothica1-medium";
   text-decoration-line: underline;
   include-font-padding: false;
   text-align-vertical: center;
@@ -746,7 +771,7 @@ const StoreText = styled.Text`
 
 const MoneyText = styled.Text`
   font-size: 14px;
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
   include-font-padding: false;
   text-align-vertical: center;
 `;
@@ -764,7 +789,7 @@ const NumberText = styled.Text`
 const TitleText = styled.Text`
   margin-left: ${width * 8}px;
   font-size: 17px;
-  font-family: "noto-medium";
+  font-family: "gothica1-medium";
   color: ${colors.primaryBlue};
   include-font-padding: false;
   text-align-vertical: center;
@@ -773,7 +798,7 @@ const TitleText = styled.Text`
 const ExplainText = styled.Text`
   margin-left: ${width * 4}px;
   font-size: 14px;
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
   color: ${colors.steelBlue2};
   include-font-padding: false;
   text-align-vertical: center;
@@ -781,7 +806,7 @@ const ExplainText = styled.Text`
 
 const SelectTitleText = styled.Text`
   font-size: ${width * 14}px;
-  font-family: "noto-medium";
+  font-family: "gothica1-medium";
   margin-top: ${height * 13.7};
   color: ${(props) =>
     props.isSelected ? colors.primaryBlue : colors.unselectedGrey};
@@ -791,7 +816,7 @@ const SelectTitleText = styled.Text`
 
 const SelectExplainText = styled.Text`
   font-size: ${width * 11}px;
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
   margin-top: ${height * 11}px;
   color: ${(props) => (props.isSelected ? "#000000" : colors.unselectedGrey)};
   include-font-padding: false;
@@ -799,7 +824,7 @@ const SelectExplainText = styled.Text`
 `;
 
 const SearchText = styled.Text`
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
   margin-left: ${width * 17}px;
   color: ${colors.unselectedGrey};
 `;

@@ -6,7 +6,7 @@ import { height } from "../../utils";
 
 const StyledText = styled.Text`
   align-items: flex-start;
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
   font-size: 12px;
   margin-top: ${height * 3}px;
   color: ${colors.errorPink};

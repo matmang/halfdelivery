@@ -24,7 +24,7 @@ import colors from "../../colors";
 import { width, height } from "../../utils";
 import PlatformIcon from "../PlatformIcon";
 import Timer from "../Timer";
-import { EnterMatching } from "./Modals";
+import { EnterMatching } from "./modals";
 import { DataStore } from "aws-amplify";
 import { Store } from "../../AWS/src/models";
 
@@ -98,9 +98,9 @@ export default ({ matchingInfo }) => {
       <InfoRoot>
         <Header>
           <PlatformIcon platform={platform} />
-          <Noto14medium style={{ marginLeft: width * 8 }}>
+          <Gothic14medium style={{ marginLeft: width * 8 }}>
             {store.store}
-          </Noto14medium>
+          </Gothic14medium>
           <Timer
             style={{ marginLeft: "auto", marginRight: width * 24 }}
             simple={true}
@@ -110,7 +110,7 @@ export default ({ matchingInfo }) => {
         <InfoBox>
           <Top>
             <TopLeft>
-              <Noto12left style={{ flex: 4 }}>최소주문금액</Noto12left>
+              <Gothic12left style={{ flex: 4 }}>최소주문금액</Gothic12left>
               <Nunito12right
                 style={{
                   flex: 0.2,
@@ -123,13 +123,13 @@ export default ({ matchingInfo }) => {
                   .toString()
                   .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
               </Nunito12right>
-              <Noto12left style={{ flex: 1 }}>{"  "}원</Noto12left>
+              <Gothic12left style={{ flex: 1 }}>{"  "}원</Gothic12left>
             </TopLeft>
 
             <TopRight>
-              <Noto12left style={{ flex: 4, color: colors.primaryBlue }}>
+              <Gothic12left style={{ flex: 4, color: colors.primaryBlue }}>
                 필요주문금액
-              </Noto12left>
+              </Gothic12left>
               <Nunito12right
                 style={{
                   flex: 0.2,
@@ -142,20 +142,20 @@ export default ({ matchingInfo }) => {
                   .toString()
                   .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
               </Nunito12right>
-              <Noto12left
+              <Gothic12left
                 style={{
                   flex: 1,
                   color: colors.primaryBlue,
                 }}
               >
                 {"  "}원
-              </Noto12left>
+              </Gothic12left>
             </TopRight>
           </Top>
 
           <Btm>
             <BtmLeft>
-              <Noto12left style={{ flex: 4 }}>현재주문금액</Noto12left>
+              <Gothic12left style={{ flex: 4 }}>현재주문금액</Gothic12left>
               <Nunito12right
                 style={{
                   flex: 0.2,
@@ -167,11 +167,11 @@ export default ({ matchingInfo }) => {
                   .toString()
                   .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
               </Nunito12right>
-              <Noto12left style={{ flex: 1 }}>{"  "}원</Noto12left>
+              <Gothic12left style={{ flex: 1 }}>{"  "}원</Gothic12left>
             </BtmLeft>
 
             <BtmRight>
-              <Noto12left style={{ flex: 3 }}>매칭 대기 인원</Noto12left>
+              <Gothic12left style={{ flex: 3 }}>매칭 대기 인원</Gothic12left>
               <Nunito12right
                 style={{
                   flex: 1,
@@ -181,13 +181,13 @@ export default ({ matchingInfo }) => {
               >
                 2 / {requiredPersons}
               </Nunito12right>
-              <Noto12left
+              <Gothic12left
                 style={{
                   flex: 0.6,
                 }}
               >
                 {"  "}명
-              </Noto12left>
+              </Gothic12left>
             </BtmRight>
           </Btm>
         </InfoBox>
@@ -275,25 +275,25 @@ const BtmRight = styled(TopRight)`
   /* background-color: blue; */
 `;
 
-const Noto14medium = styled.Text`
+const Gothic14medium = styled.Text`
   font-size: ${width * 14}px;
   /* font-size: 12px; */
-  font-family: "noto-medium";
+  font-family: "gothica1-medium";
   include-font-padding: false;
   text-align-vertical: center;
   text-align: left;
 `;
 
-const Noto12left = styled.Text`
+const Gothic12left = styled.Text`
   font-size: ${width * 12}px;
   /* font-size: 12px; */
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
   include-font-padding: false;
   text-align-vertical: center;
   text-align: left;
 `;
 
-const Nunito12right = styled(Noto12left)`
+const Nunito12right = styled(Gothic12left)`
   font-family: "nunito-regular";
   include-font-padding: false;
   text-align-vertical: center;

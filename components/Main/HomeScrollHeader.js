@@ -14,7 +14,7 @@ const HeaderContainer = styled.View`
 `;
 
 const MapText = styled.Text`
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
   color: white;
   margin-top: 12px;
   margin-bottom: 16px;
@@ -35,7 +35,7 @@ const SearchContanier = styled.View`
 `;
 
 const SearchText = styled.Text`
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
   margin-left: 19px;
   color: ${colors.unselectedGrey};
 `;

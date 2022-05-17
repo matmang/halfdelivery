@@ -44,13 +44,13 @@ const NoneBox = styled.View`
 `;
 
 const SearchText = styled.Text`
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
   margin-left: ${width * 17}px;
   color: ${colors.unselectedGrey};
 `;
 
 const StartText = styled.Text`
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
   margin-top: ${height * 46}px;
   color: ${colors.unselectedGrey};
   font-size: ${width * 17}px;

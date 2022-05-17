@@ -19,7 +19,7 @@ const HeaderView = styled.SafeAreaView`
 `;
 
 const Title = styled.Text`
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
   font-size: 20px;
   color: #ffffff;
   font-weight: bold;

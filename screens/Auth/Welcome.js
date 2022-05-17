@@ -7,6 +7,7 @@ import LoginBtn from "../../components/Auth/LoginBtn";
 import SignUpBtn from "../../components/Auth/SignUpBtn";
 import TermBottomSheet from "../../components/Auth/TermBottomSheet";
 
+
 const Container = styled.View`
   flex: 1;
   background-color: white;
@@ -36,7 +37,7 @@ const SecondContainer = styled.View`
 
 export default ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
-
+  
   return (
     <Container>
       <ImageBackground
@@ -69,6 +70,7 @@ export default ({ navigation }) => {
             text="로그인"
           />
           <SecondContainer>
+
             <SignUpBtn onPress={() => setModalVisible(true)} text="회원가입" />
           </SecondContainer>
         </BodyContainer>

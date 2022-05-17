@@ -17,7 +17,7 @@ const DistributionLine = styled.View`
 `;
 
 const Title = styled.Text`
-  font-family: "noto-medium";
+  font-family: "gothica1-medium";
   font-size: ${width * 17};
   color: ${colors.primaryBlue};
   margin-top: ${height * 25}px;
@@ -37,7 +37,7 @@ const DateText = styled.Text`
 `;
 
 const BodyText = styled.Text`
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
   font-size: ${width * 14};
   text-align: left;
   line-height: ${height * 24}px;

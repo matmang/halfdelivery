@@ -31,7 +31,7 @@ export default ({ style }) => {
             <Text
               style={{
                 color: colors.steelBlue2,
-                fontFamily: "noto-medium",
+                fontFamily: "gothica1-medium",
                 includeFontPadding: false,
                 textAlignVertical: "center",
 
@@ -87,7 +87,7 @@ export default ({ style }) => {
           />
           <Text
             style={{
-              fontFamily: "noto-regular",
+              fontFamily: "gothica1-regular",
               includeFontPadding: false,
               textAlignVertical: "center",
               fontSize: 12,
@@ -126,7 +126,7 @@ export default ({ style }) => {
             style={{
               fontSize: 12,
               color: colors.steelBlue2,
-              fontFamily: "noto-regular",
+              fontFamily: "gothica1-regular",
               includeFontPadding: false,
               textAlignVertical: "center",
             }}

@@ -20,7 +20,7 @@ const Text = styled.Text`
   color: ${colors.primaryBlue};
   margin-left: ${width * 160}px;
   font-size: 17px;
-  font-family: "noto-medium";
+  font-family: "gothica1-medium";
 `;
 
 const NextCircle = styled.View`

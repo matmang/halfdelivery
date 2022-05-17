@@ -47,7 +47,7 @@ const ButtonContainer = styled.View`
 `;
 
 const NameText = styled.Text`
-  font-family: "noto-semibold";
+  font-family: "gothica1-semibold";
   font-size: 17px;
   margin-bottom: ${height * 21}px;
   color: ${colors.primaryBlue};
@@ -67,7 +67,10 @@ export default ({ navigation }) => {
   const refDidMount = useRef(null);
 
   useEffect(() => {
-    setAccent(username && password && !IDerrorMessage && !PWerrorMessage);
+    //? !!! == not !!
+    //? !! == undefined, "", 0 값을 false 로 강제 형변환 함
+    //? accent type 이 boolean 이어야 하는데, string 으로 들어가서 생기는 warning message 해결을 위해 추가함
+    setAccent(username && password && !IDerrorMessage && !!!PWerrorMessage);
   }, [username, password, IDerrorMessage, PWerrorMessage]);
 
   useEffect(() => {
@@ -95,7 +98,6 @@ export default ({ navigation }) => {
       console.log(data);
       setLoggedIn(true);
     } catch (e) {
-      console.log(e);
       alert("학번 혹은 비밀번호가 잘못되었습니다.");
     }
   };

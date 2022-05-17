@@ -4,15 +4,17 @@ import Modal from "react-native-modal";
 import colors from "../../../colors";
 import styled from "styled-components";
 import StoreCategory from "../../StoreCategory";
-import Platform from "./../Platform";
+import Platform from "../Platform";
 import { width, height } from "../../../utils";
 import { useNavigation } from "@react-navigation/native";
 import DisclaimerFooter from "../../DisclaimerFooter";
 import { Auth } from "aws-amplify";
 // import { toggleIsMatching } from "../../../redux/usersSlice";
 import logos from "../../../images";
+import ButtonModalBottomOutlined from "../../common/buttons/ButtonModalBottomOutlined";
+import StoreInfoSelectPlatform from "./StoreInfoSelectPlatform";
 
-export default ({ isModal, setIsModal, storeInfo, category }) => {
+const SelectPlatform = ({ isModal, setIsModal, storeInfo, category }) => {
   const navigation = useNavigation();
   const [selectedName, setSelectedName] = useState(null);
   const [authUser, setAuthUser] = useState(undefined);
@@ -47,7 +49,7 @@ export default ({ isModal, setIsModal, storeInfo, category }) => {
             authUser,
           },
         });
-    dispatch(toggleIsMatching(true));
+    // dispatch(toggleIsMatching(true));
     setIsModal(false);
   };
 
@@ -59,6 +61,14 @@ export default ({ isModal, setIsModal, storeInfo, category }) => {
       animationOut="fadeOut"
       isVisible={isModal}
       style={{ justifyContent: "center", alignItems: "center" }}
+      // ? modal 아닌 부분 즉, 배경 클릭시 작동
+      onBackdropPress={() => {
+        setIsModal(false);
+      }}
+      // ? Android 소프트웨어 키 뒤로가기 버튼 클릭시 작동
+      onBackButtonPress={() => {
+        setIsModal(false);
+      }}
     >
       <ModalBox>
         <Pressable
@@ -67,10 +77,12 @@ export default ({ isModal, setIsModal, storeInfo, category }) => {
           }}
           style={{
             position: "absolute",
-            marginLeft: width * 330,
-            marginRight: width * 20,
-            marginTop: height * 14,
-            marginBottom: height * 435.7,
+            // marginLeft: "auto",
+            marginLeft: MODAL_WIDTH - width * (16 + 14),
+            marginRight: width * 16,
+            marginTop: height * 16,
+            // marginBottom: "auto",
+            marginBottom: MODAL_HEIGTH - height * (16 + 14),
             zIndex: 2,
           }}
         >
@@ -83,249 +95,126 @@ export default ({ isModal, setIsModal, storeInfo, category }) => {
           />
         </Pressable>
         <Top>
-          <StoreInfo_mini storeInfo={storeInfo} category={category} />
+          <View style={{ marginTop: height * 42 }}>
+            <StoreInfoSelectPlatform
+              storeInfo={storeInfo}
+              category={category}
+            />
+          </View>
           <BlueLine />
-          <Noto17medium style={{ color: colors.primaryBlue, marginTop: 20 }}>
+          <Gothic17medium
+            style={{ color: colors.primaryBlue, marginTop: height * 20 }}
+          >
             배달 플랫폼 선택
-          </Noto17medium>
-          <Noto14>주문을 진행할 배달 플랫폼을 선택해주세요</Noto14>
+          </Gothic17medium>
+          <Gothic14 style={{ marginTop: height * 8 }}>
+            주문을 진행할 배달 플랫폼을 선택해주세요
+          </Gothic14>
         </Top>
+
         <Mid>
           <View
             style={{
               flexDirection: "row",
-              justifyContent: "space-evenly",
-              marginTop: 20,
+              // justifyContent: "space-evenly",
+              marginTop: height * 32,
             }}
           >
             <Platform
               name={"배달의 민족"}
               selectedName={selectedName}
               setSelectedName={setSelectedName}
+              viewStyle={{ marginLeft: width * 16 }}
             />
             <Platform
               name={"요기요"}
               selectedName={selectedName}
               setSelectedName={setSelectedName}
+              viewStyle={{ marginLeft: width * 15 }}
             />
             <Platform
               name={"쿠팡잇츠"}
               selectedName={selectedName}
               setSelectedName={setSelectedName}
+              viewStyle={{ marginLeft: width * 14 }}
+            />
+            <Platform
+              name={"배달특급"}
+              selectedName={selectedName}
+              setSelectedName={setSelectedName}
+              viewStyle={{ marginLeft: width * 15, marginRight: width * 16 }}
             />
           </View>
-          <SelectButton
-            selectedName={selectedName}
-            onPress={() => {
-              onPress();
-            }}
-          >
-            <Noto17medium
-              style={{
-                color: selectedName ? "white" : colors.steelBlue2,
-              }}
-            >
-              선택완료
-            </Noto17medium>
-          </SelectButton>
+
+          <View style={{ alignSelf: "center", marginTop: height * 32 }}>
+            <ButtonModalBottomOutlined
+              onPress={onPress}
+              accent={selectedName}
+              text="선택완료"
+            />
+          </View>
         </Mid>
         <Btm>
-          <DisclaimerFooter />
-          {/* <Warnning>
-            * 하프하프는 상품거래에 대한 통신판매중개자이며, 통신판매의 당사자가
-            아닙니다. 따라서, 하프하프는 상품거래에 대하여 책임을 지지 않습니다.
-          </Warnning> */}
+          <DisclaimerFooter viewStyle={{ marginTop: height * 25 }} />
         </Btm>
       </ModalBox>
     </Modal>
   );
 };
 
+const MODAL_WIDTH = width * 364;
+const MODAL_HEIGTH = height * 469;
+
 const ModalBox = styled.View`
-  width: 364px;
-  height: 452px;
+  width: ${MODAL_WIDTH}px;
+  height: ${MODAL_HEIGTH}px;
+  border-radius: 16px;
   background-color: white;
-  border-radius: 10px;
 `;
 
 const Top = styled.View`
-  width: 364px;
-  height: 192px;
+  width: ${MODAL_WIDTH}px;
+  /* height: ${height * 189}px; */
   /* background-color: lightcyan; */
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  /* margin-top: ${height * -10}px; */
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
   padding-left: 20px;
 `;
 
 const BlueLine = styled.View`
-  width: 324px; /*//! StoreRoomBox width 랑 같아야 함*/
-  height: 1.5px;
+  width: ${width * 324}px; /*//! StoreRoomBox width 랑 같아야 함*/
+  height: ${height * 1.5}px;
   background-color: #5465aa;
   margin-top: 6px;
 `;
 
 const Mid = styled.View`
-  width: 364px;
-  height: 204px;
+  width: ${MODAL_WIDTH}px;
+  /* height: ${height * 221}px; */
   /* background-color: lightgoldenrodyellow; */
 `;
 
 const Btm = styled.View`
-  width: 364px;
-  height: 56px;
-  background-color: ${colors.whiteGray};
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  width: ${MODAL_WIDTH}px;
+  /* height: ${height * 56}px; */
+  /* background-color: yellow; */
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
 `;
 
-const Noto17medium = styled.Text`
-  font-family: "noto-medium";
+const Gothic17medium = styled.Text`
+  font-family: "gothica1-medium";
   include-font-padding: false;
   text-align-vertical: center;
   font-size: 17px;
 `;
 
-const Noto14 = styled.Text`
-  font-family: "noto-regular";
+const Gothic14 = styled.Text`
+  font-family: "gothica1-regular";
   include-font-padding: false;
   text-align-vertical: center;
   font-size: 14px;
 `;
 
-const Warnning = styled.Text`
-  font-family: "noto-regular";
-  include-font-padding: false;
-  text-align-vertical: center;
-  font-size: 10px;
-  padding: 10px;
-  color: ${colors.oxfordGray};
-`;
-
-const SelectButton = styled.Pressable`
-  width: 324px;
-  height: 48px;
-  justify-content: center;
-  align-self: center;
-  align-items: center;
-  background-color: ${({ selectedName }) =>
-    selectedName !== null ? colors.primaryBlue : colors.blueGray2};
-  border-radius: 40px;
-  margin-top: auto;
-  margin-bottom: 16px;
-`;
-
-const StoreInfo_mini = ({ storeInfo, category }) => {
-  const { baeminDlvTip } = storeInfo;
-  const { baeminOrderPrice } = storeInfo;
-  const { baeminUri } = storeInfo;
-  const { coupangDlvTip } = storeInfo;
-  const { coupangOrderPrice } = storeInfo;
-  const { coupangUri } = storeInfo;
-  const { yogiyoDlvTip } = storeInfo;
-  const { yogiyoOrderPrice } = storeInfo;
-  const { yogiyoUri } = storeInfo;
-  const { backgroundImgUri } = storeInfo;
-  const { logoImgUri } = storeInfo;
-  const { name } = storeInfo;
-  const { location } = storeInfo;
-  const { openHours } = storeInfo;
-  const { storecategoryID } = storeInfo;
-
-  return (
-    <StoreRoomBox>
-      <Img
-        resizeMode="cover"
-        source={
-          // logos.halfLogo
-          // { uri: logoImgUri }
-          logoImgUri !== undefined ? { uri: logoImgUri } : logos.halfLogo
-        }
-      />
-      <NonImgBox>
-        <InfoView>
-          <StoreCategory category={category} />
-          <StoreText>{name}</StoreText>
-        </InfoView>
-
-        <InfoView>
-          <View>
-            <InfoText numberOfLines={1}>최소주문금액</InfoText>
-            <InfoText numberOfLines={1}>배달팁</InfoText>
-          </View>
-
-          <View style={{ marginLeft: 18 }}>
-            <InfoText numberOfLines={1}>
-              <NunitoText>
-                {baeminOrderPrice
-                  .toString()
-                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-              </NunitoText>
-              원
-            </InfoText>
-            <InfoText numberOfLines={1}>was maxDlvTip</InfoText>
-          </View>
-        </InfoView>
-      </NonImgBox>
-    </StoreRoomBox>
-  );
-};
-
-const StoreRoomBox = styled.View`
-  width: 324px;
-  flex-direction: row;
-  align-items: center;
-  background-color: white;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  margin-top: 20px;
-`;
-
-const Img = styled.Image`
-  /* margin-left: 24px; */
-  margin-top: 10px;
-  margin-bottom: 10px;
-  border-radius: 16px;
-  width: ${width * 72}px;
-  height: ${height * 72}px;
-`;
-
-const NonImgBox = styled.View`
-  padding: 5px;
-  margin-left: 20px;
-  justify-content: center;
-`;
-
-const InfoView = styled.View`
-  flex-direction: row;
-  align-items: center;
-  padding: 2px;
-`;
-
-const StoreText = styled.Text`
-  font-size: 17px;
-  line-height: 20px;
-  text-align: left;
-  font-family: "noto-medium";
-  include-font-padding: false;
-  text-align-vertical: center;
-  margin-left: 8px;
-  margin-bottom: 3px;
-`;
-
-const InfoText = styled.Text`
-  font-size: 14px;
-  line-height: 16px;
-  text-align: left;
-  font-family: "noto-regular";
-  include-font-padding: false;
-  text-align-vertical: center;
-  padding: 2px;
-`;
-
-const NunitoText = styled.Text`
-  font-size: 14px;
-  font-family: "nunito-regular";
-  include-font-padding: false;
-  text-align-vertical: center;
-  text-align: right;
-`;
+export default SelectPlatform;

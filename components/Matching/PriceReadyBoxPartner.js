@@ -14,7 +14,7 @@ export default ({ price, style }) => {
       <Left>
         <Text
           style={{
-            fontFamily: "noto-regular",
+            fontFamily: "gothica1-regular",
             includeFontPadding: false,
             textAlignVertical: "center",
             fontSize: 14,
@@ -44,7 +44,7 @@ export default ({ price, style }) => {
             <Text style={{ color: colors.primaryBlue }}>{"   "}11,000</Text>
             <Text
               style={{
-                fontFamily: "noto-regular",
+                fontFamily: "gothica1-regular",
                 includeFontPadding: false,
                 textAlignVertical: "center",
                 fontSize: 23,

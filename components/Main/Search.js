@@ -59,12 +59,12 @@ const SearchedLabel = styled.Text`
   margin-bottom: 5px;
   margin-left: 24px;
   font-weight: 500;
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
 `;
 
 const RemoveAll = styled.Text`
   font-size: 14px;
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
   margin-right: 19px;
 `;
 

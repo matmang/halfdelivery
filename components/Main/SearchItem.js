@@ -15,7 +15,7 @@ const Container = styled.View`
 `;
 
 const StoreName = styled.Text`
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
   font-size: 17px;
 `;
 

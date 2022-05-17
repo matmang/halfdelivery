@@ -71,7 +71,7 @@ export default ({ name }) => {
         >
           <Text
             style={{
-              fontFamily: "noto-medium",
+              fontFamily: "gothica1-medium",
               includeFontPadding: false,
               textAlignVertical: "center",
               fontSize: 20,
@@ -82,7 +82,7 @@ export default ({ name }) => {
           </Text>
           <Text
             style={{
-              fontFamily: "noto-medium",
+              fontFamily: "gothica1-medium",
               includeFontPadding: false,
               textAlignVertical: "center",
               fontSize: 20,
@@ -93,7 +93,7 @@ export default ({ name }) => {
           </Text>
           <Text
             style={{
-              fontFamily: "noto-medium",
+              fontFamily: "gothica1-medium",
               includeFontPadding: false,
               textAlignVertical: "center",
               fontSize: 20,
@@ -104,7 +104,7 @@ export default ({ name }) => {
           </Text>
           <Text
             style={{
-              fontFamily: "noto-medium",
+              fontFamily: "gothica1-medium",
               includeFontPadding: false,
               textAlignVertical: "center",
               fontSize: 20,
@@ -128,7 +128,7 @@ export default ({ name }) => {
 
           <Text
             style={{
-              fontFamily: "noto-medium",
+              fontFamily: "gothica1-medium",
               includeFontPadding: false,
               textAlignVertical: "center",
               fontSize: 17,

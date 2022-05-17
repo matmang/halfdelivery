@@ -73,7 +73,7 @@ export default ({ name }) => {
         >
           <Text
             style={{
-              fontFamily: "noto-regular",
+              fontFamily: "gothica1-regular",
               fontWeight: "400",
               fontSize: 20,
               color: "rgba(14, 37, 124, 255)",
@@ -89,7 +89,7 @@ export default ({ name }) => {
           >
             <Text
               style={{
-                fontFamily: "noto-regular",
+                fontFamily: "gothica1-regular",
                 fontWeight: "400",
                 fontSize: 20,
                 color: "rgba(0, 0, 0, 255)",
@@ -99,7 +99,7 @@ export default ({ name }) => {
             </Text>
             <Text
               style={{
-                fontFamily: "noto-regular",
+                fontFamily: "gothica1-regular",
                 fontWeight: "400",
                 fontSize: 20,
                 color: "rgba(14, 37, 124, 255)",
@@ -109,7 +109,7 @@ export default ({ name }) => {
             </Text>
             <Text
               style={{
-                fontFamily: "noto-regular",
+                fontFamily: "gothica1-regular",
                 fontWeight: "400",
                 fontSize: 20,
                 color: "rgba(0, 0, 0, 255)",
@@ -133,7 +133,7 @@ export default ({ name }) => {
           />
           <Text
             style={{
-              fontFamily: "noto-regular",
+              fontFamily: "gothica1-regular",
               fontWeight: "400",
               fontSize: 17,
               color: "rgba(0, 0, 0, 255)",

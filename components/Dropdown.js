@@ -50,7 +50,7 @@ export default ({ placeholder, data, onSelect }) => {
     >
       <Text
         style={{
-          fontFamily: "noto-regular",
+          fontFamily: "gothica1-regular",
           includeFontPadding: false,
           textAlignVertical: "center",
           fontSize: 17,
@@ -88,7 +88,7 @@ export default ({ placeholder, data, onSelect }) => {
       <RenderDropdown />
       <Text
         style={{
-          fontFamily: "noto-regular",
+          fontFamily: "gothica1-regular",
           includeFontPadding: false,
           textAlignVertical: "center",
           fontSize: 17,

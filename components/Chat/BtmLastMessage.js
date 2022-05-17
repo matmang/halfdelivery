@@ -36,16 +36,16 @@ export default ({ isMaster, username, message }) => {
         />
         <ProfileInfo>
           <Nunito11left>{isMaster ? "Master" : "Partner"}</Nunito11left>
-          <Noto11left>{username}</Noto11left>
+          <Gothic11left>{username}</Gothic11left>
         </ProfileInfo>
       </ProfileView>
 
-      <Noto13left
+      <Gothic13left
         style={{ marginLeft: width * 11, maxWidth: width * 275 }}
         numberOfLines={1}
       >
         {message}
-      </Noto13left>
+      </Gothic13left>
       <Entypo
         name="chevron-thin-down"
         size={14}
@@ -92,23 +92,23 @@ const ProfileInfo = styled.View`
   justify-content: center;
 `;
 
-const Noto13left = styled.Text`
+const Gothic13left = styled.Text`
   font-size: ${width * 13}px;
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
   include-font-padding: false;
   text-align-vertical: center;
   text-align: left;
 `;
 
-const Noto11left = styled.Text`
+const Gothic11left = styled.Text`
   font-size: ${width * 11}px;
-  font-family: "noto-regular";
+  font-family: "gothica1-regular";
   include-font-padding: false;
   text-align-vertical: center;
   text-align: left;
 `;
 
-const Nunito11left = styled(Noto11left)`
+const Nunito11left = styled(Gothic11left)`
   font-family: "nunito-regular";
   include-font-padding: false;
   text-align-vertical: center;

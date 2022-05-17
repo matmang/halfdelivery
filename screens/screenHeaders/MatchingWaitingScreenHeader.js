@@ -37,7 +37,7 @@ const Root = styled.View`
 `;
 
 const Title = styled.Text`
-  font-family: "noto-medium";
+  font-family: "gothica1-medium";
   font-size: 14px;
   color: #ffffff;
   include-font-padding: false;
