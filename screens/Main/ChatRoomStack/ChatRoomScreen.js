@@ -37,21 +37,21 @@ import {
 } from "../../../components/Statuses";
 import colors from "../../../colors";
 import { MaterialIcons } from "@expo/vector-icons";
-import {
-  MatchingCancelled,
-  EjectPartner,
-  CancelMatching,
-} from "../../../components/Chat/modals";
-import {
-  InputOrderPrice,
-  RequestAdditionalTime,
-  AddAdditionalTime,
-  ViewProfilePartner,
-  FinalCheck,
-  EnterMatching,
-} from "../../../components/Matching/modals/";
+// import {
+//   MatchingCancelled,
+//   EjectPartner,
+//   CancelMatching,
+// } from "../../../components/Chat/modals";
+// import {
+//   InputOrderPrice,
+//   RequestAdditionalTime,
+//   AddAdditionalTime,
+//   ViewProfilePartner,
+//   FinalCheck,
+//   EnterMatching,
+// } from "../../../components/Matrching/modals/";
 import Dropdown from "../../../components/Dropdown";
-import SelectPlatform from "../../../components/Matching/modals/SelectPlatform";
+// import { SelectPlatform } from "../../../components/Matching/modals";
 import TEST_react_native_expo_image_cropper from "./TEST_react_native_expo_image_cropper";
 import TEST_expo_image_crop from "./TEST_expo_image_crop";
 import {

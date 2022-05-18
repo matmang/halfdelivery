@@ -5,7 +5,7 @@ import StoreCategory from "../../StoreCategory";
 import { width, height } from "../../../utils";
 import logos from "../../../images";
 
-const StoreInfoSelectPlatform = ({ storeInfo, category }) => {
+const ViewProfilePartner = ({ storeInfo, category }) => {
   const { baeminDlvTip } = storeInfo;
   const { baeminOrderPrice } = storeInfo;
   const { baeminUri } = storeInfo;
@@ -116,4 +116,4 @@ const StoreText = styled.Text`
   /* margin-bottom: 3px; */
 `;
 
-export default StoreInfoSelectPlatform;
+export default ViewProfilePartner;

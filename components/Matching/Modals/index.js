@@ -1,9 +1,19 @@
-export * from "./InputOrderPrice";
-export * from "./RequestAdditionalTime";
-export * from "./AddAdditionalTime";
-export * from "./SendAccount";
-export * from "./ViewProfilePartner";
-export * from "./SelectPlatform";
-export * from "./FinalCheck";
-export * from "./EnterMatching";
-export * from "./StoreInfoSelectPlatform";
+import SelectPlatform from "./SelectPlatform";
+import InputOrderPrice from "./InputOrderPrice";
+import AddAdditionalTime from "./AddAdditionalTime";
+import ViewProfilePartner from "./ViewProfilePartner";
+import FinalCheck from "./FinalCheck";
+import EnterMatching from "./EnterMatching";
+import StoreInfoSelectPlatform from "./StoreInfoSelectPlatform";
+import SendAccount from "./SendAccount";
+
+export {
+  SelectPlatform,
+  InputOrderPrice,
+  AddAdditionalTime,
+  SendAccount,
+  ViewProfilePartner,
+  FinalCheck,
+  EnterMatching,
+  StoreInfoSelectPlatform,
+};

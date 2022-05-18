@@ -5,7 +5,7 @@ import { width, height } from "../../utils";
 import RoundedBtn from "../RoundedBtn";
 import colors from "../../colors";
 
-export default ({ style }) => {
+const ParticipantEmpty = ({ style }) => {
   return (
     <Root style={style}>
       <Top>
@@ -241,3 +241,5 @@ const ImageBox = styled.View`
   justify-content: center;
   align-items: center;
 `;
+
+export default ParticipantEmpty;

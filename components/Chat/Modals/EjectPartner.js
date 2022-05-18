@@ -5,7 +5,7 @@ import RoundedBtn from "../../RoundedBtn";
 import DisclaimerFooter from "../../DisclaimerFooter";
 import CheckBox from "../../CheckBox";
 
-export default ({ name }) => {
+const EjectPartner = ({ name }) => {
   const [reason1, setReason1] = useState(null);
   const [reason2, setReason2] = useState(null);
   const [reason3, setReason3] = useState(null);
@@ -229,3 +229,5 @@ export default ({ name }) => {
     </View>
   );
 };
+
+export default EjectPartner;

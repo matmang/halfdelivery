@@ -5,7 +5,7 @@ import { width, height } from "../../../utils";
 import colors from "../../../colors";
 import styled from "styled-components";
 
-export default ({ name, school, college, bank, accountnumber }) => {
+const ViewProfilePartner = ({ name, school, college, bank, accountnumber }) => {
   return (
     <View
       style={{
@@ -214,3 +214,5 @@ const Profile = styled.View`
 // marginTop: height * 44,
 // marginStart: 0.5,
 // marginTop: height * 52,
+
+export default ViewProfilePartner;

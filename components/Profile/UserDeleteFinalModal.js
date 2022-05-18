@@ -9,7 +9,7 @@ import { Image } from "react-native";
 import { Auth } from "aws-amplify";
 import { useRecoilState } from "recoil";
 import { loginState } from "../../recoil/atoms/loginAtom";
-import { deleteUser } from "../../AWS/src/graphql/mutations";
+// import { deleteUser } from "../../../AWS/src/graphql/mutations";
 
 const Container = styled.View`
   width: ${width * 364}px;
@@ -96,15 +96,15 @@ const UserDeleteFinalModal = ({
         .then(
           (user) =>
             new Promise((resolve, reject) => {
-              user.deleteUser((error) => {
-                if (error) {
-                  return reject(error);
-                }
-                if (this.props.onSessionChange) {
-                  this.props.onSessionChange();
-                }
-                resolve();
-              });
+              // user.deleteUser((error) => {
+              //   if (error) {
+              //     return reject(error);
+              //   }
+              //   if (this.props.onSessionChange) {
+              //     this.props.onSessionChange();
+              //   }
+              //   resolve();
+              // });
             })
         )
         .catch(this.onError);

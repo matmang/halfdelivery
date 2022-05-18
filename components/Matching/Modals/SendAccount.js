@@ -8,7 +8,7 @@ import Platform from "../Platform";
 import { color } from "react-native-reanimated";
 import { AntDesign } from "@expo/vector-icons";
 
-export default ({
+const SendAccount = ({
   isModal,
   setIsModal,
   name,
@@ -162,3 +162,5 @@ const Send = styled.Pressable`
   margin-top: auto;
   margin-bottom: 16px;
 `;
+
+export default SendAccount;

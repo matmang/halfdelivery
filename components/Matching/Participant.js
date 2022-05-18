@@ -5,7 +5,7 @@ import { width, height } from "../../utils";
 import PickAndViewImage from "./renderImage/PickAndViewImage";
 import colors from "../../colors";
 
-export default ({ _isReady, imageUri, username, isHost, orderPrice }) => {
+const Participant = ({ _isReady, imageUri, username, isHost, orderPrice }) => {
   const isReady = true;
   const [images, setImages] = useState([]);
   console.log("images", images);
@@ -312,3 +312,5 @@ const PicNumIndicator = styled.View`
   margin-right: ${width * 16}px;
   margin-top: ${height * 60}px;
 `;
+
+export default Participant;

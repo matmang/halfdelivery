@@ -30,7 +30,7 @@ const images = [
   },
 ];
 
-export default ({ name, school, college, bank, accountnumber }) => {
+const FinalCheck = ({ name, school, college, bank, accountnumber }) => {
   const navigation = useNavigation();
 
   return (
@@ -457,3 +457,5 @@ const Nunito12right = styled(Gothic12left)`
 // marginTop: height * 44,
 // marginStart: 0.5,
 // marginTop: height * 52,
+
+export default FinalCheck;

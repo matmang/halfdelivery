@@ -11,7 +11,7 @@ import {
   CAFE_ID,
 } from "../../assets/constants";
 import { width, height } from "../../utils";
-import SelectPlatform from "./modals/SelectPlatform";
+import { SelectPlatform } from "./Modals";
 
 /*   Store {
     "_deleted": null,

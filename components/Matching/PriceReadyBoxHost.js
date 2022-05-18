@@ -5,7 +5,7 @@ import { width, height } from "../../utils";
 import colors from "../../colors";
 import RoundedBtn from "../RoundedBtn";
 
-export default ({ totalPrice, _isAllReady, style }) => {
+const PriceReadyBoxHost = ({ totalPrice, _isAllReady, style }) => {
   const isAllReady = false;
 
   return (
@@ -125,3 +125,5 @@ const Right = styled.View`
   align-items: center;
   margin-right: ${width * 25}px;
 `;
+
+export default PriceReadyBoxHost;

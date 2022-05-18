@@ -19,7 +19,7 @@ import RoundedBtn from "../../RoundedBtn";
 import Modal from "react-native-modal";
 import { useNavigation } from "@react-navigation/native";
 
-export default ({ isModal, setIsModal, matchingInfo, storeInfo }) => {
+const EnterMatching = ({ isModal, setIsModal, matchingInfo, storeInfo }) => {
   const {
     matchingInfoStoreCategoryId,
     matchingInfoStoreId,
@@ -440,3 +440,5 @@ const Nunito12right = styled(Gothic12left)`
 // marginTop: height * 44,
 // marginStart: 0.5,
 // marginTop: height * 52,
+
+export default EnterMatching;

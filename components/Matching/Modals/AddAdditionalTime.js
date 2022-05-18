@@ -9,7 +9,7 @@ import BarInput from "../../Auth/BarInput";
 import SmallBarInput from "../../Auth/SmallBarInput";
 import { width, height } from "../../../utils";
 
-export default ({ name }) => {
+const AddAdditionalTime = ({ name }) => {
   const [time, setTime] = useState(null);
   const [isPressed, setIsPressed] = useState(null);
 
@@ -169,3 +169,5 @@ export default ({ name }) => {
     </View>
   );
 };
+
+export default AddAdditionalTime;

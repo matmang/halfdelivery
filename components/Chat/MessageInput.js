@@ -28,7 +28,7 @@ import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
 import styled from "styled-components";
 import Modal from "react-native-modal";
-import { SendAccount } from "../Matching/modals";
+import { SendAccount } from "../Matching/Modals";
 
 const MessageInput = ({ chatRoom, me }) => {
   const [message, setMessage] = useState("");

@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, Pressable } from "react-native";
 import RoundedBtn from "../../RoundedBtn";
 
-export default () => {
+export default CancelMatching = () => {
   return (
     <View
       style={{
@@ -145,3 +145,5 @@ export default () => {
     </View>
   );
 };
+
+// export default CancelMatching;

@@ -10,7 +10,7 @@ import SmallBarInput from "../../Auth/SmallBarInput";
 import { width, height } from "../../../utils";
 import DisclaimerFooter from "../../DisclaimerFooter";
 
-export default ({ name }) => {
+const InputOrderPrice = ({ name }) => {
   const [price, setPrice] = useState(null);
   const [isPressed, setIsPressed] = useState(null);
 
@@ -235,3 +235,5 @@ export default ({ name }) => {
     </View>
   );
 };
+
+export default InputOrderPrice;

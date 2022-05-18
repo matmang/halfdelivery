@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Pressable, Image } from "react-native";
 
-export default () => {
+const MatchingCancelled = () => {
   return (
     <View
       style={{
@@ -131,3 +131,5 @@ export default () => {
     </View>
   );
 };
+
+export default MatchingCancelled;
