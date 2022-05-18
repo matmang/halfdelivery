@@ -8,6 +8,7 @@ import {
   PanResponder,
   StyleSheet,
   View,
+  Pressable,
 } from "react-native";
 import {
   TouchableOpacity,
@@ -167,7 +168,7 @@ const TermBottomSheet = (props) => {
           }}
           {...panResponders.panHandlers}
         >
-          <TouchableOpacity onPress={() => setModalVisible(false)}>
+          <Pressable onPress={() => setModalVisible(false)}>
             <Image
               source={require("../../assets/images/delete.png")}
               style={{
@@ -179,9 +180,9 @@ const TermBottomSheet = (props) => {
                 resizeMode: "contain",
               }}
             />
-          </TouchableOpacity>
+          </Pressable>
           <TitleText>{"회원 가입을 위해\n약관에 동의해주세요"}</TitleText>
-          <TouchableOpacity onPress={() => setTermService(!termService)}>
+          <Pressable onPress={() => setTermService(!termService)}>
             <CheckboxContainer>
               {termService ? (
                 <Image
@@ -216,8 +217,8 @@ const TermBottomSheet = (props) => {
                 }}
               />
             </CheckboxContainer>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => setTermPersonal(!termPersonal)}>
+          </Pressable>
+          <Pressable onPress={() => setTermPersonal(!termPersonal)}>
             <CheckboxContainer>
               {termPersonal ? (
                 <Image
@@ -254,8 +255,8 @@ const TermBottomSheet = (props) => {
                 }}
               />
             </CheckboxContainer>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => setTermLocation(!termLocation)}>
+          </Pressable>
+          <Pressable onPress={() => setTermLocation(!termLocation)}>
             <CheckboxContainer>
               {termLocation ? (
                 <Image
@@ -290,9 +291,9 @@ const TermBottomSheet = (props) => {
                 }}
               />
             </CheckboxContainer>
-          </TouchableOpacity>
+          </Pressable>
           <Distributionline></Distributionline>
-          <TouchableOpacity
+          <Pressable
             onPress={() => {
               setTermAllCheck(!termAllCheck);
               setTermService(!termAllCheck);
@@ -324,7 +325,7 @@ const TermBottomSheet = (props) => {
               )}
               <TermText accent={termAllCheck}>필수 약관 전체 동의</TermText>
             </CheckboxContainer>
-          </TouchableOpacity>
+          </Pressable>
           <ButtonContainer>
             <Btn text={"다음"} accent={accent} onPress={() => handleSubmit()} />
           </ButtonContainer>
