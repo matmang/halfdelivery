@@ -754,7 +754,7 @@ const SelectBox = styled.View`
 
 const PlatformText = styled.Text`
   font-size: 10px;
-  font-family: "gothica1-medium";
+  font-family: "gothic-medium";
   color: white;
   include-font-padding: false;
   text-align-vertical: center;
@@ -763,7 +763,7 @@ const PlatformText = styled.Text`
 const StoreText = styled.Text`
   margin-left: ${width * 14}px;
   font-size: 14px;
-  font-family: "gothica1-medium";
+  font-family: "gothic-medium";
   text-decoration-line: underline;
   include-font-padding: false;
   text-align-vertical: center;
@@ -771,7 +771,7 @@ const StoreText = styled.Text`
 
 const MoneyText = styled.Text`
   font-size: 14px;
-  font-family: "gothica1-regular";
+  font-family: "gothic-regular";
   include-font-padding: false;
   text-align-vertical: center;
 `;
@@ -789,7 +789,7 @@ const NumberText = styled.Text`
 const TitleText = styled.Text`
   margin-left: ${width * 8}px;
   font-size: 17px;
-  font-family: "gothica1-medium";
+  font-family: "gothic-medium";
   color: ${colors.primaryBlue};
   include-font-padding: false;
   text-align-vertical: center;
@@ -798,7 +798,7 @@ const TitleText = styled.Text`
 const ExplainText = styled.Text`
   margin-left: ${width * 4}px;
   font-size: 14px;
-  font-family: "gothica1-regular";
+  font-family: "gothic-regular";
   color: ${colors.steelBlue2};
   include-font-padding: false;
   text-align-vertical: center;
@@ -806,7 +806,7 @@ const ExplainText = styled.Text`
 
 const SelectTitleText = styled.Text`
   font-size: ${width * 14}px;
-  font-family: "gothica1-medium";
+  font-family: "gothic-medium";
   margin-top: ${height * 13.7};
   color: ${(props) =>
     props.isSelected ? colors.primaryBlue : colors.unselectedGrey};
@@ -816,7 +816,7 @@ const SelectTitleText = styled.Text`
 
 const SelectExplainText = styled.Text`
   font-size: ${width * 11}px;
-  font-family: "gothica1-regular";
+  font-family: "gothic-regular";
   margin-top: ${height * 11}px;
   color: ${(props) => (props.isSelected ? "#000000" : colors.unselectedGrey)};
   include-font-padding: false;
@@ -824,7 +824,7 @@ const SelectExplainText = styled.Text`
 `;
 
 const SearchText = styled.Text`
-  font-family: "gothica1-regular";
+  font-family: "gothic-regular";
   margin-left: ${width * 17}px;
   color: ${colors.unselectedGrey};
 `;

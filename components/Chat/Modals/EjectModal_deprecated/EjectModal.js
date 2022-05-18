@@ -349,7 +349,7 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     fontStyle: "normal",
     // fontFamily: "Noto Sans KR",
-    fontFamily: "gothica1-regular",
+    fontFamily: "gothic-regular",
     textAlign: "left",
     lineHeight: 16,
     marginTop: 0,
@@ -423,7 +423,7 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     fontStyle: "normal",
     // fontFamily: "Noto Sans KR",
-    fontFamily: "gothica1-regular",
+    fontFamily: "gothic-regular",
 
     textAlign: "left",
     lineHeight: 22,
@@ -449,7 +449,7 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     fontStyle: "normal",
     // fontFamily: "Noto Sans KR",
-    fontFamily: "gothica1-regular",
+    fontFamily: "gothic-regular",
 
     textAlign: "left",
     lineHeight: 22,
@@ -475,7 +475,7 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     fontStyle: "normal",
     // fontFamily: "Noto Sans KR",
-    fontFamily: "gothica1-regular",
+    fontFamily: "gothic-regular",
 
     textAlign: "left",
     lineHeight: 22,
@@ -501,7 +501,7 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     fontStyle: "normal",
     // fontFamily: "Noto Sans KR",
-    fontFamily: "gothica1-regular",
+    fontFamily: "gothic-regular",
 
     textAlign: "left",
     lineHeight: 22,
@@ -527,7 +527,7 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     fontStyle: "normal",
     // fontFamily: "Noto Sans KR",
-    fontFamily: "gothica1-regular",
+    fontFamily: "gothic-regular",
 
     textAlign: "left",
     lineHeight: 22,
@@ -553,7 +553,7 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     fontStyle: "normal",
     // fontFamily: "Noto Sans KR",
-    fontFamily: "gothica1-regular",
+    fontFamily: "gothic-regular",
 
     textAlign: "left",
     lineHeight: 22,
@@ -620,7 +620,7 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     fontStyle: "normal",
     // fontFamily: "Noto Sans KR",
-    fontFamily: "gothica1-regular",
+    fontFamily: "gothic-regular",
 
     textAlign: "left",
     lineHeight: 17,
@@ -664,7 +664,7 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     fontStyle: "normal",
     // fontFamily: "Noto Sans KR",
-    fontFamily: "gothica1-regular",
+    fontFamily: "gothic-regular",
 
     textAlign: "left",
     lineHeight: 22,
@@ -761,7 +761,7 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     fontStyle: "normal",
     // fontFamily: "Noto Sans KR",
-    fontFamily: "gothica1-regular",
+    fontFamily: "gothic-regular",
 
     textAlign: "center",
     lineHeight: 22,

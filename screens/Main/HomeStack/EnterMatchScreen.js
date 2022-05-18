@@ -84,7 +84,7 @@ export default ({ navigation, route: { params } }) => {
             <MatchingTypeContainer>
               <Text
                 style={{
-                  fontFamily: "gothica1-regular",
+                  fontFamily: "gothic-regular",
                   includeFontPadding: false,
                   textAlignVertical: "center",
                   fontSize: 12,
@@ -207,7 +207,7 @@ export default ({ navigation, route: { params } }) => {
               <BarInput
                 style={{
                   fontSize: 17,
-                  fontFamily: "gothica1-regular",
+                  fontFamily: "gothic-regular",
                 }}
                 KeyboardType="numeric"
                 placeholder={"선택한 메뉴의 금액을 입력해주세요"}
@@ -485,7 +485,7 @@ const CoupangBubble = styled.View`
 
 const PlatformText = styled.Text`
   font-size: 10px;
-  font-family: "gothica1-medium";
+  font-family: "gothic-medium";
   color: white;
   include-font-padding: false;
   text-align-vertical: center;
@@ -494,7 +494,7 @@ const PlatformText = styled.Text`
 const StoreText = styled.Text`
   margin-left: ${width * 14}px;
   font-size: 14px;
-  font-family: "gothica1-medium";
+  font-family: "gothic-medium";
   text-decoration-line: underline;
   include-font-padding: false;
   text-align-vertical: center;
@@ -502,7 +502,7 @@ const StoreText = styled.Text`
 
 const MoneyText = styled.Text`
   font-size: 14px;
-  font-family: "gothica1-regular";
+  font-family: "gothic-regular";
   include-font-padding: false;
   text-align-vertical: center;
 `;
@@ -521,7 +521,7 @@ const NumberText = styled.Text`
 const TitleText = styled.Text`
   margin-left: ${width * 8}px;
   font-size: 17px;
-  font-family: "gothica1-medium";
+  font-family: "gothic-medium";
   color: ${colors.primaryBlue};
   include-font-padding: false;
   text-align-vertical: center;
@@ -530,7 +530,7 @@ const TitleText = styled.Text`
 const ExplainText = styled.Text`
   margin-left: ${width * 4}px;
   font-size: 14px;
-  font-family: "gothica1-regular";
+  font-family: "gothic-regular";
   color: ${colors.steelBlue2};
   include-font-padding: false;
   text-align-vertical: center;
@@ -538,7 +538,7 @@ const ExplainText = styled.Text`
 
 const SelectTitleText = styled.Text`
   font-size: ${width * 14}px;
-  font-family: "gothica1-medium";
+  font-family: "gothic-medium";
   margin-top: ${height * 13.7}px;
   color: ${(props) =>
     props.isSelected ? colors.primaryBlue : colors.unselectedGrey};
@@ -547,7 +547,7 @@ const SelectTitleText = styled.Text`
 `;
 
 const SearchText = styled.Text`
-  font-family: "gothica1-regular";
+  font-family: "gothic-regular";
   margin-left: ${width * 17}px;
   color: ${colors.unselectedGrey};
 `;

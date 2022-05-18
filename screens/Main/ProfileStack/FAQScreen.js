@@ -28,7 +28,7 @@ const ButtonBounder = styled.View`
 `;
 
 const SubTitleText = styled.Text`
-  font-family: "noto-medium";
+  font-family: "gothic-medium";
   font-size: ${width * 17}px;
   margin-top: ${height * 23}px;
   margin-bottom: ${height * 22}px;
@@ -37,7 +37,7 @@ const SubTitleText = styled.Text`
 `;
 
 const InfoText = styled.Text`
-  font-family: "noto-regular";
+  font-family: "gothic-regular";
   font-size: 12px;
   line-height: ${height * 20}px;
 `;

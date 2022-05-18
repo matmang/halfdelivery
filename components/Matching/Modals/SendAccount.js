@@ -137,12 +137,12 @@ const Btm = styled.View`
 `;
 
 const Gothic17 = styled.Text`
-  font-family: "gothica1-regular";
+  font-family: "gothic-regular";
   font-size: 17px;
 `;
 
 const Gothic14 = styled.Text`
-  font-family: "gothica1-regular";
+  font-family: "gothic-regular";
   font-size: 14px;
 `;
 

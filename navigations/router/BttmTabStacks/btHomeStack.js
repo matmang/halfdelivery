@@ -21,12 +21,12 @@ const Container = styled.View`
 
 const UserInfo = styled.Text`
   margin-left: 24px;
-  font-family: "gothica1-regular";
+  font-family: "gothic-regular";
   color: ${colors.primaryPink};
 `;
 
 const UserSchool = styled.Text`
-  font-family: "gothica1-regular";
+  font-family: "gothic-regular";
   color: ${colors.primaryPink};
   text-decoration: underline;
 `;

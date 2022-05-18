@@ -71,7 +71,7 @@ const AddAdditionalTime = ({ name }) => {
         >
           <Text
             style={{
-              fontFamily: "gothica1-medium",
+              fontFamily: "gothic-medium",
               includeFontPadding: false,
               textAlignVertical: "center",
               fontSize: 20,
@@ -82,7 +82,7 @@ const AddAdditionalTime = ({ name }) => {
           </Text>
           <Text
             style={{
-              fontFamily: "gothica1-medium",
+              fontFamily: "gothic-medium",
               includeFontPadding: false,
               textAlignVertical: "center",
               fontSize: 20,
@@ -93,7 +93,7 @@ const AddAdditionalTime = ({ name }) => {
           </Text>
           <Text
             style={{
-              fontFamily: "gothica1-medium",
+              fontFamily: "gothic-medium",
               includeFontPadding: false,
               textAlignVertical: "center",
               fontSize: 20,
@@ -104,7 +104,7 @@ const AddAdditionalTime = ({ name }) => {
           </Text>
           <Text
             style={{
-              fontFamily: "gothica1-medium",
+              fontFamily: "gothic-medium",
               includeFontPadding: false,
               textAlignVertical: "center",
               fontSize: 20,
@@ -128,7 +128,7 @@ const AddAdditionalTime = ({ name }) => {
 
           <Text
             style={{
-              fontFamily: "gothica1-medium",
+              fontFamily: "gothic-medium",
               includeFontPadding: false,
               textAlignVertical: "center",
               fontSize: 17,

@@ -1,14 +1,23 @@
 @font-face {
-  font-family: "gothica1-regular";
+  font-family: "gothic-regular";
   font-display: fallback;
-  src: url("./NotoSansKR-Regular.otf");
+  src: url("./GothicA1-Regular.ttf");
   font-weight: 300;
   font-style: normal;
 }
+
 @font-face {
-  font-family: "Noto Sans KR";
+  font-family: "gothic-medium";
   font-display: fallback;
-  src: url("./NotoSansKR-Regular.otf");
+  src: url("./GothicA1-Medium.ttf");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "gothic-semibold";
+  font-display: fallback;
+  src: url("./GothicA1-SemiBold.ttf");
   font-weight: 300;
   font-style: normal;
 }

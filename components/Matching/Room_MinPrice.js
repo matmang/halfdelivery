@@ -278,7 +278,7 @@ const BtmRight = styled(TopRight)`
 const Gothic14medium = styled.Text`
   font-size: ${width * 14}px;
   /* font-size: 12px; */
-  font-family: "gothica1-medium";
+  font-family: "gothic-medium";
   include-font-padding: false;
   text-align-vertical: center;
   text-align: left;
@@ -287,7 +287,7 @@ const Gothic14medium = styled.Text`
 const Gothic12left = styled.Text`
   font-size: ${width * 12}px;
   /* font-size: 12px; */
-  font-family: "gothica1-regular";
+  font-family: "gothic-regular";
   include-font-padding: false;
   text-align-vertical: center;
   text-align: left;

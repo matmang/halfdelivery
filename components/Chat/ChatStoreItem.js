@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 15,
-    fontFamily: "gothica1-regular",
+    fontFamily: "gothic-regular",
     fontWeight: "bold",
     textAlign: "right",
   },

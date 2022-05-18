@@ -35,7 +35,7 @@ export default CancelMatching = () => {
         >
           <Text
             style={{
-              fontFamily: "gothica1-regular",
+              fontFamily: "gothic-regular",
               fontWeight: "400",
               fontSize: 20,
               color: "rgba(0, 0, 0, 255)",
@@ -46,7 +46,7 @@ export default CancelMatching = () => {
           </Text>
           <Text
             style={{
-              fontFamily: "gothica1-regular",
+              fontFamily: "gothic-regular",
               fontWeight: "400",
               fontSize: 20,
               color: "rgba(227, 0, 78, 255)",
@@ -56,7 +56,7 @@ export default CancelMatching = () => {
           </Text>
           <Text
             style={{
-              fontFamily: "gothica1-regular",
+              fontFamily: "gothic-regular",
               fontWeight: "400",
               fontSize: 20,
               color: "rgba(0, 0, 0, 255)",
@@ -75,7 +75,7 @@ export default CancelMatching = () => {
         />
         <Text
           style={{
-            fontFamily: "gothica1-regular",
+            fontFamily: "gothic-regular",
             fontSize: 14,
             color: "rgba(18, 18, 18, 255)",
             marginStart: 0.5,
@@ -104,7 +104,7 @@ export default CancelMatching = () => {
               borderColor: "rgba(173, 177, 192, 255)",
             }}
             textStyle={{
-              fontFamily: "gothica1-regular",
+              fontFamily: "gothic-regular",
               fontSize: 17,
               textAlign: "center",
               color: "rgba(173, 177, 192, 255)",
@@ -130,7 +130,7 @@ export default CancelMatching = () => {
               borderColor: "rgba(227, 0, 78, 255)",
             }}
             textStyle={{
-              fontFamily: "gothica1-regular",
+              fontFamily: "gothic-regular",
               fontSize: 17,
               textAlign: "center",
               color: "rgba(227, 0, 78, 255)",

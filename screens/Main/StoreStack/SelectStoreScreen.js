@@ -53,7 +53,7 @@ const SelectStoreScreen = () => {
   }, []);
 
   const ButtonTitle = styled.Text`
-    font-family: "gothica1-regular";
+    font-family: "gothic-regular";
     font-size: 17px;
     /* line-height: 20px; */
     color: ${({ id }) =>
@@ -133,7 +133,7 @@ const SelectStoreScreen = () => {
 const styles = StyleSheet.create({
   title: {
     fontSize: 18,
-    fontFamily: "gothica1-regular",
+    fontFamily: "gothic-regular",
     fontWeight: "bold",
   },
 });

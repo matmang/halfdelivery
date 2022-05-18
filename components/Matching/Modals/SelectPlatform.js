@@ -204,14 +204,14 @@ const Btm = styled.View`
 `;
 
 const Gothic17medium = styled.Text`
-  font-family: "gothica1-medium";
+  font-family: "gothic-medium";
   include-font-padding: false;
   text-align-vertical: center;
   font-size: 17px;
 `;
 
 const Gothic14 = styled.Text`
-  font-family: "gothica1-regular";
+  font-family: "gothic-regular";
   include-font-padding: false;
   text-align-vertical: center;
   font-size: 14px;

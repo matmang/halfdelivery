@@ -415,7 +415,7 @@ const ModalBox = styled.View`
 `;
 
 const BlueText = styled.Text`
-  font-family: "gothica1-regular";
+  font-family: "gothic-regular";
   font-size: 17px;
   margin-left: 8px;
   color: ${colors.primaryBlue};

@@ -63,7 +63,7 @@ const Distributionline = styled.View`
 `;
 
 const TitleText = styled.Text`
-  font-family: "noto-medium";
+  font-family: "gothic-medium";
   font-size: 20px;
   margin-top: ${height * 14}px;
   margin-left: ${width * 24}px;
@@ -72,7 +72,7 @@ const TitleText = styled.Text`
 `;
 
 const TermText = styled.Text`
-  font-family: "noto-medium";
+  font-family: "gothic-medium";
   font-size: 17px;
   color: ${(props) => (props.accent ? colors.primaryBlue : colors.darkGray)};
   margin-right: ${width * 11}px;

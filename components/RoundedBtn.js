@@ -28,7 +28,7 @@ const RoundedBtn = ({ btnStyle, textStyle, text, isPressed, onPress }) => {
       <Text
         style={[
           {
-            fontFamily: "gothica1-medium",
+            fontFamily: "gothic-medium",
             includeFontPadding: false,
             textAlignVertical: "center",
             fontSize: 17,

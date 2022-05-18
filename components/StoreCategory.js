@@ -38,7 +38,7 @@ const StoreCategory = ({ category }) => {
         style={{
           fontSize: 10,
           textAlign: "center",
-          fontFamily: "gothica1-medium",
+          fontFamily: "gothic-medium",
         }}
         numberOfLines={1}
       >

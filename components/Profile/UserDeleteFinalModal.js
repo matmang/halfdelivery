@@ -59,25 +59,25 @@ const Distributionline = styled.View`
 `;
 
 const UserInfoText = styled.Text`
-  font-family: "noto-regular";
+  font-family: "gothic-regular";
   font-size: 17px;
 `;
 
 const BtInfoText = styled.Text`
   margin-left: ${width * 24}px;
-  font-family: "noto-regular";
+  font-family: "gothic-regular";
   font-size: 14px;
   line-height: ${height * 24}px;
 `;
 
 const ButtonText = styled.Text`
-  font-family: "noto-regular";
+  font-family: "gothic-regular";
   font-size: 17px;
   color: ${colors.primaryBlue};
 `;
 
 const CancelText = styled.Text`
-  font-family: "noto-regular";
+  font-family: "gothic-regular";
   font-size: 17px;
   color: ${colors.error};
 `;

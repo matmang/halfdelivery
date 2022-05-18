@@ -13,7 +13,7 @@ const StatusBox = styled.View`
 `;
 
 const StatusText = styled.Text`
-  font-family: "gothica1-regular";
+  font-family: "gothic-regular";
   font-size: 12px;
   /* line-height: 15px; */
   color: ${({ color }) => color};

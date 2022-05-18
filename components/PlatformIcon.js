@@ -47,7 +47,7 @@ export default ({ platform, viewStyle, isLong }) => {
       ]}
     >
       <Text
-        style={{ color: "white", fontFamily: "gothica1-medium", fontSize: 10 }}
+        style={{ color: "white", fontFamily: "gothic-medium", fontSize: 10 }}
       >
         {platform}
       </Text>

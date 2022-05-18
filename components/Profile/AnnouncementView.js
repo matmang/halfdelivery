@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   sectionTItle: {
-    fontFamily: "noto-medium",
+    fontFamily: "gothic-medium",
     fontSize: 14,
     includeFontPadding: false,
     textAlignVertical: "center",
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   content: {
-    fontFamily: "noto-medium",
+    fontFamily: "gothic-medium",
     fontSize: 15,
     includeFontPadding: false,
     textAlignVertical: "center",

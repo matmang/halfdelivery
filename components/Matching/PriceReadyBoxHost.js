@@ -13,7 +13,7 @@ const PriceReadyBoxHost = ({ totalPrice, _isAllReady, style }) => {
       <Left>
         <Text
           style={{
-            fontFamily: "gothica1-regular",
+            fontFamily: "gothic-regular",
             includeFontPadding: false,
             textAlignVertical: "center",
             fontSize: 14,
@@ -43,7 +43,7 @@ const PriceReadyBoxHost = ({ totalPrice, _isAllReady, style }) => {
             <Text style={{ color: colors.primaryBlue }}>{"   "}11,000</Text>
             <Text
               style={{
-                fontFamily: "gothica1-regular",
+                fontFamily: "gothic-regular",
                 includeFontPadding: false,
                 textAlignVertical: "center",
                 fontSize: 23,

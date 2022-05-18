@@ -60,7 +60,7 @@ const ButtonContainer = styled.View`
 `;
 
 const ExplainText = styled.Text`
-  font-family: "gothica1-regular";
+  font-family: "gothic-regular";
   font-size: ${width * 14};
   text-align: center;
   line-height: 20px;
@@ -69,7 +69,7 @@ const ExplainText = styled.Text`
 `;
 
 const NameText = styled.Text`
-  font-family: "gothica1-medium";
+  font-family: "gothic-medium";
   font-size: ${width * 17}px;
   color: ${colors.primaryBlue};
   margin-left: ${width * 24}px;

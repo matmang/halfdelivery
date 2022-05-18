@@ -86,7 +86,7 @@ const FinalCheck = ({ name, school, college, bank, accountnumber }) => {
           >
             <Text
               style={{
-                fontFamily: "gothica1-medium",
+                fontFamily: "gothic-medium",
                 includeFontPadding: false,
                 textAlignVertical: "center",
                 fontSize: 17,
@@ -105,7 +105,7 @@ const FinalCheck = ({ name, school, college, bank, accountnumber }) => {
           >
             <Text
               style={{
-                fontFamily: "gothica1-regular",
+                fontFamily: "gothic-regular",
                 includeFontPadding: false,
                 textAlignVertical: "center",
                 fontSize: 14,
@@ -120,7 +120,7 @@ const FinalCheck = ({ name, school, college, bank, accountnumber }) => {
         <MatchingInfo>
           <Text
             style={{
-              fontFamily: "gothica1-regular",
+              fontFamily: "gothic-regular",
               includeFontPadding: false,
               textAlignVertical: "center",
               fontSize: 12,
@@ -262,7 +262,7 @@ const FinalCheck = ({ name, school, college, bank, accountnumber }) => {
         <MyOrderInfo>
           <Text
             style={{
-              fontFamily: "gothica1-medium",
+              fontFamily: "gothic-medium",
               includeFontPadding: false,
               textAlignVertical: "center",
               fontSize: 14,
@@ -277,7 +277,7 @@ const FinalCheck = ({ name, school, college, bank, accountnumber }) => {
         <MyOrderPrice>
           <Text
             style={{
-              fontFamily: "gothica1-medium",
+              fontFamily: "gothic-medium",
               includeFontPadding: false,
               textAlignVertical: "center",
               fontSize: 14,
@@ -431,7 +431,7 @@ const BtmRight = styled(TopRight)`
 const Gothic14medium = styled.Text`
   font-size: ${width * 14}px;
   /* font-size: 12px; */
-  font-family: "gothica1-medium";
+  font-family: "gothic-medium";
   include-font-padding: false;
   text-align-vertical: center;
   text-align: left;
@@ -440,7 +440,7 @@ const Gothic14medium = styled.Text`
 const Gothic12left = styled.Text`
   font-size: ${width * 12}px;
   /* font-size: 12px; */
-  font-family: "gothica1-regular";
+  font-family: "gothic-regular";
   include-font-padding: false;
   text-align-vertical: center;
   text-align: left;

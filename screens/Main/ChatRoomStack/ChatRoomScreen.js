@@ -579,7 +579,7 @@ const InfoDetail = styled.View`
 `;
 
 const RoomText = styled.Text`
-  font-family: "gothica1-regular";
+  font-family: "gothic-regular";
   font-size: 17px;
   text-decoration: underline;
   color: ${colors.primaryBlue};
@@ -607,7 +607,7 @@ const ProfileImg = styled.Image`
 
 const TextBox = styled.Text`
   /* //! noto로 폰트바꾸면 이상하게 줄맞춤이 깨진다.. */
-  font-family: "gothica1-regular";
+  font-family: "gothic-regular";
   font-size: 17px;
   line-height: 19px;
   margin-left: 12px;

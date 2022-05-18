@@ -46,9 +46,8 @@ const ButtonContainer = styled.View`
   z-index: 0;
 `;
 
-
 const TitleText = styled.Text`
-  font-family: "gothica1-medium";
+  font-family: "gothic-medium";
   font-size: 24px;
   margin-top: ${height * 22}px;
   margin-left: ${width * 24}px;
@@ -58,7 +57,7 @@ const TitleText = styled.Text`
 `;
 
 const NameText = styled.Text`
-  font-family: "gothica1-medium";
+  font-family: "gothic-medium";
   font-size: 15px;
   margin-bottom: ${height * 21}px;
   color: ${colors.primaryBlue};
@@ -67,7 +66,7 @@ const NameText = styled.Text`
 `;
 
 const CollegeText = styled.Text`
-  font-family: "gothica1-medium";
+  font-family: "gothic-medium";
   font-size: 15px;
   margin-bottom: ${height * 21}px;
   color: ${colors.primaryBlue};

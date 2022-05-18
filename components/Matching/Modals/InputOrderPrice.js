@@ -71,7 +71,7 @@ const InputOrderPrice = ({ name }) => {
         >
           <Text
             style={{
-              fontFamily: "gothica1-medium",
+              fontFamily: "gothic-medium",
               includeFontPadding: false,
               textAlignVertical: "center",
               fontSize: 20,
@@ -82,7 +82,7 @@ const InputOrderPrice = ({ name }) => {
           </Text>
           <Text
             style={{
-              fontFamily: "gothica1-medium",
+              fontFamily: "gothic-medium",
               includeFontPadding: false,
               textAlignVertical: "center",
               fontSize: 20,
@@ -93,7 +93,7 @@ const InputOrderPrice = ({ name }) => {
           </Text>
           <Text
             style={{
-              fontFamily: "gothica1-medium",
+              fontFamily: "gothic-medium",
               includeFontPadding: false,
               textAlignVertical: "center",
               fontSize: 20,
@@ -104,7 +104,7 @@ const InputOrderPrice = ({ name }) => {
           </Text>
           <Text
             style={{
-              fontFamily: "gothica1-medium",
+              fontFamily: "gothic-medium",
               includeFontPadding: false,
               textAlignVertical: "center",
               fontSize: 20,
@@ -128,7 +128,7 @@ const InputOrderPrice = ({ name }) => {
           />
           <Text
             style={{
-              fontFamily: "gothica1-medium",
+              fontFamily: "gothic-medium",
               includeFontPadding: false,
               textAlignVertical: "center",
               fontSize: 17,
@@ -157,7 +157,7 @@ const InputOrderPrice = ({ name }) => {
               style={{
                 marginTop: height * -2,
                 marginLeft: width * 12,
-                fontFamily: "gothica1-medium",
+                fontFamily: "gothic-medium",
                 includeFontPadding: false,
                 textAlignVertical: "center",
                 fontSize: 15,
@@ -180,7 +180,7 @@ const InputOrderPrice = ({ name }) => {
 
           <Text
             style={{
-              fontFamily: "gothica1-medium",
+              fontFamily: "gothic-medium",
               includeFontPadding: false,
               textAlignVertical: "center",
               fontSize: 17,

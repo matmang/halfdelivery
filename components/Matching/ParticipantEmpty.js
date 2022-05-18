@@ -31,7 +31,7 @@ const ParticipantEmpty = ({ style }) => {
             <Text
               style={{
                 color: colors.steelBlue2,
-                fontFamily: "gothica1-medium",
+                fontFamily: "gothic-medium",
                 includeFontPadding: false,
                 textAlignVertical: "center",
 
@@ -87,7 +87,7 @@ const ParticipantEmpty = ({ style }) => {
           />
           <Text
             style={{
-              fontFamily: "gothica1-regular",
+              fontFamily: "gothic-regular",
               includeFontPadding: false,
               textAlignVertical: "center",
               fontSize: 12,
@@ -126,7 +126,7 @@ const ParticipantEmpty = ({ style }) => {
             style={{
               fontSize: 12,
               color: colors.steelBlue2,
-              fontFamily: "gothica1-regular",
+              fontFamily: "gothic-regular",
               includeFontPadding: false,
               textAlignVertical: "center",
             }}

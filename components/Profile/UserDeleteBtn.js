@@ -22,7 +22,7 @@ const Button = styled.View`
 const Text = styled.Text`
   color: ${(props) => (props.accent ? colors.error : colors.mediumGray)};
   font-size: 17px;
-  font-family: "noto-medium";
+  font-family: "gothic-medium";
 `;
 
 const UserDeleteBtn = ({ onPress, text, accent = true, textStyle }) => (

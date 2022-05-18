@@ -93,7 +93,7 @@ const InfoView = styled.View`
 const InfoText = styled.Text`
   font-size: 13px;
   text-align: left;
-  font-family: "gothica1-regular";
+  font-family: "gothic-regular";
   include-font-padding: false;
   text-align-vertical: center;
   /* padding: 1px; */
@@ -109,7 +109,7 @@ const NumberText = styled.Text`
 const StoreText = styled.Text`
   font-size: 14px;
   text-align: left;
-  font-family: "gothica1-medium";
+  font-family: "gothic-medium";
   include-font-padding: false;
   text-align-vertical: center;
   margin-left: 8px;

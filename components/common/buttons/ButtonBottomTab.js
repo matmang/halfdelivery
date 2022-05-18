@@ -41,7 +41,7 @@ const Button = styled.View`
 const Text = styled.Text`
   color: ${(props) => (props.accent ? "#FFFFFF" : colors.mediumGray)};
   font-size: 17px;
-  font-family: "gothica1-medium";
+  font-family: "gothic-medium";
 `;
 
 export default ButtonBottomTab;

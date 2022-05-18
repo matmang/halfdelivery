@@ -51,7 +51,7 @@ export default () => (
         title: "OOOO 매칭방",
         headerTitleStyle: {
           color: "white",
-          fontFamily: "gothica1-regular",
+          fontFamily: "gothic-regular",
           fontSize: 17,
         },
         headerTitleAlign: "center",

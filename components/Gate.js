@@ -12,7 +12,7 @@ export default () => {
   const [loggedIn, setLoggedIn] = useRecoilState(loginState);
   return (
     <NavigationContainer>
-      {loggedIn ? <Router /> : <Auth />}
+      {!loggedIn ? <Router /> : <Auth />}
     </NavigationContainer>
   );
 };

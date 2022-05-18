@@ -54,7 +54,7 @@ const MatchingListScreen = (props) => {
   }, [navigation, type]);
 
   const ButtonTitle = styled.Text`
-    font-family: "gothica1-regular";
+    font-family: "gothic-regular";
     font-size: 17px;
     /* line-height: 20px; */
     color: ${({ id }) =>
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    fontFamily: "gothica1-regular",
+    fontFamily: "gothic-regular",
     textAlign: "left",
     marginLeft: 24,
   },
@@ -156,7 +156,7 @@ const Root = styled.View`
 `;
 
 const Title = styled.Text`
-  font-family: "gothica1-medium";
+  font-family: "gothic-medium";
   font-size: 17px;
   color: #ffffff;
   include-font-padding: false;

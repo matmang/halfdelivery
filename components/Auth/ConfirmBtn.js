@@ -19,7 +19,7 @@ const Button = styled.View`
 const Text = styled.Text`
   color: ${colors.darkGray};
   font-size: 12px;
-  font-family: "gothica1-regular";
+  font-family: "gothic-regular";
 `;
 
 const ConfirmBtn = ({ onPress, text }) => (

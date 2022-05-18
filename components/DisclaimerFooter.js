@@ -24,7 +24,7 @@ export default ({ viewStyle, textStyle }) => {
           {
             color: colors.darkGray,
             fontSize: width * 10,
-            fontFamily: "gothica1-regular",
+            fontFamily: "gothic-regular",
             includeFontPadding: false,
             textAlignVertical: "center",
             textAlign: "left",
@@ -40,7 +40,7 @@ export default ({ viewStyle, textStyle }) => {
           {
             color: "rgba(62, 63, 65, 1)",
             fontSize: width * 10,
-            fontFamily: "gothica1-regular",
+            fontFamily: "gothic-regular",
             includeFontPadding: false,
             textAlignVertical: "center",
             textAlign: "left",

@@ -55,7 +55,7 @@ const MatchingCancelled = () => {
         >
           <Text
             style={{
-              fontFamily: "gothica1-regular",
+              fontFamily: "gothic-regular",
               fontWeight: "400",
               fontSize: 20,
               color: "rgba(14, 37, 124, 255)",
@@ -66,7 +66,7 @@ const MatchingCancelled = () => {
           </Text>
           <Text
             style={{
-              fontFamily: "gothica1-regular",
+              fontFamily: "gothic-regular",
               fontWeight: "400",
               fontSize: 20,
               color: "rgba(0, 0, 0, 255)",
@@ -76,7 +76,7 @@ const MatchingCancelled = () => {
           </Text>{" "}
           <Text
             style={{
-              fontFamily: "gothica1-regular",
+              fontFamily: "gothic-regular",
               fontWeight: "400",
               fontSize: 20,
               color: "rgba(14, 37, 124, 255)",
@@ -86,7 +86,7 @@ const MatchingCancelled = () => {
           </Text>
           <Text
             style={{
-              fontFamily: "gothica1-regular",
+              fontFamily: "gothic-regular",
               fontWeight: "400",
               fontSize: 20,
               color: "rgba(0, 0, 0, 255)",
@@ -105,7 +105,7 @@ const MatchingCancelled = () => {
         />
         <Text
           style={{
-            fontFamily: "gothica1-regular",
+            fontFamily: "gothic-regular",
             fontSize: 14,
             color: "rgba(18, 18, 18, 255)",
             marginStart: 0.5,
@@ -117,7 +117,7 @@ const MatchingCancelled = () => {
         </Text>
         <Text
           style={{
-            fontFamily: "gothica1-regular",
+            fontFamily: "gothic-regular",
             fontSize: 14,
             color: "rgba(18, 18, 18, 255)",
             marginStart: 0.5,

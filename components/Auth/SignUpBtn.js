@@ -19,7 +19,7 @@ const Button = styled.View`
 const Text = styled.Text`
   color: ${colors.primaryBlue};
   font-size: 17px;
-  font-family: "gothica1-medium";
+  font-family: "gothic-medium";
 `;
 
 const Circle = styled.View`

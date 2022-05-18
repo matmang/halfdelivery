@@ -64,7 +64,7 @@ const ButtonContainer = styled.View`
 `;
 
 const ExplainText = styled.Text`
-  font-family: "noto-regular";
+  font-family: "gothic-regular";
   font-size: ${width * 14};
   text-align: center;
   line-height: 20px;
@@ -73,7 +73,7 @@ const ExplainText = styled.Text`
 `;
 
 const NameText = styled.Text`
-  font-family: "noto-medium";
+  font-family: "gothic-medium";
   font-size: ${width * 17}px;
   color: ${colors.primaryBlue};
 `;

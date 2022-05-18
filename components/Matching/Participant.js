@@ -35,7 +35,7 @@ const Participant = ({ _isReady, imageUri, username, isHost, orderPrice }) => {
             </Text>
             <Text
               style={{
-                fontFamily: "gothica1-regular",
+                fontFamily: "gothic-regular",
                 includeFontPadding: false,
                 textAlignVertical: "center",
               }}
@@ -47,7 +47,7 @@ const Participant = ({ _isReady, imageUri, username, isHost, orderPrice }) => {
             <Text
               style={{
                 color: isReady ? colors.primaryBlue : colors.steelBlue2,
-                fontFamily: "gothica1-medium",
+                fontFamily: "gothic-medium",
                 includeFontPadding: false,
                 textAlignVertical: "center",
                 fontSize: 10,
@@ -163,7 +163,7 @@ const Participant = ({ _isReady, imageUri, username, isHost, orderPrice }) => {
           />
           <Text
             style={{
-              fontFamily: "gothica1-regular",
+              fontFamily: "gothic-regular",
               includeFontPadding: false,
               textAlignVertical: "center",
               fontSize: 12,
@@ -206,7 +206,7 @@ const Participant = ({ _isReady, imageUri, username, isHost, orderPrice }) => {
             style={{
               fontSize: 12,
               color: isReady ? "white" : colors.steelBlue2,
-              fontFamily: "gothica1-regular",
+              fontFamily: "gothic-regular",
               includeFontPadding: false,
               textAlignVertical: "center",
             }}

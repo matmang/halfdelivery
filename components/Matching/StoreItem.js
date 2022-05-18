@@ -361,20 +361,20 @@ const Price4 = styled.Text`
 
 const Won1 = styled.Text`
   font-size: ${height * 13}px;
-  font-family: "gothica1-regular";
+  font-family: "gothic-regular";
   margin-left: ${width * 2}px;
 `;
 
 const Won2 = styled.Text`
   font-size: ${height * 13}px;
-  font-family: "gothica1-regular";
+  font-family: "gothic-regular";
   margin-left: ${width * 2}px;
   margin-right: ${width * 58}px;
 `;
 
 const Won3 = styled.Text`
   font-size: ${height * 13}px;
-  font-family: "gothica1-regular";
+  font-family: "gothic-regular";
   margin-left: ${width * 2}px;
   margin-right: ${width * 58}px;
 `;
@@ -388,12 +388,12 @@ const Wave = styled.Text`
 const StoreText = styled.Text`
   font-size: ${height * 14}px;
   margin-left: ${width * 4}px;
-  font-family: "gothica1-medium";
+  font-family: "gothic-medium";
 `;
 
 const InfoText = styled.Text`
   font-size: ${height * 13}px;
-  font-family: "gothica1-regular";
+  font-family: "gothic-regular";
   text-align: left;
 `;
 

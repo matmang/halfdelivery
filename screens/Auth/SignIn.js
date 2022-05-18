@@ -47,7 +47,7 @@ const ButtonContainer = styled.View`
 `;
 
 const NameText = styled.Text`
-  font-family: "gothica1-semibold";
+  font-family: "gothic-semibold";
   font-size: 17px;
   margin-bottom: ${height * 21}px;
   color: ${colors.primaryBlue};

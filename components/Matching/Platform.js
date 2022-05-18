@@ -25,7 +25,7 @@ const Img = styled.Image`
 
 const Gothic14 = styled.Text`
   font-family: ${({ name, selectedName }) =>
-    name === selectedName ? "gothica1-medium" : "gothica1-regular"};
+    name === selectedName ? "gothic-medium" : "gothic-regular"};
   font-size: 14px;
   margin-top: 12px;
   color: ${({ name, selectedName }) =>

@@ -94,7 +94,7 @@ const ProfileInfo = styled.View`
 
 const Gothic13left = styled.Text`
   font-size: ${width * 13}px;
-  font-family: "gothica1-regular";
+  font-family: "gothic-regular";
   include-font-padding: false;
   text-align-vertical: center;
   text-align: left;
@@ -102,7 +102,7 @@ const Gothic13left = styled.Text`
 
 const Gothic11left = styled.Text`
   font-size: ${width * 11}px;
-  font-family: "gothica1-regular";
+  font-family: "gothic-regular";
   include-font-padding: false;
   text-align-vertical: center;
   text-align: left;

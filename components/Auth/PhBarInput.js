@@ -21,7 +21,7 @@ const Container = styled.View`
 
 const InputContainer = styled.TextInput`
   height: ${height * 29}px;
-  font-family: "noto-regular";
+  font-family: "gothic-regular";
   include-font-padding: false;
   text-align-vertical: center;
   font-size: 17px;

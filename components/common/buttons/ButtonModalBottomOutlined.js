@@ -48,7 +48,7 @@ const Button = styled.View`
 const Text = styled.Text`
   color: ${(props) => (props.accent ? colors.primaryBlue : colors.softgray)};
   font-size: 17px;
-  font-family: "gothica1-medium";
+  font-family: "gothic-medium";
 `;
 
 export default ButtonModalBottomOutlined;
