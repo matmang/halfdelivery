@@ -11,7 +11,7 @@ const ButtonModalBottomOutlined = ({
   accent = false,
   textStyle,
 }) => {
-  if (typeof accent != "boolean") {
+  if (typeof accent !== "boolean") {
     accent = !!accent;
   }
 

@@ -182,6 +182,7 @@ const StoreItem = ({ storeInfo }) => {
             setIsModal={setIsModal}
             storeInfo={storeInfo}
             category={category}
+            DlvTipsArray={DlvTipsArray}
           />
         )}
         <ImageRoot
@@ -271,7 +272,6 @@ const StoreItem = ({ storeInfo }) => {
 const Root = styled.View`
   width: 100%;
   height: ${height * 108}px;
-  background-color: #e6edf3;
   margin-top: -1.5px;
 `;
 
@@ -280,7 +280,6 @@ const StoreRoomBox = styled.Pressable`
   height: ${height * 105}px;
   flex-direction: row;
   align-items: center;
-  background-color: white;
 `;
 
 const HorizontalLine = styled.View`
@@ -304,12 +303,9 @@ const ImageRoot = styled.Image`
 const InfoRoot = styled.View`
   padding-left: ${width * 20}px;
   width: ${width * 316}px;
-
-  background-color: pink;
 `;
 
 const Row0 = styled.View`
-  background-color: lightblue;
   width: ${width * 316}px;
   height: auto;
   flex-direction: row;
@@ -318,7 +314,6 @@ const Row0 = styled.View`
 `;
 
 const Row1 = styled.View`
-  background-color: yellow;
   width: ${width * 316}px;
   height: auto;
   flex-direction: row;
@@ -326,7 +321,6 @@ const Row1 = styled.View`
 `;
 
 const Row2 = styled(Row1)`
-  background-color: orange;
   margin-top: ${height * 4}px;
   margin-bottom: ${height * 19}px;
 `;
@@ -395,14 +389,6 @@ const InfoText = styled.Text`
   font-size: ${height * 13}px;
   font-family: "gothic-regular";
   text-align: left;
-`;
-
-const NunitoText = styled.Text`
-  font-size: ${height * 14}px;
-  font-family: "nunito-regular";
-  include-font-padding: false;
-  text-align-vertical: center;
-  text-align: right;
 `;
 
 export default StoreItem;

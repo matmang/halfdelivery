@@ -14,7 +14,13 @@ import logos from "../../../images";
 import ButtonModalBottomOutlined from "../../common/buttons/ButtonModalBottomOutlined";
 import StoreInfoSelectPlatform from "./StoreInfoSelectPlatform";
 
-const SelectPlatform = ({ isModal, setIsModal, storeInfo, category }) => {
+const SelectPlatform = ({
+  isModal,
+  setIsModal,
+  storeInfo,
+  category,
+  DlvTipsArray,
+}) => {
   const navigation = useNavigation();
   const [selectedName, setSelectedName] = useState(null);
   const [authUser, setAuthUser] = useState(undefined);
@@ -94,69 +100,71 @@ const SelectPlatform = ({ isModal, setIsModal, storeInfo, category }) => {
             }}
           />
         </Pressable>
-        <Top>
-          <View style={{ marginTop: height * 42 }}>
-            <StoreInfoSelectPlatform
-              storeInfo={storeInfo}
-              category={category}
-            />
-          </View>
-          <BlueLine />
-          <Gothic17medium
-            style={{ color: colors.primaryBlue, marginTop: height * 20 }}
-          >
-            배달 플랫폼 선택
-          </Gothic17medium>
-          <Gothic14 style={{ marginTop: height * 8 }}>
-            주문을 진행할 배달 플랫폼을 선택해주세요
-          </Gothic14>
-        </Top>
+        <StoreInfoSelectPlatform
+          storeInfo={storeInfo}
+          category={category}
+          DlvTipsArray={DlvTipsArray}
+          style={{ alignSelf: "center", marginTop: height * 42 }}
+        />
 
-        <Mid>
-          <View
-            style={{
-              flexDirection: "row",
-              // justifyContent: "space-evenly",
-              marginTop: height * 32,
-            }}
-          >
-            <Platform
-              name={"배달의 민족"}
-              selectedName={selectedName}
-              setSelectedName={setSelectedName}
-              viewStyle={{ marginLeft: width * 16 }}
-            />
-            <Platform
-              name={"요기요"}
-              selectedName={selectedName}
-              setSelectedName={setSelectedName}
-              viewStyle={{ marginLeft: width * 15 }}
-            />
-            <Platform
-              name={"쿠팡잇츠"}
-              selectedName={selectedName}
-              setSelectedName={setSelectedName}
-              viewStyle={{ marginLeft: width * 14 }}
-            />
-            <Platform
-              name={"배달특급"}
-              selectedName={selectedName}
-              setSelectedName={setSelectedName}
-              viewStyle={{ marginLeft: width * 15, marginRight: width * 16 }}
-            />
-          </View>
+        <BlueLine />
+        <Gothic17medium
+          style={{
+            color: colors.primaryBlue,
+            marginTop: height * 20,
+            marginLeft: width * 16,
+          }}
+        >
+          배달 플랫폼 선택
+        </Gothic17medium>
+        <Gothic14 style={{ marginTop: height * 8, marginLeft: width * 16 }}>
+          주문을 진행할 배달 플랫폼을 선택해주세요
+        </Gothic14>
 
-          <View style={{ alignSelf: "center", marginTop: height * 32 }}>
-            <ButtonModalBottomOutlined
-              onPress={onPress}
-              accent={selectedName}
-              text="선택완료"
-            />
-          </View>
-        </Mid>
-        <Btm>
-          <DisclaimerFooter viewStyle={{ marginTop: height * 25 }} />
-        </Btm>
+        <View
+          style={{
+            flexDirection: "row",
+            // justifyContent: "space-evenly",
+            marginTop: height * 32,
+            // backgroundColor: "red",
+          }}
+        >
+          <Platform
+            name={"배달의 민족"}
+            selectedName={selectedName}
+            setSelectedName={setSelectedName}
+            viewStyle={{ marginLeft: width * 16 }}
+          />
+          <Platform
+            name={"요기요"}
+            selectedName={selectedName}
+            setSelectedName={setSelectedName}
+            viewStyle={{ marginLeft: width * 15 }}
+          />
+          <Platform
+            name={"쿠팡잇츠"}
+            selectedName={selectedName}
+            setSelectedName={setSelectedName}
+            viewStyle={{ marginLeft: width * 14 }}
+          />
+          <Platform
+            name={"배달특급"}
+            selectedName={selectedName}
+            setSelectedName={setSelectedName}
+            viewStyle={{ marginLeft: width * 15, marginRight: width * 16 }}
+          />
+        </View>
+
+        <View style={{ alignSelf: "center", marginTop: height * 32 }}>
+          <ButtonModalBottomOutlined
+            onPress={onPress}
+            accent={selectedName}
+            text="선택완료"
+          />
+        </View>
+
+        <DisclaimerFooter viewStyle={{ marginTop: height * 25 }} />
+        <Btm></Btm>
       </ModalBox>
     </Modal>
   );
@@ -172,33 +180,16 @@ const ModalBox = styled.View`
   background-color: white;
 `;
 
-const Top = styled.View`
-  width: ${MODAL_WIDTH}px;
-  /* height: ${height * 189}px; */
-  /* background-color: lightcyan; */
-  /* margin-top: ${height * -10}px; */
-  border-top-left-radius: 16px;
-  border-top-right-radius: 16px;
-  padding-left: 20px;
-`;
-
 const BlueLine = styled.View`
   width: ${width * 324}px; /*//! StoreRoomBox width 랑 같아야 함*/
   height: ${height * 1.5}px;
+  margin-top: ${height * 16}px;
   background-color: #5465aa;
-  margin-top: 6px;
-`;
-
-const Mid = styled.View`
-  width: ${MODAL_WIDTH}px;
-  /* height: ${height * 221}px; */
-  /* background-color: lightgoldenrodyellow; */
+  align-self: center;
 `;
 
 const Btm = styled.View`
   width: ${MODAL_WIDTH}px;
-  /* height: ${height * 56}px; */
-  /* background-color: yellow; */
   border-bottom-left-radius: 16px;
   border-bottom-right-radius: 16px;
 `;

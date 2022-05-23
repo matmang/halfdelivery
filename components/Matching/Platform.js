@@ -4,6 +4,27 @@ import colors from "../../colors";
 import styled from "styled-components";
 import { width, height } from "../../utils";
 
+const Platform = ({ name, selectedName, setSelectedName, viewStyle }) => {
+  return (
+    <RootView
+      style={viewStyle}
+      onPress={() => {
+        setSelectedName(name);
+      }}
+    >
+      <Img name={name} selectedName={selectedName} />
+      <Gothic14
+        name={name}
+        selectedName={selectedName}
+        style={{ includeFontPadding: false, textAlignVertical: "center" }}
+      >
+        {name}
+      </Gothic14>
+      {name === selectedName && <PinkHighlight name={name} />}
+    </RootView>
+  );
+};
+
 const RootView = styled.Pressable`
   width: ${width * 72}px;
   height: ${height * 99}px;
@@ -26,21 +47,13 @@ const Img = styled.Image`
 const Gothic14 = styled.Text`
   font-family: ${({ name, selectedName }) =>
     name === selectedName ? "gothic-medium" : "gothic-regular"};
-  font-size: 14px;
+  font-size: ${height * 14}px;
   margin-top: 12px;
   color: ${({ name, selectedName }) =>
     name === selectedName ? colors.primaryBlue : "black"};
 
   /* text-decoration: ${({ name, selectedName }) =>
     name === selectedName ? "underline" : null}; */
-`;
-
-const Underline = styled.View`
-  margin-top: 2px;
-  width: ${({ name }) => (name === "배달의 민족" ? "68px" : "54px")};
-  width: auto;
-  height: 1.5px;
-  background-color: ${colors.primaryBlue};
 `;
 
 const PinkHighlight = styled.View`
@@ -53,25 +66,4 @@ const PinkHighlight = styled.View`
   z-index: -1;
 `;
 
-const Platforms = ({ name, selectedName, setSelectedName, viewStyle }) => {
-  return (
-    <RootView
-      style={viewStyle}
-      onPress={() => {
-        setSelectedName(name);
-      }}
-    >
-      <Img name={name} selectedName={selectedName} />
-      <Gothic14
-        name={name}
-        selectedName={selectedName}
-        style={{ includeFontPadding: false, textAlignVertical: "center" }}
-      >
-        {name}
-      </Gothic14>
-      {name === selectedName && <PinkHighlight name={name} />}
-    </RootView>
-  );
-};
-
-export default Platforms;
+export default Platform;

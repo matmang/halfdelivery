@@ -31,19 +31,14 @@ import {
   WESTERN_ID,
   CAFE_ID,
 } from "../../../assets/constants";
+import { height } from "../../../utils";
+
+export const CATEGORRIES_HEIGHT = height * 47;
 
 const Categorries = styled.Pressable`
-  height: 52px;
+  height: ${CATEGORRIES_HEIGHT}px;
   justify-content: center;
 `;
-
-// const CatView = styled.View`
-//   flex-direction: row;
-//   justify-content: space-evenly;
-//   background: #ffffff 0% 0% no-repeat padding-box;
-//   box-shadow: 3px 3px 6px #00000029;
-//   opacity: 1;
-// `;
 
 const SelectStoreScreen = () => {
   const [categoryID, setCategoryID] = useState("ALL");
@@ -95,7 +90,7 @@ const SelectStoreScreen = () => {
     <View
       style={{
         backgroundColor: "#E5E6E7",
-        flex: 1,
+        // flex: 1,
         alignItems: "center", // 가로 정렬
         flexDirection: "column",
       }}
@@ -105,7 +100,7 @@ const SelectStoreScreen = () => {
           flexDirection: "row",
           backgroundColor: "white",
           width: "100%",
-          paddingHorizontal: 30,
+          // paddingHorizontal: 30,
           justifyContent: "space-evenly",
 
           zIndex: 1,
@@ -116,6 +111,7 @@ const SelectStoreScreen = () => {
             height: 3,
           },
           shadowRadius: 6,
+          elevation: 6,
         }}
       >
         <CategoryButton name="한식" id={KOREAN_ID} />

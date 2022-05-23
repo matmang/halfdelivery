@@ -18,6 +18,14 @@ import {
   CAFE_ID,
 } from "../../assets/constants";
 import styled from "styled-components";
+import { height } from "../../utils";
+import { BOTTOM_TAB_NAV_HEIGHT } from "../../navigations/router/BottomTabNav";
+import {
+  HEADER_HEIGHT,
+  HEIGHT,
+  STATUS_BAR_HEIGHT,
+} from "../../navigations/router/BttmTabStacks/btStoreStack";
+import { CATEGORRIES_HEIGHT } from "../../screens/Main/StoreStack/SelectStoreScreen";
 
 const StoreList = ({ categoryID }) => {
   const [serverData, setServerData] = useState([]);
@@ -67,16 +75,39 @@ const StoreList = ({ categoryID }) => {
         data={serverData} // ? 임시 설정
         renderItem={({ item }) => <StoreItem storeInfo={item} />}
         keyExtractor={(item, index) => index.toString()} // ? Warning 메시지 해결. https://github.com/facebook/react-native/issues/18291
+        // contentContainerStyle={{
+        //   backgroundColor: "lightblue",
+        //   // justifyContent: "center",
+        //   // width: "100%",
+        //   height:
+        //     HEIGHT -
+        //     (STATUS_BAR_HEIGHT +
+        //       HEADER_HEIGHT +
+        //       CATEGORRIES_HEIGHT +
+        //       BOTTOM_TAB_NAV_HEIGHT),
+        // }}
+        style={{
+          height:
+            HEIGHT -
+            (STATUS_BAR_HEIGHT +
+              HEADER_HEIGHT +
+              CATEGORRIES_HEIGHT +
+              BOTTOM_TAB_NAV_HEIGHT),
+        }}
       />
     </Root>
   );
 };
 
-const Root = styled.Pressable`
-  background-color: red;
+const Root = styled.View`
+  background-color: #ffffff;
   justify-content: center;
   width: 100%;
-  height: 100%;
+  height: ${HEIGHT -
+  (STATUS_BAR_HEIGHT +
+    HEADER_HEIGHT +
+    CATEGORRIES_HEIGHT +
+    BOTTOM_TAB_NAV_HEIGHT)}px;
 `;
 
 export default StoreList;

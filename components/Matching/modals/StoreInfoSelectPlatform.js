@@ -5,115 +5,256 @@ import StoreCategory from "../../StoreCategory";
 import { width, height } from "../../../utils";
 import logos from "../../../images";
 
-const ViewProfilePartner = ({ storeInfo, category }) => {
-  const { baeminDlvTip } = storeInfo;
-  const { baeminOrderPrice } = storeInfo;
-  const { baeminUri } = storeInfo;
-  const { coupangDlvTip } = storeInfo;
-  const { coupangOrderPrice } = storeInfo;
-  const { coupangUri } = storeInfo;
-  const { yogiyoDlvTip } = storeInfo;
-  const { yogiyoOrderPrice } = storeInfo;
-  const { yogiyoUri } = storeInfo;
-  const { backgroundImgUri } = storeInfo;
+const StoreInfoSelectPlatform = ({
+  storeInfo,
+  category,
+  DlvTipsArray,
+  style,
+}) => {
+  const [isModal, setIsModal] = useState(false);
+
+  // const { baeminDlvTip } = storeInfo;
+  // const { baeminOrderPrice } = storeInfo;
+  // const { baeminUri } = storeInfo;
+  // const { coupangDlvTip } = storeInfo;
+  // const { coupangOrderPrice } = storeInfo;
+  // const { coupangUri } = storeInfo;
+  // const { yogiyoDlvTip } = storeInfo;
+  // const { yogiyoOrderPrice } = storeInfo;
+  // const { yogiyoUri } = storeInfo;
+  // const { backgroundImgUri } = storeInfo;
   const { logoImgUri } = storeInfo;
   const { name } = storeInfo;
-  const { location } = storeInfo;
-  const { openHours } = storeInfo;
-  const { storecategoryID } = storeInfo;
+  // const { location } = storeInfo;
+  // const { openHours } = storeInfo;
+  // const { storecategoryID } = storeInfo;
 
   return (
-    <StoreRoomBox>
-      <Img
-        resizeMode="cover"
-        source={
-          logos.halfLogo
-          // { uri: logoImgUri }
-          // logoImgUri !== undefined ? { uri: logoImgUri } : logos.halfLogo
-        }
-      />
-      <View style={{ flexDirection: "column" }}>
-        <StoreNameRoot>
-          <InfoView>
+    <Root style={style}>
+      <StoreRoomBox
+        // onPress={() => {
+        //   // ? nested screen 상태에선, navigation 방법이 조금 다르다.
+        //   // 참조: https://reactnavigation.org/docs/nesting-navigators/#navigating-to-a-screen-in-a-nested-navigator
+        //   navigation.navigate("StoreStack", {
+        //     screen: "SelectMenuScreen",
+        //     params: {
+        //       storeInfo,
+        //       isHost: true,
+        //     },
+        //   });
+        // }}
+        onPress={() => {
+          setIsModal(true);
+          // alert("s");
+          // return <StoreModal isModal={true} setIsModal={setIsModal} />;
+        }}
+      >
+        {isModal && (
+          <SelectPlatform
+            isModal={isModal}
+            setIsModal={setIsModal}
+            storeInfo={storeInfo}
+            category={category}
+          />
+        )}
+        <ImageRoot
+          resizeMode="cover"
+          source={
+            // logos.halfLogo
+            // { uri: logoImgUri }
+            logoImgUri == null ? logos.halfLogo : { uri: logoImgUri }
+          }
+        />
+        <InfoRoot>
+          {/* //? 카테고리와 식당명 */}
+          <Row0>
             <StoreCategory category={category} />
             <StoreText>{name}</StoreText>
-          </InfoView>
-        </StoreNameRoot>
+          </Row0>
 
-        <NumberInfoRoot>
-          <Text>최소주문금액과 배달비</Text>
-          <NumberText>1000</NumberText>
-          <NumberText>3000</NumberText>
-          <InfoView></InfoView>
-        </NumberInfoRoot>
-      </View>
-    </StoreRoomBox>
+          {/* //? 최소주문금액 표기 */}
+          {DlvTipsArray.length === 1 ? (
+            <Row1>
+              <InfoText>최소주문금액</InfoText>
+              <Price4>
+                {DlvTipsArray[DlvTipsArray.length - 1][0]
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+              </Price4>
+              <Won2>원</Won2>
+            </Row1>
+          ) : (
+            <Row1>
+              <InfoText>최소주문금액</InfoText>
+              <Price1>
+                {DlvTipsArray[0][0]
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+              </Price1>
+              <Won1>원</Won1>
+              <Wave>~</Wave>
+              <Price2>
+                {DlvTipsArray[DlvTipsArray.length - 1][0]
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+              </Price2>
+              <Won2>원</Won2>
+            </Row1>
+          )}
+
+          {/* //? 배달비 표기 */}
+          {DlvTipsArray.length === 1 ? (
+            <Row2>
+              <InfoText>배달비</InfoText>
+              <Price4>
+                {" "}
+                {DlvTipsArray[0][1]
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+              </Price4>
+              <Won3>원</Won3>
+            </Row2>
+          ) : (
+            <Row2>
+              <InfoText>배달비</InfoText>
+              <Price1>
+                {" "}
+                {DlvTipsArray[DlvTipsArray.length - 1][1]
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+              </Price1>
+              <Won1>원</Won1>
+              <Wave>~</Wave>
+              <Price3>
+                {" "}
+                {DlvTipsArray[0][1]
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+              </Price3>
+              <Won2>원</Won2>
+            </Row2>
+          )}
+        </InfoRoot>
+      </StoreRoomBox>
+      <HorizontalLine />
+    </Root>
   );
 };
 
-const StoreRoomBox = styled.View`
-  width: ${width * 324}px;
-  flex-direction: row;
-  background-color: rosybrown;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  /* margin-top: 20px; */
+const Root = styled.View`
+  width: ${width * 332}px;
+  height: ${height * 72}px;
+  margin-top: -1.5px;
 `;
 
-const Img = styled.Image`
-  /* margin-left: 24px; */
-  /* margin-top: 10px; */
-  border-radius: 16px;
-  border-width: 1px;
-  border-color: red;
+const StoreRoomBox = styled.Pressable`
+  width: ${width * 332}px;
+  height: ${height * 72}px;
+  flex-direction: row;
+  align-items: center;
+`;
 
+const HorizontalLine = styled.View`
+  width: 100%;
+  height: ${height * 1.5}px;
+`;
+
+const ImageRoot = styled.Image`
+  border-radius: 16px;
   width: ${width * 72}px;
   height: ${height * 72}px;
-  margin-bottom: ${height * 10}px;
+  border-width: 1px;
+  border-color: black;
 `;
 
-const StoreNameRoot = styled.View`
-  margin-top: ${height * 2}px;
-  margin-left: ${width * 20}px;
-  background-color: red;
+const InfoRoot = styled.View`
+  padding-left: ${width * 12}px;
+  width: ${width * (332 - 72)}px;
+  height: ${height * 72}px;
+  opacity: 0.8;
 `;
 
-const NumberInfoRoot = styled.View`
-  margin-top: ${height * 2}px;
-  margin-left: ${width * 20}px;
-  background-color: yellowgreen;
-`;
-
-const InfoView = styled.View`
+const Row0 = styled.View`
+  width: ${width * 248}px;
+  height: auto;
   flex-direction: row;
-  /* align-items: center; */
-  /* padding: 2px; */
+  align-items: center;
 `;
 
-const InfoText = styled.Text`
-  font-size: 13px;
-  text-align: left;
-  font-family: "gothic-regular";
-  include-font-padding: false;
-  text-align-vertical: center;
-  /* padding: 1px; */
+const Row1 = styled.View`
+  width: ${width * 248}px;
+  height: auto;
+  flex-direction: row;
+  margin-top: ${height * 8}px;
 `;
 
-const NumberText = styled.Text`
-  font-size: 13px;
+const Row2 = styled(Row1)`
+  margin-top: ${height * 4}px;
+  margin-bottom: ${height * 19}px;
+`;
+
+const Price1 = styled.Text`
+  font-size: ${height * 13}px;
   font-family: "nunito-regular";
-  include-font-padding: false;
-  text-align-vertical: center;
+  text-align: right;
+  margin-left: auto;
+`;
+
+const Price2 = styled.Text`
+  font-size: ${height * 13}px;
+  font-family: "nunito-regular";
+  text-align: right;
+  margin-left: ${width * 8}px;
+`;
+
+const Price3 = styled.Text`
+  font-size: ${height * 13}px;
+  font-family: "nunito-regular";
+  text-align: right;
+  margin-left: ${width * 16}px;
+`;
+
+const Price4 = styled.Text`
+  font-size: ${height * 13}px;
+  font-family: "nunito-regular";
+  text-align: right;
+  margin-left: auto;
+`;
+
+const Won1 = styled.Text`
+  font-size: ${height * 13}px;
+  font-family: "gothic-regular";
+  margin-left: ${width * 2}px;
+`;
+
+const Won2 = styled.Text`
+  font-size: ${height * 13}px;
+  font-family: "gothic-regular";
+  margin-left: ${width * 2}px;
+`;
+
+const Won3 = styled.Text`
+  font-size: ${height * 13}px;
+  font-family: "gothic-regular";
+  margin-left: ${width * 2}px;
+`;
+
+const Wave = styled.Text`
+  font-size: ${height * 13}px;
+  font-family: "nunito-regular";
+  margin-left: ${width * 16}px;
 `;
 
 const StoreText = styled.Text`
-  font-size: 14px;
-  text-align: left;
+  font-size: ${height * 14}px;
+  margin-left: ${width * 4}px;
   font-family: "gothic-medium";
-  include-font-padding: false;
-  text-align-vertical: center;
-  margin-left: 8px;
-  /* margin-bottom: 3px; */
 `;
 
-export default ViewProfilePartner;
+const InfoText = styled.Text`
+  font-size: ${height * 13}px;
+  font-family: "gothic-regular";
+  text-align: left;
+`;
+
+export default StoreInfoSelectPlatform;

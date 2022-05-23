@@ -32,28 +32,25 @@ import { width, height } from "../../utils";
 
 const Tab = createBottomTabNavigator();
 
-const BottomTabView = styled.SafeAreaView`
-  justify-content: center;
-  align-items: center;
-  background-color: white;
-  flex-direction: row;
-
-  width: 100%;
-  height: ${height * 80}px;
-  position: absolute;
-  bottom: -2px;
-  /* z-index: 3; */
-`;
+export const BOTTOM_TAB_NAV_HEIGHT = height * 68;
 
 const BottomTab = (props) => {
   return (
     <BottomTabView>
-      <Image source={props} style={{ width: "105%", height: height * 80 }} />
+      <Image
+        source={props}
+        style={{
+          width: "105%",
+          // width: width * 412,
+          height: BOTTOM_TAB_NAV_HEIGHT,
+          // backgroundColor: "red",
+        }}
+      />
     </BottomTabView>
   );
 };
 
-export default () => {
+const BottomTabNav = () => {
   // const [image, setImage] = useState(storeOn); //! 리액트훅 Tab 네비게이션 prop 안에 못 넣는다..!
 
   return (
@@ -67,7 +64,28 @@ export default () => {
         //   borderWidth: 2,
         //   height: 70,
         // },
+
         tabBarIcon: () => <Image source={empty} />,
+
+        // tabBarBackground: () => (
+        //   <View
+        //     style={{
+        //       width: "100%",
+        //       height: 40,
+        //       backgroundColor: "blue",
+        //     }}
+        //   />
+        // ),
+
+        // tabBarStyle: () => (
+        //   <View
+        //     style={{
+        //       width: "100%",
+        //       height: 40,
+        //       backgroundColor: "blue",
+        //     }}
+        //   />
+        // ),a
       }}
     >
       <Tab.Screen
@@ -118,3 +136,18 @@ export default () => {
     </Tab.Navigator>
   );
 };
+
+const BottomTabView = styled.SafeAreaView`
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  flex-direction: row;
+
+  width: 100%;
+  height: ${BOTTOM_TAB_NAV_HEIGHT}px;
+  position: absolute;
+  bottom: -2px;
+  /* z-index: 3; */
+`;
+
+export default BottomTabNav;

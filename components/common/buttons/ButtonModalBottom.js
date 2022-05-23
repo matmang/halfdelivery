@@ -6,7 +6,7 @@ import colors from "../../../colors";
 import { height, width } from "../../../utils";
 
 const ButtonModalBottom = ({ onPress, text, accent = false, textStyle }) => {
-  if (typeof accent != "boolean") {
+  if (typeof accent !== "boolean") {
     accent = !!accent;
   }
 

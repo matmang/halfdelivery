@@ -3,7 +3,7 @@ import React from "react";
 import colors from "../colors";
 import { width, height } from "../utils";
 
-export default ({ viewStyle, textStyle }) => {
+const DisclaimerFooter = ({ viewStyle, textStyle }) => {
   return (
     <View
       style={[
@@ -23,7 +23,7 @@ export default ({ viewStyle, textStyle }) => {
         style={[
           {
             color: colors.darkGray,
-            fontSize: width * 10,
+            fontSize: width * 8,
             fontFamily: "gothic-regular",
             includeFontPadding: false,
             textAlignVertical: "center",
@@ -33,13 +33,14 @@ export default ({ viewStyle, textStyle }) => {
           textStyle,
         ]}
       >
-        * 하프딜리버리는 상품거래에 대한 통신판매중개자이며, 통신판매의 당사자가
+        하프딜리버리는 상품거래에 대한 통신판매중개자이며, 통신판매의 당사자가
+        아닙니다.
       </Text>
       <Text
         style={[
           {
             color: "rgba(62, 63, 65, 1)",
-            fontSize: width * 10,
+            fontSize: width * 8,
             fontFamily: "gothic-regular",
             includeFontPadding: false,
             textAlignVertical: "center",
@@ -50,8 +51,10 @@ export default ({ viewStyle, textStyle }) => {
           textStyle,
         ]}
       >
-        아닙니다. 따라서, 하프딜리버리는 상품거래에 대하여 책임을 지지 않습니다.
+        따라서, 하프딜리버리는 상품거래에 대하여 책임을 지지 않습니다.
       </Text>
     </View>
   );
 };
+
+export default DisclaimerFooter;
